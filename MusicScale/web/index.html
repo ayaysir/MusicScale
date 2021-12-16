@@ -1,50 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link href="css/abcjs-audio.css" rel="stylesheet" type="text/css">
+  <title>Music Sheet Area</title>
 </head>
-
 <body>
-  <p>
-    <a href="#" onclick="onRender(cooleys, { responsive: 'resize' }); return false;" >Cooley's</a> |
-    <a href="#" onclick="onRender(chorus, { responsive: 'resize' }); return false;" >Chorus</a> |
-    <a href="#" onclick="onRender(bigNotes, { scale: 2.0 }); return false;" >Big Notes</a> |
-    <a href="#" onclick="onMidi(); return false;" >Audio</a>
-  </p>
-  
-  <p>For more information, see <a href="https://github.com/paulrosen/abcjs" >the project page</a>.</p>
-  <hr />
+  <h1 id="title">자바스크립트 동작안함</h1>
   <div id="notation"></div>
   <div id="audio"></div>
-  
   <script src="./js/abcjs-basic-min.js"></script>
   <script>
-    var cooleys = 'X:1\nT: Cooley\'s\nM: 4/4\nL: 1/8\nR: reel\nK: Emin\nD2|:"Em"EB{c}BA B2 EB|~B2 AB dBAG|"D"FDAD BDAD|FDAD dAFD|\n"Em"EBBA B2 EB|B2 AB defg|"D"afe^c dBAF|1"Em"DEFD E2 D2:|2"Em"DEFD E2 gf||\n|:"Em"eB B2 efge|eB B2 gedB|"D"A2 FA DAFA|A2 FA defg|\n"Em"eB B2 eBgB|eB B2 defg|"D"afe^c dBAF|1"Em"DEFD E2 gf:|2"Em"DEFD E4|]\n';
-    var chorus = '%%staffwidth 500\nX: 1\nT: Chorus\nV: T1 clef=treble name="Soprano"\nV: T2 clef=treble name="Alto"\nV: B1 clef=bass name="Tenor"\nV: B2 clef=bass name="Bass"\nL:1/8\nK:G\nP:First Part\n[V: T1]"C"ed"Am"ed "F"cd"G7"gf |\n[V: T2]GGAA- A2BB |\n[V: B1]C3D- DF,3 |\n[V: B2]C,2A,,2 F,,2G,,2 |';
-    var bigNotes = "X:1\nM: 4/4\nL: 1/8\nK: Emin\n|:D2|EB{c}BA B2 EB|\n";
-    var visualOptions = { responsive: 'resize' };
+    const is_iOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) == null ? false : true
 
-    function onMidi() {
+    function onRender(tune, params = {responsive: 'resize'}) {
+      alert(tune)
+      const rendered = ABCJS.renderAbc('notation', tune, params)
+      onMidi(rendered)
+    }
+
+    function onMidi(rendered) {
       if (ABCJS.synth.supportsAudio()) {
-        var visualObj = ABCJS.renderAbc('notation', cooleys, visualOptions)[0];
-        var synthControl = new ABCJS.synth.SynthController();
-        synthControl.load("#audio", null, { displayRestart: true, displayPlay: true, displayProgress: true });
-        synthControl.setTune(visualObj, false);
+        const visualObj = rendered[0]
+        const synthControl = new ABCJS.synth.SynthController()
+        synthControl.load("#audio", null, { displayRestart: true, displayPlay: true, displayProgress: true })
+        synthControl.setTune(visualObj, false)
       } else {
         document.querySelector("#audio").innerHTML = "<div class='audio-error'>Audio is not supported in this browser.</div>";
       }
     }
 
-    function onRender(tune, params) {
-      if (!params) params = {};
-      ABCJS.renderAbc('notation', tune, params);
-      document.getElementById("audio").innerHTML = "";
-    }
+    console.log('====== start ======')
+    document.getElementById('title').textContent = '자바스크립트 동작함'
+    
   </script>
 </body>
-
 </html>
