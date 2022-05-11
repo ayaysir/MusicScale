@@ -11,6 +11,7 @@
 		4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEA9282BE28800E7A607 /* UIViewPreview.swift */; };
 		4463FEAD282C0E6600E7A607 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEAC282C0E6600E7A607 /* Note.swift */; };
 		4463FEAF282C145A00E7A607 /* NoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEAE282C145A00E7A607 /* NoteTests.swift */; };
+		4463FEB1282C24CA00E7A607 /* PianoKeyArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEB0282C24CA00E7A607 /* PianoKeyArea.swift */; };
 		44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D55276A334F00BBF6C9 /* AppDelegate.swift */; };
 		44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D57276A334F00BBF6C9 /* SceneDelegate.swift */; };
 		44709D5A276A334F00BBF6C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D59276A334F00BBF6C9 /* ViewController.swift */; };
@@ -47,6 +48,7 @@
 		4463FEA9282BE28800E7A607 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		4463FEAC282C0E6600E7A607 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		4463FEAE282C145A00E7A607 /* NoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTests.swift; sourceTree = "<group>"; };
+		4463FEB0282C24CA00E7A607 /* PianoKeyArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoKeyArea.swift; sourceTree = "<group>"; };
 		44709D52276A334F00BBF6C9 /* MusicScale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicScale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44709D55276A334F00BBF6C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44709D57276A334F00BBF6C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				4463FEAC282C0E6600E7A607 /* Note.swift */,
+				4463FEB0282C24CA00E7A607 /* PianoKeyArea.swift */,
 			);
 			path = ValueObject;
 			sourceTree = "<group>";
@@ -129,6 +132,7 @@
 		44709D54276A334F00BBF6C9 /* MusicScale */ = {
 			isa = PBXGroup;
 			children = (
+				4463FEA8282BE27600E7A607 /* SwiftUI */,
 				4463FEAB282C0E5600E7A607 /* ValueObject */,
 				44709D8A276A3BB800BBF6C9 /* ViewController */,
 				44709D88276A37F200BBF6C9 /* web */,
@@ -165,7 +169,6 @@
 		44709D8A276A3BB800BBF6C9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				4463FEA8282BE27600E7A607 /* SwiftUI */,
 				44709D8B276A3BDE00BBF6C9 /* ScaleDetailWebViewController.swift */,
 				4463FEA6282BDFF700E7A607 /* PianoViewController.swift */,
 			);
@@ -306,6 +309,7 @@
 			files = (
 				44709D60276A334F00BBF6C9 /* MusicScale.xcdatamodeld in Sources */,
 				44709D5A276A334F00BBF6C9 /* ViewController.swift in Sources */,
+				4463FEB1282C24CA00E7A607 /* PianoKeyArea.swift in Sources */,
 				44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */,
 				44709D8C276A3BDE00BBF6C9 /* ScaleDetailWebViewController.swift in Sources */,
 				4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */,

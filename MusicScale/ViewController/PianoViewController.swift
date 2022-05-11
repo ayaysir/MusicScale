@@ -18,14 +18,53 @@ class PianoViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        let pianoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handlePianoTap))
-        viewPiano.addGestureRecognizer(pianoTapRecognizer)
+        let pianoLongPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handlePianoLongPress(gesture:)))
+        pianoLongPressRecognizer.minimumPressDuration = 0
+        viewPiano.addGestureRecognizer(pianoLongPressRecognizer)
     }
     
-    @objc func handlePianoTap(gesture: UITapGestureRecognizer) {
+    @objc func handlePianoLongPress(gesture: UILongPressGestureRecognizer) {
         
-        let location = gesture.location(in: gesture.view)
-        print(location)
+        switch gesture.state {
+        case .possible:
+            print("possible")
+        case .began:
+            let location = gesture.location(in: gesture.view)
+            print("touchLocation:", location)
+            
+//            let whiteKeyResult = viewPiano.touchWhiteKeyArea.reduce(into: []) { partialResult, rect in
+//                partialResult.append(rect.contains(location))
+//            }
+//            let blackKeyResult = viewPiano.touchBlackKeyArea.reduce(into: []) { partialResult, rect in
+//                partialResult.append(rect.contains(location))
+//            }
+//            print("whiteKey:", whiteKeyResult)
+//            print("blackKey:", blackKeyResult)
+            
+            if let targetBlackKey = viewPiano.touchBlackKeyArea.first(where: { $0.touchArea.contains(location) }) {
+                print(targetBlackKey)
+                viewPiano.currentTouchedKey = targetBlackKey
+                return
+            }
+            
+            if let targetWhiteKey = viewPiano.touchWhiteKeyArea.first(where: { $0.touchArea.contains(location) }) {
+                print(targetWhiteKey)
+                viewPiano.currentTouchedKey = targetWhiteKey
+                return
+            }
+            
+        case .changed:
+            print("changed")
+        case .ended:
+            print("ended")
+            viewPiano.currentTouchedKey = nil
+        case .cancelled:
+            print("cancelled")
+        case .failed:
+            print("failed")
+        @unknown default:
+            print("default")
+        }
     }
     
     @IBAction func sldActViewScale(_ sender: UISlider) {
@@ -50,6 +89,17 @@ class PianoView: UIView {
             self.setNeedsDisplay()
         }
     }
+    var touchWhiteKeyArea: [PianoKeyArea] = []
+    var touchBlackKeyArea: [PianoKeyArea] = []
+    var currentTouchedKey: PianoKeyArea? {
+        didSet {
+            if let currentTouchArea = currentTouchedKey {
+                setNeedsDisplay(currentTouchArea.touchArea)
+            } else {
+                setNeedsDisplay()
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,6 +116,10 @@ class PianoView: UIView {
         guard let context = UIGraphicsGetCurrentContext() else {
             return
         }
+        
+        // 초기화
+        touchWhiteKeyArea = []
+        touchBlackKeyArea = []
         
         print(self.frame)
         let viewWidth = self.frame.width
@@ -101,12 +155,33 @@ class PianoView: UIView {
         for seq in 0...divBy {
             let eachPosX: CGFloat = margin.left + whiteKeyWidth * CGFloat(seq)
             
-            context.move(to: CGPoint(x: eachPosX, y: margin.top))
-            context.addLine(to: CGPoint(x: eachPosX, y: viewHeight - margin.bottom))
+            let startPos = CGPoint(x: eachPosX, y: margin.top)
+            let endPos = CGPoint(x: eachPosX, y: viewHeight - margin.bottom)
+            
+            context.move(to: startPos)
+            context.addLine(to: endPos)
             context.strokePath()
+            
+            // 흰 건반 touchArea에 추가
+            if seq == 0 {
+                let touchArea = CGRect(x: 0, y: margin.top, width: margin.left, height: endPos.y - startPos.y)
+                touchWhiteKeyArea.append(PianoKeyArea(touchArea: touchArea, keyColor: .white))
+            }
+            
+            let touchArea = CGRect(origin: startPos, size: CGSize(width: whiteKeyWidth, height: endPos.y - startPos.y))
+            touchWhiteKeyArea.append(PianoKeyArea(touchArea: touchArea, keyColor: .white))
+            
         }
         
-        // 검은 건반:
+        // 현재 누르고 있는 건반 하이라이트(흰색)
+        // 흰 건반인 경우 검은 건반 그리기 전에 하이라이트 해야 안겹침
+        if let currentTouchedKey = currentTouchedKey, currentTouchedKey.keyColor == .white {
+            context.addRect(currentTouchedKey.touchArea)
+            context.setFillColor(UIColor.orange.cgColor)
+            context.fillPath()
+        }
+        
+        // 검은 건반 그리기:
         // 3, 4, 3, 4 .....
         // -11, -7 ,-4 ,0, 3, 7, 10, 14, 17, 21
         let passIndexHalfRangeTo: Int = 6
@@ -121,7 +196,8 @@ class PianoView: UIView {
         
         let passIndexInC = passIndexInC_lower + [0] + passIndexInC_upper
         let passIndexAdjusted = passIndexInC.map { $0 + (adjustKeyPosition) }
-        print(passIndexAdjusted)
+//        print(passIndexAdjusted)
+        
         for seq in 0...divBy {
             if passIndexAdjusted.contains(seq) {
                 continue
@@ -129,7 +205,19 @@ class PianoView: UIView {
             
             context.setFillColor(UIColor.red.cgColor)
             let blackKeyWidth = whiteKeyWidth * 0.8
-            context.addRect(CGRect(x: margin.left + (whiteKeyWidth * CGFloat(seq) - blackKeyWidth * 0.5), y: margin.top - lineWidth * 0.5, width: blackKeyWidth, height: (viewHeight - marginsY) * 0.65))
+            let keyArea = CGRect(x: margin.left + (whiteKeyWidth * CGFloat(seq) - blackKeyWidth * 0.5), y: margin.top - lineWidth * 0.5, width: blackKeyWidth, height: (viewHeight - marginsY) * 0.65)
+            context.addRect(keyArea)
+            context.fillPath()
+            
+            // 검은 건반 touchArea 추가
+            touchBlackKeyArea.append(PianoKeyArea(touchArea: keyArea, keyColor: .black))
+        }
+        
+        // 현재 누르고 있는 건반 하이라이트(검은색)
+        // 검은색 건반인 경우 검은 건반 그린 이후에 하이라이트 해야 안묻힘
+        if let currentTouchedKey = currentTouchedKey, currentTouchedKey.keyColor == .black {
+            context.addRect(currentTouchedKey.touchArea)
+            context.setFillColor(UIColor.orange.cgColor)
             context.fillPath()
         }
         
@@ -147,7 +235,7 @@ struct PianoView_Preview: PreviewProvider {
             return view
         }
         .previewLayout(.sizeThatFits)
-        .padding(10)
+        .padding(0)
     }
 }
 #endif
