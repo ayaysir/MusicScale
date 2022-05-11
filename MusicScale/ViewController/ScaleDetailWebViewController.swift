@@ -16,8 +16,8 @@ class ScaleDetailWebViewController: UIViewController {
         super.viewDidLoad()
         
         // https://stackoverflow.com/questions/56460362/how-to-force-wkwebview-to-ignore-hardware-silent-switch-on-ios
-//        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
 
         webView.configuration.allowsInlineMediaPlayback = true
         webView.configuration.mediaTypesRequiringUserActionForPlayback = []
@@ -25,14 +25,14 @@ class ScaleDetailWebViewController: UIViewController {
         loadHelpPage()
     }
     
-//    @objc func willResignActive() {
-//        disableIgnoreSilentSwitch(webView)
-//    }
-//
-//    @objc func didBecomeActive() {
-//        //Always creates new js Audio object to ensure the audio session behaves correctly
-//        forceIgnoreSilentHardwareSwitch(webView, initialSetup: false)
-//    }
+    @objc func willResignActive() {
+        disableIgnoreSilentSwitch(webView)
+    }
+
+    @objc func didBecomeActive() {
+        //Always creates new js Audio object to ensure the audio session behaves correctly
+        forceIgnoreSilentHardwareSwitch(webView, initialSetup: false)
+    }
     
     
 }
@@ -55,23 +55,18 @@ extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKSc
             return
         }
         webView.loadFileURL(url, allowingReadAccessTo: url)
+        webView.scrollView.isScrollEnabled = false
         
         // inject script to html
         let chorusLineBroken = """
-        %%staffwidth 500
         X: 1
-        T: Chorus
-        V: T1 clef=treble name="Soprano"
-        V: T2 clef=treble name="Alto"
-        V: B1 clef=bass name="Tenor"
-        V: B2 clef=bass name="Bass"
-        L:1/8
-        K:C
-        P:First Part
-        [V: T1]"C"ed"Am"ed "F"cd"G7"gf |
-        [V: T2]GGAA- A2BB |
-        [V: B1]C3D- DF,3 |
-        [V: B2]C,2A,,2 F,,2G,,2 |
+        T: Ahava Rabboh
+        V: T1 clef=treble
+        L: 1/1
+        K: C
+        %
+        e d e d c d g f |
+        w: A B♭ C D♯ E F♮ G H
         """
         
         let injectionSource = "onRender('\(chorusLineBroken.replacingOccurrences(of: "\n", with: "\\n"))');"
@@ -102,35 +97,35 @@ extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKSc
         }
     }
     
-//    private func disableIgnoreSilentSwitch(_ webView: WKWebView) {
-//        //Nullifying the js Audio object src is critical to restore the audio sound session to consistent state for app background/foreground cycle
-//        let jsInject = "document.getElementById('wkwebviewAudio').muted=true;"
-//        webView.evaluateJavaScript(jsInject, completionHandler: nil)
-//    }
-//
-//    private func forceIgnoreSilentHardwareSwitch(_ webView: WKWebView, initialSetup: Bool) {
-//        //after some trial and error this seems to be minimal silence sound that still plays
-//        let silenceMono56kbps100msBase64Mp3 = "data:audio/mp3;base64,//tAxAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAFAAAESAAzMzMzMzMzMzMzMzMzMzMzMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmaZmZmZmZmZmZmZmZmZmZmZmZmZmczMzMzMzMzMzMzMzMzMzMzMzMzM//////////////////////////8AAAA5TEFNRTMuMTAwAZYAAAAAAAAAABQ4JAMGQgAAOAAABEhNIZS0AAAAAAD/+0DEAAPH3Yz0AAR8CPqyIEABp6AxjG/4x/XiInE4lfQDFwIIRE+uBgZoW4RL0OLMDFn6E5v+/u5ehf76bu7/6bu5+gAiIQGAABQIUJ0QolFghEn/9PhZQpcUTpXMjo0OGzRCZXyKxoIQzB2KhCtGobpT9TRVj/3Pmfp+f8X7Pu1B04sTnc3s0XhOlXoGVCMNo9X//9/r6a10TZEY5DsxqvO7mO5qFvpFCmKIjhpSItGsUYcRO//7QsQRgEiljQIAgLFJAbIhNBCa+JmorCbOi5q9nVd2dKnusTMQg4MFUlD6DQ4OFijwGAijRMfLbHG4nLVTjydyPlJTj8pfPflf9/5GD950A5e+jsrmNZSjSirjs1R7hnkia8vr//l/7Nb+crvr9Ok5ZJOylUKRxf/P9Zn0j2P4pJYXyKkeuy5wUYtdmOu6uobEtFqhIJViLEKIjGxchGev/L3Y0O3bwrIOszTBAZ7Ih28EUaSOZf/7QsQfg8fpjQIADN0JHbGgQBAZ8T//y//t/7d/2+f5m7MdCeo/9tdkMtGLbt1tqnabRroO1Qfvh20yEbei8nfDXP7btW7f9/uO9tbe5IvHQbLlxpf3DkAk0ojYcv///5/u3/7PTfGjPEPUvt5D6f+/3Lea4lz4tc4TnM/mFPrmalWbboeNiNyeyr+vufttZuvrVrt/WYv3T74JFo8qEDiJqJrmDTs///v99xDku2xG02jjunrICP/7QsQtA8kpkQAAgNMA/7FgQAGnobgfghgqA+uXwWQ3XFmGimSbe2X3ksY//KzK1a2k6cnNWOPJnPWUsYbKqkh8RJzrVf///P///////4vyhLKHLrCb5nIrYIUss4cthigL1lQ1wwNAc6C1pf1TIKRSkt+a//z+yLVcwlXKSqeSuCVQFLng2h4AFAFgTkH+Z/8jTX/zr//zsJV/5f//5UX/0ZNCNCCaf5lTCTRkaEdhNP//n/KUjf/7QsQ5AEhdiwAAjN7I6jGddBCO+WGTQ1mXrYatSAgaykxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqg=="
-//        //Plays 100ms silence once the web page has loaded through HTML5 Audio element (through Javascript)
-//        //which as a side effect will switch WKWebView AudioSession to AVAudioSessionCategoryPlayback
-//
-//        var jsInject: String
-//        if initialSetup {
-//           jsInject =
-//                "var s=new Audio('\(silenceMono56kbps100msBase64Mp3)');" +
-//                "s.id='wkwebviewAudio';" +
-//                "s.play();" +
-//                "s.loop=true;" +
-//                "document.body.appendChild(s);"
-//        } else {
-//            //Restore sound hack
-//            jsInject = "document.getElementById('wkwebviewAudio').muted=false;"
-//        }
-//        webView.evaluateJavaScript(jsInject, completionHandler: nil)
-//    }
-//
-//    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//        //As a result the WKWebView ignores the silent switch
-//        forceIgnoreSilentHardwareSwitch(webView, initialSetup: true)
-//    }
+    private func disableIgnoreSilentSwitch(_ webView: WKWebView) {
+        //Nullifying the js Audio object src is critical to restore the audio sound session to consistent state for app background/foreground cycle
+        let jsInject = "document.getElementById('wkwebviewAudio').muted=true;"
+        webView.evaluateJavaScript(jsInject, completionHandler: nil)
+    }
+
+    private func forceIgnoreSilentHardwareSwitch(_ webView: WKWebView, initialSetup: Bool) {
+        //after some trial and error this seems to be minimal silence sound that still plays
+        let silenceMono56kbps100msBase64Mp3 = "data:audio/mp3;base64,//tAxAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAFAAAESAAzMzMzMzMzMzMzMzMzMzMzMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmaZmZmZmZmZmZmZmZmZmZmZmZmZmczMzMzMzMzMzMzMzMzMzMzMzMzM//////////////////////////8AAAA5TEFNRTMuMTAwAZYAAAAAAAAAABQ4JAMGQgAAOAAABEhNIZS0AAAAAAD/+0DEAAPH3Yz0AAR8CPqyIEABp6AxjG/4x/XiInE4lfQDFwIIRE+uBgZoW4RL0OLMDFn6E5v+/u5ehf76bu7/6bu5+gAiIQGAABQIUJ0QolFghEn/9PhZQpcUTpXMjo0OGzRCZXyKxoIQzB2KhCtGobpT9TRVj/3Pmfp+f8X7Pu1B04sTnc3s0XhOlXoGVCMNo9X//9/r6a10TZEY5DsxqvO7mO5qFvpFCmKIjhpSItGsUYcRO//7QsQRgEiljQIAgLFJAbIhNBCa+JmorCbOi5q9nVd2dKnusTMQg4MFUlD6DQ4OFijwGAijRMfLbHG4nLVTjydyPlJTj8pfPflf9/5GD950A5e+jsrmNZSjSirjs1R7hnkia8vr//l/7Nb+crvr9Ok5ZJOylUKRxf/P9Zn0j2P4pJYXyKkeuy5wUYtdmOu6uobEtFqhIJViLEKIjGxchGev/L3Y0O3bwrIOszTBAZ7Ih28EUaSOZf/7QsQfg8fpjQIADN0JHbGgQBAZ8T//y//t/7d/2+f5m7MdCeo/9tdkMtGLbt1tqnabRroO1Qfvh20yEbei8nfDXP7btW7f9/uO9tbe5IvHQbLlxpf3DkAk0ojYcv///5/u3/7PTfGjPEPUvt5D6f+/3Lea4lz4tc4TnM/mFPrmalWbboeNiNyeyr+vufttZuvrVrt/WYv3T74JFo8qEDiJqJrmDTs///v99xDku2xG02jjunrICP/7QsQtA8kpkQAAgNMA/7FgQAGnobgfghgqA+uXwWQ3XFmGimSbe2X3ksY//KzK1a2k6cnNWOPJnPWUsYbKqkh8RJzrVf///P///////4vyhLKHLrCb5nIrYIUss4cthigL1lQ1wwNAc6C1pf1TIKRSkt+a//z+yLVcwlXKSqeSuCVQFLng2h4AFAFgTkH+Z/8jTX/zr//zsJV/5f//5UX/0ZNCNCCaf5lTCTRkaEdhNP//n/KUjf/7QsQ5AEhdiwAAjN7I6jGddBCO+WGTQ1mXrYatSAgaykxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqg=="
+        //Plays 100ms silence once the web page has loaded through HTML5 Audio element (through Javascript)
+        //which as a side effect will switch WKWebView AudioSession to AVAudioSessionCategoryPlayback
+
+        var jsInject: String
+        if initialSetup {
+           jsInject =
+                "var s=new Audio('\(silenceMono56kbps100msBase64Mp3)');" +
+                "s.id='wkwebviewAudio';" +
+                "s.play();" +
+                "s.loop=true;" +
+                "document.body.appendChild(s);"
+        } else {
+            //Restore sound hack
+            jsInject = "document.getElementById('wkwebviewAudio').muted=false;"
+        }
+        webView.evaluateJavaScript(jsInject, completionHandler: nil)
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        //As a result the WKWebView ignores the silent switch
+        forceIgnoreSilentHardwareSwitch(webView, initialSetup: true)
+    }
 }
