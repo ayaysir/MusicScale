@@ -67,34 +67,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DYq-Ty-mLu" customClass="PianoView" customModule="MusicScale" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="543" width="414" height="259"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYq-Ty-mLu" customClass="PianoView" customModule="MusicScale" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="603" width="414" height="259"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="DYq-Ty-mLu" secondAttribute="height" multiplier="414:259" id="8Tf-at-Qur"/>
+                                </constraints>
                             </view>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.29999999999999999" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="f5w-ni-0mC">
-                                <rect key="frame" x="20" y="476" width="118" height="30"/>
+                                <rect key="frame" x="20" y="100" width="118" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="sldActViewScale:" destination="koB-7m-YD5" eventType="valueChanged" id="jet-LF-mht"/>
                                 </connections>
                             </slider>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-7" maximumValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="hNm-UP-xTl">
-                                <rect key="frame" x="20" y="420" width="94" height="32"/>
+                                <rect key="frame" x="20" y="44" width="94" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="stepAdjustKeyPosition:" destination="koB-7m-YD5" eventType="valueChanged" id="uGI-fA-bXD"/>
                                 </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9sv-e7-5gn">
-                                <rect key="frame" x="122" y="426" width="113" height="21"/>
+                                <rect key="frame" x="122" y="50" width="113" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfX-md-M0Q">
-                                <rect key="frame" x="151" y="480" width="113" height="21"/>
+                                <rect key="frame" x="151" y="104" width="113" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -103,6 +105,11 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="x31-Qa-z9y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="x31-Qa-z9y" firstAttribute="bottom" secondItem="DYq-Ty-mLu" secondAttribute="bottom" id="7tW-JS-GLE"/>
+                            <constraint firstItem="DYq-Ty-mLu" firstAttribute="leading" secondItem="x31-Qa-z9y" secondAttribute="leading" id="IjU-vk-4dt"/>
+                            <constraint firstItem="x31-Qa-z9y" firstAttribute="trailing" secondItem="DYq-Ty-mLu" secondAttribute="trailing" id="Lh9-eD-Qim"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="lblCurrentKeyPosition" destination="9sv-e7-5gn" id="FY4-pK-3ah"/>

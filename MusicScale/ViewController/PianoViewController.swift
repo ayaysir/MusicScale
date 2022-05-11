@@ -18,6 +18,14 @@ class PianoViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        let pianoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handlePianoTap))
+        viewPiano.addGestureRecognizer(pianoTapRecognizer)
+    }
+    
+    @objc func handlePianoTap(gesture: UITapGestureRecognizer) {
+        
+        let location = gesture.location(in: gesture.view)
+        print(location)
     }
     
     @IBAction func sldActViewScale(_ sender: UISlider) {
@@ -45,10 +53,12 @@ class PianoView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        print("PianoView is initialized from \(#function)")
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        print("PianoView is initialized from \(#function)")
     }
     
     override func draw(_ rect: CGRect) {
@@ -117,7 +127,7 @@ class PianoView: UIView {
                 continue
             }
             
-            context.setFillColor(UIColor.black.cgColor)
+            context.setFillColor(UIColor.red.cgColor)
             let blackKeyWidth = whiteKeyWidth * 0.8
             context.addRect(CGRect(x: margin.left + (whiteKeyWidth * CGFloat(seq) - blackKeyWidth * 0.5), y: margin.top - lineWidth * 0.5, width: blackKeyWidth, height: (viewHeight - marginsY) * 0.65))
             context.fillPath()
