@@ -14,6 +14,10 @@
 		4463FEB1282C24CA00E7A607 /* PianoKeyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEB0282C24CA00E7A607 /* PianoKeyInfo.swift */; };
 		4463FEB4282D317700E7A607 /* PianoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEB3282D317700E7A607 /* PianoViewModel.swift */; };
 		4463FEB7282D3FCE00E7A607 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEB6282D3FCE00E7A607 /* PianoView.swift */; };
+		4463FEBA282D615400E7A607 /* MIDIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEB9282D615300E7A607 /* MIDIManager.swift */; };
+		4463FEBC282D61E700E7A607 /* GeneralUser GS MuseScore v1.442.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */; };
+		4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */; };
+		4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEC1282D66C700E7A607 /* CaseCountable.swift */; };
 		44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D55276A334F00BBF6C9 /* AppDelegate.swift */; };
 		44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D57276A334F00BBF6C9 /* SceneDelegate.swift */; };
 		44709D5A276A334F00BBF6C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D59276A334F00BBF6C9 /* ViewController.swift */; };
@@ -53,6 +57,10 @@
 		4463FEB0282C24CA00E7A607 /* PianoKeyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoKeyInfo.swift; sourceTree = "<group>"; };
 		4463FEB3282D317700E7A607 /* PianoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoViewModel.swift; sourceTree = "<group>"; };
 		4463FEB6282D3FCE00E7A607 /* PianoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
+		4463FEB9282D615300E7A607 /* MIDIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIManager.swift; sourceTree = "<group>"; };
+		4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeneralUser GS MuseScore v1.442.sf2"; sourceTree = "<group>"; };
+		4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoKeyHelper.swift; sourceTree = "<group>"; };
+		4463FEC1282D66C700E7A607 /* CaseCountable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseCountable.swift; sourceTree = "<group>"; };
 		44709D52276A334F00BBF6C9 /* MusicScale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicScale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44709D55276A334F00BBF6C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44709D57276A334F00BBF6C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +137,31 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4463FEB8282D614500E7A607 /* MIDI */ = {
+			isa = PBXGroup;
+			children = (
+				4463FEB9282D615300E7A607 /* MIDIManager.swift */,
+				4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */,
+			);
+			path = MIDI;
+			sourceTree = "<group>";
+		};
+		4463FEBD282D63AC00E7A607 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		4463FEC0282D66BC00E7A607 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4463FEC1282D66C700E7A607 /* CaseCountable.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		44709D49276A334F00BBF6C9 = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +185,9 @@
 		44709D54276A334F00BBF6C9 /* MusicScale */ = {
 			isa = PBXGroup;
 			children = (
+				4463FEC0282D66BC00E7A607 /* Extension */,
+				4463FEBD282D63AC00E7A607 /* Helper */,
+				4463FEB8282D614500E7A607 /* MIDI */,
 				4463FEB5282D3FB700E7A607 /* View */,
 				4463FEB2282D316700E7A607 /* ViewModel */,
 				4463FEA8282BE27600E7A607 /* SwiftUI */,
@@ -304,6 +340,7 @@
 				44709D65276A335800BBF6C9 /* LaunchScreen.storyboard in Resources */,
 				44709D89276A37F200BBF6C9 /* web in Resources */,
 				44709D62276A335800BBF6C9 /* Assets.xcassets in Resources */,
+				4463FEBC282D61E700E7A607 /* GeneralUser GS MuseScore v1.442.sf2 in Resources */,
 				44709D5D276A334F00BBF6C9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,9 +368,12 @@
 			files = (
 				44709D60276A334F00BBF6C9 /* MusicScale.xcdatamodeld in Sources */,
 				44709D5A276A334F00BBF6C9 /* ViewController.swift in Sources */,
+				4463FEBA282D615400E7A607 /* MIDIManager.swift in Sources */,
 				4463FEB7282D3FCE00E7A607 /* PianoView.swift in Sources */,
 				4463FEB1282C24CA00E7A607 /* PianoKeyInfo.swift in Sources */,
+				4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */,
 				44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */,
+				4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */,
 				4463FEB4282D317700E7A607 /* PianoViewModel.swift in Sources */,
 				44709D8C276A3BDE00BBF6C9 /* ScaleDetailWebViewController.swift in Sources */,
 				4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */,

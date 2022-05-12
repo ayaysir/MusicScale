@@ -102,6 +102,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fUA-Tx-1Hx">
+                                <rect key="frame" x="0.0" y="157" width="414" height="341"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="x31-Qa-z9y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -114,6 +118,7 @@
                     <connections>
                         <outlet property="lblCurrentKeyPosition" destination="9sv-e7-5gn" id="FY4-pK-3ah"/>
                         <outlet property="lblCurrentPianoViewScale" destination="tfX-md-M0Q" id="qAH-jD-UXI"/>
+                        <outlet property="pkvSelectKey" destination="fUA-Tx-1Hx" id="HPG-H7-ghD"/>
                         <outlet property="viewPiano" destination="DYq-Ty-mLu" id="6yo-X2-vJa"/>
                     </connections>
                 </viewController>
