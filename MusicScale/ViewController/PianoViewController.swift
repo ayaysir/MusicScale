@@ -33,34 +33,42 @@ class PianoViewController: UIViewController {
     @objc func handlePianoLongPress(gesture: UILongPressGestureRecognizer) {
         
         let semitoneStart = 60 + PianoKeyHelper.adjustKeyPosition(key: currentPlayableKey)
+        let viewModel = viewPiano.pianoViewModel
+        
+        let location = gesture.location(in: gesture.view)
         
         switch gesture.state {
         case .possible:
             print("possible")
         case .began:
-            let location = gesture.location(in: gesture.view)
             print("touchLocation:", location)
             
-            if let targetBlackKey = viewPiano.touchBlackKeyArea.first(where: { $0.touchArea.contains(location) }) {
-                print(targetBlackKey)
-                viewPiano.currentTouchedKey = targetBlackKey
-                midiManager.playNote(semitone: semitoneStart + targetBlackKey.keyIndex)
-                return
+            if let keyInfo = viewModel?.getKeyInfoBy(touchLocation: location) {
+                viewModel?.currentTouchedKey = keyInfo
+                print("keyInfo:", keyInfo)
+                midiManager.playNote(semitone: semitoneStart + keyInfo.keyIndex)
             }
             
-            if let targetWhiteKey = viewPiano.touchWhiteKeyArea.first(where: { $0.touchArea.contains(location) }) {
-                print(targetWhiteKey)
-                viewPiano.currentTouchedKey = targetWhiteKey
-                midiManager.playNote(semitone: semitoneStart + targetWhiteKey.keyIndex)
-                print(60 + targetWhiteKey.keyIndex)
-                return
-            }
+//            if let targetBlackKey = viewModel..first(where: { $0.touchArea.contains(location) }) {
+//                print(targetBlackKey)
+//                viewPiano.currentTouchedKey = targetBlackKey
+//                midiManager.playNote(semitone: semitoneStart + targetBlackKey.keyIndex)
+//                return
+//            }
+//
+//            if let targetWhiteKey = viewPiano.touchWhiteKeyArea.first(where: { $0.touchArea.contains(location) }) {
+//                print(targetWhiteKey)
+//                viewPiano.currentTouchedKey = targetWhiteKey
+//                midiManager.playNote(semitone: semitoneStart + targetWhiteKey.keyIndex)
+//                print(60 + targetWhiteKey.keyIndex)
+//                return
+//            }
             
         case .changed:
             print("changed")
         case .ended:
             print("ended")
-            viewPiano.currentTouchedKey = nil
+            viewModel?.currentTouchedKey = nil
             midiManager.stopNote()
         case .cancelled:
             print("cancelled")
@@ -77,7 +85,7 @@ class PianoViewController: UIViewController {
     }
     
     @IBAction func stepAdjustKeyPosition(_ sender: UIStepper) {
-        viewPiano.adjustKeyPosition = Int(sender.value)
+        viewPiano.pianoViewModel.adjustKeyPosition = Int(sender.value)
         lblCurrentKeyPosition.text = "\(Int(sender.value))"
     }
     
@@ -99,7 +107,7 @@ extension PianoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let key = Music.PlayableKey(rawValue: row)!
         currentPlayableKey = key
-        viewPiano.changeKey(key: key)
+        viewPiano.pianoViewModel.changeKey(key: key)
     }
 }
 
