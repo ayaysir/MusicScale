@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct PianoKeyArea {
+struct PianoKeyInfo {
     
     enum KeyColor {
         case white, black
@@ -15,5 +15,5 @@ struct PianoKeyArea {
     
     var touchArea: CGRect
     var keyColor: KeyColor
-    var note: Note?
+    var keyIndex: Int
 }

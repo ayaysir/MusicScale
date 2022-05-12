@@ -16,6 +16,10 @@ struct Music: Codable {
     enum PitchShift: Int, Codable {
         case sharp = 1, doubleSharp = 2, flat = -1, doubleFlat = -2, natural = 0
     }
+    
+    enum PlayableKey: Int, Codable {
+        case C, C_sharp, D, D_sharp, E, F, F_sharp, G, G_sharp, A, A_sharp, B
+    }
 }
 
 struct Note: Codable, Equatable, Comparable {
