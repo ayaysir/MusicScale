@@ -19,8 +19,7 @@ class MusicScaleTests: XCTestCase {
     }
 
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        print(3 % 12, 15 % 12)
     }
 
     func testPerformanceExample() throws {

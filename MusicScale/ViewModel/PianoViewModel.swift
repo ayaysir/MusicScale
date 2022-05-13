@@ -26,7 +26,23 @@ class PianoViewModel {
         }
     }
     
-    private var passIndexInC: [Int]!
+    static var passIndexInC: [Int] {
+        
+        let passIndexHalfRange = (1...PianoViewConstants.passIndexHalfRangeTo)
+        
+        let passIndexInC_upper = passIndexHalfRange.reduce(into: [Int]()) { partialResult, index in
+            let lastElement = partialResult.last ?? 0
+            partialResult.append(lastElement + (index % 2 != 0 ? 3 : 4))
+        }
+        let passIndexInC_lower = passIndexHalfRange.reduce(into: [Int]()) { partialResult, index in
+            let lastElement = partialResult.last ?? 0
+            partialResult.append(lastElement + (index % 2 != 0 ? -4 : -3))
+        }
+        
+        return passIndexInC_lower + [0] + passIndexInC_upper
+    }
+    
+//    private var passIndexInC: [Int]!
     private var passIndexAdjusted: [Int]!
     
     private(set) var pianoKeys: [PianoKeyInfo] = []
@@ -68,7 +84,7 @@ class PianoViewModel {
         
         self.frame = frame
         
-        configurePassIndexInC()
+//        configurePassIndexInC()
         createTopBottomLine()
         arrangeKeys()
     }
@@ -83,27 +99,25 @@ class PianoViewModel {
         self.init(frame: frame, divBy: divBy, margin: margin, lineWidth: lineWidth, blackKeyRatio: blackKeyRatio)
     }
     
-    private func configurePassIndexInC() {
-        
-        let passIndexHalfRange = (1...PianoViewConstants.passIndexHalfRangeTo)
-        
-        let passIndexInC_upper = passIndexHalfRange.reduce(into: [Int]()) { partialResult, index in
-            let lastElement = partialResult.last ?? 0
-            partialResult.append(lastElement + (index % 2 != 0 ? 3 : 4))
-        }
-        let passIndexInC_lower = passIndexHalfRange.reduce(into: [Int]()) { partialResult, index in
-            let lastElement = partialResult.last ?? 0
-            partialResult.append(lastElement + (index % 2 != 0 ? -4 : -3))
-        }
-        
-        self.passIndexInC = passIndexInC_lower + [0] + passIndexInC_upper
-        print("keyInfo:", passIndexInC)
-    }
+//    private func configurePassIndexInC() {
+//
+//        let passIndexHalfRange = (1...PianoViewConstants.passIndexHalfRangeTo)
+//        
+//        let passIndexInC_upper = passIndexHalfRange.reduce(into: [Int]()) { partialResult, index in
+//            let lastElement = partialResult.last ?? 0
+//            partialResult.append(lastElement + (index % 2 != 0 ? 3 : 4))
+//        }
+//        let passIndexInC_lower = passIndexHalfRange.reduce(into: [Int]()) { partialResult, index in
+//            let lastElement = partialResult.last ?? 0
+//            partialResult.append(lastElement + (index % 2 != 0 ? -4 : -3))
+//        }
+//
+//        self.passIndexInC = passIndexInC_lower + [0] + passIndexInC_upper
+//    }
     
     private func arrangeKeys() {
         
-        passIndexAdjusted = passIndexInC.map { $0 + (adjustKeyPosition) }
-        print("keyInfo:", passIndexAdjusted)
+        passIndexAdjusted = PianoViewModel.passIndexInC.map { $0 + (adjustKeyPosition) }
         pianoKeys = []
         whiteKeyDrawPosList = []
         blackKeyDrawPosList = []
@@ -185,8 +199,6 @@ class PianoViewModel {
                 blackKeyIndex += 1
                 continue
             }
-            
-//            context.setFillColor(UIColor.red.cgColor)
             
             let whiteKeyWidth = (frame.width - margins.x) / CGFloat(divBy)
             let blackKeyWidth = whiteKeyWidth * blackKeyRatio.width

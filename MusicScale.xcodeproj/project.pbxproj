@@ -18,6 +18,7 @@
 		4463FEBC282D61E700E7A607 /* GeneralUser GS MuseScore v1.442.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */; };
 		4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */; };
 		4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEC1282D66C700E7A607 /* CaseCountable.swift */; };
+		4463FEC4282EB2AE00E7A607 /* PianoKeyHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEC3282EB2AE00E7A607 /* PianoKeyHelperTests.swift */; };
 		44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D55276A334F00BBF6C9 /* AppDelegate.swift */; };
 		44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D57276A334F00BBF6C9 /* SceneDelegate.swift */; };
 		44709D5A276A334F00BBF6C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D59276A334F00BBF6C9 /* ViewController.swift */; };
@@ -61,6 +62,7 @@
 		4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeneralUser GS MuseScore v1.442.sf2"; sourceTree = "<group>"; };
 		4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoKeyHelper.swift; sourceTree = "<group>"; };
 		4463FEC1282D66C700E7A607 /* CaseCountable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseCountable.swift; sourceTree = "<group>"; };
+		4463FEC3282EB2AE00E7A607 /* PianoKeyHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoKeyHelperTests.swift; sourceTree = "<group>"; };
 		44709D52276A334F00BBF6C9 /* MusicScale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicScale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44709D55276A334F00BBF6C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44709D57276A334F00BBF6C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 		44709D6E276A335900BBF6C9 /* MusicScaleTests */ = {
 			isa = PBXGroup;
 			children = (
+				4463FEC3282EB2AE00E7A607 /* PianoKeyHelperTests.swift */,
 				4463FEAE282C145A00E7A607 /* NoteTests.swift */,
 				44709D6F276A335900BBF6C9 /* MusicScaleTests.swift */,
 			);
@@ -389,6 +392,7 @@
 			files = (
 				44709D70276A335900BBF6C9 /* MusicScaleTests.swift in Sources */,
 				4463FEAF282C145A00E7A607 /* NoteTests.swift in Sources */,
+				4463FEC4282EB2AE00E7A607 /* PianoKeyHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
