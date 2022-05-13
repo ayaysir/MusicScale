@@ -8,6 +8,10 @@
 import UIKit
 import WebKit
 
+func generateAbcJsInjectionSource(from abcjsText: String) -> String {
+    return "onRender('\(abcjsText.replacingOccurrences(of: "\n", with: "\\n"))');"
+}
+
 class ScaleDetailWebViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
@@ -22,7 +26,7 @@ class ScaleDetailWebViewController: UIViewController {
         webView.configuration.allowsInlineMediaPlayback = true
         webView.configuration.mediaTypesRequiringUserActionForPlayback = []
         
-        loadHelpPage()
+        loadWebSheetPage()
     }
     
     @objc func willResignActive() {
@@ -38,7 +42,8 @@ class ScaleDetailWebViewController: UIViewController {
 }
 
 extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
-    func loadHelpPage() {
+    
+    func loadWebSheetPage() {
 
         if #available(iOS 14.0, *) {
             webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
@@ -60,16 +65,16 @@ extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKSc
         // inject script to html
         let chorusLineBroken = """
         X: 1
-        T: Ahava Rabboh
+        T:
         V: T1 clef=treble
         L: 1/1
+        R: C Aeolian
         K: C
-        %
-        e d e d c d g f |
-        w: A B♭ C D♯ E F♮ G H
+        C D _E F G _A _B c |
+        w: C D E♭ F G A♭ B♭ C
         """
         
-        let injectionSource = "onRender('\(chorusLineBroken.replacingOccurrences(of: "\n", with: "\\n"))');"
+        let injectionSource = generateAbcJsInjectionSource(from: chorusLineBroken)
         let injectionScript = WKUserScript(source: injectionSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
         webView.configuration.userContentController.addUserScript(injectionScript)
         

@@ -31,6 +31,7 @@
 		44709D7C276A335900BBF6C9 /* MusicScaleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D7B276A335900BBF6C9 /* MusicScaleUITestsLaunchTests.swift */; };
 		44709D89276A37F200BBF6C9 /* web in Resources */ = {isa = PBXBuildFile; fileRef = 44709D88276A37F200BBF6C9 /* web */; };
 		44709D8C276A3BDE00BBF6C9 /* ScaleDetailWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D8B276A3BDE00BBF6C9 /* ScaleDetailWebViewController.swift */; };
+		449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF426282EC008008273CA /* ScaleInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		44709D7B276A335900BBF6C9 /* MusicScaleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicScaleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		44709D88276A37F200BBF6C9 /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = web; sourceTree = "<group>"; };
 		44709D8B276A3BDE00BBF6C9 /* ScaleDetailWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleDetailWebViewController.swift; sourceTree = "<group>"; };
+		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 			children = (
 				44709D8B276A3BDE00BBF6C9 /* ScaleDetailWebViewController.swift */,
 				4463FEA6282BDFF700E7A607 /* PianoViewController.swift */,
+				449AF426282EC008008273CA /* ScaleInfoViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				44709D8C276A3BDE00BBF6C9 /* ScaleDetailWebViewController.swift in Sources */,
 				4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */,
 				4463FEA7282BDFF700E7A607 /* PianoViewController.swift in Sources */,
+				449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */,
 				4463FEAD282C0E6600E7A607 /* Note.swift in Sources */,
 				44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */,
 			);
