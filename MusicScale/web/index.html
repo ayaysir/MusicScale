@@ -50,9 +50,7 @@
         const visualObj = rendered[0]
         const synthControl = new ABCJS.synth.SynthController()
         synthControl.load("#audio", cursorControl, { displayRestart: true, displayPlay: true, displayProgress: true })
-        synthControl.setTune(visualObj, false, {
-          options: { defaultQpm: 300, qpm: 300 }
-        })
+        synthControl.setTune(visualObj, false, {})
       } else {
         document.querySelector("#audio").innerHTML = "<div class='audio-error'>Audio is not supported in this browser.</div>";
       }

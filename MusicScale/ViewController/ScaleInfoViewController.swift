@@ -17,6 +17,15 @@ class ScaleInfoViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        do {
+//            let array = try ScaleInfoCDService.shared.readCoreData()
+//            array[0].comment = "eeeeeee"
+//            array[1].comment = "fffffff"
+//            try ScaleInfoCDService.saveManagedContext()
+//            print(ScaleInfoCDService.shared.printScaleInfoEntity(array: array))
+        } catch {
+            print(error)
+        }
     }
     
 

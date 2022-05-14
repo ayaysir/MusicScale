@@ -19,26 +19,9 @@ class ScaleDetailWebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // https://stackoverflow.com/questions/56460362/how-to-force-wkwebview-to-ignore-hardware-silent-switch-on-ios
-        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
-
-        webView.configuration.allowsInlineMediaPlayback = true
-        webView.configuration.mediaTypesRequiringUserActionForPlayback = []
-        
+        initIgnoreSilenceMode()
         loadWebSheetPage()
     }
-    
-    @objc func willResignActive() {
-        disableIgnoreSilentSwitch(webView)
-    }
-
-    @objc func didBecomeActive() {
-        //Always creates new js Audio object to ensure the audio session behaves correctly
-        forceIgnoreSilentHardwareSwitch(webView, initialSetup: false)
-    }
-    
-    
 }
 
 extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
@@ -69,6 +52,7 @@ extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKSc
         V: T1 clef=treble
         L: 1/1
         R: C Aeolian
+        Q: 1/1=120
         K: C
         C D _E F G _A _B c |
         w: C D E♭ F G A♭ B♭ C
@@ -88,6 +72,30 @@ extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKSc
         // register the bridge script that listens for the output
         webView.configuration.userContentController.add(self, name: "logHandler")
         
+    }
+}
+
+// MARK: - 무음 모드에서도 소리 나오게 하기
+extension ScaleDetailWebViewController {
+    
+    // How to force WKWebView to ignore hardware silent switch on iOS?
+    // https://stackoverflow.com/questions/56460362
+    func initIgnoreSilenceMode() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
+        
+        webView.configuration.allowsInlineMediaPlayback = true
+        webView.configuration.mediaTypesRequiringUserActionForPlayback = []
+    }
+    
+    @objc func willResignActive() {
+        disableIgnoreSilentSwitch(webView)
+    }
+
+    @objc func didBecomeActive() {
+        //Always creates new js Audio object to ensure the audio session behaves correctly
+        forceIgnoreSilentHardwareSwitch(webView, initialSetup: false)
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {

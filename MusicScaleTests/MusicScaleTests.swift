@@ -19,7 +19,28 @@ class MusicScaleTests: XCTestCase {
     }
 
     func testExample() throws {
-        print(3 % 12, 15 % 12)
+        
+    }
+    
+    func test_structToJson() throws {
+        
+        let scaleInfo1 = ScaleInfo(id: UUID(), name: "asdf", nameAlias: "Das", degreesAscending: "Asd", degreesDescending: "ADs", defaultPriority: 3, comment: "ADs", links: "da", isDivBy12Tet: false)
+        let scaleInfo2 = ScaleInfo(id: UUID(), name: "dafdxzc", nameAlias: "zc", degreesAscending: "zz", degreesDescending: "zz", defaultPriority: 3, comment: "z", links: "dfefea", isDivBy12Tet: false)
+        
+        do {
+            let jsonData = try JSONEncoder().encode([scaleInfo1, scaleInfo2])
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+//            print(jsonString)
+            
+            XCTAssert(jsonString.contains(scaleInfo1.id.uuidString), "uuid1 not contained.")
+            XCTAssert(jsonString.contains(scaleInfo2.id.uuidString), "uuid2 not contained.")
+            
+            // and decode it back
+//            let decodedSentences = try JSONDecoder().decode([Sentence].self, from: jsonData)
+//            print(decodedSentences)
+        } catch {
+            print(error)
+        }
     }
 
     func testPerformanceExample() throws {

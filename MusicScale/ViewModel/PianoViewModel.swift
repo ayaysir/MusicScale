@@ -136,7 +136,7 @@ class PianoViewModel {
             return targetBlackKey
         }
         
-        print("whiteKeys:", pianoWhiteKeys)
+        // print("whiteKeys:", pianoWhiteKeys)
         if let targetWhiteKey = pianoWhiteKeys.first(where: { $0.touchArea.contains(location) }) {
             return targetWhiteKey
         }
@@ -183,7 +183,7 @@ class PianoViewModel {
                 whiteKeyIndex += keyIndexStep
             }
             
-            print("whiteKeys:", seq, passIndexAdjusted.contains(seq), keyIndexStep, whiteKeyIndex, touchArea)
+            // print("whiteKeys:", seq, passIndexAdjusted.contains(seq), keyIndexStep, whiteKeyIndex, touchArea)
             pianoKeys.append(PianoKeyInfo(touchArea: touchArea, keyColor: .white, keyIndex: whiteKeyIndex))
         }
     }
