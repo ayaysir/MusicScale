@@ -13,6 +13,9 @@ class ScaleInfoViewModel {
     
     // 모든 관리는 배열의 index로
     private var totalEntityData: [ScaleInfoEntity]!
+    var infoCount: Int {
+        return totalEntityData.count
+    }
     
     var handleDataReloaded: () -> () = {}
     

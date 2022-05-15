@@ -21,11 +21,14 @@ class CoreDataTests: XCTestCase {
         array = (1...100).map { index in
             ScaleInfo(id: UUID(), name: "Scale \(index)", nameAlias: "스케일 \(index)", degreesAscending: "cde \(index)", degreesDescending: "", defaultPriority: 3, comment: "comment \(index): \(Date())", links: "", isDivBy12Tet: true)
         }
-        
+
         for info in array {
             try service.saveCoreData(scaleInfo: info)
         }
+        
     }
+    
+
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.

@@ -36,7 +36,7 @@ class MIDIManager {
     init(soundbank: URL?) {
         self.soundbank = soundbank
         createNotePlayers()
-        print(notePlayers)
+//        print(notePlayers)
     }
     
     deinit {

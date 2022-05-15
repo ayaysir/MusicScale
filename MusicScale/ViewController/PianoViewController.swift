@@ -14,7 +14,16 @@ class PianoViewController: UIViewController {
     @IBOutlet weak var lblCurrentPianoViewScale: UILabel!
     @IBOutlet weak var pkvSelectKey: UIPickerView!
     
-    var midiManager = MIDIManager()
+//    var midiManager = MIDIManager()
+    private(set) var midiManagerLoaded = false {
+        didSet {
+            print("midiManagerLoaded")
+        }
+    }
+    lazy var midiManager: MIDIManager = {
+        midiManagerLoaded = true
+        return MIDIManager()
+    }()
     var currentPlayableKey: Music.PlayableKey = .C
     
     override func viewDidLoad() {
