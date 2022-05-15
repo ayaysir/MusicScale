@@ -11,6 +11,7 @@ extension Sequence {
     
     // https://stackoverflow.com/questions/49476485/swift-loop-over-array-elements-and-access-previous-and-next-elements
     /// 사용법: array.enumerated().withPreviousAndNext.compactMap { values -> T? in ... }
+    /// let (prev, curr, next) = values
     var withPreviousAndNext: [(Element?, Element, Element?)] {
         let optionalSelf = self.map(Optional.some)
         let next = optionalSelf.dropFirst() + [nil]

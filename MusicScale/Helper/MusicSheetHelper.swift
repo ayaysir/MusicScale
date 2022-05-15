@@ -147,4 +147,16 @@ struct MusicSheetHelper {
                 w: \(degreesToAbcjsLyric(degrees: targetDegrees))
                 """
     }
+    
+    func getIntegerNotation(scaleInfo: ScaleInfo) {
+        
+       
+        
+    }
+    
+    func getPattern(scaleInfo: ScaleInfo) {
+        
+       
+
+    }
 }

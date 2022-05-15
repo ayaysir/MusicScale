@@ -9,6 +9,9 @@ import Foundation
 
 extension String {
 
+    // MARK: - An expert's solution to weird string manupulations.
+    // https://stackoverflow.com/questions/39677330/how-does-string-substring-work-in-swift
+    
     var length: Int {
         return count
     }

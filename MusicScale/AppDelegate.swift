@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import DropDown
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // in your AppDelegate's didFinishLaunching method so that the drop down will handle its display with the keyboard displayed even the first time a drop down is showed.
+        DropDown.startListeningToKeyboard()
+        
         return true
     }
 
