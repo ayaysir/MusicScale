@@ -8,13 +8,12 @@
 import UIKit
 import WebKit
 
-func generateAbcJsInjectionSource(from abcjsText: String) -> String {
-    return "onRender('\(abcjsText.replacingOccurrences(of: "\n", with: "\\n"))');"
-}
-
 class ScaleDetailWebViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
+    
+    var scaleInfo: ScaleInfo!
+    let musicSheetHelper = MusicSheetHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +24,10 @@ class ScaleDetailWebViewController: UIViewController {
 }
 
 extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+    
+    func generateAbcJsInjectionSource(from abcjsText: String) -> String {
+        return "onRender('\(abcjsText.replacingOccurrences(of: "\n", with: "\\n"))');"
+    }
     
     func loadWebSheetPage() {
 
@@ -45,20 +48,9 @@ extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKSc
         webView.loadFileURL(url, allowingReadAccessTo: url)
         webView.scrollView.isScrollEnabled = false
         
-        // inject script to html
-        let chorusLineBroken = """
-        X: 1
-        T:
-        V: T1 clef=treble
-        L: 1/1
-        R: C Aeolian
-        Q: 1/1=120
-        K: C
-        C D _E F G _A _B "<(♮)"c |
-        w: C D E♭ F G A♭ B♭ C
-        """
+        let abcjsText = musicSheetHelper.scaleInfoToAbcjsText(scaleInfo: scaleInfo)
         
-        let injectionSource = generateAbcJsInjectionSource(from: chorusLineBroken)
+        let injectionSource = generateAbcJsInjectionSource(from: abcjsText)
         let injectionScript = WKUserScript(source: injectionSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
         webView.configuration.userContentController.addUserScript(injectionScript)
         

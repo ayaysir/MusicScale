@@ -43,6 +43,7 @@
 		4475CB512830A6C200B9D204 /* MusicSheetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB502830A6C200B9D204 /* MusicSheetHelper.swift */; };
 		4475CB532830B52700B9D204 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB522830B52700B9D204 /* String+.swift */; };
 		4475CB552830BD8E00B9D204 /* MusicSheetHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB542830BD8E00B9D204 /* MusicSheetHelperTests.swift */; };
+		4475CB572831501600B9D204 /* Sequence+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB562831501600B9D204 /* Sequence+.swift */; };
 		449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF426282EC008008273CA /* ScaleInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +105,7 @@
 		4475CB502830A6C200B9D204 /* MusicSheetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSheetHelper.swift; sourceTree = "<group>"; };
 		4475CB522830B52700B9D204 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		4475CB542830BD8E00B9D204 /* MusicSheetHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSheetHelperTests.swift; sourceTree = "<group>"; };
+		4475CB562831501600B9D204 /* Sequence+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+.swift"; sourceTree = "<group>"; };
 		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -214,6 +216,7 @@
 			children = (
 				4463FEC1282D66C700E7A607 /* CaseCountable.swift */,
 				4475CB522830B52700B9D204 /* String+.swift */,
+				4475CB562831501600B9D204 /* Sequence+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				4463FEB7282D3FCE00E7A607 /* PianoView.swift in Sources */,
 				440637EB282FF6D900875E77 /* CoreDataService.swift in Sources */,
 				440637F428307E0000875E77 /* ScaleListTableViewController.swift in Sources */,
+				4475CB572831501600B9D204 /* Sequence+.swift in Sources */,
 				440637F2283003DE00875E77 /* ScaleInfoViewModel.swift in Sources */,
 				4463FEB1282C24CA00E7A607 /* PianoKeyInfo.swift in Sources */,
 				4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */,

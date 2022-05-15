@@ -15,15 +15,6 @@ class PianoViewController: UIViewController {
     @IBOutlet weak var pkvSelectKey: UIPickerView!
     
     var midiManager = MIDIManager()
-//    private(set) var midiManagerLoaded = false {
-//        didSet {
-//            print("midiManagerLoaded")
-//        }
-//    }
-//    lazy var midiManager: MIDIManager = {
-//        midiManagerLoaded = true
-//        return MIDIManager()
-//    }()
     
     var currentPlayableKey: Music.PlayableKey = .C
     
@@ -32,20 +23,12 @@ class PianoViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         let pianoLongPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handlePianoLongPress(gesture:)))
-        let pianoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handlePianoTap(gesture:)))
         pianoLongPressRecognizer.minimumPressDuration = 0
         viewPiano.addGestureRecognizer(pianoLongPressRecognizer)
-        viewPiano.addGestureRecognizer(pianoTapRecognizer)
         
         pkvSelectKey.delegate = self
         pkvSelectKey.dataSource = self
         
-//        midiManager.midiPlayer?.prepareToPlay()
-    }
-    
-    // 하이라이트 표시만
-    @objc func handlePianoTap(gesture: UITapGestureRecognizer) {
-        print(#function)
     }
     
     @objc func handlePianoLongPress(gesture: UILongPressGestureRecognizer) {
@@ -64,7 +47,7 @@ class PianoViewController: UIViewController {
             if let keyInfo = viewModel?.getKeyInfoBy(touchLocation: location) {
                 viewModel?.currentTouchedKey = keyInfo
                 print("keyInfo:", keyInfo)
-//                midiManager.playNote(semitone: semitoneStart + keyInfo.keyIndex)
+                // 노트 재생
             }
             
         case .changed:
@@ -72,7 +55,7 @@ class PianoViewController: UIViewController {
         case .ended:
             print("ended")
             viewModel?.currentTouchedKey = nil
-//            midiManager.stopNote()
+            // 노트 멈춤
         case .cancelled:
             print("cancelled")
         case .failed:

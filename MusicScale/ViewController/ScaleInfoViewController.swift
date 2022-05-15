@@ -37,6 +37,7 @@ class ScaleInfoViewController: UIViewController {
             infoVC?.scaleInfo = scaleInfo
         case "WebSheetSegue":
             webSheetVC = segue.destination as? ScaleDetailWebViewController
+            webSheetVC?.scaleInfo = scaleInfo
         case "PianoSegue":
             pianoVC = segue.destination as? PianoViewController
         default:
