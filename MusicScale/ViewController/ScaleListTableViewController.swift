@@ -102,7 +102,7 @@ class ScaleListTableViewController: UITableViewController {
             guard let receivedInfo = sender as? ScaleInfo else {
                 return
             }
-            vc?.scaleName = receivedInfo.name
+            vc?.scaleInfo = receivedInfo
             
         default:
             break

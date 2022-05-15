@@ -54,7 +54,7 @@ extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKSc
         R: C Aeolian
         Q: 1/1=120
         K: C
-        C D _E F G _A _B c |
+        C D _E F G _A _B "<(♮)"c |
         w: C D E♭ F G A♭ B♭ C
         """
         

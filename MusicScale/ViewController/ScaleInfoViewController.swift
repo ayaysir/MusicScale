@@ -12,33 +12,36 @@ class ScaleInfoViewController: UIViewController {
     @IBOutlet weak var lblScaleName: UILabel!
     
     @IBOutlet weak var containerViewInfo: UIView!
-    @IBOutlet weak var containerViewSheetWeb: UIView!
+    @IBOutlet weak var containerViewWebSheet: UIView!
     @IBOutlet weak var containerViewPiano: UIView!
     
-    var scaleName: String = "Unknown Scale"
+    var infoVC: ScaleSubInfoTableViewController?
+    var webSheetVC: ScaleDetailWebViewController?
+    var pianoVC: PianoViewController?
+    
+    var scaleInfo: ScaleInfo!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        do {
-//            let array = try ScaleInfoCDService.shared.readCoreData()
-//            array[0].comment = "eeeeeee"
-//            array[1].comment = "fffffff"
-//            try ScaleInfoCDService.saveManagedContext()
-//            print(ScaleInfoCDService.shared.printScaleInfoEntity(array: array))
-            
-            lblScaleName.text = scaleName
-        } catch {
-            print(error)
-        }
+        
+        lblScaleName.text = scaleInfo.name
     }
     
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        switch segue.identifier {
+        case "InfoSegue":
+            infoVC = segue.destination as? ScaleSubInfoTableViewController
+            infoVC?.scaleInfo = scaleInfo
+        case "WebSheetSegue":
+            webSheetVC = segue.destination as? ScaleDetailWebViewController
+        case "PianoSegue":
+            pianoVC = segue.destination as? PianoViewController
+        default:
+            break
+        }
     }
 
 }

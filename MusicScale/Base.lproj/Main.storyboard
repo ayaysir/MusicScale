@@ -141,21 +141,21 @@
                                 <rect key="frame" x="0.0" y="53" width="414" height="200"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="moQ-G5-aJS" kind="embed" id="Nkp-AJ-FiX"/>
+                                    <segue destination="moQ-G5-aJS" kind="embed" identifier="InfoSegue" id="Nkp-AJ-FiX"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="78q-Qb-nNd">
                                 <rect key="frame" x="0.0" y="314" width="414" height="182"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="DAe-qX-YdK" kind="embed" id="gzf-qz-h50"/>
+                                    <segue destination="DAe-qX-YdK" kind="embed" identifier="WebSheetSegue" id="gzf-qz-h50"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YQ5-tU-dgi">
                                 <rect key="frame" x="0.0" y="488" width="414" height="320"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="koB-7m-YD5" kind="embed" id="2J2-cR-7Di"/>
+                                    <segue destination="koB-7m-YD5" kind="embed" identifier="PianoSegue" id="2J2-cR-7Di"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Transpose" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ue-1x-MJm">
@@ -187,7 +187,7 @@
                     <connections>
                         <outlet property="containerViewInfo" destination="CGd-VL-s4b" id="ody-bt-Cbc"/>
                         <outlet property="containerViewPiano" destination="YQ5-tU-dgi" id="2sh-Gc-y1l"/>
-                        <outlet property="containerViewSheetWeb" destination="78q-Qb-nNd" id="evA-wV-RWu"/>
+                        <outlet property="containerViewWebSheet" destination="78q-Qb-nNd" id="evA-wV-RWu"/>
                         <outlet property="lblScaleName" destination="kTi-kW-HIo" id="Y5q-v8-s5R"/>
                     </connections>
                 </viewController>
@@ -195,10 +195,10 @@
             </objects>
             <point key="canvasLocation" x="863.768115942029" y="-595.3125"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Scale Sub Info Table View Controller-->
         <scene sceneID="ZMl-6K-EUG">
             <objects>
-                <tableViewController id="moQ-G5-aJS" sceneMemberID="viewController">
+                <tableViewController id="moQ-G5-aJS" customClass="ScaleSubInfoTableViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="Rf1-DV-A3a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -308,12 +308,23 @@ fa;dkslj</string>
                             </tableViewSection>
                             <tableViewSection headerTitle="Description" id="1Dc-ST-gj7">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ZTj-o3-38e">
-                                        <rect key="frame" x="0.0" y="273.5" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="170" id="ZTj-o3-38e">
+                                        <rect key="frame" x="0.0" y="273.5" width="414" height="170"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZTj-o3-38e" id="J6J-bR-JES">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XEK-LT-H7l">
+                                                    <rect key="frame" x="8" y="8" width="398" height="167"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -321,7 +332,7 @@ fa;dkslj</string>
                             <tableViewSection headerTitle="Links" id="cWp-Nj-9Mx">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="UgM-KH-JiA" style="IBUITableViewCellStyleDefault" id="yot-5w-Wbt">
-                                        <rect key="frame" x="0.0" y="367" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="493.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yot-5w-Wbt" id="9g5-ZC-wRH">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -338,7 +349,7 @@ fa;dkslj</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="LW5-GG-5je" style="IBUITableViewCellStyleDefault" id="axL-9J-hK8">
-                                        <rect key="frame" x="0.0" y="410.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="537" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="axL-9J-hK8" id="MJ4-CF-gNi">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -355,7 +366,7 @@ fa;dkslj</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="N1c-mn-4eD" style="IBUITableViewCellStyleDefault" id="UbA-jO-8Ca">
-                                        <rect key="frame" x="0.0" y="454" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="580.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UbA-jO-8Ca" id="tFf-nc-hao">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -380,10 +391,17 @@ fa;dkslj</string>
                         </connections>
                     </tableView>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="lblName" destination="1PZ-a3-HzC" id="m2K-5W-Lkd"/>
+                        <outlet property="lblNameAlias" destination="kWf-40-E1F" id="cVe-4m-MXF"/>
+                        <outlet property="lblPattern" destination="dyu-wZ-aGz" id="IUx-TC-1xy"/>
+                        <outlet property="lblPriority" destination="yQE-sL-izW" id="7Wm-Ht-zbe"/>
+                        <outlet property="txvComment" destination="XEK-LT-H7l" id="UK8-z5-hGv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fD4-BH-Wd3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2057" y="-826"/>
+            <point key="canvasLocation" x="2056.521739130435" y="-826.33928571428567"/>
         </scene>
         <!--Scale List-->
         <scene sceneID="fXn-we-lmp">
@@ -514,6 +532,9 @@ fa;dkslj</string>
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

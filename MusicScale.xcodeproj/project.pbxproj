@@ -39,6 +39,10 @@
 		44709D7C276A335900BBF6C9 /* MusicScaleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D7B276A335900BBF6C9 /* MusicScaleUITestsLaunchTests.swift */; };
 		44709D89276A37F200BBF6C9 /* web in Resources */ = {isa = PBXBuildFile; fileRef = 44709D88276A37F200BBF6C9 /* web */; };
 		44709D8C276A3BDE00BBF6C9 /* ScaleDetailWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D8B276A3BDE00BBF6C9 /* ScaleDetailWebViewController.swift */; };
+		4475CB4F2830A0DD00B9D204 /* ScaleSubInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB4E2830A0DD00B9D204 /* ScaleSubInfoTableViewController.swift */; };
+		4475CB512830A6C200B9D204 /* MusicSheetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB502830A6C200B9D204 /* MusicSheetHelper.swift */; };
+		4475CB532830B52700B9D204 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB522830B52700B9D204 /* String+.swift */; };
+		4475CB552830BD8E00B9D204 /* MusicSheetHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB542830BD8E00B9D204 /* MusicSheetHelperTests.swift */; };
 		449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF426282EC008008273CA /* ScaleInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +100,10 @@
 		44709D7B276A335900BBF6C9 /* MusicScaleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicScaleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		44709D88276A37F200BBF6C9 /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = web; sourceTree = "<group>"; };
 		44709D8B276A3BDE00BBF6C9 /* ScaleDetailWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleDetailWebViewController.swift; sourceTree = "<group>"; };
+		4475CB4E2830A0DD00B9D204 /* ScaleSubInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleSubInfoTableViewController.swift; sourceTree = "<group>"; };
+		4475CB502830A6C200B9D204 /* MusicSheetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSheetHelper.swift; sourceTree = "<group>"; };
+		4475CB522830B52700B9D204 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		4475CB542830BD8E00B9D204 /* MusicSheetHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSheetHelperTests.swift; sourceTree = "<group>"; };
 		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */,
+				4475CB502830A6C200B9D204 /* MusicSheetHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -204,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				4463FEC1282D66C700E7A607 /* CaseCountable.swift */,
+				4475CB522830B52700B9D204 /* String+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -258,6 +268,7 @@
 		44709D6E276A335900BBF6C9 /* MusicScaleTests */ = {
 			isa = PBXGroup;
 			children = (
+				4475CB542830BD8E00B9D204 /* MusicSheetHelperTests.swift */,
 				440637FB283084DE00875E77 /* CoreDataWithSampleTests.swift */,
 				440637EC282FF89300875E77 /* CoreDataTests.swift */,
 				4463FEC3282EB2AE00E7A607 /* PianoKeyHelperTests.swift */,
@@ -283,6 +294,7 @@
 				4463FEA6282BDFF700E7A607 /* PianoViewController.swift */,
 				449AF426282EC008008273CA /* ScaleInfoViewController.swift */,
 				440637F328307E0000875E77 /* ScaleListTableViewController.swift */,
+				4475CB4E2830A0DD00B9D204 /* ScaleSubInfoTableViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -436,9 +448,12 @@
 				44709D8C276A3BDE00BBF6C9 /* ScaleDetailWebViewController.swift in Sources */,
 				4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */,
 				4463FEA7282BDFF700E7A607 /* PianoViewController.swift in Sources */,
+				4475CB4F2830A0DD00B9D204 /* ScaleSubInfoTableViewController.swift in Sources */,
 				449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */,
 				4463FEAD282C0E6600E7A607 /* Note.swift in Sources */,
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,
+				4475CB512830A6C200B9D204 /* MusicSheetHelper.swift in Sources */,
+				4475CB532830B52700B9D204 /* String+.swift in Sources */,
 				44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */,
 				440637F0283003CC00875E77 /* ScaleInfo.swift in Sources */,
 			);
@@ -451,6 +466,7 @@
 				440637FC283084DE00875E77 /* CoreDataWithSampleTests.swift in Sources */,
 				440637ED282FF89300875E77 /* CoreDataTests.swift in Sources */,
 				44709D70276A335900BBF6C9 /* MusicScaleTests.swift in Sources */,
+				4475CB552830BD8E00B9D204 /* MusicSheetHelperTests.swift in Sources */,
 				4463FEAF282C145A00E7A607 /* NoteTests.swift in Sources */,
 				4463FEC4282EB2AE00E7A607 /* PianoKeyHelperTests.swift in Sources */,
 			);
