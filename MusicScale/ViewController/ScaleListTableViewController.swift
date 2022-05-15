@@ -19,6 +19,18 @@ class ScaleListTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
          self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        let service = ScaleInfoCDService.shared
+        do {
+            try service.deleteAllCoreData()
+            getSampleScaleDataFromLocal { infoList in
+                for info in infoList {
+                    try service.saveCoreData(scaleInfo: info)
+                }
+            }
+        } catch {
+            print(error)
+        }
     }
 
     // MARK: - Table view data source
@@ -63,7 +75,7 @@ class ScaleListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailViewSegue", sender: nil)
+        performSegue(withIdentifier: "DetailViewSegue", sender: scaleInfoViewModel.getScaleInfoBy(index: indexPath.row))
     }
 
     /*
@@ -82,13 +94,20 @@ class ScaleListTableViewController: UITableViewController {
     */
 
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        switch segue.identifier {
+        case "DetailViewSegue":
+            let vc = segue.destination as? ScaleInfoViewController
+            guard let receivedInfo = sender as? ScaleInfo else {
+                return
+            }
+            vc?.scaleName = receivedInfo.name
+            
+        default:
+            break
+        }
     }
-
 }
 
 class ScaleListCell: UITableViewCell {

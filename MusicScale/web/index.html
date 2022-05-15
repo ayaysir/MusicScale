@@ -4,12 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link href="css/abcjs-audio.css" rel="stylesheet" type="text/css">
   <title>Music Sheet Area</title>
   <style>
     * {
       overflow-y: hidden;
+    }
+
+    html, body {
+      margin: 0px;
+      padding: 0px;
     }
 
     .abcjs-highlight {
@@ -26,7 +31,7 @@
 </head>
 
 <body>
-  <h1 id="title">자바스크립트 동작안함</h1>
+  <!-- <h1 id="title">자바스크립트 동작안함</h1> -->
   <div id="notation"></div>
   <div id="audio"></div>
   <script src="./js/abcjs-basic-min.js"></script>
@@ -49,7 +54,7 @@
       if (ABCJS.synth.supportsAudio()) {
         const visualObj = rendered[0]
         const synthControl = new ABCJS.synth.SynthController()
-        synthControl.load("#audio", cursorControl, { displayRestart: true, displayPlay: true, displayProgress: true })
+        synthControl.load("#audio", cursorControl, { displayRestart: true, displayPlay: true, displayProgress: false, displayWarp: true })
         synthControl.setTune(visualObj, false, {})
       } else {
         document.querySelector("#audio").innerHTML = "<div class='audio-error'>Audio is not supported in this browser.</div>";
@@ -57,7 +62,7 @@
     }
 
     console.log('====== start ======')
-    document.getElementById('title').textContent = '자바스크립트 동작함'
+    // document.getElementById('title').textContent = '자바스크립트 동작함'
 
 
     // MARK: - cursor constrol

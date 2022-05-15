@@ -9,9 +9,13 @@ import UIKit
 
 class ScaleInfoViewController: UIViewController {
     
+    @IBOutlet weak var lblScaleName: UILabel!
+    
     @IBOutlet weak var containerViewInfo: UIView!
     @IBOutlet weak var containerViewSheetWeb: UIView!
     @IBOutlet weak var containerViewPiano: UIView!
+    
+    var scaleName: String = "Unknown Scale"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +27,8 @@ class ScaleInfoViewController: UIViewController {
 //            array[1].comment = "fffffff"
 //            try ScaleInfoCDService.saveManagedContext()
 //            print(ScaleInfoCDService.shared.printScaleInfoEntity(array: array))
+            
+            lblScaleName.text = scaleName
         } catch {
             print(error)
         }

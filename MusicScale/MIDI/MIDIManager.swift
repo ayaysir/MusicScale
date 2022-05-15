@@ -35,7 +35,7 @@ class MIDIManager {
     
     init(soundbank: URL?) {
         self.soundbank = soundbank
-        createNotePlayers()
+//        createNotePlayers()
 //        print(notePlayers)
     }
     
@@ -201,19 +201,28 @@ class MIDIManager {
 
 extension MIDIManager {
     
+//    func playNote(semitone: Int) {
+//        self.notePlayers[semitone].play()
+//    }
+//
+//    func stopNote() {
+//
+//        for semitone in (0...notePlayers.count - 1) {
+//            if notePlayers[semitone].isPlaying {
+//                notePlayers[semitone].stop()
+//                //
+//                notePlayers[semitone] = createOneNotePlayer(semitone: semitone)!
+//            }
+//        }
+//    }
+    
     func playNote(semitone: Int) {
-        self.notePlayers[semitone].play()
+        musicSequence = oneNoteSequence(semitone: semitone)
+        midiPlayer?.play()
     }
     
     func stopNote() {
-        
-        for semitone in (0...notePlayers.count - 1) {
-            if notePlayers[semitone].isPlaying {
-                notePlayers[semitone].stop()
-                //
-                notePlayers[semitone] = createOneNotePlayer(semitone: semitone)!
-            }
-        }
+        midiPlayer?.stop()
     }
     
     func oneNoteSequence(semitone: Int) -> MusicSequence {
