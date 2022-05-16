@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AudioKit
+import AVFoundation
 
 class PianoViewController: UIViewController {
     
@@ -14,7 +16,10 @@ class PianoViewController: UIViewController {
     @IBOutlet weak var lblCurrentPianoViewScale: UILabel!
     @IBOutlet weak var pkvSelectKey: UIPickerView!
     
-    var midiManager = MIDIManager()
+//    var midiManager = MIDIManager()
+    let engine = AudioEngine()
+    private var instrument = MIDISampler(name: "Instrument 1")
+    private var midiNote: MIDINoteNumber!
     
     var currentPlayableKey: Music.PlayableKey = .C
     
@@ -31,6 +36,48 @@ class PianoViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print(#function)
+        initPianoSound()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        print(#function)
+        engine.stop()
+    }
+    
+    private func initPianoSound() {
+        
+        // piano sound
+        engine.output = instrument
+        
+        // Load EXS file (you can also load SoundFonts and WAV files too using the AppleSampler Class)
+        do {
+//            if let fileURL = Bundle.main.url(forResource: "sawPiano1 복사본", withExtension: "exs") {
+//                try instrument.loadInstrument(url: fileURL)
+//            }
+            
+            // 무음모드에서 소리나게 하기
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            
+            if let fileURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2") {
+
+                try instrument.loadMelodicSoundFont(url: fileURL, preset: 67)
+            } else {
+                Log("Could not find file")
+            }
+        } catch {
+            Log("Could not load instrument")
+        }
+        do {
+            try engine.start()
+        } catch {
+            Log("AudioKit did not start!")
+        }
+    }
+    
     @objc func handlePianoLongPress(gesture: UILongPressGestureRecognizer) {
         
         let semitoneStart = 60 + PianoKeyHelper.adjustKeySemitone(key: currentPlayableKey)
@@ -40,26 +87,34 @@ class PianoViewController: UIViewController {
         
         switch gesture.state {
         case .possible:
-            print("possible")
+//            print("possible")
+            break
         case .began:
-            print("touchLocation:", location)
+//            print("touchLocation:", location)
             
             if let keyInfo = viewModel?.getKeyInfoBy(touchLocation: location) {
                 viewModel?.currentTouchedKey = keyInfo
                 print("keyInfo:", keyInfo)
                 // 노트 재생
+                midiNote = MIDINoteNumber(semitoneStart + keyInfo.keyIndex)
+                instrument.play(noteNumber: midiNote, velocity: 90, channel: 1)
             }
             
         case .changed:
-            print("changed")
+//            print("changed")
+            break
         case .ended:
-            print("ended")
+//            print("ended")
             viewModel?.currentTouchedKey = nil
             // 노트 멈춤
+            instrument.stop(noteNumber: midiNote, channel: 1)
+            midiNote = nil
         case .cancelled:
-            print("cancelled")
+//            print("cancelled")
+            break
         case .failed:
-            print("failed")
+//            print("failed")
+            break
         @unknown default:
             print("default")
         }

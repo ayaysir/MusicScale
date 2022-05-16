@@ -11,7 +11,7 @@
 		440637EB282FF6D900875E77 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637EA282FF6D900875E77 /* CoreDataService.swift */; };
 		440637ED282FF89300875E77 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637EC282FF89300875E77 /* CoreDataTests.swift */; };
 		440637F0283003CC00875E77 /* ScaleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637EF283003CC00875E77 /* ScaleInfo.swift */; };
-		440637F2283003DE00875E77 /* ScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637F1283003DE00875E77 /* ScaleInfoViewModel.swift */; };
+		440637F2283003DE00875E77 /* ScaleInfoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637F1283003DE00875E77 /* ScaleInfoListViewModel.swift */; };
 		440637F428307E0000875E77 /* ScaleListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637F328307E0000875E77 /* ScaleListTableViewController.swift */; };
 		440637F7283082BE00875E77 /* SampleScaleList.json in Resources */ = {isa = PBXBuildFile; fileRef = 440637F6283082BE00875E77 /* SampleScaleList.json */; };
 		440637FA283083AE00875E77 /* JSONCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637F9283083AE00875E77 /* JSONCoder.swift */; };
@@ -48,6 +48,13 @@
 		4475CB592831759300B9D204 /* CustomCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB582831759300B9D204 /* CustomCharacter.swift */; };
 		4475CB5B283176EA00B9D204 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB5A283176EA00B9D204 /* Music.swift */; };
 		449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF426282EC008008273CA /* ScaleInfoViewController.swift */; };
+		44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A28283293680067184E /* ScaleInfoViewModel.swift */; };
+		44A09A2C2832A3C90067184E /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44A09A2B2832A3C90067184E /* AudioKit */; };
+		44A09A2F2832A40A0067184E /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44A09A2E2832A40A0067184E /* SoundpipeAudioKit */; };
+		44A09A312832A6180067184E /* sawPiano1.exs in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A302832A4BB0067184E /* sawPiano1.exs */; };
+		44A09A362832AEFA0067184E /* saw220-ana1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A352832AEFA0067184E /* saw220-ana1.wav */; };
+		44A09A372832B1810067184E /* sawPiano1 복사본.exs in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A342832AEE80067184E /* sawPiano1 복사본.exs */; };
+		44A09A392832B7D20067184E /* VintageDreamsWaves-v2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */; };
 		4BE14DBCD05F5882BF98D64F /* Pods_MusicScale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214599025073672669B0DEA4 /* Pods_MusicScale.framework */; };
 		DE03C6B45056C54CF4C98113 /* Pods_MusicScale_MusicScaleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFCC8F1225122295FF5581 /* Pods_MusicScale_MusicScaleUITests.framework */; };
 /* End PBXBuildFile section */
@@ -79,7 +86,7 @@
 		440637EA282FF6D900875E77 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		440637EC282FF89300875E77 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		440637EF283003CC00875E77 /* ScaleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfo.swift; sourceTree = "<group>"; };
-		440637F1283003DE00875E77 /* ScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewModel.swift; sourceTree = "<group>"; };
+		440637F1283003DE00875E77 /* ScaleInfoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoListViewModel.swift; sourceTree = "<group>"; };
 		440637F328307E0000875E77 /* ScaleListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleListTableViewController.swift; sourceTree = "<group>"; };
 		440637F6283082BE00875E77 /* SampleScaleList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleScaleList.json; sourceTree = "<group>"; };
 		440637F9283083AE00875E77 /* JSONCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoder.swift; sourceTree = "<group>"; };
@@ -120,6 +127,11 @@
 		4475CB582831759300B9D204 /* CustomCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCharacter.swift; sourceTree = "<group>"; };
 		4475CB5A283176EA00B9D204 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
+		44A09A28283293680067184E /* ScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewModel.swift; sourceTree = "<group>"; };
+		44A09A302832A4BB0067184E /* sawPiano1.exs */ = {isa = PBXFileReference; lastKnownFileType = file; path = sawPiano1.exs; sourceTree = "<group>"; };
+		44A09A342832AEE80067184E /* sawPiano1 복사본.exs */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sawPiano1 복사본.exs"; sourceTree = "<group>"; };
+		44A09A352832AEFA0067184E /* saw220-ana1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "saw220-ana1.wav"; sourceTree = "<group>"; };
+		44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
 		4C9FB0A5D20EA8BA718B985F /* Pods-MusicScale.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScale.release.xcconfig"; path = "Target Support Files/Pods-MusicScale/Pods-MusicScale.release.xcconfig"; sourceTree = "<group>"; };
 		9FA4470F182FF4C132941F6A /* Pods-MusicScaleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScaleTests.debug.xcconfig"; path = "Target Support Files/Pods-MusicScaleTests/Pods-MusicScaleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4FFCC8F1225122295FF5581 /* Pods_MusicScale_MusicScaleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicScale_MusicScaleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,7 +142,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44A09A2C2832A3C90067184E /* AudioKit in Frameworks */,
 				4BE14DBCD05F5882BF98D64F /* Pods_MusicScale.framework in Frameworks */,
+				44A09A2F2832A40A0067184E /* SoundpipeAudioKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +227,8 @@
 			isa = PBXGroup;
 			children = (
 				4463FEB3282D317700E7A607 /* PianoViewModel.swift */,
-				440637F1283003DE00875E77 /* ScaleInfoViewModel.swift */,
+				440637F1283003DE00875E77 /* ScaleInfoListViewModel.swift */,
+				44A09A28283293680067184E /* ScaleInfoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -230,7 +245,11 @@
 			isa = PBXGroup;
 			children = (
 				4463FEB9282D615300E7A607 /* MIDIManager.swift */,
+				44A09A302832A4BB0067184E /* sawPiano1.exs */,
+				44A09A342832AEE80067184E /* sawPiano1 복사본.exs */,
+				44A09A352832AEFA0067184E /* saw220-ana1.wav */,
 				4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */,
+				44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */,
 			);
 			path = MIDI;
 			sourceTree = "<group>";
@@ -366,6 +385,10 @@
 			dependencies = (
 			);
 			name = MusicScale;
+			packageProductDependencies = (
+				44A09A2B2832A3C90067184E /* AudioKit */,
+				44A09A2E2832A40A0067184E /* SoundpipeAudioKit */,
+			);
 			productName = MusicScale;
 			productReference = 44709D52276A334F00BBF6C9 /* MusicScale.app */;
 			productType = "com.apple.product-type.application";
@@ -441,6 +464,10 @@
 				Base,
 			);
 			mainGroup = 44709D49276A334F00BBF6C9;
+			packageReferences = (
+				44A09A2A2832A3C90067184E /* XCRemoteSwiftPackageReference "AudioKit" */,
+				44A09A2D2832A40A0067184E /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */,
+			);
 			productRefGroup = 44709D53276A334F00BBF6C9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -457,6 +484,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44A09A392832B7D20067184E /* VintageDreamsWaves-v2.sf2 in Resources */,
+				44A09A372832B1810067184E /* sawPiano1 복사본.exs in Resources */,
+				44A09A362832AEFA0067184E /* saw220-ana1.wav in Resources */,
+				44A09A312832A6180067184E /* sawPiano1.exs in Resources */,
 				44709D65276A335800BBF6C9 /* LaunchScreen.storyboard in Resources */,
 				440637F7283082BE00875E77 /* SampleScaleList.json in Resources */,
 				44709D89276A37F200BBF6C9 /* web in Resources */,
@@ -598,12 +629,13 @@
 				440637EB282FF6D900875E77 /* CoreDataService.swift in Sources */,
 				440637F428307E0000875E77 /* ScaleListTableViewController.swift in Sources */,
 				4475CB572831501600B9D204 /* Sequence+.swift in Sources */,
-				440637F2283003DE00875E77 /* ScaleInfoViewModel.swift in Sources */,
+				440637F2283003DE00875E77 /* ScaleInfoListViewModel.swift in Sources */,
 				4463FEB1282C24CA00E7A607 /* PianoKeyInfo.swift in Sources */,
 				4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */,
 				44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */,
 				4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */,
 				4463FEB4282D317700E7A607 /* PianoViewModel.swift in Sources */,
+				44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */,
 				44709D8C276A3BDE00BBF6C9 /* ScaleDetailWebViewController.swift in Sources */,
 				4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */,
 				4463FEA7282BDFF700E7A607 /* PianoViewController.swift in Sources */,
@@ -992,6 +1024,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		44A09A2A2832A3C90067184E /* XCRemoteSwiftPackageReference "AudioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/AudioKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		44A09A2D2832A40A0067184E /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/SoundpipeAudioKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		44A09A2B2832A3C90067184E /* AudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44A09A2A2832A3C90067184E /* XCRemoteSwiftPackageReference "AudioKit" */;
+			productName = AudioKit;
+		};
+		44A09A2E2832A40A0067184E /* SoundpipeAudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44A09A2D2832A40A0067184E /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */;
+			productName = SoundpipeAudioKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		44709D5E276A334F00BBF6C9 /* MusicScale.xcdatamodeld */ = {

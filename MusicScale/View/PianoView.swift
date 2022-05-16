@@ -64,7 +64,7 @@ class PianoView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        print("draw start")
+//        print("draw start")
         
         guard let context = UIGraphicsGetCurrentContext() else {
             return

@@ -36,8 +36,8 @@
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nFO-H7-miO">
                                 <rect key="frame" x="0.0" y="44" width="414" height="204"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" audio="YES"/>
+                                <wkWebViewConfiguration key="configuration" allowsAirPlayForMediaPlayback="NO" allowsPictureInPictureMediaPlayback="NO">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
@@ -204,13 +204,6 @@
                                     <segue destination="koB-7m-YD5" kind="embed" identifier="PianoSegue" id="2J2-cR-7Di"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aeolian" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kTi-kW-HIo">
-                                <rect key="frame" x="10" y="0.0" width="374" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Transpose in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ue-1x-MJm">
                                 <rect key="frame" x="10" y="316" width="97" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -252,7 +245,6 @@
                         <outlet property="containerViewInfo" destination="CGd-VL-s4b" id="ody-bt-Cbc"/>
                         <outlet property="containerViewPiano" destination="YQ5-tU-dgi" id="2sh-Gc-y1l"/>
                         <outlet property="containerViewWebSheet" destination="78q-Qb-nNd" id="evA-wV-RWu"/>
-                        <outlet property="lblScaleName" destination="kTi-kW-HIo" id="Y5q-v8-s5R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpK-P1-p9p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -320,22 +312,22 @@ fa;dkslj</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="WLi-xh-Le6" detailTextLabel="dyu-wZ-aGz" style="IBUITableViewCellStyleValue1" id="jqP-qF-vZ2">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ySI-Fk-w9l" detailTextLabel="HiU-jV-BKf" style="IBUITableViewCellStyleValue1" id="S3z-AJ-XWH">
                                         <rect key="frame" x="0.0" y="136.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jqP-qF-vZ2" id="x0e-rg-yg5">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S3z-AJ-XWH" id="5nE-zj-X8B">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Interval" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WLi-xh-Le6">
-                                                    <rect key="frame" x="20" y="15" width="42" height="14.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Integer Notation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ySI-Fk-w9l">
+                                                    <rect key="frame" x="20" y="15" width="92" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dyu-wZ-aGz">
-                                                    <rect key="frame" x="361" y="15" width="33" height="14.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="1,1,1,1,1," textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HiU-jV-BKf">
+                                                    <rect key="frame" x="351" y="15" width="43" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>
@@ -482,9 +474,10 @@ fa;dkslj</string>
                     <nil key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="414" height="700"/>
                     <connections>
-                        <outlet property="lblInterval" destination="dyu-wZ-aGz" id="IUx-TC-1xy"/>
+                        <outlet property="lblIntegerNotation" destination="HiU-jV-BKf" id="VHd-wZ-UOH"/>
                         <outlet property="lblName" destination="1PZ-a3-HzC" id="m2K-5W-Lkd"/>
                         <outlet property="lblNameAlias" destination="kWf-40-E1F" id="cVe-4m-MXF"/>
+                        <outlet property="lblPattern" destination="AJs-Tl-Yfh" id="jF6-BW-Qqm"/>
                         <outlet property="lblPriority" destination="yQE-sL-izW" id="7Wm-Ht-zbe"/>
                         <outlet property="txvComment" destination="XEK-LT-H7l" id="UK8-z5-hGv"/>
                     </connections>

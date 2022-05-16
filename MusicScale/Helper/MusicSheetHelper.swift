@@ -19,15 +19,19 @@ import Foundation
  w: C D E♭ F G A♭ B♭ C
  */
 
+typealias NoteNumberPair = (prefix: String, number: Int)
+typealias NoteStrPair = (prefix: String, noteStr: String)
+
 struct MusicSheetHelper {
     
     enum IntervalError: String, Error {
         case notCalculable = "계산 불가"
     }
     
-    typealias NoteNumberPair = (prefix: String, number: Int)
-    typealias NoteStrPair = (prefix: String, noteStr: String)
-    
+    enum DegreesError: String, Error {
+        case malformedDegrees = "Degree is malformed."
+    }
+        
     private func degreesToNoteNumberPair(degrees: String, completeFinalNote: Bool = true) -> [NoteNumberPair] {
         
 //        let key = ["C", "D", "E", "F", "G", "A", "B"]
@@ -107,7 +111,6 @@ struct MusicSheetHelper {
             let finalNotePair = (result[0].prefix, result[0].number + 7)
             return result + [finalNotePair]
         }
-        
         return result
     }
     
@@ -124,84 +127,6 @@ struct MusicSheetHelper {
             
             return (prefix: value.prefix, noteStr: key[value.number - 1])
         }
-        
-        
-//        let degreeComponents = degrees.components(separatedBy: " ")
-//
-//        let onlyNumberRegex = "^[1234567]$"
-//        let hasPrefixRegex = "^[♭b#♯♮=][1234567]$"
-//        let hasBracketedPrefixRegex = "^\\([♭b#♯♮=]\\)[1234567]$"
-//
-//        let hasSharpAndFlatPrefixRegex = "^[♭b#♯][1234567]$"
-//        let hasSharpAndFlatBracketedPrefixRegex = "^\\([♭b#♯]\\)[1234567]$"
-//
-//        let result = degreeComponents.enumerated().withPreviousAndNext.compactMap { values -> NoteStrPair? in
-//
-//            let (prev, curr, _) = values
-//            let str = curr.element
-//
-//            let onlyNumber = str.range(of: onlyNumberRegex, options: .regularExpression)
-//            let hasPrefix = str.range(of: hasPrefixRegex, options: .regularExpression)
-//            let hasBracketedPrefix = str.range(of: hasBracketedPrefixRegex, options: .regularExpression)
-//
-//            if onlyNumber != nil {
-//
-//                if let prevElement = prev?.element {
-//
-//                    let isPrevHasPrefix = (prevElement.range(of: hasSharpAndFlatPrefixRegex, options: .regularExpression)) != nil
-//                    let isPrevAndCurrSameNumber1 = prevElement[1] == str
-//
-//                    let isPrevHasBracketPrefix = (prevElement.range(of: hasSharpAndFlatBracketedPrefixRegex, options: .regularExpression)) != nil
-//                    let removeBracketStrOfPrev = prevElement.replacingOccurrences(of: "[\\(\\)]", with: "", options: .regularExpression)
-//                    let isPrevAndCurrSameNumber2 = removeBracketStrOfPrev[1] == str
-//
-//                    if isPrevHasPrefix && isPrevAndCurrSameNumber1 {
-//                        return ("=", key[Int(str)! - 1])
-//                    }
-//
-//                    if isPrevHasBracketPrefix && isPrevAndCurrSameNumber2 {
-//                        return ("=", key[Int(str)! - 1])
-//                    }
-//                }
-//
-//                return ("", key[Int(str)! - 1])
-//
-//            } else if hasPrefix != nil {
-//                let note = key[Int(str[1])! - 1]
-//                switch str[0] {
-//                case "♭", "b":
-//                    return ("_", note)
-//                case "♯", "#":
-//                    return ("^", note)
-//                case "♮", "=":
-//                    return ("=", note)
-//                default:
-//                    break
-//                }
-//            } else if hasBracketedPrefix != nil {
-//                let removedBracketStr = str.replacingOccurrences(of: "[\\(\\)]", with: "", options: .regularExpression)
-//                let note = key[Int(removedBracketStr[1])! - 1]
-//                switch removedBracketStr[0] {
-//                case "♭", "b":
-//                    return ("_", note)
-//                case "♯", "#":
-//                    return ("^", note)
-//                case "♮", "=":
-//                    return ("=", note)
-//                default:
-//                    break
-//                }
-//            }
-//
-//            return ("", "")
-//        }
-//
-//        if completeFinalNote {
-//            let finalNotePair = (result[0].prefix, result[0].noteStr.lowercased())
-//            return result + [finalNotePair]
-//        }
-//
-//        return result
     }
     
     func degreesToAbcjsPart(degrees: String, completeFinalNote: Bool = true) -> String {
@@ -258,8 +183,12 @@ struct MusicSheetHelper {
         var leftInteger: Int!
         var rightInteger: Int!
         
+        //  1,  2,  3,  4,  5,  6,  7
+        //  8,  9, 10, 11, 12, 13, 14
+        // 15, 16, 17, 18, 19, 20, 21
+        
         leftInteger = leftPair.number * 2
-        if leftPair.number >= 4 {
+        if leftPair.number % 7 >= 4 {
             leftInteger -= 1
         }
         
@@ -293,7 +222,7 @@ struct MusicSheetHelper {
         return rightInteger - leftInteger
     }
     
-    func getIntegerNotation(scaleInfo: ScaleInfo) -> [Int] {
+    func getIntegerNotationOfAscending(degrees: String, completeFinalNote: Bool = false) throws -> [Int] {
         
         /*
           1  2  ♭3  4  5  ♭6  ♭7
@@ -312,29 +241,41 @@ struct MusicSheetHelper {
          */
         
         
-        let noteNumPairs = degreesToNoteNumberPair(degrees: scaleInfo.degreesAscending, completeFinalNote: false)
-        return noteNumPairs.enumerated().withPreviousAndNext.compactMap { values -> Int? in
+        let noteNumPairs = degreesToNoteNumberPair(degrees: degrees, completeFinalNote: completeFinalNote)
+        return try noteNumPairs.enumerated().withPreviousAndNext.reduce(into: [Int]()) { partialResult, values in
             let (prev, curr, _) = values
             
             if curr.offset == 0 {
-                return 0
+                partialResult.append(0)
             }
             
             if let prevPair = prev?.element {
                 do {
-                    return try getIntervalOfAscendingTwoNumPair(leftPair: prevPair, rightPair: curr.element)
+                    let interval = try getIntervalOfAscendingTwoNumPair(leftPair: prevPair, rightPair: curr.element)
+                    let lastInteger = partialResult.last!
+                    partialResult.append(lastInteger + interval)
                 } catch {
-                    print(error)
-                    return -99
+                    throw DegreesError.malformedDegrees
                 }
             }
-            
-            return -99
         }
     }
     
-    func getPattern(scaleInfo: ScaleInfo) {
+    func getPattern(degrees: String) throws -> [Int] {
         
-        
+        let integerNotation = try getIntegerNotationOfAscending(degrees: degrees, completeFinalNote: true)
+        return try integerNotation.enumerated().withPreviousAndNext.compactMap { values -> Int? in
+            let (prev, curr, _) = values
+            
+            if curr.offset == 0 {
+                return nil
+            }
+            
+            guard let prevInteger = prev?.element else {
+                throw DegreesError.malformedDegrees
+            }
+            
+            return curr.element - prevInteger
+        }
     }
 }

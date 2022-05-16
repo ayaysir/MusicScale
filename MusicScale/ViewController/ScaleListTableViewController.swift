@@ -9,7 +9,7 @@ import UIKit
 
 class ScaleListTableViewController: UITableViewController {
     
-    let scaleInfoViewModel = ScaleInfoViewModel()
+    let scaleInfoViewModel = ScaleInfoListViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,10 +50,10 @@ class ScaleListTableViewController: UITableViewController {
             return UITableViewCell()
         }
 
-        guard let info = scaleInfoViewModel.getScaleInfoBy(index: indexPath.row) else {
+        guard let infoViewModel = scaleInfoViewModel.getScaleInfoViewModelOf(index: indexPath.row) else {
             return UITableViewCell()
         }
-        cell.configure(info: info)
+        cell.configure(infoViewModel: infoViewModel)
 
         return cell
     }
@@ -75,7 +75,7 @@ class ScaleListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailViewSegue", sender: scaleInfoViewModel.getScaleInfoBy(index: indexPath.row))
+        performSegue(withIdentifier: "DetailViewSegue", sender: scaleInfoViewModel.getScaleInfoViewModelOf(index: indexPath.row))
     }
 
     /*
@@ -98,11 +98,11 @@ class ScaleListTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "DetailViewSegue":
-            let vc = segue.destination as? ScaleInfoViewController
-            guard let receivedInfo = sender as? ScaleInfo else {
+            let scaleInfoVC = segue.destination as? ScaleInfoViewController
+            guard let receivedInfoViewModel = sender as? ScaleInfoViewModel else {
                 return
             }
-            vc?.scaleInfo = receivedInfo
+            scaleInfoVC?.scaleInfoViewModel = receivedInfoViewModel
             
         default:
             break
@@ -115,8 +115,8 @@ class ScaleListCell: UITableViewCell {
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblNameAlias: UILabel!
     
-    func configure(info: ScaleInfo) {
-        lblName.text = info.name
-        lblNameAlias.text = info.nameAlias
+    func configure(infoViewModel: ScaleInfoViewModel) {
+        lblName.text = infoViewModel.name
+        lblNameAlias.text = infoViewModel.nameAlias
     }
 }

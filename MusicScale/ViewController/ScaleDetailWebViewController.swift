@@ -12,8 +12,7 @@ class ScaleDetailWebViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
     
-    var scaleInfo: ScaleInfo!
-    let musicSheetHelper = MusicSheetHelper()
+    var scaleInfoViewModel: ScaleInfoViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +47,7 @@ extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKSc
         webView.loadFileURL(url, allowingReadAccessTo: url)
         webView.scrollView.isScrollEnabled = false
         
-        let abcjsText = musicSheetHelper.scaleInfoToAbcjsText(scaleInfo: scaleInfo)
+        let abcjsText = scaleInfoViewModel.abcjsText
         
         let injectionSource = generateAbcJsInjectionSource(from: abcjsText)
         let injectionScript = WKUserScript(source: injectionSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
@@ -64,6 +63,18 @@ extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKSc
         // register the bridge script that listens for the output
         webView.configuration.userContentController.add(self, name: "logHandler")
         
+    }
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print(#function, message.name)
+        switch message.name {
+        // ... //
+        case "logHandler":
+            print("console log:", message.body)
+        // ... //
+        default:
+            break
+        }
     }
 }
 
@@ -88,18 +99,6 @@ extension ScaleDetailWebViewController {
     @objc func didBecomeActive() {
         //Always creates new js Audio object to ensure the audio session behaves correctly
         forceIgnoreSilentHardwareSwitch(webView, initialSetup: false)
-    }
-    
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print(#function, message.name)
-        switch message.name {
-        // ... //
-        case "logHandler":
-            print("console log:", message.body)
-        // ... //
-        default:
-            break
-        }
     }
     
     private func disableIgnoreSilentSwitch(_ webView: WKWebView) {
@@ -131,6 +130,6 @@ extension ScaleDetailWebViewController {
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         //As a result the WKWebView ignores the silent switch
-        forceIgnoreSilentHardwareSwitch(webView, initialSetup: true)
+//        forceIgnoreSilentHardwareSwitch(webView, initialSetup: true)
     }
 }

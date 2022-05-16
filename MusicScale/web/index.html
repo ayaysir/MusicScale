@@ -34,10 +34,13 @@
   <!-- <h1 id="title">자바스크립트 동작안함</h1> -->
   <div id="notation"></div>
   <div id="audio"></div>
+  <button class="start">start</button>
+  <button class="stop">start</button>
   <script src="./js/abcjs-basic-min.js"></script>
   <script>
     const is_iOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) == null ? false : true
 
+    let visualObj
     function onRender(tune, params = {
       responsive: "resize",
       staffwidth: 500,
@@ -46,8 +49,8 @@
     }) {
       alert(tune)
       params["add_classes"] = true
-      const rendered = ABCJS.renderAbc('notation', tune, params)
-      onMidi(rendered)
+      visualObj = ABCJS.renderAbc('notation', tune, params)
+      // onMidi(rendered)
     }
 
     function onMidi(rendered) {
@@ -134,12 +137,17 @@
       };
     }
 
-    var cursorControl = new CursorControl("#notation");
+    let isPlaying = false
+    const cursorControl = new CursorControl("#notation");
 
-    // document.querySelector(".start").addEventListener("click", startTimer);
+    document.querySelector(".start").addEventListener("click", startTimer)
+    document.querySelector(".stop").addEventListener("click", e => {
+      isPlaying = false
+      cursorControl.onFinished()
+    })
 
     function onEvent(ev) {
-      if (ev)
+      if (ev && isPlaying)
         cursorControl.onEvent(ev);
       else
         cursorControl.onFinished();
@@ -147,6 +155,7 @@
 
     function startTimer() {
       cursorControl.onStart();
+      isPlaying = true
 
       var timingCallbacks = new ABCJS.TimingCallbacks(visualObj[0], {
         eventCallback: onEvent
@@ -157,7 +166,7 @@
 
     if (!is_iOS) {
       const sample =
-        `X: 1
+ `X: 1
 T:
 V: T1 clef=treble
 L: 1/1

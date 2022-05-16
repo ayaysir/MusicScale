@@ -2,67 +2,67 @@
 //  ScaleInfoViewModel.swift
 //  MusicScale
 //
-//  Created by yoonbumtae on 2022/05/15.
+//  Created by yoonbumtae on 2022/05/16.
 //
 
 import Foundation
 
 class ScaleInfoViewModel {
     
-    private let service = ScaleInfoCDService.shared
+    private let scaleInfo: ScaleInfo
+    private var currentKey: Any
+    private let helper = MusicSheetHelper()
     
-    // 모든 관리는 배열의 index로
-    private var totalEntityData: [ScaleInfoEntity]!
-    var infoCount: Int {
-        return totalEntityData.count
+    init(scaleInfo: ScaleInfo) {
+        self.scaleInfo = scaleInfo
+        self.currentKey = "!"
     }
     
-    var handleDataReloaded: () -> () = {}
-    
-    init() {
-        fetchCoreData()
+    var name: String {
+        return scaleInfo.name
     }
     
-    private func fetchCoreData() {
-        // 이 작업이 실행될떄마다 뷰도 새로고침한다.
+    var nameAlias: String {
+        return scaleInfo.nameAlias
+    }
+    
+    var defaultPriority: Int {
+        return scaleInfo.defaultPriority
+    }
+    
+    var comment: String {
+        return scaleInfo.comment
+    }
+    
+    var abcjsPart: String {
+        helper.degreesToAbcjsLyric(degrees: scaleInfo.degreesAscending)
+    }
+    
+    var abcjsLyric: String {
+        helper.degreesToAbcjsLyric(degrees: scaleInfo.degreesAscending)
+    }
+    
+    var abcjsText: String {
+        helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo)
+    }
+    
+    var ascendingIntegerNotation: String? {
+       
         do {
-            totalEntityData = try service.readCoreData()
-            handleDataReloaded()
+            let integersText = try helper.getIntegerNotationOfAscending(degrees: scaleInfo.degreesAscending).map(String.init).joined(separator: ", ")
+            return "(\(integersText))"
         } catch {
             print(error)
+            return nil
         }
     }
     
-    func addScaleInfo(info: ScaleInfo) {
-        
+    var ascendingPattern: String? {
         do {
-            try service.saveCoreData(scaleInfo: info)
-            fetchCoreData()
+            return try helper.getPattern(degrees: scaleInfo.degreesAscending).map(String.init).joined(separator: "")
         } catch {
             print(error)
-        }
-    }
-    
-    func getScaleInfoBy(index: Int) -> ScaleInfo? {
-        return service.toScaleInfoStruct(from: totalEntityData[index])
-    }
-    
-    func updateScaleInfo(index: Int, info: ScaleInfo) {
-        
-        do {
-            try service.updateCoreData(entityObject: totalEntityData[index], scaleInfo: info)
-        } catch {
-            print(error)
-        }
-    }
-    
-    func deleteScaleInfo(index: Int) {
-        
-        do {
-            try service.deleteCoreData(entityObject: totalEntityData[index])
-            fetchCoreData()
-        } catch {
-            print(error)
+            return nil
         }
     }
     

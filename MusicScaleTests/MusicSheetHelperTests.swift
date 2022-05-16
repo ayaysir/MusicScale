@@ -82,7 +82,7 @@ class MusicSheetHelperTests: XCTestCase {
          */
         
         // MARK: - check throw error
-        let leftRightPairsArrayForError: [[MusicSheetHelper.NoteNumberPair]] = [
+        let leftRightPairsArrayForError: [[NoteNumberPair]] = [
             [("", 5), ("", 4)],
             [("^", 1), ("", 1)],
             [("", 3), ("_", 3)],
@@ -96,7 +96,7 @@ class MusicSheetHelperTests: XCTestCase {
         }
         
         // MARK: - Check correct result?
-        let leftRightPairsArray: [[MusicSheetHelper.NoteNumberPair]] = [
+        let leftRightPairsArray: [[NoteNumberPair]] = [
             [("", 4), ("", 4)],
             [("", 1), ("", 2)],
             [("", 2), ("_", 3)],
@@ -119,11 +119,55 @@ class MusicSheetHelperTests: XCTestCase {
         
         let expectedResults = [0, 2, 1, 2, 2, 2, 4, 4, 3, 1, 3, 0]
         for i in (0...expectedResults.count - 1) {
-            print(intervals[i], expectedResults[i])
             XCTAssertEqual(intervals[i], expectedResults[i])
         }
         
+    }
+    
+    func test_getIntegerNotationOfAscending() throws {
         
+        let bluesScale = "1 ♭3 4 ♭5 5 ♭7"
+        let octatonicScale1 = "1 2 ♭3 4 ♭5 ♭6 6 7"
+        let octatonicScale2 = "1 ♭2 ♭3 3 ♯4 5 6 ♭7"
+        
+        let notations: [[Int]] = [
+            try helper.getIntegerNotationOfAscending(degrees: bluesScale),
+            try helper.getIntegerNotationOfAscending(degrees: octatonicScale1),
+            try helper.getIntegerNotationOfAscending(degrees: octatonicScale2),
+        ]
+        
+        let expectedResults: [[Int]] = [
+            [0,3,5,6,7,10],
+            [0,2,3,5,6,8,9,11],
+            [0,1,3,4,6,7,9,10],
+        ]
+        
+        XCTAssertEqual(notations, expectedResults)
+        
+        XCTAssertThrowsError(try helper.getIntegerNotationOfAscending(degrees: "1 ♭3 ♭5 4 5 ♭7"), "") { error in
+            print(error)
+        }
+    }
+    
+    func test_getPattern() throws {
+        
+        let bluesScale = "1 ♭3 4 ♭5 5 ♭7"
+        let octatonicScale1 = "1 2 ♭3 4 ♭5 ♭6 6 7"
+        let octatonicScale2 = "1 ♭2 ♭3 3 ♯4 5 6 ♭7"
+        
+        let patterns: [[Int]] = [
+            try helper.getPattern(degrees: bluesScale),
+            try helper.getPattern(degrees: octatonicScale1),
+            try helper.getPattern(degrees: octatonicScale2),
+        ]
+        
+        let expectedResults = [
+            [3, 2, 1, 1, 3],
+            [2, 1, 2, 1, 2, 1, 2],
+            [1, 2, 1, 2, 1, 2, 1],
+        ]
+        
+        XCTAssertEqual(patterns, expectedResults)
     }
 
     func testPerformanceExample() throws {

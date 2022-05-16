@@ -131,7 +131,7 @@ class PianoViewModel {
     
     func getKeyInfoBy(touchLocation location: CGPoint) -> PianoKeyInfo? {
         
-        print(pianoBlackKeys)
+        // print(pianoBlackKeys)
         if let targetBlackKey = pianoBlackKeys.first(where: { $0.touchArea.contains(location) }) {
             return targetBlackKey
         }

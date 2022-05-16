@@ -10,8 +10,6 @@ import DropDown
 
 class ScaleInfoViewController: UIViewController {
     
-    @IBOutlet weak var lblScaleName: UILabel!
-    
     @IBOutlet weak var containerViewInfo: UIView!
     @IBOutlet weak var containerViewWebSheet: UIView!
     @IBOutlet weak var containerViewPiano: UIView!
@@ -20,7 +18,7 @@ class ScaleInfoViewController: UIViewController {
     var webSheetVC: ScaleDetailWebViewController?
     var pianoVC: PianoViewController?
     
-    var scaleInfo: ScaleInfo!
+    var scaleInfoViewModel: ScaleInfoViewModel!
     
     let transposeDropDown = DropDown()
     let enharmonicDropDown = DropDown()
@@ -31,7 +29,8 @@ class ScaleInfoViewController: UIViewController {
         initTransposeDropDown()
         initEnharmonicDropDown()
         
-        lblScaleName.text = scaleInfo.name
+        self.title = scaleInfoViewModel.name
+        
     }
     
     // MARK: - Outlet Action
@@ -52,10 +51,10 @@ class ScaleInfoViewController: UIViewController {
         switch segue.identifier {
         case "InfoSegue":
             infoVC = segue.destination as? ScaleSubInfoTableViewController
-            infoVC?.scaleInfo = scaleInfo
+            infoVC?.scaleInfoViewModel = scaleInfoViewModel
         case "WebSheetSegue":
             webSheetVC = segue.destination as? ScaleDetailWebViewController
-            webSheetVC?.scaleInfo = scaleInfo
+            webSheetVC?.scaleInfoViewModel = scaleInfoViewModel
         case "PianoSegue":
             pianoVC = segue.destination as? PianoViewController
         default:
