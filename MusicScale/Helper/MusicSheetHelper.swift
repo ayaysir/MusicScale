@@ -19,13 +19,46 @@ import Foundation
  w: C D E♭ F G A♭ B♭ C
  */
 
-typealias NoteNumberPair = (prefix: String, number: Int)
-typealias NoteStrPair = (prefix: String, noteStr: String)
+//typealias NoteNumberPair = (prefix: String, number: Int)
+//typealias NoteStrPair = (prefix: String, noteStr: String)
+
+struct NoteNumberPair: Codable, Equatable {
+    
+    init(prefix: String, number: Int) {
+        self.prefix = prefix
+        self.number = number
+    }
+    
+    init(_ prefix: String, _ number: Int) {
+        self.init(prefix: prefix, number: number)
+    }
+    
+    var prefix: String
+    var number: Int
+    
+}
+
+struct NoteStrPair: Codable, Equatable {
+    
+    init(prefix: String, noteStr: String) {
+        self.prefix = prefix
+        self.noteStr = noteStr
+    }
+    
+    init(_ prefix: String, _ noteStr: String) {
+        self.init(prefix: prefix, noteStr: noteStr)
+    }
+    
+    var prefix: String
+    var noteStr: String
+}
 
 struct MusicSheetHelper {
     
     enum IntervalError: String, Error {
         case notCalculable = "계산 불가"
+        case numberIsInvalidate = "interval의 number는 1~8까지"
+        case wrongPairPrefix = "Prefix of pair 잘못됨"
     }
     
     enum DegreesError: String, Error {
@@ -34,7 +67,6 @@ struct MusicSheetHelper {
         
     private func degreesToNoteNumberPair(degrees: String, completeFinalNote: Bool = true) -> [NoteNumberPair] {
         
-//        let key = ["C", "D", "E", "F", "G", "A", "B"]
         let degreeComponents = degrees.components(separatedBy: " ")
         
         let onlyNumberRegex = "^[1234567]$"
@@ -67,25 +99,25 @@ struct MusicSheetHelper {
                     let isPrevAndCurrSameNumber2 = removeBracketStrOfPrev[1] == str
                     
                     if isPrevHasPrefix && isPrevAndCurrSameNumber1 {
-                        return ("=", number)
+                        return NoteNumberPair("=", number)
                     }
                     
                     if isPrevHasBracketPrefix && isPrevAndCurrSameNumber2 {
-                        return ("=", number)
+                        return NoteNumberPair("=", number)
                     }
                 }
                 
-                return ("", number)
+                return NoteNumberPair("", number)
                 
             } else if hasPrefix != nil {
                 let number = Int(str[1])!
                 switch str[0] {
                 case "♭", "b":
-                    return ("_", number)
+                    return NoteNumberPair("_", number)
                 case "♯", "#":
-                    return ("^", number)
+                    return NoteNumberPair("^", number)
                 case "♮", "=":
-                    return ("=", number)
+                    return NoteNumberPair("=", number)
                 default:
                     break
                 }
@@ -94,21 +126,21 @@ struct MusicSheetHelper {
                 let number = Int(removedBracketStr[1])!
                 switch removedBracketStr[0] {
                 case "♭", "b":
-                    return ("_", number)
+                    return NoteNumberPair("_", number)
                 case "♯", "#":
-                    return ("^", number)
+                    return NoteNumberPair("^", number)
                 case "♮", "=":
-                    return ("=", number)
+                    return NoteNumberPair("=", number)
                 default:
                     break
                 }
             }
             
-            return ("", -99)
+            return NoteNumberPair("", -99)
         }
         
         if completeFinalNote {
-            let finalNotePair = (result[0].prefix, result[0].number + 7)
+            let finalNotePair = NoteNumberPair(result[0].prefix, result[0].number + 7)
             return result + [finalNotePair]
         }
         return result
@@ -122,10 +154,10 @@ struct MusicSheetHelper {
         return noteNumPairs.enumerated().map { (index, value) -> NoteStrPair in
             
             if index == noteNumPairs.count - 1 && completeFinalNote {
-                return (prefix: value.prefix, noteStr: key[7])
+                return NoteStrPair(prefix: value.prefix, noteStr: key[7])
             }
             
-            return (prefix: value.prefix, noteStr: key[value.number - 1])
+            return NoteStrPair(prefix: value.prefix, noteStr: key[value.number - 1])
         }
     }
     
@@ -188,9 +220,9 @@ struct MusicSheetHelper {
         // 15, 16, 17, 18, 19, 20, 21
         
         leftInteger = leftPair.number * 2
-        if leftPair.number % 7 >= 4 {
-            leftInteger -= 1
-        }
+//        if leftPair.number % 7 >= 4 {
+//            leftInteger -= 1
+//        }
         
         switch leftPair.prefix {
         case "_":
@@ -202,9 +234,9 @@ struct MusicSheetHelper {
         }
         
         rightInteger = rightPair.number * 2
-        if rightPair.number >= 4 {
-            rightInteger -= 1
-        }
+//        if rightPair.number % 7 >= 4 {
+//            rightInteger -= 1
+//        }
         
         switch rightPair.prefix {
         case "_":
@@ -215,11 +247,28 @@ struct MusicSheetHelper {
             break
         }
         
+        let numRange = leftPair.number...rightPair.number
+        let totalHalfCount =  numRange.enumerated().reduce(0) { partialResults, values in
+            
+            let (index, num) = values
+            
+            if index == 0 {
+                return partialResults
+            }
+            
+            let currentNumMod7 = num % 7
+            if (currentNumMod7 == 4 || currentNumMod7 == 1) {
+                return partialResults + 1
+            }
+            
+            return partialResults
+        }
+        
         guard rightInteger - leftInteger >= 0 else {
             throw IntervalError.notCalculable
         }
         
-        return rightInteger - leftInteger
+        return rightInteger - leftInteger - totalHalfCount
     }
     
     func getIntegerNotationOfAscending(degrees: String, completeFinalNote: Bool = false) throws -> [Int] {
@@ -264,6 +313,7 @@ struct MusicSheetHelper {
     func getPattern(degrees: String) throws -> [Int] {
         
         let integerNotation = try getIntegerNotationOfAscending(degrees: degrees, completeFinalNote: true)
+        
         return try integerNotation.enumerated().withPreviousAndNext.compactMap { values -> Int? in
             let (prev, curr, _) = values
             
@@ -276,6 +326,154 @@ struct MusicSheetHelper {
             }
             
             return curr.element - prevInteger
+        }
+    }
+    
+    func getCountOfHalfStep(pairNum: Int, intervalNum: Int) -> Int {
+        
+        let resultNumber = (pairNum - 1) + intervalNum
+        
+        if pairNum == resultNumber {
+            return 0
+        }
+        
+        guard pairNum <= resultNumber else {
+            return -99
+        }
+        
+        // 반음 갯수 구하기
+        // 4, 8, 11, 15, 18, 22...
+        // 1, 2,  3,  4,  5,  6...
+        
+        let numRange = pairNum...resultNumber
+        return numRange.enumerated().reduce(0) { partialResults, values in
+            
+            let (index, num) = values
+            
+            if index == 0 {
+                return partialResults
+            }
+            
+            let currentNumMod7 = num % 7
+            if (currentNumMod7 == 4 || currentNumMod7 == 1) {
+                return partialResults + 1
+            }
+            
+            return partialResults
+        }
+    }
+    
+    /// 음정 입력하면 해당 음정보다 위에 있는 노트 계산
+    func getAboveIntervalNoteFrom(pair: NoteNumberPair, interval: Music.Interval) throws -> NoteNumberPair {
+        
+        /*
+         C - C : 완전 1도
+         C - C# : 증 1도
+         C - Db : 단 2도
+         C - D :  장 2도
+         C - D# : 증 2도
+         C - Eb : 단 3도
+         C - E : 장 3도
+         C - F : 완전 4도
+         C - F# : 증 4도
+         C - Gb : 감 5도
+         C - G : 완전 5도
+         C - G# : 증 5도
+         C - Ab : 단 6도
+         C - A : 장 6도
+         C - A# : 증 6도
+         C - Bb : 단 7도
+         C - B: 장 7도
+         
+         1) x도 만큼 음을 올린다. (반음 포함여부 무관)
+         예) 3도: C -> E, E - G, G -> B
+         
+         2) 장음정
+         2-1) 장 3도 이하이고, 두 음 사이에 반음이 없다면, prefix는 그대로 따라간다.
+         예) C# -> E#, Gb -> Bb, G -> B
+         
+         2-2) 장 3도 이하이고, 두 음 사이에 반음이 한 개 있다면 (3-4 또는 7-8), 원래 음에서 반음이 높아진다(=prefix가 1단계 높아진다).
+         예) E -> G는 E -> G#, Eb -> G는 Eb -> G(=), C -> A
+         
+         2-3) 장 6 ~ 7도이고, 두 음 사이에 반음이 한 개 있다면 prefix는 그대로 따라간다.
+         예) C -> A, Db -> Bb, G# -> E#
+         
+         2-4) 장 6 ~ 7도이고, 두 음 사이에 반음이 두 개 있다면, 원래 음에서 반음이 높아진다(=prefix가 1단계 높아진다).
+         예) E -> C# (EF, BC), A -> F# (BC, EF), Bb -> G (BC, EF)
+         
+         3) 단음정
+         장음정을 기준으로 먼저 계산한 뒤, 반음 내린다(=prefix는 1단계 낮아진다).
+         예1) C -> Eb (단 3도, from E), Eb -> Gb (단 3도, from G), Gb -> Bbb (from Bb), F# -> A (단 3도, from A#)
+         예2) E -> C (from C#), Db -> Bbb (from Bb), Bb -> Ab (from A)
+         
+         4) 완전음정
+         4-1) 완전음정 4, 5도 사이에 반음이 한 개 있다면, prefix는 그대로 따라간다.
+         예) C -> F (EF), Eb -> Ab (EF), Bb -> Eb (BC)
+         
+         4-2) 완전음정 4, 5도 사이에 반음이 하나도 없다면, 원래 음에서 반음이 낮아진다(=prefix는 1단계 낮아진다).
+         참고) 이 케이스는 F밖에 존재할 수밖에 없다.
+         예) F -> Bb, F# -> B, Fb -> Fbb
+         
+         5) 증음정
+         장음정 또는 완전음정을 기준으로 먼저 계산한 뒤, 반음씩 올리면 된다(=prefix가 1단계 높아진다).
+         예) C -> C# (증 1도, from C), E -> F## (증 2도, from F#)
+         
+         6) 감음정
+         감 5도만 있음 (겹증, 겹감, 감 4도(=장 3도) 제외)
+         완전 5도에서 반음 내린다(=prefix는 1단계 낮아진다).
+         예) Eb -> Bbb (from Bb), F# -> C (from C#)
+         
+         */
+        
+        if interval.quality == .perfect && interval.number == 1 {
+            return pair
+        }
+        
+        guard interval.number >= 1 && interval.number <= 8 else {
+            throw IntervalError.numberIsInvalidate
+        }
+        
+        let perfect = [1, 4, 5, 8]
+        let prefixList = ["__", "_", "=", "^", "^^"]
+        
+        let resultNumber = (pair.number - 1) + interval.number
+        
+//        let totalHalfCount = (numberDiv7 >= 4 && numberDiv7 <= 6) ? 1 : (numberDiv7 >= 7) ? 2 : 0
+        let totalHalfCount = getCountOfHalfStep(pairNum: pair.number, intervalNum: interval.number)
+        
+        let currentPairPrefix = pair.prefix == "" ? "=" : pair.prefix
+        guard let pairPrefixIndex = prefixList.firstIndex(of: currentPairPrefix), pairPrefixIndex >= 1 else {
+            throw IntervalError.wrongPairPrefix
+        }
+        
+        var basePrefixIndex: Int {
+            
+            if perfect.contains(interval.number) {
+                if pair.number == 1 || pair.number == 8 {
+                    return pairPrefixIndex
+                }
+                return totalHalfCount == 1 ? pairPrefixIndex : pairPrefixIndex - 1
+                
+            } else {
+                if interval.number <= 3 {
+                    return totalHalfCount == 0 ? pairPrefixIndex : pairPrefixIndex + 1
+                } else {
+                    return totalHalfCount == 1 ? pairPrefixIndex : pairPrefixIndex + 1
+                }
+            }
+        }
+//        print(interval, basePrefixIndex, prefixList[basePrefixIndex], totalHalfCount)
+        
+        switch interval.quality {
+        case .perfect, .major:
+            return NoteNumberPair(prefixList[basePrefixIndex], resultNumber)
+        case .diminished, .minor:
+            let resultPrefix = prefixList[basePrefixIndex - 1]
+            return NoteNumberPair(resultPrefix, resultNumber)
+        case .augmented:
+            let resultPrefix = prefixList[basePrefixIndex + 1]
+            return NoteNumberPair(resultPrefix, resultNumber)
+        
         }
     }
 }

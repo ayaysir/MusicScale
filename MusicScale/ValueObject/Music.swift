@@ -73,3 +73,17 @@ struct Music: Codable {
     }
     
 }
+
+extension Music {
+    
+    struct Interval: Codable {
+        
+        enum Quality: Codable {
+            case diminished, minor, major, perfect, augmented
+        }
+        
+        var quality: Quality
+        var number: Int
+    }
+    
+}
