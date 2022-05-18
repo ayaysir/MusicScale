@@ -10,14 +10,19 @@ import Foundation
 class ScaleInfoViewModel {
     
     private let scaleInfo: ScaleInfo
-    private var currentKey: Any
+    private(set) var currentKey: Music.Key
     private let helper = MusicSheetHelper()
     
-    init(scaleInfo: ScaleInfo) {
+    init(scaleInfo: ScaleInfo, currentKey: Music.Key) {
         self.scaleInfo = scaleInfo
-        self.currentKey = "!"
+        self.currentKey = currentKey
     }
     
+    func setCurrentKey(_ key: Music.Key) {
+        currentKey = key
+    }
+    
+    // MARK: - 키 변화와 무관
     var name: String {
         return scaleInfo.name
     }
@@ -34,20 +39,7 @@ class ScaleInfoViewModel {
         return scaleInfo.comment
     }
     
-    var abcjsPart: String {
-        helper.degreesToAbcjsLyric(degrees: scaleInfo.degreesAscending)
-    }
-    
-    var abcjsLyric: String {
-        helper.degreesToAbcjsLyric(degrees: scaleInfo.degreesAscending)
-    }
-    
-    var abcjsText: String {
-        helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo)
-    }
-    
     var ascendingIntegerNotation: String? {
-       
         do {
             let integersText = try helper.getIntegerNotationOfAscending(degrees: scaleInfo.degreesAscending).map(String.init).joined(separator: ", ")
             return "(\(integersText))"
@@ -65,5 +57,20 @@ class ScaleInfoViewModel {
             return nil
         }
     }
+    
+    // MARK: - 키, asc, desc에 따라 변화되는 것
+    var abcjsPart: String {
+        helper.degreesToAbcjsPart(degrees: scaleInfo.degreesAscending)
+    }
+    
+    var abcjsLyric: String {
+        helper.degreesToAbcjsLyric(degrees: scaleInfo.degreesAscending)
+    }
+    
+    var abcjsText: String {
+        helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, isDesceding: false, key: currentKey, tempo: 120)
+    }
+    
+    
     
 }

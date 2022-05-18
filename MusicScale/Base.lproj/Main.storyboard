@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="3" y="728"/>
         </scene>
-        <!--Scale Detail Web View Controller-->
+        <!--Score Web View Controller-->
         <scene sceneID="ehm-4l-VFX">
             <objects>
-                <viewController id="DAe-qX-YdK" customClass="ScaleDetailWebViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DAe-qX-YdK" customClass="ScoreWebViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GXf-lZ-LDc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="248"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -242,6 +242,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Aeolian" id="7CF-gT-5wt"/>
                     <connections>
+                        <outlet property="btnEnharmonic" destination="LbI-JK-IQB" id="XiJ-lg-p8J"/>
+                        <outlet property="btnTranspose" destination="972-3C-Ond" id="1Lg-0B-uKU"/>
                         <outlet property="containerViewInfo" destination="CGd-VL-s4b" id="ody-bt-Cbc"/>
                         <outlet property="containerViewPiano" destination="YQ5-tU-dgi" id="2sh-Gc-y1l"/>
                         <outlet property="containerViewWebSheet" destination="78q-Qb-nNd" id="evA-wV-RWu"/>

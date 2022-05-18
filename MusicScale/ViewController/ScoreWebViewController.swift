@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-class ScaleDetailWebViewController: UIViewController {
+class ScoreWebViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
     
@@ -22,10 +22,24 @@ class ScaleDetailWebViewController: UIViewController {
     }
 }
 
-extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
     
     func generateAbcJsInjectionSource(from abcjsText: String) -> String {
         return "onRender('\(abcjsText.replacingOccurrences(of: "\n", with: "\\n"))');"
+    }
+    
+    func injectAbcjsText(from abcjsText: String, needReload: Bool = true) {
+        
+        let injectionSource = generateAbcJsInjectionSource(from: abcjsText.replacingOccurrences(of: "'", with: "\\'"))
+        let injectionScript = WKUserScript(source: injectionSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+        
+        if needReload {
+            webView.configuration.userContentController.removeAllUserScripts()
+            webView.configuration.userContentController.addUserScript(injectionScript)
+            webView.reload()
+        } else {
+            webView.configuration.userContentController.addUserScript(injectionScript)
+        }
     }
     
     func loadWebSheetPage() {
@@ -48,10 +62,7 @@ extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKSc
         webView.scrollView.isScrollEnabled = false
         
         let abcjsText = scaleInfoViewModel.abcjsText
-        
-        let injectionSource = generateAbcJsInjectionSource(from: abcjsText)
-        let injectionScript = WKUserScript(source: injectionSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-        webView.configuration.userContentController.addUserScript(injectionScript)
+        injectAbcjsText(from: abcjsText, needReload: false)
         
         // inject JS to capture console.log output and send to iOS
         let source = """
@@ -79,7 +90,7 @@ extension ScaleDetailWebViewController: WKUIDelegate, WKNavigationDelegate, WKSc
 }
 
 // MARK: - 무음 모드에서도 소리 나오게 하기
-extension ScaleDetailWebViewController {
+extension ScoreWebViewController {
     
     // How to force WKWebView to ignore hardware silent switch on iOS?
     // https://stackoverflow.com/questions/56460362

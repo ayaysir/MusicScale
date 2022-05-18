@@ -52,7 +52,7 @@ class ScaleInfoListViewModel {
             return nil
         }
         
-        return ScaleInfoViewModel(scaleInfo: scaleInfo)
+        return ScaleInfoViewModel(scaleInfo: scaleInfo, currentKey: .C)
         
     }
     

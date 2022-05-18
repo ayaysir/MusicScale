@@ -14,8 +14,11 @@ class ScaleInfoViewController: UIViewController {
     @IBOutlet weak var containerViewWebSheet: UIView!
     @IBOutlet weak var containerViewPiano: UIView!
     
+    @IBOutlet weak var btnTranspose: UIButton!
+    @IBOutlet weak var btnEnharmonic: UIButton!
+    
     var infoVC: ScaleSubInfoTableViewController?
-    var webSheetVC: ScaleDetailWebViewController?
+    var webSheetVC: ScoreWebViewController?
     var pianoVC: PianoViewController?
     
     var scaleInfoViewModel: ScaleInfoViewModel!
@@ -53,7 +56,7 @@ class ScaleInfoViewController: UIViewController {
             infoVC = segue.destination as? ScaleSubInfoTableViewController
             infoVC?.scaleInfoViewModel = scaleInfoViewModel
         case "WebSheetSegue":
-            webSheetVC = segue.destination as? ScaleDetailWebViewController
+            webSheetVC = segue.destination as? ScoreWebViewController
             webSheetVC?.scaleInfoViewModel = scaleInfoViewModel
         case "PianoSegue":
             pianoVC = segue.destination as? PianoViewController
@@ -82,9 +85,17 @@ extension ScaleInfoViewController {
     func initTransposeDropDown() {
         
         let targetDropDown = transposeDropDown
-        let dataSource = Music.PlayableKey.allCases.map { $0.textValueMixed }
+        let dataSource = Music.Key.allCases.map { $0.textValue }
         let selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item: \(item) at index: \(index)")
+            self.btnTranspose.setTitle(item, for: .normal)
+            
+            if let targetKey = Music.Key.getKeyFromNoteStr(item) {
+                scaleInfoViewModel.setCurrentKey(targetKey)
+                webSheetVC?.injectAbcjsText(from: scaleInfoViewModel.abcjsText)
+                print(scaleInfoViewModel.abcjsText)
+            }
+            
           }
         _ = dropDownCommon(dropDown: targetDropDown, dataSource: dataSource, selectionAction: selectionAction)
     }

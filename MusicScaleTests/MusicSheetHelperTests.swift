@@ -286,6 +286,15 @@ class MusicSheetHelperTests: XCTestCase {
         try XCTAssertEqual(calc(NoteNumberPair("_", 3), dim_5), NoteNumberPair("__", 7))
         try XCTAssertEqual(calc(NoteNumberPair("^", 4), dim_5), NoteNumberPair("=", 8))
     }
+    
+    func test_getTransposedNoteNumberPairsUseInterval() throws {
+        
+        let bluesScale = "1 ♭3 4 ♭5 5 ♭7"
+        let octatonicScale1 = "1 2 ♭3 4 ♭5 ♭6 6 7"
+        let octatonicScale2 = "1 ♭2 ♭3 3 ♯4 5 6 ♭7"
+        
+//        helper.getTransposedNoteNumberPairsUseInterval(pairs: <#T##[NoteNumberPair]#>, interval: <#T##Music.Interval#>)
+    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
