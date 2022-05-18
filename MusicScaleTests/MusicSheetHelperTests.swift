@@ -33,9 +33,9 @@ class MusicSheetHelperTests: XCTestCase {
         let result_octatonicScale2 = helper.degreesToAbcjsPart(degrees: octatonicScale2)
         
         // then
-        XCTAssertEqual(result_bluesScale, "C _E F _G =G _B c")
-        XCTAssertEqual(result_octatonicScale1, "C D _E F _G _A =A B c")
-        XCTAssertEqual(result_octatonicScale2, "C _D _E =E ^F G A _B c")
+        XCTAssertEqual(result_bluesScale, "C _E F _G =G _B C'")
+        XCTAssertEqual(result_octatonicScale1, "C D _E F _G _A =A B C'")
+        XCTAssertEqual(result_octatonicScale2, "C _D _E =E ^F G A _B C'")
         
         let result = helper.degreesToAbcjsPart(degrees: "1 2 ♭3 4 5 ♭6 ♭7 1 2 ♭3 4 5 ♭6 (♮)7 1 ♯1 2 ♯2 3 4 ♯4 5 ♯5 6 ♯6 7", completeFinalNote: false)
         XCTAssertEqual(result, "C D _E F G _A _B C D _E F G _A =B C ^C D ^D E F ^F G ^G A ^A B")
@@ -265,6 +265,10 @@ class MusicSheetHelperTests: XCTestCase {
         try XCTAssertEqual(calc(NoteNumberPair("_", 7), perfect_4), NoteNumberPair("_", 10))
         try XCTAssertEqual(calc(NoteNumberPair("=", 3), perfect_5), NoteNumberPair("=", 7))
 
+        // 반음 2개?
+        // (BC EF)
+        try XCTAssertEqual(calc(NoteNumberPair("_", 7), perfect_5), NoteNumberPair("=", 11))
+        try XCTAssertEqual(calc(NoteNumberPair("_", 6), perfect_5), NoteNumberPair("_", 10))
 
         // 4-2) 완전음정 사이에 반음이 하나도 없다면, 원래 음에서 반음이 낮아진다(=prefix는 1단계 낮아진다).
         // 참고) 이 케이스는 F밖에 존재할 수밖에 없다.
@@ -278,6 +282,8 @@ class MusicSheetHelperTests: XCTestCase {
         // 예) C -> C# (증 1도, from C), E -> F## (증 2도, from F#)
         try XCTAssertEqual(calc(NoteNumberPair("", 1), aug_1), NoteNumberPair("^", 1))
         try XCTAssertEqual(calc(NoteNumberPair("", 3), aug_2), NoteNumberPair("^^", 4))
+        
+        try XCTAssertEqual(calc(NoteNumberPair("_", 2), aug_1), NoteNumberPair("=", 2))
 
         // 6) 감음정
         // 감 5도만 있음 (겹증, 겹감, 감 4도(=장 3도) 제외)
@@ -287,14 +293,6 @@ class MusicSheetHelperTests: XCTestCase {
         try XCTAssertEqual(calc(NoteNumberPair("^", 4), dim_5), NoteNumberPair("=", 8))
     }
     
-    func test_getTransposedNoteNumberPairsUseInterval() throws {
-        
-        let bluesScale = "1 ♭3 4 ♭5 5 ♭7"
-        let octatonicScale1 = "1 2 ♭3 4 ♭5 ♭6 6 7"
-        let octatonicScale2 = "1 ♭2 ♭3 3 ♯4 5 6 ♭7"
-        
-//        helper.getTransposedNoteNumberPairsUseInterval(pairs: <#T##[NoteNumberPair]#>, interval: <#T##Music.Interval#>)
-    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.

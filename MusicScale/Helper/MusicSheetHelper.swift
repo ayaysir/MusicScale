@@ -169,13 +169,37 @@ struct MusicSheetHelper {
         
         let noteNumPairs = degreesToNoteNumberPair(degrees: degrees, completeFinalNote: completeFinalNote, key: key, octaveShift: octaveShift)
         
-        return noteNumPairs.enumerated().map { (index, value) -> NoteStrPair in
+        let compactedStrPair = noteNumPairs.enumerated().withPreviousAndNext.compactMap { values -> NoteStrPair? in
+            let (prev, curr, _) = values
+            let pair = curr.element
             
-            let numberInFirstOctave = (value.number - 1) % 7
-            let octave = Int(floor(Double(value.number - 1) / 7.0))
+            let numberInFirstOctave = (pair.number - 1) % 7
+            let octave = Int(floor(Double(pair.number - 1) / 7.0))
             let noteScale = Music.Scale7.getScaleByCaseIndex(numberInFirstOctave)!
             
-            var notePostfix: String {
+            let pairPrefix: String = {
+                
+                if curr.offset == 0 && pair.prefix == "=" {
+                    return ""
+                }
+                
+                // 기본적으로 natural(=)은 표시하지 않는다.
+                // 단, 이전 노트가 동일한 높이(number)이고, accidental이 붙어있다면 natural 기호를 붙인다.
+                if let prevPair = prev?.element {
+                    let prevPrefixIsAccidental = prevPair.prefix.range(of: "^[\\^_]*$", options: .regularExpression) != nil
+                    let currPrefixIsNatural = pair.prefix == "" || pair.prefix == "="
+                    
+                    if prevPair.number != pair.number && pair.prefix == "=" {
+                        return ""
+                    } else if prevPair.number == pair.number && prevPrefixIsAccidental && currPrefixIsNatural {
+                        return "="
+                    }
+                }
+                
+                return pair.prefix
+            }()
+            
+            let notePostfix: String = {
                 
                 if octave == 0 {
                     return ""
@@ -184,10 +208,40 @@ struct MusicSheetHelper {
                 } else {
                     return ""
                 }
-            }
+            }()
             
-            return NoteStrPair(prefix: value.prefix, noteStr: "\(noteScale)\(notePostfix)")
+            return NoteStrPair(prefix: pairPrefix, noteStr: "\(noteScale)\(notePostfix)")
         }
+        
+//        return noteNumPairs.enumerated().map { (index, value) -> NoteStrPair in
+//
+//            let numberInFirstOctave = (value.number - 1) % 7
+//            let octave = Int(floor(Double(value.number - 1) / 7.0))
+//            let noteScale = Music.Scale7.getScaleByCaseIndex(numberInFirstOctave)!
+//
+//            var valuePrefix: String {
+//                if value.prefix == "=" {
+//                    return ""
+//                }
+//
+//                return value.prefix
+//            }
+//
+//            var notePostfix: String {
+//
+//                if octave == 0 {
+//                    return ""
+//                } else if octave >= 1 {
+//                    return String(repeating: "'", count: octave)
+//                } else {
+//                    return ""
+//                }
+//            }
+//
+//            return NoteStrPair(prefix: valuePrefix, noteStr: "\(noteScale)\(notePostfix)")
+//        }
+        
+        return compactedStrPair
     }
     
     func degreesToAbcjsPart(degrees: String, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0) -> String {
@@ -437,7 +491,10 @@ struct MusicSheetHelper {
          4-1) 완전음정 4, 5도 사이에 반음이 한 개 있다면, prefix는 그대로 따라간다.
          예) C -> F (EF), Eb -> Ab (EF), Bb -> Eb (BC)
          
-         4-2) 완전음정 4, 5도 사이에 반음이 하나도 없다면, 원래 음에서 반음이 낮아진다(=prefix는 1단계 낮아진다).
+         4-2) 완전음정 4, 5도 사이에 반음이 한 개 있다면, 반음씩 올리면 된다(=prefix가 1단계 높아진다).
+         예) Bb -> F (BC, EF)
+         
+         4-3) 완전음정 4, 5도 사이에 반음이 하나도 없다면, 원래 음에서 반음이 낮아진다(=prefix는 1단계 낮아진다).
          참고) 이 케이스는 F밖에 존재할 수밖에 없다.
          예) F -> Bb, F# -> B, Fb -> Fbb
          
@@ -476,10 +533,12 @@ struct MusicSheetHelper {
         var basePrefixIndex: Int {
             
             if perfect.contains(interval.number) {
-                if pair.number == 1 || pair.number == 8 {
+                if interval.number == 1 || interval.number == 8 {
                     return pairPrefixIndex
                 }
-                return totalHalfCount == 1 ? pairPrefixIndex : pairPrefixIndex - 1
+                
+                return pairPrefixIndex + (totalHalfCount - 1)
+//                return totalHalfCount == 1 ? pairPrefixIndex : pairPrefixIndex - 1
                 
             } else {
                 if interval.number <= 3 {
