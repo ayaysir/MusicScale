@@ -34,6 +34,8 @@ class PianoViewController: UIViewController {
         pkvSelectKey.delegate = self
         pkvSelectKey.dataSource = self
         
+//        instrument.play(noteNumber: 65, velocity: 100, channel: 1)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -213,34 +213,6 @@ struct MusicSheetHelper {
             return NoteStrPair(prefix: pairPrefix, noteStr: "\(noteScale)\(notePostfix)")
         }
         
-//        return noteNumPairs.enumerated().map { (index, value) -> NoteStrPair in
-//
-//            let numberInFirstOctave = (value.number - 1) % 7
-//            let octave = Int(floor(Double(value.number - 1) / 7.0))
-//            let noteScale = Music.Scale7.getScaleByCaseIndex(numberInFirstOctave)!
-//
-//            var valuePrefix: String {
-//                if value.prefix == "=" {
-//                    return ""
-//                }
-//
-//                return value.prefix
-//            }
-//
-//            var notePostfix: String {
-//
-//                if octave == 0 {
-//                    return ""
-//                } else if octave >= 1 {
-//                    return String(repeating: "'", count: octave)
-//                } else {
-//                    return ""
-//                }
-//            }
-//
-//            return NoteStrPair(prefix: valuePrefix, noteStr: "\(noteScale)\(notePostfix)")
-//        }
-        
         return compactedStrPair
     }
     
@@ -389,6 +361,13 @@ struct MusicSheetHelper {
                 }
             }
         }
+    }
+    
+    func getSemitoneToPlaybackNotes(degrees: String, key: Music.Key) throws -> [Int] {
+        
+        let integerNotation = try getIntegerNotationOfAscending(degrees: degrees, completeFinalNote: true)
+        let startSemitone = key.playableKey.rawValue
+        return integerNotation.map { $0 + startSemitone }
     }
     
     func getPattern(degrees: String) throws -> [Int] {

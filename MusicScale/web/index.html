@@ -141,26 +141,50 @@
     const cursorControl = new CursorControl("#notation");
 
     document.querySelector(".start").addEventListener("click", startTimer)
-    document.querySelector(".stop").addEventListener("click", e => {
-      isPlaying = false
-      cursorControl.onFinished()
-    })
+    document.querySelector(".stop").addEventListener("click", stopTimer)
 
     function onEvent(ev) {
       if (ev && isPlaying)
         cursorControl.onEvent(ev);
-      else
+      else {
+        isPlaying = false
         cursorControl.onFinished();
+      }
     }
 
+    let timingCallbacks
     function startTimer() {
+
+      if(isPlaying) {
+        stopTimer()
+        return
+      }
+
       cursorControl.onStart();
       isPlaying = true
 
-      var timingCallbacks = new ABCJS.TimingCallbacks(visualObj[0], {
+      timingCallbacks = new ABCJS.TimingCallbacks(visualObj[0], {
         eventCallback: onEvent
       });
       timingCallbacks.start();
+
+      // iOS 기기로 신호 전송
+      if(is_iOS) {
+        // notePlayback - 네이티브 앱에서 사용할 함수 이름
+        webkit.messageHandlers.notePlayback.postMessage("play")
+      }
+    }
+
+    function stopTimer() {
+      isPlaying = false
+      cursorControl.onFinished()
+      timingCallbacks.stop()
+      timingCallbacks.reset()
+      
+      if(is_iOS) {
+        // notePlayback - 네이티브 앱에서 사용할 함수 이름
+        webkit.messageHandlers.notePlayback.postMessage("stop")
+      }
     }
 
 

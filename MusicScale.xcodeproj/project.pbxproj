@@ -55,6 +55,7 @@
 		44A09A362832AEFA0067184E /* saw220-ana1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A352832AEFA0067184E /* saw220-ana1.wav */; };
 		44A09A372832B1810067184E /* sawPiano1 복사본.exs in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A342832AEE80067184E /* sawPiano1 복사본.exs */; };
 		44A09A392832B7D20067184E /* VintageDreamsWaves-v2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */; };
+		44A09A3B283559190067184E /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A3A283559190067184E /* Sequencer.swift */; };
 		4BE14DBCD05F5882BF98D64F /* Pods_MusicScale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214599025073672669B0DEA4 /* Pods_MusicScale.framework */; };
 		DE03C6B45056C54CF4C98113 /* Pods_MusicScale_MusicScaleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFCC8F1225122295FF5581 /* Pods_MusicScale_MusicScaleUITests.framework */; };
 /* End PBXBuildFile section */
@@ -132,6 +133,7 @@
 		44A09A342832AEE80067184E /* sawPiano1 복사본.exs */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sawPiano1 복사본.exs"; sourceTree = "<group>"; };
 		44A09A352832AEFA0067184E /* saw220-ana1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "saw220-ana1.wav"; sourceTree = "<group>"; };
 		44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
+		44A09A3A283559190067184E /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
 		4C9FB0A5D20EA8BA718B985F /* Pods-MusicScale.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScale.release.xcconfig"; path = "Target Support Files/Pods-MusicScale/Pods-MusicScale.release.xcconfig"; sourceTree = "<group>"; };
 		9FA4470F182FF4C132941F6A /* Pods-MusicScaleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScaleTests.debug.xcconfig"; path = "Target Support Files/Pods-MusicScaleTests/Pods-MusicScaleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4FFCC8F1225122295FF5581 /* Pods_MusicScale_MusicScaleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicScale_MusicScaleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -250,6 +252,7 @@
 				44A09A352832AEFA0067184E /* saw220-ana1.wav */,
 				4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */,
 				44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */,
+				44A09A3A283559190067184E /* Sequencer.swift */,
 			);
 			path = MIDI;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				440637F428307E0000875E77 /* ScaleListTableViewController.swift in Sources */,
 				4475CB572831501600B9D204 /* Sequence+.swift in Sources */,
 				440637F2283003DE00875E77 /* ScaleInfoListViewModel.swift in Sources */,
+				44A09A3B283559190067184E /* Sequencer.swift in Sources */,
 				4463FEB1282C24CA00E7A607 /* PianoKeyInfo.swift in Sources */,
 				4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */,
 				44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */,

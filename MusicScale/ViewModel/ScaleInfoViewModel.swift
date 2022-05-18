@@ -71,6 +71,14 @@ class ScaleInfoViewModel {
         helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, isDesceding: false, key: currentKey, tempo: 120)
     }
     
-    
+    var playbackSemitone: [Int]? {
+        do {
+            return try helper.getSemitoneToPlaybackNotes(degrees: scaleInfo.degreesAscending, key: currentKey)
+        } catch {
+            print(error)
+        }
+        
+        return nil
+    }
     
 }

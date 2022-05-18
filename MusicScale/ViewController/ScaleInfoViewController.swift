@@ -26,6 +26,8 @@ class ScaleInfoViewController: UIViewController {
     let transposeDropDown = DropDown()
     let enharmonicDropDown = DropDown()
     
+    let conductor = NoteSequencerConductor()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +36,7 @@ class ScaleInfoViewController: UIViewController {
         
         self.title = scaleInfoViewModel.name
         
+        conductor.start()
     }
     
     // MARK: - Outlet Action
@@ -58,6 +61,7 @@ class ScaleInfoViewController: UIViewController {
         case "WebSheetSegue":
             webSheetVC = segue.destination as? ScoreWebViewController
             webSheetVC?.scaleInfoViewModel = scaleInfoViewModel
+            webSheetVC?.delegate = self
         case "PianoSegue":
             pianoVC = segue.destination as? PianoViewController
         default:
@@ -65,6 +69,28 @@ class ScaleInfoViewController: UIViewController {
         }
     }
 
+}
+
+// MARK: - ScoreWebVCDelegate
+extension ScaleInfoViewController: ScoreWebVCDelegate {
+    
+    func resetSequencer() {
+        conductor.sequencer.stop()
+        conductor.sequencer.rewind()
+    }
+    
+    func didStartButtonClicked(_ controller: ScoreWebViewController) {
+        resetSequencer()
+        conductor.addScaleToSequencer(semintones: scaleInfoViewModel.playbackSemitone!)
+        print(conductor.sequencer.length)
+        conductor.sequencer.play()
+    }
+    
+    func didStopButtonClicked(_ controller: ScoreWebViewController) {
+        resetSequencer()
+    }
+    
+    
 }
 
 // MARK: - DropDown
@@ -93,7 +119,7 @@ extension ScaleInfoViewController {
             if let targetKey = Music.Key.getKeyFromNoteStr(item) {
                 scaleInfoViewModel.setCurrentKey(targetKey)
                 webSheetVC?.injectAbcjsText(from: scaleInfoViewModel.abcjsText)
-                print(scaleInfoViewModel.abcjsText)
+                resetSequencer()
             }
             
           }
@@ -111,3 +137,5 @@ extension ScaleInfoViewController {
     }
     
 }
+
+

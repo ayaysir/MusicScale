@@ -8,9 +8,16 @@
 import UIKit
 import WebKit
 
+protocol ScoreWebVCDelegate: AnyObject {
+    func didStartButtonClicked(_ controller: ScoreWebViewController)
+    func didStopButtonClicked(_ controller: ScoreWebViewController)
+}
+
 class ScoreWebViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
+    
+    weak var delegate: ScoreWebVCDelegate?
     
     var scaleInfoViewModel: ScaleInfoViewModel!
     
@@ -33,13 +40,15 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
         let injectionSource = generateAbcJsInjectionSource(from: abcjsText.replacingOccurrences(of: "'", with: "\\'"))
         let injectionScript = WKUserScript(source: injectionSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
         
-        if needReload {
-            webView.configuration.userContentController.removeAllUserScripts()
+//        if needReload {
+//            webView.configuration.userContentController.removeAllUserScripts()
+//            webView.configuration.userContentController.addUserScript(injectionScript)
+//            webView.reload()
+//        } else {
             webView.configuration.userContentController.addUserScript(injectionScript)
-            webView.reload()
-        } else {
-            webView.configuration.userContentController.addUserScript(injectionScript)
-        }
+//        }
+        
+        webView.reload()
     }
     
     func loadWebSheetPage() {
@@ -64,6 +73,10 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
         let abcjsText = scaleInfoViewModel.abcjsText
         injectAbcjsText(from: abcjsText, needReload: false)
         
+        // 자바스크립트 -> 네이티브 앱 연결
+        // 브리지 등록
+        webView.configuration.userContentController.add(self, name: "notePlayback")
+        
         // inject JS to capture console.log output and send to iOS
         let source = """
             function captureLog(msg) { window.webkit.messageHandlers.logHandler.postMessage(msg); }
@@ -82,7 +95,15 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
         // ... //
         case "logHandler":
             print("console log:", message.body)
-        // ... //
+        case "notePlayback":
+            let status = message.body as! String
+            if let delegate = delegate {
+                if status == "play" {
+                    delegate.didStartButtonClicked(self)
+                } else if status == "stop" {
+                    delegate.didStopButtonClicked(self)
+                }
+            }
         default:
             break
         }

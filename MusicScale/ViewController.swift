@@ -8,10 +8,15 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let conductor = NoteSequencerConductor()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        print("Efe")
+        conductor.start()
+////        conductor.sequencer.play()
+        conductor.instrument.play(noteNumber: 65, velocity: 100, channel: 1)
     }
 
 
