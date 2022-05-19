@@ -40,18 +40,13 @@ class ScaleInfoViewModel {
     }
     
     var ascendingIntegerNotation: String? {
-        do {
-            let integersText = try helper.getIntegerNotationOfAscending(degrees: scaleInfo.degreesAscending).map(String.init).joined(separator: ", ")
-            return "(\(integersText))"
-        } catch {
-            print(error)
-            return nil
-        }
+        let integersText = helper.getIntegerNotation(degrees: scaleInfo.degreesAscending, order: .ascending).map(String.init).joined(separator: ", ")
+        return "(\(integersText))"
     }
     
     var ascendingPattern: String? {
         do {
-            return try helper.getPattern(degrees: scaleInfo.degreesAscending).map(String.init).joined(separator: "")
+            return try helper.getPattern(degrees: scaleInfo.degreesAscending).map(String.init).joined(separator: " ")
         } catch {
             print(error)
             return nil
@@ -59,26 +54,28 @@ class ScaleInfoViewModel {
     }
     
     // MARK: - 키, asc, desc에 따라 변화되는 것
-    var abcjsPart: String {
-        helper.degreesToAbcjsPart(degrees: scaleInfo.degreesAscending)
+//    var abcjsPart: String {
+//        helper.degreesToAbcjsPart(degrees: scaleInfo.degreesAscending)
+//    }
+//
+//    var abcjsLyric: String {
+//        helper.degreesToAbcjsLyric(degrees: scaleInfo.degreesAscending)
+//    }
+    
+    var abcjsTextAscending: String {
+        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .ascending, key: currentKey, tempo: 120)
     }
     
-    var abcjsLyric: String {
-        helper.degreesToAbcjsLyric(degrees: scaleInfo.degreesAscending)
+    var abcjsTextDescending: String {
+        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .descending, key: currentKey, tempo: 120)
     }
     
-    var abcjsText: String {
-        helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, isDesceding: false, key: currentKey, tempo: 120)
+    var playbackSemitoneAscending: [Int]? {
+        return helper.getSemitoneToPlaybackNotes(scaleInfo: scaleInfo, order: .ascending, key: currentKey)
     }
     
-    var playbackSemitone: [Int]? {
-        do {
-            return try helper.getSemitoneToPlaybackNotes(degrees: scaleInfo.degreesAscending, key: currentKey)
-        } catch {
-            print(error)
-        }
-        
-        return nil
+    var playbackSemitoneDescending: [Int]? {
+        return helper.getSemitoneToPlaybackNotes(scaleInfo: scaleInfo, order: .descending, key: currentKey)
     }
     
 }

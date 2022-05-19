@@ -107,10 +107,12 @@ class PianoViewController: UIViewController {
             break
         case .ended:
 //            print("ended")
-            viewModel?.currentTouchedKey = nil
             // 노트 멈춤
-            instrument.stop(noteNumber: midiNote, channel: 1)
-            midiNote = nil
+            if viewModel?.currentTouchedKey != nil && midiNote != nil {
+                viewModel?.currentTouchedKey = nil
+                instrument.stop(noteNumber: midiNote, channel: 1)
+                midiNote = nil
+            }
         case .cancelled:
 //            print("cancelled")
             break

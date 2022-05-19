@@ -22,6 +22,19 @@ import Foundation
 //typealias NoteNumberPair = (prefix: String, number: Int)
 //typealias NoteStrPair = (prefix: String, noteStr: String)
 
+enum DegreesOrder {
+    case ascending, descending
+    
+    var signum: Int {
+        switch self {
+        case .ascending:
+            return 1
+        case .descending:
+            return -1
+        }
+    }
+}
+
 struct NoteNumberPair: Codable, Equatable {
     
     init(prefix: String, number: Int) {
@@ -65,7 +78,7 @@ struct MusicSheetHelper {
         case malformedDegrees = "Degree is malformed."
     }
         
-    private func degreesToNoteNumberPair(degrees: String, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0) -> [NoteNumberPair] {
+    private func degreesToNoteNumberPair(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0) -> [NoteNumberPair] {
         
         let degreeComponents = degrees.components(separatedBy: " ")
         
@@ -139,9 +152,14 @@ struct MusicSheetHelper {
             return NoteNumberPair("", -99)
         }
         
-        if completeFinalNote {
+        if completeFinalNote && order == .ascending {
             let finalNotePair = NoteNumberPair(result[0].prefix, result[0].number + 7)
             result += [finalNotePair]
+        } else if completeFinalNote && order == .descending {
+            if let lastNotePair = result.last {
+                let toFirstNotePair = NoteNumberPair(lastNotePair.prefix, lastNotePair.number + 7)
+                result.insert(toFirstNotePair, at: 0)
+            }
         }
         
         if key == .C && octaveShift == 0 {
@@ -163,11 +181,11 @@ struct MusicSheetHelper {
         }
     }
     
-    private func degreesToNoteStrPair(degrees: String, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0) -> [NoteStrPair] {
+    private func degreesToNoteStrPair(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0) -> [NoteStrPair] {
         
         // 옥타브 올리기 (C'), 옥타브 내리기(C,)
         
-        let noteNumPairs = degreesToNoteNumberPair(degrees: degrees, completeFinalNote: completeFinalNote, key: key, octaveShift: octaveShift)
+        let noteNumPairs = degreesToNoteNumberPair(degrees: degrees, order: order, completeFinalNote: completeFinalNote, key: key, octaveShift: octaveShift)
         
         let compactedStrPair = noteNumPairs.enumerated().withPreviousAndNext.compactMap { values -> NoteStrPair? in
             let (prev, curr, _) = values
@@ -175,7 +193,9 @@ struct MusicSheetHelper {
             
             let numberInFirstOctave = (pair.number - 1) % 7
             let octave = Int(floor(Double(pair.number - 1) / 7.0))
-            let noteScale = Music.Scale7.getScaleByCaseIndex(numberInFirstOctave)!
+            print(pair.number, octave)
+            let scaleIndex = numberInFirstOctave.signum() >= 0 ? numberInFirstOctave : 7 + numberInFirstOctave
+            let noteScale = Music.Scale7.getScaleByCaseIndex(scaleIndex)!
             
             let pairPrefix: String = {
                 
@@ -216,20 +236,20 @@ struct MusicSheetHelper {
         return compactedStrPair
     }
     
-    func degreesToAbcjsPart(degrees: String, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0) -> String {
+    func degreesToAbcjsPart(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0) -> String {
         
         // sharp: ^A, flat: _A, natural =A
         // CDEFGAB cde...
         
         // TODO: degreesToNoteStrPair 중복 안되게
-        let pairs = degreesToNoteStrPair(degrees: degrees, completeFinalNote: completeFinalNote, key: key)
+        let pairs = degreesToNoteStrPair(degrees: degrees, order: order, completeFinalNote: completeFinalNote, key: key)
         return pairs.map { $0.prefix + $0.noteStr }.joined(separator: " ")
     }
     
-    func degreesToAbcjsLyric(degrees: String, completeFinalNote: Bool = true, key: Music.Key = .C) -> String {
+    func degreesToAbcjsLyric(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C) -> String {
         
         // TODO: degreesToNoteStrPair 중복 안되게
-        let pairs = degreesToNoteStrPair(degrees: degrees, completeFinalNote: completeFinalNote, key: key)
+        let pairs = degreesToNoteStrPair(degrees: degrees, order: order, completeFinalNote: completeFinalNote, key: key)
         return pairs.map { pair in
             let noteStr = pair.noteStr.uppercased().replacingOccurrences(of: "[\\'\\,]", with: "", options: .regularExpression)
             let postfix: String = {
@@ -248,9 +268,11 @@ struct MusicSheetHelper {
         }.joined(separator: " ")
     }
     
-    func scaleInfoToAbcjsText(scaleInfo: ScaleInfo, isDesceding: Bool = false, key: Music.Key = .C, tempo: Int = 120) -> String {
+    func scaleInfoToAbcjsText(scaleInfo: ScaleInfo, order: DegreesOrder = .ascending, key: Music.Key = .C, tempo: Int = 120) -> String {
         
-        let targetDegrees = isDesceding ? scaleInfo.degreesDescending : scaleInfo.degreesAscending
+//        let targetDegrees = isDescending ? scaleInfo.degreesDescending : scaleInfo.degreesAscending
+        let targetDegrees = getTargetDegrees(scaleInfo: scaleInfo, order: order)
+        
         let text = """
                 X: 1
                 T:
@@ -259,26 +281,79 @@ struct MusicSheetHelper {
                 R: \(key.textValue) \(scaleInfo.name)
                 Q: 1/1=\(tempo)
                 K: C
-                \(degreesToAbcjsPart(degrees: targetDegrees, completeFinalNote: true, key: key, octaveShift: 0)) |
-                w: \(degreesToAbcjsLyric(degrees: targetDegrees, completeFinalNote: true, key: key))
+                \(degreesToAbcjsPart(degrees: targetDegrees, order: order, completeFinalNote: true, key: key, octaveShift: 0)) |
+                w: \(degreesToAbcjsLyric(degrees: targetDegrees, order: order, completeFinalNote: true, key: key))
                 """
         return text
     }
     
-    func getIntervalOfAscendingTwoNumPair(leftPair: NoteNumberPair, rightPair: NoteNumberPair) throws -> Int {
-        
-        guard leftPair.number <= rightPair.number else {
-            throw IntervalError.notCalculable
-        }
-        
-        var leftInteger: Int!
-        var rightInteger: Int!
-        
+//    func getIntervalOfAscendingTwoNumPair(leftPair: NoteNumberPair, rightPair: NoteNumberPair) throws -> Int {
+//
+//        guard leftPair.number <= rightPair.number else {
+//            throw IntervalError.notCalculable
+//        }
+//
+//        var leftInteger: Int!
+//        var rightInteger: Int!
+//
+//        //  1,  2,  3,  4,  5,  6,  7
+//        //  8,  9, 10, 11, 12, 13, 14
+//        // 15, 16, 17, 18, 19, 20, 21
+//
+//        leftInteger = leftPair.number * 2
+//
+//        switch leftPair.prefix {
+//        case "_":
+//            leftInteger -= 1
+//        case "^":
+//            leftInteger += 1
+//        default:
+//            break
+//        }
+//
+//        rightInteger = rightPair.number * 2
+//
+//        switch rightPair.prefix {
+//        case "_":
+//            rightInteger -= 1
+//        case "^":
+//            rightInteger += 1
+//        default:
+//            break
+//        }
+//
+//        let numRange = leftPair.number...rightPair.number
+//        let totalHalfCount =  numRange.enumerated().reduce(0) { partialResults, values in
+//
+//            let (index, num) = values
+//
+//            if index == 0 {
+//                return partialResults
+//            }
+//
+//            let currentNumMod7 = num % 7
+//            if (currentNumMod7 == 4 || currentNumMod7 == 1) {
+//                return partialResults + 1
+//            }
+//
+//            return partialResults
+//        }
+//
+//        guard rightInteger - leftInteger >= 0 else {
+//            throw IntervalError.notCalculable
+//        }
+//
+//        return rightInteger - leftInteger - totalHalfCount
+//    }
+    
+    func getIntervalOfTwoNumPair(leftPair: NoteNumberPair, rightPair: NoteNumberPair) -> Int {
+       
         //  1,  2,  3,  4,  5,  6,  7
         //  8,  9, 10, 11, 12, 13, 14
         // 15, 16, 17, 18, 19, 20, 21
         
-        leftInteger = leftPair.number * 2
+        var leftInteger = leftPair.number * 2
+        var rightInteger = rightPair.number * 2
         
         switch leftPair.prefix {
         case "_":
@@ -289,8 +364,6 @@ struct MusicSheetHelper {
             break
         }
         
-        rightInteger = rightPair.number * 2
-        
         switch rightPair.prefix {
         case "_":
             rightInteger -= 1
@@ -299,9 +372,11 @@ struct MusicSheetHelper {
         default:
             break
         }
+
+        let numbers = [leftPair.number, rightPair.number].sorted()
+        let numRange = numbers[0]...numbers[1]
         
-        let numRange = leftPair.number...rightPair.number
-        let totalHalfCount =  numRange.enumerated().reduce(0) { partialResults, values in
+        let totalHalfCount = numRange.enumerated().reduce(0) { partialResults, values in
             
             let (index, num) = values
             
@@ -317,14 +392,11 @@ struct MusicSheetHelper {
             return partialResults
         }
         
-        guard rightInteger - leftInteger >= 0 else {
-            throw IntervalError.notCalculable
-        }
-        
-        return rightInteger - leftInteger - totalHalfCount
+        return (rightInteger - leftInteger) - (leftInteger <= rightInteger ? totalHalfCount : -totalHalfCount)
     }
+
     
-    func getIntegerNotationOfAscending(degrees: String, completeFinalNote: Bool = false) throws -> [Int] {
+    func getIntegerNotation(degrees: String, order: DegreesOrder, completeFinalNote: Bool = false) -> [Int] {
         
         /*
           1  2  ♭3  4  5  ♭6  ♭7
@@ -343,8 +415,9 @@ struct MusicSheetHelper {
          */
         
         
-        let noteNumPairs = degreesToNoteNumberPair(degrees: degrees, completeFinalNote: completeFinalNote)
-        return try noteNumPairs.enumerated().withPreviousAndNext.reduce(into: [Int]()) { partialResult, values in
+        let noteNumPairs = degreesToNoteNumberPair(degrees: degrees, order: order, completeFinalNote: completeFinalNote)
+        print(#function, noteNumPairs, degrees)
+        return noteNumPairs.enumerated().withPreviousAndNext.reduce(into: [Int]()) { partialResult, values in
             let (prev, curr, _) = values
             
             if curr.offset == 0 {
@@ -352,27 +425,43 @@ struct MusicSheetHelper {
             }
             
             if let prevPair = prev?.element {
-                do {
-                    let interval = try getIntervalOfAscendingTwoNumPair(leftPair: prevPair, rightPair: curr.element)
-                    let lastInteger = partialResult.last!
-                    partialResult.append(lastInteger + interval)
-                } catch {
-                    throw DegreesError.malformedDegrees
-                }
+                let interval = order == .ascending ?
+                getIntervalOfTwoNumPair(leftPair: prevPair, rightPair: curr.element) :
+                getIntervalOfTwoNumPair(leftPair: curr.element, rightPair: prevPair)
+                
+                let lastInteger = partialResult.last!
+                let adjustInterval = order == .ascending ? interval : -interval
+                partialResult.append(lastInteger + adjustInterval)
             }
         }
     }
     
-    func getSemitoneToPlaybackNotes(degrees: String, key: Music.Key) throws -> [Int] {
+    func getTargetDegrees(scaleInfo: ScaleInfo, order: DegreesOrder) -> String {
         
-        let integerNotation = try getIntegerNotationOfAscending(degrees: degrees, completeFinalNote: true)
-        let startSemitone = key.playableKey.rawValue
-        return integerNotation.map { $0 + startSemitone }
+        if order == .descending && scaleInfo.degreesDescending != "" {
+            return scaleInfo.degreesDescending
+        } else if order == .descending && scaleInfo.degreesDescending == "" {
+            return scaleInfo.degreesAscending.components(separatedBy: " ").reversed().joined(separator: " ")
+        }
+        
+        return scaleInfo.degreesAscending
+    }
+    
+    func getSemitoneToPlaybackNotes(scaleInfo: ScaleInfo, order: DegreesOrder, key: Music.Key) -> [Int] {
+        
+        let targetDegrees = getTargetDegrees(scaleInfo: scaleInfo, order: order)
+        
+        let integerNotation = getIntegerNotation(degrees: targetDegrees, order: order, completeFinalNote: true)
+        let startSemitone = order.signum == 1 ? key.playableKey.rawValue : key.playableKey.rawValue + 12
+        
+        let result = integerNotation.map { $0 + startSemitone }
+        print(result, integerNotation)
+        return result
     }
     
     func getPattern(degrees: String) throws -> [Int] {
         
-        let integerNotation = try getIntegerNotationOfAscending(degrees: degrees, completeFinalNote: true)
+        let integerNotation = getIntegerNotation(degrees: degrees, order: .ascending, completeFinalNote: true)
         
         return try integerNotation.enumerated().withPreviousAndNext.compactMap { values -> Int? in
             let (prev, curr, _) = values

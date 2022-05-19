@@ -17,6 +17,11 @@ class ScaleInfoViewController: UIViewController {
     @IBOutlet weak var btnTranspose: UIButton!
     @IBOutlet weak var btnEnharmonic: UIButton!
     
+    @IBOutlet weak var stepTranspose: UIStepper!
+    
+    // 나중에 UserDefaults 등으로 교체
+    var tempCurrentOrder: DegreesOrder = .ascending
+    
     var infoVC: ScaleSubInfoTableViewController?
     var webSheetVC: ScoreWebViewController?
     var pianoVC: PianoViewController?
@@ -37,6 +42,8 @@ class ScaleInfoViewController: UIViewController {
         self.title = scaleInfoViewModel.name
         
         conductor.start()
+        
+        stepTranspose.maximumValue = Double(Music.Key.allCases.count - 1)
     }
     
     // MARK: - Outlet Action
@@ -50,7 +57,27 @@ class ScaleInfoViewController: UIViewController {
         enharmonicDropDown.show()
     }
     
-
+    @IBAction func stepActTranspose(_ sender: UIStepper) {
+        print(sender.value)
+        let index = Int(sender.value)
+        let noteStr = transposeDropDown.dataSource[index]
+        transpose(noteStr: noteStr)
+    }
+    
+    @IBAction func segActChangeOrder(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            tempCurrentOrder = .ascending
+            changeOrder()
+        case 1:
+            tempCurrentOrder = .descending
+            changeOrder()
+        default:
+            break
+        }
+    }
+    
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -71,6 +98,27 @@ class ScaleInfoViewController: UIViewController {
 
 }
 
+// MARK: - Custom methods
+extension ScaleInfoViewController {
+    
+    func changeOrder() {
+        
+        webSheetVC?.injectAbcjsText(from: tempCurrentOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending, needReload: true)
+        resetSequencer()
+    }
+    
+    func transpose(noteStr: String) {
+        
+        self.btnTranspose.setTitle(noteStr, for: .normal)
+        
+        if let targetKey = Music.Key.getKeyFromNoteStr(noteStr) {
+            scaleInfoViewModel.setCurrentKey(targetKey)
+            webSheetVC?.injectAbcjsText(from: tempCurrentOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending, needReload: true)
+            resetSequencer()
+        }
+    }
+}
+
 // MARK: - ScoreWebVCDelegate
 extension ScaleInfoViewController: ScoreWebVCDelegate {
     
@@ -81,7 +129,8 @@ extension ScaleInfoViewController: ScoreWebVCDelegate {
     
     func didStartButtonClicked(_ controller: ScoreWebViewController) {
         resetSequencer()
-        conductor.addScaleToSequencer(semintones: scaleInfoViewModel.playbackSemitone!)
+        let targetSemitones = tempCurrentOrder == .ascending ? scaleInfoViewModel.playbackSemitoneAscending : scaleInfoViewModel.playbackSemitoneDescending
+        conductor.addScaleToSequencer(semintones: targetSemitones!)
         print(conductor.sequencer.length)
         conductor.sequencer.play()
     }
@@ -114,14 +163,8 @@ extension ScaleInfoViewController {
         let dataSource = Music.Key.allCases.map { $0.textValue }
         let selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item: \(item) at index: \(index)")
-            self.btnTranspose.setTitle(item, for: .normal)
-            
-            if let targetKey = Music.Key.getKeyFromNoteStr(item) {
-                scaleInfoViewModel.setCurrentKey(targetKey)
-                webSheetVC?.injectAbcjsText(from: scaleInfoViewModel.abcjsText)
-                resetSequencer()
-            }
-            
+            transpose(noteStr: item)
+            stepTranspose.value = Double(index)
           }
         _ = dropDownCommon(dropDown: targetDropDown, dataSource: dataSource, selectionAction: selectionAction)
     }

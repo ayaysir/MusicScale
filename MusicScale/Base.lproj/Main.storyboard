@@ -191,7 +191,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="78q-Qb-nNd">
-                                <rect key="frame" x="0.0" y="368" width="414" height="182"/>
+                                <rect key="frame" x="0.0" y="397" width="414" height="153"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="DAe-qX-YdK" kind="embed" identifier="WebSheetSegue" id="gzf-qz-h50"/>
@@ -227,8 +227,26 @@
                                     <action selector="btnActTranspose:" destination="LFu-VY-SiC" eventType="touchUpInside" id="fpY-fZ-r5R"/>
                                 </connections>
                             </button>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" continuous="NO" autorepeat="NO" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="e5b-Uf-Ipu">
+                                <rect key="frame" x="198" y="310" width="94" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="stepActTranspose:" destination="LFu-VY-SiC" eventType="valueChanged" id="ubx-Tw-Skl"/>
+                                </connections>
+                            </stepper>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Z21-5W-1nF">
+                                <rect key="frame" x="10" y="359" width="384" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Ascending"/>
+                                    <segment title="Descending"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segActChangeOrder:" destination="LFu-VY-SiC" eventType="valueChanged" id="Dzl-Am-UGy"/>
+                                </connections>
+                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LbI-JK-IQB">
-                                <rect key="frame" x="222" y="336" width="108" height="31"/>
+                                <rect key="frame" x="212" y="336" width="108" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Standard"/>
@@ -238,7 +256,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mSi-5z-bZl"/>
-                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color"/>
                     </view>
                     <navigationItem key="navigationItem" title="Aeolian" id="7CF-gT-5wt"/>
                     <connections>
@@ -247,6 +265,7 @@
                         <outlet property="containerViewInfo" destination="CGd-VL-s4b" id="ody-bt-Cbc"/>
                         <outlet property="containerViewPiano" destination="YQ5-tU-dgi" id="2sh-Gc-y1l"/>
                         <outlet property="containerViewWebSheet" destination="78q-Qb-nNd" id="evA-wV-RWu"/>
+                        <outlet property="stepTranspose" destination="e5b-Uf-Ipu" id="46m-dF-RDy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpK-P1-p9p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -623,6 +642,9 @@ fa;dkslj</string>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

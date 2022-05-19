@@ -28,17 +28,14 @@ class MusicSheetHelperTests: XCTestCase {
         let octatonicScale2 = "1 ♭2 ♭3 3 ♯4 5 6 ♭7"
         
         // when
-        let result_bluesScale = helper.degreesToAbcjsPart(degrees: bluesScale)
-        let result_octatonicScale1 = helper.degreesToAbcjsPart(degrees: octatonicScale1)
-        let result_octatonicScale2 = helper.degreesToAbcjsPart(degrees: octatonicScale2)
+        let result_bluesScale = helper.degreesToAbcjsPart(degrees: bluesScale, order: .ascending)
+        let result_octatonicScale1 = helper.degreesToAbcjsPart(degrees: octatonicScale1, order: .ascending)
+        let result_octatonicScale2 = helper.degreesToAbcjsPart(degrees: octatonicScale2, order: .ascending)
         
         // then
         XCTAssertEqual(result_bluesScale, "C _E F _G =G _B C'")
         XCTAssertEqual(result_octatonicScale1, "C D _E F _G _A =A B C'")
         XCTAssertEqual(result_octatonicScale2, "C _D _E =E ^F G A _B C'")
-        
-        let result = helper.degreesToAbcjsPart(degrees: "1 2 ♭3 4 5 ♭6 ♭7 1 2 ♭3 4 5 ♭6 (♮)7 1 ♯1 2 ♯2 3 4 ♯4 5 ♯5 6 ♯6 7", completeFinalNote: false)
-        XCTAssertEqual(result, "C D _E F G _A _B C D _E F G _A =B C ^C D ^D E F ^F G ^G A ^A B")
     }
     
     func test_degreesToAbcjsLyric() throws {
@@ -49,9 +46,9 @@ class MusicSheetHelperTests: XCTestCase {
         let octatonicScale2 = "1 ♭2 ♭3 3 ♯4 5 6 ♭7"
         
         // when
-        let result_bluesScale = helper.degreesToAbcjsLyric(degrees: bluesScale)
-        let result_octatonicScale1 = helper.degreesToAbcjsLyric(degrees: octatonicScale1)
-        let result_octatonicScale2 = helper.degreesToAbcjsLyric(degrees: octatonicScale2)
+        let result_bluesScale = helper.degreesToAbcjsLyric(degrees: bluesScale, order: .ascending)
+        let result_octatonicScale1 = helper.degreesToAbcjsLyric(degrees: octatonicScale1, order: .ascending)
+        let result_octatonicScale2 = helper.degreesToAbcjsLyric(degrees: octatonicScale2, order: .ascending)
         
         // then
         XCTAssertEqual(result_bluesScale, "C E♭ F G♭ G♮ B♭ C")
@@ -59,7 +56,7 @@ class MusicSheetHelperTests: XCTestCase {
         XCTAssertEqual(result_octatonicScale2, "C D♭ E♭ E♮ F♯ G A B♭ C")
     }
     
-    func test_getIntervalOfAscendingTwoNumPair() throws {
+    func test_getIntervalOfTwoNumPair() throws {
         /*
           1  2  ♭3  4  5  ♭6  ♭7
            +2 +1  +2 +2 +1  +2
@@ -82,18 +79,13 @@ class MusicSheetHelperTests: XCTestCase {
          */
         
         // MARK: - check throw error
-        let leftRightPairsArrayForError: [[NoteNumberPair]] = [
-            [NoteNumberPair("", 5), NoteNumberPair("", 4)],
-            [NoteNumberPair("^", 1), NoteNumberPair("", 1)],
-            [NoteNumberPair("", 3), NoteNumberPair("_", 3)],
-            [NoteNumberPair("_", 3), NoteNumberPair("", -1)],
-            [NoteNumberPair("_", 7), NoteNumberPair("_", 4)],
-//            [("_", 7), ("_", 7)],
-        ]
-        
-        for lhPair in leftRightPairsArrayForError {
-            XCTAssertThrowsError(try helper.getIntervalOfAscendingTwoNumPair(leftPair: lhPair[0], rightPair: lhPair[1]))
-        }
+//        let leftRightPairsArrayForError: [[NoteNumberPair]] = [
+//            [NoteNumberPair("", 5), NoteNumberPair("", 4)],
+//            [NoteNumberPair("^", 1), NoteNumberPair("", 1)],
+//            [NoteNumberPair("", 3), NoteNumberPair("_", 3)],
+//            [NoteNumberPair("_", 3), NoteNumberPair("", -1)],
+//            [NoteNumberPair("_", 7), NoteNumberPair("_", 4)],
+//        ]
         
         // MARK: - Check correct result?
         let leftRightPairsArray: [[NoteNumberPair]] = [
@@ -113,7 +105,7 @@ class MusicSheetHelperTests: XCTestCase {
         
         var intervals: [Int] = []
         for lrPairs in leftRightPairsArray {
-            let interval = try helper.getIntervalOfAscendingTwoNumPair(leftPair: lrPairs[0], rightPair: lrPairs[1])
+            let interval = helper.getIntervalOfTwoNumPair(leftPair: lrPairs[0], rightPair: lrPairs[1])
             intervals.append(interval)
         }
         
@@ -124,16 +116,16 @@ class MusicSheetHelperTests: XCTestCase {
         
     }
     
-    func test_getIntegerNotationOfAscending() throws {
+    func test_getIntegerNotation() throws {
         
         let bluesScale = "1 ♭3 4 ♭5 5 ♭7"
         let octatonicScale1 = "1 2 ♭3 4 ♭5 ♭6 6 7"
         let octatonicScale2 = "1 ♭2 ♭3 3 ♯4 5 6 ♭7"
         
         let notations: [[Int]] = [
-            try helper.getIntegerNotationOfAscending(degrees: bluesScale),
-            try helper.getIntegerNotationOfAscending(degrees: octatonicScale1),
-            try helper.getIntegerNotationOfAscending(degrees: octatonicScale2),
+            helper.getIntegerNotation(degrees: bluesScale, order: .ascending),
+            helper.getIntegerNotation(degrees: octatonicScale1, order: .ascending),
+            helper.getIntegerNotation(degrees: octatonicScale2, order: .ascending),
         ]
         
         let expectedResults: [[Int]] = [
@@ -142,14 +134,12 @@ class MusicSheetHelperTests: XCTestCase {
             [0,1,3,4,6,7,9,10],
         ]
         
-        XCTAssertEqual(try helper.getIntegerNotationOfAscending(degrees: bluesScale, completeFinalNote: true), [0,3,5,6,7,10,12])
-        XCTAssertEqual(try helper.getIntegerNotationOfAscending(degrees: octatonicScale1, completeFinalNote: true), [0,2,3,5,6,8,9,11,12])
+        XCTAssertEqual(helper.getIntegerNotation(degrees: bluesScale, order: .ascending, completeFinalNote: true), [0,3,5,6,7,10,12])
+        XCTAssertEqual(helper.getIntegerNotation(degrees: octatonicScale1, order: .ascending, completeFinalNote: true), [0,2,3,5,6,8,9,11,12])
         
         XCTAssertEqual(notations, expectedResults)
         
-        XCTAssertThrowsError(try helper.getIntegerNotationOfAscending(degrees: "1 ♭3 ♭5 4 5 ♭7"), "") { error in
-            print(error)
-        }
+        print(helper.getIntegerNotation(degrees: "1 ♭3 ♭5 4 5 ♭7", order: .ascending), "")
     }
     
     func test_getPattern() throws {

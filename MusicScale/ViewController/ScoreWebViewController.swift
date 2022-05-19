@@ -35,20 +35,23 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
         return "onRender('\(abcjsText.replacingOccurrences(of: "\n", with: "\\n"))');"
     }
     
+    func stopTimingCallback() {
+        webView.evaluateJavaScript("stopTimer()")
+    }
+    
     func injectAbcjsText(from abcjsText: String, needReload: Bool = true) {
         
-        let injectionSource = generateAbcJsInjectionSource(from: abcjsText.replacingOccurrences(of: "'", with: "\\'"))
-        let injectionScript = WKUserScript(source: injectionSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-        
-//        if needReload {
-//            webView.configuration.userContentController.removeAllUserScripts()
-//            webView.configuration.userContentController.addUserScript(injectionScript)
-//            webView.reload()
-//        } else {
+        let abcjsTextFixed = abcjsText.replacingOccurrences(of: "'", with: "\\'")
+
+        if needReload {
+            stopTimingCallback()
+            webView.evaluateJavaScript(generateAbcJsInjectionSource(from: abcjsTextFixed))
+        } else {
+            let injectionSource = generateAbcJsInjectionSource(from: abcjsTextFixed)
+            let injectionScript = WKUserScript(source: injectionSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
             webView.configuration.userContentController.addUserScript(injectionScript)
-//        }
+        }
         
-        webView.reload()
     }
     
     func loadWebSheetPage() {
@@ -70,7 +73,7 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
         webView.loadFileURL(url, allowingReadAccessTo: url)
         webView.scrollView.isScrollEnabled = false
         
-        let abcjsText = scaleInfoViewModel.abcjsText
+        let abcjsText = scaleInfoViewModel.abcjsTextAscending
         injectAbcjsText(from: abcjsText, needReload: false)
         
         // 자바스크립트 -> 네이티브 앱 연결
