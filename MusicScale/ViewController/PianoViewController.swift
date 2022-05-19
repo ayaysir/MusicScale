@@ -134,6 +134,10 @@ class PianoViewController: UIViewController {
         lblCurrentKeyPosition.text = "\(Int(sender.value))"
     }
     
+    func adjustKeyPosition(key: Music.PlayableKey) {
+        currentPlayableKey = key
+        viewPiano.pianoViewModel.changeKey(key: key)
+    }
 }
 
 extension PianoViewController: UIPickerViewDelegate, UIPickerViewDataSource {

@@ -33,9 +33,9 @@
 <body>
   <!-- <h1 id="title">자바스크립트 동작안함</h1> -->
   <div id="notation"></div>
-  <div id="audio"></div>
+  <!-- <div id="audio"></div>
   <button class="start">start</button>
-  <button class="stop">stop</button>
+  <button class="stop">stop</button> -->
   <script src="./js/abcjs-basic-min.js"></script>
   <script>
     const is_iOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) == null ? false : true
@@ -140,8 +140,8 @@
     let isPlaying = false
     const cursorControl = new CursorControl("#notation");
 
-    document.querySelector(".start").addEventListener("click", startTimer)
-    document.querySelector(".stop").addEventListener("click", stopTimer)
+    // document.querySelector(".start").addEventListener("click", startTimer)
+    // document.querySelector(".stop").addEventListener("click", stopTimer)
 
     function onEvent(ev) {
       if (ev && isPlaying)
@@ -169,10 +169,10 @@
       timingCallbacks.start();
 
       // iOS 기기로 신호 전송
-      if(is_iOS) {
-        // notePlayback - 네이티브 앱에서 사용할 함수 이름
-        webkit.messageHandlers.notePlayback.postMessage("play")
-      }
+      // if(is_iOS) {
+      //   // notePlayback - 네이티브 앱에서 사용할 함수 이름
+      //   webkit.messageHandlers.notePlayback.postMessage("play")
+      // }
     }
 
     function stopTimer() {
@@ -181,10 +181,10 @@
       timingCallbacks.stop()
       timingCallbacks.reset()
       
-      if(is_iOS) {
-        // notePlayback - 네이티브 앱에서 사용할 함수 이름
-        webkit.messageHandlers.notePlayback.postMessage("stop")
-      }
+      // if(is_iOS) {
+      //   // notePlayback - 네이티브 앱에서 사용할 함수 이름
+      //   webkit.messageHandlers.notePlayback.postMessage("stop")
+      // }
     }
 
 

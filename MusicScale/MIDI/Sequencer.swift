@@ -68,7 +68,7 @@ class NoteSequencerConductor: ObservableObject {
         sequencer.debug()
         sequencer.setGlobalMIDIOutput(instrument.midiIn)
 //        sequencer.enableLooping(Duration(beats: 4))
-        sequencer.setTempo(120)
+        sequencer.setTempo(Double(tempo))
         
         
     }

@@ -16,11 +16,16 @@ class ScaleInfoViewController: UIViewController {
     
     @IBOutlet weak var btnTranspose: UIButton!
     @IBOutlet weak var btnEnharmonic: UIButton!
+    @IBOutlet weak var btnPlayAndStop: UIButton!
     
     @IBOutlet weak var stepTranspose: UIStepper!
+    @IBOutlet weak var stepTempo: UIStepper!
+    
+    @IBOutlet weak var lblTempo: UILabel!
     
     // 나중에 UserDefaults 등으로 교체
     var tempCurrentOrder: DegreesOrder = .ascending
+    var tempCurrentTempo: Double = 120
     
     var infoVC: ScaleSubInfoTableViewController?
     var webSheetVC: ScoreWebViewController?
@@ -44,6 +49,7 @@ class ScaleInfoViewController: UIViewController {
         conductor.start()
         
         stepTranspose.maximumValue = Double(Music.Key.allCases.count - 1)
+        stepTempo.value = tempCurrentTempo
     }
     
     // MARK: - Outlet Action
@@ -77,6 +83,20 @@ class ScaleInfoViewController: UIViewController {
         }
     }
     
+    @IBAction func btnActPlayAndStop(_ sender: UIButton) {
+        if conductor.sequencer.isPlaying {
+            stopSequencer()
+            return
+        }
+        startSequencer()
+    }
+    
+    @IBAction func stepActChangeTempo(_ sender: UIStepper) {
+        tempCurrentTempo = sender.value
+        lblTempo.text = "\(Int(sender.value))"
+        changeTempo()
+    }
+    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -101,10 +121,20 @@ class ScaleInfoViewController: UIViewController {
 // MARK: - Custom methods
 extension ScaleInfoViewController {
     
-    func changeOrder() {
-        
+    private func reinjectAbcjsText() {
         webSheetVC?.injectAbcjsText(from: tempCurrentOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending, needReload: true)
-        resetSequencer()
+        stopSequencer()
+    }
+    
+    func changeTempo() {
+        scaleInfoViewModel.setCurrentTempo(tempCurrentTempo)
+        conductor.tempo = Float(tempCurrentTempo)
+        print(conductor.tempo)
+        reinjectAbcjsText()
+    }
+    
+    func changeOrder() {
+        reinjectAbcjsText()
     }
     
     func transpose(noteStr: String) {
@@ -113,33 +143,42 @@ extension ScaleInfoViewController {
         
         if let targetKey = Music.Key.getKeyFromNoteStr(noteStr) {
             scaleInfoViewModel.setCurrentKey(targetKey)
-            webSheetVC?.injectAbcjsText(from: tempCurrentOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending, needReload: true)
-            resetSequencer()
+            reinjectAbcjsText()
+            
+            // change keyboard start position
+            let playableKey = targetKey.playableKey
+            pianoVC?.adjustKeyPosition(key: playableKey)
         }
+    }
+    
+    func stopSequencer() {
+        webSheetVC?.stopTimer()
+        conductor.sequencer.stop()
+        conductor.sequencer.rewind()
+        btnPlayAndStop.setTitle("Play", for: .normal)
+    }
+    
+    func startSequencer() {
+        stopSequencer()
+        webSheetVC?.startTimer()
+        let targetSemitones = tempCurrentOrder == .ascending ? scaleInfoViewModel.playbackSemitoneAscending : scaleInfoViewModel.playbackSemitoneDescending
+        conductor.addScaleToSequencer(semintones: targetSemitones!)
+        btnPlayAndStop.setTitle("Stop", for: .normal)
+        conductor.sequencer.play()
     }
 }
 
 // MARK: - ScoreWebVCDelegate
 extension ScaleInfoViewController: ScoreWebVCDelegate {
     
-    func resetSequencer() {
-        conductor.sequencer.stop()
-        conductor.sequencer.rewind()
-    }
     
     func didStartButtonClicked(_ controller: ScoreWebViewController) {
-        resetSequencer()
-        let targetSemitones = tempCurrentOrder == .ascending ? scaleInfoViewModel.playbackSemitoneAscending : scaleInfoViewModel.playbackSemitoneDescending
-        conductor.addScaleToSequencer(semintones: targetSemitones!)
-        print(conductor.sequencer.length)
-        conductor.sequencer.play()
+        startSequencer()
     }
     
     func didStopButtonClicked(_ controller: ScoreWebViewController) {
-        resetSequencer()
+        stopSequencer()
     }
-    
-    
 }
 
 // MARK: - DropDown

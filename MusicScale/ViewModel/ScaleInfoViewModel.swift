@@ -11,15 +11,21 @@ class ScaleInfoViewModel {
     
     private let scaleInfo: ScaleInfo
     private(set) var currentKey: Music.Key
+    private(set) var currentTempo: Double
     private let helper = MusicSheetHelper()
     
-    init(scaleInfo: ScaleInfo, currentKey: Music.Key) {
+    init(scaleInfo: ScaleInfo, currentKey: Music.Key, currentTempo: Double) {
         self.scaleInfo = scaleInfo
         self.currentKey = currentKey
+        self.currentTempo = currentTempo
     }
     
     func setCurrentKey(_ key: Music.Key) {
         currentKey = key
+    }
+    
+    func setCurrentTempo(_ tempo: Double) {
+        currentTempo = tempo
     }
     
     // MARK: - 키 변화와 무관
@@ -63,11 +69,11 @@ class ScaleInfoViewModel {
 //    }
     
     var abcjsTextAscending: String {
-        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .ascending, key: currentKey, tempo: 120)
+        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .ascending, key: currentKey, tempo: currentTempo)
     }
     
     var abcjsTextDescending: String {
-        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .descending, key: currentKey, tempo: 120)
+        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .descending, key: currentKey, tempo: currentTempo)
     }
     
     var playbackSemitoneAscending: [Int]? {

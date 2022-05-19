@@ -35,7 +35,11 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
         return "onRender('\(abcjsText.replacingOccurrences(of: "\n", with: "\\n"))');"
     }
     
-    func stopTimingCallback() {
+    func startTimer() {
+        webView.evaluateJavaScript("startTimer()")
+    }
+    
+    func stopTimer() {
         webView.evaluateJavaScript("stopTimer()")
     }
     
@@ -44,7 +48,7 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
         let abcjsTextFixed = abcjsText.replacingOccurrences(of: "'", with: "\\'")
 
         if needReload {
-            stopTimingCallback()
+            stopTimer()
             webView.evaluateJavaScript(generateAbcJsInjectionSource(from: abcjsTextFixed))
         } else {
             let injectionSource = generateAbcJsInjectionSource(from: abcjsTextFixed)

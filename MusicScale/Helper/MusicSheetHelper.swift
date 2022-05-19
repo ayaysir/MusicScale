@@ -193,7 +193,6 @@ struct MusicSheetHelper {
             
             let numberInFirstOctave = (pair.number - 1) % 7
             let octave = Int(floor(Double(pair.number - 1) / 7.0))
-            print(pair.number, octave)
             let scaleIndex = numberInFirstOctave.signum() >= 0 ? numberInFirstOctave : 7 + numberInFirstOctave
             let noteScale = Music.Scale7.getScaleByCaseIndex(scaleIndex)!
             
@@ -268,7 +267,7 @@ struct MusicSheetHelper {
         }.joined(separator: " ")
     }
     
-    func scaleInfoToAbcjsText(scaleInfo: ScaleInfo, order: DegreesOrder = .ascending, key: Music.Key = .C, tempo: Int = 120) -> String {
+    func scaleInfoToAbcjsText(scaleInfo: ScaleInfo, order: DegreesOrder = .ascending, key: Music.Key = .C, tempo: Double = 120) -> String {
         
 //        let targetDegrees = isDescending ? scaleInfo.degreesDescending : scaleInfo.degreesAscending
         let targetDegrees = getTargetDegrees(scaleInfo: scaleInfo, order: order)
@@ -416,7 +415,7 @@ struct MusicSheetHelper {
         
         
         let noteNumPairs = degreesToNoteNumberPair(degrees: degrees, order: order, completeFinalNote: completeFinalNote)
-        print(#function, noteNumPairs, degrees)
+//        print(#function, noteNumPairs, degrees)
         return noteNumPairs.enumerated().withPreviousAndNext.reduce(into: [Int]()) { partialResult, values in
             let (prev, curr, _) = values
             
@@ -455,7 +454,6 @@ struct MusicSheetHelper {
         let startSemitone = order.signum == 1 ? key.playableKey.rawValue : key.playableKey.rawValue + 12
         
         let result = integerNotation.map { $0 + startSemitone }
-        print(result, integerNotation)
         return result
     }
     
