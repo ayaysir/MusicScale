@@ -10,23 +10,26 @@ import Foundation
 class ScaleInfoViewModel {
     
     private let scaleInfo: ScaleInfo
-    private(set) var currentKey: Music.Key
-    private(set) var currentTempo: Double
     private let helper = MusicSheetHelper()
     
-    init(scaleInfo: ScaleInfo, currentKey: Music.Key, currentTempo: Double) {
+    var currentKey: Music.Key
+    var currentTempo: Double
+    var currentOctaveShift: Int
+    
+    init(scaleInfo: ScaleInfo, currentKey: Music.Key, currentTempo: Double, currentOctaveShift: Int = 0) {
         self.scaleInfo = scaleInfo
         self.currentKey = currentKey
         self.currentTempo = currentTempo
+        self.currentOctaveShift = currentOctaveShift
     }
     
-    func setCurrentKey(_ key: Music.Key) {
-        currentKey = key
-    }
-    
-    func setCurrentTempo(_ tempo: Double) {
-        currentTempo = tempo
-    }
+//    func setCurrentKey(_ key: Music.Key) {
+//        currentKey = key
+//    }
+//    
+//    func setCurrentTempo(_ tempo: Double) {
+//        currentTempo = tempo
+//    }
     
     // MARK: - 키 변화와 무관
     var name: String {
@@ -69,19 +72,24 @@ class ScaleInfoViewModel {
 //    }
     
     var abcjsTextAscending: String {
-        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .ascending, key: currentKey, tempo: currentTempo)
+        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .ascending, key: currentKey, tempo: currentTempo, octaveShift: currentOctaveShift)
     }
     
     var abcjsTextDescending: String {
-        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .descending, key: currentKey, tempo: currentTempo)
+        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .descending, key: currentKey, tempo: currentTempo, octaveShift: currentOctaveShift)
     }
     
     var playbackSemitoneAscending: [Int]? {
-        return helper.getSemitoneToPlaybackNotes(scaleInfo: scaleInfo, order: .ascending, key: currentKey)
+        return helper.getSemitoneToPlaybackNotes(scaleInfo: scaleInfo, order: .ascending, key: currentKey, octaveShift: currentOctaveShift)
     }
     
     var playbackSemitoneDescending: [Int]? {
-        return helper.getSemitoneToPlaybackNotes(scaleInfo: scaleInfo, order: .descending, key: currentKey)
+        return helper.getSemitoneToPlaybackNotes(scaleInfo: scaleInfo, order: .descending, key: currentKey, octaveShift: currentOctaveShift)
+    }
+    
+    var expectedPlayTime: Double {
+        // t = 1 / b. Therefore: 1 min / 96 = 60,000 ms / 96 = 625 ms.
+        return (60 / currentTempo) * Double(playbackSemitoneAscending!.count)
     }
     
 }

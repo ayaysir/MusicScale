@@ -20,6 +20,7 @@ class ScaleInfoViewController: UIViewController {
     
     @IBOutlet weak var stepTranspose: UIStepper!
     @IBOutlet weak var stepTempo: UIStepper!
+    @IBOutlet weak var stepOctaveShift: UIStepper!
     
     @IBOutlet weak var lblTempo: UILabel!
     
@@ -37,6 +38,8 @@ class ScaleInfoViewController: UIViewController {
     let enharmonicDropDown = DropDown()
     
     let conductor = NoteSequencerConductor()
+    
+    var playTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +100,10 @@ class ScaleInfoViewController: UIViewController {
         changeTempo()
     }
     
+    @IBAction func stepActChangeOctaveShift(_ sender: UIStepper) {
+        changeOctaveShift()
+    }
+    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -127,9 +134,14 @@ extension ScaleInfoViewController {
     }
     
     func changeTempo() {
-        scaleInfoViewModel.setCurrentTempo(tempCurrentTempo)
+        scaleInfoViewModel.currentTempo = tempCurrentTempo
         conductor.tempo = Float(tempCurrentTempo)
-        print(conductor.tempo)
+
+        reinjectAbcjsText()
+    }
+    
+    func changeOctaveShift() {
+        scaleInfoViewModel.currentOctaveShift = Int(stepOctaveShift.value)
         reinjectAbcjsText()
     }
     
@@ -142,7 +154,7 @@ extension ScaleInfoViewController {
         self.btnTranspose.setTitle(noteStr, for: .normal)
         
         if let targetKey = Music.Key.getKeyFromNoteStr(noteStr) {
-            scaleInfoViewModel.setCurrentKey(targetKey)
+            scaleInfoViewModel.currentKey = targetKey
             reinjectAbcjsText()
             
             // change keyboard start position
@@ -151,20 +163,31 @@ extension ScaleInfoViewController {
         }
     }
     
-    func stopSequencer() {
+    @objc func stopSequencer() {
         webSheetVC?.stopTimer()
         conductor.sequencer.stop()
         conductor.sequencer.rewind()
+        conductor.isPlaying = false
         btnPlayAndStop.setTitle("Play", for: .normal)
+        
+        playTimer?.invalidate()
+        
     }
     
     func startSequencer() {
         stopSequencer()
         webSheetVC?.startTimer()
         let targetSemitones = tempCurrentOrder == .ascending ? scaleInfoViewModel.playbackSemitoneAscending : scaleInfoViewModel.playbackSemitoneDescending
-        conductor.addScaleToSequencer(semintones: targetSemitones!)
+        self.conductor.addScaleToSequencer(semintones: targetSemitones!)
+        self.conductor.isPlaying = true
+        
         btnPlayAndStop.setTitle("Stop", for: .normal)
-        conductor.sequencer.play()
+        
+        playTimer = Timer.scheduledTimer(timeInterval: scaleInfoViewModel.expectedPlayTime, target: self, selector: #selector(stopSequencer), userInfo: nil, repeats: false)
+    }
+    
+    @objc func skf() {
+        stopSequencer()
     }
 }
 

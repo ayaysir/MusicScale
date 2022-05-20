@@ -285,6 +285,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-1" maximumValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="1CM-SR-6Eq">
+                                <rect key="frame" x="0.0" y="530" width="94" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="stepActChangeOctaveShift:" destination="LFu-VY-SiC" eventType="valueChanged" id="Aia-SK-wcA"/>
+                                </connections>
+                            </stepper>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mSi-5z-bZl"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
@@ -300,6 +307,7 @@
                         <outlet property="containerViewPiano" destination="YQ5-tU-dgi" id="2sh-Gc-y1l"/>
                         <outlet property="containerViewWebSheet" destination="78q-Qb-nNd" id="evA-wV-RWu"/>
                         <outlet property="lblTempo" destination="VRb-r7-aq6" id="1nL-Wk-gr5"/>
+                        <outlet property="stepOctaveShift" destination="1CM-SR-6Eq" id="uo4-4j-WaU"/>
                         <outlet property="stepTempo" destination="wsc-rc-FyV" id="gGp-wM-QRf"/>
                         <outlet property="stepTranspose" destination="e5b-Uf-Ipu" id="46m-dF-RDy"/>
                     </connections>

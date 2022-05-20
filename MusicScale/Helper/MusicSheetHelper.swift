@@ -164,9 +164,24 @@ struct MusicSheetHelper {
         
         if key == .C && octaveShift == 0 {
             return result
-        } else {
+        } else if key == .C && octaveShift != 0 {
+            return result.map { (pair: NoteNumberPair) -> NoteNumberPair in
+                let newNumber = pair.number + (octaveShift * 7)
+                return NoteNumberPair(pair.prefix, newNumber)
+            }
+        } else if key != .C && octaveShift == 0 {
             do {
                 return try getTransposedNoteNumberPairsUseInterval(pairs: result, interval: key.intervalFromC)
+            } catch {
+                print(error)
+            }
+        } else if octaveShift != 0 {
+            do {
+                let transposed = try getTransposedNoteNumberPairsUseInterval(pairs: result, interval: key.intervalFromC)
+                return transposed.map { (pair: NoteNumberPair) -> NoteNumberPair in
+                    let newNumber = pair.number + (octaveShift * 7)
+                    return NoteNumberPair(pair.prefix, newNumber)
+                }
             } catch {
                 print(error)
             }
@@ -224,6 +239,8 @@ struct MusicSheetHelper {
                     return ""
                 } else if octave >= 1 {
                     return String(repeating: "'", count: octave)
+                } else if octave <= 1 {
+                    return String(repeating: ",", count: abs(octave))
                 } else {
                     return ""
                 }
@@ -241,7 +258,7 @@ struct MusicSheetHelper {
         // CDEFGAB cde...
         
         // TODO: degreesToNoteStrPair 중복 안되게
-        let pairs = degreesToNoteStrPair(degrees: degrees, order: order, completeFinalNote: completeFinalNote, key: key)
+        let pairs = degreesToNoteStrPair(degrees: degrees, order: order, completeFinalNote: completeFinalNote, key: key, octaveShift: octaveShift)
         return pairs.map { $0.prefix + $0.noteStr }.joined(separator: " ")
     }
     
@@ -267,9 +284,8 @@ struct MusicSheetHelper {
         }.joined(separator: " ")
     }
     
-    func scaleInfoToAbcjsText(scaleInfo: ScaleInfo, order: DegreesOrder = .ascending, key: Music.Key = .C, tempo: Double = 120) -> String {
+    func scaleInfoToAbcjsText(scaleInfo: ScaleInfo, order: DegreesOrder = .ascending, key: Music.Key = .C, tempo: Double = 120, octaveShift: Int = 0) -> String {
         
-//        let targetDegrees = isDescending ? scaleInfo.degreesDescending : scaleInfo.degreesAscending
         let targetDegrees = getTargetDegrees(scaleInfo: scaleInfo, order: order)
         
         let text = """
@@ -280,70 +296,11 @@ struct MusicSheetHelper {
                 R: \(key.textValue) \(scaleInfo.name)
                 Q: 1/1=\(tempo)
                 K: C
-                \(degreesToAbcjsPart(degrees: targetDegrees, order: order, completeFinalNote: true, key: key, octaveShift: 0)) |
+                \(degreesToAbcjsPart(degrees: targetDegrees, order: order, completeFinalNote: true, key: key, octaveShift: octaveShift)) |
                 w: \(degreesToAbcjsLyric(degrees: targetDegrees, order: order, completeFinalNote: true, key: key))
                 """
         return text
     }
-    
-//    func getIntervalOfAscendingTwoNumPair(leftPair: NoteNumberPair, rightPair: NoteNumberPair) throws -> Int {
-//
-//        guard leftPair.number <= rightPair.number else {
-//            throw IntervalError.notCalculable
-//        }
-//
-//        var leftInteger: Int!
-//        var rightInteger: Int!
-//
-//        //  1,  2,  3,  4,  5,  6,  7
-//        //  8,  9, 10, 11, 12, 13, 14
-//        // 15, 16, 17, 18, 19, 20, 21
-//
-//        leftInteger = leftPair.number * 2
-//
-//        switch leftPair.prefix {
-//        case "_":
-//            leftInteger -= 1
-//        case "^":
-//            leftInteger += 1
-//        default:
-//            break
-//        }
-//
-//        rightInteger = rightPair.number * 2
-//
-//        switch rightPair.prefix {
-//        case "_":
-//            rightInteger -= 1
-//        case "^":
-//            rightInteger += 1
-//        default:
-//            break
-//        }
-//
-//        let numRange = leftPair.number...rightPair.number
-//        let totalHalfCount =  numRange.enumerated().reduce(0) { partialResults, values in
-//
-//            let (index, num) = values
-//
-//            if index == 0 {
-//                return partialResults
-//            }
-//
-//            let currentNumMod7 = num % 7
-//            if (currentNumMod7 == 4 || currentNumMod7 == 1) {
-//                return partialResults + 1
-//            }
-//
-//            return partialResults
-//        }
-//
-//        guard rightInteger - leftInteger >= 0 else {
-//            throw IntervalError.notCalculable
-//        }
-//
-//        return rightInteger - leftInteger - totalHalfCount
-//    }
     
     func getIntervalOfTwoNumPair(leftPair: NoteNumberPair, rightPair: NoteNumberPair) -> Int {
        
@@ -446,14 +403,14 @@ struct MusicSheetHelper {
         return scaleInfo.degreesAscending
     }
     
-    func getSemitoneToPlaybackNotes(scaleInfo: ScaleInfo, order: DegreesOrder, key: Music.Key) -> [Int] {
+    func getSemitoneToPlaybackNotes(scaleInfo: ScaleInfo, order: DegreesOrder, key: Music.Key, octaveShift: Int = 0) -> [Int] {
         
         let targetDegrees = getTargetDegrees(scaleInfo: scaleInfo, order: order)
         
         let integerNotation = getIntegerNotation(degrees: targetDegrees, order: order, completeFinalNote: true)
         let startSemitone = order.signum == 1 ? key.playableKey.rawValue : key.playableKey.rawValue + 12
         
-        let result = integerNotation.map { $0 + startSemitone }
+        let result = integerNotation.map { ($0 + startSemitone) + (octaveShift * 12) }
         return result
     }
     
