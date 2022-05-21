@@ -27,6 +27,7 @@ class ScaleInfoViewController: UIViewController {
     // 나중에 UserDefaults 등으로 교체
     var tempCurrentOrder: DegreesOrder = .ascending
     var tempCurrentTempo: Double = 120
+    var tempCurrentEnharmonicMode: EnharmonicMode = .standard
     
     var infoVC: ScaleSubInfoTableViewController?
     var webSheetVC: ScoreWebViewController?
@@ -149,6 +150,16 @@ extension ScaleInfoViewController {
         reinjectAbcjsText()
     }
     
+    func changeEnharmonicMode(mode: EnharmonicMode) {
+        
+        tempCurrentEnharmonicMode = mode
+        
+        self.btnEnharmonic.setTitle("\(mode)", for: .normal)
+        scaleInfoViewModel.currentEnharmonicMode = tempCurrentEnharmonicMode
+        
+        reinjectAbcjsText()
+    }
+    
     func transpose(noteStr: String) {
         
         self.btnTranspose.setTitle(noteStr, for: .normal)
@@ -234,9 +245,10 @@ extension ScaleInfoViewController {
     func initEnharmonicDropDown() {
         
         let targetDropDown = enharmonicDropDown
-        let dataSource = ["Default", "Sharp(♯) only", "Flat(♭) only"]
+        let dataSource = ["Scale's default", "Sharp(♯) and natural", "Flat(♭) and natural", "Custom"]
         let selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item: \(item) at index: \(index)")
+            changeEnharmonicMode(mode: .init(rawValue: index)!)
           }
         _ = dropDownCommon(dropDown: targetDropDown, dataSource: dataSource, selectionAction: selectionAction)
     }

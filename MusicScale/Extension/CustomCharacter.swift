@@ -11,3 +11,5 @@ import Foundation
 let xSharp = "♯"
 let xFlat = "♭"
 let xNatural = "♮"
+let xDobuleFlat = "𝄫"
+let xDoubleSharp = "𝄪"

@@ -56,6 +56,9 @@
 		44A09A372832B1810067184E /* sawPiano1 복사본.exs in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A342832AEE80067184E /* sawPiano1 복사본.exs */; };
 		44A09A392832B7D20067184E /* VintageDreamsWaves-v2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */; };
 		44A09A3B283559190067184E /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A3A283559190067184E /* Sequencer.swift */; };
+		44A09A7D283808C90067184E /* ScaleInfoVCConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A7C283808C90067184E /* ScaleInfoVCConfigStore.swift */; };
+		44A09A7F283929FB0067184E /* EnharmonicMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A7E283929FB0067184E /* EnharmonicMode.swift */; };
+		44A09A8128392C0B0067184E /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A8028392C0B0067184E /* UserDefaults+.swift */; };
 		4BE14DBCD05F5882BF98D64F /* Pods_MusicScale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214599025073672669B0DEA4 /* Pods_MusicScale.framework */; };
 		DE03C6B45056C54CF4C98113 /* Pods_MusicScale_MusicScaleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFCC8F1225122295FF5581 /* Pods_MusicScale_MusicScaleUITests.framework */; };
 /* End PBXBuildFile section */
@@ -134,6 +137,9 @@
 		44A09A352832AEFA0067184E /* saw220-ana1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "saw220-ana1.wav"; sourceTree = "<group>"; };
 		44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
 		44A09A3A283559190067184E /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
+		44A09A7C283808C90067184E /* ScaleInfoVCConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoVCConfigStore.swift; sourceTree = "<group>"; };
+		44A09A7E283929FB0067184E /* EnharmonicMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnharmonicMode.swift; sourceTree = "<group>"; };
+		44A09A8028392C0B0067184E /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		4C9FB0A5D20EA8BA718B985F /* Pods-MusicScale.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScale.release.xcconfig"; path = "Target Support Files/Pods-MusicScale/Pods-MusicScale.release.xcconfig"; sourceTree = "<group>"; };
 		9FA4470F182FF4C132941F6A /* Pods-MusicScaleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScaleTests.debug.xcconfig"; path = "Target Support Files/Pods-MusicScaleTests/Pods-MusicScaleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4FFCC8F1225122295FF5581 /* Pods_MusicScale_MusicScaleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicScale_MusicScaleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -262,6 +268,7 @@
 			children = (
 				4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */,
 				4475CB502830A6C200B9D204 /* MusicSheetHelper.swift */,
+				44A09A7E283929FB0067184E /* EnharmonicMode.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -273,6 +280,7 @@
 				4475CB522830B52700B9D204 /* String+.swift */,
 				4475CB562831501600B9D204 /* Sequence+.swift */,
 				4475CB582831759300B9D204 /* CustomCharacter.swift */,
+				44A09A8028392C0B0067184E /* UserDefaults+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -302,6 +310,7 @@
 		44709D54276A334F00BBF6C9 /* MusicScale */ = {
 			isa = PBXGroup;
 			children = (
+				44A09A7B2838089D0067184E /* UserDefaults */,
 				440637F82830839700875E77 /* Util */,
 				440637F5283082A800875E77 /* SampleData */,
 				440637E9282FF6BF00875E77 /* CoreData */,
@@ -358,6 +367,14 @@
 				4475CB4E2830A0DD00B9D204 /* ScaleSubInfoTableViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		44A09A7B2838089D0067184E /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				44A09A7C283808C90067184E /* ScaleInfoVCConfigStore.swift */,
+			);
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 		5FEB080EBDB1D36B4DC4A58A /* Frameworks */ = {
@@ -629,12 +646,15 @@
 				44709D5A276A334F00BBF6C9 /* ViewController.swift in Sources */,
 				4463FEBA282D615400E7A607 /* MIDIManager.swift in Sources */,
 				4463FEB7282D3FCE00E7A607 /* PianoView.swift in Sources */,
+				44A09A8128392C0B0067184E /* UserDefaults+.swift in Sources */,
 				440637EB282FF6D900875E77 /* CoreDataService.swift in Sources */,
+				44A09A7D283808C90067184E /* ScaleInfoVCConfigStore.swift in Sources */,
 				440637F428307E0000875E77 /* ScaleListTableViewController.swift in Sources */,
 				4475CB572831501600B9D204 /* Sequence+.swift in Sources */,
 				440637F2283003DE00875E77 /* ScaleInfoListViewModel.swift in Sources */,
 				44A09A3B283559190067184E /* Sequencer.swift in Sources */,
 				4463FEB1282C24CA00E7A607 /* PianoKeyInfo.swift in Sources */,
+				44A09A7F283929FB0067184E /* EnharmonicMode.swift in Sources */,
 				4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */,
 				44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */,
 				4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */,

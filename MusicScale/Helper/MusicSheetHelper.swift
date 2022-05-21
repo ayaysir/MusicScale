@@ -220,7 +220,7 @@ struct MusicSheetHelper {
                 // 기본적으로 natural(=)은 표시하지 않는다.
                 // 단, 이전 노트가 동일한 높이(number)이고, accidental이 붙어있다면 natural 기호를 붙인다.
                 if let prevPair = prev?.element {
-                    let prevPrefixIsAccidental = prevPair.prefix.range(of: "^[\\^_]*$", options: .regularExpression) != nil
+                    let prevPrefixIsAccidental = prevPair.prefix.range(of: "^[\\^_]+$", options: .regularExpression) != nil
                     let currPrefixIsNatural = pair.prefix == "" || pair.prefix == "="
                     
                     if prevPair.number != pair.number && pair.prefix == "=" {
@@ -252,20 +252,30 @@ struct MusicSheetHelper {
         return compactedStrPair
     }
     
-    func degreesToAbcjsPart(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0) -> String {
+    private func getNoteStrPairsForAbcjs(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0, enharmonicMode: EnharmonicMode = .standard) -> [NoteStrPair] {
+        
+        if enharmonicMode == .standard {
+            // TODO: degreesToNoteStrPair 중복 안되게
+            return degreesToNoteStrPair(degrees: degrees, order: order, completeFinalNote: completeFinalNote, key: key, octaveShift: octaveShift)
+        } else {
+            return getNoteStrPairsOfEnharmonicMode(degrees: degrees, order: order, key: key, octaveShift: octaveShift, noteStrOfFirstOctave: enharmonicMode.noteStrOfFirstOctave ?? [])
+        }
+    }
+    
+    func degreesToAbcjsPart(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0, enharmonicMode: EnharmonicMode = .standard) -> String {
         
         // sharp: ^A, flat: _A, natural =A
         // CDEFGAB cde...
         
-        // TODO: degreesToNoteStrPair 중복 안되게
-        let pairs = degreesToNoteStrPair(degrees: degrees, order: order, completeFinalNote: completeFinalNote, key: key, octaveShift: octaveShift)
+        let pairs: [NoteStrPair] = getNoteStrPairsForAbcjs(degrees: degrees, order: order, completeFinalNote: completeFinalNote, key: key, octaveShift: octaveShift, enharmonicMode: enharmonicMode)
+        
         return pairs.map { $0.prefix + $0.noteStr }.joined(separator: " ")
     }
     
-    func degreesToAbcjsLyric(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C) -> String {
+    func degreesToAbcjsLyric(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, enharmonicMode: EnharmonicMode = .standard) -> String {
         
         // TODO: degreesToNoteStrPair 중복 안되게
-        let pairs = degreesToNoteStrPair(degrees: degrees, order: order, completeFinalNote: completeFinalNote, key: key)
+        let pairs: [NoteStrPair] = getNoteStrPairsForAbcjs(degrees: degrees, order: order, completeFinalNote: completeFinalNote, key: key, enharmonicMode: enharmonicMode)
         return pairs.map { pair in
             let noteStr = pair.noteStr.uppercased().replacingOccurrences(of: "[\\'\\,]", with: "", options: .regularExpression)
             let postfix: String = {
@@ -276,6 +286,10 @@ struct MusicSheetHelper {
                     return "♯"
                 case "=":
                     return "♮"
+                case "^^":
+                    return "𝄪"
+                case "__":
+                    return "𝄫"
                 default:
                     return ""
                 }
@@ -284,7 +298,7 @@ struct MusicSheetHelper {
         }.joined(separator: " ")
     }
     
-    func scaleInfoToAbcjsText(scaleInfo: ScaleInfo, order: DegreesOrder = .ascending, key: Music.Key = .C, tempo: Double = 120, octaveShift: Int = 0) -> String {
+    func scaleInfoToAbcjsText(scaleInfo: ScaleInfo, order: DegreesOrder = .ascending, key: Music.Key = .C, tempo: Double = 120, octaveShift: Int = 0, enharmonicMode: EnharmonicMode = .standard) -> String {
         
         let targetDegrees = getTargetDegrees(scaleInfo: scaleInfo, order: order)
         
@@ -296,8 +310,8 @@ struct MusicSheetHelper {
                 R: \(key.textValue) \(scaleInfo.name)
                 Q: 1/1=\(tempo)
                 K: C
-                \(degreesToAbcjsPart(degrees: targetDegrees, order: order, completeFinalNote: true, key: key, octaveShift: octaveShift)) |
-                w: \(degreesToAbcjsLyric(degrees: targetDegrees, order: order, completeFinalNote: true, key: key))
+                \(degreesToAbcjsPart(degrees: targetDegrees, order: order, completeFinalNote: true, key: key, octaveShift: octaveShift, enharmonicMode: enharmonicMode)) |
+                w: \(degreesToAbcjsLyric(degrees: targetDegrees, order: order, completeFinalNote: true, key: key, enharmonicMode: enharmonicMode))
                 """
         return text
     }
@@ -350,7 +364,6 @@ struct MusicSheetHelper {
         
         return (rightInteger - leftInteger) - (leftInteger <= rightInteger ? totalHalfCount : -totalHalfCount)
     }
-
     
     func getIntegerNotation(degrees: String, order: DegreesOrder, completeFinalNote: Bool = false) -> [Int] {
         
@@ -406,12 +419,15 @@ struct MusicSheetHelper {
     func getSemitoneToPlaybackNotes(scaleInfo: ScaleInfo, order: DegreesOrder, key: Music.Key, octaveShift: Int = 0) -> [Int] {
         
         let targetDegrees = getTargetDegrees(scaleInfo: scaleInfo, order: order)
+        return getSemitoneToPlaybackNotes(degrees: targetDegrees, order: order, key: key, octaveShift: octaveShift)
+    }
+    
+    func getSemitoneToPlaybackNotes(degrees: String, order: DegreesOrder, key: Music.Key, octaveShift: Int = 0) -> [Int] {
         
-        let integerNotation = getIntegerNotation(degrees: targetDegrees, order: order, completeFinalNote: true)
+        let integerNotation = getIntegerNotation(degrees: degrees, order: order, completeFinalNote: true)
         let startSemitone = order.signum == 1 ? key.playableKey.rawValue : key.playableKey.rawValue + 12
         
-        let result = integerNotation.map { ($0 + startSemitone) + (octaveShift * 12) }
-        return result
+        return integerNotation.map { ($0 + startSemitone) + (octaveShift * 12) }
     }
     
     func getPattern(degrees: String) throws -> [Int] {
@@ -583,6 +599,46 @@ struct MusicSheetHelper {
             let resultPrefix = prefixList[basePrefixIndex + 1]
             return NoteNumberPair(resultPrefix, resultNumber)
         
+        }
+    }
+    
+    // MARK: - enharmonic mode가 standard 외인 경우
+    func getSemitoneOfFirstOctave(_ semitone: Int) -> Int {
+        let semitoneMod12 = semitone % 12
+        if semitoneMod12 >= 0 {
+            return semitoneMod12
+        } else {
+            return 12 + semitoneMod12
+        }
+    }
+    
+    func getNoteStrPairsOfEnharmonicMode(degrees: String, order: DegreesOrder, key: Music.Key, octaveShift: Int, noteStrOfFirstOctave: [NoteStrPair]) -> [NoteStrPair] {
+        
+        let playbackSemitones = getSemitoneToPlaybackNotes(degrees: degrees, order: order, key: key, octaveShift: octaveShift)
+        
+        // count: 12
+        
+        return playbackSemitones.enumerated().withPreviousAndNext.compactMap { values -> NoteStrPair? in
+            let (prev, curr, _) = values
+            
+            let semitone = curr.element
+            let semitoneOfFirstOctave: Int = getSemitoneOfFirstOctave(semitone)
+            let octave = Int(floor(Double(semitone) / 12.0))
+            print(#function, "ictave:", semitone, semitoneOfFirstOctave, octave)
+            let notePostfix = octave > 0 ? String(repeating: "'", count: octave) : octave < 0 ? String(repeating: ",", count: abs(octave)) : ""
+            let noteStrPair = noteStrOfFirstOctave[semitoneOfFirstOctave]
+            
+            if let prevSemitone = prev?.element {
+                let prevSemitoneMod12 = getSemitoneOfFirstOctave(prevSemitone)
+                let isPrevHasAccidental = noteStrOfFirstOctave[prevSemitoneMod12].prefix.range(of: "^[\\^_]+$", options: .regularExpression) != nil
+                let prevAndCurrHasSameNoteStr = noteStrOfFirstOctave[prevSemitoneMod12].noteStr == noteStrPair.noteStr
+                if isPrevHasAccidental && prevAndCurrHasSameNoteStr {
+                    return NoteStrPair("=", noteStrPair.noteStr + notePostfix)
+                }
+            }
+            
+            return NoteStrPair(noteStrPair.prefix, noteStrPair.noteStr + notePostfix)
+            
         }
     }
 }

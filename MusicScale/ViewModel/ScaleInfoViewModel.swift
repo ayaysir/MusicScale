@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 class ScaleInfoViewModel {
     
     private let scaleInfo: ScaleInfo
@@ -15,23 +16,17 @@ class ScaleInfoViewModel {
     var currentKey: Music.Key
     var currentTempo: Double
     var currentOctaveShift: Int
+    var currentEnharmonicMode: EnharmonicMode
     
-    init(scaleInfo: ScaleInfo, currentKey: Music.Key, currentTempo: Double, currentOctaveShift: Int = 0) {
+    init(scaleInfo: ScaleInfo, currentKey: Music.Key, currentTempo: Double, currentOctaveShift: Int = 0, currentEnharmonicMode: EnharmonicMode = .standard) {
         self.scaleInfo = scaleInfo
         self.currentKey = currentKey
         self.currentTempo = currentTempo
         self.currentOctaveShift = currentOctaveShift
+        self.currentEnharmonicMode = currentEnharmonicMode
     }
     
-//    func setCurrentKey(_ key: Music.Key) {
-//        currentKey = key
-//    }
-//    
-//    func setCurrentTempo(_ tempo: Double) {
-//        currentTempo = tempo
-//    }
-    
-    // MARK: - 키 변화와 무관
+    // MARK: - current 변수의 변화와 무관
     var name: String {
         return scaleInfo.name
     }
@@ -62,7 +57,7 @@ class ScaleInfoViewModel {
         }
     }
     
-    // MARK: - 키, asc, desc에 따라 변화되는 것
+    // MARK: - current 변수에 따라 변화되는 것
 //    var abcjsPart: String {
 //        helper.degreesToAbcjsPart(degrees: scaleInfo.degreesAscending)
 //    }
@@ -72,11 +67,11 @@ class ScaleInfoViewModel {
 //    }
     
     var abcjsTextAscending: String {
-        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .ascending, key: currentKey, tempo: currentTempo, octaveShift: currentOctaveShift)
+        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .ascending, key: currentKey, tempo: currentTempo, octaveShift: currentOctaveShift, enharmonicMode: currentEnharmonicMode)
     }
     
     var abcjsTextDescending: String {
-        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .descending, key: currentKey, tempo: currentTempo, octaveShift: currentOctaveShift)
+        return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .descending, key: currentKey, tempo: currentTempo, octaveShift: currentOctaveShift, enharmonicMode: currentEnharmonicMode)
     }
     
     var playbackSemitoneAscending: [Int]? {
