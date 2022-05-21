@@ -54,6 +54,28 @@ struct Music: Codable {
             }
         }
         
+        var enharmonicKey: Key {
+            if self.rawValue.count == 1 {
+                return self
+            }
+            
+            let scale7 = ["C", "D", "E", "F", "G", "A", "B"]
+            
+            let strComponents = self.rawValue.components(separatedBy: "_")
+            let accidental = strComponents[1]
+            let index = scale7.firstIndex(of: strComponents[0])! + (accidental == "sharp" ? 1 : -1)
+            let newAccidental = accidental == "sharp" ? "flat" : "sharp"
+            return Key(rawValue: "\(scale7[index])_\(newAccidental)")!
+        }
+        
+        var accidentalValue: String {
+            if self.rawValue.count == 1 {
+                return "natural"
+            }
+            
+            return self.rawValue.components(separatedBy: "_")[1]
+        }
+        
         var intervalFromC: Interval {
             switch self {
             case .C:
@@ -104,6 +126,56 @@ struct Music: Codable {
             return strComponents[0] + accidental
         }
         
+        var textValueMixed: String {
+            switch self {
+            case .C: return "C"
+            case .C_sharp, .D_flat: return "C# / D♭"
+            case .D: return "D"
+            case .D_sharp, .E_flat: return "D♯ / E♭"
+            case .E: return "E"
+            case .F: return "F"
+            case .F_sharp, .G_flat: return "F♯ / G♭"
+            case .G: return "G"
+            case .G_sharp, .A_flat: return "G♯ / A♭"
+            case .A: return "A"
+            case .A_sharp, .B_flat: return "A♯ / B♭"
+            case .B: return "B"
+            }
+        }
+        
+        static var sharpKeys: [Key] {
+            return self.allCases.filter { key in
+                
+                if key.rawValue.count == 1 {
+                    return true
+                }
+                
+                let component = key.rawValue.components(separatedBy: "_")
+                if component[1] == "sharp" {
+                    return true
+                }
+                
+                return false
+            }
+        }
+        
+        
+        static var flatKeys: [Key] {
+            return self.allCases.filter { key in
+                
+                if key.rawValue.count == 1 {
+                    return true
+                }
+                
+                let component = key.rawValue.components(separatedBy: "_")
+                if component[1] == "flat" {
+                    return true
+                }
+                
+                return false
+            }
+        }
+        
         static func getKeyFromNoteStr(_ noteStr: String) -> Key? {
             
             if noteStr.count == 1 {
@@ -114,6 +186,10 @@ struct Music: Codable {
             let postfixStr = accidental == "" ? "" : "_\(accidental)"
 
             return self.init(rawValue: noteStr[0] + postfixStr)
+        }
+        
+        static func getKey(index: Int) -> Key {
+            return self.allCases[index]
         }
     }
     
@@ -186,6 +262,10 @@ struct Music: Codable {
             case .A_sharp: return "A♯ / B♭"
             case .B: return "B"
             }
+        }
+        
+        static func getPlaybleKey(index: Int) -> PlayableKey {
+            return self.allCases[index]
         }
     }
     

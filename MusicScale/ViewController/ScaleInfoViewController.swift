@@ -68,8 +68,8 @@ class ScaleInfoViewController: UIViewController {
     }
     
     @IBAction func stepActTranspose(_ sender: UIStepper) {
-        print(sender.value)
         let index = Int(sender.value)
+        // print(#function, index, sender.maximumValue)
         let noteStr = transposeDropDown.dataSource[index]
         transpose(noteStr: noteStr)
     }
@@ -152,12 +152,35 @@ extension ScaleInfoViewController {
     
     func changeEnharmonicMode(mode: EnharmonicMode) {
         
+        let currentKeyAccidentalValue = scaleInfoViewModel.currentKey.accidentalValue
+        switch mode {
+        case .standard, .userCustom:
+            transposeDropDown.dataSource = Music.Key.allCases.map { $0.textValue }
+        case .sharpAndNatural:
+            transposeDropDown.dataSource = Music.Key.sharpKeys.map { $0.textValue }
+            if currentKeyAccidentalValue == "flat" {
+                scaleInfoViewModel.currentKey = scaleInfoViewModel.currentKey.enharmonicKey
+            }
+        case .flatAndNatural:
+            transposeDropDown.dataSource = Music.Key.flatKeys.map { $0.textValue }
+            if currentKeyAccidentalValue == "sharp" {
+                scaleInfoViewModel.currentKey = scaleInfoViewModel.currentKey.enharmonicKey
+            }
+        }
+        
+        stepTranspose.maximumValue = Double(transposeDropDown.dataSource.count) - 1
+        
+        let stepIndex = transposeDropDown.dataSource.firstIndex(of: scaleInfoViewModel.currentKey.textValue)!
+        stepTranspose.value = Double(stepIndex)
+        
         tempCurrentEnharmonicMode = mode
         
+        self.btnTranspose.setTitle(scaleInfoViewModel.currentKey.textValue, for: .normal)
         self.btnEnharmonic.setTitle("\(mode)", for: .normal)
         scaleInfoViewModel.currentEnharmonicMode = tempCurrentEnharmonicMode
         
         reinjectAbcjsText()
+
     }
     
     func transpose(noteStr: String) {

@@ -20,17 +20,6 @@ class ScaleListTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        let service = ScaleInfoCDService.shared
-        do {
-            try service.deleteAllCoreData()
-            getSampleScaleDataFromLocal { infoList in
-                for info in infoList {
-                    try service.saveCoreData(scaleInfo: info)
-                }
-            }
-        } catch {
-            print(error)
-        }
     }
 
     // MARK: - Table view data source

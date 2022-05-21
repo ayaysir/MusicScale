@@ -11,14 +11,32 @@ import DropDown
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         // in your AppDelegate's didFinishLaunching method so that the drop down will handle its display with the keyboard displayed even the first time a drop down is showed.
         DropDown.startListeningToKeyboard()
+        
+        // 체크
+        checkAppFirstrunOrUpdateStatus {
+            let service = ScaleInfoCDService.shared
+            do {
+                try service.deleteAllCoreData()
+                getSampleScaleDataFromLocal { infoList in
+                    for info in infoList {
+                        try service.saveCoreData(scaleInfo: info)
+                    }
+                }
+            } catch {
+                print(error)
+            }
+        } updated: {
+            print("버전 변경시마다 실행됨")
+        } nothingChanged: {
+            print("변경 사항 없음")
+        }
+
         
         return true
     }

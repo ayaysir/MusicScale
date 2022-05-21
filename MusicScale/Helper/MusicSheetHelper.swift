@@ -287,7 +287,7 @@ struct MusicSheetHelper {
                 case "=":
                     return "♮"
                 case "^^":
-                    return "𝄪"
+                    return "ⅹ"
                 case "__":
                     return "𝄫"
                 default:
