@@ -88,7 +88,7 @@ class PianoViewController: UIViewController {
         
         let semitoneStart = 60 + PianoKeyHelper.adjustKeySemitone(key: currentPlayableKey)
         let location = gesture.location(in: gesture.view)
-        let viewModel = viewPiano.pianoViewModel
+        let viewModel = viewPiano.viewModel
         
         switch gesture.state {
         case .possible:
@@ -98,6 +98,10 @@ class PianoViewController: UIViewController {
             // print(#function, "location:", location, terminator: ":")
             
             if let viewModel = viewModel, let keyInfo = viewModel.getKeyInfoBy(touchLocation: location) {
+                guard viewPiano.viewModel.availableKeyIndexes.contains(keyInfo.keyIndex) else {
+                    return
+                }
+                
                 viewModel.currentTouchedKey = keyInfo
                 // print("keyInfo:", keyInfo)
                 // 노트 재생
@@ -126,11 +130,17 @@ class PianoViewController: UIViewController {
             print("default", terminator: ":")
         }
     }
-    
-    func adjustKeyPosition(key: Music.PlayableKey) {
-        currentPlayableKey = key
-        viewPiano.pianoViewModel.changeKey(key: key)
-    }
 }
 
+extension PianoViewController {
+
+    func adjustKeyPosition(key: Music.PlayableKey) {
+        currentPlayableKey = key
+        viewPiano.viewModel.changeKey(key: key)
+    }
+    
+    func updateAvailableKeys(integerNotations: [Int]) {
+        viewPiano.viewModel.availableKeyIndexes = integerNotations.map { $0 + PianoKeyHelper.adjustKeyPosForAvaliableKeyIndexes(playableKey: currentPlayableKey) }
+    }
+}
 

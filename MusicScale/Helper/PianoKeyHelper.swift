@@ -57,6 +57,35 @@ struct PianoKeyHelper {
         }
     }
     
+    static func adjustKeyPosForAvaliableKeyIndexes(playableKey key: Music.PlayableKey) -> Int {
+        switch key {
+        case .C:
+            return 0
+        case .C_sharp:
+            return 1
+        case .D:
+            return 1
+        case .D_sharp:
+            return 2
+        case .E:
+            return 1
+        case .F:
+            return 0
+        case .F_sharp:
+            return 1
+        case .G:
+            return 1
+        case .G_sharp:
+            return 2
+        case .A:
+            return 1
+        case .A_sharp:
+            return 2
+        case .B:
+            return 1
+        }
+    }
+    
     static func adjustKeySemitone(key: Music.PlayableKey) -> Int {
         return adjustKeySemitone(adjustPostion: adjustKeyPosition(key: key))
     }

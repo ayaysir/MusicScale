@@ -48,6 +48,10 @@ class ScaleInfoViewModel {
         return "(\(integersText))"
     }
     
+    var ascendingIntegerNotationArray: [Int] {
+        return helper.getIntegerNotation(degrees: scaleInfo.degreesAscending, order: .ascending, completeFinalNote: true)
+    }
+    
     var ascendingPattern: String? {
         do {
             return try helper.getPattern(degrees: scaleInfo.degreesAscending).map(String.init).joined(separator: " ")

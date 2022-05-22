@@ -24,7 +24,7 @@ struct PianoViewConstants {
     static let margins: Margins = (x: margin.left + margin.right, y: margin.top + margin.bottom)
     
     /// 박스 line의 너비
-    static let lineWidth: CGFloat = 2.5
+    static let lineWidth: CGFloat = 0.7
     
     /// 흰 건반 대비 검은 건반의 가로세로 길이 비율
     static let blackKeyRatio: CGSize = CGSize(width: 0.8, height: 0.65)
@@ -35,9 +35,17 @@ struct PianoViewConstants {
 class PianoView: UIView {
 
     // draw 주요 정보 저장
-    var pianoViewModel: PianoViewModel!
+    var viewModel: PianoViewModel!
     
     var boxOutline: CGRect!
+    
+    let lightYellow = CGColor(red: 255/255, green: 235/255, blue: 60/255, alpha: 1)
+    // let darkYellow = CGColor(red: 255/255, green: 200/255, blue: 50/255, alpha: 1)
+    let darkYellow = CGColor(red: 195/255, green: 150/255, blue: 10/255, alpha: 1)
+    let violet = CGColor(red: 233/255, green: 30/255, blue: 99/255, alpha: 1)
+    let purple = CGColor(red: 150/255, green: 33/255, blue: 170/255, alpha: 1)
+    
+    let orange = CGColor(red: 250/255, green: 177/255, blue: 88/255, alpha: 1)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,12 +60,12 @@ class PianoView: UIView {
     }
     
     private func initCommon() {
-        pianoViewModel = PianoViewModel(frame: self.frame)
-        boxOutline = pianoViewModel.boxOutline
-        pianoViewModel.handlerForRefreshEntireView = {
+        viewModel = PianoViewModel(frame: self.frame)
+        boxOutline = viewModel.boxOutline
+        viewModel.handlerForRefreshEntireView = {
             self.setNeedsDisplay()
         }
-        pianoViewModel.handlerForRefreshPartialView = { rect in
+        viewModel.handlerForRefreshPartialView = { rect in
             self.setNeedsDisplay(rect)
         }
     }
@@ -74,9 +82,9 @@ class PianoView: UIView {
         context.fill(rect)
         
         // 위아래 라인
-        context.setLineWidth(pianoViewModel.lineWidth)
-        context.setStrokeColor(UIColor.black.cgColor)
-        for line in pianoViewModel.topBottomLineDrawPosList {
+        context.setLineWidth(viewModel.lineWidth)
+        context.setStrokeColor(UIColor.darkGray.cgColor)
+        for line in viewModel.topBottomLineDrawPosList {
             context.move(to: line.startPos)
             context.addLine(to: line.endPos)
             context.strokePath()
@@ -87,35 +95,120 @@ class PianoView: UIView {
         // -11, -7 ,-4 ,0, 3, 7, 10, 14, 17, 21
 
         // 흰 건반 그리기: 내부를 7개 선으로 나눔
-        for keyLine in pianoViewModel.whiteKeyDrawPosList {
+        for keyLine in viewModel.whiteKeyDrawPosList {
             context.move(to: keyLine.startPos)
             context.addLine(to: keyLine.endPos)
             context.strokePath()
         }
         
+        // 키별로 동그라미 그리기 (흰 건반 - 누르기 전)
+        for info in viewModel.pianoWhiteKeys {
+            if viewModel.availableKeyIndexes.contains(info.keyIndex) {
+                let touchArea = info.touchArea
+                let startY = touchArea.minY + touchArea.height * (1 - PianoViewConstants.blackKeyRatio.height)
+                let keyRect = CGRect(x: touchArea.minX, y: startY, width: touchArea.width, height: touchArea.height)
+                
+                let midPoint = CGPoint(x: keyRect.midX, y: keyRect.midY)
+                let arcRadius = keyRect.width / 2 / 1.5
+                
+                let colorSpace = CGColorSpaceCreateDeviceRGB()
+                let gradientColors = [
+                    darkYellow,
+                    purple,
+                ] as CFArray
+                
+                let colorLocations: [CGFloat] = [0.5, 0.95]
+                let gradient = CGGradient(colorsSpace: colorSpace, colors: gradientColors, locations: colorLocations)
+                
+                context.drawRadialGradient(gradient!, startCenter: midPoint, startRadius: 0, endCenter: midPoint, endRadius: arcRadius, options: [])
+            }
+            
+        }
+        
+        
         // 현재 누르고 있는 건반 하이라이트(흰색)
         // 흰 건반인 경우 검은 건반 그리기 전에 하이라이트 해야 안겹침
-        if let currentTouchedKey = pianoViewModel.currentTouchedKey, currentTouchedKey.keyColor == .white {
+        if let currentTouchedKey = viewModel.currentTouchedKey, currentTouchedKey.keyColor == .white {
             context.addRect(currentTouchedKey.touchArea)
-            context.setFillColor(UIColor.orange.cgColor)
+            context.setFillColor(orange)
             context.fillPath()
+            
+            // 키별로 동그라미 그리기 (흰색 건반 - 누른 후)
+            if viewModel.availableKeyIndexes.contains(currentTouchedKey.keyIndex) {
+                let touchArea = currentTouchedKey.touchArea
+                let startY = touchArea.minY + touchArea.height * (1 - PianoViewConstants.blackKeyRatio.height)
+                let keyRect = CGRect(x: touchArea.minX, y: startY, width: touchArea.width, height: touchArea.height)
+                let midPoint = CGPoint(x: keyRect.midX, y: keyRect.midY)
+                let arcRadius = keyRect.width / 2 / 1.5
+                
+                let colorSpace = CGColorSpaceCreateDeviceRGB()
+                let gradientColors = [
+                    lightYellow,
+                    violet,
+                ] as CFArray
+                
+                let colorLocations: [CGFloat] = [0.5, 0.95]
+                let gradient = CGGradient(colorsSpace: colorSpace, colors: gradientColors, locations: colorLocations)
+                
+                context.drawRadialGradient(gradient!, startCenter: midPoint, startRadius: 0, endCenter: midPoint, endRadius: arcRadius, options: [])
+            }
+            
+            
         }
         
         // 검은 건반 그리기:
-        context.setFillColor(UIColor.red.cgColor)
-        for keyRect in pianoViewModel.blackKeyDrawPosList {
+        for keyRect in viewModel.blackKeyDrawPosList {
+            context.setFillColor(CGColor(gray: 0.1, alpha: 1))
             context.addRect(keyRect)
             context.fillPath()
         }
         
-        // 현재 누르고 있는 건반 하이라이트(검은색)
-        // 검은색 건반인 경우 검은 건반 그린 이후에 하이라이트 해야 안묻힘
-        if let currentTouchedKey = pianoViewModel.currentTouchedKey, currentTouchedKey.keyColor == .black {
-            context.addRect(currentTouchedKey.touchArea)
-            context.setFillColor(UIColor.orange.cgColor)
-            context.fillPath()
+        // 키별로 동그라미 그리기 (검은 건반 - 누르기 전)
+        for info in viewModel.pianoBlackKeys {
+            if viewModel.availableKeyIndexes.contains(info.keyIndex) {
+                let keyRect = info.touchArea
+                let midPoint = CGPoint(x: keyRect.midX, y: keyRect.midY)
+                let arcRadius = keyRect.width / 2 / 1.5
+                
+                let colorSpace = CGColorSpaceCreateDeviceRGB()
+                let gradientColors = [
+                    darkYellow,
+                    purple,
+                ] as CFArray
+                
+                let colorLocations: [CGFloat] = [0.5, 0.95]
+                let gradient = CGGradient(colorsSpace: colorSpace, colors: gradientColors, locations: colorLocations)
+                
+                context.drawRadialGradient(gradient!, startCenter: midPoint, startRadius: 0, endCenter: midPoint, endRadius: arcRadius, options: [])
+            }
         }
         
+        // 현재 누르고 있는 건반 하이라이트(검은색)
+        // 검은색 건반인 경우 검은 건반 그린 이후에 하이라이트 해야 안묻힘
+        if let currentTouchedKey = viewModel.currentTouchedKey, currentTouchedKey.keyColor == .black {
+            context.addRect(currentTouchedKey.touchArea)
+            context.setFillColor(orange)
+            context.fillPath()
+            
+            // 키별로 동그라미 그리기 (검은 건반 - 누른 후)
+            if viewModel.availableKeyIndexes.contains(currentTouchedKey.keyIndex) {
+                
+                let keyRect = currentTouchedKey.touchArea
+                let midPoint = CGPoint(x: keyRect.midX, y: keyRect.midY)
+                let arcRadius = keyRect.width / 2 / 1.5
+                
+                let colorSpace = CGColorSpaceCreateDeviceRGB()
+                let gradientColors = [
+                    lightYellow,
+                    violet,
+                ] as CFArray
+                
+                let colorLocations: [CGFloat] = [0.5, 0.95]
+                let gradient = CGGradient(colorsSpace: colorSpace, colors: gradientColors, locations: colorLocations)
+                
+                context.drawRadialGradient(gradient!, startCenter: midPoint, startRadius: 0, endCenter: midPoint, endRadius: arcRadius, options: [])
+            }
+        }
     }
 }
 

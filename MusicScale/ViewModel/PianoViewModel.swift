@@ -26,6 +26,9 @@ class PianoViewModel {
     private var passIndexAdjusted: [Int]!
     private var frame: CGRect!
     
+    // draw cirlce on keys
+    var availableKeyIndexes: [Int] = [0, 1, 2, 4, 6, 7, 10, 11, 12]
+    
     var handlerForRefreshEntireView: (() -> ()) = {}
     var handlerForRefreshPartialView: ((CGRect) -> ()) = { _ in }
     

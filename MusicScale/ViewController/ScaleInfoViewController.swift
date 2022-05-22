@@ -54,6 +54,8 @@ class ScaleInfoViewController: UIViewController {
         
         stepTranspose.maximumValue = Double(Music.Key.allCases.count - 1)
         stepTempo.value = tempCurrentTempo
+        // 피아노 이용 가능 키 표시 - 최초 페이지 열었을 때
+        pianoVC?.updateAvailableKeys(integerNotations: scaleInfoViewModel.ascendingIntegerNotationArray)
     }
     
     // MARK: - Outlet Action
@@ -198,6 +200,10 @@ extension ScaleInfoViewController {
             // change keyboard start position
             let playableKey = targetKey.playableKey
             pianoVC?.adjustKeyPosition(key: playableKey)
+            
+            // 피아노 이용 가능 키 표시 - Transpose 했을때
+            pianoVC?.updateAvailableKeys(integerNotations: scaleInfoViewModel.ascendingIntegerNotationArray)
+            
         }
     }
     
@@ -222,10 +228,6 @@ extension ScaleInfoViewController {
         btnPlayAndStop.setTitle("Stop", for: .normal)
         
         playTimer = Timer.scheduledTimer(timeInterval: scaleInfoViewModel.expectedPlayTime, target: self, selector: #selector(stopSequencer), userInfo: nil, repeats: false)
-    }
-    
-    @objc func skf() {
-        stopSequencer()
     }
 }
 

@@ -16,6 +16,7 @@
 		440637F7283082BE00875E77 /* SampleScaleList.json in Resources */ = {isa = PBXBuildFile; fileRef = 440637F6283082BE00875E77 /* SampleScaleList.json */; };
 		440637FA283083AE00875E77 /* JSONCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637F9283083AE00875E77 /* JSONCoder.swift */; };
 		440637FC283084DE00875E77 /* CoreDataWithSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637FB283084DE00875E77 /* CoreDataWithSampleTests.swift */; };
+		441FA160283A8C370084AE58 /* FloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441FA15F283A8C370084AE58 /* FloatingPoint.swift */; };
 		4463FEA7282BDFF700E7A607 /* PianoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEA6282BDFF700E7A607 /* PianoViewController.swift */; };
 		4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEA9282BE28800E7A607 /* UIViewPreview.swift */; };
 		4463FEAD282C0E6600E7A607 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEAC282C0E6600E7A607 /* Note.swift */; };
@@ -97,6 +98,7 @@
 		440637F6283082BE00875E77 /* SampleScaleList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleScaleList.json; sourceTree = "<group>"; };
 		440637F9283083AE00875E77 /* JSONCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoder.swift; sourceTree = "<group>"; };
 		440637FB283084DE00875E77 /* CoreDataWithSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWithSampleTests.swift; sourceTree = "<group>"; };
+		441FA15F283A8C370084AE58 /* FloatingPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPoint.swift; sourceTree = "<group>"; };
 		4463FEA6282BDFF700E7A607 /* PianoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoViewController.swift; sourceTree = "<group>"; };
 		4463FEA9282BE28800E7A607 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		4463FEAC282C0E6600E7A607 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				4475CB562831501600B9D204 /* Sequence+.swift */,
 				4475CB582831759300B9D204 /* CustomCharacter.swift */,
 				44A09A8028392C0B0067184E /* UserDefaults+.swift */,
+				441FA15F283A8C370084AE58 /* FloatingPoint.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -661,6 +664,7 @@
 				44A09A3B283559190067184E /* Sequencer.swift in Sources */,
 				44A09A832839327F0067184E /* OnlyFirstRun.swift in Sources */,
 				4463FEB1282C24CA00E7A607 /* PianoKeyInfo.swift in Sources */,
+				441FA160283A8C370084AE58 /* FloatingPoint.swift in Sources */,
 				44A09A7F283929FB0067184E /* EnharmonicMode.swift in Sources */,
 				4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */,
 				44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */,
