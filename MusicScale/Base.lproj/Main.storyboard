@@ -253,6 +253,7 @@
                         <outlet property="containerViewPiano" destination="YQ5-tU-dgi" id="2sh-Gc-y1l"/>
                         <outlet property="containerViewWebSheet" destination="78q-Qb-nNd" id="evA-wV-RWu"/>
                         <outlet property="lblTempo" destination="VRb-r7-aq6" id="1nL-Wk-gr5"/>
+                        <outlet property="segDegreesOrder" destination="Z21-5W-1nF" id="VTK-LM-zVl"/>
                         <outlet property="stepOctaveShift" destination="1CM-SR-6Eq" id="uo4-4j-WaU"/>
                         <outlet property="stepTempo" destination="wsc-rc-FyV" id="gGp-wM-QRf"/>
                         <outlet property="stepTranspose" destination="e5b-Uf-Ipu" id="46m-dF-RDy"/>

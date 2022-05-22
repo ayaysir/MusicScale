@@ -22,11 +22,14 @@ class ScaleInfoViewController: UIViewController {
     @IBOutlet weak var stepTempo: UIStepper!
     @IBOutlet weak var stepOctaveShift: UIStepper!
     
+    @IBOutlet weak var segDegreesOrder: UISegmentedControl!
+    
     @IBOutlet weak var lblTempo: UILabel!
     
     // 나중에 UserDefaults 등으로 교체
-    var tempCurrentOrder: DegreesOrder = .ascending
-    var tempCurrentTempo: Double = 120
+    var configStore = ScaleInfoVCConfigStore.shared
+    // var tempCurrentOrder: DegreesOrder = .ascending
+    // var tempCurrentTempo: Double = 120
     var tempCurrentEnharmonicMode: EnharmonicMode = .standard
     
     var infoVC: ScaleSubInfoTableViewController?
@@ -52,9 +55,11 @@ class ScaleInfoViewController: UIViewController {
         
         conductor.start()
         
-        stepTranspose.maximumValue = Double(Music.Key.allCases.count - 1)
-        stepTempo.value = tempCurrentTempo
+        // loadFromConfigStore()는 prepare에서 실행
+        
         // 피아노 이용 가능 키 표시 - 최초 페이지 열었을 때
+        pianoVC?.adjustKeyPosition(key: scaleInfoViewModel.currentKey.playableKey)
+        pianoVC?.octaveShift = scaleInfoViewModel.currentOctaveShift
         pianoVC?.updateAvailableKeys(integerNotations: scaleInfoViewModel.ascendingIntegerNotationArray)
     }
     
@@ -79,11 +84,9 @@ class ScaleInfoViewController: UIViewController {
     @IBAction func segActChangeOrder(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            tempCurrentOrder = .ascending
-            changeOrder()
+            changeOrder(.ascending)
         case 1:
-            tempCurrentOrder = .descending
-            changeOrder()
+            changeOrder(.descending)
         default:
             break
         }
@@ -98,13 +101,12 @@ class ScaleInfoViewController: UIViewController {
     }
     
     @IBAction func stepActChangeTempo(_ sender: UIStepper) {
-        tempCurrentTempo = sender.value
-        lblTempo.text = "\(Int(sender.value))"
-        changeTempo()
+        let tempo = sender.value
+        changeTempo(tempo: tempo)
     }
     
     @IBAction func stepActChangeOctaveShift(_ sender: UIStepper) {
-        changeOctaveShift()
+        changeOctaveShift(Int(sender.value))
     }
     
     
@@ -117,6 +119,8 @@ class ScaleInfoViewController: UIViewController {
             infoVC?.scaleInfoViewModel = scaleInfoViewModel
         case "WebSheetSegue":
             webSheetVC = segue.destination as? ScoreWebViewController
+            // 최초 정보 로딩
+            loadFromConfigStore()
             webSheetVC?.scaleInfoViewModel = scaleInfoViewModel
             webSheetVC?.delegate = self
         case "PianoSegue":
@@ -132,31 +136,80 @@ class ScaleInfoViewController: UIViewController {
 // MARK: - Custom methods
 extension ScaleInfoViewController {
     
+    private func loadFromConfigStore() {
+        
+        // tempo
+        let tempo = configStore.tempo
+        changeTempo(tempo: tempo, initChange: true)
+        
+        // order
+        let order = configStore.degreesOrder
+        changeOrder(order, initChange: true)
+        
+        // octaveShift
+        let octaveShift = configStore.octaveShift
+        changeOctaveShift(octaveShift, initChange: true)
+        
+        // transpose
+        let transposeStr = configStore.transpose
+        transpose(noteStr: transposeStr ?? "C", initChange: true)
+        
+        // EnharmonicMode
+        let mode = configStore.enharmonicMode
+        changeEnharmonicMode(mode: mode, initChange: true)
+        
+        // reinjectAbcjsText()
+        
+        // customEnharmonics
+        // TOOO
+        
+        // stepTranspose.maximumValue = Double(Music.Key.allCases.count - 1)
+    }
+    
     private func reinjectAbcjsText() {
-        webSheetVC?.injectAbcjsText(from: tempCurrentOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending, needReload: true)
+        webSheetVC?.injectAbcjsText(from: configStore.degreesOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending, needReload: true)
         stopSequencer()
     }
     
-    func changeTempo() {
-        scaleInfoViewModel.currentTempo = tempCurrentTempo
-        conductor.tempo = Float(tempCurrentTempo)
-
-        reinjectAbcjsText()
+    func changeTempo(tempo: Double, initChange: Bool = false) {
+        stepTempo.value = tempo
+        scaleInfoViewModel.currentTempo = tempo
+        conductor.tempo = Float(tempo)
+        lblTempo.text = "\(Int(tempo))"
+        
+        if !initChange {
+            reinjectAbcjsText()
+            configStore.tempo = tempo
+        }
     }
     
-    func changeOctaveShift() {
-        scaleInfoViewModel.currentOctaveShift = Int(stepOctaveShift.value)
+    func changeOctaveShift(_ shift: Int, initChange: Bool = false) {
+        scaleInfoViewModel.currentOctaveShift = shift
+        stepOctaveShift.value = Double(shift)
+        
         if let pianoVC = pianoVC {
             pianoVC.octaveShift = scaleInfoViewModel.currentOctaveShift
         }
-        reinjectAbcjsText()
+        
+        if !initChange {
+            reinjectAbcjsText()
+            configStore.octaveShift = shift
+        }
     }
     
-    func changeOrder() {
-        reinjectAbcjsText()
+    func changeOrder(_ order: DegreesOrder, initChange: Bool = false) {
+        // 다른 곳에서 사용시 configStore.degreesOrder 등으로 사용
+        
+        configStore.degreesOrder = order
+        
+        if !initChange {
+            reinjectAbcjsText()
+        } else {
+            segDegreesOrder.selectedSegmentIndex = order == .ascending ? 0 : 1
+        }
     }
     
-    func changeEnharmonicMode(mode: EnharmonicMode) {
+    func changeEnharmonicMode(mode: EnharmonicMode, initChange: Bool = false) {
         
         let currentKeyAccidentalValue = scaleInfoViewModel.currentKey.accidentalValue
         switch mode {
@@ -185,17 +238,19 @@ extension ScaleInfoViewController {
         self.btnEnharmonic.setTitle("\(mode)", for: .normal)
         scaleInfoViewModel.currentEnharmonicMode = tempCurrentEnharmonicMode
         
-        reinjectAbcjsText()
+        if !initChange {
+            reinjectAbcjsText()
+            configStore.enharmonicMode = mode
+        }
 
     }
     
-    func transpose(noteStr: String) {
+    func transpose(noteStr: String, initChange: Bool = false) {
         
         self.btnTranspose.setTitle(noteStr, for: .normal)
         
         if let targetKey = Music.Key.getKeyFromNoteStr(noteStr) {
             scaleInfoViewModel.currentKey = targetKey
-            reinjectAbcjsText()
             
             // change keyboard start position
             let playableKey = targetKey.playableKey
@@ -204,6 +259,10 @@ extension ScaleInfoViewController {
             // 피아노 이용 가능 키 표시 - Transpose 했을때
             pianoVC?.updateAvailableKeys(integerNotations: scaleInfoViewModel.ascendingIntegerNotationArray)
             
+            if !initChange {
+                reinjectAbcjsText()
+                configStore.transpose = noteStr
+            }
         }
     }
     
@@ -221,7 +280,7 @@ extension ScaleInfoViewController {
     func startSequencer() {
         stopSequencer()
         webSheetVC?.startTimer()
-        let targetSemitones = tempCurrentOrder == .ascending ? scaleInfoViewModel.playbackSemitoneAscending : scaleInfoViewModel.playbackSemitoneDescending
+        let targetSemitones = configStore.degreesOrder == .ascending ? scaleInfoViewModel.playbackSemitoneAscending : scaleInfoViewModel.playbackSemitoneDescending
         self.conductor.addScaleToSequencer(semintones: targetSemitones!)
         self.conductor.isPlaying = true
         

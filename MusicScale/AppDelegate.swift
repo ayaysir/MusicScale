@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } catch {
                 print(error)
             }
+            
+            ScaleInfoVCConfigStore.shared.initalizeConfigValueOnFirstrun()
         } updated: {
             print("버전 변경시마다 실행됨")
         } nothingChanged: {

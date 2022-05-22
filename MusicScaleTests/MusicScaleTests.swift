@@ -73,18 +73,23 @@ class MusicScaleTests: XCTestCase {
         do {
             let jsonData = try JSONEncoder().encode([scaleInfo1, scaleInfo2])
             let jsonString = String(data: jsonData, encoding: .utf8)!
-//            print(jsonString)
+            // print(jsonString)
             
             XCTAssert(jsonString.contains(scaleInfo1.id.uuidString), "uuid1 not contained.")
             XCTAssert(jsonString.contains(scaleInfo2.id.uuidString), "uuid2 not contained.")
             
             // and decode it back
-//            let decodedSentences = try JSONDecoder().decode([Sentence].self, from: jsonData)
-//            print(decodedSentences)
+            // let decodedSentences = try JSONDecoder().decode([Sentence].self, from: jsonData)
+            // print(decodedSentences)
         } catch {
             print(error)
         }
     }
+    
+    // func test_configStore() {
+    //     ScaleInfoVCConfigStore.shared.initalizeConfigValueOnFirstrun()
+    //     ScaleInfoVCConfigStore.shared.printCurrentStore()
+    // }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.

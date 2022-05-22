@@ -19,8 +19,17 @@ extension String {
 
 struct ScaleInfoVCConfigStore {
     
-    static let shared = ScaleInfoVCConfigStore()
+    static var shared = ScaleInfoVCConfigStore()
     private let store = UserDefaults.standard
+    
+    mutating func initalizeConfigValueOnFirstrun() {
+        degreesOrder = .ascending
+        octaveShift = 0
+        tempo = 120
+        transpose = "C"
+        enharmonicMode = .standard
+        customEnharmonics = EnharmonicMode.userCustom.noteStrOfFirstOctave!
+    }
     
     var degreesOrder: DegreesOrder {
         get {
@@ -78,5 +87,16 @@ struct ScaleInfoVCConfigStore {
                 print(error)
             }
         }
+    }
+    
+    func printCurrentStore() {
+        print("======\(#function)======")
+        print("degressOrder:", degreesOrder)
+        print("octaveShift:", octaveShift)
+        print("tempo:", tempo)
+        print("transpose:", transpose ?? "?")
+        print("enharmonicMode:", enharmonicMode)
+        print("customEnharmonics", customEnharmonics)
+        print("========================")
     }
 }
