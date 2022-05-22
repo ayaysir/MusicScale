@@ -17,7 +17,17 @@ class PianoViewModel {
     private(set) var lineWidth: CGFloat!
     private(set) var blackKeyRatio: CGSize!
     
+    // Piano Key Information
+    private(set) var pianoKeys: [PianoKeyInfo] = []
+    private(set) var whiteKeyDrawPosList: [StartEndPositions] = []
+    private(set) var blackKeyDrawPosList: [CGRect] = []
+    private(set) var topBottomLineDrawPosList: [StartEndPositions] = []
+    
+    private var passIndexAdjusted: [Int]!
     private var frame: CGRect!
+    
+    var handlerForRefreshEntireView: (() -> ()) = {}
+    var handlerForRefreshPartialView: ((CGRect) -> ()) = { _ in }
     
     var adjustKeyPosition: Int = 0 {
         didSet {
@@ -42,24 +52,12 @@ class PianoViewModel {
         return passIndexInC_lower + [0] + passIndexInC_upper
     }
     
-//    private var passIndexInC: [Int]!
-    private var passIndexAdjusted: [Int]!
-    
-    private(set) var pianoKeys: [PianoKeyInfo] = []
     var pianoWhiteKeys: [PianoKeyInfo] {
         return pianoKeys.filter { $0.keyColor == .white }
     }
     var pianoBlackKeys: [PianoKeyInfo] {
         return pianoKeys.filter { $0.keyColor == .black }
     }
-    
-    private(set) var whiteKeyDrawPosList: [StartEndPositions] = []
-    private(set) var blackKeyDrawPosList: [CGRect] = []
-    private(set) var topBottomLineDrawPosList: [StartEndPositions] = []
-    
-    var handlerForRefreshEntireView: (() -> ()) = {}
-    var handlerForRefreshPartialView: ((CGRect) -> ()) = { _ in }
-    
     
     var boxOutline: CGRect {
         return CGRect(x: margin.left, y: margin.top, width: frame.width - (margin.left + margin.right), height: frame.height - (margin.top + margin.bottom))
@@ -84,7 +82,6 @@ class PianoViewModel {
         
         self.frame = frame
         
-//        configurePassIndexInC()
         createTopBottomLine()
         arrangeKeys()
     }
@@ -98,22 +95,6 @@ class PianoViewModel {
         
         self.init(frame: frame, divBy: divBy, margin: margin, lineWidth: lineWidth, blackKeyRatio: blackKeyRatio)
     }
-    
-//    private func configurePassIndexInC() {
-//
-//        let passIndexHalfRange = (1...PianoViewConstants.passIndexHalfRangeTo)
-//        
-//        let passIndexInC_upper = passIndexHalfRange.reduce(into: [Int]()) { partialResult, index in
-//            let lastElement = partialResult.last ?? 0
-//            partialResult.append(lastElement + (index % 2 != 0 ? 3 : 4))
-//        }
-//        let passIndexInC_lower = passIndexHalfRange.reduce(into: [Int]()) { partialResult, index in
-//            let lastElement = partialResult.last ?? 0
-//            partialResult.append(lastElement + (index % 2 != 0 ? -4 : -3))
-//        }
-//
-//        self.passIndexInC = passIndexInC_lower + [0] + passIndexInC_upper
-//    }
     
     private func arrangeKeys() {
         
@@ -173,9 +154,9 @@ class PianoViewModel {
             whiteKeyDrawPosList.append((startPos: startPos, endPos: endPos))
             
             // 그리기 방법
-//            context.move(to: startPos)
-//            context.addLine(to: endPos)
-//            context.strokePath()
+            // context.move(to: startPos)
+            // context.addLine(to: endPos)
+            // context.strokePath()
             
             let touchArea = CGRect(origin: startPos, size: CGSize(width: whiteKeyWidth, height: endPos.y - startPos.y))
             let keyIndexStep = passIndexAdjusted.contains(seq) ? 1 : 2
@@ -207,8 +188,8 @@ class PianoViewModel {
                                  width: blackKeyWidth,
                                  height: (frame.height - margins.y) * blackKeyRatio.height)
             blackKeyDrawPosList.append(keyArea)
-//            context.addRect(keyArea)
-//            context.fillPath()
+            // context.addRect(keyArea)
+            // context.fillPath()
             
             // 검은 건반 touchArea 추가
             blackKeyIndex += 2

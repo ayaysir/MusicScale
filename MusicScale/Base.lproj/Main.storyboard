@@ -68,67 +68,15 @@
                     <view key="view" contentMode="scaleToFill" id="feE-u1-cuc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYq-Ty-mLu" customClass="PianoView" customModule="MusicScale" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="414" height="259"/>
-                                <color key="backgroundColor" systemColor="systemYellowColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="DYq-Ty-mLu" secondAttribute="height" multiplier="414:259" id="8Tf-at-Qur"/>
-                                </constraints>
-                            </view>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.29999999999999999" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="f5w-ni-0mC">
-                                <rect key="frame" x="20" y="382" width="118" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="sldActViewScale:" destination="koB-7m-YD5" eventType="valueChanged" id="jet-LF-mht"/>
-                                </connections>
-                            </slider>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-7" maximumValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="hNm-UP-xTl">
-                                <rect key="frame" x="22" y="325" width="94" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="stepAdjustKeyPosition:" destination="koB-7m-YD5" eventType="valueChanged" id="uGI-fA-bXD"/>
-                                </connections>
-                            </stepper>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfX-md-M0Q">
-                                <rect key="frame" x="151" y="386" width="113" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fUA-Tx-1Hx">
-                                <rect key="frame" x="0.0" y="419" width="414" height="96"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9sv-e7-5gn">
-                                <rect key="frame" x="124" y="325" width="113" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="x31-Qa-z9y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="x31-Qa-z9y" firstAttribute="top" secondItem="DYq-Ty-mLu" secondAttribute="top" id="7tW-JS-GLE"/>
-                            <constraint firstItem="DYq-Ty-mLu" firstAttribute="leading" secondItem="x31-Qa-z9y" secondAttribute="leading" id="IjU-vk-4dt"/>
-                            <constraint firstItem="x31-Qa-z9y" firstAttribute="trailing" secondItem="DYq-Ty-mLu" secondAttribute="trailing" id="Lh9-eD-Qim"/>
-                        </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <size key="freeformSize" width="414" height="500"/>
-                    <connections>
-                        <outlet property="lblCurrentKeyPosition" destination="9sv-e7-5gn" id="FY4-pK-3ah"/>
-                        <outlet property="lblCurrentPianoViewScale" destination="tfX-md-M0Q" id="qAH-jD-UXI"/>
-                        <outlet property="pkvSelectKey" destination="fUA-Tx-1Hx" id="HPG-H7-ghD"/>
-                        <outlet property="viewPiano" destination="DYq-Ty-mLu" id="6yo-X2-vJa"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mGY-ea-mDc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2057" y="-372"/>
+            <point key="canvasLocation" x="2057" y="-282"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="0WM-sX-DU2">
@@ -199,7 +147,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YQ5-tU-dgi">
-                                <rect key="frame" x="0.0" y="569" width="414" height="201"/>
+                                <rect key="frame" x="0.0" y="569" width="414" height="244"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="koB-7m-YD5" kind="embed" identifier="PianoSegue" id="2J2-cR-7Di"/>
@@ -297,8 +245,6 @@
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                     </view>
                     <navigationItem key="navigationItem" title="Aeolian" id="7CF-gT-5wt"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnEnharmonic" destination="LbI-JK-IQB" id="XiJ-lg-p8J"/>
                         <outlet property="btnPlayAndStop" destination="VAm-Vf-UU4" id="22H-E3-zGC"/>
@@ -692,9 +638,6 @@ fa;dkslj</string>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

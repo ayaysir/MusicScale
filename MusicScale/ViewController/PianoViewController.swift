@@ -11,31 +11,34 @@ import AVFoundation
 
 class PianoViewController: UIViewController {
     
-    @IBOutlet weak var viewPiano: PianoView!
-    @IBOutlet weak var lblCurrentKeyPosition: UILabel!
-    @IBOutlet weak var lblCurrentPianoViewScale: UILabel!
-    @IBOutlet weak var pkvSelectKey: UIPickerView!
+    // @IBOutlet weak var viewPiano: PianoView!
+    var viewPiano: PianoView!
     
-//    var midiManager = MIDIManager()
     let engine = AudioEngine()
     private var instrument = MIDISampler(name: "Instrument 1")
     private var midiNote: MIDINoteNumber!
     
     var currentPlayableKey: Music.PlayableKey = .C
+    var octaveShift: Int = 0
+    
+    var parentContainerView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        let pianoLongPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handlePianoLongPress(gesture:)))
-        pianoLongPressRecognizer.minimumPressDuration = 0
-        viewPiano.addGestureRecognizer(pianoLongPressRecognizer)
+        if let parentContainerView = parentContainerView {
+            
+            viewPiano = PianoView(frame: CGRect(origin: .zero, size: parentContainerView.frame.size))
+            self.view.addSubview(viewPiano)
+            
+            let pianoLongPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handlePianoLongPress(gesture:)))
+            pianoLongPressRecognizer.minimumPressDuration = 0.0
+            viewPiano.addGestureRecognizer(pianoLongPressRecognizer)
+        }
         
-        pkvSelectKey.delegate = self
-        pkvSelectKey.dataSource = self
         
-//        instrument.play(noteNumber: 65, velocity: 100, channel: 1)
-        
+        // let pianoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handlePianoTap))
+        // viewPiano.addGestureRecognizer(pianoTapRecognizer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,17 +58,12 @@ class PianoViewController: UIViewController {
         
         // Load EXS file (you can also load SoundFonts and WAV files too using the AppleSampler Class)
         do {
-//            if let fileURL = Bundle.main.url(forResource: "sawPiano1 복사본", withExtension: "exs") {
-//                try instrument.loadInstrument(url: fileURL)
-//            }
-            
             // 무음모드에서 소리나게 하기
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
             
             
             if let fileURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2") {
-
                 try instrument.loadMelodicSoundFont(url: fileURL, preset: 67)
             } else {
                 Log("Could not find file")
@@ -73,6 +71,7 @@ class PianoViewController: UIViewController {
         } catch {
             Log("Could not load instrument")
         }
+        
         do {
             try engine.start()
         } catch {
@@ -80,33 +79,37 @@ class PianoViewController: UIViewController {
         }
     }
     
+    // @objc func handlePianoTap(gesture: UITapGestureRecognizer) {
+    //     let location = gesture.location(in: gesture.view)
+    //     print(#function, "location:", location)
+    // }
+    
     @objc func handlePianoLongPress(gesture: UILongPressGestureRecognizer) {
         
         let semitoneStart = 60 + PianoKeyHelper.adjustKeySemitone(key: currentPlayableKey)
-        let viewModel = viewPiano.pianoViewModel
-        
         let location = gesture.location(in: gesture.view)
+        let viewModel = viewPiano.pianoViewModel
         
         switch gesture.state {
         case .possible:
-//            print("possible")
+            // print("possible", terminator: ":")
             break
         case .began:
-//            print("touchLocation:", location)
+            // print(#function, "location:", location, terminator: ":")
             
-            if let keyInfo = viewModel?.getKeyInfoBy(touchLocation: location) {
-                viewModel?.currentTouchedKey = keyInfo
-                print("keyInfo:", keyInfo)
+            if let viewModel = viewModel, let keyInfo = viewModel.getKeyInfoBy(touchLocation: location) {
+                viewModel.currentTouchedKey = keyInfo
+                // print("keyInfo:", keyInfo)
                 // 노트 재생
-                midiNote = MIDINoteNumber(semitoneStart + keyInfo.keyIndex)
+                midiNote = MIDINoteNumber(semitoneStart + keyInfo.keyIndex + (octaveShift * 12))
                 instrument.play(noteNumber: midiNote, velocity: 90, channel: 1)
             }
             
         case .changed:
-//            print("changed")
+            // print(".", terminator: ":")
             break
         case .ended:
-//            print("ended")
+            // print("ended")
             // 노트 멈춤
             if viewModel?.currentTouchedKey != nil && midiNote != nil {
                 viewModel?.currentTouchedKey = nil
@@ -114,24 +117,14 @@ class PianoViewController: UIViewController {
                 midiNote = nil
             }
         case .cancelled:
-//            print("cancelled")
+            // print("cancelled")
             break
         case .failed:
-//            print("failed")
+            // print("failed")
             break
         @unknown default:
-            print("default")
+            print("default", terminator: ":")
         }
-    }
-    
-    @IBAction func sldActViewScale(_ sender: UISlider) {
-        viewPiano.transform = .identity.scaledBy(x: CGFloat(sender.value), y: CGFloat(sender.value))
-        lblCurrentPianoViewScale.text = "\(sender.value)"
-    }
-    
-    @IBAction func stepAdjustKeyPosition(_ sender: UIStepper) {
-        viewPiano.pianoViewModel.adjustKeyPosition = Int(sender.value)
-        lblCurrentKeyPosition.text = "\(Int(sender.value))"
     }
     
     func adjustKeyPosition(key: Music.PlayableKey) {
@@ -140,23 +133,4 @@ class PianoViewController: UIViewController {
     }
 }
 
-extension PianoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        Music.PlayableKey.caseCount
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        Music.PlayableKey(rawValue: row)?.textValueMixed
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let key = Music.PlayableKey(rawValue: row)!
-        currentPlayableKey = key
-        viewPiano.pianoViewModel.changeKey(key: key)
-    }
-}
 

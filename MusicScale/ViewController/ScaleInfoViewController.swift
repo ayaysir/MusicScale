@@ -119,6 +119,7 @@ class ScaleInfoViewController: UIViewController {
             webSheetVC?.delegate = self
         case "PianoSegue":
             pianoVC = segue.destination as? PianoViewController
+            pianoVC?.parentContainerView = containerViewPiano
         default:
             break
         }
@@ -143,6 +144,9 @@ extension ScaleInfoViewController {
     
     func changeOctaveShift() {
         scaleInfoViewModel.currentOctaveShift = Int(stepOctaveShift.value)
+        if let pianoVC = pianoVC {
+            pianoVC.octaveShift = scaleInfoViewModel.currentOctaveShift
+        }
         reinjectAbcjsText()
     }
     
