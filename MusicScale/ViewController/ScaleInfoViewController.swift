@@ -7,6 +7,7 @@
 
 import UIKit
 import DropDown
+import AudioToolbox
 
 class ScaleInfoViewController: UIViewController {
     
@@ -60,7 +61,8 @@ class ScaleInfoViewController: UIViewController {
         // 피아노 이용 가능 키 표시 - 최초 페이지 열었을 때
         pianoVC?.adjustKeyPosition(key: scaleInfoViewModel.currentKey.playableKey)
         pianoVC?.octaveShift = scaleInfoViewModel.currentOctaveShift
-        pianoVC?.updateAvailableKeys(integerNotations: scaleInfoViewModel.ascendingIntegerNotationArray)
+        changeAvailableKeys()
+        
     }
     
     // MARK: - Outlet Action
@@ -201,6 +203,7 @@ extension ScaleInfoViewController {
         // 다른 곳에서 사용시 configStore.degreesOrder 등으로 사용
         
         configStore.degreesOrder = order
+        changeAvailableKeys()
         
         if !initChange {
             reinjectAbcjsText()
@@ -212,6 +215,7 @@ extension ScaleInfoViewController {
     func changeEnharmonicMode(mode: EnharmonicMode, initChange: Bool = false) {
         
         let currentKeyAccidentalValue = scaleInfoViewModel.currentKey.accidentalValue
+        
         switch mode {
         case .standard, .userCustom:
             transposeDropDown.dataSource = Music.Key.allCases.map { $0.textValue }
@@ -257,12 +261,22 @@ extension ScaleInfoViewController {
             pianoVC?.adjustKeyPosition(key: playableKey)
             
             // 피아노 이용 가능 키 표시 - Transpose 했을때
-            pianoVC?.updateAvailableKeys(integerNotations: scaleInfoViewModel.ascendingIntegerNotationArray)
+            changeAvailableKeys()
             
             if !initChange {
                 reinjectAbcjsText()
                 configStore.transpose = noteStr
             }
+        }
+    }
+    
+    private func changeAvailableKeys() {
+        // 피아노 이용 가능 키 표시
+        if scaleInfoViewModel.isAscAndDescDifferent && configStore.degreesOrder == .descending {
+            print(scaleInfoViewModel.availableIntNoteArrayInDescOrder)
+            pianoVC?.updateAvailableKeys(integerNotations: scaleInfoViewModel.availableIntNoteArrayInDescOrder)
+        } else {
+            pianoVC?.updateAvailableKeys(integerNotations: scaleInfoViewModel.ascendingIntegerNotationArray)
         }
     }
     
@@ -321,12 +335,22 @@ extension ScaleInfoViewController {
     func initTransposeDropDown() {
         
         let targetDropDown = transposeDropDown
-        let dataSource = Music.Key.allCases.map { $0.textValue }
+        var dataSource: [String] {
+            switch configStore.enharmonicMode {
+            case .standard, .userCustom:
+                return Music.Key.allCases.map { $0.textValue }
+            case .sharpAndNatural:
+                return Music.Key.sharpKeys.map { $0.textValue }
+            case .flatAndNatural:
+                return Music.Key.flatKeys.map { $0.textValue }
+            }
+        }
+        
         let selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item: \(item) at index: \(index)")
             transpose(noteStr: item)
             stepTranspose.value = Double(index)
-          }
+        }
         _ = dropDownCommon(dropDown: targetDropDown, dataSource: dataSource, selectionAction: selectionAction)
     }
     

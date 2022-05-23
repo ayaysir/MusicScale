@@ -141,6 +141,7 @@ extension PianoViewController {
     
     func updateAvailableKeys(integerNotations: [Int]) {
         viewPiano.viewModel.availableKeyIndexes = integerNotations.map { $0 + PianoKeyHelper.adjustKeyPosForAvaliableKeyIndexes(playableKey: currentPlayableKey) }
+        viewPiano.setNeedsDisplay()
     }
 }
 

@@ -52,6 +52,14 @@ class ScaleInfoViewModel {
         return helper.getIntegerNotation(degrees: scaleInfo.degreesAscending, order: .ascending, completeFinalNote: true)
     }
     
+    var availableIntNoteArrayInDescOrder: [Int] {
+        if isAscAndDescDifferent {
+            return helper.getIntegerNotation(degrees: scaleInfo.degreesDescending, order: .ascending, completeFinalNote: true).map { abs($0) }
+        } else {
+            return ascendingIntegerNotationArray
+        }
+    }
+    
     var ascendingPattern: String? {
         do {
             return try helper.getPattern(degrees: scaleInfo.degreesAscending).map(String.init).joined(separator: " ")
@@ -59,6 +67,10 @@ class ScaleInfoViewModel {
             print(error)
             return nil
         }
+    }
+    
+    var isAscAndDescDifferent: Bool {
+        return scaleInfo.degreesDescending != "" && scaleInfo.degreesAscending != scaleInfo.degreesDescending
     }
     
     // MARK: - current 변수에 따라 변화되는 것

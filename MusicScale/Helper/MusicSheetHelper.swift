@@ -632,7 +632,9 @@ struct MusicSheetHelper {
                 let prevSemitoneMod12 = getSemitoneOfFirstOctave(prevSemitone)
                 let isPrevHasAccidental = noteStrOfFirstOctave[prevSemitoneMod12].prefix.range(of: "^[\\^_]+$", options: .regularExpression) != nil
                 let prevAndCurrHasSameNoteStr = noteStrOfFirstOctave[prevSemitoneMod12].noteStr == noteStrPair.noteStr
-                if isPrevHasAccidental && prevAndCurrHasSameNoteStr {
+                let currNoteIsNatural = noteStrPair.prefix == "=" || noteStrPair.prefix == ""
+                
+                if isPrevHasAccidental && prevAndCurrHasSameNoteStr && currNoteIsNatural {
                     return NoteStrPair("=", noteStrPair.noteStr + notePostfix)
                 }
             }
