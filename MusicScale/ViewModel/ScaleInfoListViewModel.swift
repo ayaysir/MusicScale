@@ -43,17 +43,28 @@ class ScaleInfoListViewModel {
         }
     }
     
-//    func getScaleInfoBy(index: Int) -> ScaleInfo? {
-//        return service.toScaleInfoStruct(from: totalEntityData[index])
-//    }
+    // func getScaleInfoBy(index: Int) -> ScaleInfo? {
+    //     return service.toScaleInfoStruct(from: totalEntityData[index])
+    // }
+    
+    private var infoViewModels: [ScaleInfoViewModel?] {
+        
+        return totalEntityData.map { (entity: ScaleInfoEntity) -> ScaleInfoViewModel? in
+            guard let scaleInfo = service.toScaleInfoStruct(from: entity) else {
+                return nil
+            }
+            return ScaleInfoViewModel(scaleInfo: scaleInfo, currentKey: .C, currentTempo: 120, entity: entity)
+        }
+    }
     
     func getScaleInfoViewModelOf(index: Int) -> ScaleInfoViewModel? {
-        guard let scaleInfo = service.toScaleInfoStruct(from: totalEntityData[index]) else {
-            return nil
-        }
         
-        return ScaleInfoViewModel(scaleInfo: scaleInfo, currentKey: .C, currentTempo: 120)
-        
+        // guard let scaleInfo = service.toScaleInfoStruct(from: totalEntityData[index]) else {
+        //     return nil
+        // }
+        //
+        // return ScaleInfoViewModel(scaleInfo: scaleInfo, currentKey: .C, currentTempo: 120, entity: totalEntityData[index])
+        return infoViewModels[index]
     }
     
     func updateScaleInfo(index: Int, info: ScaleInfo) {

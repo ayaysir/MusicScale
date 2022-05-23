@@ -64,7 +64,11 @@ class ScaleListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailViewSegue", sender: scaleInfoViewModel.getScaleInfoViewModelOf(index: indexPath.row))
+        let sender: [String: Any] = [
+            "indexPath": indexPath,
+            "viewModel": scaleInfoViewModel.getScaleInfoViewModelOf(index: indexPath.row)!
+        ]
+        performSegue(withIdentifier: "DetailViewSegue", sender: sender)
     }
 
     /*
@@ -88,10 +92,13 @@ class ScaleListTableViewController: UITableViewController {
         switch segue.identifier {
         case "DetailViewSegue":
             let scaleInfoVC = segue.destination as? ScaleInfoViewController
-            guard let receivedInfoViewModel = sender as? ScaleInfoViewModel else {
+            let sender = sender as! [String: Any]
+            scaleInfoVC?.selectedIndexPath = sender["indexPath"] as? IndexPath
+            guard let receivedInfoViewModel = sender["viewModel"] as? ScaleInfoViewModel else {
                 return
             }
             scaleInfoVC?.scaleInfoViewModel = receivedInfoViewModel
+            scaleInfoVC?.delegate = self
             
         default:
             break
@@ -99,6 +106,19 @@ class ScaleListTableViewController: UITableViewController {
     }
 }
 
+// MARK: - ScaleInfoVCDelgate
+extension ScaleListTableViewController: ScaleInfoVCDelgate {
+    
+    func didInfoUpdated(_ controller: ScaleInfoViewController, indexPath: IndexPath?) {
+        guard let indexPath = indexPath else {
+            tableView.reloadData()
+            return
+        }
+        tableView.reloadRows(at: [indexPath], with: .none)
+    }
+}
+
+// MARK: - ScaleListCell
 class ScaleListCell: UITableViewCell {
     
     @IBOutlet weak var lblName: UILabel!

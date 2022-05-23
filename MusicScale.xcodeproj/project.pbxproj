@@ -17,6 +17,7 @@
 		440637FA283083AE00875E77 /* JSONCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637F9283083AE00875E77 /* JSONCoder.swift */; };
 		440637FC283084DE00875E77 /* CoreDataWithSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637FB283084DE00875E77 /* CoreDataWithSampleTests.swift */; };
 		441FA160283A8C370084AE58 /* FloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441FA15F283A8C370084AE58 /* FloatingPoint.swift */; };
+		441FA163283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441FA162283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift */; };
 		4463FEA7282BDFF700E7A607 /* PianoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEA6282BDFF700E7A607 /* PianoViewController.swift */; };
 		4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEA9282BE28800E7A607 /* UIViewPreview.swift */; };
 		4463FEAD282C0E6600E7A607 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEAC282C0E6600E7A607 /* Note.swift */; };
@@ -99,6 +100,7 @@
 		440637F9283083AE00875E77 /* JSONCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoder.swift; sourceTree = "<group>"; };
 		440637FB283084DE00875E77 /* CoreDataWithSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWithSampleTests.swift; sourceTree = "<group>"; };
 		441FA15F283A8C370084AE58 /* FloatingPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPoint.swift; sourceTree = "<group>"; };
+		441FA162283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoUpdateTableViewController.swift; sourceTree = "<group>"; };
 		4463FEA6282BDFF700E7A607 /* PianoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoViewController.swift; sourceTree = "<group>"; };
 		4463FEA9282BE28800E7A607 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		4463FEAC282C0E6600E7A607 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -216,6 +218,15 @@
 				440637F9283083AE00875E77 /* JSONCoder.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		441FA161283BE32B0084AE58 /* ScaleInfo */ = {
+			isa = PBXGroup;
+			children = (
+				449AF426282EC008008273CA /* ScaleInfoViewController.swift */,
+				441FA162283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift */,
+			);
+			path = ScaleInfo;
 			sourceTree = "<group>";
 		};
 		4463FEA8282BE27600E7A607 /* SwiftUI */ = {
@@ -369,9 +380,9 @@
 		44709D8A276A3BB800BBF6C9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				441FA161283BE32B0084AE58 /* ScaleInfo */,
 				44709D8B276A3BDE00BBF6C9 /* ScoreWebViewController.swift */,
 				4463FEA6282BDFF700E7A607 /* PianoViewController.swift */,
-				449AF426282EC008008273CA /* ScaleInfoViewController.swift */,
 				440637F328307E0000875E77 /* ScaleListTableViewController.swift */,
 				4475CB4E2830A0DD00B9D204 /* ScaleSubInfoTableViewController.swift */,
 			);
@@ -673,6 +684,7 @@
 				4463FEB4282D317700E7A607 /* PianoViewModel.swift in Sources */,
 				44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */,
 				44709D8C276A3BDE00BBF6C9 /* ScoreWebViewController.swift in Sources */,
+				441FA163283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift in Sources */,
 				4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */,
 				4463FEA7282BDFF700E7A607 /* PianoViewController.swift in Sources */,
 				4475CB4F2830A0DD00B9D204 /* ScaleSubInfoTableViewController.swift in Sources */,

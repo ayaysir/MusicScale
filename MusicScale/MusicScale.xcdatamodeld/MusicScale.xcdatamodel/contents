@@ -5,13 +5,15 @@
         <attribute name="defaultPriority" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="degreesAscending" optional="YES" attributeType="String"/>
         <attribute name="degreesDescending" optional="YES" attributeType="String"/>
+        <attribute name="displayOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isDivBy12Tet" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="links" optional="YES" attributeType="String"/>
+        <attribute name="myPriority" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="nameAlias" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="ScaleInfoEntity" positionX="-63" positionY="-18" width="128" height="164"/>
+        <element name="ScaleInfoEntity" positionX="-63" positionY="-18" width="128" height="194"/>
     </elements>
 </model>

@@ -21,6 +21,7 @@ struct ScaleInfo: Codable {
     let defaultPriority: Int
     var comment, links: String
     let isDivBy12Tet: Bool
+    var displayOrder, myPriority: Int
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -30,6 +31,8 @@ struct ScaleInfo: Codable {
         case defaultPriority = "default_priority"
         case comment, links
         case isDivBy12Tet = "is_div_by_12tet"
+        case displayOrder = "display_order"
+        case myPriority = "my_priority"
     }
     
     

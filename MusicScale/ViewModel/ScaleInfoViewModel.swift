@@ -10,7 +10,8 @@ import Foundation
 
 class ScaleInfoViewModel {
     
-    private let scaleInfo: ScaleInfo
+    private var scaleInfo: ScaleInfo
+    private let _entity: ScaleInfoEntity
     private let helper = MusicSheetHelper()
     
     var currentKey: Music.Key
@@ -18,15 +19,28 @@ class ScaleInfoViewModel {
     var currentOctaveShift: Int
     var currentEnharmonicMode: EnharmonicMode
     
-    init(scaleInfo: ScaleInfo, currentKey: Music.Key, currentTempo: Double, currentOctaveShift: Int = 0, currentEnharmonicMode: EnharmonicMode = .standard) {
+    init(scaleInfo: ScaleInfo, currentKey: Music.Key, currentTempo: Double, currentOctaveShift: Int = 0, currentEnharmonicMode: EnharmonicMode = .standard, entity: ScaleInfoEntity) {
         self.scaleInfo = scaleInfo
         self.currentKey = currentKey
         self.currentTempo = currentTempo
         self.currentOctaveShift = currentOctaveShift
         self.currentEnharmonicMode = currentEnharmonicMode
+        self._entity = entity
+    }
+    
+    /// CoreData entity가 업데이트되면 여기 내의 내용도 전부 바꾼다.
+    func reloadInfoFromEntity() {
+        guard let newScaleInfo = ScaleInfoCDService.shared.toScaleInfoStruct(from: entity) else {
+            return
+        }
+        self.scaleInfo = newScaleInfo
     }
     
     // MARK: - current 변수의 변화와 무관
+    var entity: ScaleInfoEntity {
+        return _entity
+    }
+    
     var name: String {
         return scaleInfo.name
     }
@@ -41,6 +55,18 @@ class ScaleInfoViewModel {
     
     var comment: String {
         return scaleInfo.comment
+    }
+    
+    var degreesAscending: String {
+        return scaleInfo.degreesAscending
+    }
+    
+    var degreesDescending: String {
+        return scaleInfo.degreesDescending
+    }
+    
+    var nameAliasFormatted: String {
+        return scaleInfo.nameAlias.replacingOccurrences(of: ";", with: "\n")
     }
     
     var ascendingIntegerNotation: String? {
@@ -74,13 +100,13 @@ class ScaleInfoViewModel {
     }
     
     // MARK: - current 변수에 따라 변화되는 것
-//    var abcjsPart: String {
-//        helper.degreesToAbcjsPart(degrees: scaleInfo.degreesAscending)
-//    }
-//
-//    var abcjsLyric: String {
-//        helper.degreesToAbcjsLyric(degrees: scaleInfo.degreesAscending)
-//    }
+    // var abcjsPart: String {
+    //     helper.degreesToAbcjsPart(degrees: scaleInfo.degreesAscending)
+    // }
+    //
+    // var abcjsLyric: String {
+    //     helper.degreesToAbcjsLyric(degrees: scaleInfo.degreesAscending)
+    // }
     
     var abcjsTextAscending: String {
         return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .ascending, key: currentKey, tempo: currentTempo, octaveShift: currentOctaveShift, enharmonicMode: currentEnharmonicMode)

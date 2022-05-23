@@ -21,8 +21,12 @@ class ScaleSubInfoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshViewInfo()
+    }
+    
+    func refreshViewInfo() {
         lblName.text = scaleInfoViewModel.name
-        lblNameAlias.text = scaleInfoViewModel.nameAlias
+        lblNameAlias.text = scaleInfoViewModel.nameAliasFormatted
         lblPattern.text = scaleInfoViewModel.ascendingPattern
         lblIntegerNotation.text = scaleInfoViewModel.ascendingIntegerNotation
         lblPriority.text = (1...scaleInfoViewModel.defaultPriority).reduce("") { partialResult, _ in

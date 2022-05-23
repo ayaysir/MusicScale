@@ -84,7 +84,7 @@ class CoreDataWithSampleTests: XCTestCase {
     
     func test_delete() throws {
         
-        let infoToDelete = ScaleInfo(id: UUID(), name: "delete", nameAlias: "delete", degreesAscending: "delete", degreesDescending: "delete", defaultPriority: 1, comment: "delete", links: "delete", isDivBy12Tet: false)
+        let infoToDelete = ScaleInfo(id: UUID(), name: "delete", nameAlias: "delete", degreesAscending: "delete", degreesDescending: "delete", defaultPriority: 1, comment: "delete", links: "delete", isDivBy12Tet: false, displayOrder: 0, myPriority: 0)
         try service.saveCoreData(scaleInfo: infoToDelete)
         
         try reloadData()

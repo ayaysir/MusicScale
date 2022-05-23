@@ -19,28 +19,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DropDown.startListeningToKeyboard()
         
         // 체크
+        
         checkAppFirstrunOrUpdateStatus {
-            let service = ScaleInfoCDService.shared
-            do {
-                try service.deleteAllCoreData()
-                getSampleScaleDataFromLocal { infoList in
-                    for info in infoList {
-                        try service.saveCoreData(scaleInfo: info)
-                    }
-                }
-            } catch {
-                print(error)
-            }
+            // putInitalData()
             
             ScaleInfoVCConfigStore.shared.initalizeConfigValueOnFirstrun()
         } updated: {
             print("버전 변경시마다 실행됨")
         } nothingChanged: {
             print("변경 사항 없음")
+            putInitalData()
         }
 
         
         return true
+    }
+    
+    func putInitalData() {
+        let cdService = ScaleInfoCDService.shared
+        do {
+            try cdService.deleteAllCoreData()
+            getSampleScaleDataFromLocal { infoList in
+                for info in infoList {
+                    try cdService.saveCoreData(scaleInfo: info)
+                }
+            }
+        } catch {
+            print(error)
+        }
     }
 
     // MARK: UISceneSession Lifecycle

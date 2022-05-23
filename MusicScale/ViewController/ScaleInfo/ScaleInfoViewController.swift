@@ -9,6 +9,10 @@ import UIKit
 import DropDown
 import AudioToolbox
 
+protocol ScaleInfoVCDelgate: AnyObject {
+    func didInfoUpdated(_ controller: ScaleInfoViewController, indexPath: IndexPath?)
+}
+
 class ScaleInfoViewController: UIViewController {
     
     @IBOutlet weak var containerViewInfo: UIView!
@@ -31,7 +35,10 @@ class ScaleInfoViewController: UIViewController {
     var configStore = ScaleInfoVCConfigStore.shared
     // var tempCurrentOrder: DegreesOrder = .ascending
     // var tempCurrentTempo: Double = 120
-    var tempCurrentEnharmonicMode: EnharmonicMode = .standard
+    // var tempCurrentEnharmonicMode: EnharmonicMode = .standard
+    
+    var selectedIndexPath: IndexPath?
+    weak var delegate: ScaleInfoVCDelgate?
     
     var infoVC: ScaleSubInfoTableViewController?
     var webSheetVC: ScoreWebViewController?
@@ -128,6 +135,12 @@ class ScaleInfoViewController: UIViewController {
         case "PianoSegue":
             pianoVC = segue.destination as? PianoViewController
             pianoVC?.parentContainerView = containerViewPiano
+        case "UpdateScaleInfoSegue":
+            print("UpdateScaleInfoSegue")
+            let updateVC = segue.destination as! ScaleInfoUpdateTableViewController
+            updateVC.viewModel = scaleInfoViewModel
+            updateVC.mode = .update
+            updateVC.updateDelegate = self
         default:
             break
         }
@@ -236,11 +249,11 @@ extension ScaleInfoViewController {
         let stepIndex = transposeDropDown.dataSource.firstIndex(of: scaleInfoViewModel.currentKey.textValue)!
         stepTranspose.value = Double(stepIndex)
         
-        tempCurrentEnharmonicMode = mode
+        // tempCurrentEnharmonicMode = mode
         
         self.btnTranspose.setTitle(scaleInfoViewModel.currentKey.textValue, for: .normal)
         self.btnEnharmonic.setTitle("\(mode)", for: .normal)
-        scaleInfoViewModel.currentEnharmonicMode = tempCurrentEnharmonicMode
+        scaleInfoViewModel.currentEnharmonicMode = mode
         
         if !initChange {
             reinjectAbcjsText()
@@ -307,13 +320,24 @@ extension ScaleInfoViewController {
 // MARK: - ScoreWebVCDelegate
 extension ScaleInfoViewController: ScoreWebVCDelegate {
     
-    
     func didStartButtonClicked(_ controller: ScoreWebViewController) {
         startSequencer()
     }
     
     func didStopButtonClicked(_ controller: ScoreWebViewController) {
         stopSequencer()
+    }
+}
+
+// MARK: - ScaleInfoUpdateTVCDelegate
+extension ScaleInfoViewController: ScaleInfoUpdateTVCDelegate {
+    
+    func didFinishedUpdate(_ controller: ScaleInfoUpdateTableViewController, viewModel: ScaleInfoViewModel) {
+        print(#function)
+        // self.scaleInfoViewModel = viewModel
+        // infoVC?.scaleInfoViewModel = viewModel
+        infoVC?.refreshViewInfo()
+        delegate?.didInfoUpdated(self, indexPath: selectedIndexPath)
     }
 }
 

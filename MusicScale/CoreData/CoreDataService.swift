@@ -51,6 +51,9 @@ struct ScaleInfoCDService {
         entityObject.nameAlias = info.nameAlias
         entityObject.name = info.name
         
+        entityObject.myPriority = Int16(info.myPriority)
+        entityObject.displayOrder = Int16(info.displayOrder)
+        
         do {
             // managedContext 내부의 변경사항 저장
             try managedContext.save()
@@ -70,15 +73,29 @@ struct ScaleInfoCDService {
         let fetchRequest = NSFetchRequest<ScaleInfoEntity>(entityName: ENTITY_NAME)
         
         // 정렬 또는 조건 설정
-//        let sort = NSSortDescriptor(key: "date", ascending: false)
-//        fetchRequest.sortDescriptors = [sort]
-//        fetchRequest.predicate = NSPredicate(format: "isFinished = %@", NSNumber(value: isFinished))
+        // let sort = NSSortDescriptor(key: "date", ascending: false)
+        // fetchRequest.sortDescriptors = [sort]
+        // fetchRequest.predicate = NSPredicate(format: "isFinished = %@", NSNumber(value: isFinished))
         
         do {
             // fetchRequest를 통해 managedContext로부터 결과 배열을 가져오기
             return try managedContext.fetch(fetchRequest)
         } catch let error as NSError {
             throw error
+        }
+    }
+    
+    var getEntityCount: Int {
+        guard let managedContext = managedContext else {
+            return -1
+        }
+        
+        // Entity의 fetchRequest 생성
+        let fetchRequest = NSFetchRequest<ScaleInfoEntity>(entityName: ENTITY_NAME)
+        do {
+            return try managedContext.fetch(fetchRequest).count
+        } catch {
+            return -1
         }
     }
     
@@ -104,16 +121,20 @@ struct ScaleInfoCDService {
             throw CDError.appDelegateNotExist
         }
         
+        // entityObject.id = info.id
+        
         entityObject.comment = info.comment
         entityObject.defaultPriority = Int16(info.defaultPriority)
         entityObject.degreesAscending = info.degreesAscending
         entityObject.degreesDescending = info.degreesDescending
-//            entityObject.id = info.id
         entityObject.isDivBy12Tet = info.isDivBy12Tet
         entityObject.links = info.links
         entityObject.nameAlias = info.nameAlias
         entityObject.name = info.name
-    
+        
+        entityObject.myPriority = Int16(info.myPriority)
+        entityObject.displayOrder = Int16(info.displayOrder)
+        
         do {
             try managedContext.save()
         } catch let error as NSError {
@@ -155,6 +176,8 @@ struct ScaleInfoCDService {
         
         let defaultPriority = Int(entity.defaultPriority)
         let isDivBy12Tet = entity.isDivBy12Tet
+        let displayOrder = Int(entity.displayOrder)
+        let myPriority = Int(entity.myPriority)
         
         guard let comment = entity.comment,
               let degreesAscending = entity.degreesAscending,
@@ -162,11 +185,12 @@ struct ScaleInfoCDService {
               let id = entity.id,
               let links = entity.links,
               let nameAlias = entity.nameAlias,
-              let name = entity.name else {
+              let name = entity.name
+        else {
             return nil
         }
         
-        return ScaleInfo(id: id, name: name, nameAlias: nameAlias, degreesAscending: degreesAscending, degreesDescending: degreesDescending, defaultPriority: defaultPriority, comment: comment, links: links, isDivBy12Tet: isDivBy12Tet)
+        return ScaleInfo(id: id, name: name, nameAlias: nameAlias, degreesAscending: degreesAscending, degreesDescending: degreesDescending, defaultPriority: defaultPriority, comment: comment, links: links, isDivBy12Tet: isDivBy12Tet, displayOrder: displayOrder, myPriority: myPriority)
     }
     
     func printScaleInfoEntity(array: [ScaleInfoEntity]) {
