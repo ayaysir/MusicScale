@@ -336,7 +336,7 @@ extension ScaleInfoViewController: ScaleInfoUpdateTVCDelegate {
         print(#function)
         // self.scaleInfoViewModel = viewModel
         // infoVC?.scaleInfoViewModel = viewModel
-        infoVC?.refreshViewInfo()
+        infoVC?.refreshViewInfo(isUpdated: true)
         delegate?.didInfoUpdated(self, indexPath: selectedIndexPath)
     }
 }

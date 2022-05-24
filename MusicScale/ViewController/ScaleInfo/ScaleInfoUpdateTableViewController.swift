@@ -63,15 +63,20 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
             
             let entity = viewModel.entity
             entity.name = txfScaleName.text
-            entity.nameAlias = txvScaleAliases.text.replacingOccurrences(of: "\n", with: ";")
+            
+            // let filtered = txvScaleAliases.text.range(of: "[^\n]+(\n)", options: .regularExpression)
+            let aliasComponents = txvScaleAliases.text.components(separatedBy: "\n")
+            entity.nameAlias = aliasComponents.filter { $0 != "" }.joined(separator: ";")
+            print(entity.nameAlias!)
             entity.comment = txvComment.text
+            
             do {
                 try ScaleInfoCDService.shared.saveManagedContext()
-                
+            
                 viewModel.reloadInfoFromEntity()
                 updateDelegate?.didFinishedUpdate(self, viewModel: viewModel)
                 navigationController?.popViewController(animated: true)
-                
+            
             } catch {
                 print("error: update failed:", error)
             }
