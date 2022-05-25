@@ -138,7 +138,7 @@ class ScaleInfoViewController: UIViewController {
         case "UpdateScaleInfoSegue":
             print("UpdateScaleInfoSegue")
             let updateVC = segue.destination as! ScaleInfoUpdateTableViewController
-            updateVC.viewModel = scaleInfoViewModel
+            updateVC.infoViewModel = scaleInfoViewModel
             updateVC.mode = .update
             updateVC.updateDelegate = self
         default:

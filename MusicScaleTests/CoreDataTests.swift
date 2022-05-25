@@ -19,7 +19,7 @@ class CoreDataTests: XCTestCase {
         try service.deleteAllCoreData()
         
         array = (1...100).map { index in
-            ScaleInfo(id: UUID(), name: "Scale \(index)", nameAlias: "스케일 \(index)", degreesAscending: "cde \(index)", degreesDescending: "", defaultPriority: 3, comment: "comment \(index): \(Date())", links: "", isDivBy12Tet: true)
+            ScaleInfo(id: UUID(), name: "Scale \(index)", nameAlias: "스케일 \(index)", degreesAscending: "cde \(index)", degreesDescending: "", defaultPriority: 3, comment: "comment \(index): \(Date())", links: "", isDivBy12Tet: true, displayOrder: 3, myPriority: 3)
         }
 
         for info in array {

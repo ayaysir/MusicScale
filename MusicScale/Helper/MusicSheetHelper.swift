@@ -77,10 +77,9 @@ struct MusicSheetHelper {
     enum DegreesError: String, Error {
         case malformedDegrees = "Degree is malformed."
     }
-        
-    private func degreesToNoteNumberPair(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0) -> [NoteNumberPair] {
-        
-        let degreeComponents = degrees.components(separatedBy: " ")
+    
+    /// degree -> NoteNumberPair
+    func degreeToNoteNumeberPair(singleDegree degree: String, prevDegree: String? = nil) -> NoteNumberPair {
         
         let onlyNumberRegex = "^[1234567]$"
         let hasPrefixRegex = "^[♭b#♯♮=][1234567]$"
@@ -88,68 +87,147 @@ struct MusicSheetHelper {
         
         let hasSharpAndFlatPrefixRegex = "^[♭b#♯][1234567]$"
         let hasSharpAndFlatBracketedPrefixRegex = "^\\([♭b#♯]\\)[1234567]$"
+    
+        let onlyNumber = degree.range(of: onlyNumberRegex, options: .regularExpression)
+        let hasPrefix = degree.range(of: hasPrefixRegex, options: .regularExpression)
+        let hasBracketedPrefix = degree.range(of: hasBracketedPrefixRegex, options: .regularExpression)
+        
+        if onlyNumber != nil {
+            
+            let number = Int(degree)!
+            
+            // 앞 노트와 비교해서 natural 붙이기: prevDegree가 nil이면 실행안함
+            if let prevDegree = prevDegree {
+                
+                let isPrevHasPrefix = (prevDegree.range(of: hasSharpAndFlatPrefixRegex, options: .regularExpression)) != nil
+                let isPrevAndCurrSameNumber1 = prevDegree[1] == degree
+                
+                let isPrevHasBracketPrefix = (prevDegree.range(of: hasSharpAndFlatBracketedPrefixRegex, options: .regularExpression)) != nil
+                let removeBracketStrOfPrev = prevDegree.replacingOccurrences(of: "[\\(\\)]", with: "", options: .regularExpression)
+                let isPrevAndCurrSameNumber2 = removeBracketStrOfPrev[1] == degree
+                
+                if isPrevHasPrefix && isPrevAndCurrSameNumber1 {
+                    return NoteNumberPair("=", number)
+                }
+                
+                if isPrevHasBracketPrefix && isPrevAndCurrSameNumber2 {
+                    return NoteNumberPair("=", number)
+                }
+            }
+            
+            return NoteNumberPair("", number)
+            
+        } else if hasPrefix != nil {
+            
+            let number = Int(degree[1])!
+            
+            switch degree[0] {
+            case "♭", "b":
+                return NoteNumberPair("_", number)
+            case "♯", "#":
+                return NoteNumberPair("^", number)
+            case "♮", "=":
+                return NoteNumberPair("=", number)
+            default:
+                break
+            }
+            
+        } else if hasBracketedPrefix != nil {
+            
+            let removedBracketStr = degree.replacingOccurrences(of: "[\\(\\)]", with: "", options: .regularExpression)
+            let number = Int(removedBracketStr[1])!
+            
+            switch removedBracketStr[0] {
+            case "♭", "b":
+                return NoteNumberPair("_", number)
+            case "♯", "#":
+                return NoteNumberPair("^", number)
+            case "♮", "=":
+                return NoteNumberPair("=", number)
+            default:
+                break
+            }
+        }
+        
+        return NoteNumberPair("", -99)
+        
+    }
+        
+    /// degrees 텍스트를 prefix(abjcs 포맷)+숫자 쌍 배열로 변환
+    func degreesToNoteNumberPairs(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0) -> [NoteNumberPair] {
+        
+        let degreeComponents = degrees.components(separatedBy: " ")
+        
+        // let onlyNumberRegex = "^[1234567]$"
+        // let hasPrefixRegex = "^[♭b#♯♮=][1234567]$"
+        // let hasBracketedPrefixRegex = "^\\([♭b#♯♮=]\\)[1234567]$"
+        //
+        // let hasSharpAndFlatPrefixRegex = "^[♭b#♯][1234567]$"
+        // let hasSharpAndFlatBracketedPrefixRegex = "^\\([♭b#♯]\\)[1234567]$"
         
         var result = degreeComponents.enumerated().withPreviousAndNext.compactMap { values -> NoteNumberPair? in
             
             let (prev, curr, _) = values
             let str = curr.element
             
-            let onlyNumber = str.range(of: onlyNumberRegex, options: .regularExpression)
-            let hasPrefix = str.range(of: hasPrefixRegex, options: .regularExpression)
-            let hasBracketedPrefix = str.range(of: hasBracketedPrefixRegex, options: .regularExpression)
+            return degreeToNoteNumeberPair(singleDegree: str, prevDegree: prev?.element)
             
-            if onlyNumber != nil {
-                
-                let number = Int(str)!
-                
-                if let prevElement = prev?.element {
-                    
-                    let isPrevHasPrefix = (prevElement.range(of: hasSharpAndFlatPrefixRegex, options: .regularExpression)) != nil
-                    let isPrevAndCurrSameNumber1 = prevElement[1] == str
-                    
-                    let isPrevHasBracketPrefix = (prevElement.range(of: hasSharpAndFlatBracketedPrefixRegex, options: .regularExpression)) != nil
-                    let removeBracketStrOfPrev = prevElement.replacingOccurrences(of: "[\\(\\)]", with: "", options: .regularExpression)
-                    let isPrevAndCurrSameNumber2 = removeBracketStrOfPrev[1] == str
-                    
-                    if isPrevHasPrefix && isPrevAndCurrSameNumber1 {
-                        return NoteNumberPair("=", number)
-                    }
-                    
-                    if isPrevHasBracketPrefix && isPrevAndCurrSameNumber2 {
-                        return NoteNumberPair("=", number)
-                    }
-                }
-                
-                return NoteNumberPair("", number)
-                
-            } else if hasPrefix != nil {
-                let number = Int(str[1])!
-                switch str[0] {
-                case "♭", "b":
-                    return NoteNumberPair("_", number)
-                case "♯", "#":
-                    return NoteNumberPair("^", number)
-                case "♮", "=":
-                    return NoteNumberPair("=", number)
-                default:
-                    break
-                }
-            } else if hasBracketedPrefix != nil {
-                let removedBracketStr = str.replacingOccurrences(of: "[\\(\\)]", with: "", options: .regularExpression)
-                let number = Int(removedBracketStr[1])!
-                switch removedBracketStr[0] {
-                case "♭", "b":
-                    return NoteNumberPair("_", number)
-                case "♯", "#":
-                    return NoteNumberPair("^", number)
-                case "♮", "=":
-                    return NoteNumberPair("=", number)
-                default:
-                    break
-                }
-            }
-            
-            return NoteNumberPair("", -99)
+        //     let onlyNumber = str.range(of: onlyNumberRegex, options: .regularExpression)
+        //     let hasPrefix = str.range(of: hasPrefixRegex, options: .regularExpression)
+        //     let hasBracketedPrefix = str.range(of: hasBracketedPrefixRegex, options: .regularExpression)
+        //
+        //     if onlyNumber != nil {
+        //
+        //         let number = Int(str)!
+        //
+        //         if let prevElement = prev?.element {
+        //
+        //             let isPrevHasPrefix = (prevElement.range(of: hasSharpAndFlatPrefixRegex, options: .regularExpression)) != nil
+        //             let isPrevAndCurrSameNumber1 = prevElement[1] == str
+        //
+        //             let isPrevHasBracketPrefix = (prevElement.range(of: hasSharpAndFlatBracketedPrefixRegex, options: .regularExpression)) != nil
+        //             let removeBracketStrOfPrev = prevElement.replacingOccurrences(of: "[\\(\\)]", with: "", options: .regularExpression)
+        //             let isPrevAndCurrSameNumber2 = removeBracketStrOfPrev[1] == str
+        //
+        //             if isPrevHasPrefix && isPrevAndCurrSameNumber1 {
+        //                 return NoteNumberPair("=", number)
+        //             }
+        //
+        //             if isPrevHasBracketPrefix && isPrevAndCurrSameNumber2 {
+        //                 return NoteNumberPair("=", number)
+        //             }
+        //         }
+        //
+        //         return NoteNumberPair("", number)
+        //
+        //     } else if hasPrefix != nil {
+        //         let number = Int(str[1])!
+        //         switch str[0] {
+        //         case "♭", "b":
+        //             return NoteNumberPair("_", number)
+        //         case "♯", "#":
+        //             return NoteNumberPair("^", number)
+        //         case "♮", "=":
+        //             return NoteNumberPair("=", number)
+        //         default:
+        //             break
+        //         }
+        //     } else if hasBracketedPrefix != nil {
+        //         let removedBracketStr = str.replacingOccurrences(of: "[\\(\\)]", with: "", options: .regularExpression)
+        //         let number = Int(removedBracketStr[1])!
+        //         switch removedBracketStr[0] {
+        //         case "♭", "b":
+        //             return NoteNumberPair("_", number)
+        //         case "♯", "#":
+        //             return NoteNumberPair("^", number)
+        //         case "♮", "=":
+        //             return NoteNumberPair("=", number)
+        //         default:
+        //             break
+        //         }
+        //     }
+        //
+        //     return NoteNumberPair("", -99)
         }
         
         if completeFinalNote && order == .ascending {
@@ -190,17 +268,19 @@ struct MusicSheetHelper {
         return result
     }
     
-    private func getTransposedNoteNumberPairsUseInterval(pairs: [NoteNumberPair], interval: Music.Interval) throws -> [NoteNumberPair] {
+    /// transposed된 [NoteNumberPair] 배열 반환
+    func getTransposedNoteNumberPairsUseInterval(pairs: [NoteNumberPair], interval: Music.Interval) throws -> [NoteNumberPair] {
         return try pairs.map { pair in
             return try getAboveIntervalNoteFrom(pair: pair, interval: interval)
         }
     }
     
-    private func degreesToNoteStrPair(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0) -> [NoteStrPair] {
+    /// [NoteNumberPair]를 abjcs 에서 이용가능하도록 [NoteStrPair]로 변환
+    func degreesToNoteStrPair(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0) -> [NoteStrPair] {
         
         // 옥타브 올리기 (C'), 옥타브 내리기(C,)
         
-        let noteNumPairs = degreesToNoteNumberPair(degrees: degrees, order: order, completeFinalNote: completeFinalNote, key: key, octaveShift: octaveShift)
+        let noteNumPairs = degreesToNoteNumberPairs(degrees: degrees, order: order, completeFinalNote: completeFinalNote, key: key, octaveShift: octaveShift)
         
         let compactedStrPair = noteNumPairs.enumerated().withPreviousAndNext.compactMap { values -> NoteStrPair? in
             let (prev, curr, _) = values
@@ -252,7 +332,8 @@ struct MusicSheetHelper {
         return compactedStrPair
     }
     
-    private func getNoteStrPairsForAbcjs(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0, enharmonicMode: EnharmonicMode = .standard) -> [NoteStrPair] {
+    /// 조건에 따라 다른 [NoteNumberPair] 반환: 순서, 마지막 키 포함 여부 등
+    func getNoteStrPairsForAbcjs(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0, enharmonicMode: EnharmonicMode = .standard) -> [NoteStrPair] {
         
         if enharmonicMode == .standard {
             // TODO: degreesToNoteStrPair 중복 안되게
@@ -262,6 +343,7 @@ struct MusicSheetHelper {
         }
     }
     
+    /// degreesString 을 abcjsText에 바로 삽입 가능한 코드 형태로 반환
     func degreesToAbcjsPart(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0, enharmonicMode: EnharmonicMode = .standard) -> String {
         
         // sharp: ^A, flat: _A, natural =A
@@ -272,6 +354,7 @@ struct MusicSheetHelper {
         return pairs.map { $0.prefix + $0.noteStr }.joined(separator: " ")
     }
     
+    /// degreesString 을 이름을 가사란에 써서 abcjsText에 바로 삽입 가능한 형태로 반환
     func degreesToAbcjsLyric(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, enharmonicMode: EnharmonicMode = .standard) -> String {
         
         // TODO: degreesToNoteStrPair 중복 안되게
@@ -298,73 +381,147 @@ struct MusicSheetHelper {
         }.joined(separator: " ")
     }
     
-    func scaleInfoToAbcjsText(scaleInfo: ScaleInfo, order: DegreesOrder = .ascending, key: Music.Key = .C, tempo: Double = 120, octaveShift: Int = 0, enharmonicMode: EnharmonicMode = .standard) -> String {
-        
-        let targetDegrees = getTargetDegrees(scaleInfo: scaleInfo, order: order)
+    /// abcjsText 생성기: 원시 형태
+    func composeAbcjsText(scaleNameText: String, tempo: Double, partText: String, lyricText: String) -> String {
         
         let text = """
                 X: 1
                 T:
                 V: T1 clef=treble
                 L: 1/1
-                R: \(key.textValue) \(scaleInfo.name)
+                R: \(scaleNameText)
                 Q: 1/1=\(tempo)
                 K: C
-                \(degreesToAbcjsPart(degrees: targetDegrees, order: order, completeFinalNote: true, key: key, octaveShift: octaveShift, enharmonicMode: enharmonicMode)) |
-                w: \(degreesToAbcjsLyric(degrees: targetDegrees, order: order, completeFinalNote: true, key: key, enharmonicMode: enharmonicMode))
+                \(partText) |
+                w: \(lyricText)
                 """
         return text
     }
     
+    /// abcjsText 생성기: scaleInfo를 위한 래핑 형태
+    func scaleInfoToAbcjsText(scaleInfo: ScaleInfo, order: DegreesOrder = .ascending, key: Music.Key = .C, tempo: Double = 120, octaveShift: Int = 0, enharmonicMode: EnharmonicMode = .standard) -> String {
+        
+        let targetDegrees = getTargetDegrees(scaleInfo: scaleInfo, order: order)
+        let scaleNameText = "\(key.textValue) \(scaleInfo.name)"
+        let partText = degreesToAbcjsPart(degrees: targetDegrees, order: order, completeFinalNote: true, key: key, octaveShift: octaveShift, enharmonicMode: enharmonicMode)
+        let lyricText = degreesToAbcjsLyric(degrees: targetDegrees, order: order, completeFinalNote: true, key: key, enharmonicMode: enharmonicMode)
+        
+        return composeAbcjsText(scaleNameText: scaleNameText, tempo: tempo, partText: partText, lyricText: lyricText)
+        
+        // let text = """
+        //         X: 1
+        //         T:
+        //         V: T1 clef=treble
+        //         L: 1/1
+        //         R: \(key.textValue) \(scaleInfo.name)
+        //         Q: 1/1=\(tempo)
+        //         K: C
+        //         \(degreesToAbcjsPart(degrees: targetDegrees, order: order, completeFinalNote: true, key: key, octaveShift: octaveShift, enharmonicMode: enharmonicMode)) |
+        //         w: \(degreesToAbcjsLyric(degrees: targetDegrees, order: order, completeFinalNote: true, key: key, enharmonicMode: enharmonicMode))
+        //         """
+        // return text
+    }
+    
+    func numPairToInteger(_ pair: NoteNumberPair) -> Int {
+        
+        // 온음은 기본 2칸씩 이동
+        var integer = pair.number * 2
+        
+        // 1차: 기호에 따라 반음 가감
+        switch pair.prefix {
+        case "_":
+            integer -= 1
+        case "^":
+            integer += 1
+        case "__":
+            integer -= 2
+        case "^^":
+            integer += 2
+        default:
+            break
+        }
+        
+        let numRange = 0...pair.number
+        let totalHalfCount = numRange.enumerated().reduce(0) { partialResult, values in
+            
+            let (index, num) = values
+            
+            if index == 0 {
+                return partialResult
+            }
+            
+            let currentNumMod7 = num % 7
+            if (currentNumMod7 == 4 || currentNumMod7 == 1) {
+                return partialResult + 1
+            }
+            
+            return partialResult
+        }
+        
+        return integer - totalHalfCount
+        
+    }
+    
+    /// 두 NoteNumberPair간 음정을 semitone(Int) 형태로 반환
     func getIntervalOfTwoNumPair(leftPair: NoteNumberPair, rightPair: NoteNumberPair) -> Int {
        
         //  1,  2,  3,  4,  5,  6,  7
         //  8,  9, 10, 11, 12, 13, 14
         // 15, 16, 17, 18, 19, 20, 21
         
-        var leftInteger = leftPair.number * 2
-        var rightInteger = rightPair.number * 2
+        // var leftInteger = leftPair.number * 2
+        // var rightInteger = rightPair.number * 2
+        //
+        // switch leftPair.prefix {
+        // case "_":
+        //     leftInteger -= 1
+        // case "^":
+        //     leftInteger += 1
+        // default:
+        //     break
+        // }
+        //
+        // switch rightPair.prefix {
+        // case "_":
+        //     rightInteger -= 1
+        // case "^":
+        //     rightInteger += 1
+        // default:
+        //     break
+        // }
+        //
+        // let numbers = [leftPair.number, rightPair.number].sorted()
+        // let numRange = numbers[0]...numbers[1]
+        //
+        // let totalHalfCount = numRange.enumerated().reduce(0) { partialResults, values in
+        //
+        //     let (index, num) = values
+        //
+        //     if index == 0 {
+        //         return partialResults
+        //     }
+        //
+        //     let currentNumMod7 = num % 7
+        //     if (currentNumMod7 == 4 || currentNumMod7 == 1) {
+        //         return partialResults + 1
+        //     }
+        //
+        //     return partialResults
+        // }
+        //
+        // return (rightInteger - leftInteger) - (leftInteger <= rightInteger ? totalHalfCount : -totalHalfCount)
         
-        switch leftPair.prefix {
-        case "_":
-            leftInteger -= 1
-        case "^":
-            leftInteger += 1
-        default:
-            break
+        let leftInteger = numPairToInteger(leftPair)
+        let rightInteger = numPairToInteger(rightPair)
+        
+        if leftInteger <= rightInteger {
+            return rightInteger - leftInteger
+        } else {
+            return leftInteger - rightInteger
         }
-        
-        switch rightPair.prefix {
-        case "_":
-            rightInteger -= 1
-        case "^":
-            rightInteger += 1
-        default:
-            break
-        }
-
-        let numbers = [leftPair.number, rightPair.number].sorted()
-        let numRange = numbers[0]...numbers[1]
-        
-        let totalHalfCount = numRange.enumerated().reduce(0) { partialResults, values in
-            
-            let (index, num) = values
-            
-            if index == 0 {
-                return partialResults
-            }
-            
-            let currentNumMod7 = num % 7
-            if (currentNumMod7 == 4 || currentNumMod7 == 1) {
-                return partialResults + 1
-            }
-            
-            return partialResults
-        }
-        
-        return (rightInteger - leftInteger) - (leftInteger <= rightInteger ? totalHalfCount : -totalHalfCount)
     }
     
+    /// IntegerNotation: 구성음을 정수 누적 형태로 표기, 정보 제공 및 플레이백을 위해 필요
     func getIntegerNotation(degrees: String, order: DegreesOrder, completeFinalNote: Bool = false) -> [Int] {
         
         /*
@@ -383,9 +540,8 @@ struct MusicSheetHelper {
          3~4 는 반음
          */
         
-        
-        let noteNumPairs = degreesToNoteNumberPair(degrees: degrees, order: order, completeFinalNote: completeFinalNote)
-//        print(#function, noteNumPairs, degrees)
+        let noteNumPairs = degreesToNoteNumberPairs(degrees: degrees, order: order, completeFinalNote: completeFinalNote)
+
         return noteNumPairs.enumerated().withPreviousAndNext.reduce(into: [Int]()) { partialResult, values in
             let (prev, curr, _) = values
             
@@ -405,6 +561,7 @@ struct MusicSheetHelper {
         }
     }
     
+    /// 어떤 degree가 변환 대상인지 판단 (오름차순/내림차순이 같을 때, 오름차순/내림차순이 다를 때)
     func getTargetDegrees(scaleInfo: ScaleInfo, order: DegreesOrder) -> String {
         
         if order == .descending && scaleInfo.degreesDescending != "" {
@@ -416,12 +573,14 @@ struct MusicSheetHelper {
         return scaleInfo.degreesAscending
     }
     
+    /// 미디 재생을 위한 semitone 정보 반환
     func getSemitoneToPlaybackNotes(scaleInfo: ScaleInfo, order: DegreesOrder, key: Music.Key, octaveShift: Int = 0) -> [Int] {
         
         let targetDegrees = getTargetDegrees(scaleInfo: scaleInfo, order: order)
         return getSemitoneToPlaybackNotes(degrees: targetDegrees, order: order, key: key, octaveShift: octaveShift)
     }
     
+    /// 미디 재생을 위한 semitone 정보 반환
     func getSemitoneToPlaybackNotes(degrees: String, order: DegreesOrder, key: Music.Key, octaveShift: Int = 0) -> [Int] {
         
         let integerNotation = getIntegerNotation(degrees: degrees, order: order, completeFinalNote: true)
@@ -430,6 +589,7 @@ struct MusicSheetHelper {
         return integerNotation.map { ($0 + startSemitone) + (octaveShift * 12) }
     }
     
+    /// 패턴 정보 제공
     func getPattern(degrees: String) throws -> [Int] {
         
         let integerNotation = getIntegerNotation(degrees: degrees, order: .ascending, completeFinalNote: true)
@@ -449,6 +609,7 @@ struct MusicSheetHelper {
         }
     }
     
+    // 어느 음 (7단계)과 그 음의 특정 음정 사이의 반음 개수 반환
     func getCountOfHalfStep(pairNum: Int, intervalNum: Int) -> Int {
         
         let resultNumber = (pairNum - 1) + intervalNum
@@ -561,7 +722,7 @@ struct MusicSheetHelper {
         
         let resultNumber = (pair.number - 1) + interval.number
         
-//        let totalHalfCount = (numberDiv7 >= 4 && numberDiv7 <= 6) ? 1 : (numberDiv7 >= 7) ? 2 : 0
+        // let totalHalfCount = (numberDiv7 >= 4 && numberDiv7 <= 6) ? 1 : (numberDiv7 >= 7) ? 2 : 0
         let totalHalfCount = getCountOfHalfStep(pairNum: pair.number, intervalNum: interval.number)
         
         let currentPairPrefix = pair.prefix == "" ? "=" : pair.prefix
@@ -577,7 +738,6 @@ struct MusicSheetHelper {
                 }
                 
                 return pairPrefixIndex + (totalHalfCount - 1)
-//                return totalHalfCount == 1 ? pairPrefixIndex : pairPrefixIndex - 1
                 
             } else {
                 if interval.number <= 3 {
@@ -587,7 +747,6 @@ struct MusicSheetHelper {
                 }
             }
         }
-//        print(interval, basePrefixIndex, prefixList[basePrefixIndex], totalHalfCount)
         
         switch interval.quality {
         case .perfect, .major:
@@ -603,6 +762,8 @@ struct MusicSheetHelper {
     }
     
     // MARK: - enharmonic mode가 standard 외인 경우
+    
+    /// 첫 옥타브 (shift 0)에서의 semitone 반환
     func getSemitoneOfFirstOctave(_ semitone: Int) -> Int {
         let semitoneMod12 = semitone % 12
         if semitoneMod12 >= 0 {
@@ -612,6 +773,7 @@ struct MusicSheetHelper {
         }
     }
     
+    /// Enharmonic Mode가 standard 외인 경우의 noteStrPair 배열 반환
     func getNoteStrPairsOfEnharmonicMode(degrees: String, order: DegreesOrder, key: Music.Key, octaveShift: Int, noteStrOfFirstOctave: [NoteStrPair]) -> [NoteStrPair] {
         
         let playbackSemitones = getSemitoneToPlaybackNotes(degrees: degrees, order: order, key: key, octaveShift: octaveShift)
@@ -643,4 +805,7 @@ struct MusicSheetHelper {
             
         }
     }
+    
+    // MARK: - Degree 관련
+    
 }

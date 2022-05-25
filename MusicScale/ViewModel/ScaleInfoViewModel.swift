@@ -129,4 +129,12 @@ class ScaleInfoViewModel {
         return (60 / currentTempo) * Double(playbackSemitoneAscending!.count)
     }
     
+    // MARK: - 편집용
+    var abcjsTextForEditAsc: String {
+        return helper.composeAbcjsText(scaleNameText: scaleInfo.name, tempo: 100, partText: helper.degreesToAbcjsPart(degrees: scaleInfo.degreesAscending, order: .ascending, completeFinalNote: false, key: .C, octaveShift: 0, enharmonicMode: .standard), lyricText: scaleInfo.degreesAscending)
+    }
+    
+    func editAbcjsText() {
+        
+    }
 }

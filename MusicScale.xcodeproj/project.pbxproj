@@ -30,6 +30,8 @@
 		4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */; };
 		4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEC1282D66C700E7A607 /* CaseCountable.swift */; };
 		4463FEC4282EB2AE00E7A607 /* PianoKeyHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEC3282EB2AE00E7A607 /* PianoKeyHelperTests.swift */; };
+		446AEA2C283D3EB200C2BFCF /* WebMusicSheetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446AEA2B283D3EB200C2BFCF /* WebMusicSheetHelper.swift */; };
+		446AEA2E283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446AEA2D283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift */; };
 		44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D55276A334F00BBF6C9 /* AppDelegate.swift */; };
 		44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D57276A334F00BBF6C9 /* SceneDelegate.swift */; };
 		44709D5A276A334F00BBF6C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D59276A334F00BBF6C9 /* ViewController.swift */; };
@@ -113,6 +115,8 @@
 		4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoKeyHelper.swift; sourceTree = "<group>"; };
 		4463FEC1282D66C700E7A607 /* CaseCountable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseCountable.swift; sourceTree = "<group>"; };
 		4463FEC3282EB2AE00E7A607 /* PianoKeyHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoKeyHelperTests.swift; sourceTree = "<group>"; };
+		446AEA2B283D3EB200C2BFCF /* WebMusicSheetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMusicSheetHelper.swift; sourceTree = "<group>"; };
+		446AEA2D283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleDegreesUpdateViewModel.swift; sourceTree = "<group>"; };
 		44709D52276A334F00BBF6C9 /* MusicScale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicScale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44709D55276A334F00BBF6C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44709D57276A334F00BBF6C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 				440637F1283003DE00875E77 /* ScaleInfoListViewModel.swift */,
 				44A09A28283293680067184E /* ScaleInfoViewModel.swift */,
 				44A09A8428394A200067184E /* DropDownTransposeViewModel.swift */,
+				446AEA2D283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 				4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */,
 				4475CB502830A6C200B9D204 /* MusicSheetHelper.swift */,
 				44A09A7E283929FB0067184E /* EnharmonicMode.swift */,
+				446AEA2B283D3EB200C2BFCF /* WebMusicSheetHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -690,9 +696,11 @@
 				4475CB4F2830A0DD00B9D204 /* ScaleSubInfoTableViewController.swift in Sources */,
 				449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */,
 				4463FEAD282C0E6600E7A607 /* Note.swift in Sources */,
+				446AEA2E283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift in Sources */,
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,
 				4475CB512830A6C200B9D204 /* MusicSheetHelper.swift in Sources */,
 				4475CB532830B52700B9D204 /* String+.swift in Sources */,
+				446AEA2C283D3EB200C2BFCF /* WebMusicSheetHelper.swift in Sources */,
 				44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */,
 				4475CB592831759300B9D204 /* CustomCharacter.swift in Sources */,
 				440637F0283003CC00875E77 /* ScaleInfo.swift in Sources */,

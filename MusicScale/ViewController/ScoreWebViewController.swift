@@ -13,6 +13,28 @@ protocol ScoreWebVCDelegate: AnyObject {
     func didStopButtonClicked(_ controller: ScoreWebViewController)
 }
 
+protocol ScoreWebInjection {
+    
+    /**
+     웹 악보에서 커서 움직이기 시작할 때
+     예) webView.evaluateJavaScript("startTimer()")
+     */
+    func startTimer()
+    
+    /**
+     웹 악보에서 커서 멈출 때
+     예) webView.evaluateJavaScript("stopTimer()")
+     */
+    func stopTimer()
+    
+    /**
+     wkView에 Abcjs 텍스트를 injection 한다.
+     - parameter from: abcjs Text (캐릭터 충돌 문제해결된 것으로)
+     - parameter needReload: 외부 컨트롤러에서 재실행을 하는거라면 **true**(기본값), 최초 실행이라면 **false**
+     */
+    func injectAbcjsText(from abcjsText: String, needReload: Bool)
+}
+
 class ScoreWebViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
@@ -29,11 +51,7 @@ class ScoreWebViewController: UIViewController {
     }
 }
 
-extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
-    
-    func generateAbcJsInjectionSource(from abcjsText: String) -> String {
-        return "onRender('\(abcjsText.replacingOccurrences(of: "\n", with: "\\n"))');"
-    }
+extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, ScoreWebInjection {
     
     func startTimer() {
         webView.evaluateJavaScript("startTimer()")
@@ -45,7 +63,7 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
     
     func injectAbcjsText(from abcjsText: String, needReload: Bool = true) {
         
-        let abcjsTextFixed = abcjsText.replacingOccurrences(of: "'", with: "\\'")
+        let abcjsTextFixed = charFixedAbcjsText(abcjsText)
 
         if needReload {
             stopTimer()
@@ -97,7 +115,7 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print(#function, message.name)
+        // print(#function, message.name)
         switch message.name {
         // ... //
         case "logHandler":

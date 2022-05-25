@@ -206,8 +206,23 @@ struct Music: Codable {
         }
     }
     
-    enum PitchShift: Int, Codable {
+    enum Accidental: Int, Codable {
         case sharp = 1, doubleSharp = 2, flat = -1, doubleFlat = -2, natural = 0
+        
+        var textValue: String {
+            switch self {
+            case .sharp:
+                return "♯"
+            case .doubleSharp:
+                return "𝄪"
+            case .flat:
+                return "♭"
+            case .doubleFlat:
+                return "𝄫"
+            case .natural:
+                return "♮"
+            }
+        }
     }
     
     enum PlayableKey: Int, Codable, CaseIterable, CaseCountable {

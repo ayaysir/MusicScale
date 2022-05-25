@@ -43,12 +43,14 @@
     let visualObj
     function onRender(tune, params = {
       responsive: "resize",
-      staffwidth: 500,
+      staffwidth: 460,
       paddingright: 5,
       paddingleft: 5,
+      add_classes: true,
+      selectTypes: [],
     }) {
       alert(tune)
-      params["add_classes"] = true
+      // params["add_classes"] = true
       visualObj = ABCJS.renderAbc('notation', tune, params)
       // onMidi(rendered)
     }

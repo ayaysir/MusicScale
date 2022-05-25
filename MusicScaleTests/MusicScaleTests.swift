@@ -67,8 +67,8 @@ class MusicScaleTests: XCTestCase {
     
     func test_structToJson() throws {
         
-        let scaleInfo1 = ScaleInfo(id: UUID(), name: "asdf", nameAlias: "Das", degreesAscending: "Asd", degreesDescending: "ADs", defaultPriority: 3, comment: "ADs", links: "da", isDivBy12Tet: false)
-        let scaleInfo2 = ScaleInfo(id: UUID(), name: "dafdxzc", nameAlias: "zc", degreesAscending: "zz", degreesDescending: "zz", defaultPriority: 3, comment: "z", links: "dfefea", isDivBy12Tet: false)
+        let scaleInfo1 = ScaleInfo(id: UUID(), name: "asdf", nameAlias: "Das", degreesAscending: "Asd", degreesDescending: "ADs", defaultPriority: 3, comment: "ADs", links: "da", isDivBy12Tet: false, displayOrder: 3, myPriority: 3)
+        let scaleInfo2 = ScaleInfo(id: UUID(), name: "dafdxzc", nameAlias: "zc", degreesAscending: "zz", degreesDescending: "zz", defaultPriority: 3, comment: "z", links: "dfefea", isDivBy12Tet: false, displayOrder: 3, myPriority: 3)
         
         do {
             let jsonData = try JSONEncoder().encode([scaleInfo1, scaleInfo2])

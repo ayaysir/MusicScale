@@ -20,11 +20,11 @@ class NoteTests: XCTestCase {
 
     func test_semitone() throws {
         // given
-        let musicNote_F = Note(scale7: .F, pitchShift: .natural)
-        let musicNote_C_Sharp = Note(scale7: .C, pitchShift: .sharp)
-        let musicNote_B_Flat = Note(scale7: .B, pitchShift: .flat)
-        let musicNote_G_DoubleFlat = Note(scale7: .G, pitchShift: .doubleFlat)
-        let musicNote_A_DoubleSharp = Note(scale7: .A, pitchShift: .doubleSharp)
+        let musicNote_F = Note(scale7: .F, accidental: .natural)
+        let musicNote_C_Sharp = Note(scale7: .C, accidental: .sharp)
+        let musicNote_B_Flat = Note(scale7: .B, accidental: .flat)
+        let musicNote_G_DoubleFlat = Note(scale7: .G, accidental: .doubleFlat)
+        let musicNote_A_DoubleSharp = Note(scale7: .A, accidental: .doubleSharp)
         
         // when
         let semitone_F = musicNote_F.semitone
@@ -44,12 +44,12 @@ class NoteTests: XCTestCase {
     
     func test_noteComparable() throws {
         // given
-        let musicNote_F = Note(scale7: .F, pitchShift: .natural)
-        let musicNote_F_Sharp = Note(scale7: .F, pitchShift: .sharp)
-        let musicNote_B_Flat = Note(scale7: .B, pitchShift: .flat)
-        let musicNote_B_DoubleFlat = Note(scale7: .B, pitchShift: .doubleFlat)
-        let musicNote_A_DoubleSharp = Note(scale7: .A, pitchShift: .doubleSharp)
-        let musicNote_B = Note(scale7: .B, pitchShift: .natural)
+        let musicNote_F = Note(scale7: .F, accidental: .natural)
+        let musicNote_F_Sharp = Note(scale7: .F, accidental: .sharp)
+        let musicNote_B_Flat = Note(scale7: .B, accidental: .flat)
+        let musicNote_B_DoubleFlat = Note(scale7: .B, accidental: .doubleFlat)
+        let musicNote_A_DoubleSharp = Note(scale7: .A, accidental: .doubleSharp)
+        let musicNote_B = Note(scale7: .B, accidental: .natural)
         
         // when
         let cond1_1 = musicNote_F == musicNote_F_Sharp

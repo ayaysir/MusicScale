@@ -10,20 +10,20 @@ import Foundation
 struct Note: Codable, Equatable, Comparable {
     
     var scale7: Music.Scale7 = .C
-    var pitchShift: Music.PitchShift = .natural
+    var accidental: Music.Accidental = .natural
     
     var semitone: Int {
-        return scale7.rawValue + pitchShift.rawValue
+        return scale7.rawValue + accidental.rawValue
     }
     
     static func == (lhs: Note, rhs: Note) -> Bool {
-        return lhs.scale7 == rhs.scale7 && lhs.pitchShift == rhs.pitchShift
+        return lhs.scale7 == rhs.scale7 && lhs.accidental == rhs.accidental
     }
     
     static func < (lhs: Note, rhs: Note) -> Bool {
         
         if lhs.scale7 == rhs.scale7 {
-            return lhs.pitchShift.rawValue < rhs.pitchShift.rawValue
+            return lhs.accidental.rawValue < rhs.accidental.rawValue
         }
         return lhs.scale7.rawValue < rhs.scale7.rawValue
     }
