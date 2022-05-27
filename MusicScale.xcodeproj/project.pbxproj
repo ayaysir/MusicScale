@@ -33,6 +33,7 @@
 		446AEA2C283D3EB200C2BFCF /* WebMusicSheetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446AEA2B283D3EB200C2BFCF /* WebMusicSheetHelper.swift */; };
 		446AEA2E283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446AEA2D283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift */; };
 		446AEA3028411ED300C2BFCF /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446AEA2F28411ED300C2BFCF /* Toast.swift */; };
+		446AEA3228413E0200C2BFCF /* Cosmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446AEA3128413E0200C2BFCF /* Cosmos.swift */; };
 		44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D55276A334F00BBF6C9 /* AppDelegate.swift */; };
 		44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D57276A334F00BBF6C9 /* SceneDelegate.swift */; };
 		44709D5A276A334F00BBF6C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D59276A334F00BBF6C9 /* ViewController.swift */; };
@@ -119,6 +120,7 @@
 		446AEA2B283D3EB200C2BFCF /* WebMusicSheetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMusicSheetHelper.swift; sourceTree = "<group>"; };
 		446AEA2D283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleDegreesUpdateViewModel.swift; sourceTree = "<group>"; };
 		446AEA2F28411ED300C2BFCF /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		446AEA3128413E0200C2BFCF /* Cosmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cosmos.swift; sourceTree = "<group>"; };
 		44709D52276A334F00BBF6C9 /* MusicScale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicScale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44709D55276A334F00BBF6C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44709D57276A334F00BBF6C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			children = (
 				440637F9283083AE00875E77 /* JSONCoder.swift */,
 				446AEA2F28411ED300C2BFCF /* Toast.swift */,
+				446AEA3128413E0200C2BFCF /* Cosmos.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -695,6 +698,7 @@
 				44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */,
 				44709D8C276A3BDE00BBF6C9 /* ScoreWebViewController.swift in Sources */,
 				441FA163283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift in Sources */,
+				446AEA3228413E0200C2BFCF /* Cosmos.swift in Sources */,
 				4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */,
 				4463FEA7282BDFF700E7A607 /* PianoViewController.swift in Sources */,
 				4475CB4F2830A0DD00B9D204 /* ScaleSubInfoTableViewController.swift in Sources */,

@@ -66,9 +66,12 @@ extension ScaleSubInfoTableViewController {
         lblNameAlias.text = scaleInfoViewModel.nameAliasFormatted
         lblPattern.text = scaleInfoViewModel.ascendingPattern
         lblIntegerNotation.text = scaleInfoViewModel.ascendingIntegerNotation
-        lblPriority.text = (1...scaleInfoViewModel.defaultPriority).reduce("") { partialResult, _ in
-            return partialResult + "⭐️"
-        }
+        // lblPriority.text = (1...scaleInfoViewModel.defaultPriority).reduce("") { partialResult, _ in
+        //     return partialResult + "★"
+        // }
+        
+        let priority = scaleInfoViewModel.defaultPriority
+        lblPriority.text = String(repeating: "★", count: priority) + String(repeating: "☆", count: 5 - priority)
         txvComment.text = scaleInfoViewModel.comment
         txvComment.sizeToFit()
         

@@ -31,11 +31,15 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     
     @IBOutlet weak var lblCautionAscAndDescDiff: UILabel!
     
+    @IBOutlet weak var cosmosDefaultPriority: CosmosView!
+    
     weak var updateDelegate: ScaleInfoUpdateTVCDelegate?
     
     var mode: SubmitMode = .update
     var infoViewModel: ScaleInfoViewModel?
     var degreesViewModel: ScaleDegreesUpdateViewModel!
+    
+    var defaultPriority = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +47,12 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         // ===== 공통 작업 =====
         loadWebSheetPage()
         txfScaleName.addTarget(self, action: #selector(scaleNameChanged), for: .editingChanged)
+        
+        cosmosDefaultPriority.didFinishTouchingCosmos = {
+            rating in
+            print(rating)
+            self.defaultPriority = Int(rating)
+        }
         
         // ===== 분기별 작업 =====
         switch mode {
@@ -52,6 +62,8 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
             guard let infoViewModel = infoViewModel else {
                 return
             }
+            
+            cosmosDefaultPriority.rating = Double(infoViewModel.defaultPriority)
 
             txfScaleName.text = infoViewModel.name
             txvScaleAliases.text = infoViewModel.nameAliasFormatted
@@ -236,6 +248,11 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
             print(entity.nameAlias!)
             entity.comment = txvComment.text
             entity.degreesAscending = degreesViewModel.degreesAsc
+            
+            // 기본 별점 변경
+            if defaultPriority != -1 {
+                entity.defaultPriority = Int16(defaultPriority)
+            }
 
             if isDescEnabled {
                 entity.degreesDescending = degreesViewModel.degreesDesc

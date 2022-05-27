@@ -14,9 +14,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Efe")
-        conductor.start()
-////        conductor.sequencer.play()
-        // conductor.instrument.play(noteNumber: 65, velocity: 100, channel: 1)
+        
+        
     }
 
 
