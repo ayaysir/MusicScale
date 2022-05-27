@@ -251,10 +251,10 @@
                             <tableViewSection headerTitle="Scale Name" id="2rB-rT-RHT">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Z74-96-Pfm">
-                                        <rect key="frame" x="20" y="49.5" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="49.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z74-96-Pfm" id="Hi4-HY-JtS">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Ionian Scale" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-Sc-oFm">
@@ -271,7 +271,7 @@
                             <tableViewSection headerTitle="Scale Name Aliases" footerTitle="Enter an alias for the scale. You can enter multiple aliases and press Enter to separate words." id="ZRm-N1-fYF">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="84" id="Uyn-M1-xdI">
-                                        <rect key="frame" x="20" y="151" width="374" height="84"/>
+                                        <rect key="frame" x="20" y="150.5" width="374" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uyn-M1-xdI" id="ShG-0Q-96Q">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="84"/>
@@ -295,7 +295,7 @@
                             <tableViewSection headerTitle="Degrees" id="ayI-wy-sCl">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="51" id="rv3-q4-bcM">
-                                        <rect key="frame" x="20" y="307.5" width="374" height="51"/>
+                                        <rect key="frame" x="20" y="307" width="374" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rv3-q4-bcM" id="SOa-Ul-amZ">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="51"/>
@@ -304,6 +304,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5wG-e5-7XJ">
                                                     <rect key="frame" x="20" y="9" width="49" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="swtActEnableDescending:" destination="dom-77-63F" eventType="valueChanged" id="pEt-2k-j2e"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ascending and Descending are different." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Va8-eM-OZi">
                                                     <rect key="frame" x="75" y="16" width="264" height="17"/>
@@ -316,7 +319,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="210" id="WOX-f3-c4K">
-                                        <rect key="frame" x="20" y="358.5" width="374" height="210"/>
+                                        <rect key="frame" x="20" y="358" width="374" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WOX-f3-c4K" id="b6s-pO-lcS">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="210"/>
@@ -425,6 +428,9 @@
                                                         <segment title="Ascending"/>
                                                         <segment title="Descending"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="segActAscDesc:" destination="dom-77-63F" eventType="valueChanged" id="WvY-8H-C0Z"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -439,7 +445,7 @@
                             <tableViewSection headerTitle="Default Priority" id="7g6-dn-VuA">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Cbr-ru-iYb">
-                                        <rect key="frame" x="20" y="618.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="618" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cbr-ru-iYb" id="tzW-ph-R3m">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
@@ -451,7 +457,7 @@
                             <tableViewSection headerTitle="Comment" id="gho-qR-VYd">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="116" id="sdu-43-ANX">
-                                        <rect key="frame" x="20" y="712" width="374" height="116"/>
+                                        <rect key="frame" x="20" y="711.5" width="374" height="116"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sdu-43-ANX" id="boC-d7-I1B">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="116"/>
@@ -475,7 +481,7 @@
                             <tableViewSection headerTitle="Hyperlinks" id="e2E-Rb-NVX">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="zga-mx-9vx">
-                                        <rect key="frame" x="20" y="878" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="877.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zga-mx-9vx" id="mme-Pq-nf9">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
@@ -501,6 +507,8 @@
                         <outlet property="barBtnSubmit" destination="dCH-q1-Ogl" id="KCI-mz-hm4"/>
                         <outlet property="lblCautionAscAndDescDiff" destination="Va8-eM-OZi" id="4Hg-Zt-srs"/>
                         <outlet property="segAccidental" destination="3Ol-cg-3AV" id="Xgc-pl-3iW"/>
+                        <outlet property="segAscDesc" destination="Wqp-e2-Cge" id="nFg-ty-Li3"/>
+                        <outlet property="swtActivateDesc" destination="5wG-e5-7XJ" id="Dnw-c3-GjU"/>
                         <outlet property="txfScaleName" destination="lUC-Sc-oFm" id="XSe-Gw-YHq"/>
                         <outlet property="txvComment" destination="0C4-bg-MUT" id="BES-0p-Da5"/>
                         <outlet property="txvScaleAliases" destination="c2p-Ah-UtD" id="4Zy-U7-7tx"/>

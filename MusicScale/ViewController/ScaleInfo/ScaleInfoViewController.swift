@@ -333,11 +333,13 @@ extension ScaleInfoViewController: ScoreWebVCDelegate {
 extension ScaleInfoViewController: ScaleInfoUpdateTVCDelegate {
     
     func didFinishedUpdate(_ controller: ScaleInfoUpdateTableViewController, viewModel: ScaleInfoViewModel) {
-        print(#function)
-        // self.scaleInfoViewModel = viewModel
-        // infoVC?.scaleInfoViewModel = viewModel
+        
+        self.scaleInfoViewModel = viewModel
         infoVC?.refreshViewInfo(isUpdated: true)
         delegate?.didInfoUpdated(self, indexPath: selectedIndexPath)
+        changeAvailableKeys()
+        reinjectAbcjsText()
+        
     }
 }
 

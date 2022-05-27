@@ -25,6 +25,9 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     @IBOutlet weak var webView: WKWebView!
     
     @IBOutlet weak var segAccidental: UISegmentedControl!
+    @IBOutlet weak var segAscDesc: UISegmentedControl!
+    
+    @IBOutlet weak var swtActivateDesc: UISwitch!
     
     @IBOutlet weak var lblCautionAscAndDescDiff: UILabel!
     
@@ -39,7 +42,6 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         
         // ===== 공통 작업 =====
         loadWebSheetPage()
-        lblCautionAscAndDescDiff.text = ""
         txfScaleName.addTarget(self, action: #selector(scaleNameChanged), for: .editingChanged)
         
         // ===== 분기별 작업 =====
@@ -59,10 +61,18 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
             
             // 편집용
             degreesViewModel = ScaleDegreesUpdateViewModel(ascDegrees: infoViewModel.degreesAscending, descDegrees: infoViewModel.degreesDescending)
+            degreesViewModel.setScaleName(infoViewModel.name)
+            if infoViewModel.degreesDescending != "" && infoViewModel.degreesDescending != infoViewModel.degreesAscending {
+                swtActivateDesc.isOn = true
+                segAscDesc.isEnabled = true
+            }
+            
+            print(degreesViewModel.onEditDegreesDesc)
         }
     }
     
     // MARK: - @objc
+    
     @objc func scaleNameChanged(_ textField: UITextField) {
         webView.evaluateJavaScript("""
         document.querySelector(".abcjs-meta-top tspan").textContent = "C \(textField.text!)"
@@ -70,6 +80,27 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     }
     
     // MARK: - @IBAction
+    
+    @IBAction func swtActEnableDescending(_ sender: UISwitch) {
+        if sender.isOn {
+            segAscDesc.isEnabled = true
+        } else {
+            segAscDesc.selectedSegmentIndex = 0
+            segAscDesc.isEnabled = false
+        }
+    }
+    
+    @IBAction func segActAscDesc(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            injectAbcjsText(from: degreesViewModel.abcjsTextOnEditDegreesAsc, needReload: true)
+        case 1:
+            injectAbcjsText(from: degreesViewModel.abcjsTextOnEditDegreesDesc, needReload: true)
+        default:
+            break
+        }
+    }
+    
     @IBAction func btnActInputNumber(_ sender: UIButton) {
         
         var degreeText = ""
@@ -88,36 +119,54 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         
         degreeText += "\(sender.tag)"
         
+        degreesViewModel.setScaleName(txfScaleName.text ?? "")
+        let order: DegreesOrder = segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
+        
+        if (order == .ascending ? degreesViewModel.onEditDegreesAsc : degreesViewModel.onEditDegreesDesc).count > 20 {
+            self.tableView.makeToast("⚠️ degreesViewModel.onEditDegreesAsc.count must be 20 or less.", position: .center)
+            return
+        }
+        
         // 오름차순(내림차순) 순으로 되어있는지 확인: 각 degree 별 semitone 확인해서 크거나 작은 값은 입력 못하게
-        if let prevDegree = degreesViewModel.onEditDegreesAsc.last {
+        if let prevDegree = order == .ascending
+            ? degreesViewModel.onEditDegreesAsc.last
+            : degreesViewModel.onEditDegreesDesc.last
+        {
             let prevInteger = degreesViewModel.getInteger(degree: prevDegree)
             let currInteger = degreesViewModel.getInteger(degree: degreeText)
             
-            // 오름차순인 경우
-            if prevInteger > currInteger {
-                print("ASC: prevInteger must be less than currInteger.")
+            let prevNumPair = degreesViewModel.getNumPair(degree: prevDegree)
+            let currNumPair = degreesViewModel.getNumPair(degree: degreeText)
+            
+            let isNoteOrderWrong = order == .ascending ? (prevInteger > currInteger) : (prevInteger < currInteger)
+            let wrongNoteOrderMessage = order == .ascending
+            ? "⚠️ ASC: prevInteger must be less than currInteger."
+            : "⚠️ DESC: prevInteger must be greater than currInteger."
+            
+            let pairHasTargetPrefix = order == .ascending
+            ? (prevNumPair.prefix == "_" || prevNumPair.prefix == "__")
+            : (prevNumPair.prefix == "^" || prevNumPair.prefix == "^^")
+            
+            if isNoteOrderWrong {
+                self.tableView.makeToast(wrongNoteOrderMessage, position: .center)
                 return
             }
             
-            // 오름차순: 앞에 기호(플랫:오름차순) 있을 때 Default를 입력한다면 자동으로 natural 붙게
-            let prevNumPair = degreesViewModel.getNumPair(degree: prevDegree)
-            let currNumPair = degreesViewModel.getNumPair(degree: degreeText)
-            if (prevNumPair.prefix == "_" || prevNumPair.prefix == "__") && currNumPair.prefix == "" {
+            if pairHasTargetPrefix && currNumPair.prefix == "" {
                 degreeText = Music.Accidental.natural.textValue + degreeText
             }
         }
         
-        if degreesViewModel.onEditDegreesAsc.count > 20 {
-            print("degreesViewModel.onEditDegreesAsc.count must be 20 or less.")
-            return
+        switch order {
+        case .ascending:
+            degreesViewModel.onEditDegreesAsc.append(degreeText)
+            injectAbcjsText(from: degreesViewModel.abcjsTextOnEditDegreesAsc, needReload: true)
+        case .descending:
+            degreesViewModel.onEditDegreesDesc.append(degreeText)
+            injectAbcjsText(from: degreesViewModel.abcjsTextOnEditDegreesDesc, needReload: true)
         }
         
-        degreesViewModel.onEditDegreesAsc.append(degreeText)
-        
-        // 악보 업데이트
-        degreesViewModel.setScaleName(txfScaleName.text ?? "")
-        injectAbcjsText(from: degreesViewModel.abcjsTextOnEditDegreesAsc, needReload: true)
-        lblCautionAscAndDescDiff.text! = degreesViewModel.degreesAsc
+        highlightLastNote()
         
         /**
          버튼 누를때마다
@@ -128,17 +177,45 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     }
     
     @IBAction func btnActBackspaceNote(_ sender: UIButton) {
-        print(#function)
-        _ = degreesViewModel.onEditDegreesAsc.popLast()
         
-        // 악보 업데이트
         degreesViewModel.setScaleName(txfScaleName.text ?? "")
-        injectAbcjsText(from: degreesViewModel.abcjsTextOnEditDegreesAsc, needReload: true)
-        lblCautionAscAndDescDiff.text! = degreesViewModel.degreesAsc
+        
+        let order: DegreesOrder = segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
+        switch order {
+        case .ascending:
+            _ = degreesViewModel.onEditDegreesAsc.popLast()
+            injectAbcjsText(from: degreesViewModel.abcjsTextOnEditDegreesAsc, needReload: true)
+        case .descending:
+            _ = degreesViewModel.onEditDegreesDesc.popLast()
+            injectAbcjsText(from: degreesViewModel.abcjsTextOnEditDegreesDesc, needReload: true)
+        }
+        
+        highlightLastNote()
     }
     
     
     @IBAction func barBtnActSubmit(_ sender: UIBarButtonItem) {
+        
+        // Degrees 유효성 검사
+        // ASC: 반드시 1로 시작
+        // DESC: 반드시 1로 끝남
+        
+        let isDescEnabled = swtActivateDesc.isOn
+        let degreeNaturalOne = "\(Music.Accidental.natural.textValue)1"
+        
+        // ===== 유효성 검사 =====
+        guard degreesViewModel.onEditDegreesAsc.first == "1" || degreesViewModel.onEditDegreesAsc.first == degreeNaturalOne else {
+            print("ASC: 반드시 1로 시작")
+            return
+        }
+        
+        if isDescEnabled {
+            guard degreesViewModel.onEditDegreesDesc.last == "1" || degreesViewModel.onEditDegreesDesc.last == degreeNaturalOne else {
+                print("DESC: 반드시 1로 끝남")
+                return
+            }
+        }
+        
         // ===== 공통 작업 =====
         
         // ===== 분기별 작업 =====
@@ -158,6 +235,13 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
             entity.nameAlias = aliasComponents.filter { $0 != "" }.joined(separator: ";")
             print(entity.nameAlias!)
             entity.comment = txvComment.text
+            entity.degreesAscending = degreesViewModel.degreesAsc
+
+            if isDescEnabled {
+                entity.degreesDescending = degreesViewModel.degreesDesc
+            } else {
+                entity.degreesDescending = ""
+            }
             
             do {
                 try ScaleInfoCDService.shared.saveManagedContext()
@@ -198,6 +282,28 @@ extension ScaleInfoUpdateTableViewController: WKUIDelegate, WKNavigationDelegate
         }
     }
     
+    func highlightLastNote() {
+        var cursorIndex: Int {
+            switch segAscDesc.selectedSegmentIndex {
+            case 0:
+                return degreesViewModel.onEditDegreesAsc.count - 1
+            case 1:
+                return degreesViewModel.onEditDegreesDesc.count - 1
+            default:
+                return 0
+            }
+        }
+        
+        webView.evaluateJavaScript("""
+        document.querySelector(".abcjs-n\(cursorIndex)").classList.add("abcjs-highlight");
+        """)
+        // { result, error in
+        //     print(result)
+        //     print(error)
+        // }
+        
+    }
+    
     func loadWebSheetPage() {
 
         if #available(iOS 14.0, *) {
@@ -225,7 +331,6 @@ extension ScaleInfoUpdateTableViewController: WKUIDelegate, WKNavigationDelegate
         case .update:
             let abcjsText = infoViewModel!.abcjsTextForEditAsc
             injectAbcjsText(from: abcjsText, needReload: false)
-            
         }
         
         // 자바스크립트 -> 네이티브 앱 연결
@@ -254,5 +359,10 @@ extension ScaleInfoUpdateTableViewController: WKUIDelegate, WKNavigationDelegate
         }
     }
     
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print(#function)
+        
+        highlightLastNote()
+    }
     
 }

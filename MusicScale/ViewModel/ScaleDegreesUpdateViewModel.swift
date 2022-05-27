@@ -10,7 +10,7 @@ import Foundation
 class ScaleDegreesUpdateViewModel {
     
     var onEditDegreesAsc: [String] = ["1"]
-    var onEditDegreesDesc: [String] = ["1"]
+    var onEditDegreesDesc: [String] = ["7"]
     var scaleName = "C Aeioulian"
     
     private let helper = MusicSheetHelper()
@@ -21,7 +21,9 @@ class ScaleDegreesUpdateViewModel {
     
     init(ascDegrees: String, descDegrees: String) {
         onEditDegreesAsc = ascDegrees.components(separatedBy: " ")
-        onEditDegreesDesc = ascDegrees.components(separatedBy: " ")
+        if descDegrees != "" {
+            onEditDegreesDesc = descDegrees.components(separatedBy: " ")
+        }
     }
     
     var degreesAsc: String {
@@ -39,6 +41,12 @@ class ScaleDegreesUpdateViewModel {
     var abcjsTextOnEditDegreesAsc: String {
         let joinedDegrees = onEditDegreesAsc.joined(separator: " ")
         let abcjsPart = helper.degreesToAbcjsPart(degrees: joinedDegrees, order: .ascending, completeFinalNote: false)
+        return helper.composeAbcjsText(scaleNameText: scaleName, tempo: 100, partText: abcjsPart, lyricText: joinedDegrees)
+    }
+    
+    var abcjsTextOnEditDegreesDesc: String {
+        let joinedDegrees = onEditDegreesDesc.joined(separator: " ")
+        let abcjsPart = helper.degreesToAbcjsPart(degrees: joinedDegrees, order: .descending, completeFinalNote: false)
         return helper.composeAbcjsText(scaleNameText: scaleName, tempo: 100, partText: abcjsPart, lyricText: joinedDegrees)
     }
     

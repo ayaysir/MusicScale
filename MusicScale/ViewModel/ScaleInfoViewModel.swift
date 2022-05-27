@@ -131,7 +131,7 @@ class ScaleInfoViewModel {
     
     // MARK: - 편집용
     var abcjsTextForEditAsc: String {
-        return helper.composeAbcjsText(scaleNameText: scaleInfo.name, tempo: 100, partText: helper.degreesToAbcjsPart(degrees: scaleInfo.degreesAscending, order: .ascending, completeFinalNote: false, key: .C, octaveShift: 0, enharmonicMode: .standard), lyricText: scaleInfo.degreesAscending)
+        return helper.composeAbcjsText(scaleNameText: "C " + scaleInfo.name, tempo: 100, partText: helper.degreesToAbcjsPart(degrees: scaleInfo.degreesAscending, order: .ascending, completeFinalNote: false, key: .C, octaveShift: 0, enharmonicMode: .standard), lyricText: scaleInfo.degreesAscending)
     }
     
     func editAbcjsText() {
