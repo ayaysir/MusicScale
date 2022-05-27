@@ -71,7 +71,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     
     // MARK: - @IBAction
     @IBAction func btnActInputNumber(_ sender: UIButton) {
-        print(#function, sender.tag)
+        
         var degreeText = ""
         switch segAccidental.selectedSegmentIndex {
         case 0:
@@ -87,7 +87,36 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         }
         
         degreeText += "\(sender.tag)"
+        
+        // 오름차순(내림차순) 순으로 되어있는지 확인: 각 degree 별 semitone 확인해서 크거나 작은 값은 입력 못하게
+        if let prevDegree = degreesViewModel.onEditDegreesAsc.last {
+            let prevInteger = degreesViewModel.getInteger(degree: prevDegree)
+            let currInteger = degreesViewModel.getInteger(degree: degreeText)
+            
+            // 오름차순인 경우
+            if prevInteger > currInteger {
+                print("ASC: prevInteger must be less than currInteger.")
+                return
+            }
+            
+            // 오름차순: 앞에 기호(플랫:오름차순) 있을 때 Default를 입력한다면 자동으로 natural 붙게
+            let prevNumPair = degreesViewModel.getNumPair(degree: prevDegree)
+            let currNumPair = degreesViewModel.getNumPair(degree: degreeText)
+            if (prevNumPair.prefix == "_" || prevNumPair.prefix == "__") && currNumPair.prefix == "" {
+                degreeText = Music.Accidental.natural.textValue + degreeText
+            }
+        }
+        
+        if degreesViewModel.onEditDegreesAsc.count > 20 {
+            print("degreesViewModel.onEditDegreesAsc.count must be 20 or less.")
+            return
+        }
+        
         degreesViewModel.onEditDegreesAsc.append(degreeText)
+        
+        // 악보 업데이트
+        degreesViewModel.setScaleName(txfScaleName.text ?? "")
+        injectAbcjsText(from: degreesViewModel.abcjsTextOnEditDegreesAsc, needReload: true)
         lblCautionAscAndDescDiff.text! = degreesViewModel.degreesAsc
         
         /**
@@ -100,8 +129,11 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     
     @IBAction func btnActBackspaceNote(_ sender: UIButton) {
         print(#function)
-        // lblCautionAscAndDescDiff.text!.remove(at: lblCautionAscAndDescDiff.text!.index(before: lblCautionAscAndDescDiff.text!.endIndex))
         _ = degreesViewModel.onEditDegreesAsc.popLast()
+        
+        // 악보 업데이트
+        degreesViewModel.setScaleName(txfScaleName.text ?? "")
+        injectAbcjsText(from: degreesViewModel.abcjsTextOnEditDegreesAsc, needReload: true)
         lblCautionAscAndDescDiff.text! = degreesViewModel.degreesAsc
     }
     

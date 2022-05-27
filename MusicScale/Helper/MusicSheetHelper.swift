@@ -348,6 +348,9 @@ struct MusicSheetHelper {
         
         // sharp: ^A, flat: _A, natural =A
         // CDEFGAB cde...
+        if degrees == "" || degrees == " " {
+            return ""
+        }
         
         let pairs: [NoteStrPair] = getNoteStrPairsForAbcjs(degrees: degrees, order: order, completeFinalNote: completeFinalNote, key: key, octaveShift: octaveShift, enharmonicMode: enharmonicMode)
         
@@ -422,6 +425,7 @@ struct MusicSheetHelper {
         // return text
     }
     
+    /// NumberPair를 semitone으로 변환
     func numPairToInteger(_ pair: NoteNumberPair) -> Int {
         
         // 온음은 기본 2칸씩 이동
