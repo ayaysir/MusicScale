@@ -251,10 +251,10 @@
                             <tableViewSection headerTitle="Scale Name" id="2rB-rT-RHT">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Z74-96-Pfm">
-                                        <rect key="frame" x="20" y="49.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="49.5" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z74-96-Pfm" id="Hi4-HY-JtS">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Ionian Scale" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-Sc-oFm">
@@ -271,7 +271,7 @@
                             <tableViewSection headerTitle="Scale Name Aliases" footerTitle="Enter an alias for the scale. You can enter multiple aliases and press Enter to separate words." id="ZRm-N1-fYF">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="84" id="Uyn-M1-xdI">
-                                        <rect key="frame" x="20" y="150.5" width="374" height="84"/>
+                                        <rect key="frame" x="20" y="151" width="374" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uyn-M1-xdI" id="ShG-0Q-96Q">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="84"/>
@@ -295,7 +295,7 @@
                             <tableViewSection headerTitle="Degrees" id="ayI-wy-sCl">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="51" id="rv3-q4-bcM">
-                                        <rect key="frame" x="20" y="307" width="374" height="51"/>
+                                        <rect key="frame" x="20" y="307.5" width="374" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rv3-q4-bcM" id="SOa-Ul-amZ">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="51"/>
@@ -319,7 +319,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="210" id="WOX-f3-c4K">
-                                        <rect key="frame" x="20" y="358" width="374" height="210"/>
+                                        <rect key="frame" x="20" y="358.5" width="374" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WOX-f3-c4K" id="b6s-pO-lcS">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="210"/>
@@ -443,9 +443,10 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Default Priority" id="7g6-dn-VuA">
+                                <string key="footerTitle">Default Priority is the default value to set when first writing or when distributing to other users after uploading, and it is different from the "My Priority" I set.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="Cbr-ru-iYb">
-                                        <rect key="frame" x="20" y="618" width="374" height="50"/>
+                                        <rect key="frame" x="20" y="626" width="374" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cbr-ru-iYb" id="tzW-ph-R3m">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
@@ -477,7 +478,7 @@
                             <tableViewSection headerTitle="Comment" id="gho-qR-VYd">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="116" id="sdu-43-ANX">
-                                        <rect key="frame" x="20" y="718" width="374" height="116"/>
+                                        <rect key="frame" x="20" y="762.5" width="374" height="116"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sdu-43-ANX" id="boC-d7-I1B">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="116"/>
@@ -498,10 +499,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Hyperlinks" id="e2E-Rb-NVX">
+                            <tableViewSection headerTitle="Banner Ads" id="e2E-Rb-NVX">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="zga-mx-9vx">
-                                        <rect key="frame" x="20" y="884" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="928.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zga-mx-9vx" id="mme-Pq-nf9">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
@@ -726,7 +727,7 @@
         <scene sceneID="fXn-we-lmp">
             <objects>
                 <tableViewController id="DIB-Cg-Q3w" customClass="ScaleListTableViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="yeV-0v-RXS">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" canCancelContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="yeV-0v-RXS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -752,16 +753,28 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="⭐⭐⭐⭐⭐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="noI-sp-L45">
-                                            <rect key="frame" x="279" y="19" width="115" height="21"/>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x3u-V4-Caz" customClass="CosmosView" customModule="MusicScale" customModuleProvider="target">
+                                            <rect key="frame" x="271" y="17" width="123" height="26"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                                    <integer key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                    <real key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                    <real key="value" value="25"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="cosmosViewMyPriority" destination="x3u-V4-Caz" id="L44-3x-ReO"/>
                                     <outlet property="lblName" destination="Ems-tJ-kqY" id="jaa-dR-kxm"/>
                                     <outlet property="lblNameAlias" destination="56w-vM-U3Y" id="Q4F-fI-mqr"/>
                                 </connections>
@@ -869,6 +882,9 @@
         </designable>
         <designable name="uio-9K-kwd">
             <size key="intrinsicContentSize" width="170" height="30"/>
+        </designable>
+        <designable name="x3u-V4-Caz">
+            <size key="intrinsicContentSize" width="125" height="25"/>
         </designable>
     </designables>
     <resources>

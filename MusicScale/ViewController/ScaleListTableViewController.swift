@@ -14,20 +14,11 @@ class ScaleListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         
     }
 
     // MARK: - Table view data source
-
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -50,7 +41,7 @@ class ScaleListTableViewController: UITableViewController {
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        return false
     }
 
     // Override to support editing the table view.
@@ -123,9 +114,17 @@ class ScaleListCell: UITableViewCell {
     
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblNameAlias: UILabel!
+    @IBOutlet weak var cosmosViewMyPriority: CosmosView!
+    
+    override func prepareForReuse() {
+        cosmosViewMyPriority.prepareForReuse()
+    }
     
     func configure(infoViewModel: ScaleInfoViewModel) {
         lblName.text = infoViewModel.name
         lblNameAlias.text = infoViewModel.nameAlias
+        
+        cosmosViewMyPriority.settings.passTouchesToSuperview = false
+        cosmosViewMyPriority.rating = Double(infoViewModel.priorityForDisplayBoth)
     }
 }

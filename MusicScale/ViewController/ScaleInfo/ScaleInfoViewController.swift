@@ -126,6 +126,7 @@ class ScaleInfoViewController: UIViewController {
         case "InfoSegue":
             infoVC = segue.destination as? ScaleSubInfoTableViewController
             infoVC?.scaleInfoViewModel = scaleInfoViewModel
+            infoVC?.delegate = self
         case "WebSheetSegue":
             webSheetVC = segue.destination as? ScoreWebViewController
             // 최초 정보 로딩
@@ -340,6 +341,16 @@ extension ScaleInfoViewController: ScaleInfoUpdateTVCDelegate {
         changeAvailableKeys()
         reinjectAbcjsText()
         
+    }
+}
+
+// MARK: - ScaleSubInfoTVCDelegate
+extension ScaleInfoViewController: ScaleSubInfoTVCDelegate {
+    
+    func didMyPriorityUpdated(_ controller: ScaleSubInfoTableViewController, viewModel: ScaleInfoViewModel) {
+        self.scaleInfoViewModel = viewModel
+        // List TableView에 변경사항 반영
+        delegate?.didInfoUpdated(self, indexPath: selectedIndexPath)
     }
 }
 

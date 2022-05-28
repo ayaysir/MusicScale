@@ -8,6 +8,10 @@
 import UIKit
 import DropDown
 
+protocol ScaleSubInfoTVCDelegate: AnyObject {
+    func didMyPriorityUpdated(_ controller: ScaleSubInfoTableViewController, viewModel: ScaleInfoViewModel)
+}
+
 class ScaleSubInfoTableViewController: UITableViewController {
     
     let MIN_CELL_SIZE: CGFloat = 30.0
@@ -20,11 +24,11 @@ class ScaleSubInfoTableViewController: UITableViewController {
     @IBOutlet weak var lblPattern: UILabel!
     @IBOutlet weak var lblIntegerNotation: UILabel!
     @IBOutlet weak var txvComment: UITextView!
-    
     @IBOutlet weak var tblCellNameAlias: UITableViewCell!
     
-    var scaleInfoViewModel: ScaleInfoViewModel!
+    weak var delegate: ScaleSubInfoTVCDelegate?
     
+    var scaleInfoViewModel: ScaleInfoViewModel!
     var priorityDropDown = DropDown()
     let starRatingVM = StarRatingViewModel()
     
@@ -75,7 +79,7 @@ extension ScaleSubInfoTableViewController {
         priorityDropDown.dataSource = starRatingVM.dataSource
         priorityDropDown.cornerRadius = 10
         priorityDropDown.anchorView = lblPriority
-        // priorityDropDown.topOffset = CGPoint(x: -100, y: 0)
+        
         priorityDropDown.bottomOffset = CGPoint(x: -40, y: 0)
         priorityDropDown.selectionAction = { index, item in
             
@@ -83,6 +87,10 @@ extension ScaleSubInfoTableViewController {
             print(item, rating)
             self.lblPriority.text = self.starRatingVM.starTextWithBlankStars(fillCount: rating)
             self.scaleInfoViewModel.updateMyPriority(rating)
+            
+            if let delegate = self.delegate {
+                delegate.didMyPriorityUpdated(self, viewModel: self.scaleInfoViewModel)
+            }
         }
     }
     
@@ -96,13 +104,7 @@ extension ScaleSubInfoTableViewController {
         lblPattern.text = scaleInfoViewModel.ascendingPattern
         lblIntegerNotation.text = scaleInfoViewModel.ascendingIntegerNotation
         
-        if scaleInfoViewModel.myPriority < 0 {
-            lblPriority.text = starRatingVM.starTextWithBlankStars(fillCount: scaleInfoViewModel.defaultPriority)
-            print("loaded default priority:", scaleInfoViewModel.defaultPriority)
-        } else {
-            lblPriority.text = starRatingVM.starTextWithBlankStars(fillCount: scaleInfoViewModel.myPriority)
-            print("loaded my priority:", scaleInfoViewModel.myPriority)
-        }
+        lblPriority.text = starRatingVM.starTextWithBlankStars(fillCount: scaleInfoViewModel.priorityForDisplayBoth)
         
         txvComment.text = scaleInfoViewModel.comment
         txvComment.sizeToFit()
