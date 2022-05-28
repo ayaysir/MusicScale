@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DropDown
 
 class ScaleSubInfoTableViewController: UITableViewController {
     
@@ -24,9 +25,13 @@ class ScaleSubInfoTableViewController: UITableViewController {
     
     var scaleInfoViewModel: ScaleInfoViewModel!
     
+    var priorityDropDown = DropDown()
+    let starRatingVM = StarRatingViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initDropDownOnPriorityLabel()
         refreshViewInfo()
     }
     
@@ -59,19 +64,46 @@ class ScaleSubInfoTableViewController: UITableViewController {
 
 }
 
+// MARK: - Custom Methods
 extension ScaleSubInfoTableViewController {
+    
+    func initDropDownOnPriorityLabel() {
+        
+        let labelTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(labelPriorityAction))
+        lblPriority.addGestureRecognizer(labelTapRecognizer)
+        
+        priorityDropDown.dataSource = starRatingVM.dataSource
+        priorityDropDown.cornerRadius = 10
+        priorityDropDown.anchorView = lblPriority
+        // priorityDropDown.topOffset = CGPoint(x: -100, y: 0)
+        priorityDropDown.bottomOffset = CGPoint(x: -40, y: 0)
+        priorityDropDown.selectionAction = { index, item in
+            
+            let rating = item.count
+            print(item, rating)
+            self.lblPriority.text = self.starRatingVM.starTextWithBlankStars(fillCount: rating)
+            self.scaleInfoViewModel.updateMyPriority(rating)
+        }
+    }
+    
+    @objc func labelPriorityAction(sender: UITapGestureRecognizer) {
+        priorityDropDown.show()
+    }
     
     func refreshViewInfo(isUpdated: Bool = false) {
         lblName.text = scaleInfoViewModel.name
         lblNameAlias.text = scaleInfoViewModel.nameAliasFormatted
         lblPattern.text = scaleInfoViewModel.ascendingPattern
         lblIntegerNotation.text = scaleInfoViewModel.ascendingIntegerNotation
-        // lblPriority.text = (1...scaleInfoViewModel.defaultPriority).reduce("") { partialResult, _ in
-        //     return partialResult + "★"
-        // }
         
-        let priority = scaleInfoViewModel.defaultPriority
-        lblPriority.text = String(repeating: "★", count: priority) + String(repeating: "☆", count: 5 - priority)
+        if scaleInfoViewModel.myPriority < 0 {
+            lblPriority.text = starRatingVM.starTextWithBlankStars(fillCount: scaleInfoViewModel.defaultPriority)
+            print("loaded default priority:", scaleInfoViewModel.defaultPriority)
+        } else {
+            lblPriority.text = starRatingVM.starTextWithBlankStars(fillCount: scaleInfoViewModel.myPriority)
+            print("loaded my priority:", scaleInfoViewModel.myPriority)
+        }
+        
         txvComment.text = scaleInfoViewModel.comment
         txvComment.sizeToFit()
         
@@ -91,4 +123,24 @@ extension ScaleSubInfoTableViewController {
         
         return refLabel.frame.height
     }
+}
+
+struct StarRatingViewModel {
+    
+    let dataSource: [String] = [
+        "★★★★★",
+        "★★★★",
+        "★★★",
+        "★★",
+        "★",
+    ]
+    
+    func countStarText(_ starText: String) -> Int {
+        return starText.count
+    }
+    
+    func starTextWithBlankStars(fillCount: Int) -> String {
+        return String(repeating: "★", count: fillCount) + String(repeating: "☆", count: 5 - fillCount)
+    }
+    
 }

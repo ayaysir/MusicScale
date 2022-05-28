@@ -53,6 +53,10 @@ class ScaleInfoViewModel {
         return scaleInfo.defaultPriority
     }
     
+    var myPriority: Int {
+        return scaleInfo.myPriority
+    }
+    
     var comment: String {
         return scaleInfo.comment
     }
@@ -134,7 +138,14 @@ class ScaleInfoViewModel {
         return helper.composeAbcjsText(scaleNameText: "C " + scaleInfo.name, tempo: 100, partText: helper.degreesToAbcjsPart(degrees: scaleInfo.degreesAscending, order: .ascending, completeFinalNote: false, key: .C, octaveShift: 0, enharmonicMode: .standard), lyricText: scaleInfo.degreesAscending)
     }
     
-    func editAbcjsText() {
-        
+    // MARK: - update Core Data Entity
+    func updateMyPriority(_ priority: Int) {
+        entity.myPriority = Int16(priority)
+        reloadInfoFromEntity()
+        do {
+            try ScaleInfoCDService.shared.saveManagedContext()
+        } catch {
+            print(#function, error)
+        }
     }
 }
