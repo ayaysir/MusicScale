@@ -216,7 +216,7 @@
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                     </view>
                     <navigationItem key="navigationItem" title="Aeolian" id="7CF-gT-5wt">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Bsq-Ow-kds">
+                        <barButtonItem key="rightBarButtonItem" title="Update" id="Bsq-Ow-kds">
                             <connections>
                                 <segue destination="dom-77-63F" kind="show" identifier="UpdateScaleInfoSegue" id="6tl-C7-X1w"/>
                             </connections>
@@ -251,13 +251,13 @@
                             <tableViewSection headerTitle="Scale Name" id="2rB-rT-RHT">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Z74-96-Pfm">
-                                        <rect key="frame" x="20" y="49.5" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="49.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z74-96-Pfm" id="Hi4-HY-JtS">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Ionian Scale" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-Sc-oFm">
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter the scale name. ex) Major scale" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-Sc-oFm">
                                                     <rect key="frame" x="12" y="5" width="354" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -268,10 +268,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Scale Name Aliases" footerTitle="Enter an alias for the scale. You can enter multiple aliases and press Enter to separate words." id="ZRm-N1-fYF">
+                            <tableViewSection headerTitle="Scale Name Aliases" footerTitle="Enter an alias for the scale or a foreign language term. You can enter multiple aliases and press Enter to separate words." id="ZRm-N1-fYF">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="84" id="Uyn-M1-xdI">
-                                        <rect key="frame" x="20" y="151" width="374" height="84"/>
+                                        <rect key="frame" x="20" y="150.5" width="374" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uyn-M1-xdI" id="ShG-0Q-96Q">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="84"/>
@@ -281,8 +281,9 @@
                                                     <rect key="frame" x="8" y="0.0" width="355" height="73"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <string key="text">Major scale
-장음계</string>
+                                                    <string key="text">Ionian
+🇰🇷 아이오니안
+🇯🇵 イオニアン</string>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -295,7 +296,7 @@
                             <tableViewSection headerTitle="Degrees" id="ayI-wy-sCl">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="51" id="rv3-q4-bcM">
-                                        <rect key="frame" x="20" y="307.5" width="374" height="51"/>
+                                        <rect key="frame" x="20" y="321" width="374" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rv3-q4-bcM" id="SOa-Ul-amZ">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="51"/>
@@ -319,7 +320,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="210" id="WOX-f3-c4K">
-                                        <rect key="frame" x="20" y="358.5" width="374" height="210"/>
+                                        <rect key="frame" x="20" y="372" width="374" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WOX-f3-c4K" id="b6s-pO-lcS">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="210"/>
@@ -446,7 +447,7 @@
                                 <string key="footerTitle">Default Priority is the default value to set when first writing or when distributing to other users after uploading, and it is different from the "My Priority" I set.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="Cbr-ru-iYb">
-                                        <rect key="frame" x="20" y="626" width="374" height="50"/>
+                                        <rect key="frame" x="20" y="639.5" width="374" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cbr-ru-iYb" id="tzW-ph-R3m">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
@@ -478,18 +479,16 @@
                             <tableViewSection headerTitle="Comment" id="gho-qR-VYd">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="116" id="sdu-43-ANX">
-                                        <rect key="frame" x="20" y="762.5" width="374" height="116"/>
+                                        <rect key="frame" x="20" y="776" width="374" height="116"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sdu-43-ANX" id="boC-d7-I1B">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="116"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0C4-bg-MUT">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Enter descriptions, notes, or memorization tips and more..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0C4-bg-MUT">
                                                     <rect key="frame" x="10" y="0.0" width="355" height="105"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <string key="text">Major scale
-장음계</string>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -502,7 +501,7 @@
                             <tableViewSection headerTitle="Banner Ads" id="e2E-Rb-NVX">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="zga-mx-9vx">
-                                        <rect key="frame" x="20" y="928.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="942" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zga-mx-9vx" id="mme-Pq-nf9">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
@@ -518,7 +517,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="8W6-7b-r1s">
-                        <barButtonItem key="rightBarButtonItem" title="Update" id="dCH-q1-Ogl">
+                        <barButtonItem key="rightBarButtonItem" title="Submit" id="dCH-q1-Ogl">
                             <connections>
                                 <action selector="barBtnActSubmit:" destination="dom-77-63F" id="V6m-j3-FAJ"/>
                             </connections>
@@ -723,7 +722,7 @@
             </objects>
             <point key="canvasLocation" x="2056.521739130435" y="-1038.6160714285713"/>
         </scene>
-        <!--Scale List Table View Controller-->
+        <!--Scale List-->
         <scene sceneID="fXn-we-lmp">
             <objects>
                 <tableViewController id="DIB-Cg-Q3w" customClass="ScaleListTableViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
@@ -786,9 +785,24 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" systemItem="featured" id="v2L-1v-IK4"/>
-                    <navigationItem key="navigationItem" id="HlW-aX-UHD"/>
+                    <navigationItem key="navigationItem" title="Scale List" id="HlW-aX-UHD">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="yxr-Ap-H9v"/>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Add" id="p3G-1W-HEc">
+                                <connections>
+                                    <action selector="barBnActAdd:" destination="DIB-Cg-Q3w" id="Iw0-4R-urS"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" id="ToQ-KK-G10">
+                                <connections>
+                                    <action selector="barBtnActEdit:" destination="DIB-Cg-Q3w" id="fGN-ki-VR4"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <segue destination="LFu-VY-SiC" kind="show" identifier="DetailViewSegue" id="FWp-pe-ob4"/>
+                        <segue destination="dom-77-63F" kind="show" identifier="CreateScaleInfoSegue" id="VsC-uc-p1n"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ho-er-G0d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -887,6 +901,9 @@
             <size key="intrinsicContentSize" width="125" height="25"/>
         </designable>
     </designables>
+    <inferredMetricsTieBreakers>
+        <segue reference="VsC-uc-p1n"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

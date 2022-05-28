@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("버전 변경시마다 실행됨")
         } nothingChanged: {
             print("변경 사항 없음")
-            putInitalData()
+            // putInitalData()
         }
 
         
@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try cdService.deleteAllCoreData()
             getSampleScaleDataFromLocal { infoList in
                 for info in infoList {
-                    try cdService.saveCoreData(scaleInfo: info)
+                    _ = try cdService.saveCoreData(scaleInfo: info)
                 }
             }
         } catch {

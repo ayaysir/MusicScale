@@ -9,20 +9,34 @@ import UIKit
 
 class ScaleListTableViewController: UITableViewController {
     
-    let scaleInfoViewModel = ScaleInfoListViewModel()
+    let scaleListViewModel = ScaleInfoListViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        scaleListViewModel.handleDataReloaded = {
+            self.tableView.reloadData()
+        }
     }
-
+    
+    @IBAction func barBtnActEdit(_ sender: UIBarButtonItem) {
+        if tableView.isEditing {
+            tableView.setEditing(false, animated: true)
+        } else {
+            tableView.setEditing(true, animated: true)
+        }
+    }
+    
+    @IBAction func barBnActAdd(_ sender: Any) {
+        performSegue(withIdentifier: "CreateScaleInfoSegue", sender: nil)
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return scaleInfoViewModel.infoCount
+        return scaleListViewModel.infoCount
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -30,7 +44,7 @@ class ScaleListTableViewController: UITableViewController {
             return UITableViewCell()
         }
 
-        guard let infoViewModel = scaleInfoViewModel.getScaleInfoViewModelOf(index: indexPath.row) else {
+        guard let infoViewModel = scaleListViewModel.getScaleInfoViewModelOf(index: indexPath.row) else {
             return UITableViewCell()
         }
         cell.configure(infoViewModel: infoViewModel)
@@ -38,26 +52,27 @@ class ScaleListTableViewController: UITableViewController {
         return cell
     }
 
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return false
-    }
-
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
+    // // Override to support conditional editing of the table view.
+    // override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    //     // Return false if you do not want the specified item to be editable.
+    //     return true
+    // }
+    //
+    // // Override to support editing the table view.
+    // override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    //     if editingStyle == .delete {
+    //         // Delete the row from the data source
+    //         tableView.deleteRows(at: [indexPath], with: .fade)
+    //     } else if editingStyle == .insert {
+    //         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    //     }
+    //
+    // }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sender: [String: Any] = [
             "indexPath": indexPath,
-            "viewModel": scaleInfoViewModel.getScaleInfoViewModelOf(index: indexPath.row)!
+            "viewModel": scaleListViewModel.getScaleInfoViewModelOf(index: indexPath.row)!
         ]
         performSegue(withIdentifier: "DetailViewSegue", sender: sender)
     }
@@ -90,7 +105,10 @@ class ScaleListTableViewController: UITableViewController {
             }
             scaleInfoVC?.scaleInfoViewModel = receivedInfoViewModel
             scaleInfoVC?.delegate = self
-            
+        case "CreateScaleInfoSegue":
+            let createVC = segue.destination as! ScaleInfoUpdateTableViewController
+            createVC.mode = .create
+            createVC.createDelegate = self
         default:
             break
         }
@@ -106,6 +124,14 @@ extension ScaleListTableViewController: ScaleInfoVCDelgate {
             return
         }
         tableView.reloadRows(at: [indexPath], with: .none)
+    }
+}
+
+// MARK: - ScaleInfoUpdateTVCDelegate
+extension ScaleListTableViewController: ScaleInfoUpdateTVCDelegate {
+    
+    func didFinishedCreate(_ controller: ScaleInfoUpdateTableViewController, entity: ScaleInfoEntity) {
+        scaleListViewModel.addCreatedInfoToList(entity: entity)
     }
 }
 

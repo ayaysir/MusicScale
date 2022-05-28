@@ -11,7 +11,7 @@ class ScaleDegreesUpdateViewModel {
     
     var onEditDegreesAsc: [String] = ["1"]
     var onEditDegreesDesc: [String] = ["7"]
-    var scaleName = "C Aeioulian"
+    var scaleName = "C "
     
     private let helper = MusicSheetHelper()
     

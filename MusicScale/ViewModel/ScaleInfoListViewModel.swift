@@ -34,18 +34,19 @@ class ScaleInfoListViewModel {
     }
     
     func addScaleInfo(info: ScaleInfo) {
-        
         do {
-            try service.saveCoreData(scaleInfo: info)
+            _ = try service.saveCoreData(scaleInfo: info)
             fetchCoreData()
         } catch {
             print(error)
         }
     }
     
-    // func getScaleInfoBy(index: Int) -> ScaleInfo? {
-    //     return service.toScaleInfoStruct(from: totalEntityData[index])
-    // }
+    func addCreatedInfoToList(entity: ScaleInfoEntity) {
+        // let viewModel = ScaleInfoViewModel(scaleInfo: info, currentKey: .C, currentTempo: 100, entity: entity)
+        totalEntityData.insert(entity, at: 0)
+        handleDataReloaded()
+    }
     
     private var infoViewModels: [ScaleInfoViewModel?] {
         
@@ -53,22 +54,15 @@ class ScaleInfoListViewModel {
             guard let scaleInfo = service.toScaleInfoStruct(from: entity) else {
                 return nil
             }
-            return ScaleInfoViewModel(scaleInfo: scaleInfo, currentKey: .C, currentTempo: 120, entity: entity)
+            return ScaleInfoViewModel(scaleInfo: scaleInfo, currentKey: .C, currentTempo: 100, entity: entity)
         }
     }
     
     func getScaleInfoViewModelOf(index: Int) -> ScaleInfoViewModel? {
-        
-        // guard let scaleInfo = service.toScaleInfoStruct(from: totalEntityData[index]) else {
-        //     return nil
-        // }
-        //
-        // return ScaleInfoViewModel(scaleInfo: scaleInfo, currentKey: .C, currentTempo: 120, entity: totalEntityData[index])
         return infoViewModels[index]
     }
     
     func updateScaleInfo(index: Int, info: ScaleInfo) {
-        
         do {
             try service.updateCoreData(entityObject: totalEntityData[index], scaleInfo: info)
         } catch {
@@ -77,7 +71,6 @@ class ScaleInfoListViewModel {
     }
     
     func deleteScaleInfo(index: Int) {
-        
         do {
             try service.deleteCoreData(entityObject: totalEntityData[index])
             fetchCoreData()

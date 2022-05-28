@@ -28,7 +28,7 @@ struct ScaleInfoCDService {
         return appDelegate.persistentContainer.viewContext
     }
     
-    func saveCoreData(scaleInfo info: ScaleInfo) throws{
+    func saveCoreData(scaleInfo info: ScaleInfo) throws -> ScaleInfoEntity{
         
         guard let managedContext = managedContext else {
             throw CDError.appDelegateNotExist
@@ -57,6 +57,7 @@ struct ScaleInfoCDService {
         do {
             // managedContext 내부의 변경사항 저장
             try managedContext.save()
+            return entityObject
         } catch let error as NSError {
             // 에러 발생시
             throw error

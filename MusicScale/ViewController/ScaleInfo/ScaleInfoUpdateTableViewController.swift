@@ -10,6 +10,12 @@ import WebKit
 
 protocol ScaleInfoUpdateTVCDelegate: AnyObject {
     func didFinishedUpdate(_ controller: ScaleInfoUpdateTableViewController, viewModel: ScaleInfoViewModel)
+    func didFinishedCreate(_ controller: ScaleInfoUpdateTableViewController, entity: ScaleInfoEntity)
+}
+
+extension ScaleInfoUpdateTVCDelegate {
+    func didFinishedUpdate(_ controller: ScaleInfoUpdateTableViewController, viewModel: ScaleInfoViewModel) {}
+    func didFinishedCreate(_ controller: ScaleInfoUpdateTableViewController, entity: ScaleInfoEntity) {}
 }
 
 class ScaleInfoUpdateTableViewController: UITableViewController {
@@ -34,12 +40,13 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     @IBOutlet weak var cosmosDefaultPriority: CosmosView!
     
     weak var updateDelegate: ScaleInfoUpdateTVCDelegate?
+    weak var createDelegate: ScaleInfoUpdateTVCDelegate?
     
     var mode: SubmitMode = .update
     var infoViewModel: ScaleInfoViewModel?
     var degreesViewModel: ScaleDegreesUpdateViewModel!
     
-    var defaultPriority = -1
+    // var defaultPriority = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,16 +55,21 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         loadWebSheetPage()
         txfScaleName.addTarget(self, action: #selector(scaleNameChanged), for: .editingChanged)
         
-        cosmosDefaultPriority.didFinishTouchingCosmos = {
-            rating in
-            print(rating)
-            self.defaultPriority = Int(rating)
-        }
+        // cosmosDefaultPriority.didFinishTouchingCosmos = {
+        //     rating in
+        //     print(rating)
+        //     self.defaultPriority = Int(rating)
+        // }
         
         // ===== 분기별 작업 =====
         switch mode {
         case .create:
-            break
+            
+            cosmosDefaultPriority.rating = 3.0
+            
+            degreesViewModel = ScaleDegreesUpdateViewModel()
+            injectAbcjsText(from: degreesViewModel.abcjsTextOnEditDegreesAsc, needReload: false)
+            
         case .update:
             guard let infoViewModel = infoViewModel else {
                 return
@@ -164,7 +176,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
                 return
             }
             
-            if pairHasTargetPrefix && currNumPair.prefix == "" {
+            if pairHasTargetPrefix && prevNumPair.number == currNumPair.number && currNumPair.prefix == "" {
                 degreeText = Music.Accidental.natural.textValue + degreeText
             }
         }
@@ -216,11 +228,13 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         let degreeNaturalOne = "\(Music.Accidental.natural.textValue)1"
         
         // ===== 유효성 검사 =====
+        //ASC: 반드시 1로 시작
         guard degreesViewModel.onEditDegreesAsc.first == "1" || degreesViewModel.onEditDegreesAsc.first == degreeNaturalOne else {
             print("ASC: 반드시 1로 시작")
             return
         }
         
+        // DESC: 반드시 1로 끝남
         if isDescEnabled {
             guard degreesViewModel.onEditDegreesDesc.last == "1" || degreesViewModel.onEditDegreesDesc.last == degreeNaturalOne else {
                 print("DESC: 반드시 1로 끝남")
@@ -228,31 +242,66 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
             }
         }
         
+        // txfScaleName: 50자 정도 초과 못하게
+        guard let scaleName = txfScaleName.text,
+              scaleName.count >= 2 && scaleName.count <= 50 else {
+            return
+        }
+        
+        // rating: 1 ~ 5
+        let ratingInt = Int(cosmosDefaultPriority.rating)
+        guard ratingInt.between(1...5) else {
+            return
+        }
+        
+        // txfComment: 2000자 부근까지
+        guard let comment = txvComment.text, comment.count <= 2000 else {
+            return
+        }
+        
         // ===== 공통 작업 =====
         
         // ===== 분기별 작업 =====
         switch mode {
         case .create:
-            break
+            
+            let degreesAscending = degreesViewModel.degreesAsc
+            let degreesDescending = isDescEnabled ? degreesViewModel.degreesDesc : ""
+            
+            // ScaleInfo 생성
+            let createdInfo = ScaleInfo(id: UUID(),
+                      name: scaleName,
+                      nameAlias: convertScaleAliases(),
+                      degreesAscending: degreesAscending,
+                      degreesDescending: degreesDescending,
+                      defaultPriority: ratingInt,
+                      comment: comment,
+                      links: "",
+                      isDivBy12Tet: true,
+                      displayOrder: 1,
+                      myPriority: 0)
+            
+            do {
+                let entity = try ScaleInfoCDService.shared.saveCoreData(scaleInfo: createdInfo)
+                createDelegate?.didFinishedCreate(self, entity: entity)
+                navigationController?.popViewController(animated: true)
+            } catch {
+                print("error: create failed:", error)
+            }
         case .update:
             guard let infoViewModel = infoViewModel else {
                 return
             }
             
             let entity = infoViewModel.entity
-            entity.name = txfScaleName.text
-            
-            // let filtered = txvScaleAliases.text.range(of: "[^\n]+(\n)", options: .regularExpression)
-            let aliasComponents = txvScaleAliases.text.components(separatedBy: "\n")
-            entity.nameAlias = aliasComponents.filter { $0 != "" }.joined(separator: ";")
-            print(entity.nameAlias!)
-            entity.comment = txvComment.text
+            entity.name = scaleName
+            entity.nameAlias = convertScaleAliases()
+            entity.comment = comment
             entity.degreesAscending = degreesViewModel.degreesAsc
             
             // 기본 별점 변경
-            if defaultPriority != -1 {
-                entity.defaultPriority = Int16(defaultPriority)
-            }
+            entity.defaultPriority = Int16(cosmosDefaultPriority.rating)
+            
 
             if isDescEnabled {
                 entity.degreesDescending = degreesViewModel.degreesDesc
@@ -271,8 +320,19 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
                 print("error: update failed:", error)
             }
         }
+        
     }
     
+}
+
+extension ScaleInfoUpdateTableViewController {
+    
+    func convertScaleAliases() -> String {
+        // let filtered = txvScaleAliases.text.range(of: "[^\n]+(\n)", options: .regularExpression)
+        let aliasComponents = txvScaleAliases.text.components(separatedBy: "\n")
+        return aliasComponents.filter { $0 != "" }.joined(separator: ";")
+        // print(entity.nameAlias!)
+    }
 }
 
 extension ScaleInfoUpdateTableViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, ScoreWebInjection {
@@ -300,6 +360,11 @@ extension ScaleInfoUpdateTableViewController: WKUIDelegate, WKNavigationDelegate
     }
     
     func highlightLastNote() {
+        
+        if mode == .create && degreesViewModel == nil {
+            return
+        }
+        
         var cursorIndex: Int {
             switch segAscDesc.selectedSegmentIndex {
             case 0:
@@ -307,8 +372,12 @@ extension ScaleInfoUpdateTableViewController: WKUIDelegate, WKNavigationDelegate
             case 1:
                 return degreesViewModel.onEditDegreesDesc.count - 1
             default:
-                return 0
+                return -99
             }
+        }
+        
+        guard cursorIndex >= 0 else {
+            return
         }
         
         webView.evaluateJavaScript("""
@@ -344,6 +413,7 @@ extension ScaleInfoUpdateTableViewController: WKUIDelegate, WKNavigationDelegate
         // ===== 분기별 작업 =====
         switch mode {
         case .create:
+            // degreesViewModel이 로딩이 안된 상태이므로 viewDidLoad에서 실행
             break
         case .update:
             let abcjsText = infoViewModel!.abcjsTextForEditAsc
@@ -377,8 +447,6 @@ extension ScaleInfoUpdateTableViewController: WKUIDelegate, WKNavigationDelegate
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print(#function)
-        
         highlightLastNote()
     }
     
