@@ -753,7 +753,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x3u-V4-Caz" customClass="CosmosView" customModule="MusicScale" customModuleProvider="target">
-                                            <rect key="frame" x="271" y="17" width="123" height="26"/>
+                                            <rect key="frame" x="299" y="19" width="103" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
@@ -763,7 +763,7 @@
                                                     <real key="value" value="3"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                                    <real key="value" value="25"/>
+                                                    <real key="value" value="20"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
                                                     <real key="value" value="0.0"/>
@@ -898,7 +898,7 @@
             <size key="intrinsicContentSize" width="170" height="30"/>
         </designable>
         <designable name="x3u-V4-Caz">
-            <size key="intrinsicContentSize" width="125" height="25"/>
+            <size key="intrinsicContentSize" width="100" height="20"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>

@@ -42,8 +42,8 @@ class ScaleInfoListViewModel {
         }
     }
     
+    /// 받아온 entity를 totalEntityDatadp 추가하고 테이블뷰 reload (코어 데이타 전체를 다시 불러오지는 않는다.)
     func addCreatedInfoToList(entity: ScaleInfoEntity) {
-        // let viewModel = ScaleInfoViewModel(scaleInfo: info, currentKey: .C, currentTempo: 100, entity: entity)
         totalEntityData.insert(entity, at: 0)
         handleDataReloaded()
     }
@@ -79,4 +79,19 @@ class ScaleInfoListViewModel {
         }
     }
     
+    /// entity로 delete
+    func deleteScaleInfo(entity: ScaleInfoEntity) {
+        do {
+            try service.deleteCoreData(entityObject: entity)
+            
+            if let index = totalEntityData.firstIndex(of: entity) {
+                totalEntityData.remove(at: index)
+                print("endItemOnlyt", #function)
+                return
+            }
+            
+        } catch {
+            print(error)
+        }
+    }
 }

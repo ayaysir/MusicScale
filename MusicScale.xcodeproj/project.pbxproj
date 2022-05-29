@@ -20,6 +20,7 @@
 		441FA163283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441FA162283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift */; };
 		443A0C612842864400641BC0 /* CreateScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C602842864400641BC0 /* CreateScaleInfoViewModel.swift */; };
 		443A0C6328428F3100641BC0 /* Between.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C6228428F3100641BC0 /* Between.swift */; };
+		443A0C652843E99B00641BC0 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C642843E99B00641BC0 /* SimpleAlert.swift */; };
 		4463FEA7282BDFF700E7A607 /* PianoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEA6282BDFF700E7A607 /* PianoViewController.swift */; };
 		4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEA9282BE28800E7A607 /* UIViewPreview.swift */; };
 		4463FEAD282C0E6600E7A607 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEAC282C0E6600E7A607 /* Note.swift */; };
@@ -109,6 +110,7 @@
 		441FA162283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoUpdateTableViewController.swift; sourceTree = "<group>"; };
 		443A0C602842864400641BC0 /* CreateScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScaleInfoViewModel.swift; sourceTree = "<group>"; };
 		443A0C6228428F3100641BC0 /* Between.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Between.swift; sourceTree = "<group>"; };
+		443A0C642843E99B00641BC0 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
 		4463FEA6282BDFF700E7A607 /* PianoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoViewController.swift; sourceTree = "<group>"; };
 		4463FEA9282BE28800E7A607 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		4463FEAC282C0E6600E7A607 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				440637F9283083AE00875E77 /* JSONCoder.swift */,
 				446AEA2F28411ED300C2BFCF /* Toast.swift */,
 				446AEA3128413E0200C2BFCF /* Cosmos.swift */,
+				443A0C642843E99B00641BC0 /* SimpleAlert.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 				441FA160283A8C370084AE58 /* FloatingPoint.swift in Sources */,
 				44A09A7F283929FB0067184E /* EnharmonicMode.swift in Sources */,
 				4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */,
+				443A0C652843E99B00641BC0 /* SimpleAlert.swift in Sources */,
 				44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */,
 				44A09A8528394A200067184E /* DropDownTransposeViewModel.swift in Sources */,
 				4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */,

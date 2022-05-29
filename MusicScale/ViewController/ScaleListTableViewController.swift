@@ -13,7 +13,6 @@ class ScaleListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         scaleListViewModel.handleDataReloaded = {
             self.tableView.reloadData()
@@ -22,9 +21,16 @@ class ScaleListTableViewController: UITableViewController {
     
     @IBAction func barBtnActEdit(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
+            // Edit mode off
             tableView.setEditing(false, animated: true)
+            sender.title = "Edit"
+            toggleStarRatingViewForCurrentVisibleCells(isEditing: false)
         } else {
+            // Edit mode on
             tableView.setEditing(true, animated: true)
+            sender.title = "Done"
+            toggleStarRatingViewForCurrentVisibleCells(isEditing: true)
+            
         }
     }
     
@@ -32,14 +38,28 @@ class ScaleListTableViewController: UITableViewController {
         performSegue(withIdentifier: "CreateScaleInfoSegue", sender: nil)
     }
     
+    // MARK: - Custome Methods
+    func toggleStarRatingViewForCurrentVisibleCells(isEditing: Bool) {
+        tableView.indexPathsForVisibleRows?.forEach { indexPath in
+            let cell = tableView.cellForRow(at: indexPath) as! ScaleListCell
+            cell.cosmosViewMyPriority.isHidden = isEditing
+        }
+    }
+    
     // MARK: - Table view data source
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return scaleListViewModel.infoCount
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ScaleListCell", for: indexPath) as? ScaleListCell else {
             return UITableViewCell()
         }
@@ -48,27 +68,63 @@ class ScaleListTableViewController: UITableViewController {
             return UITableViewCell()
         }
         cell.configure(infoViewModel: infoViewModel)
+        
+        if tableView.isEditing {
+            cell.cosmosViewMyPriority.isHidden = true
+        } else {
+            cell.cosmosViewMyPriority.isHidden = false
+        }
 
         return cell
     }
 
-    // // Override to support conditional editing of the table view.
-    // override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    //     // Return false if you do not want the specified item to be editable.
-    //     return true
-    // }
-    //
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    
     // // Override to support editing the table view.
     // override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     //     if editingStyle == .delete {
     //         // Delete the row from the data source
-    //         tableView.deleteRows(at: [indexPath], with: .fade)
+    //         // tableView.deleteRows(at: [indexPath], with: .fade)
+    //         print("dlete")
     //     } else if editingStyle == .insert {
     //         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     //     }
-    //
     // }
     
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        print(#function, indexPath)
+        
+        if tableView.isEditing {
+            
+            let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
+                
+                let cell = tableView.cellForRow(at: indexPath) as! ScaleListCell
+                let entity = cell.infoViewModel.entity
+                
+                simpleDestructiveYesAndNo(self, message: "Do you want to delete? It cannot be recovered.", title: "Delete") { action in
+                    self.scaleListViewModel.deleteScaleInfo(entity: entity)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    completionHandler(true)
+                }
+            }
+            
+            let swipeAction = UISwipeActionsConfiguration(actions: [delete])
+            swipeAction.performsFirstActionWithFullSwipe = false // This is the line which disables full swipe
+            return swipeAction
+        } else {
+            let config = UISwipeActionsConfiguration()
+            config.performsFirstActionWithFullSwipe = false
+            return config
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sender: [String: Any] = [
             "indexPath": indexPath,
@@ -76,21 +132,17 @@ class ScaleListTableViewController: UITableViewController {
         ]
         performSegue(withIdentifier: "DetailViewSegue", sender: sender)
     }
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+    
+    // // Override to support rearranging the table view.
+    // override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    //
+    // }
+    //
+    // // Override to support conditional rearranging of the table view.
+    // override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    //     // Return false if you do not want the item to be re-orderable.
+    //     return true
+    // }
 
     // MARK: - Navigation
     
@@ -142,11 +194,16 @@ class ScaleListCell: UITableViewCell {
     @IBOutlet weak var lblNameAlias: UILabel!
     @IBOutlet weak var cosmosViewMyPriority: CosmosView!
     
+    private(set) var infoViewModel: ScaleInfoViewModel!
+    
     override func prepareForReuse() {
         cosmosViewMyPriority.prepareForReuse()
     }
     
     func configure(infoViewModel: ScaleInfoViewModel) {
+        
+        self.infoViewModel = infoViewModel
+        
         lblName.text = infoViewModel.name
         lblNameAlias.text = infoViewModel.nameAlias
         
