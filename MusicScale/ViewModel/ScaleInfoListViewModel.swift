@@ -26,11 +26,54 @@ class ScaleInfoListViewModel {
     private func fetchCoreData() {
         // 이 작업이 실행될떄마다 뷰도 새로고침한다.
         do {
-            totalEntityData = try service.readCoreData()
+            
+            let sort = NSSortDescriptor(key: "displayOrder", ascending: true)
+            totalEntityData = try service.readCoreData(sortDescriptors: [sort])
             handleDataReloaded()
         } catch {
             print(error)
         }
+    }
+    
+    // 정렬
+    func compareTwo<T: Comparable>(by order: SortOrder, left: T, right: T) -> Bool {
+        
+        guard order == .ascending || order == .descending else {
+            return false
+        }
+        
+        if order == .ascending {
+            return left < right
+        } else {
+            return left > right
+        }
+    }
+    
+    func orderByUserSequence() {
+        totalEntityData.sort { leftEntity, rightEntity in
+            leftEntity.displayOrder < rightEntity.displayOrder
+        }
+        SortFilterConfigStore.shared.currentState = .displayOrder
+        SortFilterConfigStore.shared.curentOrder = .none
+        handleDataReloaded()
+    }
+    
+    func orderByNameDisplayOrder(order: SortOrder) {
+        totalEntityData.sort { leftEntity, rightEntity in
+            compareTwo(by: order, left: leftEntity.name!, right: rightEntity.name!)
+        }
+        SortFilterConfigStore.shared.currentState = .name
+        SortFilterConfigStore.shared.curentOrder = order
+        handleDataReloaded()
+    }
+    
+    func orderByMyPriority(order: SortOrder) {
+        totalEntityData.sort { leftEntity, rightEntity in
+            return compareTwo(by: order, left: leftEntity.myPriority, right: rightEntity.myPriority)
+        }
+        SortFilterConfigStore.shared.currentState = .priority
+        SortFilterConfigStore.shared.curentOrder = order
+        handleDataReloaded()
     }
     
     func addScaleInfo(info: ScaleInfo) {
@@ -79,14 +122,14 @@ class ScaleInfoListViewModel {
         }
     }
     
-    /// entity로 delete
+    /// entity로 delete (readCoreData는 하지 않음)
     func deleteScaleInfo(entity: ScaleInfoEntity) {
         do {
             try service.deleteCoreData(entityObject: entity)
             
             if let index = totalEntityData.firstIndex(of: entity) {
                 totalEntityData.remove(at: index)
-                print("endItemOnlyt", #function)
+                
                 return
             }
             

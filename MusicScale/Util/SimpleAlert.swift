@@ -38,3 +38,7 @@ func simpleYesAndNo(_ controller: UIViewController, message: String, title: Stri
     alertController.addAction(alertActionYes)
     controller.present(alertController, animated: true, completion: nil)
 }
+
+func simpleActionSheet(_ controller: UIViewController) {
+    
+}

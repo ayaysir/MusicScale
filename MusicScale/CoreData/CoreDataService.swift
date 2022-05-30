@@ -64,7 +64,7 @@ struct ScaleInfoCDService {
         }
     }
     
-    func readCoreData() throws -> [ScaleInfoEntity] {
+    func readCoreData(sortDescriptors: [NSSortDescriptor] = []) throws -> [ScaleInfoEntity] {
         
         guard let managedContext = managedContext else {
             throw CDError.appDelegateNotExist
@@ -74,8 +74,7 @@ struct ScaleInfoCDService {
         let fetchRequest = NSFetchRequest<ScaleInfoEntity>(entityName: ENTITY_NAME)
         
         // 정렬 또는 조건 설정
-        // let sort = NSSortDescriptor(key: "date", ascending: false)
-        // fetchRequest.sortDescriptors = [sort]
+        fetchRequest.sortDescriptors = sortDescriptors
         // fetchRequest.predicate = NSPredicate(format: "isFinished = %@", NSNumber(value: isFinished))
         
         do {

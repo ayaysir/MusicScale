@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import PanModal
 
 class ScaleListTableViewController: UITableViewController {
     
     let scaleListViewModel = ScaleInfoListViewModel()
+    lazy var sortVC: SortViewController & PanModalPresentable = {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortViewController") as! SortViewController
+        vc.delegate = self
+        return vc
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +23,17 @@ class ScaleListTableViewController: UITableViewController {
         scaleListViewModel.handleDataReloaded = {
             self.tableView.reloadData()
         }
+        
+        // search
+        let searchController = UISearchController(searchResultsController: nil)
+        self.navigationItem.searchController = searchController
+        searchController.searchBar.scopeButtonTitles = [
+          "All", "Name", "Comment", "Degrees"
+        ]
+        // self.navigationController?.navigationBar.prefersLargeTitles = true
+            
+        
+        
     }
     
     @IBAction func barBtnActEdit(_ sender: UIBarButtonItem) {
@@ -34,9 +51,14 @@ class ScaleListTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func barBnActAdd(_ sender: Any) {
+    @IBAction func barBtnActAdd(_ sender: Any) {
         performSegue(withIdentifier: "CreateScaleInfoSegue", sender: nil)
     }
+    
+    @IBAction func barBtnActSort(_ sender: Any) {
+        self.presentPanModal(sortVC)
+    }
+    
     
     // MARK: - Custome Methods
     func toggleStarRatingViewForCurrentVisibleCells(isEditing: Bool) {
@@ -45,6 +67,7 @@ class ScaleListTableViewController: UITableViewController {
             cell.cosmosViewMyPriority.isHidden = isEditing
         }
     }
+    
     
     // MARK: - Table view data source
     
@@ -187,6 +210,23 @@ extension ScaleListTableViewController: ScaleInfoUpdateTVCDelegate {
     }
 }
 
+// MARK: - SortVCDelegate
+extension ScaleListTableViewController: SortVCDelegate {
+    
+    func didSortDone(_ controller: SortViewController, sortInfo: SortInfo) {
+        switch sortInfo.state {
+        case .none:
+            break
+        case .displayOrder:
+            scaleListViewModel.orderByUserSequence()
+        case .name:
+            scaleListViewModel.orderByNameDisplayOrder(order: sortInfo.order)
+        case .priority:
+            scaleListViewModel.orderByMyPriority(order: sortInfo.order)
+        }
+    }
+}
+
 // MARK: - ScaleListCell
 class ScaleListCell: UITableViewCell {
     
@@ -207,7 +247,20 @@ class ScaleListCell: UITableViewCell {
         lblName.text = infoViewModel.name
         lblNameAlias.text = infoViewModel.nameAlias
         
+        if infoViewModel.myPriority <= 0 {
+            cosmosViewMyPriority.filledColor = .systemGray3
+        } else {
+            cosmosViewMyPriority.filledColor = .orange
+        }
+        
         cosmosViewMyPriority.settings.passTouchesToSuperview = false
         cosmosViewMyPriority.rating = Double(infoViewModel.priorityForDisplayBoth)
+        
+        cosmosViewMyPriority.didTouchCosmos = { rating in
+            self.cosmosViewMyPriority.filledColor = .orange
+        }
+        cosmosViewMyPriority.didFinishTouchingCosmos = { rating in
+            infoViewModel.updateMyPriority(Int(rating))
+        }
     }
 }

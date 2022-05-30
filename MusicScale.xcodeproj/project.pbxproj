@@ -21,6 +21,9 @@
 		443A0C612842864400641BC0 /* CreateScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C602842864400641BC0 /* CreateScaleInfoViewModel.swift */; };
 		443A0C6328428F3100641BC0 /* Between.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C6228428F3100641BC0 /* Between.swift */; };
 		443A0C652843E99B00641BC0 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C642843E99B00641BC0 /* SimpleAlert.swift */; };
+		446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446100BA284517FB0033BCE9 /* UIColor+.swift */; };
+		446100BE28451B370033BCE9 /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = 446100BD28451B370033BCE9 /* PanModal */; };
+		4461012F28451EE30033BCE9 /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4461012E28451EE30033BCE9 /* SortViewController.swift */; };
 		4463FEA7282BDFF700E7A607 /* PianoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEA6282BDFF700E7A607 /* PianoViewController.swift */; };
 		4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEA9282BE28800E7A607 /* UIViewPreview.swift */; };
 		4463FEAD282C0E6600E7A607 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEAC282C0E6600E7A607 /* Note.swift */; };
@@ -70,6 +73,8 @@
 		44A09A8128392C0B0067184E /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A8028392C0B0067184E /* UserDefaults+.swift */; };
 		44A09A832839327F0067184E /* OnlyFirstRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A822839327F0067184E /* OnlyFirstRun.swift */; };
 		44A09A8528394A200067184E /* DropDownTransposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A8428394A200067184E /* DropDownTransposeViewModel.swift */; };
+		44B4AB8428453286008C8AFD /* SortFilterConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4AB8328453285008C8AFD /* SortFilterConfigStore.swift */; };
+		44B4AB8628453AB5008C8AFD /* SortList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4AB8528453AB5008C8AFD /* SortList.swift */; };
 		4BE14DBCD05F5882BF98D64F /* Pods_MusicScale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214599025073672669B0DEA4 /* Pods_MusicScale.framework */; };
 		DE03C6B45056C54CF4C98113 /* Pods_MusicScale_MusicScaleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFCC8F1225122295FF5581 /* Pods_MusicScale_MusicScaleUITests.framework */; };
 /* End PBXBuildFile section */
@@ -111,6 +116,8 @@
 		443A0C602842864400641BC0 /* CreateScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScaleInfoViewModel.swift; sourceTree = "<group>"; };
 		443A0C6228428F3100641BC0 /* Between.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Between.swift; sourceTree = "<group>"; };
 		443A0C642843E99B00641BC0 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
+		446100BA284517FB0033BCE9 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		4461012E28451EE30033BCE9 /* SortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
 		4463FEA6282BDFF700E7A607 /* PianoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoViewController.swift; sourceTree = "<group>"; };
 		4463FEA9282BE28800E7A607 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		4463FEAC282C0E6600E7A607 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -162,6 +169,8 @@
 		44A09A8028392C0B0067184E /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		44A09A822839327F0067184E /* OnlyFirstRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyFirstRun.swift; sourceTree = "<group>"; };
 		44A09A8428394A200067184E /* DropDownTransposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTransposeViewModel.swift; sourceTree = "<group>"; };
+		44B4AB8328453285008C8AFD /* SortFilterConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFilterConfigStore.swift; sourceTree = "<group>"; };
+		44B4AB8528453AB5008C8AFD /* SortList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortList.swift; sourceTree = "<group>"; };
 		4C9FB0A5D20EA8BA718B985F /* Pods-MusicScale.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScale.release.xcconfig"; path = "Target Support Files/Pods-MusicScale/Pods-MusicScale.release.xcconfig"; sourceTree = "<group>"; };
 		9FA4470F182FF4C132941F6A /* Pods-MusicScaleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScaleTests.debug.xcconfig"; path = "Target Support Files/Pods-MusicScaleTests/Pods-MusicScaleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4FFCC8F1225122295FF5581 /* Pods_MusicScale_MusicScaleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicScale_MusicScaleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				446100BE28451B370033BCE9 /* PanModal in Frameworks */,
 				44A09A2C2832A3C90067184E /* AudioKit in Frameworks */,
 				4BE14DBCD05F5882BF98D64F /* Pods_MusicScale.framework in Frameworks */,
 				44A09A2F2832A40A0067184E /* SoundpipeAudioKit in Frameworks */,
@@ -246,6 +256,14 @@
 			path = ScaleInfo;
 			sourceTree = "<group>";
 		};
+		4461012D28451ECA0033BCE9 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				4461012E28451EE30033BCE9 /* SortViewController.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
 		4463FEA8282BE27600E7A607 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +279,7 @@
 				4463FEB0282C24CA00E7A607 /* PianoKeyInfo.swift */,
 				440637EF283003CC00875E77 /* ScaleInfo.swift */,
 				4475CB5A283176EA00B9D204 /* Music.swift */,
+				44B4AB8528453AB5008C8AFD /* SortList.swift */,
 			);
 			path = ValueObject;
 			sourceTree = "<group>";
@@ -321,6 +340,7 @@
 				44A09A8028392C0B0067184E /* UserDefaults+.swift */,
 				441FA15F283A8C370084AE58 /* FloatingPoint.swift */,
 				443A0C6228428F3100641BC0 /* Between.swift */,
+				446100BA284517FB0033BCE9 /* UIColor+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -401,6 +421,7 @@
 		44709D8A276A3BB800BBF6C9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				4461012D28451ECA0033BCE9 /* Modal */,
 				441FA161283BE32B0084AE58 /* ScaleInfo */,
 				44709D8B276A3BDE00BBF6C9 /* ScoreWebViewController.swift */,
 				4463FEA6282BDFF700E7A607 /* PianoViewController.swift */,
@@ -414,6 +435,7 @@
 			isa = PBXGroup;
 			children = (
 				44A09A7C283808C90067184E /* ScaleInfoVCConfigStore.swift */,
+				44B4AB8328453285008C8AFD /* SortFilterConfigStore.swift */,
 			);
 			path = UserDefaults;
 			sourceTree = "<group>";
@@ -449,6 +471,7 @@
 			packageProductDependencies = (
 				44A09A2B2832A3C90067184E /* AudioKit */,
 				44A09A2E2832A40A0067184E /* SoundpipeAudioKit */,
+				446100BD28451B370033BCE9 /* PanModal */,
 			);
 			productName = MusicScale;
 			productReference = 44709D52276A334F00BBF6C9 /* MusicScale.app */;
@@ -528,6 +551,7 @@
 			packageReferences = (
 				44A09A2A2832A3C90067184E /* XCRemoteSwiftPackageReference "AudioKit" */,
 				44A09A2D2832A40A0067184E /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */,
+				446100BC28451B370033BCE9 /* XCRemoteSwiftPackageReference "PanModal" */,
 			);
 			productRefGroup = 44709D53276A334F00BBF6C9 /* Products */;
 			projectDirPath = "";
@@ -685,9 +709,11 @@
 				44709D60276A334F00BBF6C9 /* MusicScale.xcdatamodeld in Sources */,
 				4475CB5B283176EA00B9D204 /* Music.swift in Sources */,
 				44709D5A276A334F00BBF6C9 /* ViewController.swift in Sources */,
+				44B4AB8628453AB5008C8AFD /* SortList.swift in Sources */,
 				446AEA3028411ED300C2BFCF /* Toast.swift in Sources */,
 				4463FEBA282D615400E7A607 /* MIDIManager.swift in Sources */,
 				4463FEB7282D3FCE00E7A607 /* PianoView.swift in Sources */,
+				4461012F28451EE30033BCE9 /* SortViewController.swift in Sources */,
 				44A09A8128392C0B0067184E /* UserDefaults+.swift in Sources */,
 				440637EB282FF6D900875E77 /* CoreDataService.swift in Sources */,
 				44A09A7D283808C90067184E /* ScaleInfoVCConfigStore.swift in Sources */,
@@ -719,6 +745,8 @@
 				443A0C6328428F3100641BC0 /* Between.swift in Sources */,
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,
 				4475CB512830A6C200B9D204 /* MusicSheetHelper.swift in Sources */,
+				446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */,
+				44B4AB8428453286008C8AFD /* SortFilterConfigStore.swift in Sources */,
 				4475CB532830B52700B9D204 /* String+.swift in Sources */,
 				446AEA2C283D3EB200C2BFCF /* WebMusicSheetHelper.swift in Sources */,
 				44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */,
@@ -1102,6 +1130,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		446100BC28451B370033BCE9 /* XCRemoteSwiftPackageReference "PanModal" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/slackhq/PanModal.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		44A09A2A2832A3C90067184E /* XCRemoteSwiftPackageReference "AudioKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AudioKit/AudioKit.git";
@@ -1121,6 +1157,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		446100BD28451B370033BCE9 /* PanModal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 446100BC28451B370033BCE9 /* XCRemoteSwiftPackageReference "PanModal" */;
+			productName = PanModal;
+		};
 		44A09A2B2832A3C90067184E /* AudioKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 44A09A2A2832A3C90067184E /* XCRemoteSwiftPackageReference "AudioKit" */;

@@ -22,6 +22,7 @@ import Foundation
 //typealias NoteNumberPair = (prefix: String, number: Int)
 //typealias NoteStrPair = (prefix: String, noteStr: String)
 
+
 enum DegreesOrder {
     case ascending, descending
     
