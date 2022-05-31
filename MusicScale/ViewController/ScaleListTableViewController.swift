@@ -11,11 +11,20 @@ import PanModal
 class ScaleListTableViewController: UITableViewController {
     
     let scaleListViewModel = ScaleInfoListViewModel()
+    
     lazy var sortVC: SortViewController & PanModalPresentable = {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortViewController") as! SortViewController
         vc.delegate = self
         return vc
     }()
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    var searchCategoryList: [SearchCategory] = []
+    var isFiltering: Bool {
+        let isActive = searchController.isActive
+        let isSearchBarHasText = searchController.searchBar.text?.isEmpty == false
+        return isActive && isSearchBarHasText
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,15 +34,12 @@ class ScaleListTableViewController: UITableViewController {
         }
         
         // search
-        let searchController = UISearchController(searchResultsController: nil)
         self.navigationItem.searchController = searchController
-        searchController.searchBar.scopeButtonTitles = [
-          "All", "Name", "Comment", "Degrees"
-        ]
+        searchController.searchBar.scopeButtonTitles = SearchCategory.allCases.map { $0.textValue }
+        searchCategoryList = SearchCategory.allCases
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
         // self.navigationController?.navigationBar.prefersLargeTitles = true
-            
-        
-        
     }
     
     @IBAction func barBtnActEdit(_ sender: UIBarButtonItem) {
@@ -47,7 +53,6 @@ class ScaleListTableViewController: UITableViewController {
             tableView.setEditing(true, animated: true)
             sender.title = "Done"
             toggleStarRatingViewForCurrentVisibleCells(isEditing: true)
-            
         }
     }
     
@@ -78,19 +83,25 @@ class ScaleListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return scaleListViewModel.infoCount
+        return !isFiltering ? scaleListViewModel.infoCount : scaleListViewModel.searchInfoCount
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ScaleListCell", for: indexPath) as? ScaleListCell else {
             return UITableViewCell()
         }
-
-        guard let infoViewModel = scaleListViewModel.getScaleInfoViewModelOf(index: indexPath.row) else {
-            return UITableViewCell()
+        
+        if isFiltering {
+            guard let searchedVM = scaleListViewModel.getSearchedInfoViewModelOf(index: indexPath.row) else {
+                return UITableViewCell()
+            }
+            cell.configure(infoViewModel: searchedVM)
+        } else {
+            guard let infoViewModel = scaleListViewModel.getScaleInfoViewModelOf(index: indexPath.row) else {
+                return UITableViewCell()
+            }
+            cell.configure(infoViewModel: infoViewModel)
         }
-        cell.configure(infoViewModel: infoViewModel)
         
         if tableView.isEditing {
             cell.cosmosViewMyPriority.isHidden = true
@@ -196,6 +207,20 @@ class ScaleListTableViewController: UITableViewController {
     }
 }
 
+// MARK: - UISearchBarDelegate, UISearchResultsUpdating
+extension ScaleListTableViewController: UISearchBarDelegate, UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchCategory = searchCategoryList[searchController.searchBar.selectedScopeButtonIndex]
+        guard let searchText = searchController.searchBar.text else { return }
+        scaleListViewModel.search(searchText: searchText, searchCategory: searchCategory)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+    }
+}
+
 // MARK: - ScaleInfoVCDelgate
 extension ScaleListTableViewController: ScaleInfoVCDelgate {
     
@@ -220,6 +245,12 @@ extension ScaleListTableViewController: ScaleInfoUpdateTVCDelegate {
 extension ScaleListTableViewController: SortVCDelegate {
     
     func didSortDone(_ controller: SortViewController, sortInfo: SortInfo) {
+        
+        // 검색중엔 정렬 버튼이 안나옴
+        // searchController.searchBar.text = ""
+        // searchController.resignFirstResponder()
+        // scaleListViewModel.resetSearch()
+        
         switch sortInfo.state {
         case .none:
             break

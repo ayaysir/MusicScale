@@ -75,6 +75,7 @@
 		44A09A8528394A200067184E /* DropDownTransposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A8428394A200067184E /* DropDownTransposeViewModel.swift */; };
 		44B4AB8428453286008C8AFD /* SortFilterConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4AB8328453285008C8AFD /* SortFilterConfigStore.swift */; };
 		44B4AB8628453AB5008C8AFD /* SortList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4AB8528453AB5008C8AFD /* SortList.swift */; };
+		44E7A07528467692005C7909 /* SearchCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E7A07428467692005C7909 /* SearchCategory.swift */; };
 		4BE14DBCD05F5882BF98D64F /* Pods_MusicScale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214599025073672669B0DEA4 /* Pods_MusicScale.framework */; };
 		DE03C6B45056C54CF4C98113 /* Pods_MusicScale_MusicScaleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFCC8F1225122295FF5581 /* Pods_MusicScale_MusicScaleUITests.framework */; };
 /* End PBXBuildFile section */
@@ -171,6 +172,7 @@
 		44A09A8428394A200067184E /* DropDownTransposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTransposeViewModel.swift; sourceTree = "<group>"; };
 		44B4AB8328453285008C8AFD /* SortFilterConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFilterConfigStore.swift; sourceTree = "<group>"; };
 		44B4AB8528453AB5008C8AFD /* SortList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortList.swift; sourceTree = "<group>"; };
+		44E7A07428467692005C7909 /* SearchCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategory.swift; sourceTree = "<group>"; };
 		4C9FB0A5D20EA8BA718B985F /* Pods-MusicScale.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScale.release.xcconfig"; path = "Target Support Files/Pods-MusicScale/Pods-MusicScale.release.xcconfig"; sourceTree = "<group>"; };
 		9FA4470F182FF4C132941F6A /* Pods-MusicScaleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScaleTests.debug.xcconfig"; path = "Target Support Files/Pods-MusicScaleTests/Pods-MusicScaleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4FFCC8F1225122295FF5581 /* Pods_MusicScale_MusicScaleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicScale_MusicScaleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -280,6 +282,7 @@
 				440637EF283003CC00875E77 /* ScaleInfo.swift */,
 				4475CB5A283176EA00B9D204 /* Music.swift */,
 				44B4AB8528453AB5008C8AFD /* SortList.swift */,
+				44E7A07428467692005C7909 /* SearchCategory.swift */,
 			);
 			path = ValueObject;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */,
 				443A0C652843E99B00641BC0 /* SimpleAlert.swift in Sources */,
 				44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */,
+				44E7A07528467692005C7909 /* SearchCategory.swift in Sources */,
 				44A09A8528394A200067184E /* DropDownTransposeViewModel.swift in Sources */,
 				4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */,
 				443A0C612842864400641BC0 /* CreateScaleInfoViewModel.swift in Sources */,

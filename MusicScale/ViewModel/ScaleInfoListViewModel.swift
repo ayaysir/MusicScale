@@ -17,6 +17,12 @@ class ScaleInfoListViewModel {
         return totalEntityData.count
     }
     
+    // 검색용
+    private var searchEntityData: [ScaleInfoEntity]!
+    var searchInfoCount: Int {
+        return searchEntityData.count
+    }
+    
     var handleDataReloaded: () -> () = {}
     
     init() {
@@ -33,6 +39,37 @@ class ScaleInfoListViewModel {
         } catch {
             print(error)
         }
+    }
+    
+    // 검색
+    func search(searchText: String, searchCategory: SearchCategory) {
+        let searchText = searchText.lowercased()
+        
+        searchEntityData = totalEntityData.filter { entity in
+            var results: [Bool] = []
+            let alwaysAll = searchCategory == .all
+            
+            if alwaysAll || searchCategory == .name {
+                results.append(entity.name?.lowercased().contains(searchText) ?? false)
+            }
+            
+            if alwaysAll || searchCategory == .comment {
+                results.append(entity.comment?.lowercased().contains(searchText) ?? false)
+            }
+            
+            if alwaysAll || searchCategory == .degrees {
+                results.append(entity.degreesAscending?.lowercased().contains(searchText) ?? false)
+                results.append(entity.degreesDescending?.lowercased().contains(searchText) ?? false)
+            }
+            
+            return results.reduce(false) { $0 || $1 }
+        }
+        
+        handleDataReloaded()
+    }
+    
+    func resetSearch() {
+        searchEntityData = []
     }
     
     // 정렬
@@ -93,9 +130,19 @@ class ScaleInfoListViewModel {
         handleDataReloaded()
     }
     
+    /// 뷰모델 만들기
     private var infoViewModels: [ScaleInfoViewModel?] {
-        
         return totalEntityData.map { (entity: ScaleInfoEntity) -> ScaleInfoViewModel? in
+            guard let scaleInfo = service.toScaleInfoStruct(from: entity) else {
+                return nil
+            }
+            return ScaleInfoViewModel(scaleInfo: scaleInfo, currentKey: .C, currentTempo: 100, entity: entity)
+        }
+    }
+    
+    /// 뷰모델 만들기 (검색용)
+    private var searchedInfoViewModel: [ScaleInfoViewModel?] {
+        return searchEntityData.map { (entity: ScaleInfoEntity) -> ScaleInfoViewModel? in
             guard let scaleInfo = service.toScaleInfoStruct(from: entity) else {
                 return nil
             }
@@ -105,6 +152,10 @@ class ScaleInfoListViewModel {
     
     func getScaleInfoViewModelOf(index: Int) -> ScaleInfoViewModel? {
         return infoViewModels[index]
+    }
+    
+    func getSearchedInfoViewModelOf(index: Int) -> ScaleInfoViewModel? {
+        return searchedInfoViewModel[index]
     }
     
     func updateScaleInfo(index: Int, info: ScaleInfo) {
