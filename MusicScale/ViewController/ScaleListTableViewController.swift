@@ -156,16 +156,22 @@ class ScaleListTableViewController: UITableViewController {
         performSegue(withIdentifier: "DetailViewSegue", sender: sender)
     }
     
-    // // Override to support rearranging the table view.
-    // override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-    //
-    // }
-    //
-    // // Override to support conditional rearranging of the table view.
-    // override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-    //     // Return false if you do not want the item to be re-orderable.
-    //     return true
-    // }
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+        print(fromIndexPath, to)
+        let fromEntity = (tableView.cellForRow(at: fromIndexPath) as! ScaleListCell).infoViewModel.entity
+        
+        scaleListViewModel.changeOrder(from: fromEntity, toIndex: to)
+    }
+    
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        if SortFilterConfigStore.shared.currentState == .displayOrder {
+            return true
+        }
+        return false
+    }
 
     // MARK: - Navigation
     
@@ -222,7 +228,7 @@ extension ScaleListTableViewController: SortVCDelegate {
         case .name:
             scaleListViewModel.orderByNameDisplayOrder(order: sortInfo.order)
         case .priority:
-            scaleListViewModel.orderByMyPriority(order: sortInfo.order)
+            scaleListViewModel.orderByDisplayedPriority(order: sortInfo.order)
         }
     }
 }

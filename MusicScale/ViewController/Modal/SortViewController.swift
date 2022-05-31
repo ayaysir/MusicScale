@@ -22,7 +22,7 @@ class SortViewController: UIViewController {
     let menus: [SortInfo] = [
         SortInfo(title: "Custom Display Order", order: .none, state: .displayOrder),
         SortInfo(title: "Scale Name", order: .none, state: .name),
-        SortInfo(title: "My Priority", order: .none, state: .priority),
+        SortInfo(title: "Priority", order: .none, state: .priority),
     ]
     
     override func viewDidLoad() {
@@ -38,13 +38,20 @@ class SortViewController: UIViewController {
     
     @IBAction func btnActDone(_ sender: Any) {
         
+        var info: SortInfo!
         if let selectedIndexPath = tableViewButtons.indexPathForSelectedRow {
-            var info = menus[selectedIndexPath.row]
-            if segAscDesc.isEnabled {
-                info.order = segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
+            info = menus[selectedIndexPath.row]
+        } else {
+            let state = SortFilterConfigStore.shared.currentState
+            info = menus.first { info in
+                info.state == state
             }
-            delegate?.didSortDone(self, sortInfo: info)
         }
+        
+        if segAscDesc.isEnabled {
+            info.order = segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
+        }
+        delegate?.didSortDone(self, sortInfo: info)
         
         self.dismiss(animated: true)
     }
@@ -137,9 +144,10 @@ class SortButtonCell: UITableViewCell {
         // 현재 필터인 경우 체크마크
         
         // 선택시 색 변화
-        let bgView = UIView()
-        selectedBackgroundView = bgView
-        selectedBackgroundView!.backgroundColor = UIColor(fromGooglePicker: "255, 172, 166")
+        // let bgView = UIView()
+        // selectedBackgroundView = bgView
+        // // selectedBackgroundView!.backgroundColor = UIColor(fromGooglePicker: "255, 172, 166")
+        // selectedBackgroundView!.backgroundColor = .clear
     }
 }
 

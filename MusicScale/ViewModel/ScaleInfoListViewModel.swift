@@ -67,9 +67,11 @@ class ScaleInfoListViewModel {
         handleDataReloaded()
     }
     
-    func orderByMyPriority(order: SortOrder) {
+    func orderByDisplayedPriority(order: SortOrder) {
         totalEntityData.sort { leftEntity, rightEntity in
-            return compareTwo(by: order, left: leftEntity.myPriority, right: rightEntity.myPriority)
+            let leftTargetPriority = leftEntity.myPriority > 0 ? leftEntity.myPriority : leftEntity.defaultPriority
+            let rightTargetPriority = rightEntity.myPriority > 0 ? rightEntity.myPriority : rightEntity.defaultPriority
+            return compareTwo(by: order, left: leftTargetPriority, right: rightTargetPriority)
         }
         SortFilterConfigStore.shared.currentState = .priority
         SortFilterConfigStore.shared.curentOrder = order
@@ -136,5 +138,61 @@ class ScaleInfoListViewModel {
         } catch {
             print(error)
         }
+    }
+    
+    func changeOrder(from fromEntity: ScaleInfoEntity, toIndex: IndexPath) {
+        guard let fromEntityIndex = totalEntityData.firstIndex(of: fromEntity) else {
+            return
+        }
+        
+        if totalEntityData[fromEntityIndex] == fromEntity {
+            totalEntityData.remove(at: fromEntityIndex)
+            totalEntityData.insert(fromEntity, at: toIndex.row)
+            
+            // totalEntityData.enumerated().forEach { (index, entity) in
+            //     entity.displayOrder = Int16(index)
+            // }
+            
+            // 절반 기준으로 오른쪽에 있으면 오른쪽 이후 순서를 바꾸고, 반대의 경우 왼쪽 이전의 순서를 바꾼다.
+            
+            let mid = (totalEntityData.count - 1) / 2
+            if mid < toIndex.row {
+                let beforeEntityDispOrder = totalEntityData[toIndex.row - 1].displayOrder
+                let targetDisplayOrder = beforeEntityDispOrder + 1
+                let halfRight = totalEntityData[(toIndex.row)..<totalEntityData.count]
+                halfRight.enumerated().forEach { (index, entity) in
+                    entity.displayOrder = (targetDisplayOrder + Int16(index))
+                }
+            } else {
+                /*
+                 5 [0, 8] Optional("Lydian mode")
+                 ["1:bcxvbvc", "2:vzcx", "3:Dorian mode", "4:Ioniand", "5:Phrygian mode", "6:Mixolydian mode", "7:Aeolian mode", "8:Locrian mode", "132:Lydian mode(삽입됨)",  "9:?????",
+                 - 9번의 DisplayOrder 가져오고
+                 - 132번의 DisplayOrder 를 9번 displayOrder - 1 해서 8로 변경해야 됨
+                 - 최종 결과는 아래와 같이 되야함
+                 
+                 "0:bcxvbvc", "1:vzcx", "2:Dorian mode", "3:Ioniand", "4:Phrygian mode", "5:Mixolydian mode", "6:Aeolian mode", "7:Locrian mode", "8:Lydian mode",
+                 
+                 "-3:bcxvbvc", "2:vzcx", "1:Dorian mode", "0:Ioniand", "1:Phrygian mode", "2:Mixolydian mode", "3:Aeolian mode", "4:Locrian mode", "5:Lydian mode",
+                 
+                 "113:bcxvbvc", "114:vzcx", "115:Dorian mode", "116:Ioniand", "117:Phrygian mode", "118:Mixolydian mode", "119:Aeolian mode", "120:Locrian mode", "121:Lydian mode",
+                 
+                 - (targetDisplayOrder - (lydian까지의 count - 1)) 에서부터  index(0~를 더해야 최종 결과가 목표한 숫자에 도달
+                 
+                 */
+                let afterEntityDispOrder = totalEntityData[toIndex.row + 1].displayOrder
+                let targetDisplayOrder: Int16 = afterEntityDispOrder - 1
+                let halfLeft = totalEntityData[0...toIndex.row]
+                // print(halfLeft.map{ "\($0.displayOrder):\($0.name!)" })
+                let startDisplayOrder: Int16 = targetDisplayOrder - Int16((halfLeft.count - 1))
+                halfLeft.enumerated().forEach { (index, entity) in
+                    entity.displayOrder = startDisplayOrder + Int16(index)
+                }
+            }
+        }
+        
+        print("=========================")
+        print(totalEntityData!.map({ "\($0.displayOrder):\($0.name!)" }))
+        
     }
 }

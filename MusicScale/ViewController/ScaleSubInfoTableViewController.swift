@@ -104,12 +104,7 @@ extension ScaleSubInfoTableViewController {
         lblPattern.text = scaleInfoViewModel.ascendingPattern
         lblIntegerNotation.text = scaleInfoViewModel.ascendingIntegerNotation
         
-        let fillColor: UIColor = {
-            if scaleInfoViewModel.isPriorityCustomized {
-                return .orange
-            }
-            return .systemGray3
-        }()
+        let fillColor: UIColor = scaleInfoViewModel.isPriorityCustomized ? .orange : .systemGray3
         lblPriority.attributedText = starRatingVM.starTextAttributedStr(fillCount: scaleInfoViewModel.priorityForDisplayBoth, fillColor: fillColor)
         
         
