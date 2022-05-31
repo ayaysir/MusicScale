@@ -57,12 +57,20 @@ class ScaleInfoViewModel {
         return scaleInfo.myPriority
     }
     
-    var priorityForDisplayBoth: Int {
-        if myPriority <= 0 {
-            return defaultPriority
+    var isPriorityCustomized: Bool {
+        if myPriority > 0 {
+            return true
         }
         
-        return myPriority
+        return false
+    }
+    
+    var priorityForDisplayBoth: Int {
+        // if myPriority <= 0 {
+        //     return defaultPriority
+        // }
+        
+        return isPriorityCustomized ? myPriority : defaultPriority
     }
     
     var comment: String {

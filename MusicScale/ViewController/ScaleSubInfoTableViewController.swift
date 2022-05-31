@@ -85,7 +85,7 @@ extension ScaleSubInfoTableViewController {
             
             let rating = item.count
             print(item, rating)
-            self.lblPriority.text = self.starRatingVM.starTextWithBlankStars(fillCount: rating)
+            self.lblPriority.attributedText = self.starRatingVM.starTextAttributedStr(fillCount: rating)
             self.scaleInfoViewModel.updateMyPriority(rating)
             
             if let delegate = self.delegate {
@@ -104,11 +104,17 @@ extension ScaleSubInfoTableViewController {
         lblPattern.text = scaleInfoViewModel.ascendingPattern
         lblIntegerNotation.text = scaleInfoViewModel.ascendingIntegerNotation
         
-        lblPriority.text = starRatingVM.starTextWithBlankStars(fillCount: scaleInfoViewModel.priorityForDisplayBoth)
+        let fillColor: UIColor = {
+            if scaleInfoViewModel.isPriorityCustomized {
+                return .orange
+            }
+            return .systemGray3
+        }()
+        lblPriority.attributedText = starRatingVM.starTextAttributedStr(fillCount: scaleInfoViewModel.priorityForDisplayBoth, fillColor: fillColor)
+        
         
         txvComment.text = scaleInfoViewModel.comment
         txvComment.sizeToFit()
-        
         
         if isUpdated {
             tableView.reloadRows(at: [cellAliasIndexPath, cellCommentIndexPath], with: .none)
@@ -145,4 +151,21 @@ struct StarRatingViewModel {
         return String(repeating: "★", count: fillCount) + String(repeating: "☆", count: 5 - fillCount)
     }
     
+    func starTextAttributedStr(fillCount: Int, fillColor: UIColor = .orange) -> NSMutableAttributedString {
+        
+        let starTextAttr = NSMutableAttributedString(string: String(repeating: "★", count: 5))
+        
+        var strokeTextAttributes: [NSAttributedString.Key: Any] = [
+            .strokeColor: UIColor.orange,
+            .foregroundColor: fillColor,
+            .strokeWidth: -1.25,
+            .font: UIFont.systemFont(ofSize: 15),
+        ]
+        starTextAttr.addAttributes(strokeTextAttributes, range: NSRange(location: 0, length: fillCount))
+        
+        strokeTextAttributes[.foregroundColor] = UIColor.clear
+        starTextAttr.addAttributes(strokeTextAttributes, range: NSRange(location: fillCount, length: 5 - fillCount))
+        
+        return starTextAttr
+    }
 }
