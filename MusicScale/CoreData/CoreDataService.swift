@@ -190,7 +190,22 @@ struct ScaleInfoCDService {
             return nil
         }
         
-        return ScaleInfo(id: id, name: name, nameAlias: nameAlias, degreesAscending: degreesAscending, degreesDescending: degreesDescending, defaultPriority: defaultPriority, comment: comment, links: links, isDivBy12Tet: isDivBy12Tet, displayOrder: displayOrder, myPriority: myPriority)
+        return ScaleInfo(
+            id: id,
+            name: name,
+            nameAlias: nameAlias,
+            degreesAscending: degreesAscending,
+            degreesDescending: degreesDescending,
+            defaultPriority: defaultPriority,
+            comment: comment,
+            links: links,
+            isDivBy12Tet: isDivBy12Tet,
+            displayOrder: displayOrder,
+            myPriority: myPriority,
+            createdDate: Date(),
+            modifiedDate: Date(),
+            groupName: ""
+        )
     }
     
     func printScaleInfoEntity(array: [ScaleInfoEntity]) {

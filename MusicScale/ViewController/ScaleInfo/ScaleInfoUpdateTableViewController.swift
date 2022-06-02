@@ -270,16 +270,19 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
             
             // ScaleInfo 생성
             let createdInfo = ScaleInfo(id: UUID(),
-                      name: scaleName,
-                      nameAlias: convertScaleAliases(),
-                      degreesAscending: degreesAscending,
-                      degreesDescending: degreesDescending,
-                      defaultPriority: ratingInt,
-                      comment: comment,
-                      links: "",
-                      isDivBy12Tet: true,
-                      displayOrder: 1,
-                      myPriority: 0)
+                                        name: scaleName,
+                                        nameAlias: convertScaleAliases(),
+                                        degreesAscending: degreesAscending,
+                                        degreesDescending: degreesDescending,
+                                        defaultPriority: ratingInt,
+                                        comment: comment,
+                                        links: "",
+                                        isDivBy12Tet: true,
+                                        displayOrder: 1,
+                                        myPriority: 0,
+                                        createdDate: Date(),
+                                        modifiedDate: Date(),
+                                        groupName: "")
             
             do {
                 let entity = try ScaleInfoCDService.shared.saveCoreData(scaleInfo: createdInfo)
