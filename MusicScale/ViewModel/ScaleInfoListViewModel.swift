@@ -23,6 +23,10 @@ class ScaleInfoListViewModel {
         return searchEntityData.count
     }
     
+    func getInfoCount(isFiltering: Bool) -> Int {
+        return isFiltering ? searchInfoCount : infoCount
+    }
+    
     var handleDataReloaded: () -> () = {}
     
     init() {
@@ -158,6 +162,10 @@ class ScaleInfoListViewModel {
         return searchedInfoViewModel[index]
     }
     
+    func getScaleInfoVM(isFiltering: Bool, index: Int) -> ScaleInfoViewModel? {
+        return isFiltering ? getSearchedInfoViewModelOf(index: index) : getScaleInfoViewModelOf(index: index)
+    }
+    
     func updateScaleInfo(index: Int, info: ScaleInfo) {
         do {
             try service.updateCoreData(entityObject: totalEntityData[index], scaleInfo: info)
@@ -246,4 +254,5 @@ class ScaleInfoListViewModel {
         print(totalEntityData!.map({ "\($0.displayOrder):\($0.name!)" }))
         
     }
+    
 }

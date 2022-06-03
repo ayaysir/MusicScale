@@ -8,9 +8,28 @@
 import UIKit
 import PanModal
 
+protocol ScaleListTVCDelegate: AnyObject {
+    func didQuizListSubmitted(_ controller: ScaleListTableViewController, newCount: Int)
+}
+
+extension ScaleListTVCDelegate {
+    func didQuizListSubmitted(_ controller: ScaleListTableViewController, newCount: Int) {}
+}
+
 class ScaleListTableViewController: UITableViewController {
     
+    @IBOutlet weak var barBtnEdit: UIBarButtonItem!
+    @IBOutlet weak var barBtnAdd: UIBarButtonItem!
+    
     let scaleListViewModel = ScaleInfoListViewModel()
+    let quizViewModel = QuizViewModel()
+    
+    weak var quizDelegate: ScaleListTVCDelegate?
+    
+    enum Mode {
+        case main, quizSelect
+    }
+    var mode: Mode = .main
     
     lazy var sortVC: SortViewController & PanModalPresentable = {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortViewController") as! SortViewController
@@ -28,21 +47,55 @@ class ScaleListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
         scaleListViewModel.handleDataReloaded = {
             self.tableView.reloadData()
         }
         
-        // search
-        self.navigationItem.searchController = searchController
-        searchController.searchBar.scopeButtonTitles = SearchCategory.allCases.map { $0.textValue }
-        searchCategoryList = SearchCategory.allCases
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
-        // self.navigationController?.navigationBar.prefersLargeTitles = true
+        searchInit()
+        
+        if mode == .quizSelect {
+            barBtnEdit.isEnabled = false
+            barBtnEdit.title = ""
+            navigationItem.leftItemsSupplementBackButton = true
+            
+            changeSelectAllButtonTitle()
+            
+        }
+    }
+    
+    func changeSelectAllButtonTitle() {
+        if mode == .quizSelect {
+            let infoCount = scaleListViewModel.getInfoCount(isFiltering: isFiltering)
+            if quizViewModel.idListCount == infoCount {
+                barBtnAdd.title = "Deselect All"
+            } else {
+                barBtnAdd.title = "Select All"
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if mode == .quizSelect {
+            print(quizViewModel.scaleIdList)
+            // scaleListViewModel.getScaleInfoViewModelOf(index: <#T##Int#>)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if let quizDelegate = quizDelegate {
+            quizDelegate.didQuizListSubmitted(self, newCount: quizViewModel.idListCount)
+            quizViewModel.saveScaleListToConfigStore()
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func barBtnActEdit(_ sender: UIBarButtonItem) {
+        
+        if mode == .quizSelect {
+            return
+        }
+        
         if tableView.isEditing {
             // Edit mode off
             tableView.setEditing(false, animated: true)
@@ -56,8 +109,46 @@ class ScaleListTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func barBtnActAdd(_ sender: Any) {
-        performSegue(withIdentifier: "CreateScaleInfoSegue", sender: nil)
+    @IBAction func barBtnActAdd(_ sender: UIBarButtonItem) {
+        switch mode {
+        case .main:
+            performSegue(withIdentifier: "CreateScaleInfoSegue", sender: nil)
+        case .quizSelect:
+            // Select All
+            let infoCount = scaleListViewModel.getInfoCount(isFiltering: isFiltering)
+            if quizViewModel.idListCount == infoCount {
+                deselectAllCell()
+            } else {
+                selectAllCell()
+            }
+        }
+    }
+    
+    func selectAllCell() {
+        let count = scaleListViewModel.getInfoCount(isFiltering: isFiltering)
+        for row in 0..<count {
+            let infoVM = scaleListViewModel.getScaleInfoVM(isFiltering: isFiltering, index: row)
+            if let id = infoVM?.id {
+                quizViewModel.appendIdToScaleList(id)
+            }
+        }
+        tableView.reloadData()
+        changeSelectAllButtonTitle()
+    }
+    
+    func deselectAllCell() {
+        let count = scaleListViewModel.getInfoCount(isFiltering: isFiltering)
+        for row in 0..<count {
+            let infoVM = scaleListViewModel.getScaleInfoVM(isFiltering: isFiltering, index: row)
+            if let id = infoVM?.id {
+                quizViewModel.removeId(id)
+            }
+        }
+        if let first = scaleListViewModel.getScaleInfoVM(isFiltering: isFiltering, index: 0) {
+            quizViewModel.appendIdToScaleList(first.id)
+        }
+        tableView.reloadData()
+        changeSelectAllButtonTitle()
     }
     
     @IBAction func barBtnActSort(_ sender: Any) {
@@ -66,11 +157,36 @@ class ScaleListTableViewController: UITableViewController {
     
     
     // MARK: - Custome Methods
+    func searchInit() {
+        self.navigationItem.searchController = searchController
+        searchController.searchBar.scopeButtonTitles = SearchCategory.allCases.map { $0.textValue }
+        searchCategoryList = SearchCategory.allCases
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+        // self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     func toggleStarRatingViewForCurrentVisibleCells(isEditing: Bool) {
         tableView.indexPathsForVisibleRows?.forEach { indexPath in
             let cell = tableView.cellForRow(at: indexPath) as! ScaleListCell
             cell.cosmosViewMyPriority.isHidden = isEditing
         }
+    }
+    
+    func currentInfoViewModel(indexPath: IndexPath) -> ScaleInfoViewModel? {
+        if isFiltering {
+            return scaleListViewModel.getSearchedInfoViewModelOf(index: indexPath.row)
+        } else {
+            return  scaleListViewModel.getScaleInfoViewModelOf(index: indexPath.row)
+        }
+    }
+    
+    func toggleCheckmark(of cell: ScaleListCell, isCheckmark: Bool) {
+        let backgroundColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 0.2)
+        
+        cell.accessoryType = isCheckmark ? .checkmark : .none
+        cell.cosmosViewMyPriority.isHidden = isCheckmark
+        cell.backgroundColor = isCheckmark ? backgroundColor : .clear
     }
     
     
@@ -91,46 +207,37 @@ class ScaleListTableViewController: UITableViewController {
             return UITableViewCell()
         }
         
-        if isFiltering {
-            guard let searchedVM = scaleListViewModel.getSearchedInfoViewModelOf(index: indexPath.row) else {
-                return UITableViewCell()
+        let infoViewModel: ScaleInfoViewModel? = {
+            if isFiltering {
+                return scaleListViewModel.getSearchedInfoViewModelOf(index: indexPath.row)
+            } else {
+                return  scaleListViewModel.getScaleInfoViewModelOf(index: indexPath.row)
             }
-            cell.configure(infoViewModel: searchedVM)
-        } else {
-            guard let infoViewModel = scaleListViewModel.getScaleInfoViewModelOf(index: indexPath.row) else {
-                return UITableViewCell()
-            }
-            cell.configure(infoViewModel: infoViewModel)
+            
+        }()
+        
+        guard let infoViewModel = infoViewModel else {
+            return UITableViewCell()
+        }
+        cell.configure(infoViewModel: infoViewModel)
+        cell.cosmosViewMyPriority.isHidden = tableView.isEditing ? true : false
+        
+        if mode == .quizSelect {
+            cell.selectionStyle = .none
+            let containsId = quizViewModel.containsId(infoViewModel.id)
+            toggleCheckmark(of: cell, isCheckmark: containsId)
         }
         
-        if tableView.isEditing {
-            cell.cosmosViewMyPriority.isHidden = true
-        } else {
-            cell.cosmosViewMyPriority.isHidden = false
-        }
 
         return cell
     }
 
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
     
-    // // Override to support editing the table view.
-    // override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    //     if editingStyle == .delete {
-    //         // Delete the row from the data source
-    //         // tableView.deleteRows(at: [indexPath], with: .fade)
-    //         print("dlete")
-    //     } else if editingStyle == .insert {
-    //         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    //     }
-    // }
-    
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        print(#function, indexPath)
         
         if tableView.isEditing {
             
@@ -160,11 +267,35 @@ class ScaleListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sender: [String: Any] = [
-            "indexPath": indexPath,
-            "viewModel": scaleListViewModel.getScaleInfoViewModelOf(index: indexPath.row)!
-        ]
-        performSegue(withIdentifier: "DetailViewSegue", sender: sender)
+        let currentViewModel = currentInfoViewModel(indexPath: indexPath)!
+        
+        switch mode {
+        case .main:
+            let sender: [String: Any] = [
+                "indexPath": indexPath,
+                "viewModel": currentViewModel
+            ]
+            performSegue(withIdentifier: "DetailViewSegue", sender: sender)
+        case .quizSelect:
+            
+            let cell = tableView.cellForRow(at: indexPath) as! ScaleListCell
+            let isSelected = cell.accessoryType == .checkmark
+            
+            if isSelected {
+                if quizViewModel.idListCount <= 1 {
+                    simpleAlert(self, message: "At least one scale must be selected.")
+                    return
+                }
+                
+                quizViewModel.removeId(currentViewModel.id)
+                toggleCheckmark(of: cell, isCheckmark: false)
+            } else {
+                quizViewModel.appendIdToScaleList(currentViewModel.id)
+                toggleCheckmark(of: cell, isCheckmark: true)
+            }
+            
+            changeSelectAllButtonTitle()
+        }
     }
     
     // Override to support rearranging the table view.
@@ -299,5 +430,9 @@ class ScaleListCell: UITableViewCell {
         cosmosViewMyPriority.didFinishTouchingCosmos = { rating in
             infoViewModel.updateMyPriority(Int(rating))
         }
+    }
+    
+    func changeAccesoryType(_ type: UITableViewCell.AccessoryType) {
+        self.accessoryType = type
     }
 }

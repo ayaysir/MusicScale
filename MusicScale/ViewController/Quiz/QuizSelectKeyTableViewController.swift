@@ -27,7 +27,7 @@ class QuizSelectKeyTableViewController: UITableViewController {
                 let indexPath = IndexPath(row: firstIndex, section: 0)
                 tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
                 let cell = tableView.cellForRow(at: indexPath)
-                cell?.accessoryType = .checkmark
+                toggleCheckmark(cell!, isCheckmark: true)
             }
         }
     }
@@ -43,6 +43,17 @@ class QuizSelectKeyTableViewController: UITableViewController {
             delegate.didUpdated(self, newCount: availableKeyList.count)
         }
     }
+    
+    func toggleCheckmark(_ cell: UITableViewCell, isCheckmark: Bool) {
+        // background color
+        if isCheckmark {
+            cell.backgroundColor = UIColor.init(fromGooglePicker: "245, 180, 83")
+            cell.accessoryType = .checkmark
+        } else {
+            cell.backgroundColor = .clear
+            cell.accessoryType = .none
+        }
+    }
 
     // MARK: - Table view data source
 
@@ -50,8 +61,6 @@ class QuizSelectKeyTableViewController: UITableViewController {
         return Music.Key.allCases.count
     }
     
-    
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "KeyCell", for: indexPath) as? KeyCell else {
             return UITableViewCell()
@@ -65,9 +74,16 @@ class QuizSelectKeyTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.accessoryType = .checkmark
+        let cell = tableView.cellForRow(at: indexPath)!
+        toggleCheckmark(cell, isCheckmark: true)
         availableKeyList.insert(totalKeyList[indexPath.row])
+    }
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath)!
+        toggleCheckmark(cell, isCheckmark: false)
+        availableKeyList.remove(totalKeyList[indexPath.row])
     }
     
     override func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
@@ -76,13 +92,6 @@ class QuizSelectKeyTableViewController: UITableViewController {
             return nil
         }
         return indexPath
-    }
-    
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.accessoryType = .none
-        availableKeyList.remove(totalKeyList[indexPath.row])
     }
 }
 

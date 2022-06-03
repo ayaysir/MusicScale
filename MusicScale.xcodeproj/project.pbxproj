@@ -78,6 +78,7 @@
 		44B4AB8628453AB5008C8AFD /* SortList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4AB8528453AB5008C8AFD /* SortList.swift */; };
 		44B70F3B2848F1A90068495A /* QuizSelectKeyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F3A2848F1A90068495A /* QuizSelectKeyTableViewController.swift */; };
 		44B70F3D2848F4F40068495A /* QuizConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F3C2848F4F40068495A /* QuizConfigStore.swift */; };
+		44B70F4228491A650068495A /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F4128491A650068495A /* QuizViewModel.swift */; };
 		44E7A07528467692005C7909 /* SearchCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E7A07428467692005C7909 /* SearchCategory.swift */; };
 		4BE14DBCD05F5882BF98D64F /* Pods_MusicScale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214599025073672669B0DEA4 /* Pods_MusicScale.framework */; };
 		DE03C6B45056C54CF4C98113 /* Pods_MusicScale_MusicScaleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFCC8F1225122295FF5581 /* Pods_MusicScale_MusicScaleUITests.framework */; };
@@ -178,6 +179,7 @@
 		44B4AB8528453AB5008C8AFD /* SortList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortList.swift; sourceTree = "<group>"; };
 		44B70F3A2848F1A90068495A /* QuizSelectKeyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSelectKeyTableViewController.swift; sourceTree = "<group>"; };
 		44B70F3C2848F4F40068495A /* QuizConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizConfigStore.swift; sourceTree = "<group>"; };
+		44B70F4128491A650068495A /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		44E7A07428467692005C7909 /* SearchCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategory.swift; sourceTree = "<group>"; };
 		4C9FB0A5D20EA8BA718B985F /* Pods-MusicScale.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScale.release.xcconfig"; path = "Target Support Files/Pods-MusicScale/Pods-MusicScale.release.xcconfig"; sourceTree = "<group>"; };
 		9FA4470F182FF4C132941F6A /* Pods-MusicScaleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScaleTests.debug.xcconfig"; path = "Target Support Files/Pods-MusicScaleTests/Pods-MusicScaleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 		4463FEB2282D316700E7A607 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				44B70F4028491A560068495A /* Quiz */,
 				4463FEB3282D317700E7A607 /* PianoViewModel.swift */,
 				440637F1283003DE00875E77 /* ScaleInfoListViewModel.swift */,
 				44A09A28283293680067184E /* ScaleInfoViewModel.swift */,
@@ -458,6 +461,14 @@
 				44B70F3C2848F4F40068495A /* QuizConfigStore.swift */,
 			);
 			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		44B70F4028491A560068495A /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				44B70F4128491A650068495A /* QuizViewModel.swift */,
+			);
+			path = Quiz;
 			sourceTree = "<group>";
 		};
 		5FEB080EBDB1D36B4DC4A58A /* Frameworks */ = {
@@ -774,6 +785,7 @@
 				4475CB532830B52700B9D204 /* String+.swift in Sources */,
 				446AEA2C283D3EB200C2BFCF /* WebMusicSheetHelper.swift in Sources */,
 				44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */,
+				44B70F4228491A650068495A /* QuizViewModel.swift in Sources */,
 				4475CB592831759300B9D204 /* CustomCharacter.swift in Sources */,
 				440637F0283003CC00875E77 /* ScaleInfo.swift in Sources */,
 			);

@@ -37,6 +37,10 @@ class ScaleInfoViewModel {
     }
     
     // MARK: - current 변수의 변화와 무관
+    var id: UUID {
+        return scaleInfo.id
+    }
+    
     var entity: ScaleInfoEntity {
         return _entity
     }
