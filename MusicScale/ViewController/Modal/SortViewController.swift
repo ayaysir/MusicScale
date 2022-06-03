@@ -18,12 +18,24 @@ class SortViewController: UIViewController {
     @IBOutlet weak var tableViewButtons: UITableView!
     
     weak var delegate: SortVCDelegate?
+    let sortStore = SortFilterConfigStore.shared
     
     let menus: [SortInfo] = [
         SortInfo(title: "Custom Display Order", order: .none, state: .displayOrder),
         SortInfo(title: "Scale Name", order: .none, state: .name),
         SortInfo(title: "Priority", order: .none, state: .priority),
     ]
+    
+    override func viewWillAppear(_ animated: Bool) {
+        switch sortStore.curentOrder {
+        case .none:
+            break
+        case .ascending:
+            segAscDesc.selectedSegmentIndex = 0
+        case .descending:
+            segAscDesc.selectedSegmentIndex = 1
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +54,7 @@ class SortViewController: UIViewController {
         if let selectedIndexPath = tableViewButtons.indexPathForSelectedRow {
             info = menus[selectedIndexPath.row]
         } else {
-            let state = SortFilterConfigStore.shared.currentState
+            let state = sortStore.currentState
             info = menus.first { info in
                 info.state == state
             }
@@ -80,8 +92,7 @@ extension SortViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.configure(info: menus[indexPath.row])
-        print(SortFilterConfigStore.shared.currentState == menus[indexPath.row].state, SortFilterConfigStore.shared.currentState, menus[indexPath.row].state)
-        if SortFilterConfigStore.shared.currentState == menus[indexPath.row].state {
+        if sortStore.currentState == menus[indexPath.row].state {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
@@ -140,14 +151,6 @@ class SortButtonCell: UITableViewCell {
     
     func configure(info: SortInfo) {
         lblTitle.text = info.title
-        
-        // 현재 필터인 경우 체크마크
-        
-        // 선택시 색 변화
-        // let bgView = UIView()
-        // selectedBackgroundView = bgView
-        // // selectedBackgroundView!.backgroundColor = UIColor(fromGooglePicker: "255, 172, 166")
-        // selectedBackgroundView!.backgroundColor = .clear
     }
 }
 

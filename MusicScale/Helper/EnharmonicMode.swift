@@ -7,8 +7,25 @@
 
 import Foundation
 
-enum EnharmonicMode: Int {
+enum EnharmonicMode: Int, CaseIterable {
     case standard, sharpAndNatural, flatAndNatural, userCustom
+    
+    var titleValue: String {
+        switch self {
+        case .standard:
+            return "Scale's default"
+        case .sharpAndNatural:
+            return "Sharp(♯) and natural"
+        case .flatAndNatural:
+            return "Flat(♭) and natural"
+        case .userCustom:
+            return "Custom"
+        }
+    }
+    
+    static var titleValues: [String] {
+        return self.allCases.map { $0.titleValue }
+    }
     
     var noteStrOfFirstOctave: [NoteStrPair]? {
         switch self {
@@ -45,6 +62,11 @@ enum EnharmonicMode: Int {
                 NoteStrPair("", "B"),
             ]
         case .userCustom:
+            // 저장된 설정이 있는 경우 그것을 불러옴
+            let customScale = AppConfigStore.shared.userCustomScale
+            if customScale.count == 12 {
+                return customScale
+            }
             return [
                 NoteStrPair("", "C"),
                 NoteStrPair("_", "D"),

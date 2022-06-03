@@ -22,7 +22,7 @@ class ScaleListTableViewController: UITableViewController {
     @IBOutlet weak var barBtnAdd: UIBarButtonItem!
     
     let scaleListViewModel = ScaleInfoListViewModel()
-    let quizViewModel = QuizViewModel()
+    var quizViewModel: QuizViewModel!
     
     weak var quizDelegate: ScaleListTVCDelegate?
     

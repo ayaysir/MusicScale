@@ -10,6 +10,7 @@ import Foundation
 class ScaleInfoListViewModel {
     
     private let service = ScaleInfoCDService.shared
+    private let sortStore = SortFilterConfigStore.shared
     
     // 모든 관리는 배열의 index로
     private var totalEntityData: [ScaleInfoEntity]!
@@ -36,9 +37,25 @@ class ScaleInfoListViewModel {
     private func fetchCoreData() {
         // 이 작업이 실행될떄마다 뷰도 새로고침한다.
         do {
+            let isAscending = sortStore.curentOrder == .ascending || sortStore.curentOrder == .none
+            let key: String = {
+                switch sortStore.currentState {
+                case .none, .displayOrder:
+                    return "displayOrder"
+                case .name:
+                    return "name"
+                case .priority:
+                    return "defaultPriority"
+                }
+            }()
             
-            let sort = NSSortDescriptor(key: "displayOrder", ascending: true)
+            let sort = NSSortDescriptor(key: key, ascending: isAscending)
             totalEntityData = try service.readCoreData(sortDescriptors: [sort])
+            
+            if sortStore.currentState == .priority {
+                orderByDisplayedPriority(order: sortStore.curentOrder)
+            }
+            
             handleDataReloaded()
         } catch {
             print(error)
@@ -119,14 +136,14 @@ class ScaleInfoListViewModel {
         handleDataReloaded()
     }
     
-    func addScaleInfo(info: ScaleInfo) {
-        do {
-            _ = try service.saveCoreData(scaleInfo: info)
-            fetchCoreData()
-        } catch {
-            print(error)
-        }
-    }
+    // func addScaleInfo(info: ScaleInfo) {
+    //     do {
+    //         _ = try service.saveCoreData(scaleInfo: info)
+    //         fetchCoreData()
+    //     } catch {
+    //         print(error)
+    //     }
+    // }
     
     /// 받아온 entity를 totalEntityDatadp 추가하고 테이블뷰 reload (코어 데이타 전체를 다시 불러오지는 않는다.)
     func addCreatedInfoToList(entity: ScaleInfoEntity) {
@@ -174,14 +191,14 @@ class ScaleInfoListViewModel {
         }
     }
     
-    func deleteScaleInfo(index: Int) {
-        do {
-            try service.deleteCoreData(entityObject: totalEntityData[index])
-            fetchCoreData()
-        } catch {
-            print(error)
-        }
-    }
+    // func deleteScaleInfo(index: Int) {
+    //     do {
+    //         try service.deleteCoreData(entityObject: totalEntityData[index])
+    //         fetchCoreData()
+    //     } catch {
+    //         print(error)
+    //     }
+    // }
     
     /// entity로 delete (readCoreData는 하지 않음)
     func deleteScaleInfo(entity: ScaleInfoEntity) {

@@ -39,6 +39,15 @@ func simpleYesAndNo(_ controller: UIViewController, message: String, title: Stri
     controller.present(alertController, animated: true, completion: nil)
 }
 
-func simpleActionSheet(_ controller: UIViewController) {
+func simpleActionSheets(_ controller: UIViewController, actionTitles: [String], actionStyles: [UIAlertAction.Style]? = nil, title: String, message: String = "", actionCompletion: @escaping (_ actionIndex: Int) -> ()) {
+    let alertController = UIAlertController(title: title, message: "", preferredStyle: .actionSheet)
+    
+    for (index, actionTitle) in actionTitles.enumerated() {
+        let action = UIAlertAction(title: actionTitle, style: actionStyles?[index] ?? .default, handler: { action in
+            actionCompletion(index)
+        })
+        alertController.addAction(action)
+    }
+    controller.present(alertController, animated: true, completion: nil)
     
 }

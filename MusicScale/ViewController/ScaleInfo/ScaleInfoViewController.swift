@@ -253,7 +253,7 @@ extension ScaleInfoViewController {
         // tempCurrentEnharmonicMode = mode
         
         self.btnTranspose.setTitle(scaleInfoViewModel.currentKey.textValue, for: .normal)
-        self.btnEnharmonic.setTitle("\(mode)", for: .normal)
+        self.btnEnharmonic.setTitle(mode.titleValue, for: .normal)
         scaleInfoViewModel.currentEnharmonicMode = mode
         
         if !initChange {
@@ -394,7 +394,7 @@ extension ScaleInfoViewController {
     func initEnharmonicDropDown() {
         
         let targetDropDown = enharmonicDropDown
-        let dataSource = ["Scale's default", "Sharp(♯) and natural", "Flat(♭) and natural", "Custom"]
+        let dataSource = EnharmonicMode.titleValues
         let selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item: \(item) at index: \(index)")
             changeEnharmonicMode(mode: .init(rawValue: index)!)
