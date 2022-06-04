@@ -67,8 +67,8 @@ class MusicScaleTests: XCTestCase {
     
     func test_structToJson() throws {
         
-        let scaleInfo1 = ScaleInfo(id: UUID(), name: "asdf", nameAlias: "Das", degreesAscending: "Asd", degreesDescending: "ADs", defaultPriority: 3, comment: "ADs", links: "da", isDivBy12Tet: false, displayOrder: 3, myPriority: 3)
-        let scaleInfo2 = ScaleInfo(id: UUID(), name: "dafdxzc", nameAlias: "zc", degreesAscending: "zz", degreesDescending: "zz", defaultPriority: 3, comment: "z", links: "dfefea", isDivBy12Tet: false, displayOrder: 3, myPriority: 3)
+        let scaleInfo1 = ScaleInfo(id: UUID(), name: "asdf", nameAlias: "Das", degreesAscending: "Asd", degreesDescending: "ADs", defaultPriority: 3, comment: "ADs", links: "da", isDivBy12Tet: false, displayOrder: 3, myPriority: 3, createdDate: Date(), modifiedDate: Date() , groupName: "gg")
+        let scaleInfo2 = ScaleInfo(id: UUID(), name: "dafdxzc", nameAlias: "zc", degreesAscending: "zz", degreesDescending: "zz", defaultPriority: 3, comment: "z", links: "dfefea", isDivBy12Tet: false, displayOrder: 3, myPriority: 3, createdDate: Date(), modifiedDate: Date() , groupName: "gg")
         
         do {
             let jsonData = try JSONEncoder().encode([scaleInfo1, scaleInfo2])
@@ -85,12 +85,6 @@ class MusicScaleTests: XCTestCase {
             print(error)
         }
     }
-    
-    // func test_configStore() {
-    //     ScaleInfoVCConfigStore.shared.initalizeConfigValueOnFirstrun()
-    //     ScaleInfoVCConfigStore.shared.printCurrentStore()
-    // }
-
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

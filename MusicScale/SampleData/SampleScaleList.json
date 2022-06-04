@@ -1,6 +1,6 @@
 [
   {
-    "id": "2911f903-833c-4a0d-8ccb-d23939cc194c",
+    "id": "c65779a7-eb18-481a-b571-518c2961e776",
     "display_order": 1,
     "name": "Ionian mode",
     "name_alias": "Major scale;🇰🇷 장음계;🇯🇵 長音階",
@@ -8,12 +8,15 @@
     "degrees_descending": "",
     "default_priority": 5,
     "my_priority": -1,
-    "comment": "The major scale (or Ionian mode) is one of the most commonly used musical scales, especially in Western music. It is one of the diatonic scales. Like many musical scales, it is made up of seven notes: the eighth duplicates the first at double its frequency so that it is called a higher octave of the same note (from Latin \"octavus\", the eighth).v \n\nhttps://ko.wikipedia.org/wiki/%EC%9E%A5%EC%9D%8C%EA%B3%84",
+    "comment": "The major scale (or Ionian mode) is one of the most commonly used musical scales, especially in Western music. It is one of the diatonic scales. Like many musical scales, it is made up of seven notes: the eighth duplicates the first at double its frequency so that it is called a higher octave of the same note (from Latin \"octavus\", the eighth).",
     "links": "https://en.wikipedia.org/wiki/Major_scale;https://ko.wikipedia.org/wiki/%EC%9E%A5%EC%9D%8C%EA%B3%84;https://ja.wikipedia.org/wiki/%E9%95%B7%E9%9F%B3%E9%9A%8E",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "Baroque Mode",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "cde68ae1-4f1e-4144-8452-b3bb7e498e45",
+    "id": "a68d93d8-8c48-4524-a599-f7df405d76ea",
     "display_order": 2,
     "name": "Dorian mode",
     "name_alias": "",
@@ -23,10 +26,13 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "Baroque Mode",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "0df56909-6937-44f2-999d-f48ebda02239",
+    "id": "62870be7-dcde-4af0-8b82-82aadd89d4f9",
     "display_order": 3,
     "name": "Phrygian mode",
     "name_alias": "",
@@ -36,10 +42,13 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "Baroque Mode",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "eb61a9b9-dc1b-4b5e-9f6e-3dab2e37b3c2",
+    "id": "106439c0-4dee-407a-9bd1-8cc0f2db9a70",
     "display_order": 4,
     "name": "Lydian mode",
     "name_alias": "",
@@ -49,10 +58,13 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "Baroque Mode",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "c07bcb25-4e88-498c-8c93-b3d9e3ef0156",
+    "id": "a9b4059b-9ce3-4045-b1df-d2264acebb82",
     "display_order": 5,
     "name": "Mixolydian mode",
     "name_alias": "Adonai malakh mode",
@@ -62,10 +74,13 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "Baroque Mode",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "0f70e73f-b981-481f-b05c-1426f9aee4ea",
+    "id": "ec71dc68-4b28-438a-9eac-1c7653d97f7b",
     "display_order": 6,
     "name": "Aeolian mode",
     "name_alias": "Natural minor scale",
@@ -75,10 +90,13 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "Baroque Mode",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "ae19f014-1329-4e88-8b82-e93fb1889a18",
+    "id": "8dbd04fa-d674-41a6-9a51-b751609670f9",
     "display_order": 7,
     "name": "Locrian mode",
     "name_alias": "",
@@ -88,10 +106,13 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "Baroque Mode",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "a43909a1-a5b0-4c89-9346-110e63117822",
+    "id": "9d32f880-c39d-43e3-9701-31095bcafc67",
     "display_order": 8,
     "name": "Melodic minor scale",
     "name_alias": "",
@@ -101,10 +122,13 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "3dd30921-cea8-4edf-b2ab-22826169b631",
+    "id": "acafb5c7-5109-4ff3-9c20-6e4dfbf1e386",
     "display_order": 9,
     "name": "Harmonic minor scale",
     "name_alias": "",
@@ -114,10 +138,13 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "ab7edde3-1fd7-44b0-9091-b6368d34821c",
+    "id": "7fbb9a72-1359-42ed-bfdb-4797ae1e2473",
     "display_order": 10,
     "name": "Chromatic scale",
     "name_alias": "",
@@ -127,10 +154,13 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "3c0c554b-1401-4556-9f36-f342a26a5d5e",
+    "id": "da5f91c4-503a-4043-98ef-5124f50c9b40",
     "display_order": 11,
     "name": "Major pentatonic scale",
     "name_alias": "",
@@ -140,10 +170,13 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "e10e471b-8295-4757-b024-9008ee46309f",
+    "id": "a80590b6-b282-483d-9ae5-454a3e34cc54",
     "display_order": 12,
     "name": "Blues scale",
     "name_alias": "",
@@ -153,10 +186,13 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "eea8b3ff-cbb3-4727-8d8b-26120e2af31a",
+    "id": "aea747eb-0d0d-4727-ba1d-5c9a016df2df",
     "display_order": 13,
     "name": "Neapolitan major scale",
     "name_alias": "",
@@ -166,10 +202,13 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "69bb000c-df1e-427c-9f53-8044279e51b4",
+    "id": "50a6bea3-0fe3-4e19-8f95-c53ebac5a165",
     "display_order": 14,
     "name": "Neapolitan minor scale",
     "name_alias": "",
@@ -179,23 +218,13 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "068702ed-7810-4f8d-a4f3-4cd0218a2803",
-    "display_order": 16,
-    "name": "Acoustic scale",
-    "name_alias": "",
-    "degrees_ascending": "1 2 3 ♯4 5 6 ♭7",
-    "degrees_descending": "",
-    "default_priority": 3,
-    "my_priority": -1,
-    "comment": "",
-    "links": "",
-    "is_div_by_12tet": true
-  },
-  {
-    "id": "5c31bc4a-f322-4a77-9634-4850a626d781",
+    "id": "2b743cb5-3637-49a0-a60f-bbf0970f2676",
     "display_order": 15,
     "name": "Whole tone scale",
     "name_alias": "",
@@ -205,11 +234,30 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "f9bde862-8751-40ea-b14c-cd85faef4a43",
-    "display_order": 18,
+    "id": "403e8b7e-450f-4414-a9d1-e554aeeb18e1",
+    "display_order": 16,
+    "name": "Acoustic scale",
+    "name_alias": "",
+    "degrees_ascending": "1 2 3 ♯4 5 6 ♭7",
+    "degrees_descending": "",
+    "default_priority": 3,
+    "my_priority": -1,
+    "comment": "",
+    "links": "",
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
+  },
+  {
+    "id": "4ba58ad3-0885-4535-baab-250af0317048",
+    "display_order": 17,
     "name": "Altered scale",
     "name_alias": "Super Locrian scale",
     "degrees_ascending": "1 ♭2 ♭3 ♭4 ♭5 ♭6 ♭7",
@@ -218,11 +266,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "5ce08a04-848d-4e46-a34f-a9e6b6e0914c",
-    "display_order": 19,
+    "id": "f283c130-1427-4c55-9d8a-7d9d99c0a34b",
+    "display_order": 18,
     "name": "Augmented scale",
     "name_alias": "",
     "degrees_ascending": "1 ♭3 3 5 ♯5 7",
@@ -231,11 +282,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "56d971fc-1a55-4576-969b-c8fa8b1ed8b5",
-    "display_order": 20,
+    "id": "d03035c6-fa7c-430a-b96a-2d7274ee9731",
+    "display_order": 19,
     "name": "Bebop dominant scale",
     "name_alias": "",
     "degrees_ascending": "1 2 3 4 5 6 ♭7 7",
@@ -244,11 +298,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "a6d90ef1-83a1-49c3-814d-5eda74f4faa6",
-    "display_order": 21,
+    "id": "467343d0-3e7a-4314-baf3-926119a9ed6f",
+    "display_order": 20,
     "name": "Double harmonic scale",
     "name_alias": "",
     "degrees_ascending": "1 ♭2 3 4 5 ♭6 7",
@@ -257,11 +314,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "e9568e89-81aa-41bb-8f54-02e8e9953255",
-    "display_order": 22,
+    "id": "3d910538-4ab8-44a8-801d-ded907850eed",
+    "display_order": 21,
     "name": "Enigmatic scale",
     "name_alias": "",
     "degrees_ascending": "1 ♭2 3 ♯4 ♯5 ♯6 7",
@@ -270,11 +330,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "25a1a845-5b66-4ab1-973b-bd30e3c484ed",
-    "display_order": 23,
+    "id": "47ad903b-2521-4756-b85b-3eab9ae5b01d",
+    "display_order": 22,
     "name": "Flamenco mode",
     "name_alias": "",
     "degrees_ascending": "1 ♭2 3 4 5 ♭6 7",
@@ -283,11 +346,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "1cbee84a-1d1a-49cc-b2db-18d770f00b1e",
-    "display_order": 24,
+    "id": "3c9e9bf8-3af9-4337-a5ba-4f51046edb96",
+    "display_order": 23,
     "name": "Gypsy scale",
     "name_alias": "",
     "degrees_ascending": "1 2 ♭3 ♯4 5 ♭6 ♭7",
@@ -296,11 +362,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "58da85cc-0321-40cd-927a-67da9c1cd92c",
-    "display_order": 25,
+    "id": "f0dcc6a7-c485-4c25-8fdf-707e4387ec45",
+    "display_order": 24,
     "name": "Half diminished scale",
     "name_alias": "",
     "degrees_ascending": "1 2 ♭3 4 ♭5 ♭6 ♭7",
@@ -309,11 +378,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "6eed9901-93b4-4d45-9e1e-bb7923fc0cd1",
-    "display_order": 26,
+    "id": "d3d8a614-57a0-41e7-a746-8a70674ae5f2",
+    "display_order": 25,
     "name": "Harmonic major scale",
     "name_alias": "",
     "degrees_ascending": "1 2 3 4 5 ♭6 7",
@@ -322,11 +394,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "27c290cf-8202-4d78-81d7-344eef8d7805",
-    "display_order": 27,
+    "id": "97bfb563-fb40-499d-bcb1-d21f4c24b3e5",
+    "display_order": 26,
     "name": "Hirajoshi scale",
     "name_alias": "",
     "degrees_ascending": "1 3 ♯4 5 7",
@@ -335,11 +410,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "fc4048a2-60f9-4327-a0fa-4641cddf66b7",
-    "display_order": 28,
+    "id": "55835b0a-ebdb-4ff2-bf0c-3a73ae38e1be",
+    "display_order": 27,
     "name": "Hungarian major scale",
     "name_alias": "",
     "degrees_ascending": "1 ♯2 3 ♯4 5 6 ♭7",
@@ -348,11 +426,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "7eedbdaf-7e1b-4401-ab25-32a2c6e6503c",
-    "display_order": 29,
+    "id": "04548716-7a21-4209-916a-7ec6b1d8600d",
+    "display_order": 28,
     "name": "Hungarian minor scale",
     "name_alias": "",
     "degrees_ascending": "1 2 ♭3 ♯4 5 ♭6 7",
@@ -361,11 +442,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "7968d81b-7904-4e59-8f37-43c8dd33fa9b",
-    "display_order": 30,
+    "id": "8682b229-a7a2-4c1c-a9dc-7399728009c9",
+    "display_order": 29,
     "name": "In scale",
     "name_alias": "",
     "degrees_ascending": "1 ♭2 4 5 ♭6",
@@ -374,11 +458,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "4ef00895-2622-46c4-a5d2-3d538a7d13d8",
-    "display_order": 31,
+    "id": "0f50a6bc-a346-4578-9410-80af5d00d5d7",
+    "display_order": 30,
     "name": "Insen scale",
     "name_alias": "",
     "degrees_ascending": "1 ♭2 4 5 ♭7",
@@ -387,11 +474,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "bf9aaeef-10fc-486c-a4d3-b1a67db7145c",
-    "display_order": 32,
+    "id": "daacb8fe-1b07-4c69-b358-d0657f5d0229",
+    "display_order": 31,
     "name": "Istrian scale",
     "name_alias": "",
     "degrees_ascending": "1 ♭2 ♭3 ♭4 ♭5 5",
@@ -400,11 +490,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "afc257d2-bc63-4985-8094-6773f2a05022",
-    "display_order": 33,
+    "id": "8969f5ca-ee1f-4979-ad5b-01c96492999a",
+    "display_order": 32,
     "name": "Iwato scale",
     "name_alias": "",
     "degrees_ascending": "1 ♭2 4 ♭5 ♭7",
@@ -413,11 +506,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "ca02269f-80e1-4651-a1b0-54acdb29c066",
-    "display_order": 34,
+    "id": "23ad067b-dcbc-4af2-aca7-3f9a04090dbb",
+    "display_order": 33,
     "name": "Lydian augmented scale",
     "name_alias": "",
     "degrees_ascending": "1 2 3 ♯4 ♯5 6 7",
@@ -426,11 +522,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "6fd6cc55-deea-4f67-8720-2490279aaa3b",
-    "display_order": 35,
+    "id": "3b2c55cd-e735-4179-aebf-0fcbecf908c3",
+    "display_order": 34,
     "name": "Major bebop scale",
     "name_alias": "",
     "degrees_ascending": "1 2 3 4 5 ♯5 6 7",
@@ -439,11 +538,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "15a51271-7eba-48e0-a89c-d77f3401df74",
-    "display_order": 36,
+    "id": "db61b862-1ece-4902-bf1a-6e21a4720012",
+    "display_order": 35,
     "name": "Major Locrian scale",
     "name_alias": "",
     "degrees_ascending": "1 2 3 4 ♭5 ♭6 ♭7",
@@ -452,11 +554,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "e21bc482-a9e3-428a-8d06-35679f4d9b78",
-    "display_order": 37,
+    "id": "1a850332-6c73-448d-9c75-a70ea31155e6",
+    "display_order": 36,
     "name": "Minor pentatonic scale",
     "name_alias": "",
     "degrees_ascending": "1 ♭3 4 5 ♭7",
@@ -465,11 +570,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "2bfbe5e7-0b30-4892-9ec4-16cd5ae00087",
-    "display_order": 38,
+    "id": "60270feb-68d8-4413-b7d3-d03ed190a2f6",
+    "display_order": 37,
     "name": "Octatonic scale (Type 1)",
     "name_alias": "",
     "degrees_ascending": "1 2 ♭3 4 ♭5 ♭6 6 7",
@@ -478,11 +586,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "6716307f-3bf7-486b-bd15-fe0bdf840c81",
-    "display_order": 39,
+    "id": "173f0e2f-6330-4628-a3d2-0d481b8876fe",
+    "display_order": 38,
     "name": "Octatonic scale (Type 2)",
     "name_alias": "",
     "degrees_ascending": "1 ♭2 ♭3 3 ♯4 5 6 ♭7",
@@ -491,11 +602,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "fd1a9112-194e-44c4-975e-8e9852b694f7",
-    "display_order": 40,
+    "id": "7410bf9b-f63b-4ba1-ab54-44f4f8550c0e",
+    "display_order": 39,
     "name": "Persian scale",
     "name_alias": "",
     "degrees_ascending": "1 ♭2 3 4 ♭5 ♭6 7",
@@ -504,11 +618,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "7771b758-54a1-436b-a801-83eb4810ecfa",
-    "display_order": 41,
+    "id": "bbafd722-9ba5-4257-8985-7b34c38d3864",
+    "display_order": 40,
     "name": "Phrygian dominant scale",
     "name_alias": "",
     "degrees_ascending": "1 ♭2 3 4 5 ♭6 ♭7",
@@ -517,11 +634,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "9e3b0a35-86aa-45ca-a11e-3d3e90d57662",
-    "display_order": 42,
+    "id": "c08cc5d6-326e-49b3-964d-5bcf794b5249",
+    "display_order": 41,
     "name": "Prometheus scale",
     "name_alias": "",
     "degrees_ascending": "1 2 3 ♯4 6 ♭7",
@@ -530,11 +650,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "e7cf15b2-ca6e-4123-b99d-930eea3dc2eb",
-    "display_order": 44,
+    "id": "702c6e36-8388-4748-bddd-8a417c7a43b2",
+    "display_order": 42,
     "name": "Scale of harmonics",
     "name_alias": "",
     "degrees_ascending": "1 ♭3 3 4 5 6",
@@ -543,11 +666,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "a40bef44-d57f-4633-86b6-a76c9d2f903e",
-    "display_order": 45,
+    "id": "92e522c3-a86c-4f91-935f-16fc2515436d",
+    "display_order": 43,
     "name": "Tritone scale",
     "name_alias": "",
     "degrees_ascending": "1 ♭2 3 ♭5 5 ♭7",
@@ -556,11 +682,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "9a47b1ba-6b88-4679-a56c-759aace7e8f4",
-    "display_order": 46,
+    "id": "7a99377b-2256-439b-b3b6-63b2dcd93076",
+    "display_order": 44,
     "name": "Two-semitone tritone scale",
     "name_alias": "",
     "degrees_ascending": "1 ♭2 ♮2 ♯4 5 ♭6",
@@ -569,11 +698,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "0c13f3ce-253a-4690-a974-d442c27ef13a",
-    "display_order": 47,
+    "id": "0c2d6d5a-ff92-47a9-9f60-4fe6d039809e",
+    "display_order": 45,
     "name": "Ukrainian Dorian scale",
     "name_alias": "",
     "degrees_ascending": "1 2 ♭3 ♯4 5 6 ♭7",
@@ -582,11 +714,14 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   },
   {
-    "id": "61976068-4152-4048-a964-cc401535658b",
-    "display_order": 49,
+    "id": "07982f6f-e03e-4536-8451-0cfd2a66d96e",
+    "display_order": 46,
     "name": "Yo scale",
     "name_alias": "",
     "degrees_ascending": "1 ♭3 4 5 ♭7",
@@ -595,6 +730,9 @@
     "my_priority": -1,
     "comment": "",
     "links": "",
-    "is_div_by_12tet": true
+    "is_div_by_12tet": true,
+    "group_name": "",
+    "created_date": 1654352964,
+    "modified_date": 1654352964
   }
 ]

@@ -86,7 +86,7 @@ struct QuizConfigStore {
         }
     }
     
-    var typeOfQuestion: QuizType {
+    var typeOfQuestions: QuizType {
         get {
             let number = store.integer(forKey: .cfgQuizTypeOfQuest)
             if let type = QuizType(rawValue: number) {
@@ -108,5 +108,9 @@ struct QuizConfigStore {
         } set {
             store.set(newValue.rawValue, forKey: .cfgQuizEnharmonicMode)
         }
+    }
+    
+    var quizConfigChunk: QuizConfig {
+        return QuizConfig(availableKeys: availableKeys, ascSelected: ascSelected, descSelected: descSelected, selectedScaleInfoId: selectedScaleInfoId, numberOfQuestions: numberOfQuestions, typeOfQuestions: typeOfQuestions, enharmonicMode: enharmonicMode)
     }
 }

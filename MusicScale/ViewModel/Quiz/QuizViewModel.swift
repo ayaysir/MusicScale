@@ -32,7 +32,9 @@ enum QuizType: Int, Codable {
 class QuizViewModel {
     
     private var store = QuizConfigStore.shared
+    private var helper = QuizHelper()
     
+    private(set) var totalEntityData: [ScaleInfoEntity]!
     private(set) var scaleIdList: Set<UUID> = []
     var idListCount: Int {
         return scaleIdList.count
@@ -68,6 +70,12 @@ class QuizViewModel {
     
     init() {
         loadScaleListFromConfigStore()
+        
+        do {
+            totalEntityData = try ScaleInfoCDService.shared.readCoreData()
+        } catch {
+            print("QuizViewModel: Failed fetching data:", error)
+        }
     }
     
     func appendIdToScaleList(_ uuid: UUID) {
@@ -94,7 +102,8 @@ class QuizViewModel {
         scaleIdList = store.selectedScaleInfoId
     }
     
-    // func getScaleInfoFromCoreData(id: UUID) {
-    //     ScaleInfoCDService
-    // }
+    var questionList: [QuizQuestion] {
+        let config = store.quizConfigChunk
+        return helper.makeQuestionList(chunk: config, infoList: totalEntityData.compactMap { ScaleInfoCDService.shared.toScaleInfoStruct(from: $0) })
+    }
 }

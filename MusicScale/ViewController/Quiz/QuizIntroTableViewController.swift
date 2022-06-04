@@ -54,7 +54,7 @@ class QuizIntroTableViewController: UITableViewController {
         lblNumOfQuestDetail.text = quizViewModel.numOfQuestText(from:  quizStore.numberOfQuestions)
         
         // typesOfQuestions
-        lblTypeOfQuestDetail.text = quizStore.typeOfQuestion.titleValue
+        lblTypeOfQuestDetail.text = quizStore.typeOfQuestions.titleValue
         
         // enharmonic Mode
         lblEnharmonicModeDetail.text = quizStore.enharmonicMode.titleValue
@@ -64,6 +64,11 @@ class QuizIntroTableViewController: UITableViewController {
         super.viewDidLoad()
         
     }
+    
+    @IBAction func btnActStartQuiz(_ sender: UIButton) {
+        quizViewModel.questionList.forEach { print($0) }
+    }
+    
 
     // MARK: - Table view data source
     
@@ -112,7 +117,7 @@ class QuizIntroTableViewController: UITableViewController {
             let actionTitles = quizViewModel.typeOfQuestions.map { $0.titleValue }
             simpleActionSheets(self, actionTitles: actionTitles, title: "Types of Questions", message: "") { [self] actionIndex in
                 if let type = QuizType.init(rawValue: actionIndex) {
-                    quizStore.typeOfQuestion = type
+                    quizStore.typeOfQuestions = type
                     lblTypeOfQuestDetail.text = type.titleValue
                 }
             }

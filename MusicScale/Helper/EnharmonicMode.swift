@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum EnharmonicMode: Int, CaseIterable {
+enum EnharmonicMode: Int, Codable, CaseIterable {
     case standard, sharpAndNatural, flatAndNatural, userCustom
     
     var titleValue: String {
