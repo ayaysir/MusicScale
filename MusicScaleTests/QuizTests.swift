@@ -17,9 +17,8 @@ class QuizTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func test_makeList() throws {
-        let helper = QuizHelper()
+    
+    func makeQuestionConfig() throws -> QuizConfig {
         // let config = QuizConfigStore.shared.quizConfigChunk
         
         let uuidStrings: [String] = [
@@ -43,6 +42,13 @@ class QuizTests: XCTestCase {
             enharmonicMode: MusicScale.EnharmonicMode.userCustom
         )
         
+        return config
+    }
+
+    func test_makeList() throws {
+        let helper = QuizHelper()
+        let config = try makeQuestionConfig()
+        
         getSampleScaleDataFromLocal { infos in
             let result = helper.makeQuestionList(chunk: config, infoList: infos)
             
@@ -53,6 +59,40 @@ class QuizTests: XCTestCase {
                 print(question.scaleInfo.name, question.isAscending ? "asc" : "desc", question.key)
             }
         }
+        
+    }
+    
+    func test_LeitnerSystem() throws {
+        let helper = QuizHelper()
+        let config = try makeQuestionConfig()
+        
+        getSampleScaleDataFromLocal { infos in
+            let result = helper.makeQuestionList(chunk: config, infoList: infos)
+            
+            // 5 * 12 * 2 = 120
+            XCTAssertEqual(result.count, 120)
+            
+            var system: LeitnerSystem<QuizQuestion> = LeitnerSystem(itemList: result)
+            
+            // 0일차
+            system.printDailyQuestionList()
+            for i in 0..<system.dailyQuestionCount {
+                system.updateQuestionStatus(index: i, isSuccess: Bool.random())
+            }
+            
+            // 1~15일차
+            for _ in 1...15 {
+                // print("********************** before ************************")
+                // system.printDailyQuestionList()
+                system.moveNextDay()
+                for i in 0..<system.dailyQuestionCount {
+                    system.updateQuestionStatus(index: i, isSuccess: Bool.random())
+                }
+                // print("********************** after ************************")
+                system.printDailyQuestionList()
+            }
+        }
+        
         
     }
     

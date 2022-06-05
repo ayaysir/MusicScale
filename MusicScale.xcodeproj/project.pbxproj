@@ -28,6 +28,7 @@
 		445FA4B7284BA06B0008D621 /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B6284BA06B0008D621 /* QuizTests.swift */; };
 		445FA4B9284BAE540008D621 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B8284BAE540008D621 /* Array+.swift */; };
 		445FA4BB284BAF3F0008D621 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */; };
+		445FA4BF284BCA8B0008D621 /* LeitnerSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BE284BCA8B0008D621 /* LeitnerSystem.swift */; };
 		446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446100BA284517FB0033BCE9 /* UIColor+.swift */; };
 		446100BE28451B370033BCE9 /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = 446100BD28451B370033BCE9 /* PanModal */; };
 		4461012F28451EE30033BCE9 /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4461012E28451EE30033BCE9 /* SortViewController.swift */; };
@@ -135,6 +136,7 @@
 		445FA4B6284BA06B0008D621 /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		445FA4B8284BAE540008D621 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
+		445FA4BE284BCA8B0008D621 /* LeitnerSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerSystem.swift; sourceTree = "<group>"; };
 		446100BA284517FB0033BCE9 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		4461012E28451EE30033BCE9 /* SortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
 		4463FEA6282BDFF700E7A607 /* PianoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoViewController.swift; sourceTree = "<group>"; };
@@ -289,6 +291,24 @@
 			path = ScaleInfo;
 			sourceTree = "<group>";
 		};
+		445FA4BC284BCA590008D621 /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				4417252A284B8AC50003CDC7 /* QuizConfig.swift */,
+				4417252C284B8FC60003CDC7 /* QuizQuestion.swift */,
+			);
+			path = Quiz;
+			sourceTree = "<group>";
+		};
+		445FA4BD284BCA750008D621 /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				44172528284B8A110003CDC7 /* QuizHelper.swift */,
+				445FA4BE284BCA8B0008D621 /* LeitnerSystem.swift */,
+			);
+			path = Quiz;
+			sourceTree = "<group>";
+		};
 		4461012D28451ECA0033BCE9 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,14 +328,13 @@
 		4463FEAB282C0E5600E7A607 /* ValueObject */ = {
 			isa = PBXGroup;
 			children = (
+				445FA4BC284BCA590008D621 /* Quiz */,
 				4463FEAC282C0E6600E7A607 /* Note.swift */,
 				4463FEB0282C24CA00E7A607 /* PianoKeyInfo.swift */,
 				440637EF283003CC00875E77 /* ScaleInfo.swift */,
 				4475CB5A283176EA00B9D204 /* Music.swift */,
 				44B4AB8528453AB5008C8AFD /* SortList.swift */,
 				44E7A07428467692005C7909 /* SearchCategory.swift */,
-				4417252A284B8AC50003CDC7 /* QuizConfig.swift */,
-				4417252C284B8FC60003CDC7 /* QuizQuestion.swift */,
 			);
 			path = ValueObject;
 			sourceTree = "<group>";
@@ -359,11 +378,11 @@
 		4463FEBD282D63AC00E7A607 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				445FA4BD284BCA750008D621 /* Quiz */,
 				4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */,
 				4475CB502830A6C200B9D204 /* MusicSheetHelper.swift */,
 				44A09A7E283929FB0067184E /* EnharmonicMode.swift */,
 				446AEA2B283D3EB200C2BFCF /* WebMusicSheetHelper.swift */,
-				44172528284B8A110003CDC7 /* QuizHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -793,6 +812,7 @@
 				44709D8C276A3BDE00BBF6C9 /* ScoreWebViewController.swift in Sources */,
 				441738D22848ED9100A7D692 /* QuizIntroTableViewController.swift in Sources */,
 				441FA163283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift in Sources */,
+				445FA4BF284BCA8B0008D621 /* LeitnerSystem.swift in Sources */,
 				446AEA3228413E0200C2BFCF /* Cosmos.swift in Sources */,
 				4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */,
 				4463FEA7282BDFF700E7A607 /* PianoViewController.swift in Sources */,
