@@ -70,31 +70,62 @@ struct LeitnerSystem<T: Codable>: Codable {
         return dailyQuestionList.count
     }
     
-    func getQuestionStatus(index: Int) -> LeitnerItem<T> {
-        return dailyQuestionList[index]
+    func getQuestionStatus(index: Int) -> LeitnerItem<T>? {
+        return dailyQuestionList[safe: index]
     }
     
-    mutating func updateQuestionStatus(index: Int, isSuccess: Bool) {
+    /// 내부 인덱스 변수
+    private var currentDQIndex = 0
+    
+    /// 현재 내부 인덱스의 값 반환
+    func getCurrentQuestionStatus() -> LeitnerItem<T>? {
+        return getQuestionStatus(index: currentDQIndex)
+    }
+    
+    /// 다음날이 있는 경우, 다음날의 값 반환
+    mutating func getNextQuestionStatus() -> LeitnerItem<T>? {
+        // 인덱스가 마지막이라면 -> 다음 day로 이동
+        if currentDQIndex == (dailyQuestionCount - 1) {
+            if !moveNextDay() {
+                return nil
+            }
+            return getQuestionStatus(index: currentDQIndex)
+        }
+        
+        currentDQIndex += 1
+        return getQuestionStatus(index: currentDQIndex)
+    }
+    
+    /// 현재 아이템의 정답 여부를 제출하고, 다음날 값 반환
+    mutating func getNextQuestionStatus(currentItemSuccess: Bool) -> LeitnerItem<T>? {
+        guard updateQuestionStatus(index: currentDQIndex, isSuccess: currentItemSuccess) else {
+            return nil
+        }
+        return getNextQuestionStatus()
+    }
+    
+    mutating func updateQuestionStatus(index: Int, isSuccess: Bool) -> Bool {
+        guard (dailyQuestionList[safe: index] != nil) else {
+            return false
+        }
         dailyQuestionList[index].setSuccess(isSuccess)
+        return true
     }
     
     var isAllQuestionFinished: Bool {
         return originalItemList.count == leitnerFinishedList.count
     }
     
-    /// 문제 풀이 중간 또는 완료 단계 저장
-    // mutating func saveQuestionStatus(questionList: [LeitnerItem<T>]) {
-    //     dailyQuestionList = questionList
-    // }
-    
-    mutating func moveNextDay() {
+    mutating func moveNextDay() -> Bool {
         if isAllQuestionFinished {
-            return
+            return false
         }
         
         promoteQuestionList()
         day += 1
+        currentDQIndex = 0
         generateDailyQuestionList()
+        return true
     }
     
     // mutating func movePrevDay() {
@@ -115,15 +146,17 @@ struct LeitnerSystem<T: Codable>: Codable {
         var questionList = leitnerLearningLists[BOX_ONE]
         var nonQuestList: [LeitnerItem<T>] = []
         
+        // questionList.isEmpty 이면 다음 순위 출제
         // BOX_TWO는 3일 간격으로 출제
-        if day % 3 == 0 {
+        if questionList.isEmpty || day % 3 == 0 {
             questionList += leitnerLearningLists[BOX_TWO]
         } else {
             nonQuestList += leitnerLearningLists[BOX_TWO]
         }
         
+        // questionList.isEmpty 이면 다음 순위 출제
         // BOX_THREE는 5일 간격으로 출제
-        if day % 5 == 0 {
+        if questionList.isEmpty || day % 5 == 0 {
             questionList += leitnerLearningLists[BOX_THREE]
         } else {
             nonQuestList += leitnerLearningLists[BOX_THREE]
@@ -182,30 +215,9 @@ struct LeitnerSystem<T: Codable>: Codable {
                 break
             }
         }
-        
-        // let movedList = updatedDailyQuestionList.reduce(into: Array(repeating: [LeitnerItem<T>](), count: 4)) { partialResult, item in
-        //     switch item.boxNumber {
-        //     case 1:
-        //         partialResult[BOX_ONE].append(item)
-        //     case 2:
-        //         partialResult[BOX_TWO].append(item)
-        //     case 3:
-        //         partialResult[BOX_THREE].append(item)
-        //     case 4:
-        //         partialResult[BOX_FINISHED].append(item)
-        //     default:
-        //         break
-        //     }
-        // }
-        //
-        // leitnerLearningLists[BOX_ONE] = movedList[BOX_ONE]
-        // leitnerLearningLists[BOX_TWO] = movedList[BOX_TWO]
-        // leitnerLearningLists[BOX_THREE] = movedList[BOX_THREE]
-        // leitnerFinishedList = movedList[BOX_FINISHED]
-            
     }
     
-    func printDailyQuestionList() {
+    func printDailyQuestionList(printDailyQuestion: Bool = true, printBoxDetail: Bool = false) {
         print("============= Day \(day) =============")
         let displayQuestion: (LeitnerItem<T>) -> () = { item in
             let question = item.item as? QuizQuestion
@@ -217,21 +229,20 @@ struct LeitnerSystem<T: Codable>: Codable {
         
         let totalBoxCount = leitnerItemStartingList.count + leitnerLearningLists[BOX_ONE].count + leitnerLearningLists[BOX_TWO].count + leitnerLearningLists[BOX_THREE].count + leitnerFinishedList.count
         
-        print("----------------Picked Daily Questions (count: \(dailyQuestionCount))-------------------")
-        dailyQuestionList.forEach(displayQuestion)
-        print("----------------Start box (count: \(leitnerItemStartingList.count))-------------------")
-        // leitnerItemStartingList.forEach(displayQuestion)
-        print("----------------box 1 (count: \(leitnerLearningLists[BOX_ONE].count))-------------------")
-        // leitnerLearningLists[BOX_ONE].forEach(displayQuestion)
-        print("----------------box 2 (count: \(leitnerLearningLists[BOX_TWO].count))-------------------")
-        // leitnerLearningLists[BOX_TWO].forEach(displayQuestion)
-        print("----------------box 3 (count: \(leitnerLearningLists[BOX_THREE].count))-------------------")
-        // leitnerLearningLists[BOX_THREE].forEach(displayQuestion)
-        print("----------------Finished box (count: \(leitnerFinishedList.count))--------------")
-        // leitnerFinishedList.forEach(displayQuestion)
-        print("----------------Total Box Count: \(totalBoxCount)")
-        print("----------------Original Items Count: \(originalItemList.count), isSameWithBoxCount? \(originalItemList.count == totalBoxCount)")
-        print("=================================================")
+        print(" - Picked Daily Questions (count: \(dailyQuestionCount))")
+        printDailyQuestion ? dailyQuestionList.forEach(displayQuestion) : nil
+        print(" - Start box (count: \(leitnerItemStartingList.count))")
+        printBoxDetail ? leitnerItemStartingList.forEach(displayQuestion) : nil
+        print(" - box 1 (count: \(leitnerLearningLists[BOX_ONE].count))")
+        printBoxDetail ? leitnerLearningLists[BOX_ONE].forEach(displayQuestion) : nil
+        print(" - box 2 (count: \(leitnerLearningLists[BOX_TWO].count))")
+        printBoxDetail ? leitnerLearningLists[BOX_TWO].forEach(displayQuestion) : nil
+        print(" - box 3 (count: \(leitnerLearningLists[BOX_THREE].count))")
+        printBoxDetail ? leitnerLearningLists[BOX_THREE].forEach(displayQuestion) : nil
+        print(" - Finished box (count: \(leitnerFinishedList.count))")
+        printBoxDetail ? leitnerFinishedList.forEach(displayQuestion) : nil
+        print(" - Total Box Count: \(totalBoxCount)")
+        print(" - Original Items Count: \(originalItemList.count), isSameWithBoxCount? \(originalItemList.count == totalBoxCount)")
         
     }
     

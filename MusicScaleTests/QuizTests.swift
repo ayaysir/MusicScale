@@ -72,24 +72,34 @@ class QuizTests: XCTestCase {
             // 5 * 12 * 2 = 120
             XCTAssertEqual(result.count, 120)
             
-            var system: LeitnerSystem<QuizQuestion> = LeitnerSystem(itemList: result)
+            var leitner: LeitnerSystem<QuizQuestion> = LeitnerSystem(itemList: result)
             
             // 0일차
-            system.printDailyQuestionList()
-            for i in 0..<system.dailyQuestionCount {
-                system.updateQuestionStatus(index: i, isSuccess: Bool.random())
+            leitner.printDailyQuestionList()
+            for i in 0..<leitner.dailyQuestionCount {
+                _ = leitner.updateQuestionStatus(index: i, isSuccess: Bool.random())
             }
             
-            // 1~15일차
-            for _ in 1...15 {
-                // print("********************** before ************************")
-                // system.printDailyQuestionList()
-                system.moveNextDay()
-                for i in 0..<system.dailyQuestionCount {
-                    system.updateQuestionStatus(index: i, isSuccess: Bool.random())
+            // 1~n일차
+            // while leitner.moveNextDay() {
+            //     for i in 0..<leitner.dailyQuestionCount {
+            //         _ = leitner.updateQuestionStatus(index: i, isSuccess: Bool.random())
+            //     }
+            //     leitner.printDailyQuestionList(printDailyQuestion: false, printBoxDetail: false)
+            // }
+            
+            var index: Int = 1
+            var day: Int = 0
+            while !leitner.isAllQuestionFinished {
+                day = leitner.day
+                if index >= 10000 {
+                    break
                 }
-                // print("********************** after ************************")
-                system.printDailyQuestionList()
+                _ = leitner.getNextQuestionStatus(currentItemSuccess: Bool.random())
+                if leitner.day != day {
+                    leitner.printDailyQuestionList(printDailyQuestion: false, printBoxDetail: false)
+                }
+                index += 1
             }
         }
         

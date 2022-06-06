@@ -29,6 +29,7 @@
 		445FA4B9284BAE540008D621 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B8284BAE540008D621 /* Array+.swift */; };
 		445FA4BB284BAF3F0008D621 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */; };
 		445FA4BF284BCA8B0008D621 /* LeitnerSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BE284BCA8B0008D621 /* LeitnerSystem.swift */; };
+		445FA4C1284E3AD80008D621 /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4C0284E3AD80008D621 /* Collection+.swift */; };
 		446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446100BA284517FB0033BCE9 /* UIColor+.swift */; };
 		446100BE28451B370033BCE9 /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = 446100BD28451B370033BCE9 /* PanModal */; };
 		4461012F28451EE30033BCE9 /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4461012E28451EE30033BCE9 /* SortViewController.swift */; };
@@ -137,6 +138,7 @@
 		445FA4B8284BAE540008D621 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
 		445FA4BE284BCA8B0008D621 /* LeitnerSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerSystem.swift; sourceTree = "<group>"; };
+		445FA4C0284E3AD80008D621 /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		446100BA284517FB0033BCE9 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		4461012E28451EE30033BCE9 /* SortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
 		4463FEA6282BDFF700E7A607 /* PianoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoViewController.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				443A0C6228428F3100641BC0 /* Between.swift */,
 				446100BA284517FB0033BCE9 /* UIColor+.swift */,
 				445FA4B8284BAE540008D621 /* Array+.swift */,
+				445FA4C0284E3AD80008D621 /* Collection+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 				44B70F4228491A650068495A /* QuizViewModel.swift in Sources */,
 				4475CB592831759300B9D204 /* CustomCharacter.swift in Sources */,
 				440637F0283003CC00875E77 /* ScaleInfo.swift in Sources */,
+				445FA4C1284E3AD80008D621 /* Collection+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
