@@ -219,14 +219,14 @@ struct ScaleInfoCDService {
         print(result)
     }
     
-    func printCodeOfScaleInfoEntity() {
-        if let entities = try? readCoreData() {
-            let list = entities.compactMap { toScaleInfoStruct(from: $0) }
-                .forEach { info in
-                    print(info)
-                }
-        }
-    }
+    // func printCodeOfScaleInfoEntity() {
+    //     if let entities = try? readCoreData() {
+    //         let list = entities.compactMap { toScaleInfoStruct(from: $0) }
+    //             .forEach { info in
+    //                 print(info)
+    //             }
+    //     }
+    // }
 }
 
 

@@ -30,6 +30,9 @@
 		445FA4BB284BAF3F0008D621 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */; };
 		445FA4BF284BCA8B0008D621 /* LeitnerSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BE284BCA8B0008D621 /* LeitnerSystem.swift */; };
 		445FA4C1284E3AD80008D621 /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4C0284E3AD80008D621 /* Collection+.swift */; };
+		445FA4C3284E49120008D621 /* MatchKeysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4C2284E49120008D621 /* MatchKeysViewController.swift */; };
+		445FA4C5284E60D70008D621 /* FlashcardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4C4284E60D70008D621 /* FlashcardsViewController.swift */; };
+		445FA4C7284E70090008D621 /* QuizInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4C6284E70090008D621 /* QuizInProgressViewController.swift */; };
 		446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446100BA284517FB0033BCE9 /* UIColor+.swift */; };
 		446100BE28451B370033BCE9 /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = 446100BD28451B370033BCE9 /* PanModal */; };
 		4461012F28451EE30033BCE9 /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4461012E28451EE30033BCE9 /* SortViewController.swift */; };
@@ -139,6 +142,9 @@
 		445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
 		445FA4BE284BCA8B0008D621 /* LeitnerSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerSystem.swift; sourceTree = "<group>"; };
 		445FA4C0284E3AD80008D621 /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
+		445FA4C2284E49120008D621 /* MatchKeysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchKeysViewController.swift; sourceTree = "<group>"; };
+		445FA4C4284E60D70008D621 /* FlashcardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardsViewController.swift; sourceTree = "<group>"; };
+		445FA4C6284E70090008D621 /* QuizInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizInProgressViewController.swift; sourceTree = "<group>"; };
 		446100BA284517FB0033BCE9 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		4461012E28451EE30033BCE9 /* SortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
 		4463FEA6282BDFF700E7A607 /* PianoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +286,9 @@
 			children = (
 				441738D12848ED9100A7D692 /* QuizIntroTableViewController.swift */,
 				44B70F3A2848F1A90068495A /* QuizSelectKeyTableViewController.swift */,
+				445FA4C2284E49120008D621 /* MatchKeysViewController.swift */,
+				445FA4C4284E60D70008D621 /* FlashcardsViewController.swift */,
+				445FA4C6284E70090008D621 /* QuizInProgressViewController.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -781,12 +790,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				44B70F3D2848F4F40068495A /* QuizConfigStore.swift in Sources */,
+				445FA4C3284E49120008D621 /* MatchKeysViewController.swift in Sources */,
 				44709D60276A334F00BBF6C9 /* MusicScale.xcdatamodeld in Sources */,
 				4475CB5B283176EA00B9D204 /* Music.swift in Sources */,
 				44709D5A276A334F00BBF6C9 /* ViewController.swift in Sources */,
 				44B4AB8628453AB5008C8AFD /* SortList.swift in Sources */,
 				446AEA3028411ED300C2BFCF /* Toast.swift in Sources */,
 				4463FEBA282D615400E7A607 /* MIDIManager.swift in Sources */,
+				445FA4C7284E70090008D621 /* QuizInProgressViewController.swift in Sources */,
 				4463FEB7282D3FCE00E7A607 /* PianoView.swift in Sources */,
 				44172529284B8A110003CDC7 /* QuizHelper.swift in Sources */,
 				4461012F28451EE30033BCE9 /* SortViewController.swift in Sources */,
@@ -822,6 +833,7 @@
 				4475CB4F2830A0DD00B9D204 /* ScaleSubInfoTableViewController.swift in Sources */,
 				4417252D284B8FC60003CDC7 /* QuizQuestion.swift in Sources */,
 				449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */,
+				445FA4C5284E60D70008D621 /* FlashcardsViewController.swift in Sources */,
 				445FA4B9284BAE540008D621 /* Array+.swift in Sources */,
 				4417252B284B8AC50003CDC7 /* QuizConfig.swift in Sources */,
 				4463FEAD282C0E6600E7A607 /* Note.swift in Sources */,

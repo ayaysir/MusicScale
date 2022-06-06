@@ -31,7 +31,30 @@ class QuizIntroTableViewController: UITableViewController {
     let typeOfQuestIndexPath = IndexPath(row: 0, section: 0)
     let enharmonicModeIndexPath = IndexPath(row: 1, section: 0)
     
+    let overlayView = UIView(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: 4000, height: 4000)))
+    let overlayViewTag: Int = 85843945
+    
+    override func loadView() {
+        super.loadView()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
+        
+        // 기존 저장 LeitnerSystem 오브젝트가 있는 경우 리다리렉트
+        if let savedSystem = quizStore.savedLeitnerSystem {
+            print(quizViewModel.quizStatus)
+            print(savedSystem.getCurrentQuestionStatus())
+            
+            let inProgressVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuizInProgressViewController") as! QuizInProgressViewController
+            inProgressVC.quizViewModel = quizViewModel
+            inProgressVC.introVC = self
+            navigationController?.setViewControllers([inProgressVC], animated: false)
+            return
+        }
+        
+        if let viewWithTag = view.viewWithTag(overlayViewTag) {
+            viewWithTag.removeFromSuperview()
+        }
         
         // key count
         updateKeyCountLabel(quizStore.availableKeys.count)
@@ -57,11 +80,26 @@ class QuizIntroTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     @IBAction func btnActStartQuiz(_ sender: UIButton) {
+        quizViewModel.refreshQuestionList()
         quizViewModel.questionList.forEach { print($0) }
+        
+        let inProgressVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuizInProgressViewController") as! QuizInProgressViewController
+        inProgressVC.quizViewModel = quizViewModel
+        inProgressVC.introVC = self
+        
+        let matchVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MatchKeysViewController") as! MatchKeysViewController
+        matchVC.quizViewModel = quizViewModel
+        
+        navigationController?.setViewControllers([inProgressVC, matchVC], animated: true)
+        
+        // performSegue(withIdentifier: "MatchKeysSegue", sender: nil)
+        
+        // overlayView.backgroundColor = .white
+        // overlayView.tag = overlayViewTag
+        // self.view.addSubview(overlayView)
     }
     
 
@@ -129,6 +167,10 @@ class QuizIntroTableViewController: UITableViewController {
         case "SelectKeySegue":
             let keyVC = segue.destination as! QuizSelectKeyTableViewController
             keyVC.delegate = self
+        case "MatchKeysSegue":
+            let matchKeysVC = segue.destination as! MatchKeysViewController
+            matchKeysVC.quizViewModel = quizViewModel
+            
         default:
             break
         }
@@ -143,7 +185,7 @@ extension QuizIntroTableViewController: QuizSelectKeyTVCDelegate {
     }
     
     func updateKeyCountLabel(_ count: Int){
-        lblSelectKeysDetail.text =  selectedCountText.replacingOccurrences(of: "#count#", with: "\(count)")
+        lblSelectKeysDetail.text = selectedCountText.replacingOccurrences(of: "#count#", with: "\(count)")
     }
 }
 

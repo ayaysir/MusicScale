@@ -23,7 +23,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1917" y="806"/>
+            <point key="canvasLocation" x="2970" y="806"/>
         </scene>
         <!--Sort View Controller-->
         <scene sceneID="Bx2-3K-d9F">
@@ -985,7 +985,7 @@
         <!--Quiz Intro Table View Controller-->
         <scene sceneID="DoT-W4-3gn">
             <objects>
-                <tableViewController id="Hjd-ya-rmG" customClass="QuizIntroTableViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="QuizIntroTableViewController" id="Hjd-ya-rmG" customClass="QuizIntroTableViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="2uV-7a-fGJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1186,11 +1186,83 @@
                         <outlet property="lblSelectScaleList" destination="91a-PY-ENJ" id="Wfd-oc-LBr"/>
                         <outlet property="lblSelectScalesDetail" destination="Azm-Am-8mc" id="Th6-5W-uq2"/>
                         <outlet property="lblTypeOfQuestDetail" destination="JaS-Rt-rM2" id="KzG-Xz-Xfa"/>
+                        <segue destination="JGG-Hn-FWp" kind="show" identifier="MatchKeysSegue" id="nJT-RB-p47"/>
+                        <segue destination="gKJ-Ew-De1" kind="show" id="UHQ-4z-kpB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PMX-Ia-moW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2.8985507246376816" y="805.58035714285711"/>
+        </scene>
+        <!--Guess the Name-->
+        <scene sceneID="5T0-qe-NZm">
+            <objects>
+                <viewController id="gKJ-Ew-De1" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xcc-9j-e0y">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="jWT-9P-ttU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Guess the Name" id="5dN-VM-Sze"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qRs-Jd-Mts" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-322" y="1590"/>
+        </scene>
+        <!--Flashcards Prototype-->
+        <scene sceneID="Hcv-zb-CIf">
+            <objects>
+                <viewController storyboardIdentifier="MatchKeysViewController" id="JGG-Hn-FWp" customClass="MatchKeysViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gw7-te-HgD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vml-hW-Glw">
+                                <rect key="frame" x="224" y="190" width="112" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Success"/>
+                                <connections>
+                                    <action selector="btnActSuccess:" destination="JGG-Hn-FWp" eventType="touchUpInside" id="ZO4-KG-idi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGJ-cq-LqT">
+                                <rect key="frame" x="78" y="190" width="109" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Failed"/>
+                                <connections>
+                                    <action selector="btnActFailed:" destination="JGG-Hn-FWp" eventType="touchUpInside" id="85H-LQ-dJZ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="start: 0, box_one: 0, box_two: 0, box_three: 0, finished: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjO-zv-uJW">
+                                <rect key="frame" x="20" y="88" width="374" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="KeyName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Okz-86-0QZ">
+                                <rect key="frame" x="20" y="130" width="374" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vHQ-Tm-7FH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Flashcards Prototype" id="aI7-W9-8Co"/>
+                    <connections>
+                        <outlet property="lblKeyName" destination="Okz-86-0QZ" id="nkZ-sW-v1q"/>
+                        <outlet property="lblQuizProgressInfo" destination="xjO-zv-uJW" id="12g-w5-Dge"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k1p-V4-yJC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="371" y="1590"/>
         </scene>
         <!--Select the Keys-->
         <scene sceneID="VJV-sx-aaG">
@@ -1231,7 +1303,60 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4jB-2O-pRj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="702" y="819"/>
+            <point key="canvasLocation" x="701" y="806"/>
+        </scene>
+        <!--ACCCCCC-->
+        <scene sceneID="Y9o-F9-U50">
+            <objects>
+                <viewController storyboardIdentifier="QuizInProgressViewController" title="ACCCCCC" id="KJ0-Tf-AmP" customClass="QuizInProgressViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e4q-15-zsn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="dsfdasfdsfdafadsf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFV-Uj-s8A">
+                                <rect key="frame" x="89" y="167" width="138" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1i-IH-uOJ">
+                                <rect key="frame" x="85" y="296" width="309" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Give Up"/>
+                                <connections>
+                                    <action selector="btnActGiveUp:" destination="KJ0-Tf-AmP" eventType="touchUpInside" id="dD9-tH-Lvu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hfc-rb-Nkn">
+                                <rect key="frame" x="42" y="257" width="231" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="continue"/>
+                                <connections>
+                                    <action selector="btnActContinue:" destination="KJ0-Tf-AmP" eventType="touchUpInside" id="OSO-xx-jEg"/>
+                                </connections>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TR2-Nn-VMr">
+                                <rect key="frame" x="0.0" y="345" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="In Progress" id="gq7-BL-zUA"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="duY-ig-ibm"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="ASDASDASD" id="8GU-L2-dAH"/>
+                    <connections>
+                        <outlet property="btnGiveUp" destination="B1i-IH-uOJ" id="0eT-1v-n8u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JzL-f7-jn6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1500.0000000000002" y="805.58035714285711"/>
         </scene>
     </scenes>
     <designables>

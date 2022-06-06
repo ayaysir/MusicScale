@@ -15,6 +15,7 @@ extension String {
     static var cfgQuizNumOfQuest = "QUIZ_cfgQuizNumOfQuest"
     static var cfgQuizTypeOfQuest = "QUIZ_cfgQuizTypeOfQuest"
     static var cfgQuizEnharmonicMode = "QUIZ_cfgQuizEnharmonicMode"
+    static var cfgQuizLeitnerSystem = "QUIZ_cfgQuizLeitnerSystem"
 }
 
 struct QuizConfigStore {
@@ -112,5 +113,23 @@ struct QuizConfigStore {
     
     var quizConfigChunk: QuizConfig {
         return QuizConfig(availableKeys: availableKeys, ascSelected: ascSelected, descSelected: descSelected, selectedScaleInfoId: selectedScaleInfoId, numberOfQuestions: numberOfQuestions, typeOfQuestions: typeOfQuestions, enharmonicMode: enharmonicMode)
+    }
+    
+    var savedLeitnerSystem: LeitnerSystem<QuizQuestion>? {
+        get {
+            do {
+                return try store.getObject(forKey: .cfgQuizLeitnerSystem, castTo: LeitnerSystem<QuizQuestion>.self)
+            } catch {
+                print("Can't save cfgQuizLeitnerSystem to UserDefaults:", error)
+            }
+            
+            return nil
+        } set {
+            do {
+                try store.setObject(newValue, forKey: .cfgQuizLeitnerSystem)
+            } catch {
+                print("Can't save cfgQuizLeitnerSystem to UserDefaults:", error)
+            }
+        }
     }
 }

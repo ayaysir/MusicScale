@@ -101,6 +101,7 @@ class QuizTests: XCTestCase {
                 }
                 index += 1
             }
+            XCTAssertEqual(leitner.isAllQuestionFinished, true)
         }
         
         

@@ -40,6 +40,9 @@ class QuizViewModel {
         return scaleIdList.count
     }
     
+    // Leitner System
+    var leitnerSystem: LeitnerSystem<QuizQuestion>!
+    
     private(set) var numberOfQuestions: [Int] = [
         5,
         10,
@@ -73,6 +76,13 @@ class QuizViewModel {
         
         do {
             totalEntityData = try ScaleInfoCDService.shared.readCoreData()
+            
+            // leitnerSystem = LeitnerSystem<QuizQuestion>(itemList: questionList)
+            if let savedLeitnerSystem = store.savedLeitnerSystem {
+                leitnerSystem = savedLeitnerSystem
+            } else {
+                leitnerSystem = LeitnerSystem<QuizQuestion>(itemList: questionList)
+            }
         } catch {
             print("QuizViewModel: Failed fetching data:", error)
         }
@@ -105,5 +115,36 @@ class QuizViewModel {
     var questionList: [QuizQuestion] {
         let config = store.quizConfigChunk
         return helper.makeQuestionList(chunk: config, infoList: totalEntityData.compactMap { ScaleInfoCDService.shared.toScaleInfoStruct(from: $0) })
+    }
+    
+    func refreshQuestionList() {
+        leitnerSystem = LeitnerSystem<QuizQuestion>(itemList: questionList)
+        store.savedLeitnerSystem = leitnerSystem
+    }
+    
+    func replaceLeitnerSystemFromConfigStore() {
+        leitnerSystem = store.savedLeitnerSystem
+    }
+    
+    func removeSavedLeitnerSystem() {
+        store.savedLeitnerSystem = nil
+    }
+    
+    var currentQuestion: QuizQuestion? {
+        return leitnerSystem.getCurrentQuestionStatus()?.item
+    }
+    
+    func submitResultAndGetNextQuestion(currentSuccess: Bool) -> QuizQuestion? {
+        let quizQuestion = leitnerSystem.getNextQuestionStatus(currentItemSuccess: currentSuccess)?.item
+        store.savedLeitnerSystem = leitnerSystem
+        return quizQuestion
+    }
+    
+    var isAllQuestionFinished: Bool {
+        return leitnerSystem.isAllQuestionFinished
+    }
+    
+    var quizStatus: String {
+        return leitnerSystem.progressInfo.description
     }
 }

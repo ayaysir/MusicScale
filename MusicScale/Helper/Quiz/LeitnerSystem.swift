@@ -17,6 +17,18 @@ struct LeitnerItem<T: Codable>: Codable {
         self.isSuccess = isSuccess
     }
 }
+
+struct LeitnerProgressInfo: Codable, CustomStringConvertible {
+    var description: String {
+        return "CDI:\(currentDQIndex), day:\(day), dailyQuest: \(dailyQuestionCount), start: \(startBoxCount), box_one: \(learningBoxOneCount), box_two: \(learningBoxTwoCount), box_three: \(learningBoxThreeCount), finished: \(finishedBoxCount)"
+    }
+    
+    let currentDQIndex, day, totalBoxCount, dailyQuestionCount, startBoxCount: Int
+    let learningBoxOneCount, learningBoxTwoCount, learningBoxThreeCount: Int
+    let finishedBoxCount, originalItemListCount: Int
+    let isSameCountOriginalAndLeitnerBoxes: Bool
+}
+
  
 struct LeitnerSystem<T: Codable>: Codable {
     /*
@@ -56,8 +68,24 @@ struct LeitnerSystem<T: Codable>: Codable {
     private(set) var dailyQuestionList: [LeitnerItem<T>] = []
     private var dailyNonQuestList: [LeitnerItem<T>] = []
     
+    /// 내부 인덱스 변수
+    private var currentDQIndex = 0
+    
     enum CodingKeys: String, CodingKey {
-        case day, leitnerItemStartingList, leitnerLearningLists, leitnerFinishedList
+        case day
+        case originalItemList
+        case leitnerItemStartingList
+        case leitnerLearningLists
+        case leitnerFinishedList
+        case dailyQuestionList
+        case dailyNonQuestList
+        case currentDQIndex
+        
+        // // computed properties (안됨)
+        // case dailyQuestionCount
+        // case isAllQuestionFinished
+        // case progressInfo
+        
     }
     
     init(itemList: [T]) {
@@ -73,9 +101,6 @@ struct LeitnerSystem<T: Codable>: Codable {
     func getQuestionStatus(index: Int) -> LeitnerItem<T>? {
         return dailyQuestionList[safe: index]
     }
-    
-    /// 내부 인덱스 변수
-    private var currentDQIndex = 0
     
     /// 현재 내부 인덱스의 값 반환
     func getCurrentQuestionStatus() -> LeitnerItem<T>? {
@@ -217,6 +242,21 @@ struct LeitnerSystem<T: Codable>: Codable {
         }
     }
     
+    var progressInfo: LeitnerProgressInfo {
+        let totalBoxCount = leitnerItemStartingList.count + leitnerLearningLists[BOX_ONE].count + leitnerLearningLists[BOX_TWO].count + leitnerLearningLists[BOX_THREE].count + leitnerFinishedList.count
+        return LeitnerProgressInfo(currentDQIndex: currentDQIndex,
+                            day: day,
+                            totalBoxCount: totalBoxCount,
+                            dailyQuestionCount: dailyQuestionCount,
+                            startBoxCount: leitnerItemStartingList.count,
+                            learningBoxOneCount: leitnerLearningLists[BOX_ONE].count,
+                            learningBoxTwoCount: leitnerLearningLists[BOX_TWO].count,
+                            learningBoxThreeCount: leitnerLearningLists[BOX_THREE].count,
+                            finishedBoxCount: leitnerFinishedList.count,
+                            originalItemListCount: originalItemList.count,
+                            isSameCountOriginalAndLeitnerBoxes: originalItemList.count == totalBoxCount)
+    }
+    
     func printDailyQuestionList(printDailyQuestion: Bool = true, printBoxDetail: Bool = false) {
         print("============= Day \(day) =============")
         let displayQuestion: (LeitnerItem<T>) -> () = { item in
@@ -245,5 +285,4 @@ struct LeitnerSystem<T: Codable>: Codable {
         print(" - Original Items Count: \(originalItemList.count), isSameWithBoxCount? \(originalItemList.count == totalBoxCount)")
         
     }
-    
 }
