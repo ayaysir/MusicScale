@@ -13,6 +13,10 @@ struct QuizQuestion: Codable, CustomStringConvertible {
         return "(\(scaleInfo.name), order: \(isAscending ? "ASC" : "DESC"), key: \(key))"
     }
     
+    var labelTitle: String {
+        return "\(key) \(scaleInfo.name)"
+    }
+    
     var scaleInfo: ScaleInfo
     var isAscending: Bool
     var key: Music.Key

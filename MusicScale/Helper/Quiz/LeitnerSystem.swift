@@ -137,6 +137,10 @@ struct LeitnerSystem<T: Codable>: Codable {
         return true
     }
     
+    var isFirstQuestion: Bool {
+        return day == 0 && currentDQIndex == 0
+    }
+    
     var isAllQuestionFinished: Bool {
         return originalItemList.count == leitnerFinishedList.count
     }

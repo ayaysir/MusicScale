@@ -46,7 +46,9 @@ class ScoreWebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initIgnoreSilenceMode()
+        print(#function)
+        
+        // initIgnoreSilenceMode()
         loadWebSheetPage()
     }
 }
@@ -77,7 +79,7 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
     }
     
     func loadWebSheetPage() {
-
+        
         if #available(iOS 14.0, *) {
             webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         } else {
@@ -95,8 +97,10 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
         webView.loadFileURL(url, allowingReadAccessTo: url)
         webView.scrollView.isScrollEnabled = false
         
-        let abcjsText = ScaleInfoVCConfigStore.shared.degreesOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending
-        injectAbcjsText(from: abcjsText, needReload: false)
+        // if let scaleInfoViewModel = scaleInfoViewModel {
+            let abcjsText = ScaleInfoVCConfigStore.shared.degreesOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending
+            injectAbcjsText(from: abcjsText, needReload: false)
+        // }
         
         // 자바스크립트 -> 네이티브 앱 연결
         // 브리지 등록

@@ -140,6 +140,10 @@ class QuizViewModel {
         return quizQuestion
     }
     
+    var isFirstQuestion: Bool {
+        return leitnerSystem.isFirstQuestion
+    }
+    
     var isAllQuestionFinished: Bool {
         return leitnerSystem.isAllQuestionFinished
     }

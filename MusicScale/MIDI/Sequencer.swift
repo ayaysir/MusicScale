@@ -55,6 +55,11 @@ class NoteSequencerConductor: ObservableObject {
     
     func addScaleToSequencer(semintones: [Int], startSemitone start: Int = 60) {
         
+        guard sequencer.tracks.first != nil else {
+            print("NoteSequencerConductor: Tracks are not initialized. Place the conductor.start() in the appropriate place.")
+            return
+        }
+        
         sequencer.tracks[0].clear()
         
         for (index, semintone) in semintones.enumerated() {
@@ -62,12 +67,8 @@ class NoteSequencerConductor: ObservableObject {
                       position: Duration(beats: Double(index)), duration: Duration(beats: 1), channel: MIDIChannel(1))
         }
         
-//        sequencer.tracks[0] = track
-//        print(sequencer.tracks)
-        
         sequencer.debug()
         sequencer.setGlobalMIDIOutput(instrument.midiIn)
-//        sequencer.enableLooping(Duration(beats: 4))
         sequencer.setTempo(Double(tempo))
         
         

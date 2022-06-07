@@ -27,9 +27,18 @@ class QuizInProgressViewController: UIViewController {
     }
     
     @IBAction func btnActContinue(_ sender: Any) {
-        let quizVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MatchKeysViewController") as! MatchKeysViewController
-        quizVC.quizViewModel = quizViewModel
-        navigationController?.setViewControllers([self, quizVC], animated: true)
+        switch QuizConfigStore.shared.typeOfQuestions {
+        case .matchKeys:
+            let matchVC = initVCFromStoryboard(storyboardID: .MatchKeysViewController) as! MatchKeysViewController
+            matchVC.quizViewModel = quizViewModel
+            navigationController?.setViewControllers([self, matchVC], animated: true)
+        case .guessName:
+            let flashcardVC = initVCFromStoryboard(storyboardID: .FlashcardsViewController) as! FlashcardsViewController
+            flashcardVC.quizViewModel = quizViewModel
+            navigationController?.setViewControllers([self, flashcardVC], animated: true)
+        }
+        
+        
     }
     
     @IBAction func btnActGiveUp(_ sender: Any) {

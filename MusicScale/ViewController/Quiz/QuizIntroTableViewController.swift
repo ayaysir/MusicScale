@@ -41,10 +41,7 @@ class QuizIntroTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         // 기존 저장 LeitnerSystem 오브젝트가 있는 경우 리다리렉트
-        if let savedSystem = quizStore.savedLeitnerSystem {
-            print(quizViewModel.quizStatus)
-            print(savedSystem.getCurrentQuestionStatus())
-            
+        if quizStore.savedLeitnerSystem != nil {
             let inProgressVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuizInProgressViewController") as! QuizInProgressViewController
             inProgressVC.quizViewModel = quizViewModel
             inProgressVC.introVC = self
@@ -90,16 +87,18 @@ class QuizIntroTableViewController: UITableViewController {
         inProgressVC.quizViewModel = quizViewModel
         inProgressVC.introVC = self
         
-        let matchVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MatchKeysViewController") as! MatchKeysViewController
-        matchVC.quizViewModel = quizViewModel
-        
-        navigationController?.setViewControllers([inProgressVC, matchVC], animated: true)
-        
-        // performSegue(withIdentifier: "MatchKeysSegue", sender: nil)
-        
-        // overlayView.backgroundColor = .white
-        // overlayView.tag = overlayViewTag
-        // self.view.addSubview(overlayView)
+        switch quizStore.typeOfQuestions {
+        case .matchKeys:
+            let matchVC = initVCFromStoryboard(storyboardID: .MatchKeysViewController) as! MatchKeysViewController
+            matchVC.quizViewModel = quizViewModel
+            
+            navigationController?.setViewControllers([inProgressVC, matchVC], animated: true)
+        case .guessName:
+            let flashcardVC = initVCFromStoryboard(storyboardID: .FlashcardsViewController) as! FlashcardsViewController
+            flashcardVC.quizViewModel = quizViewModel
+            
+            navigationController?.setViewControllers([inProgressVC, flashcardVC], animated: true)
+        }
     }
     
 

@@ -139,7 +139,7 @@
         <!--Score Web View Controller-->
         <scene sceneID="ehm-4l-VFX">
             <objects>
-                <viewController id="DAe-qX-YdK" customClass="ScoreWebViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScoreWebViewController" id="DAe-qX-YdK" customClass="ScoreWebViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GXf-lZ-LDc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="248"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -982,7 +982,7 @@
             </objects>
             <point key="canvasLocation" x="-749.27536231884062" y="805.58035714285711"/>
         </scene>
-        <!--Quiz Intro Table View Controller-->
+        <!--Quiz-->
         <scene sceneID="DoT-W4-3gn">
             <objects>
                 <tableViewController storyboardIdentifier="QuizIntroTableViewController" id="Hjd-ya-rmG" customClass="QuizIntroTableViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
@@ -1176,7 +1176,7 @@
                             <outlet property="delegate" destination="Hjd-ya-rmG" id="QAJ-sV-lEG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="LcN-Cr-0iW"/>
+                    <navigationItem key="navigationItem" title="Quiz" id="LcN-Cr-0iW"/>
                     <connections>
                         <outlet property="cellAscending" destination="Bsm-HM-a4Y" id="Hkq-s1-W0X"/>
                         <outlet property="cellDescending" destination="pTP-cE-XCh" id="Fm4-Xp-vt8"/>
@@ -1197,18 +1197,58 @@
         <!--Guess the Name-->
         <scene sceneID="5T0-qe-NZm">
             <objects>
-                <viewController id="gKJ-Ew-De1" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FlashcardsViewController" id="gKJ-Ew-De1" customClass="FlashcardsViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xcc-9j-e0y">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXc-3O-iSr">
+                                <rect key="frame" x="230" y="782" width="164" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Remind"/>
+                                <connections>
+                                    <action selector="btnActRemindQuestion:" destination="gKJ-Ew-De1" eventType="touchUpInside" id="nvQ-gq-1YP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lp-M4-Be5">
+                                <rect key="frame" x="20" y="782" width="164" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="OK"/>
+                                <connections>
+                                    <action selector="btnActSuccessQuestion:" destination="gKJ-Ew-De1" eventType="touchUpInside" id="HIt-Pv-0dv"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i8u-Bp-kD8">
+                                <rect key="frame" x="20" y="132" width="374" height="597"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXO-Zk-CHY">
+                                        <rect key="frame" x="313" y="558" width="46" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="play.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="btnActPlay:" destination="gKJ-Ew-De1" eventType="touchUpInside" id="koj-5M-X4u"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="jWT-9P-ttU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Guess the Name" id="5dN-VM-Sze"/>
+                    <connections>
+                        <outlet property="btnPlay" destination="EXO-Zk-CHY" id="3ba-TD-PBN"/>
+                        <outlet property="cardContainerView" destination="i8u-Bp-kD8" id="FDn-6e-W0j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qRs-Jd-Mts" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-322" y="1590"/>
+            <point key="canvasLocation" x="-323.1884057971015" y="1589.7321428571429"/>
         </scene>
         <!--Flashcards Prototype-->
         <scene sceneID="Hcv-zb-CIf">
@@ -1305,37 +1345,28 @@
             </objects>
             <point key="canvasLocation" x="701" y="806"/>
         </scene>
-        <!--ACCCCCC-->
+        <!--Quiz In Progress-->
         <scene sceneID="Y9o-F9-U50">
             <objects>
-                <viewController storyboardIdentifier="QuizInProgressViewController" title="ACCCCCC" id="KJ0-Tf-AmP" customClass="QuizInProgressViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuizInProgressViewController" title="Quiz In Progress" id="KJ0-Tf-AmP" customClass="QuizInProgressViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e4q-15-zsn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="dsfdasfdsfdafadsf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFV-Uj-s8A">
-                                <rect key="frame" x="89" y="167" width="138" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Continue?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFV-Uj-s8A">
+                                <rect key="frame" x="20" y="167" width="374" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1i-IH-uOJ">
-                                <rect key="frame" x="85" y="296" width="309" height="31"/>
+                                <rect key="frame" x="20" y="296" width="374" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Give Up"/>
                                 <connections>
                                     <action selector="btnActGiveUp:" destination="KJ0-Tf-AmP" eventType="touchUpInside" id="dD9-tH-Lvu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hfc-rb-Nkn">
-                                <rect key="frame" x="42" y="257" width="231" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="continue"/>
-                                <connections>
-                                    <action selector="btnActContinue:" destination="KJ0-Tf-AmP" eventType="touchUpInside" id="OSO-xx-jEg"/>
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TR2-Nn-VMr">
@@ -1345,11 +1376,20 @@
                                     <navigationItem title="In Progress" id="gq7-BL-zUA"/>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hfc-rb-Nkn">
+                                <rect key="frame" x="20" y="257" width="374" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="continue"/>
+                                <connections>
+                                    <action selector="btnActContinue:" destination="KJ0-Tf-AmP" eventType="touchUpInside" id="OSO-xx-jEg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="duY-ig-ibm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="ASDASDASD" id="8GU-L2-dAH"/>
+                    <navigationItem key="navigationItem" id="8GU-L2-dAH"/>
                     <connections>
                         <outlet property="btnGiveUp" destination="B1i-IH-uOJ" id="0eT-1v-n8u"/>
                     </connections>
@@ -1371,6 +1411,7 @@
         <segue reference="VsC-uc-p1n"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

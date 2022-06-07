@@ -120,7 +120,7 @@ struct QuizConfigStore {
             do {
                 return try store.getObject(forKey: .cfgQuizLeitnerSystem, castTo: LeitnerSystem<QuizQuestion>.self)
             } catch {
-                print("Can't save cfgQuizLeitnerSystem to UserDefaults:", error)
+                print("Can't load cfgQuizLeitnerSystem from UserDefaults:", error)
             }
             
             return nil
