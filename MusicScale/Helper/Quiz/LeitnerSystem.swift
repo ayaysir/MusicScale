@@ -22,6 +22,9 @@ struct LeitnerProgressInfo: Codable, CustomStringConvertible {
     var description: String {
         return "CDI:\(currentDQIndex), day:\(day), dailyQuest: \(dailyQuestionCount), start: \(startBoxCount), box_one: \(learningBoxOneCount), box_two: \(learningBoxTwoCount), box_three: \(learningBoxThreeCount), finished: \(finishedBoxCount)"
     }
+    var labelText: String {
+        return "Cycle: \(day) | Quest of Cycle: \(currentDQIndex + 1) / \(dailyQuestionCount) | Not Studying Yet: \(startBoxCount) | In Studying: \(learningBoxOneCount + learningBoxTwoCount + learningBoxThreeCount) | Finished: \(finishedBoxCount)"
+    }
     
     let currentDQIndex, day, totalBoxCount, dailyQuestionCount, startBoxCount: Int
     let learningBoxOneCount, learningBoxTwoCount, learningBoxThreeCount: Int
@@ -29,6 +32,18 @@ struct LeitnerProgressInfo: Codable, CustomStringConvertible {
     let isSameCountOriginalAndLeitnerBoxes: Bool
 }
 
+struct LeitnerForecastProgressInfo: Codable {
+    
+    // day 0: (진행 문제수 / 전체 문제수)
+    // day 1 ~ : (완료 문제수 / 전체 문제수)
+    enum Phase: Codable {
+        case phaseOne, phaseTwo
+    }
+    
+    var phase: Phase
+    var percent: Float
+    
+}
  
 struct LeitnerSystem<T: Codable>: Codable {
     /*
@@ -246,8 +261,11 @@ struct LeitnerSystem<T: Codable>: Codable {
         }
     }
     
+    var totalBoxCount: Int {
+        return leitnerItemStartingList.count + leitnerLearningLists[BOX_ONE].count + leitnerLearningLists[BOX_TWO].count + leitnerLearningLists[BOX_THREE].count + leitnerFinishedList.count
+    }
+    
     var progressInfo: LeitnerProgressInfo {
-        let totalBoxCount = leitnerItemStartingList.count + leitnerLearningLists[BOX_ONE].count + leitnerLearningLists[BOX_TWO].count + leitnerLearningLists[BOX_THREE].count + leitnerFinishedList.count
         return LeitnerProgressInfo(currentDQIndex: currentDQIndex,
                             day: day,
                             totalBoxCount: totalBoxCount,
@@ -259,6 +277,33 @@ struct LeitnerSystem<T: Codable>: Codable {
                             finishedBoxCount: leitnerFinishedList.count,
                             originalItemListCount: originalItemList.count,
                             isSameCountOriginalAndLeitnerBoxes: originalItemList.count == totalBoxCount)
+    }
+    
+    var forecastProgressInfo: LeitnerForecastProgressInfo {
+        let totalBoxCount: Float = Float(totalBoxCount)
+        let dayZeroProgress = currentDQIndex
+        
+        var phase: LeitnerForecastProgressInfo.Phase {
+            return day == 0 ? .phaseOne : .phaseTwo
+        }
+        
+        var percent: Float {
+            switch phase {
+            case .phaseOne:
+                return Float(dayZeroProgress + 1) / totalBoxCount
+            case .phaseTwo:
+                
+                let finishCount = leitnerFinishedList.count
+                return Float(finishCount) / totalBoxCount
+            
+                // let expectedFinishCount = leitnerFinishedList.count + leitnerLearningLists[BOX_THREE].filter({ $0.isSuccess }).count
+                // return Float(expectedFinishCount) / totalBoxCount
+                
+                
+            }
+        }
+        
+        return LeitnerForecastProgressInfo(phase: phase, percent: percent)
     }
     
     func printDailyQuestionList(printDailyQuestion: Bool = true, printBoxDetail: Bool = false) {

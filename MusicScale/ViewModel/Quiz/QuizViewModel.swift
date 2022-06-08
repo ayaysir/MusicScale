@@ -149,6 +149,32 @@ class QuizViewModel {
     }
     
     var quizStatus: String {
-        return leitnerSystem.progressInfo.description
+        return leitnerSystem.progressInfo.labelText
     }
+    
+    var finishedCount: Int {
+        return leitnerSystem.progressInfo.finishedBoxCount
+    }
+    
+    var inStudyingCount: Int {
+        let progressInfo = leitnerSystem.progressInfo
+        return progressInfo.learningBoxOneCount + progressInfo.learningBoxTwoCount + progressInfo.learningBoxThreeCount
+    }
+    
+    var notStudyingYetCount: Int {
+        return leitnerSystem.progressInfo.startBoxCount
+    }
+    
+    var studyingProgress: (isPhaseOne: Bool, percent: Float) {
+        let info = leitnerSystem.forecastProgressInfo
+        let isPhaseOne = info.phase == .phaseOne
+        
+        return (isPhaseOne, info.percent)
+    }
+    
+    var dayQuestionProgress: Float {
+        return Float(leitnerSystem.progressInfo.currentDQIndex + 1) / Float(leitnerSystem.progressInfo.dailyQuestionCount)
+    }
+    
+    /// 빈 악보 
 }

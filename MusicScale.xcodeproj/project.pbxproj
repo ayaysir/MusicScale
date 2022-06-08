@@ -36,6 +36,7 @@
 		445FA4C9284F53C90008D621 /* QuizCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4C8284F53C90008D621 /* QuizCommon.swift */; };
 		445FA4CC284F547D0008D621 /* InitViewControllerFromStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4CB284F547D0008D621 /* InitViewControllerFromStoryboard.swift */; };
 		445FA4CE284F5D010008D621 /* InQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4CD284F5D010008D621 /* InQuizViewController.swift */; };
+		445FA4D0284FB58C0008D621 /* ColorfulProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4CF284FB58C0008D621 /* ColorfulProgressView.swift */; };
 		446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446100BA284517FB0033BCE9 /* UIColor+.swift */; };
 		446100BE28451B370033BCE9 /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = 446100BD28451B370033BCE9 /* PanModal */; };
 		4461012F28451EE30033BCE9 /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4461012E28451EE30033BCE9 /* SortViewController.swift */; };
@@ -95,6 +96,7 @@
 		44B70F4228491A650068495A /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F4128491A650068495A /* QuizViewModel.swift */; };
 		44B70F44284A57430068495A /* AppConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F43284A57430068495A /* AppConfigStore.swift */; };
 		44E7A07528467692005C7909 /* SearchCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E7A07428467692005C7909 /* SearchCategory.swift */; };
+		44FEFBF12850EE4B000402DE /* QuizEditKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEFBF02850EE4B000402DE /* QuizEditKeyViewModel.swift */; };
 		4BE14DBCD05F5882BF98D64F /* Pods_MusicScale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214599025073672669B0DEA4 /* Pods_MusicScale.framework */; };
 		DE03C6B45056C54CF4C98113 /* Pods_MusicScale_MusicScaleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFCC8F1225122295FF5581 /* Pods_MusicScale_MusicScaleUITests.framework */; };
 /* End PBXBuildFile section */
@@ -151,6 +153,7 @@
 		445FA4C8284F53C90008D621 /* QuizCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCommon.swift; sourceTree = "<group>"; };
 		445FA4CB284F547D0008D621 /* InitViewControllerFromStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitViewControllerFromStoryboard.swift; sourceTree = "<group>"; };
 		445FA4CD284F5D010008D621 /* InQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InQuizViewController.swift; sourceTree = "<group>"; };
+		445FA4CF284FB58C0008D621 /* ColorfulProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulProgressView.swift; sourceTree = "<group>"; };
 		446100BA284517FB0033BCE9 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		4461012E28451EE30033BCE9 /* SortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
 		4463FEA6282BDFF700E7A607 /* PianoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +214,7 @@
 		44B70F4128491A650068495A /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		44B70F43284A57430068495A /* AppConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigStore.swift; sourceTree = "<group>"; };
 		44E7A07428467692005C7909 /* SearchCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategory.swift; sourceTree = "<group>"; };
+		44FEFBF02850EE4B000402DE /* QuizEditKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizEditKeyViewModel.swift; sourceTree = "<group>"; };
 		4C9FB0A5D20EA8BA718B985F /* Pods-MusicScale.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScale.release.xcconfig"; path = "Target Support Files/Pods-MusicScale/Pods-MusicScale.release.xcconfig"; sourceTree = "<group>"; };
 		9FA4470F182FF4C132941F6A /* Pods-MusicScaleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScaleTests.debug.xcconfig"; path = "Target Support Files/Pods-MusicScaleTests/Pods-MusicScaleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4FFCC8F1225122295FF5581 /* Pods_MusicScale_MusicScaleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicScale_MusicScaleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -384,6 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				4463FEB6282D3FCE00E7A607 /* PianoView.swift */,
+				445FA4CF284FB58C0008D621 /* ColorfulProgressView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -536,6 +541,7 @@
 			isa = PBXGroup;
 			children = (
 				44B70F4128491A650068495A /* QuizViewModel.swift */,
+				44FEFBF02850EE4B000402DE /* QuizEditKeyViewModel.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -829,6 +835,7 @@
 				445FA4CE284F5D010008D621 /* InQuizViewController.swift in Sources */,
 				4463FEB1282C24CA00E7A607 /* PianoKeyInfo.swift in Sources */,
 				441FA160283A8C370084AE58 /* FloatingPoint.swift in Sources */,
+				44FEFBF12850EE4B000402DE /* QuizEditKeyViewModel.swift in Sources */,
 				44B70F44284A57430068495A /* AppConfigStore.swift in Sources */,
 				44A09A7F283929FB0067184E /* EnharmonicMode.swift in Sources */,
 				4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */,
@@ -858,6 +865,7 @@
 				4417252B284B8AC50003CDC7 /* QuizConfig.swift in Sources */,
 				4463FEAD282C0E6600E7A607 /* Note.swift in Sources */,
 				446AEA2E283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift in Sources */,
+				445FA4D0284FB58C0008D621 /* ColorfulProgressView.swift in Sources */,
 				443A0C6328428F3100641BC0 /* Between.swift in Sources */,
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,
 				4475CB512830A6C200B9D204 /* MusicSheetHelper.swift in Sources */,

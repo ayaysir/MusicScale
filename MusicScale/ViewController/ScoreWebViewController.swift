@@ -97,10 +97,8 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
         webView.loadFileURL(url, allowingReadAccessTo: url)
         webView.scrollView.isScrollEnabled = false
         
-        // if let scaleInfoViewModel = scaleInfoViewModel {
-            let abcjsText = ScaleInfoVCConfigStore.shared.degreesOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending
-            injectAbcjsText(from: abcjsText, needReload: false)
-        // }
+        let abcjsText = ScaleInfoVCConfigStore.shared.degreesOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending
+        injectAbcjsText(from: abcjsText, needReload: false)
         
         // 자바스크립트 -> 네이티브 앱 연결
         // 브리지 등록

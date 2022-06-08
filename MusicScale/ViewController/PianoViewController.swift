@@ -9,10 +9,18 @@ import UIKit
 import AudioKit
 import AVFoundation
 
+protocol PianoVCDelegate: AnyObject {
+    func didKeyPressed(_ controller: PianoViewController, keyInfo: PianoKeyInfo)
+}
+
 class PianoViewController: UIViewController {
     
-    // @IBOutlet weak var viewPiano: PianoView!
+    enum Mode {
+        case stricted, free
+    }
+    
     var viewPiano: PianoView!
+    var mode: Mode = .stricted
     
     let engine = AudioEngine()
     private var instrument = MIDISampler(name: "Instrument 1")
@@ -22,6 +30,7 @@ class PianoViewController: UIViewController {
     var octaveShift: Int = 0
     
     var parentContainerView: UIView?
+    weak var delegate: PianoVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +44,6 @@ class PianoViewController: UIViewController {
             pianoLongPressRecognizer.minimumPressDuration = 0.0
             viewPiano.addGestureRecognizer(pianoLongPressRecognizer)
         }
-        
-        
-        // let pianoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handlePianoTap))
-        // viewPiano.addGestureRecognizer(pianoTapRecognizer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,11 +84,6 @@ class PianoViewController: UIViewController {
         }
     }
     
-    // @objc func handlePianoTap(gesture: UITapGestureRecognizer) {
-    //     let location = gesture.location(in: gesture.view)
-    //     print(#function, "location:", location)
-    // }
-    
     @objc func handlePianoLongPress(gesture: UILongPressGestureRecognizer) {
         
         let semitoneStart = 60 + PianoKeyHelper.adjustKeySemitone(key: currentPlayableKey)
@@ -95,25 +95,28 @@ class PianoViewController: UIViewController {
             // print("possible", terminator: ":")
             break
         case .began:
-            // print(#function, "location:", location, terminator: ":")
-            
             if let viewModel = viewModel, let keyInfo = viewModel.getKeyInfoBy(touchLocation: location) {
-                guard viewPiano.viewModel.availableKeyIndexes.contains(keyInfo.keyIndex) else {
-                    return
+                if mode == .stricted {
+                    guard viewPiano.viewModel.availableKeyIndexes.contains(keyInfo.keyIndex) else {
+                        return
+                    }
                 }
                 
                 viewModel.currentTouchedKey = keyInfo
-                // print("keyInfo:", keyInfo)
+                
                 // 노트 재생
                 midiNote = MIDINoteNumber(semitoneStart + keyInfo.keyIndex + (octaveShift * 12))
                 instrument.play(noteNumber: midiNote, velocity: 90, channel: 1)
+                
+                // delegate 있는 경우 키 누름 정보 전송
+                if let delegate = delegate {
+                    delegate.didKeyPressed(self, keyInfo: keyInfo)
+                }
             }
-            
         case .changed:
             // print(".", terminator: ":")
             break
         case .ended:
-            // print("ended")
             // 노트 멈춤
             if viewModel?.currentTouchedKey != nil && midiNote != nil {
                 viewModel?.currentTouchedKey = nil
@@ -140,7 +143,7 @@ extension PianoViewController {
     }
     
     func updateAvailableKeys(integerNotations: [Int]) {
-        viewPiano.viewModel.availableKeyIndexes = integerNotations.map { $0 + PianoKeyHelper.adjustKeyPosForAvaliableKeyIndexes(playableKey: currentPlayableKey) }
+        viewPiano.viewModel.availableKeyIndexes = integerNotations.map { $0 + PianoKeyHelper.findRootKeyPosition(playableKey: currentPlayableKey) }
         viewPiano.setNeedsDisplay()
     }
 }

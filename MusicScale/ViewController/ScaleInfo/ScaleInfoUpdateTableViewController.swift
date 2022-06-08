@@ -55,12 +55,6 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         loadWebSheetPage()
         txfScaleName.addTarget(self, action: #selector(scaleNameChanged), for: .editingChanged)
         
-        // cosmosDefaultPriority.didFinishTouchingCosmos = {
-        //     rating in
-        //     print(rating)
-        //     self.defaultPriority = Int(rating)
-        // }
-        
         // ===== 분기별 작업 =====
         switch mode {
         case .create:

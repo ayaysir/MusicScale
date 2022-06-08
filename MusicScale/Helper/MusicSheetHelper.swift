@@ -19,10 +19,6 @@ import Foundation
  w: C D E♭ F G A♭ B♭ C
  */
 
-//typealias NoteNumberPair = (prefix: String, number: Int)
-//typealias NoteStrPair = (prefix: String, noteStr: String)
-
-
 enum DegreesOrder {
     case ascending, descending
     
@@ -158,77 +154,11 @@ struct MusicSheetHelper {
     func degreesToNoteNumberPairs(degrees: String, order: DegreesOrder, completeFinalNote: Bool = true, key: Music.Key = .C, octaveShift: Int = 0) -> [NoteNumberPair] {
         
         let degreeComponents = degrees.components(separatedBy: " ")
-        
-        // let onlyNumberRegex = "^[1234567]$"
-        // let hasPrefixRegex = "^[♭b#♯♮=][1234567]$"
-        // let hasBracketedPrefixRegex = "^\\([♭b#♯♮=]\\)[1234567]$"
-        //
-        // let hasSharpAndFlatPrefixRegex = "^[♭b#♯][1234567]$"
-        // let hasSharpAndFlatBracketedPrefixRegex = "^\\([♭b#♯]\\)[1234567]$"
-        
         var result = degreeComponents.enumerated().withPreviousAndNext.compactMap { values -> NoteNumberPair? in
-            
             let (prev, curr, _) = values
             let str = curr.element
             
             return degreeToNoteNumeberPair(singleDegree: str, prevDegree: prev?.element)
-            
-        //     let onlyNumber = str.range(of: onlyNumberRegex, options: .regularExpression)
-        //     let hasPrefix = str.range(of: hasPrefixRegex, options: .regularExpression)
-        //     let hasBracketedPrefix = str.range(of: hasBracketedPrefixRegex, options: .regularExpression)
-        //
-        //     if onlyNumber != nil {
-        //
-        //         let number = Int(str)!
-        //
-        //         if let prevElement = prev?.element {
-        //
-        //             let isPrevHasPrefix = (prevElement.range(of: hasSharpAndFlatPrefixRegex, options: .regularExpression)) != nil
-        //             let isPrevAndCurrSameNumber1 = prevElement[1] == str
-        //
-        //             let isPrevHasBracketPrefix = (prevElement.range(of: hasSharpAndFlatBracketedPrefixRegex, options: .regularExpression)) != nil
-        //             let removeBracketStrOfPrev = prevElement.replacingOccurrences(of: "[\\(\\)]", with: "", options: .regularExpression)
-        //             let isPrevAndCurrSameNumber2 = removeBracketStrOfPrev[1] == str
-        //
-        //             if isPrevHasPrefix && isPrevAndCurrSameNumber1 {
-        //                 return NoteNumberPair("=", number)
-        //             }
-        //
-        //             if isPrevHasBracketPrefix && isPrevAndCurrSameNumber2 {
-        //                 return NoteNumberPair("=", number)
-        //             }
-        //         }
-        //
-        //         return NoteNumberPair("", number)
-        //
-        //     } else if hasPrefix != nil {
-        //         let number = Int(str[1])!
-        //         switch str[0] {
-        //         case "♭", "b":
-        //             return NoteNumberPair("_", number)
-        //         case "♯", "#":
-        //             return NoteNumberPair("^", number)
-        //         case "♮", "=":
-        //             return NoteNumberPair("=", number)
-        //         default:
-        //             break
-        //         }
-        //     } else if hasBracketedPrefix != nil {
-        //         let removedBracketStr = str.replacingOccurrences(of: "[\\(\\)]", with: "", options: .regularExpression)
-        //         let number = Int(removedBracketStr[1])!
-        //         switch removedBracketStr[0] {
-        //         case "♭", "b":
-        //             return NoteNumberPair("_", number)
-        //         case "♯", "#":
-        //             return NoteNumberPair("^", number)
-        //         case "♮", "=":
-        //             return NoteNumberPair("=", number)
-        //         default:
-        //             break
-        //         }
-        //     }
-        //
-        //     return NoteNumberPair("", -99)
         }
         
         if completeFinalNote && order == .ascending {
@@ -385,6 +315,44 @@ struct MusicSheetHelper {
         }.joined(separator: " ")
     }
     
+    /// Note 배열을 abcjsText Part로 변환
+    func notesToAbcjsPart(notes: [Note]) -> String {
+        return notes.enumerated().withPreviousAndNext.compactMap { values -> String? in
+            let (prev, curr, _) = values
+            
+            let note = curr.element
+            
+            let notePrefix: String = {
+                
+                // 첫 번째 내추럴은 표시하지 않음
+                if prev == nil && note.accidental == .natural {
+                    return ""
+                }
+                
+                if let prevNote = prev?.element {
+                    let noteNamesAreSame = prevNote.scale7 == note.scale7
+                    let emptyCondition1 = (noteNamesAreSame && prevNote.accidental == .natural && note.accidental == .natural)
+                    let emptyCondition2 = (!noteNamesAreSame && note.accidental == .natural)
+                    
+                    if noteNamesAreSame && prevNote.hasAccidentalExceptNatural && note.accidental == .natural {
+                        return Music.Accidental.natural.abcjsPrefix
+                    } else if emptyCondition1 || emptyCondition2 {
+                        return ""
+                    }
+                }
+                
+                return note.accidental.abcjsPrefix
+            }()
+            
+            let relativeOctave = (4 - note.octave) * -1
+            
+            let noteText = note.scale7.textValue
+            let postfixStr = relativeOctave == 0 ? "" : relativeOctave >= 1 ? "'" : ","
+            let notePostfix = String(repeating: postfixStr, count: relativeOctave)
+            return notePrefix + noteText + notePostfix
+        }.joined(separator: " ")
+    }
+    
     /// abcjsText 생성기: 원시 형태
     func composeAbcjsText(scaleNameText: String, tempo: Double, partText: String, lyricText: String) -> String {
         
@@ -473,48 +441,6 @@ struct MusicSheetHelper {
         //  1,  2,  3,  4,  5,  6,  7
         //  8,  9, 10, 11, 12, 13, 14
         // 15, 16, 17, 18, 19, 20, 21
-        
-        // var leftInteger = leftPair.number * 2
-        // var rightInteger = rightPair.number * 2
-        //
-        // switch leftPair.prefix {
-        // case "_":
-        //     leftInteger -= 1
-        // case "^":
-        //     leftInteger += 1
-        // default:
-        //     break
-        // }
-        //
-        // switch rightPair.prefix {
-        // case "_":
-        //     rightInteger -= 1
-        // case "^":
-        //     rightInteger += 1
-        // default:
-        //     break
-        // }
-        //
-        // let numbers = [leftPair.number, rightPair.number].sorted()
-        // let numRange = numbers[0]...numbers[1]
-        //
-        // let totalHalfCount = numRange.enumerated().reduce(0) { partialResults, values in
-        //
-        //     let (index, num) = values
-        //
-        //     if index == 0 {
-        //         return partialResults
-        //     }
-        //
-        //     let currentNumMod7 = num % 7
-        //     if (currentNumMod7 == 4 || currentNumMod7 == 1) {
-        //         return partialResults + 1
-        //     }
-        //
-        //     return partialResults
-        // }
-        //
-        // return (rightInteger - leftInteger) - (leftInteger <= rightInteger ? totalHalfCount : -totalHalfCount)
         
         let leftInteger = numPairToInteger(leftPair)
         let rightInteger = numPairToInteger(rightPair)

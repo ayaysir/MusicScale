@@ -1221,7 +1221,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i8u-Bp-kD8">
-                                <rect key="frame" x="20" y="132" width="374" height="597"/>
+                                <rect key="frame" x="20" y="147" width="374" height="582"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXO-Zk-CHY">
@@ -1236,6 +1236,22 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                             </view>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="9HU-z4-5hf">
+                                <rect key="frame" x="20" y="118" width="374" height="4"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="progressTintColor" systemColor="systemYellowColor"/>
+                            </progressView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ein-Vh-JIj">
+                                <rect key="frame" x="20" y="130" width="374" height="4"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jt6-Z8-on3">
+                                <rect key="frame" x="20" y="89" width="374" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jWT-9P-ttU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1244,6 +1260,9 @@
                     <connections>
                         <outlet property="btnPlay" destination="EXO-Zk-CHY" id="3ba-TD-PBN"/>
                         <outlet property="cardContainerView" destination="i8u-Bp-kD8" id="FDn-6e-W0j"/>
+                        <outlet property="lblProgressStatus" destination="jt6-Z8-on3" id="qE5-TR-bZz"/>
+                        <outlet property="progressViewDayQuestionProgress" destination="ein-Vh-JIj" id="4vz-PS-Naw"/>
+                        <outlet property="progressViewInStudying" destination="9HU-z4-5hf" id="O9E-Wg-odD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qRs-Jd-Mts" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1290,19 +1309,50 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nGs-6x-Q4S">
+                                <rect key="frame" x="0.0" y="615" width="414" height="198"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="koB-7m-YD5" kind="embed" identifier="QuizPianoSegue" id="8Fa-Oz-VZU"/>
+                                </connections>
+                            </containerView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4K3-cC-Ghf">
+                                <rect key="frame" x="0.0" y="229" width="414" height="281"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                            </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hk1-Am-5Fb">
+                                <rect key="frame" x="0.0" y="571" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="nrQ-bp-MFL"/>
+                                    <barButtonItem title="Reset" image="arrow.clockwise" catalog="system" id="MZm-Pw-WoS">
+                                        <connections>
+                                            <action selector="barBtnActResetNotes:" destination="JGG-Hn-FWp" id="5Pq-jL-eHx"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Backspace" image="delete.left" catalog="system" width="53.5" id="wqy-QJ-y1X">
+                                        <connections>
+                                            <action selector="barBtnActBackspaceNote:" destination="JGG-Hn-FWp" id="b1Z-MG-nk7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vHQ-Tm-7FH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Flashcards Prototype" id="aI7-W9-8Co"/>
                     <connections>
+                        <outlet property="containerViewPiano" destination="nGs-6x-Q4S" id="Ts7-Zc-qhK"/>
                         <outlet property="lblKeyName" destination="Okz-86-0QZ" id="nkZ-sW-v1q"/>
                         <outlet property="lblQuizProgressInfo" destination="xjO-zv-uJW" id="12g-w5-Dge"/>
+                        <outlet property="viewWebContainer" destination="4K3-cC-Ghf" id="Yv6-Tg-dZO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k1p-V4-yJC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="371" y="1590"/>
+            <point key="canvasLocation" x="369.56521739130437" y="1589.7321428571429"/>
         </scene>
         <!--Select the Keys-->
         <scene sceneID="VJV-sx-aaG">
@@ -1408,9 +1458,12 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="VsC-uc-p1n"/>
+        <segue reference="6tl-C7-X1w"/>
+        <segue reference="8Fa-Oz-VZU"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
+        <image name="delete.left" catalog="system" width="128" height="104"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1421,6 +1474,9 @@
         <systemColor name="systemCyanColor">
             <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
@@ -1429,6 +1485,9 @@
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

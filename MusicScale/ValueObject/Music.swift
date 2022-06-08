@@ -54,6 +54,35 @@ struct Music: Codable {
             }
         }
         
+        var distanceFromC: Int {
+            switch self {
+            case .C:
+                return 0
+            case .C_sharp, .D_flat:
+                return 1
+            case .D:
+                return 2
+            case .D_sharp, .E_flat:
+                return 3
+            case .E:
+                return 4
+            case .F:
+                return 5
+            case .F_sharp, .G_flat:
+                return 6
+            case .G:
+                return 7
+            case .G_sharp, .A_flat:
+                return 8
+            case .A:
+                return 9
+            case .A_sharp, .B_flat:
+                return 10
+            case .B:
+                return 11
+            }
+        }
+        
         var enharmonicKey: Key {
             if self.rawValue.count == 1 {
                 return self
@@ -66,6 +95,16 @@ struct Music: Codable {
             let index = scale7.firstIndex(of: strComponents[0])! + (accidental == "sharp" ? 1 : -1)
             let newAccidental = accidental == "sharp" ? "flat" : "sharp"
             return Key(rawValue: "\(scale7[index])_\(newAccidental)")!
+        }
+        
+        var accidental: Music.Accidental {
+            
+            switch accidentalValue {
+            case "natural": return .natural
+            case "sharp": return .sharp
+            case "flat": return .flat
+            default: return .natural
+            }
         }
         
         var accidentalValue: String {
@@ -116,7 +155,6 @@ struct Music: Codable {
         }
         
         var textValue: String {
-            
             if self.rawValue.count == 1 {
                 return self.rawValue
             }
@@ -143,6 +181,28 @@ struct Music: Codable {
             }
         }
         
+        var strPair: NoteStrPair {
+            var prefix: String!
+            switch accidentalValue {
+            case "natural":
+                prefix = ""
+            case "sharp":
+                prefix = "^"
+            case "flat":
+                prefix = "_"
+            default:
+                break
+            }
+            
+            let strComponents = self.rawValue.components(separatedBy: "_")
+            return NoteStrPair(prefix, strComponents[0])
+        }
+        
+        var startNote: Note {
+            let scale7 = Scale7.getScaleByNoteName(self.rawValue)!
+            return Note(scale7: scale7, accidental: self.accidental)
+        }
+        
         static var sharpKeys: [Key] {
             return self.allCases.filter { key in
                 
@@ -158,7 +218,6 @@ struct Music: Codable {
                 return false
             }
         }
-        
         
         static var flatKeys: [Key] {
             return self.allCases.filter { key in
@@ -196,6 +255,25 @@ struct Music: Codable {
     enum Scale7: Int, Codable, CaseIterable {
         case C = 0, D = 2, E = 4, F = 5, G = 7, A = 9, B = 11
         
+        var textValue: String {
+            switch self {
+            case .C:
+                return "C"
+            case .D:
+                return "D"
+            case .E:
+                return "E"
+            case .F:
+                return "F"
+            case .G:
+                return "G"
+            case .A:
+                return "A"
+            case .B:
+                return "B"
+            }
+        }
+        
         static func getScaleByCaseIndex(_ index: Int) -> Scale7? {
             
             guard index >= 0 && index <= self.allCases.count - 1 else {
@@ -203,6 +281,24 @@ struct Music: Codable {
             }
             
             return self.allCases[index]
+        }
+        
+        static func getScaleByNoteName(_ name: String) -> Scale7? {
+            
+            guard let first = name.first?.uppercased() else {
+                return nil
+            }
+            
+            switch first {
+            case "C": return .C
+            case "D": return .D
+            case "E": return .E
+            case "F": return .F
+            case "G": return .G
+            case "A": return .A
+            case "B": return .B
+            default: return nil
+            }
         }
     }
     
@@ -221,6 +317,38 @@ struct Music: Codable {
                 return "𝄫"
             case .natural:
                 return "♮"
+            }
+        }
+        
+        var abcjsPrefix: String {
+            switch self {
+            case .sharp:
+                return "^"
+            case .doubleSharp:
+                return "^^"
+            case .flat:
+                return "_"
+            case .doubleFlat:
+                return "__"
+            case .natural:
+                return "="
+            }
+        }
+        
+        static func findAccidental(from abcjsText: String) -> Accidental? {
+            switch abcjsText {
+            case "^":
+                return .sharp
+            case "^^":
+                return .doubleSharp
+            case "_":
+                return flat
+            case "__":
+                return .doubleFlat
+            case "=", "":
+                return .natural
+            default:
+                return nil
             }
         }
     }

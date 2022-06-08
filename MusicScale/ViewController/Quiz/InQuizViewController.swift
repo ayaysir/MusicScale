@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 /**
   - quizViewModel
@@ -19,10 +20,15 @@ class InQuizViewController: UIViewController {
     typealias DisplayHandler = (_ newQuestion: QuizQuestion) -> ()
     typealias Handler = () -> ()
     
+    let quizStore = QuizConfigStore.shared
+    let playbackConfigStore = ScaleInfoVCConfigStore.shared
+    
     var quizViewModel: QuizViewModel!
     var displayNextQuestionHandler: DisplayHandler!
     var displayEndQuizHandler: Handler!
     var displayNilQuestionHandler: Handler!
+    
+    var webkitView: WKWebView!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -71,5 +77,79 @@ class InQuizViewController: UIViewController {
         }
         
         displayNextQuestionHandler(newQuestion)
+    }
+}
+
+extension InQuizViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        switch message.name {
+        case "logHandler":
+            print("console log:", message.body)
+        default:
+            break
+        }
+    }
+    
+    func initWebSheetPage(initAbcjsText: String) {
+        
+        if #available(iOS 14.0, *) {
+            webkitView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
+        } else {
+            // Fallback on earlier versions
+            webkitView.configuration.preferences.javaScriptEnabled = true
+        }
+        
+        // 웹 파일 로딩
+        webkitView.uiDelegate = self
+        webkitView.navigationDelegate = self
+        let pageName = "index"
+        guard let url = Bundle.main.url(forResource: pageName, withExtension: "html", subdirectory: "web") else {
+            return
+        }
+        webkitView.loadFileURL(url, allowingReadAccessTo: url)
+        webkitView.scrollView.isScrollEnabled = false
+        
+        injectAbcjsText(from: initAbcjsText, needReload: false)
+        
+        // 자바스크립트 -> 네이티브 앱 연결
+        // 브리지 등록
+        webkitView.configuration.userContentController.add(self, name: "notePlayback")
+        
+        // inject JS to capture console.log output and send to iOS
+        let source = """
+            function captureLog(msg) { window.webkit.messageHandlers.logHandler.postMessage(msg); }
+            window.console.log = captureLog;
+        """
+        let script = WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+        webkitView.configuration.userContentController.addUserScript(script)
+        // register the bridge script that listens for the output
+        webkitView.configuration.userContentController.add(self, name: "logHandler")
+        
+    }
+}
+
+extension InQuizViewController: ScoreWebInjection {
+    
+    func startTimer() {
+        webkitView.evaluateJavaScript("startTimer()")
+    }
+    
+    func stopTimer() {
+        webkitView.evaluateJavaScript("stopTimer()")
+    }
+    
+    func injectAbcjsText(from abcjsText: String, needReload: Bool = true) {
+        
+        let abcjsTextFixed = charFixedAbcjsText(abcjsText)
+
+        if needReload {
+            stopTimer()
+            webkitView.evaluateJavaScript(generateAbcJsInjectionSource(from: abcjsTextFixed))
+        } else {
+            let injectionSource = generateAbcJsInjectionSource(from: abcjsTextFixed)
+            let injectionScript = WKUserScript(source: injectionSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+            webkitView.configuration.userContentController.addUserScript(injectionScript)
+        }
+        
     }
 }

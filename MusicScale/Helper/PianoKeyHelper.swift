@@ -57,7 +57,7 @@ struct PianoKeyHelper {
         }
     }
     
-    static func adjustKeyPosForAvaliableKeyIndexes(playableKey key: Music.PlayableKey) -> Int {
+    static func findRootKeyPosition(playableKey key: Music.PlayableKey) -> Int {
         switch key {
         case .C:
             return 0

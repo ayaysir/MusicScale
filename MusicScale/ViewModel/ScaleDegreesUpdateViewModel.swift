@@ -15,9 +15,7 @@ class ScaleDegreesUpdateViewModel {
     
     private let helper = MusicSheetHelper()
     
-    init() {
-        
-    }
+    init() {}
     
     init(ascDegrees: String, descDegrees: String) {
         onEditDegreesAsc = ascDegrees.components(separatedBy: " ")
@@ -58,6 +56,4 @@ class ScaleDegreesUpdateViewModel {
         let pair = getNumPair(degree: degree)
         return helper.numPairToInteger(pair)
     }
-    
-    
 }
