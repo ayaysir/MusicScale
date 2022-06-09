@@ -49,14 +49,18 @@ class ScaleSubInfoTableViewController: UITableViewController {
                 return cellHeight * 1.1
             }
         case cellCommentIndexPath:
-            let cellHeight = getLabelHeight(text: scaleInfoViewModel.comment, font: txvComment.font!, width: txvComment.frame.width)
-
-            return cellHeight * 1.22
+            // let cellHeight = getLabelHeight(text: scaleInfoViewModel.comment, font: txvComment.font!, width: txvComment.frame.width)
+            
+            if scaleInfoViewModel.comment == "" {
+                return 0
+            }
+            
+            return txvComment.frame.height
         default:
             break
         }
         
-        return MIN_CELL_SIZE
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
     // MARK: - Navigation

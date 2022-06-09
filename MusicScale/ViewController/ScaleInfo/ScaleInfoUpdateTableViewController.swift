@@ -29,14 +29,10 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     @IBOutlet weak var txvComment: UITextView!
     @IBOutlet weak var barBtnSubmit: UIBarButtonItem!
     @IBOutlet weak var webView: WKWebView!
-    
     @IBOutlet weak var segAccidental: UISegmentedControl!
     @IBOutlet weak var segAscDesc: UISegmentedControl!
-    
     @IBOutlet weak var swtActivateDesc: UISwitch!
-    
     @IBOutlet weak var lblCautionAscAndDescDiff: UILabel!
-    
     @IBOutlet weak var cosmosDefaultPriority: CosmosView!
     
     weak var updateDelegate: ScaleInfoUpdateTVCDelegate?
@@ -46,7 +42,11 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     var infoViewModel: ScaleInfoViewModel?
     var degreesViewModel: ScaleDegreesUpdateViewModel!
     
-    // var defaultPriority = -1
+    let conductor = NoteSequencerConductor()
+    var playTimer: Timer?
+    
+    private let bannerAdPath = IndexPath(row: 0, section: 5)
+    private let showBanner = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +54,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         // ===== 공통 작업 =====
         loadWebSheetPage()
         txfScaleName.addTarget(self, action: #selector(scaleNameChanged), for: .editingChanged)
+        conductor.start()
         
         // ===== 분기별 작업 =====
         switch mode {
@@ -88,6 +89,50 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
             print(degreesViewModel.onEditDegreesDesc)
         }
     }
+    
+    // MARK: - Table Delegate
+    
+    // override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //     if indexPath == IndexPath(row: 0, section: 0) {
+    //         return 500
+    //     } else {
+    //         return super.tableView(tableView, heightForRowAt: indexPath)
+    //     }
+    // }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if !showBanner && section == bannerAdPath.section {
+            return 0.1
+        } else {
+            return super.tableView(tableView, heightForHeaderInSection: section)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if !showBanner && section == bannerAdPath.section {
+            return 0.1
+        } else {
+            return super.tableView(tableView, heightForHeaderInSection: section)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if !showBanner && section == bannerAdPath.section {
+            return 0
+        } else {
+            return super.tableView(tableView, numberOfRowsInSection: section)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if !showBanner && section == bannerAdPath.section {
+            return ""
+        } else {
+            return super.tableView(tableView, titleForHeaderInSection: section)
+        }
+    }
+    
+    // Footer에도 텍스트가 있는 경우 titleForFooterInSection 도 동일하게 override
     
     // MARK: - @objc
     
@@ -317,9 +362,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
                 print("error: update failed:", error)
             }
         }
-        
     }
-    
 }
 
 extension ScaleInfoUpdateTableViewController {
@@ -448,3 +491,18 @@ extension ScaleInfoUpdateTableViewController: WKUIDelegate, WKNavigationDelegate
     }
     
 }
+
+// extension ScaleInfoUpdateTableViewController: ConductorPlay {
+//     
+//     func playOrStop(playMode: PlayMode? = nil) {
+//         <#code#>
+//     }
+//     
+//     func startSequencer(playMode: PlayMode? = nil) {
+//         <#code#>
+//     }
+//     
+//     func stopSequencer() {
+//         <#code#>
+//     }
+// }
