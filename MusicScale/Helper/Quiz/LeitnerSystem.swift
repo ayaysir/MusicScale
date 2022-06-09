@@ -279,7 +279,29 @@ struct LeitnerSystem<T: Codable>: Codable {
                             isSameCountOriginalAndLeitnerBoxes: originalItemList.count == totalBoxCount)
     }
     
-    var forecastProgressInfo: LeitnerForecastProgressInfo {
+    // var forecastProgressInfo: LeitnerForecastProgressInfo {
+    //     let totalBoxCount: Float = Float(totalBoxCount)
+    //     let dayZeroProgress = currentDQIndex
+    //
+    //     var phase: LeitnerForecastProgressInfo.Phase {
+    //         return day == 0 ? .phaseOne : .phaseTwo
+    //     }
+    //
+    //     var percent: Float {
+    //         switch phase {
+    //         case .phaseOne:
+    //             return Float(dayZeroProgress + 1) / totalBoxCount
+    //         case .phaseTwo:
+    //
+    //             let finishCount = leitnerFinishedList.count
+    //             return Float(finishCount) / totalBoxCount
+    //         }
+    //     }
+    //
+    //     return LeitnerForecastProgressInfo(phase: phase, percent: percent)
+    // }
+    
+    func forecastProgressInfo(isBeforeSubmit: Bool) -> LeitnerForecastProgressInfo {
         let totalBoxCount: Float = Float(totalBoxCount)
         let dayZeroProgress = currentDQIndex
         
@@ -290,16 +312,11 @@ struct LeitnerSystem<T: Codable>: Codable {
         var percent: Float {
             switch phase {
             case .phaseOne:
-                return Float(dayZeroProgress + 1) / totalBoxCount
+                return Float(dayZeroProgress + (isBeforeSubmit ? 0 : 1)) / totalBoxCount
             case .phaseTwo:
                 
                 let finishCount = leitnerFinishedList.count
                 return Float(finishCount) / totalBoxCount
-            
-                // let expectedFinishCount = leitnerFinishedList.count + leitnerLearningLists[BOX_THREE].filter({ $0.isSuccess }).count
-                // return Float(expectedFinishCount) / totalBoxCount
-                
-                
             }
         }
         

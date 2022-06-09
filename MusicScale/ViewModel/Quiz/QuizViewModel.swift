@@ -165,16 +165,23 @@ class QuizViewModel {
         return leitnerSystem.progressInfo.startBoxCount
     }
     
-    var studyingProgress: (isPhaseOne: Bool, percent: Float) {
-        let info = leitnerSystem.forecastProgressInfo
+    func studyingProgress(isBeforeSubmit: Bool) -> (isPhaseOne: Bool, percent: Float) {
+        let info = leitnerSystem.forecastProgressInfo(isBeforeSubmit: isBeforeSubmit)
         let isPhaseOne = info.phase == .phaseOne
         
         return (isPhaseOne, info.percent)
     }
     
-    var dayQuestionProgress: Float {
-        return Float(leitnerSystem.progressInfo.currentDQIndex + 1) / Float(leitnerSystem.progressInfo.dailyQuestionCount)
+    func dayQuestionProgress(isBeforeSubmit: Bool) -> Float {
+        let currentNumber = leitnerSystem.progressInfo.currentDQIndex + (isBeforeSubmit ? 0 : 1)
+        return Float(currentNumber) / Float(leitnerSystem.progressInfo.dailyQuestionCount)
     }
     
-    /// 빈 악보 
+    // var dayQuestionProgressBefore: Float {
+    //     return Float(leitnerSystem.progressInfo.currentDQIndex) / Float(leitnerSystem.progressInfo.dailyQuestionCount)
+    // }
+    // 
+    // var dayQuestionProgressAfter: Float {
+    //     return Float(leitnerSystem.progressInfo.currentDQIndex + 1) / Float(leitnerSystem.progressInfo.dailyQuestionCount)
+    // }
 }

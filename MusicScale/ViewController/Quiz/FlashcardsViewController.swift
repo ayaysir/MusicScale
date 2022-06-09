@@ -17,15 +17,12 @@ class FlashcardsViewController: InQuizViewController {
     @IBOutlet weak var lblProgressStatus: UILabel!
     
     // 앞면: 문제, 뒷면: 정답
-    // private var frontSheetView: WKWebView = WKWebView()
     private var backAnswerLabel: UILabel = UILabel()
     
     private var showingBack = false
     private let flipDuration = 0.5
     private var firstrun = true
     
-    let conductor = NoteSequencerConductor()
-    var playTimer: Timer?
     var currentQuizQuestion: QuizQuestion?
     var currentScaleInfoVM: SimpleScaleInfoViewModel?
     
@@ -34,7 +31,6 @@ class FlashcardsViewController: InQuizViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        conductor.start()
         btnPlay.setTitle("", for: .normal)
         
         let cardRect = CGRect(origin: .zero, size: cardContainerView.frame.size)
@@ -65,14 +61,12 @@ class FlashcardsViewController: InQuizViewController {
             if firstrun {
                 initWebSheetPage(initAbcjsText: abcjsText)
                 firstrun = false
-                
-                // progressViewInStudying.setProgress(quizViewModel.studyingProgress.percent, animated: false)
-                updateProgressViews()
+                updateProgressViews(isBeforeSubmit: true)
                 return
             }
                 
             injectAbcjsText(from: abcjsText, needReload: true)
-            updateProgressViews()
+            updateProgressViews(isBeforeSubmit: true)
         }
 
         loadFirstQuestion()
@@ -106,63 +100,31 @@ class FlashcardsViewController: InQuizViewController {
     }
     
     @IBAction func btnActRemindQuestion(_ sender: Any) {
+        updateProgressViews(isBeforeSubmit: false)
         progressNextQuestion(false)
         stopSequencer()
-        // updateProgressViews()
     }
     
     @IBAction func btnActSuccessQuestion(_ sender: Any) {
+        updateProgressViews(isBeforeSubmit: false)
         progressNextQuestion(true)
         stopSequencer()
-        // updateProgressViews()
     }
     
     @IBAction func btnActPlay(_ sender: UIButton) {
-        if conductor.sequencer.isPlaying {
-            stopSequencer()
-            return
-        }
-        startSequencer()
+        playOrStop()
     }
     
-    @objc func stopSequencer() {
-        stopTimer()
-        conductor.sequencer.stop()
-        conductor.sequencer.rewind()
-        conductor.isPlaying = false
-        btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        
-        playTimer?.invalidate()
-    }
-    
-    func startSequencer() {
-        stopSequencer()
-        
-        if let currentScaleInfoVM = currentScaleInfoVM,
-           let currentQuizQuestion = currentQuizQuestion,
-           let semitones = currentQuizQuestion.isAscending ? currentScaleInfoVM.playbackSemitoneAscending : currentScaleInfoVM.playbackSemitoneDescending
-        {
-            conductor.tempo = Float(currentScaleInfoVM.currentTempo)
-            startTimer()
-            self.conductor.addScaleToSequencer(semintones: semitones)
-            self.conductor.isPlaying = true
-            btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-            playTimer = Timer.scheduledTimer(timeInterval: currentScaleInfoVM.expectedPlayTime, target: self, selector: #selector(stopSequencer), userInfo: nil, repeats: false)
-        }
-        
-    }
-    
-    func updateProgressViews() {
+    func updateProgressViews(isBeforeSubmit: Bool) {
         // day 0: 문제 진행 프로그레스
         // day 1~ : 완료한 문제 프로그레스
-        let (isPhaseOne, percent) = quizViewModel.studyingProgress
+        let (isPhaseOne, percent) = quizViewModel.studyingProgress(isBeforeSubmit: isBeforeSubmit)
         if !isPhaseOne {
-            // ??
             changeProgressViewColor(isPhaseOne: isPhaseOne)
         }
         progressViewInStudying.setProgress(percent, animated: true)
         
-        let dayQuestionPercent = quizViewModel.dayQuestionProgress
+        let dayQuestionPercent = quizViewModel.dayQuestionProgress(isBeforeSubmit: isBeforeSubmit)
         let animateDayQuestion = prevDayQuestionPercent != 1.0
         if animateDayQuestion {
             progressViewDayQuestionProgress.setProgress(dayQuestionPercent, animated: true)
@@ -198,86 +160,39 @@ class FlashcardsViewController: InQuizViewController {
 
 }
 
-// extension FlashcardsViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
-//     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-//         switch message.name {
-//         // ... //
-//         case "logHandler":
-//             print("console log:", message.body)
-//         // case "notePlayback":
-//         //     let status = message.body as! String
-//         //     if let delegate = delegate {
-//         //         if status == "play" {
-//         //             delegate.didStartButtonClicked(self)
-//         //         } else if status == "stop" {
-//         //             delegate.didStopButtonClicked(self)
-//         //         }
-//         //     }
-//         default:
-//             break
-//         }
-//     }
-//
-//     func initWebSheetPage(initAbcjsText: String) {
-//
-//         if #available(iOS 14.0, *) {
-//             frontSheetView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
-//         } else {
-//             // Fallback on earlier versions
-//             frontSheetView.configuration.preferences.javaScriptEnabled = true
-//         }
-//
-//         // 웹 파일 로딩
-//         frontSheetView.uiDelegate = self
-//         frontSheetView.navigationDelegate = self
-//         let pageName = "index"
-//         guard let url = Bundle.main.url(forResource: pageName, withExtension: "html", subdirectory: "web") else {
-//             return
-//         }
-//         frontSheetView.loadFileURL(url, allowingReadAccessTo: url)
-//         frontSheetView.scrollView.isScrollEnabled = false
-//
-//         injectAbcjsText(from: initAbcjsText, needReload: false)
-//
-//         // 자바스크립트 -> 네이티브 앱 연결
-//         // 브리지 등록
-//         frontSheetView.configuration.userContentController.add(self, name: "notePlayback")
-//
-//         // inject JS to capture console.log output and send to iOS
-//         let source = """
-//             function captureLog(msg) { window.webkit.messageHandlers.logHandler.postMessage(msg); }
-//             window.console.log = captureLog;
-//         """
-//         let script = WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: false)
-//         frontSheetView.configuration.userContentController.addUserScript(script)
-//         // register the bridge script that listens for the output
-//         frontSheetView.configuration.userContentController.add(self, name: "logHandler")
-//
-//     }
-// }
-//
-// extension FlashcardsViewController: ScoreWebInjection {
-//
-//     func startTimer() {
-//         frontSheetView.evaluateJavaScript("startTimer()")
-//     }
-//
-//     func stopTimer() {
-//         frontSheetView.evaluateJavaScript("stopTimer()")
-//     }
-//
-//     func injectAbcjsText(from abcjsText: String, needReload: Bool = true) {
-//
-//         let abcjsTextFixed = charFixedAbcjsText(abcjsText)
-//
-//         if needReload {
-//             stopTimer()
-//             frontSheetView.evaluateJavaScript(generateAbcJsInjectionSource(from: abcjsTextFixed))
-//         } else {
-//             let injectionSource = generateAbcJsInjectionSource(from: abcjsTextFixed)
-//             let injectionScript = WKUserScript(source: injectionSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-//             frontSheetView.configuration.userContentController.addUserScript(injectionScript)
-//         }
-//
-//     }
-// }
+extension FlashcardsViewController: ConductorPlay {
+    
+    func playOrStop(playMode: PlayMode? = nil) {
+        if conductor.sequencer.isPlaying {
+            stopSequencer()
+            return
+        }
+        startSequencer()
+    }
+    
+    @objc func stopSequencer() {
+        stopTimer()
+        conductor.sequencer.stop()
+        conductor.sequencer.rewind()
+        conductor.isPlaying = false
+        playTimer?.invalidate()
+        
+        btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
+    }
+    
+    func startSequencer(playMode: PlayMode? = nil) {
+        stopSequencer()
+        
+        if let currentScaleInfoVM = currentScaleInfoVM,
+           let currentQuizQuestion = currentQuizQuestion,
+           let semitones = currentQuizQuestion.isAscending ? currentScaleInfoVM.playbackSemitoneAscending : currentScaleInfoVM.playbackSemitoneDescending
+        {
+            conductor.tempo = Float(currentScaleInfoVM.currentTempo)
+            startTimer()
+            self.conductor.addScaleToSequencer(semitones: semitones)
+            self.conductor.isPlaying = true
+            btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+            playTimer = Timer.scheduledTimer(timeInterval: currentScaleInfoVM.expectedPlayTime, target: self, selector: #selector(stopSequencer), userInfo: nil, repeats: false)
+        }
+    }
+}

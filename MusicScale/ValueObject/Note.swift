@@ -35,9 +35,7 @@ struct Note: Codable, Equatable, Comparable {
     //     }
     // }
     
-    init(intNotation: Int, key: Music.Key, startOctave: Int, enharmonicMode: EnharmonicMode) {
-        let strPairs = enharmonicMode.noteStrOfFirstOctave ?? EnharmonicMode.userCustom.noteStrOfFirstOctave!
-        
+    init(intNotation: Int, key: Music.Key, startOctave: Int, strPairs: [NoteStrPair]) {
         let adjustedNotation = intNotation + key.distanceFromC
         let notationInFirstOctave = adjustedNotation >= 0 ? adjustedNotation % 12 : 12 + (adjustedNotation % 12)
         let relativeOctave = Int(floor(Double(adjustedNotation) / 12.0))

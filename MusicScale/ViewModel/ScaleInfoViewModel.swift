@@ -87,6 +87,26 @@ class SimpleScaleInfoViewModel {
         return helper.getIntegerNotation(degrees: scaleInfo.degreesAscending, order: .ascending, completeFinalNote: true)
     }
     
+    var descendingIntegerNotation: String? {
+        let targetDegrees = helper.getTargetDegrees(scaleInfo: scaleInfo, order: .descending)
+        let notation = helper.getIntegerNotation(degrees: targetDegrees, order: .descending)
+        guard let lastInteger = notation.last else {
+            return nil
+        }
+        let integersText = notation.map { String($0 + -lastInteger) }.joined(separator: ", ")
+        return "(\(integersText))"
+    }
+    
+    var descendingIntegerNotationArray: [Int] {
+        let targetDegrees = helper.getTargetDegrees(scaleInfo: scaleInfo, order: .descending)
+        let notation = helper.getIntegerNotation(degrees: targetDegrees, order: .descending, completeFinalNote: true)
+        if let lastInteger = notation.last {
+            return notation.map { $0 + -lastInteger }
+        } else {
+            return notation.map { $0 + 12 }
+        }
+    }
+    
     var availableIntNoteArrayInDescOrder: [Int] {
         if isAscAndDescDifferent {
             return helper.getIntegerNotation(degrees: scaleInfo.degreesDescending, order: .descending, completeFinalNote: true).map { abs($0) }
@@ -118,10 +138,15 @@ class SimpleScaleInfoViewModel {
         return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .descending, key: currentKey, tempo: currentTempo, octaveShift: currentOctaveShift, enharmonicMode: currentEnharmonicMode)
     }
     
+    /// degree 찾기
+    func targetDegrees(order: DegreesOrder) -> String {
+        return helper.getTargetDegrees(scaleInfo: scaleInfo, order: order)
+    }
+    
     /// Flashcard용 악보
     func abcjsTextForFlashcard(isAscending: Bool) -> String {
         let order: DegreesOrder = isAscending ? .ascending : .descending
-        let targetDegrees = helper.getTargetDegrees(scaleInfo: scaleInfo, order: order)
+        let targetDegrees = targetDegrees(order: order)
         let partText = helper.degreesToAbcjsPart(degrees: targetDegrees, order: order, completeFinalNote: true, key: currentKey, octaveShift: currentOctaveShift, enharmonicMode: currentEnharmonicMode)
         let lyricText = order == .ascending ? targetDegrees + " 🤔" : " 🤔 " + targetDegrees
         return helper.composeAbcjsText(scaleNameText: "???", tempo: currentTempo, partText: partText, lyricText: lyricText)

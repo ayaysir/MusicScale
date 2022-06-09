@@ -47,13 +47,14 @@ class NoteSequencerConductor: ObservableObject {
         }
         
         let _ = sequencer.newTrack()!
+        let _ = sequencer.newTrack()!
     }
     
     func stop() {
         engine.stop()
     }
     
-    func addScaleToSequencer(semintones: [Int], startSemitone start: Int = 60) {
+    func addScaleToSequencer(semitones: [Int], startSemitone start: Int = 60) {
         
         guard sequencer.tracks.first != nil else {
             print("NoteSequencerConductor: Tracks are not initialized. Place the conductor.start() in the appropriate place.")
@@ -61,16 +62,38 @@ class NoteSequencerConductor: ObservableObject {
         }
         
         sequencer.tracks[0].clear()
+        sequencer.tracks[1].clear()
         
-        for (index, semintone) in semintones.enumerated() {
-            sequencer.tracks[0].add(noteNumber: MIDINoteNumber(start + semintone), velocity: 90,
+        for (index, semitone) in semitones.enumerated() {
+            sequencer.tracks[0].add(noteNumber: MIDINoteNumber(start + semitone), velocity: 90,
                       position: Duration(beats: Double(index)), duration: Duration(beats: 1), channel: MIDIChannel(1))
         }
         
         sequencer.debug()
         sequencer.setGlobalMIDIOutput(instrument.midiIn)
         sequencer.setTempo(Double(tempo))
+    }
+    
+    func addScaleToSequencerTwoTrack(semitones1: [Int], semitones2: [Int], startFrom_1: Int, startFrom_2: Int) {
+        guard sequencer.tracks.first != nil else {
+            print("NoteSequencerConductor: Tracks are not initialized. Place the conductor.start() in the appropriate place.")
+            return
+        }
         
+        sequencer.tracks[0].clear()
+        sequencer.tracks[1].clear()
         
+        for (index, semitone) in semitones1.enumerated() {
+            sequencer.tracks[0].add(noteNumber: MIDINoteNumber(startFrom_1 + semitone), velocity: 90,
+                      position: Duration(beats: Double(index)), duration: Duration(beats: 1), channel: MIDIChannel(1))
+        }
+        for (index, semitone) in semitones2.enumerated() {
+            sequencer.tracks[1].add(noteNumber: MIDINoteNumber(startFrom_2 + semitone), velocity: 90,
+                      position: Duration(beats: Double(index)), duration: Duration(beats: 1), channel: MIDIChannel(1))
+        }
+        
+        sequencer.debug()
+        sequencer.setGlobalMIDIOutput(instrument.midiIn)
+        sequencer.setTempo(Double(tempo))
     }
 }

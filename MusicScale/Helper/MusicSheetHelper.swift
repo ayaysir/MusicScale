@@ -32,6 +32,10 @@ enum DegreesOrder {
     }
 }
 
+struct AbcjsPart {
+    var partName, partText, lyricText: String
+}
+
 struct NoteNumberPair: Codable, Equatable {
     
     init(prefix: String, number: Int) {
@@ -348,7 +352,7 @@ struct MusicSheetHelper {
             
             let noteText = note.scale7.textValue
             let postfixStr = relativeOctave == 0 ? "" : relativeOctave >= 1 ? "'" : ","
-            let notePostfix = String(repeating: postfixStr, count: relativeOctave)
+            let notePostfix = String(repeating: postfixStr, count: abs(relativeOctave))
             return notePrefix + noteText + notePostfix
         }.joined(separator: " ")
     }
@@ -366,6 +370,33 @@ struct MusicSheetHelper {
                 K: C
                 \(partText) |
                 w: \(lyricText)
+                """
+        return text
+    }
+    
+    /// 멀티파트 생성
+    func composeAbcjsTextForMultipart(scaleNameText: String, tempo: Double, abcjsParts: [AbcjsPart]) -> String {
+        
+        let results = abcjsParts.enumerated().reduce(into: ["", ""]) { partialResult, values in
+            let (offset, part) = values
+            let partIndex = offset + 1
+            partialResult[0] += "V: T\(partIndex) clef=treble\(part.partName != "" ? " name=\"\(part.partName)\"" : "")"
+            partialResult[1] += "[V: T\(partIndex)] \(part.partText) |\n" + "w: \(part.lyricText)"
+            
+            if partIndex != abcjsParts.count {
+                partialResult[0] += "\n"
+                partialResult[1] += "\n"
+            }
+        }
+        let text = """
+                X: 1
+                T:
+                \(results[0])
+                L: 1/1
+                R: \(scaleNameText)
+                Q: 1/1=\(tempo)
+                K: C
+                \(results[1])
                 """
         return text
     }
@@ -504,20 +535,25 @@ struct MusicSheetHelper {
         return scaleInfo.degreesAscending
     }
     
-    /// 미디 재생을 위한 semitone 정보 반환
+    /// 미디 재생을 위한 semitone 정보 반환 (by ScaleInfo)
     func getSemitoneToPlaybackNotes(scaleInfo: ScaleInfo, order: DegreesOrder, key: Music.Key, octaveShift: Int = 0) -> [Int] {
         
         let targetDegrees = getTargetDegrees(scaleInfo: scaleInfo, order: order)
         return getSemitoneToPlaybackNotes(degrees: targetDegrees, order: order, key: key, octaveShift: octaveShift)
     }
     
-    /// 미디 재생을 위한 semitone 정보 반환
+    /// 미디 재생을 위한 semitone 정보 반환 (by degrees)
     func getSemitoneToPlaybackNotes(degrees: String, order: DegreesOrder, key: Music.Key, octaveShift: Int = 0) -> [Int] {
         
         let integerNotation = getIntegerNotation(degrees: degrees, order: order, completeFinalNote: true)
         let startSemitone = order.signum == 1 ? key.playableKey.rawValue : key.playableKey.rawValue + 12
         
         return integerNotation.map { ($0 + startSemitone) + (octaveShift * 12) }
+    }
+    
+    /// 미디 재생을 위한 MidiNumber 정보 반환 (by Notes)
+    func getMidiNumberForPlaybackNotes(notes: [Note], octaveShift: Int = 0) -> [Int] {
+        return notes.map { $0.midiNoteNumber + (octaveShift * 12) }
     }
     
     /// 패턴 정보 제공

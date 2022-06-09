@@ -21,6 +21,7 @@ class PianoViewController: UIViewController {
     
     var viewPiano: PianoView!
     var mode: Mode = .stricted
+    var isKeyPressEnabled: Bool = true
     
     let engine = AudioEngine()
     private var instrument = MIDISampler(name: "Instrument 1")
@@ -95,6 +96,8 @@ class PianoViewController: UIViewController {
             // print("possible", terminator: ":")
             break
         case .began:
+            guard isKeyPressEnabled else { return }
+            
             if let viewModel = viewModel, let keyInfo = viewModel.getKeyInfoBy(touchLocation: location) {
                 if mode == .stricted {
                     guard viewPiano.viewModel.availableKeyIndexes.contains(keyInfo.keyIndex) else {

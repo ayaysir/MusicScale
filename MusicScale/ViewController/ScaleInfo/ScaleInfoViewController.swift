@@ -309,7 +309,7 @@ extension ScaleInfoViewController {
         stopSequencer()
         webSheetVC?.startTimer()
         let targetSemitones = configStore.degreesOrder == .ascending ? scaleInfoViewModel.playbackSemitoneAscending : scaleInfoViewModel.playbackSemitoneDescending
-        self.conductor.addScaleToSequencer(semintones: targetSemitones!)
+        self.conductor.addScaleToSequencer(semitones: targetSemitones!)
         self.conductor.isPlaying = true
         
         btnPlayAndStop.setTitle("Stop", for: .normal)

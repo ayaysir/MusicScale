@@ -8,6 +8,16 @@
 import UIKit
 import WebKit
 
+enum PlayMode {
+    case onEdit, answer, together
+}
+
+protocol ConductorPlay {
+    func playOrStop(playMode: PlayMode?)
+    func startSequencer(playMode: PlayMode?)
+    func stopSequencer()
+}
+
 /**
   - quizViewModel
   - displayNextQuestionHandler
@@ -29,6 +39,8 @@ class InQuizViewController: UIViewController {
     var displayNilQuestionHandler: Handler!
     
     var webkitView: WKWebView!
+    let conductor = NoteSequencerConductor()
+    var playTimer: Timer?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -36,6 +48,8 @@ class InQuizViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        conductor.start()
         
         displayNextQuestionHandler = { newQuestion in
             print(newQuestion)

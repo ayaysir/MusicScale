@@ -49,7 +49,7 @@
       add_classes: true,
       selectTypes: [],
     }) {
-      alert(tune)
+      // alert(tune)
       // params["add_classes"] = true
       visualObj = ABCJS.renderAbc('notation', tune, params)
       // onMidi(rendered)
@@ -69,10 +69,12 @@
     console.log('====== start ======')
     // document.getElementById('title').textContent = '자바스크립트 동작함'
 
+    // 비어있으면 전부 재생
+    let showHighlightParts = []
 
     // MARK: - cursor constrol
     function CursorControl(rootSelector) {
-      var self = this;
+      const self = this;
 
       // This demonstrates two methods of indicating where the music is.
       // 1) An element is created that is moved along for each note.
@@ -83,8 +85,8 @@
       self.onStart = function () {
         // This is called when the timer starts so we know the svg has been drawn by now.
         // Create the cursor and add it to the sheet music's svg.
-        var svg = document.querySelector(self.rootSelector + " svg");
-        console.log(rootSelector)
+        const svg = document.querySelector(self.rootSelector + " svg");
+        console.log("rootSelector:", rootSelector)
         self.cursor = document.createElementNS("http://www.w3.org/2000/svg", "line");
         self.cursor.setAttribute("class", "abcjs-cursor");
         self.cursor.setAttributeNS(null, 'x1', 0);
@@ -96,11 +98,10 @@
 
       self.removeSelection = function () {
         // Unselect any previously selected notes.
-        var lastSelection = document.querySelectorAll(self.rootSelector + " .abcjs-highlight");
-        for (var k = 0; k < lastSelection.length; k++)
+        const lastSelection = document.querySelectorAll(self.rootSelector + " .abcjs-highlight");
+        for (let k = 0; k < lastSelection.length; k++)
           lastSelection[k].classList.remove("abcjs-highlight");
       };
-
 
       self.onEvent = function (ev) {
 
@@ -111,10 +112,20 @@
         self.removeSelection();
 
         // Select the currently selected notes.
-        for (var i = 0; i < ev.elements.length; i++) {
-          var note = ev.elements[i];
-          for (var j = 0; j < note.length; j++) {
-            note[j].classList.add("abcjs-highlight");
+        for (let i = 0; i < ev.elements.length; i++) {
+          const note = ev.elements[i];
+          for (let j = 0; j < note.length; j++) {
+            // 파트별 재생
+            if (showHighlightParts.length == 0) {
+              note[j].classList.add("abcjs-highlight");
+            } else {
+              const selector = showHighlightParts.map(value => {
+                return ".abcjs-v" + value
+              }).join(",")
+              if (note[j].matches(selector)) {
+                note[j].classList.add("abcjs-highlight");
+              }
+            }
           }
         }
 
@@ -202,7 +213,21 @@ Q: 1/1=120
 C D _E F G _A _B C'' |
 w: C D E♭ F G A♭ B♭ C`
 
-      onRender(sample)
+      const sample2 =
+`X: 1
+T:
+V: T1 clef=treble name="Submitted"
+V: T2 clef=treble name="Correct"
+L: 1/1
+R: C Aeolian
+Q: 1/1=100
+K: C
+[V: T1] E F G|
+w: E F G
+[V: T2] C D E|
+w: C D E`
+
+      onRender(sample2)
     }
 
   </script>
