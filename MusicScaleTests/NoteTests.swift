@@ -27,11 +27,11 @@ class NoteTests: XCTestCase {
         let musicNote_A_DoubleSharp = Note(scale7: .A, accidental: .doubleSharp)
         
         // when
-        let semitone_F = musicNote_F.semitone
-        let semitone_C_Sharp = musicNote_C_Sharp.semitone
-        let semitone_B_Flat = musicNote_B_Flat.semitone
-        let semitone_G_DoubleFlat = musicNote_G_DoubleFlat.semitone
-        let semitone_A_DoubleSharp = musicNote_A_DoubleSharp.semitone
+        let semitone_F = musicNote_F.midiNoteNumber
+        let semitone_C_Sharp = musicNote_C_Sharp.midiNoteNumber
+        let semitone_B_Flat = musicNote_B_Flat.midiNoteNumber
+        let semitone_G_DoubleFlat = musicNote_G_DoubleFlat.midiNoteNumber
+        let semitone_A_DoubleSharp = musicNote_A_DoubleSharp.midiNoteNumber
         
         // then
         // C, C#, D, D#, E, F

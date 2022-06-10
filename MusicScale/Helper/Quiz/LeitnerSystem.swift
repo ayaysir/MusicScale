@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol LeitnerSystemDelegate: AnyObject {
+    func didDayPassed<T: Codable>(_ controller: LeitnerSystem<T>, newDay: Int)
+}
+
 struct LeitnerItem<T: Codable>: Codable {
     var item: T
     fileprivate var boxNumber: Int
@@ -30,6 +34,10 @@ struct LeitnerProgressInfo: Codable, CustomStringConvertible {
     let learningBoxOneCount, learningBoxTwoCount, learningBoxThreeCount: Int
     let finishedBoxCount, originalItemListCount: Int
     let isSameCountOriginalAndLeitnerBoxes: Bool
+}
+
+struct LeitnerStatsInfo: Codable {
+    let day, originalItemListCount, tryCount, successCount, failedCount: Int
 }
 
 struct LeitnerForecastProgressInfo: Codable {
@@ -74,14 +82,43 @@ struct LeitnerSystem<T: Codable>: Codable {
     private let BOX_TWO = 1
     private let BOX_THREE = 2
     private let BOX_FINISHED = 3
+    
+    weak var delegate: LeitnerSystemDelegate?
 
-    private(set) var day: Int = 0
+    private(set) var day: Int = 0 {
+        didSet {
+            if let delegate = delegate {
+                delegate.didDayPassed(self, newDay: day)
+            }
+        }
+    }
     private var originalItemList: [T] = []
     private var leitnerItemStartingList: [LeitnerItem<T>] = []
     private var leitnerLearningLists: [[LeitnerItem<T>]] = [[], [], []]
     private var leitnerFinishedList: [LeitnerItem<T>] = []
     private(set) var dailyQuestionList: [LeitnerItem<T>] = []
     private var dailyNonQuestList: [LeitnerItem<T>] = []
+    
+    // Stats
+    private(set) var tryCount: Int = 0
+    private(set) var successCount: Int = 0
+    private(set) var failedCount: Int = 0
+
+    mutating func incrementTryCount() {
+        tryCount += 1
+    }
+    
+    mutating func incrementSuccessCount() {
+        successCount += 1
+    }
+    
+    mutating func incrementFailedCount() {
+        failedCount += 1
+    }
+    
+    mutating func incrementQuestionStatusCount(isSuccess: Bool) {
+        isSuccess ? incrementSuccessCount() : incrementFailedCount()
+    }
     
     /// 내부 인덱스 변수
     private var currentDQIndex = 0
@@ -95,6 +132,10 @@ struct LeitnerSystem<T: Codable>: Codable {
         case dailyQuestionList
         case dailyNonQuestList
         case currentDQIndex
+        
+        case tryCount
+        case successCount
+        case failedCount
         
         // // computed properties (안됨)
         // case dailyQuestionCount
@@ -279,28 +320,6 @@ struct LeitnerSystem<T: Codable>: Codable {
                             isSameCountOriginalAndLeitnerBoxes: originalItemList.count == totalBoxCount)
     }
     
-    // var forecastProgressInfo: LeitnerForecastProgressInfo {
-    //     let totalBoxCount: Float = Float(totalBoxCount)
-    //     let dayZeroProgress = currentDQIndex
-    //
-    //     var phase: LeitnerForecastProgressInfo.Phase {
-    //         return day == 0 ? .phaseOne : .phaseTwo
-    //     }
-    //
-    //     var percent: Float {
-    //         switch phase {
-    //         case .phaseOne:
-    //             return Float(dayZeroProgress + 1) / totalBoxCount
-    //         case .phaseTwo:
-    //
-    //             let finishCount = leitnerFinishedList.count
-    //             return Float(finishCount) / totalBoxCount
-    //         }
-    //     }
-    //
-    //     return LeitnerForecastProgressInfo(phase: phase, percent: percent)
-    // }
-    
     func forecastProgressInfo(isBeforeSubmit: Bool) -> LeitnerForecastProgressInfo {
         let totalBoxCount: Float = Float(totalBoxCount)
         let dayZeroProgress = currentDQIndex
@@ -321,6 +340,10 @@ struct LeitnerSystem<T: Codable>: Codable {
         }
         
         return LeitnerForecastProgressInfo(phase: phase, percent: percent)
+    }
+    
+    var statsInfo: LeitnerStatsInfo {
+        return LeitnerStatsInfo(day: day, originalItemListCount: originalItemList.count, tryCount: tryCount, successCount: successCount, failedCount: failedCount)
     }
     
     func printDailyQuestionList(printDailyQuestion: Bool = true, printBoxDetail: Bool = false) {

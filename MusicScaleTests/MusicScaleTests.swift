@@ -20,49 +20,51 @@ class MusicScaleTests: XCTestCase {
 
     func testExample() throws {
         
-        let key = ["C", "D", "E", "F", "G", "A", "B"]
-        let aeolianDegrees = "1 2 ♭3 4 5 ♭6 ♭7 1 2 ♭3 4 5 ♭6 (♮)7 1 ♯1 2 ♯2 3 4 ♯4 5 ♯5 6 ♯6 7"
-        let array = aeolianDegrees.components(separatedBy: " ")
+        // let key = ["C", "D", "E", "F", "G", "A", "B"]
+        // let aeolianDegrees = "1 2 ♭3 4 5 ♭6 ♭7 1 2 ♭3 4 5 ♭6 (♮)7 1 ♯1 2 ♯2 3 4 ♯4 5 ♯5 6 ♯6 7"
+        // let array = aeolianDegrees.components(separatedBy: " ")
+        //
+        // for str in array {
+        //     let onlyNumber = str.range(of: "^[1234567]$", options: .regularExpression)
+        //     let hasPrefix = str.range(of: "^[♭b#♯♮=][1234567]$", options: .regularExpression)
+        //     let hasBracketedPrefix = str.range(of: "^\\([♭b#♯♮=]\\)[1234567]$", options: .regularExpression)
+        //
+        //     if onlyNumber != nil {
+        //         let noteStr = key[Int(str)! - 1]
+        //         print(str, "onlyNumber", noteStr)
+        //     } else if hasPrefix != nil {
+        //         var noteStr = ""
+        //         switch str[0] {
+        //         case "♭", "b":
+        //             noteStr = "_"
+        //         case "♯", "#":
+        //             noteStr = "^"
+        //         case "♮", "=":
+        //             noteStr = "="
+        //         default:
+        //             break
+        //         }
+        //         noteStr += key[Int(str[1])! - 1]
+        //         print(str, "hasPrefix", noteStr)
+        //     } else if hasBracketedPrefix != nil {
+        //         let removedBracketStr = str.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "")
+        //         var noteStr = ""
+        //         switch removedBracketStr[0] {
+        //         case "♭", "b":
+        //             noteStr = "_"
+        //         case "♯", "#":
+        //             noteStr = "^"
+        //         case "♮", "=":
+        //             noteStr = "="
+        //         default:
+        //             break
+        //         }
+        //         noteStr += key[Int(removedBracketStr[1])! - 1]
+        //         print(str, "hasBracketedPrefix", noteStr, removedBracketStr)
+        //     }
+        // }
         
-        for str in array {
-            let onlyNumber = str.range(of: "^[1234567]$", options: .regularExpression)
-            let hasPrefix = str.range(of: "^[♭b#♯♮=][1234567]$", options: .regularExpression)
-            let hasBracketedPrefix = str.range(of: "^\\([♭b#♯♮=]\\)[1234567]$", options: .regularExpression)
-            
-            if onlyNumber != nil {
-                let noteStr = key[Int(str)! - 1]
-                print(str, "onlyNumber", noteStr)
-            } else if hasPrefix != nil {
-                var noteStr = ""
-                switch str[0] {
-                case "♭", "b":
-                    noteStr = "_"
-                case "♯", "#":
-                    noteStr = "^"
-                case "♮", "=":
-                    noteStr = "="
-                default:
-                    break
-                }
-                noteStr += key[Int(str[1])! - 1]
-                print(str, "hasPrefix", noteStr)
-            } else if hasBracketedPrefix != nil {
-                let removedBracketStr = str.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "")
-                var noteStr = ""
-                switch removedBracketStr[0] {
-                case "♭", "b":
-                    noteStr = "_"
-                case "♯", "#":
-                    noteStr = "^"
-                case "♮", "=":
-                    noteStr = "="
-                default:
-                    break
-                }
-                noteStr += key[Int(removedBracketStr[1])! - 1]
-                print(str, "hasBracketedPrefix", noteStr, removedBracketStr)
-            }
-        }
+        QuizConfigStore.shared.savedLeitnerSystem = nil
     }
     
     func test_structToJson() throws {

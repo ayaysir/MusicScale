@@ -44,6 +44,7 @@ class FlashcardsViewController: InQuizViewController {
         backAnswerLabel = UILabel(frame: cardRect)
         backAnswerLabel.textAlignment = .center
         
+        // Override displayNextQuestionHandler
         displayNextQuestionHandler = { [unowned self] newQuestion in
             if showingBack {
                 flip()
@@ -57,6 +58,8 @@ class FlashcardsViewController: InQuizViewController {
             currentScaleInfoVM = scaleInfoVM
             
             let abcjsText = scaleInfoVM.abcjsTextForFlashcard(isAscending: newQuestion.isAscending)
+            
+            quizViewModel.incrementTryCount()
             
             if firstrun {
                 initWebSheetPage(initAbcjsText: abcjsText)

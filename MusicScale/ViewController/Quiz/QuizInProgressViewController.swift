@@ -15,8 +15,12 @@ class QuizInProgressViewController: UIViewController {
     @IBOutlet weak var btnGiveUp: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
+        
         if quizViewModel.isAllQuestionFinished {
-            navigationController?.setViewControllers([introVC], animated: false)
+            let finishedVC = initVCFromStoryboard(storyboardID: .QuizFinishedViewController) as! QuizFinishedViewController
+            finishedVC.quizViewModel = quizViewModel
+            navigationController?.setViewControllers([finishedVC], animated: false)
+            return
         }
     }
     

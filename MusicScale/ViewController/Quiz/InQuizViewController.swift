@@ -53,18 +53,14 @@ class InQuizViewController: UIViewController {
         
         displayNextQuestionHandler = { newQuestion in
             print(newQuestion)
+            self.quizViewModel.incrementTryCount()
         }
         
         displayEndQuizHandler = { [unowned self] in
-            navigationItem.leftBarButtonItem?.title = ""
-            navigationItem.leftBarButtonItem?.isEnabled = false
-            
-            simpleAlert(self, message: "End", title: "End") { action in
-                self.quizViewModel.removeSavedLeitnerSystem()
-                let introVC = initVCFromStoryboard(storyboardID: .QuizIntroTableViewController) as! QuizIntroTableViewController
-                introVC.quizViewModel = self.quizViewModel
-                self.navigationController?.setViewControllers([introVC], animated: true)
-            }
+            // Move to FinishedVC
+            let finishedVC = initVCFromStoryboard(storyboardID: .QuizFinishedViewController) as! QuizFinishedViewController
+            finishedVC.quizViewModel = self.quizViewModel
+            self.navigationController?.setViewControllers([finishedVC], animated: true)
         }
         
         displayNilQuestionHandler = {
@@ -164,6 +160,5 @@ extension InQuizViewController: ScoreWebInjection {
             let injectionScript = WKUserScript(source: injectionSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
             webkitView.configuration.userContentController.addUserScript(injectionScript)
         }
-        
     }
 }

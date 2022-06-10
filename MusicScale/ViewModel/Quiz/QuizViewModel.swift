@@ -83,6 +83,7 @@ class QuizViewModel {
             } else {
                 leitnerSystem = LeitnerSystem<QuizQuestion>(itemList: questionList)
             }
+            
         } catch {
             print("QuizViewModel: Failed fetching data:", error)
         }
@@ -126,6 +127,10 @@ class QuizViewModel {
         leitnerSystem = store.savedLeitnerSystem
     }
     
+    func saveLeitnerSystemToStore() {
+        store.savedLeitnerSystem = leitnerSystem
+    }
+    
     func removeSavedLeitnerSystem() {
         store.savedLeitnerSystem = nil
     }
@@ -136,6 +141,7 @@ class QuizViewModel {
     
     func submitResultAndGetNextQuestion(currentSuccess: Bool) -> QuizQuestion? {
         let quizQuestion = leitnerSystem.getNextQuestionStatus(currentItemSuccess: currentSuccess)?.item
+        leitnerSystem.incrementQuestionStatusCount(isSuccess: currentSuccess)
         store.savedLeitnerSystem = leitnerSystem
         return quizQuestion
     }
@@ -165,6 +171,31 @@ class QuizViewModel {
         return leitnerSystem.progressInfo.startBoxCount
     }
     
+    var statsInfoForTable: [(name: String, value: Int)] {
+        var result: [(name: String, value: Int)] = []
+        let statsInfo = leitnerSystem.statsInfo
+        
+        result.append(("Total Questions", statsInfo.originalItemListCount))
+        result.append(("Total Cycle", statsInfo.day))
+        result.append(("Try Count", statsInfo.tryCount))
+        result.append(("Success Count", statsInfo.successCount))
+        result.append(("Failed Count", statsInfo.failedCount))
+        
+        return result
+    }
+    
+    func incrementTryCount() {
+        leitnerSystem.incrementTryCount()
+    }
+    
+    func incrementSuccessCount() {
+        leitnerSystem.incrementSuccessCount()
+    }
+    
+    func incrementFailedCount() {
+        leitnerSystem.incrementFailedCount()
+    }
+    
     func studyingProgress(isBeforeSubmit: Bool) -> (isPhaseOne: Bool, percent: Float) {
         let info = leitnerSystem.forecastProgressInfo(isBeforeSubmit: isBeforeSubmit)
         let isPhaseOne = info.phase == .phaseOne
@@ -176,12 +207,4 @@ class QuizViewModel {
         let currentNumber = leitnerSystem.progressInfo.currentDQIndex + (isBeforeSubmit ? 0 : 1)
         return Float(currentNumber) / Float(leitnerSystem.progressInfo.dailyQuestionCount)
     }
-    
-    // var dayQuestionProgressBefore: Float {
-    //     return Float(leitnerSystem.progressInfo.currentDQIndex) / Float(leitnerSystem.progressInfo.dailyQuestionCount)
-    // }
-    // 
-    // var dayQuestionProgressAfter: Float {
-    //     return Float(leitnerSystem.progressInfo.currentDQIndex + 1) / Float(leitnerSystem.progressInfo.dailyQuestionCount)
-    // }
 }

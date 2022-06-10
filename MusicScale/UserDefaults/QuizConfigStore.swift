@@ -124,7 +124,12 @@ struct QuizConfigStore {
             }
             
             return nil
+            
         } set {
+            if newValue == nil {
+                store.set(nil, forKey: .cfgQuizLeitnerSystem)
+            }
+            
             do {
                 try store.setObject(newValue, forKey: .cfgQuizLeitnerSystem)
             } catch {

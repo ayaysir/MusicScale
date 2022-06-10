@@ -92,6 +92,7 @@ class MatchKeysViewController: InQuizViewController {
         webkitView.isUserInteractionEnabled = false
         viewWebContainer.addSubview(webkitView)
         
+        // Override displayNextQuestionHandler
         displayNextQuestionHandler = { [unowned self] newQuestion in
             self.displayName(question: newQuestion)
             
@@ -101,6 +102,8 @@ class MatchKeysViewController: InQuizViewController {
             currentEditViewModel = QuizEditKeyViewModel(scaleInfo: newQuestion.scaleInfo, key: newQuestion.key, order: newQuestion.isAscending ? .ascending : .descending, tempo: tempo)
             
             setPianoPosition(playableKey: newQuestion.key.playableKey)
+            
+            quizViewModel.incrementTryCount()
             
             if firstrun {
                 isSolvingQuestionNow = true
@@ -166,9 +169,7 @@ class MatchKeysViewController: InQuizViewController {
     
     @IBAction func btnActPlayTogether(_ sender: UIButton) {
         playOrStop(playMode: .together)
-        
     }
-    
     
     // MARK: - Custom methods
     
