@@ -514,15 +514,6 @@
                                                         </button>
                                                     </subviews>
                                                 </stackView>
-                                                <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DRz-YB-Zbg">
-                                                    <rect key="frame" x="37" y="36" width="305" height="92"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <wkWebViewConfiguration key="configuration">
-                                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                                        <wkPreferences key="preferences"/>
-                                                    </wkWebViewConfiguration>
-                                                </wkWebView>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3Ol-cg-3AV">
                                                     <rect key="frame" x="20" y="129" width="334" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -544,6 +535,26 @@
                                                         <action selector="segActAscDesc:" destination="dom-77-63F" eventType="valueChanged" id="WvY-8H-C0Z"/>
                                                     </connections>
                                                 </segmentedControl>
+                                                <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DRz-YB-Zbg">
+                                                    <rect key="frame" x="37" y="35.5" width="305" height="92"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <wkWebViewConfiguration key="configuration">
+                                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                        <wkPreferences key="preferences"/>
+                                                    </wkWebViewConfiguration>
+                                                </wkWebView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FBw-aH-9eU">
+                                                    <rect key="frame" x="303" y="40" width="43" height="35"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="play.fill" catalog="system">
+                                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="btnActPlay:" destination="dom-77-63F" eventType="touchUpInside" id="hMw-qO-f1Y"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Gy4-qH-DfH" secondAttribute="bottom" constant="11" id="0tP-sa-Chl"/>
@@ -652,6 +663,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="barBtnSubmit" destination="dCH-q1-Ogl" id="KCI-mz-hm4"/>
+                        <outlet property="btnPlay" destination="FBw-aH-9eU" id="kMX-IR-LQ2"/>
                         <outlet property="cosmosDefaultPriority" destination="fMN-rq-aiY" id="ef2-wu-vme"/>
                         <outlet property="lblCautionAscAndDescDiff" destination="Va8-eM-OZi" id="4Hg-Zt-srs"/>
                         <outlet property="segAccidental" destination="3Ol-cg-3AV" id="Xgc-pl-3iW"/>

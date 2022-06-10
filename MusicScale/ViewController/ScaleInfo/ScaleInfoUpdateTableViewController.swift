@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+import AudioKit
 
 protocol ScaleInfoUpdateTVCDelegate: AnyObject {
     func didFinishedUpdate(_ controller: ScaleInfoUpdateTableViewController, viewModel: ScaleInfoViewModel)
@@ -34,6 +35,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     @IBOutlet weak var swtActivateDesc: UISwitch!
     @IBOutlet weak var lblCautionAscAndDescDiff: UILabel!
     @IBOutlet weak var cosmosDefaultPriority: CosmosView!
+    @IBOutlet weak var btnPlay: UIButton!
     
     weak var updateDelegate: ScaleInfoUpdateTVCDelegate?
     weak var createDelegate: ScaleInfoUpdateTVCDelegate?
@@ -42,11 +44,27 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     var infoViewModel: ScaleInfoViewModel?
     var degreesViewModel: ScaleDegreesUpdateViewModel!
     
+    private var order: DegreesOrder {
+        segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
+    }
+    
     let conductor = NoteSequencerConductor()
-    var playTimer: Timer?
+    private var playTimer: Timer?
+    private var generator: MIDISoundGenerator!
     
     private let bannerAdPath = IndexPath(row: 0, section: 5)
     private let showBanner = true
+    
+    override func viewWillAppear(_ animated: Bool) {
+        try? availableSoundInSilentMode()
+        
+        // Decide instPreset
+        generator = MIDISoundGenerator()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        generator.stopEngine()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +72,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         // ===== 공통 작업 =====
         loadWebSheetPage()
         txfScaleName.addTarget(self, action: #selector(scaleNameChanged), for: .editingChanged)
-        conductor.start()
+        btnPlay.setTitle("", for: .normal)
         
         // ===== 분기별 작업 =====
         switch mode {
@@ -88,6 +106,9 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
             
             print(degreesViewModel.onEditDegreesDesc)
         }
+        
+        conductor.tempo = Float(degreesViewModel.tempo)
+        conductor.start()
     }
     
     // MARK: - Table Delegate
@@ -144,6 +165,11 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     
     // MARK: - @IBAction
     
+    @IBAction func btnActPlay(_ sender: Any) {
+        playOrStop()
+    }
+    
+    
     @IBAction func swtActEnableDescending(_ sender: UISwitch) {
         if sender.isOn {
             segAscDesc.isEnabled = true
@@ -183,7 +209,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         degreeText += "\(sender.tag)"
         
         degreesViewModel.setScaleName(txfScaleName.text ?? "")
-        let order: DegreesOrder = segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
+        // let order: DegreesOrder = segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
         
         if (order == .ascending ? degreesViewModel.onEditDegreesAsc : degreesViewModel.onEditDegreesDesc).count > 20 {
             self.tableView.makeToast("⚠️ degreesViewModel.onEditDegreesAsc.count must be 20 or less.", position: .center)
@@ -220,6 +246,9 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
             }
         }
         
+        let playbackNumber = 60 + degreesViewModel.getInteger(degree: degreeText) - 1
+        generator.playSoundWithDuration(noteNumber: playbackNumber, millisecond: 300)
+        
         switch order {
         case .ascending:
             degreesViewModel.onEditDegreesAsc.append(degreeText)
@@ -243,7 +272,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         
         degreesViewModel.setScaleName(txfScaleName.text ?? "")
         
-        let order: DegreesOrder = segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
+        // let order: DegreesOrder = segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
         switch order {
         case .ascending:
             _ = degreesViewModel.onEditDegreesAsc.popLast()
@@ -492,17 +521,37 @@ extension ScaleInfoUpdateTableViewController: WKUIDelegate, WKNavigationDelegate
     
 }
 
-// extension ScaleInfoUpdateTableViewController: ConductorPlay {
-//     
-//     func playOrStop(playMode: PlayMode? = nil) {
-//         <#code#>
-//     }
-//     
-//     func startSequencer(playMode: PlayMode? = nil) {
-//         <#code#>
-//     }
-//     
-//     func stopSequencer() {
-//         <#code#>
-//     }
-// }
+extension ScaleInfoUpdateTableViewController: ConductorPlay {
+
+    func playOrStop(playMode: PlayMode? = nil) {
+        if conductor.sequencer.isPlaying {
+            stopSequencer()
+            return
+        }
+        startSequencer()
+    }
+
+    func startSequencer(playMode: PlayMode? = nil) {
+        stopSequencer()
+        startTimer()
+        var targetSemitones = degreesViewModel.playbackSemitonesOnEdit(order: order)
+        targetSemitones.removeLast()
+        self.conductor.addScaleToSequencer(semitones: targetSemitones)
+        self.conductor.isPlaying = true
+        
+        btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+        
+        playTimer = Timer.scheduledTimer(timeInterval: conductor.sequencer.length.seconds, target: self, selector: #selector(stopSequencer), userInfo: nil, repeats: false)
+    }
+
+    @objc func stopSequencer() {
+        stopTimer()
+        conductor.sequencer.stop()
+        conductor.sequencer.rewind()
+        conductor.isPlaying = false
+        
+        btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        
+        playTimer?.invalidate()
+    }
+}

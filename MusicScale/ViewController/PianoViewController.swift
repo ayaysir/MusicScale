@@ -23,9 +23,7 @@ class PianoViewController: UIViewController {
     var mode: Mode = .stricted
     var isKeyPressEnabled: Bool = true
     
-    let engine = AudioEngine()
-    private var instrument = MIDISampler(name: "Instrument 1")
-    private var midiNote: MIDINoteNumber!
+    private var generator: MIDISoundGenerator!
     
     var currentPlayableKey: Music.PlayableKey = .C
     var octaveShift: Int = 0
@@ -48,41 +46,14 @@ class PianoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(#function)
-        initPianoSound()
+        try? availableSoundInSilentMode()
+        
+        // Decide instPreset
+        generator = MIDISoundGenerator()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        print(#function)
-        engine.stop()
-    }
-    
-    private func initPianoSound() {
-        
-        // piano sound
-        engine.output = instrument
-        
-        // Load EXS file (you can also load SoundFonts and WAV files too using the AppleSampler Class)
-        do {
-            // 무음모드에서 소리나게 하기
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            
-            if let fileURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2") {
-                try instrument.loadMelodicSoundFont(url: fileURL, preset: 67)
-            } else {
-                Log("Could not find file")
-            }
-        } catch {
-            Log("Could not load instrument")
-        }
-        
-        do {
-            try engine.start()
-        } catch {
-            Log("AudioKit did not start!")
-        }
+        generator.stopEngine()
     }
     
     @objc func handlePianoLongPress(gesture: UILongPressGestureRecognizer) {
@@ -108,8 +79,8 @@ class PianoViewController: UIViewController {
                 viewModel.currentTouchedKey = keyInfo
                 
                 // 노트 재생
-                midiNote = MIDINoteNumber(semitoneStart + keyInfo.keyIndex + (octaveShift * 12))
-                instrument.play(noteNumber: midiNote, velocity: 90, channel: 1)
+                let targetNoteNumber = semitoneStart + keyInfo.keyIndex + (octaveShift * 12)
+                generator.playSound(noteNumber: targetNoteNumber)
                 
                 // delegate 있는 경우 키 누름 정보 전송
                 if let delegate = delegate {
@@ -121,10 +92,9 @@ class PianoViewController: UIViewController {
             break
         case .ended:
             // 노트 멈춤
-            if viewModel?.currentTouchedKey != nil && midiNote != nil {
+            if viewModel?.currentTouchedKey != nil {
                 viewModel?.currentTouchedKey = nil
-                instrument.stop(noteNumber: midiNote, channel: 1)
-                midiNote = nil
+                generator.stopSound()
             }
         case .cancelled:
             // print("cancelled")

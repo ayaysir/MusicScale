@@ -49,9 +49,8 @@ class ScaleInfoViewController: UIViewController {
     let transposeDropDown = DropDown()
     let enharmonicDropDown = DropDown()
     
-    let conductor = NoteSequencerConductor()
-    
-    var playTimer: Timer?
+    private let conductor = NoteSequencerConductor()
+    private var playTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,7 +145,6 @@ class ScaleInfoViewController: UIViewController {
             break
         }
     }
-
 }
 
 // MARK: - Custom methods
@@ -302,7 +300,6 @@ extension ScaleInfoViewController {
         btnPlayAndStop.setTitle("Play", for: .normal)
         
         playTimer?.invalidate()
-        
     }
     
     func startSequencer() {
@@ -401,7 +398,4 @@ extension ScaleInfoViewController {
           }
         _ = dropDownCommon(dropDown: targetDropDown, dataSource: dataSource, selectionAction: selectionAction)
     }
-    
 }
-
-
