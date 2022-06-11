@@ -13,6 +13,7 @@ enum VCStoryboardID: String {
     case FlashcardsViewController = "FlashcardsViewController"
     case ScoreWebViewController = "ScoreWebViewController"
     case QuizFinishedViewController = "QuizFinishedViewController"
+    case ScaleListTableViewController = "ScaleListTableViewController"
 }
 
 func initVCFromStoryboard(storyboardID: VCStoryboardID, storyboardName: String = "Main") -> UIViewController {

@@ -127,9 +127,9 @@ class QuizIntroTableViewController: UITableViewController {
             cell.isSelected = false
         }
         
+        // 스케일 선택하기
         if indexPath == selectScaleCellIndexPath {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let scaleListVC = storyboard.instantiateViewController(withIdentifier: "ScaleListTableViewController") as! ScaleListTableViewController
+            let scaleListVC = initVCFromStoryboard(storyboardID: .ScaleListTableViewController) as! ScaleListTableViewController
             scaleListVC.mode = .quizSelect
             scaleListVC.quizDelegate = self
             scaleListVC.quizViewModel = quizViewModel

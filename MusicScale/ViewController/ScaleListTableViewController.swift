@@ -26,10 +26,10 @@ class ScaleListTableViewController: UITableViewController {
     
     weak var quizDelegate: ScaleListTVCDelegate?
     
-    enum Mode {
-        case main, quizSelect
+    enum ListMode {
+        case main, quizSelect, uploadSelect
     }
-    var mode: Mode = .main
+    var mode: ListMode = .main
     
     lazy var sortVC: SortViewController & PanModalPresentable = {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortViewController") as! SortViewController
@@ -54,13 +54,22 @@ class ScaleListTableViewController: UITableViewController {
         
         searchInit()
         
-        if mode == .quizSelect {
+        switch mode {
+        case .main:
+            break
+        case .quizSelect:
             barBtnEdit.isEnabled = false
             barBtnEdit.title = ""
             navigationItem.leftItemsSupplementBackButton = true
             
             changeSelectAllButtonTitle()
-            
+        case .uploadSelect:
+            barBtnEdit.isEnabled = false
+            barBtnEdit.title = ""
+            navigationItem.leftItemsSupplementBackButton = true
+            barBtnAdd.isEnabled = false
+            barBtnAdd.title = ""
+            navigationItem.largeTitleDisplayMode = .never
         }
     }
     
@@ -75,13 +84,6 @@ class ScaleListTableViewController: UITableViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        if mode == .quizSelect {
-            print(quizViewModel.scaleIdList)
-            // scaleListViewModel.getScaleInfoViewModelOf(index: <#T##Int#>)
-        }
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         if let quizDelegate = quizDelegate {
             quizDelegate.didQuizListSubmitted(self, newCount: quizViewModel.idListCount)
@@ -92,7 +94,7 @@ class ScaleListTableViewController: UITableViewController {
     
     @IBAction func barBtnActEdit(_ sender: UIBarButtonItem) {
         
-        if mode == .quizSelect {
+        guard mode == .main else {
             return
         }
         
@@ -121,10 +123,14 @@ class ScaleListTableViewController: UITableViewController {
             } else {
                 selectAllCell()
             }
+        case .uploadSelect:
+            break
         }
     }
     
     func selectAllCell() {
+        guard mode == .quizSelect else { return }
+        
         let count = scaleListViewModel.getInfoCount(isFiltering: isFiltering)
         for row in 0..<count {
             let infoVM = scaleListViewModel.getScaleInfoVM(isFiltering: isFiltering, index: row)
@@ -137,6 +143,8 @@ class ScaleListTableViewController: UITableViewController {
     }
     
     func deselectAllCell() {
+        guard mode == .quizSelect else { return }
+        
         let count = scaleListViewModel.getInfoCount(isFiltering: isFiltering)
         for row in 0..<count {
             let infoVM = scaleListViewModel.getScaleInfoVM(isFiltering: isFiltering, index: row)
@@ -177,7 +185,7 @@ class ScaleListTableViewController: UITableViewController {
         if isFiltering {
             return scaleListViewModel.getSearchedInfoViewModelOf(index: indexPath.row)
         } else {
-            return  scaleListViewModel.getScaleInfoViewModelOf(index: indexPath.row)
+            return scaleListViewModel.getScaleInfoViewModelOf(index: indexPath.row)
         }
     }
     
@@ -192,12 +200,6 @@ class ScaleListTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    }
-    
-    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return !isFiltering ? scaleListViewModel.infoCount : scaleListViewModel.searchInfoCount
     }
@@ -219,6 +221,7 @@ class ScaleListTableViewController: UITableViewController {
         guard let infoViewModel = infoViewModel else {
             return UITableViewCell()
         }
+        
         cell.configure(infoViewModel: infoViewModel)
         cell.cosmosViewMyPriority.isHidden = tableView.isEditing ? true : false
         
@@ -228,7 +231,6 @@ class ScaleListTableViewController: UITableViewController {
             toggleCheckmark(of: cell, isCheckmark: containsId)
         }
         
-
         return cell
     }
 
@@ -262,9 +264,6 @@ class ScaleListTableViewController: UITableViewController {
             return config
         }
     }
-    
-    override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-    }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let currentViewModel = currentInfoViewModel(indexPath: indexPath)!
@@ -295,6 +294,8 @@ class ScaleListTableViewController: UITableViewController {
             }
             
             changeSelectAllButtonTitle()
+        case .uploadSelect:
+            navigationController?.popViewController(animated: true)
         }
     }
     
@@ -346,10 +347,6 @@ extension ScaleListTableViewController: UISearchBarDelegate, UISearchResultsUpda
         guard let searchText = searchController.searchBar.text else { return }
         scaleListViewModel.search(searchText: searchText, searchCategory: searchCategory)
     }
-    
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
-    }
 }
 
 // MARK: - ScaleInfoVCDelgate
@@ -360,6 +357,7 @@ extension ScaleListTableViewController: ScaleInfoVCDelgate {
             tableView.reloadData()
             return
         }
+        
         tableView.reloadRows(at: [indexPath], with: .none)
     }
 }

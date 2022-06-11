@@ -64,7 +64,8 @@ class MusicScaleTests: XCTestCase {
         //     }
         // }
         
-        QuizConfigStore.shared.savedLeitnerSystem = nil
+        // QuizConfigStore.shared.savedLeitnerSystem = nil
+        
     }
     
     func test_structToJson() throws {
