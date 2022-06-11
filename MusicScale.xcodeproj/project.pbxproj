@@ -97,6 +97,7 @@
 		44B70F44284A57430068495A /* AppConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F43284A57430068495A /* AppConfigStore.swift */; };
 		44E7A07528467692005C7909 /* SearchCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E7A07428467692005C7909 /* SearchCategory.swift */; };
 		44EE68152853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md in Resources */ = {isa = PBXBuildFile; fileRef = 44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */; };
+		44EFA4B328541F0800565F93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44EFA4B228541F0800565F93 /* GoogleService-Info.plist */; };
 		44FEFBF12850EE4B000402DE /* QuizEditKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEFBF02850EE4B000402DE /* QuizEditKeyViewModel.swift */; };
 		44FEFBF328534597000402DE /* MIDISoundGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEFBF228534597000402DE /* MIDISoundGenerator.swift */; };
 		44FEFBF52853470A000402DE /* AvailableSoundInSilentMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEFBF42853470A000402DE /* AvailableSoundInSilentMode.swift */; };
@@ -219,6 +220,7 @@
 		44B70F43284A57430068495A /* AppConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigStore.swift; sourceTree = "<group>"; };
 		44E7A07428467692005C7909 /* SearchCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategory.swift; sourceTree = "<group>"; };
 		44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Quiz_IntroVC와 InProgressVC에서 무한루프.md"; sourceTree = "<group>"; };
+		44EFA4B228541F0800565F93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		44FEFBF02850EE4B000402DE /* QuizEditKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizEditKeyViewModel.swift; sourceTree = "<group>"; };
 		44FEFBF228534597000402DE /* MIDISoundGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDISoundGenerator.swift; sourceTree = "<group>"; };
 		44FEFBF42853470A000402DE /* AvailableSoundInSilentMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableSoundInSilentMode.swift; sourceTree = "<group>"; };
@@ -492,6 +494,7 @@
 				44709D5B276A334F00BBF6C9 /* Main.storyboard */,
 				44709D61276A335800BBF6C9 /* Assets.xcassets */,
 				44709D63276A335800BBF6C9 /* LaunchScreen.storyboard */,
+				44EFA4B228541F0800565F93 /* GoogleService-Info.plist */,
 				44709D66276A335800BBF6C9 /* Info.plist */,
 				44709D5E276A334F00BBF6C9 /* MusicScale.xcdatamodeld */,
 				44A09A822839327F0067184E /* OnlyFirstRun.swift */,
@@ -700,6 +703,7 @@
 				44A09A362832AEFA0067184E /* saw220-ana1.wav in Resources */,
 				44EE68152853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md in Resources */,
 				44A09A312832A6180067184E /* sawPiano1.exs in Resources */,
+				44EFA4B328541F0800565F93 /* GoogleService-Info.plist in Resources */,
 				44709D65276A335800BBF6C9 /* LaunchScreen.storyboard in Resources */,
 				440637F7283082BE00875E77 /* SampleScaleList.json in Resources */,
 				44709D89276A37F200BBF6C9 /* web in Resources */,
