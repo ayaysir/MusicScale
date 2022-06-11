@@ -12,17 +12,16 @@ import FirebaseFirestoreSwift
 /**
 Firebase 서버로 리퀘스트하기 위한 구조체
  */
-struct PostCreateRequest: Codable {
+struct Post: Codable {
     
     internal init(scaleInfo: ScaleInfo) {
         self.scaleInfo = scaleInfo
         self.authorUID = ""
-        self.documentID = ""
     }
     
     var scaleInfo: ScaleInfo
     var authorUID: String
-    var documentID: String
+    @DocumentID var documentID: String?
     
     // If a Codable object being written contains a nil for an @ServerTimestamp-annotated field, it will be replaced with FieldValue.serverTimestamp() as it is sent.
     // https://firebase.google.com/docs/reference/swift/firebasefirestoreswift/api/reference/Structs/ServerTimestamp

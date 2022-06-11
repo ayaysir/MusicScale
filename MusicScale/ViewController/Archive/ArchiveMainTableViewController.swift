@@ -15,11 +15,13 @@ class ArchiveMainTableViewController: UITableViewController {
         super.viewDidLoad()
         firebaseManager.signInAnonymously { user in
             
-            let scaleInfo = ScaleInfo(id: UUID(), name: "test", nameAlias: "testalias", degreesAscending: "1 2 3", degreesDescending: "3 2 1", defaultPriority: 5, comment: "fff\nfff", links: "", isDivBy12Tet: true, displayOrder: 10, myPriority: 3, createdDate: Date(), modifiedDate: Date(), groupName: "")
-            let request = PostCreateRequest(scaleInfo: scaleInfo)
+            let scaleInfo = ScaleInfo(id: UUID(), name: "test \(Int.random(in: 1...1000))", nameAlias: "testalias", degreesAscending: "1 2 3", degreesDescending: "3 2 1", defaultPriority: 5, comment: "fff\nfff", links: "", isDivBy12Tet: true, displayOrder: 10, myPriority: 3, createdDate: Date(), modifiedDate: Date(), groupName: "")
+            let request = Post(scaleInfo: scaleInfo)
             self.firebaseManager.addPost(postRequest: request, completionHandler: nil, errorHandler: nil)
             
-            self.firebaseManager.deletePost(documentID: "2Gs9rT8W2C0QXTKPfRlf")
+            self.firebaseManager.deletePost(documentID: "0MIv0L4bkgoKhOhwxhYa")
+            self.firebaseManager.read(documentID: "hYzj8aL0zvdiRmkMLEyX")
+            self.firebaseManager.readAll()
         }
     }
     

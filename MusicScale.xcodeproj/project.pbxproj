@@ -92,7 +92,7 @@
 		44A09A8128392C0B0067184E /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A8028392C0B0067184E /* UserDefaults+.swift */; };
 		44A09A832839327F0067184E /* OnlyFirstRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A822839327F0067184E /* OnlyFirstRun.swift */; };
 		44A09A8528394A200067184E /* DropDownTransposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A8428394A200067184E /* DropDownTransposeViewModel.swift */; };
-		44ABE1032854C1D00022B4FB /* PostCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ABE1022854C1D00022B4FB /* PostCreateRequest.swift */; };
+		44ABE1032854C1D00022B4FB /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ABE1022854C1D00022B4FB /* Post.swift */; };
 		44B4AB8428453286008C8AFD /* SortFilterConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4AB8328453285008C8AFD /* SortFilterConfigStore.swift */; };
 		44B4AB8628453AB5008C8AFD /* SortList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4AB8528453AB5008C8AFD /* SortList.swift */; };
 		44B70F3B2848F1A90068495A /* QuizSelectKeyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F3A2848F1A90068495A /* QuizSelectKeyTableViewController.swift */; };
@@ -219,7 +219,7 @@
 		44A09A8028392C0B0067184E /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		44A09A822839327F0067184E /* OnlyFirstRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyFirstRun.swift; sourceTree = "<group>"; };
 		44A09A8428394A200067184E /* DropDownTransposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTransposeViewModel.swift; sourceTree = "<group>"; };
-		44ABE1022854C1D00022B4FB /* PostCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateRequest.swift; sourceTree = "<group>"; };
+		44ABE1022854C1D00022B4FB /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		44B4AB8328453285008C8AFD /* SortFilterConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFilterConfigStore.swift; sourceTree = "<group>"; };
 		44B4AB8528453AB5008C8AFD /* SortList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortList.swift; sourceTree = "<group>"; };
 		44B70F3A2848F1A90068495A /* QuizSelectKeyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSelectKeyTableViewController.swift; sourceTree = "<group>"; };
@@ -583,7 +583,7 @@
 		44ABE1012854C1B80022B4FB /* Archive */ = {
 			isa = PBXGroup;
 			children = (
-				44ABE1022854C1D00022B4FB /* PostCreateRequest.swift */,
+				44ABE1022854C1D00022B4FB /* Post.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -935,7 +935,7 @@
 				445FA4D0284FB58C0008D621 /* ColorfulProgressView.swift in Sources */,
 				443A0C6328428F3100641BC0 /* Between.swift in Sources */,
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,
-				44ABE1032854C1D00022B4FB /* PostCreateRequest.swift in Sources */,
+				44ABE1032854C1D00022B4FB /* Post.swift in Sources */,
 				4475CB512830A6C200B9D204 /* MusicSheetHelper.swift in Sources */,
 				446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */,
 				44B4AB8428453286008C8AFD /* SortFilterConfigStore.swift in Sources */,
