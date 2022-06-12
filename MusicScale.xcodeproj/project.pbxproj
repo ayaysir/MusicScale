@@ -23,11 +23,13 @@
 		441FA160283A8C370084AE58 /* FloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441FA15F283A8C370084AE58 /* FloatingPoint.swift */; };
 		441FA163283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441FA162283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift */; };
 		4426A007285424B100942655 /* ArchiveMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426A006285424B100942655 /* ArchiveMainTableViewController.swift */; };
-		4426A00A2854251B00942655 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426A0092854251B00942655 /* FirebaseManager.swift */; };
+		4426A00A2854251B00942655 /* FirebasePostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426A0092854251B00942655 /* FirebasePostManager.swift */; };
 		4426A00C2854400B00942655 /* ArchiveDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426A00B2854400B00942655 /* ArchiveDetailTableViewController.swift */; };
 		443A0C612842864400641BC0 /* CreateScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C602842864400641BC0 /* CreateScaleInfoViewModel.swift */; };
 		443A0C6328428F3100641BC0 /* Between.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C6228428F3100641BC0 /* Between.swift */; };
 		443A0C652843E99B00641BC0 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C642843E99B00641BC0 /* SimpleAlert.swift */; };
+		44537F68285623200061CADF /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44537F67285623200061CADF /* SwiftSpinner.swift */; };
+		44537F6A285628A90061CADF /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44537F69285628A90061CADF /* FirebaseAuthManager.swift */; };
 		445FA4B7284BA06B0008D621 /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B6284BA06B0008D621 /* QuizTests.swift */; };
 		445FA4B9284BAE540008D621 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B8284BAE540008D621 /* Array+.swift */; };
 		445FA4BB284BAF3F0008D621 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */; };
@@ -93,6 +95,7 @@
 		44A09A832839327F0067184E /* OnlyFirstRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A822839327F0067184E /* OnlyFirstRun.swift */; };
 		44A09A8528394A200067184E /* DropDownTransposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A8428394A200067184E /* DropDownTransposeViewModel.swift */; };
 		44ABE1032854C1D00022B4FB /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ABE1022854C1D00022B4FB /* Post.swift */; };
+		44ABE108285619F60022B4FB /* PostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ABE107285619F60022B4FB /* PostListViewModel.swift */; };
 		44B4AB8428453286008C8AFD /* SortFilterConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4AB8328453285008C8AFD /* SortFilterConfigStore.swift */; };
 		44B4AB8628453AB5008C8AFD /* SortList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4AB8528453AB5008C8AFD /* SortList.swift */; };
 		44B70F3B2848F1A90068495A /* QuizSelectKeyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F3A2848F1A90068495A /* QuizSelectKeyTableViewController.swift */; };
@@ -149,11 +152,13 @@
 		441FA15F283A8C370084AE58 /* FloatingPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPoint.swift; sourceTree = "<group>"; };
 		441FA162283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoUpdateTableViewController.swift; sourceTree = "<group>"; };
 		4426A006285424B100942655 /* ArchiveMainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveMainTableViewController.swift; sourceTree = "<group>"; };
-		4426A0092854251B00942655 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		4426A0092854251B00942655 /* FirebasePostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebasePostManager.swift; sourceTree = "<group>"; };
 		4426A00B2854400B00942655 /* ArchiveDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveDetailTableViewController.swift; sourceTree = "<group>"; };
 		443A0C602842864400641BC0 /* CreateScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScaleInfoViewModel.swift; sourceTree = "<group>"; };
 		443A0C6228428F3100641BC0 /* Between.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Between.swift; sourceTree = "<group>"; };
 		443A0C642843E99B00641BC0 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
+		44537F67285623200061CADF /* SwiftSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
+		44537F69285628A90061CADF /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		445FA4B6284BA06B0008D621 /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		445FA4B8284BAE540008D621 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
@@ -220,6 +225,7 @@
 		44A09A822839327F0067184E /* OnlyFirstRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyFirstRun.swift; sourceTree = "<group>"; };
 		44A09A8428394A200067184E /* DropDownTransposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTransposeViewModel.swift; sourceTree = "<group>"; };
 		44ABE1022854C1D00022B4FB /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		44ABE107285619F60022B4FB /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
 		44B4AB8328453285008C8AFD /* SortFilterConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFilterConfigStore.swift; sourceTree = "<group>"; };
 		44B4AB8528453AB5008C8AFD /* SortList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortList.swift; sourceTree = "<group>"; };
 		44B70F3A2848F1A90068495A /* QuizSelectKeyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSelectKeyTableViewController.swift; sourceTree = "<group>"; };
@@ -305,6 +311,7 @@
 				446AEA2F28411ED300C2BFCF /* Toast.swift */,
 				446AEA3128413E0200C2BFCF /* Cosmos.swift */,
 				443A0C642843E99B00641BC0 /* SimpleAlert.swift */,
+				44537F67285623200061CADF /* SwiftSpinner.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -345,7 +352,8 @@
 		4426A0082854250800942655 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				4426A0092854251B00942655 /* FirebaseManager.swift */,
+				4426A0092854251B00942655 /* FirebasePostManager.swift */,
+				44537F69285628A90061CADF /* FirebaseAuthManager.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -410,6 +418,7 @@
 		4463FEB2282D316700E7A607 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				44ABE106285619E60022B4FB /* Archive */,
 				44B70F4028491A560068495A /* Quiz */,
 				4463FEB3282D317700E7A607 /* PianoViewModel.swift */,
 				440637F1283003DE00875E77 /* ScaleInfoListViewModel.swift */,
@@ -584,6 +593,14 @@
 			isa = PBXGroup;
 			children = (
 				44ABE1022854C1D00022B4FB /* Post.swift */,
+			);
+			path = Archive;
+			sourceTree = "<group>";
+		};
+		44ABE106285619E60022B4FB /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				44ABE107285619F60022B4FB /* PostListViewModel.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -893,7 +910,7 @@
 				440637F428307E0000875E77 /* ScaleListTableViewController.swift in Sources */,
 				4475CB572831501600B9D204 /* Sequence+.swift in Sources */,
 				440637F2283003DE00875E77 /* ScaleInfoListViewModel.swift in Sources */,
-				4426A00A2854251B00942655 /* FirebaseManager.swift in Sources */,
+				4426A00A2854251B00942655 /* FirebasePostManager.swift in Sources */,
 				44A09A3B283559190067184E /* Sequencer.swift in Sources */,
 				44A09A832839327F0067184E /* OnlyFirstRun.swift in Sources */,
 				445FA4CE284F5D010008D621 /* InQuizViewController.swift in Sources */,
@@ -909,6 +926,7 @@
 				44E7A07528467692005C7909 /* SearchCategory.swift in Sources */,
 				44A09A8528394A200067184E /* DropDownTransposeViewModel.swift in Sources */,
 				44B70F3B2848F1A90068495A /* QuizSelectKeyTableViewController.swift in Sources */,
+				44ABE108285619F60022B4FB /* PostListViewModel.swift in Sources */,
 				4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */,
 				44FEFBF328534597000402DE /* MIDISoundGenerator.swift in Sources */,
 				445FA4C9284F53C90008D621 /* QuizCommon.swift in Sources */,
@@ -937,6 +955,8 @@
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,
 				44ABE1032854C1D00022B4FB /* Post.swift in Sources */,
 				4475CB512830A6C200B9D204 /* MusicSheetHelper.swift in Sources */,
+				44537F68285623200061CADF /* SwiftSpinner.swift in Sources */,
+				44537F6A285628A90061CADF /* FirebaseAuthManager.swift in Sources */,
 				446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */,
 				44B4AB8428453286008C8AFD /* SortFilterConfigStore.swift in Sources */,
 				4475CB532830B52700B9D204 /* String+.swift in Sources */,

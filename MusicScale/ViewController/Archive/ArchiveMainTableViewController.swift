@@ -9,20 +9,24 @@ import UIKit
 
 class ArchiveMainTableViewController: UITableViewController {
     
-    let firebaseManager = FirebaseManager.shared
+    var viewModel: PostListViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        firebaseManager.signInAnonymously { user in
-            
-            let scaleInfo = ScaleInfo(id: UUID(), name: "test \(Int.random(in: 1...1000))", nameAlias: "testalias", degreesAscending: "1 2 3", degreesDescending: "3 2 1", defaultPriority: 5, comment: "fff\nfff", links: "", isDivBy12Tet: true, displayOrder: 10, myPriority: 3, createdDate: Date(), modifiedDate: Date(), groupName: "")
-            let request = Post(scaleInfo: scaleInfo)
-            self.firebaseManager.addPost(postRequest: request, completionHandler: nil, errorHandler: nil)
-            
-            self.firebaseManager.deletePost(documentID: "0MIv0L4bkgoKhOhwxhYa")
-            self.firebaseManager.read(documentID: "hYzj8aL0zvdiRmkMLEyX")
-            self.firebaseManager.readAll()
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        SwiftSpinner.show("Connecting \nto server...")
+        viewModel = PostListViewModel()
+        viewModel.bindHandler = {
+            print("load success", self.viewModel.posts.count)
+            self.tableView.reloadData()
+            SwiftSpinner.hide()
         }
+        
     }
     
     @IBAction func barBtnActUpload(_ sender: Any) {
@@ -33,13 +37,15 @@ class ArchiveMainTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return viewModel.posts.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell else {
+            return UITableViewCell()
+        }
 
-        // Configure the cell...
+        cell.configure(post: viewModel.posts[indexPath.row])
 
         return cell
     }
@@ -102,3 +108,22 @@ class ArchiveMainTableViewController: UITableViewController {
 extension ArchiveMainTableViewController {
     
 }
+
+class PostCell: UITableViewCell {
+    
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var lblAliases: UILabel!
+    @IBOutlet weak var lblUploadDate: UILabel!
+    @IBOutlet weak var progressLikeDislike: UIProgressView!
+    
+    override func prepareForReuse() {
+        
+    }
+    
+    func configure(post: Post) {
+        lblTitle.text = post.scaleInfo.name
+        lblAliases.text = post.scaleInfo.nameAlias
+        
+    }
+}
+

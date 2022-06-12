@@ -1795,7 +1795,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="60" id="z8w-9X-XC1">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="60" id="z8w-9X-XC1" customClass="PostCell" customModule="MusicScale" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="z8w-9X-XC1" id="aWF-Cz-ySC">
@@ -1810,7 +1810,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Natural minor scale, natural minor scale" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcI-jk-JXx">
-                                            <rect key="frame" x="20" y="32" width="251" height="17"/>
+                                            <rect key="frame" x="20" y="33" width="251" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
@@ -1831,6 +1831,12 @@
                                         </progressView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="lblAliases" destination="XcI-jk-JXx" id="Pwc-MH-bJs"/>
+                                    <outlet property="lblTitle" destination="jbv-oV-BBv" id="vXW-5m-a4D"/>
+                                    <outlet property="lblUploadDate" destination="EJR-h5-fZy" id="jZM-cC-Bin"/>
+                                    <outlet property="progressLikeDislike" destination="kxh-Pe-bES" id="Z3b-eu-qbY"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
