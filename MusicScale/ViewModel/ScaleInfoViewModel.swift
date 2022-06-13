@@ -9,7 +9,7 @@ import Foundation
 
 class SimpleScaleInfoViewModel {
     
-    fileprivate var scaleInfo: ScaleInfo
+    fileprivate(set) var scaleInfo: ScaleInfo
     fileprivate let helper = MusicSheetHelper()
     
     var currentKey: Music.Key
@@ -138,6 +138,10 @@ class SimpleScaleInfoViewModel {
         return helper.scaleInfoToAbcjsText(scaleInfo: scaleInfo, order: .descending, key: currentKey, tempo: currentTempo, octaveShift: currentOctaveShift, enharmonicMode: currentEnharmonicMode)
     }
     
+    func abcjsText(order: DegreesOrder) -> String {
+        return order == .ascending ? abcjsTextAscending : abcjsTextDescending
+    }
+    
     /// degree 찾기
     func targetDegrees(order: DegreesOrder) -> String {
         return helper.getTargetDegrees(scaleInfo: scaleInfo, order: order)
@@ -158,6 +162,13 @@ class SimpleScaleInfoViewModel {
     
     var playbackSemitoneDescending: [Int]? {
         return helper.getSemitoneToPlaybackNotes(scaleInfo: scaleInfo, order: .descending, key: currentKey, octaveShift: currentOctaveShift)
+    }
+    
+    func playbackSemitones(order: DegreesOrder) -> [Int]? {
+        if order == .none {
+            return nil
+        }
+        return order == .ascending ? playbackSemitoneAscending : playbackSemitoneDescending
     }
     
     var expectedPlayTime: Double {

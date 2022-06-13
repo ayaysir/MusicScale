@@ -2265,6 +2265,9 @@
                                                         <segment title="Ascending"/>
                                                         <segment title="Descending"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="segActAscDesc:" destination="y31-AK-apt" eventType="valueChanged" id="hkl-g6-La3"/>
+                                                    </connections>
                                                 </segmentedControl>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ascending and Desceding are same." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQg-fh-wuv">
                                                     <rect key="frame" x="20" y="11" width="221" height="16"/>
@@ -2291,6 +2294,7 @@
                                                     </buttonConfiguration>
                                                     <connections>
                                                         <action selector="btnActPlay:" destination="dom-77-63F" eventType="touchUpInside" id="eS2-uK-fMu"/>
+                                                        <action selector="btnActPlay:" destination="y31-AK-apt" eventType="touchUpInside" id="pbb-VG-vIe"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -2521,9 +2525,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="This Device (or Anonymous)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="um0-VX-CDH">
-                                                    <rect key="frame" x="234" y="8" width="160" height="14.5"/>
+                                                    <rect key="frame" x="234.5" y="8" width="159.5" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -2632,16 +2636,36 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Dorian Scale" largeTitleDisplayMode="always" id="2yS-la-dtF">
                         <rightBarButtonItems>
-                            <barButtonItem title="Download" id="lae-Ou-byD"/>
+                            <barButtonItem title="Download" id="lae-Ou-byD">
+                                <connections>
+                                    <action selector="barBtnActDownloadOr:" destination="y31-AK-apt" id="u7g-nA-2eL"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Delete" id="1Cg-fN-UUk"/>
                         </rightBarButtonItems>
                     </navigationItem>
                     <size key="freeformSize" width="414" height="1500"/>
                     <connections>
+                        <outlet property="barBtnDeleteOr" destination="1Cg-fN-UUk" id="RCz-0y-MoA"/>
+                        <outlet property="barBtnDownloadOr" destination="lae-Ou-byD" id="K91-5k-5pY"/>
                         <outlet property="btnDislike" destination="FvQ-gR-U2e" id="f2W-U2-84W"/>
                         <outlet property="btnLike" destination="3EG-Sz-5ce" id="yml-9v-BgY"/>
                         <outlet property="btnPlay" destination="xpx-c0-wDg" id="Mrq-qp-DAN"/>
                         <outlet property="btnSelectScale" destination="uua-OS-9LT" id="sPh-dH-yYq"/>
+                        <outlet property="lblAlias" destination="zec-bU-uYO" id="UCv-iW-hco"/>
+                        <outlet property="lblAscAndDescIsSame" destination="vQg-fh-wuv" id="vEh-ov-ib9"/>
+                        <outlet property="lblCreatedDate" destination="HZB-CL-FkU" id="BNt-kR-BNK"/>
+                        <outlet property="lblDownloadCount" destination="2e2-Jl-4XF" id="zQt-Pd-6Ja"/>
+                        <outlet property="lblIntNotation" destination="gtk-qQ-uWl" id="xG6-9i-97P"/>
+                        <outlet property="lblName" destination="5VY-oI-Pis" id="Ue3-fF-Lc6"/>
+                        <outlet property="lblPattern" destination="6UC-GJ-IlM" id="102-l7-xUh"/>
+                        <outlet property="lblPriority" destination="4P2-9Z-3jJ" id="oAI-bA-cQc"/>
+                        <outlet property="lblUpdatedDate" destination="N83-QF-kVT" id="mLY-cB-yy6"/>
+                        <outlet property="lblUploader" destination="um0-VX-CDH" id="nnC-9E-je5"/>
+                        <outlet property="lblViewCount" destination="Auh-jH-BKN" id="tIm-IA-dIg"/>
+                        <outlet property="segAscDesc" destination="Fif-uz-H7H" id="Mb2-ea-Rg4"/>
+                        <outlet property="txvComment" destination="VAJ-6Y-8wA" id="WQq-pw-207"/>
+                        <outlet property="webView" destination="PIa-7y-7hY" id="H7H-hc-mID"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3j8-Mr-mvZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -404,6 +404,8 @@ extension ScaleInfoUpdateTableViewController {
     }
 }
 
+// MARK: - WebDelegate & ScoreWebInjection
+
 extension ScaleInfoUpdateTableViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, ScoreWebInjection {
     
     func startTimer() {
@@ -520,6 +522,8 @@ extension ScaleInfoUpdateTableViewController: WKUIDelegate, WKNavigationDelegate
     }
     
 }
+
+// MARK: - ConductorPlay
 
 extension ScaleInfoUpdateTableViewController: ConductorPlay {
 

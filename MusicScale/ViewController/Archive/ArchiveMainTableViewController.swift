@@ -19,14 +19,15 @@ class ArchiveMainTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        SwiftSpinner.show("Connecting \nto server...")
-        viewModel = PostListViewModel()
-        viewModel.bindHandler = {
-            print("load success", self.viewModel.posts.count)
-            self.tableView.reloadData()
-            SwiftSpinner.hide()
+        if viewModel == nil {
+            SwiftSpinner.show("Connecting \nto server...")
+            viewModel = PostListViewModel()
+            viewModel.bindHandler = {
+                print("load success", self.viewModel.posts.count)
+                self.tableView.reloadData()
+                SwiftSpinner.hide()
+            }
         }
-        
     }
     
     @IBAction func barBtnActUpload(_ sender: Any) {
@@ -37,6 +38,7 @@ class ArchiveMainTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(#function, viewModel.posts.count)
         return viewModel.posts.count
     }
 
@@ -44,7 +46,6 @@ class ArchiveMainTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell else {
             return UITableViewCell()
         }
-
         cell.configure(post: viewModel.posts[indexPath.row])
 
         return cell
@@ -126,4 +127,3 @@ class PostCell: UITableViewCell {
         
     }
 }
-

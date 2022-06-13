@@ -30,6 +30,7 @@
 		443A0C652843E99B00641BC0 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C642843E99B00641BC0 /* SimpleAlert.swift */; };
 		44537F68285623200061CADF /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44537F67285623200061CADF /* SwiftSpinner.swift */; };
 		44537F6A285628A90061CADF /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44537F69285628A90061CADF /* FirebaseAuthManager.swift */; };
+		44537F6C285651EA0061CADF /* StarRatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44537F6B285651EA0061CADF /* StarRatingViewModel.swift */; };
 		445FA4B7284BA06B0008D621 /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B6284BA06B0008D621 /* QuizTests.swift */; };
 		445FA4B9284BAE540008D621 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B8284BAE540008D621 /* Array+.swift */; };
 		445FA4BB284BAF3F0008D621 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */; };
@@ -159,6 +160,7 @@
 		443A0C642843E99B00641BC0 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
 		44537F67285623200061CADF /* SwiftSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
 		44537F69285628A90061CADF /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
+		44537F6B285651EA0061CADF /* StarRatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingViewModel.swift; sourceTree = "<group>"; };
 		445FA4B6284BA06B0008D621 /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		445FA4B8284BAE540008D621 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 				44A09A8428394A200067184E /* DropDownTransposeViewModel.swift */,
 				446AEA2D283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift */,
 				443A0C602842864400641BC0 /* CreateScaleInfoViewModel.swift */,
+				44537F6B285651EA0061CADF /* StarRatingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -927,6 +930,7 @@
 				44A09A8528394A200067184E /* DropDownTransposeViewModel.swift in Sources */,
 				44B70F3B2848F1A90068495A /* QuizSelectKeyTableViewController.swift in Sources */,
 				44ABE108285619F60022B4FB /* PostListViewModel.swift in Sources */,
+				44537F6C285651EA0061CADF /* StarRatingViewModel.swift in Sources */,
 				4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */,
 				44FEFBF328534597000402DE /* MIDISoundGenerator.swift in Sources */,
 				445FA4C9284F53C90008D621 /* QuizCommon.swift in Sources */,

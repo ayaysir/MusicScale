@@ -18,8 +18,6 @@ enum FirebaseManagerError: String, Error {
     case codingFailed
 }
 
-
-
 class FirebasePostManager {
     
     let POSTS_DIR = "scale_posts"

@@ -8,12 +8,12 @@
 import UIKit
 import PanModal
 
-protocol ScaleListTVCDelegate: AnyObject {
+protocol ScaleListQuizDelegate: AnyObject {
     func didQuizListSubmitted(_ controller: ScaleListTableViewController, newCount: Int)
 }
 
-extension ScaleListTVCDelegate {
-    func didQuizListSubmitted(_ controller: ScaleListTableViewController, newCount: Int) {}
+protocol ScaleListUploadDelegate: AnyObject {
+    func didUploadScaleSelected(_ controller: ScaleListTableViewController, infoViewModel: ScaleInfoViewModel)
 }
 
 class ScaleListTableViewController: UITableViewController {
@@ -24,7 +24,8 @@ class ScaleListTableViewController: UITableViewController {
     let scaleListViewModel = ScaleInfoListViewModel()
     var quizViewModel: QuizViewModel!
     
-    weak var quizDelegate: ScaleListTVCDelegate?
+    weak var quizDelegate: ScaleListQuizDelegate?
+    weak var uploadDelegate: ScaleListUploadDelegate?
     
     enum ListMode {
         case main, quizSelect, uploadSelect
@@ -295,6 +296,9 @@ class ScaleListTableViewController: UITableViewController {
             
             changeSelectAllButtonTitle()
         case .uploadSelect:
+            if let uploadDelegate = uploadDelegate {
+                uploadDelegate.didUploadScaleSelected(self, infoViewModel: currentViewModel)
+            }
             navigationController?.popViewController(animated: true)
         }
     }

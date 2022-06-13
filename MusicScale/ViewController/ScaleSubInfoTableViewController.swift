@@ -32,8 +32,12 @@ class ScaleSubInfoTableViewController: UITableViewController {
     var priorityDropDown = DropDown()
     let starRatingVM = StarRatingViewModel()
     
+    private var originalCommentWidth: CGFloat!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        originalCommentWidth = txvComment.frame.size.width
         
         initDropDownOnPriorityLabel()
         refreshViewInfo()
@@ -42,15 +46,19 @@ class ScaleSubInfoTableViewController: UITableViewController {
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
+        let originalSize = super.tableView(tableView, heightForRowAt: indexPath)
+        
         switch indexPath {
         case cellAliasIndexPath:
+            let aliasCount = scaleInfoViewModel.nameAlias.components(separatedBy: ";").count
+            if aliasCount <= 1 {
+                return originalSize
+            }
             let cellHeight = getLabelHeight(text: scaleInfoViewModel.nameAliasFormatted, font: lblNameAlias.font)
             if cellHeight > MIN_CELL_SIZE {
-                return cellHeight * 1.1
+                return cellHeight + 10
             }
         case cellCommentIndexPath:
-            // let cellHeight = getLabelHeight(text: scaleInfoViewModel.comment, font: txvComment.font!, width: txvComment.frame.width)
-            
             if scaleInfoViewModel.comment == "" {
                 return 0
             }
@@ -60,7 +68,7 @@ class ScaleSubInfoTableViewController: UITableViewController {
             break
         }
         
-        return super.tableView(tableView, heightForRowAt: indexPath)
+        return originalSize
     }
     
     // MARK: - Navigation
@@ -111,9 +119,9 @@ extension ScaleSubInfoTableViewController {
         let fillColor: UIColor = scaleInfoViewModel.isPriorityCustomized ? .orange : .systemGray3
         lblPriority.attributedText = starRatingVM.starTextAttributedStr(fillCount: scaleInfoViewModel.priorityForDisplayBoth, fillColor: fillColor)
         
-        
         txvComment.text = scaleInfoViewModel.comment
         txvComment.sizeToFit()
+        txvComment.frame.size.width = originalCommentWidth
         
         if isUpdated {
             tableView.reloadRows(at: [cellAliasIndexPath, cellCommentIndexPath], with: .none)
@@ -129,42 +137,5 @@ extension ScaleSubInfoTableViewController {
         refLabel.sizeToFit()
         
         return refLabel.frame.height
-    }
-}
-
-struct StarRatingViewModel {
-    
-    let dataSource: [String] = [
-        "★★★★★",
-        "★★★★",
-        "★★★",
-        "★★",
-        "★",
-    ]
-    
-    func countStarText(_ starText: String) -> Int {
-        return starText.count
-    }
-    
-    func starTextWithBlankStars(fillCount: Int) -> String {
-        return String(repeating: "★", count: fillCount) + String(repeating: "☆", count: 5 - fillCount)
-    }
-    
-    func starTextAttributedStr(fillCount: Int, fillColor: UIColor = .orange) -> NSMutableAttributedString {
-        
-        let starTextAttr = NSMutableAttributedString(string: String(repeating: "★", count: 5))
-        
-        var strokeTextAttributes: [NSAttributedString.Key: Any] = [
-            .strokeColor: UIColor.orange,
-            .foregroundColor: fillColor,
-            .strokeWidth: -1.25,
-            .font: UIFont.systemFont(ofSize: 15),
-        ]
-        starTextAttr.addAttributes(strokeTextAttributes, range: NSRange(location: 0, length: fillCount))
-        
-        strokeTextAttributes[.foregroundColor] = UIColor.clear
-        starTextAttr.addAttributes(strokeTextAttributes, range: NSRange(location: fillCount, length: 5 - fillCount))
-        
-        return starTextAttr
     }
 }

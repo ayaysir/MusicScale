@@ -189,7 +189,7 @@ extension QuizIntroTableViewController: QuizSelectKeyTVCDelegate {
 }
 
 // MARK: - ScaleListTVCDelegate
-extension QuizIntroTableViewController: ScaleListTVCDelegate {
+extension QuizIntroTableViewController: ScaleListQuizDelegate {
     
     func didQuizListSubmitted(_ controller: ScaleListTableViewController, newCount: Int) {
         updateScaleCountLabel(newCount)
