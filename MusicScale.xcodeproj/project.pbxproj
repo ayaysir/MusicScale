@@ -31,6 +31,11 @@
 		44537F68285623200061CADF /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44537F67285623200061CADF /* SwiftSpinner.swift */; };
 		44537F6A285628A90061CADF /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44537F69285628A90061CADF /* FirebaseAuthManager.swift */; };
 		44537F6C285651EA0061CADF /* StarRatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44537F6B285651EA0061CADF /* StarRatingViewModel.swift */; };
+		44537F6E2857975C0061CADF /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44537F6D2857975C0061CADF /* UIApplication+.swift */; };
+		4455D1BF2857AAD400FB344E /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1BE2857AAD400FB344E /* PostViewModel.swift */; };
+		4455D1C1285890A500FB344E /* FirebaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C0285890A500FB344E /* FirebaseUtil.swift */; };
+		4455D1C32858957700FB344E /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C22858957700FB344E /* Date+.swift */; };
+		4455D1C52858BFB700FB344E /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C42858BFB700FB344E /* Notification.Name+.swift */; };
 		445FA4B7284BA06B0008D621 /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B6284BA06B0008D621 /* QuizTests.swift */; };
 		445FA4B9284BAE540008D621 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B8284BAE540008D621 /* Array+.swift */; };
 		445FA4BB284BAF3F0008D621 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */; };
@@ -161,6 +166,11 @@
 		44537F67285623200061CADF /* SwiftSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
 		44537F69285628A90061CADF /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		44537F6B285651EA0061CADF /* StarRatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingViewModel.swift; sourceTree = "<group>"; };
+		44537F6D2857975C0061CADF /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		4455D1BE2857AAD400FB344E /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		4455D1C0285890A500FB344E /* FirebaseUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtil.swift; sourceTree = "<group>"; };
+		4455D1C22858957700FB344E /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		4455D1C42858BFB700FB344E /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
 		445FA4B6284BA06B0008D621 /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		445FA4B8284BAE540008D621 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
@@ -356,6 +366,7 @@
 			children = (
 				4426A0092854251B00942655 /* FirebasePostManager.swift */,
 				44537F69285628A90061CADF /* FirebaseAuthManager.swift */,
+				4455D1C0285890A500FB344E /* FirebaseUtil.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -483,6 +494,9 @@
 				446100BA284517FB0033BCE9 /* UIColor+.swift */,
 				445FA4B8284BAE540008D621 /* Array+.swift */,
 				445FA4C0284E3AD80008D621 /* Collection+.swift */,
+				44537F6D2857975C0061CADF /* UIApplication+.swift */,
+				4455D1C22858957700FB344E /* Date+.swift */,
+				4455D1C42858BFB700FB344E /* Notification.Name+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -604,6 +618,7 @@
 			isa = PBXGroup;
 			children = (
 				44ABE107285619F60022B4FB /* PostListViewModel.swift */,
+				4455D1BE2857AAD400FB344E /* PostViewModel.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -895,12 +910,14 @@
 			files = (
 				44B70F3D2848F4F40068495A /* QuizConfigStore.swift in Sources */,
 				445FA4C3284E49120008D621 /* MatchKeysViewController.swift in Sources */,
+				44537F6E2857975C0061CADF /* UIApplication+.swift in Sources */,
 				44709D60276A334F00BBF6C9 /* MusicScale.xcdatamodeld in Sources */,
 				4426A007285424B100942655 /* ArchiveMainTableViewController.swift in Sources */,
 				4475CB5B283176EA00B9D204 /* Music.swift in Sources */,
 				44FEFBF728539C83000402DE /* QuizFinishedViewController.swift in Sources */,
 				44709D5A276A334F00BBF6C9 /* ViewController.swift in Sources */,
 				44B4AB8628453AB5008C8AFD /* SortList.swift in Sources */,
+				4455D1C32858957700FB344E /* Date+.swift in Sources */,
 				446AEA3028411ED300C2BFCF /* Toast.swift in Sources */,
 				4463FEBA282D615400E7A607 /* MIDIManager.swift in Sources */,
 				445FA4C7284E70090008D621 /* QuizInProgressViewController.swift in Sources */,
@@ -958,6 +975,7 @@
 				443A0C6328428F3100641BC0 /* Between.swift in Sources */,
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,
 				44ABE1032854C1D00022B4FB /* Post.swift in Sources */,
+				4455D1BF2857AAD400FB344E /* PostViewModel.swift in Sources */,
 				4475CB512830A6C200B9D204 /* MusicSheetHelper.swift in Sources */,
 				44537F68285623200061CADF /* SwiftSpinner.swift in Sources */,
 				44537F6A285628A90061CADF /* FirebaseAuthManager.swift in Sources */,
@@ -966,7 +984,9 @@
 				4475CB532830B52700B9D204 /* String+.swift in Sources */,
 				446AEA2C283D3EB200C2BFCF /* WebMusicSheetHelper.swift in Sources */,
 				44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */,
+				4455D1C52858BFB700FB344E /* Notification.Name+.swift in Sources */,
 				44B70F4228491A650068495A /* QuizViewModel.swift in Sources */,
+				4455D1C1285890A500FB344E /* FirebaseUtil.swift in Sources */,
 				4475CB592831759300B9D204 /* CustomCharacter.swift in Sources */,
 				440637F0283003CC00875E77 /* ScaleInfo.swift in Sources */,
 				445FA4C1284E3AD80008D621 /* Collection+.swift in Sources */,

@@ -20,7 +20,7 @@ struct ScaleInfo: Codable {
     let degreesAscending, degreesDescending: String
     let defaultPriority: Int
     var comment, links: String
-    let isDivBy12Tet: Bool
+    var isDivBy12Tet: Bool
     var displayOrder, myPriority: Int
     var createdDate, modifiedDate: Date
     var groupName: String

@@ -170,6 +170,9 @@ class FirebasePostManager {
                 try? documentSnapshot.data(as: Post.self)
             }
             
+            collection.documentChanges.forEach { change in
+                print(change.newIndex, change.oldIndex)
+            }
             completionHandler(posts)
         }
     }

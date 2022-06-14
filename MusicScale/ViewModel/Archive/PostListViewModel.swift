@@ -35,6 +35,13 @@ class PostListViewModel {
         manager.listenAll { posts in
             self.posts = posts
         }
-
+    }
+    
+    func post(at index: Int) -> Post {
+        return posts[index]
+    }
+    
+    func postViewModel(at index: Int) -> PostViewModel {
+        return PostViewModel(post: post(at: index))
     }
 }

@@ -10,6 +10,7 @@ import CoreData
 
 enum CDError: Error {
     case appDelegateNotExist
+    case unknownError
 }
 
 struct ScaleInfoCDService {
@@ -219,14 +220,28 @@ struct ScaleInfoCDService {
         print(result)
     }
     
-    // func printCodeOfScaleInfoEntity() {
-    //     if let entities = try? readCoreData() {
-    //         let list = entities.compactMap { toScaleInfoStruct(from: $0) }
-    //             .forEach { info in
-    //                 print(info)
-    //             }
-    //     }
-    // }
+    // 가장 낮은 displayOrder 반환
+    func lowestDisplayOrder() throws -> Int16 {
+        guard let managedContext = managedContext else {
+            throw CDError.appDelegateNotExist
+        }
+        
+        let fetchRequest = NSFetchRequest<ScaleInfoEntity>(entityName: ENTITY_NAME)
+        fetchRequest.fetchLimit = 1
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "displayOrder", ascending: true)]
+     
+        do {
+            // fetchRequest를 통해 managedContext로부터 결과 배열을 가져오기
+            let results = try managedContext.fetch(fetchRequest)
+            if let first = results.first {
+                return first.displayOrder
+            }
+        } catch {
+            throw error
+        }
+        
+        throw CDError.unknownError
+    }
 }
 
 

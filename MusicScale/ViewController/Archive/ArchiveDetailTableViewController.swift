@@ -44,26 +44,26 @@ class ArchiveDetailTableViewController: UITableViewController {
     private var playTimer: Timer?
     private let playbackTempo: Float = 120.0
     
+    // 데이터 목록
+    var postViewModel: PostViewModel?
     var currentInfoVM: SimpleScaleInfoViewModel? {
         switch mode {
         case .read:
-            return infoViewModelForCreateMode
+            return postViewModel?.scaleInfoVM
         case .create:
             return infoViewModelForCreateMode
         }
     }
-    
-    var currentOrder: DegreesOrder {
-        return segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
-    }
-    
-    var postViewModel: Any = ""
     private var infoViewModelForCreateMode: ScaleInfoViewModel! {
         didSet {
             if isMode(.create) {
                 setLabelsFromInfoVM()
             }
         }
+    }
+    
+    var currentOrder: DegreesOrder {
+        return segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
     }
     
     var mode: CRUDMode = .read
@@ -84,6 +84,7 @@ class ArchiveDetailTableViewController: UITableViewController {
     private var selectedSomeScale: Bool = false {
         didSet {
             tableView.reloadData()
+            barBtnDownloadOr.isEnabled = true
         }
     }
     
@@ -115,11 +116,12 @@ class ArchiveDetailTableViewController: UITableViewController {
         // 분기
         switch mode {
         case .read:
-            break
+            postViewModel?.currentTempo = Double(playbackTempo)
+            setButtonTitleForReadMode()
+            setMetadataLabelFromPostVM()
+            setLabelsFromInfoVM()
         case .create:
-            
             setButtonTitleForCreateMode()
-            
             lblUploader.text = "Anonymous (\(FirebaseAuthManager.shared.currentUser?.uid[0..<4] ?? ""))"
         }
     }
@@ -137,10 +139,20 @@ class ArchiveDetailTableViewController: UITableViewController {
         barBtnDeleteOr.isEnabled = false
         
         barBtnDownloadOr.title = "Submit"
+        barBtnDownloadOr.isEnabled = true
     }
     
     func setButtonTitleForReadMode() {
+        if let user = FirebaseAuthManager.shared.currentUser, user.uid == postViewModel?.authorUID {
+            barBtnDeleteOr.title = "Delete"
+            barBtnDeleteOr.isEnabled = true
+        } else {
+            barBtnDeleteOr.title = ""
+            barBtnDeleteOr.isEnabled = false
+        }
         
+        barBtnDownloadOr.title = "Download"
+        barBtnDownloadOr.isEnabled = true
     }
     
     // MARK: - @IBAction
@@ -180,23 +192,67 @@ class ArchiveDetailTableViewController: UITableViewController {
     @IBAction func barBtnActDownloadOr(_ sender: UIBarButtonItem) {
         switch mode {
         case .read:
-            break
+            guard let postViewModel = postViewModel else {
+                return
+            }
+
+            do {
+                let newEntity = try postViewModel.writeToCoreData()
+                simpleAlert(self, message: "Sucess Download", title: "Download") { _ in
+                    NotificationCenter.default.post(name: .downloadedFromArchive, object: newEntity)
+                }
+            } catch {
+                simpleAlert(self, message: "Failed to download: \(error.localizedDescription)")
+            }
         case .create:
+            // Submit
             guard let infoVM = infoViewModelForCreateMode else {
+                simpleAlert(self, message: "You have not selected any scales to upload.")
                 return
             }
             let post = Post(scaleInfo: infoVM.scaleInfo)
+            
+            // setLoadingScreen()
             SwiftSpinner.show("Uploading...")
             FirebasePostManager.shared.addPost(postRequest: post, completionHandler: { documentID in
-                
-                SwiftSpinner.hide()
-                simpleAlert(self, message: "upload success: \(documentID)", title: "Success") { _ in
-                    self.navigationController?.popViewController(animated: true)
-                }
-            }, errorHandler: nil)
+                DispatchQueue.main.async {
             
+                    // simpleAlert(self, message: "Upload success!", title: "Success") { _ in
+                    //     self.navigationController?.popViewController(animated: true)
+                    // }
+                    SwiftSpinner.show(duration: 2, title: "Upload Completed!", animated: false) {
+                        self.navigationController?.popViewController(animated: true)
+                    }.addTapHandler({
+                        SwiftSpinner.hide()
+                        self.navigationController?.popViewController(animated: true)
+                    }, subtitle: "Tap to dismiss")
+                }
+            
+            }, errorHandler: nil)
         }
     }
+    
+    @IBAction func btnActDeleteOr(_ sender: Any) {
+        guard let postViewModel = postViewModel else {
+            return
+        }
+        
+        guard let user = FirebaseAuthManager.shared.currentUser else {
+            return
+        }
+
+        if isMode(.read) && postViewModel.authorUID == user.uid {
+            FirebasePostManager.shared.deletePost(documentID: postViewModel.documentID) { documentID in
+                simpleAlert(self, message: "Success to delete.", title: "Delete") { _ in
+                    self.navigationController?.popViewController(animated: true)
+                }
+            } errorHandler: { err in
+                simpleAlert(self, message: "Failed to delete because an error occurred.")
+                return
+            }
+        }
+    }
+    
     
     // MARK: - prepare segue
     
@@ -212,7 +268,6 @@ class ArchiveDetailTableViewController: UITableViewController {
     // MARK: - Handle data change
     
     private func setLabelsFromInfoVM() {
-        
         guard let currentInfoVM = currentInfoVM else {
             return
         }
@@ -235,7 +290,24 @@ class ArchiveDetailTableViewController: UITableViewController {
         tableView.reloadData()
         
         // 악보
-        injectAbcjsText(from: currentInfoVM.abcjsText(order: currentOrder), needReload: true)
+        switch mode {
+        case .read:
+            break
+        case .create:
+            injectAbcjsText(from: currentInfoVM.abcjsText(order: currentOrder), needReload: true)
+        }
+        
+    }
+    
+    private func setMetadataLabelFromPostVM() {
+        guard let postViewModel = postViewModel else {
+            return
+        }
+        
+        lblUploader.text = "Anonymous (\(postViewModel.authorUIDTruncated4))"
+        lblCreatedDate.text = postViewModel.createdDateStr
+        lblViewCount.text = "30"
+        lblDownloadCount.text = "10"
     }
     
     private func needHideSectionsBeforeSelectScale(_ section: Int) -> Bool {
@@ -252,6 +324,10 @@ class ArchiveDetailTableViewController: UITableViewController {
         
         return refLabel.frame.height
     }
+    
+    // MARK: - Custom methods
+    
+    
 }
 
 // MARK: - Table View overriding
@@ -259,7 +335,9 @@ class ArchiveDetailTableViewController: UITableViewController {
 extension ArchiveDetailTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == SECTION_METADATA && isMode(.create) {
+        
+        // Create mode일 때 Metadata는 uploader만 필요
+        if isMode(.create) && section == SECTION_METADATA {
             return 1
         }
         
@@ -268,6 +346,7 @@ extension ArchiveDetailTableViewController {
             return 0
         }
         
+        // Create mode일 때 숨겨야 할 섹션들
         if needHideSectionsBeforeSelectScale(section) {
             return 0
         }
@@ -276,6 +355,7 @@ extension ArchiveDetailTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        // 모드에 따라 스케일 선택 또는 배너 광고
         if section == SECTION_FIRST {
             switch mode {
             case .read:
@@ -290,6 +370,7 @@ extension ArchiveDetailTableViewController {
             return ""
         }
         
+        // Create mode일 때 숨겨야 할 섹션들
         if needHideSectionsBeforeSelectScale(section) {
             return ""
         }
@@ -298,6 +379,7 @@ extension ArchiveDetailTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        // Create mode일 때 숨겨야 할 섹션들
         if needHideSectionsBeforeSelectScale(section) {
             return ""
         }
@@ -426,7 +508,9 @@ extension ArchiveDetailTableViewController: WKUIDelegate, WKNavigationDelegate, 
         webView.scrollView.isScrollEnabled = false
         
         // ===== 분기별 작업 =====
-        // 초기에 로딩되지 않으므로 제외
+        if isMode(.read), let infoVM = currentInfoVM {
+            injectAbcjsText(from: infoVM.abcjsText(order: currentOrder), needReload: false)
+        }
         
         // 자바스크립트 -> 네이티브 앱 연결
         // 브리지 등록

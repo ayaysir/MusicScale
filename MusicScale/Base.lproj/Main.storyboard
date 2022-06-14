@@ -1117,10 +1117,21 @@
         <!--View Controller-->
         <scene sceneID="hdc-sK-FuB">
             <objects>
-                <viewController id="gZd-zw-915" sceneMemberID="viewController">
+                <viewController id="gZd-zw-915" customClass="ViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QoS-GS-clR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="voV-Ho-WWe">
+                                <rect key="frame" x="235" y="146" width="67" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="btnActAddDummy:" destination="gZd-zw-915" eventType="touchUpInside" id="xAP-wJ-x5c"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="iS7-hP-Fi7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
@@ -1816,19 +1827,19 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2 weeks ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJR-h5-fZy">
-                                            <rect key="frame" x="311" y="32" width="66" height="14"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="11"/>
-                                            <color key="textColor" systemColor="systemGray4Color"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="kxh-Pe-bES">
                                             <rect key="frame" x="279" y="28" width="98" height="4"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="progressTintColor" systemColor="systemPinkColor"/>
                                             <color key="trackTintColor" systemColor="systemGreenColor"/>
                                         </progressView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2 weeks ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJR-h5-fZy">
+                                            <rect key="frame" x="279" y="40" width="106" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="11"/>
+                                            <color key="textColor" systemColor="systemGray4Color"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
@@ -1845,11 +1856,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Download" id="bwb-44-Weh">
-                        <barButtonItem key="rightBarButtonItem" title="Upload" id="hyB-2I-mwu">
-                            <connections>
-                                <action selector="barBtnActUpload:" destination="uwd-Dd-vJ2" id="3nU-To-h4I"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Upload" id="hyB-2I-mwu">
+                                <connections>
+                                    <action selector="barBtnActUpload:" destination="uwd-Dd-vJ2" id="3nU-To-h4I"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" id="8xD-Bq-RLM">
+                                <connections>
+                                    <action selector="barBtnAddDummy:" destination="uwd-Dd-vJ2" id="L4o-PN-aFk"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <segue destination="y31-AK-apt" kind="show" identifier="ArchiveDetailSegue" id="xuH-5T-fv2"/>
@@ -2558,32 +2576,8 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="GSk-qb-sTp" detailTextLabel="N83-QF-kVT" rowHeight="30" style="IBUITableViewCellStyleValue1" id="lXO-3W-hEE">
-                                        <rect key="frame" x="0.0" y="1005" width="414" height="30"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lXO-3W-hEE" id="D9O-Uh-DxU">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Updated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GSk-qb-sTp">
-                                                    <rect key="frame" x="20" y="8" width="49" height="14.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="2020-20-20 12:13:!4" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N83-QF-kVT">
-                                                    <rect key="frame" x="275.5" y="8" width="118.5" height="14.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="sew-Iu-3Ch" detailTextLabel="Auh-jH-BKN" rowHeight="30" style="IBUITableViewCellStyleValue1" id="Rhp-AK-Gt5">
-                                        <rect key="frame" x="0.0" y="1035" width="414" height="30"/>
+                                        <rect key="frame" x="0.0" y="1005" width="414" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rhp-AK-Gt5" id="PL6-u3-JaA">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
@@ -2607,7 +2601,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="K3E-8w-0zV" detailTextLabel="2e2-Jl-4XF" rowHeight="30" style="IBUITableViewCellStyleValue1" id="WDL-i2-1pb">
-                                        <rect key="frame" x="0.0" y="1065" width="414" height="30"/>
+                                        <rect key="frame" x="0.0" y="1035" width="414" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WDL-i2-1pb" id="VDT-hd-W61">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
@@ -2641,7 +2635,11 @@
                                     <action selector="barBtnActDownloadOr:" destination="y31-AK-apt" id="u7g-nA-2eL"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Delete" id="1Cg-fN-UUk"/>
+                            <barButtonItem title="Delete" id="1Cg-fN-UUk">
+                                <connections>
+                                    <action selector="btnActDeleteOr:" destination="y31-AK-apt" id="yBn-Fo-wFU"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <size key="freeformSize" width="414" height="1500"/>
@@ -2660,7 +2658,6 @@
                         <outlet property="lblName" destination="5VY-oI-Pis" id="Ue3-fF-Lc6"/>
                         <outlet property="lblPattern" destination="6UC-GJ-IlM" id="102-l7-xUh"/>
                         <outlet property="lblPriority" destination="4P2-9Z-3jJ" id="oAI-bA-cQc"/>
-                        <outlet property="lblUpdatedDate" destination="N83-QF-kVT" id="mLY-cB-yy6"/>
                         <outlet property="lblUploader" destination="um0-VX-CDH" id="nnC-9E-je5"/>
                         <outlet property="lblViewCount" destination="Auh-jH-BKN" id="tIm-IA-dIg"/>
                         <outlet property="segAscDesc" destination="Fif-uz-H7H" id="Mb2-ea-Rg4"/>

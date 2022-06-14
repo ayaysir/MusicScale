@@ -74,6 +74,13 @@ class ScaleListTableViewController: UITableViewController {
         }
     }
     
+    @objc func getNewEntityFromArchive(_ notification: Notification) {
+        if let newEntity = notification.object as? ScaleInfoEntity {
+            scaleListViewModel.addCreatedInfoToList(entity: newEntity)
+            print(#function, "newEntity has received.")
+        }
+    }
+    
     func changeSelectAllButtonTitle() {
         if mode == .quizSelect {
             let infoCount = scaleListViewModel.getInfoCount(isFiltering: isFiltering)
@@ -85,7 +92,13 @@ class ScaleListTableViewController: UITableViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: .downloadedFromArchive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getNewEntityFromArchive(_:)), name: .downloadedFromArchive, object: nil)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
+        
         if let quizDelegate = quizDelegate {
             quizDelegate.didQuizListSubmitted(self, newCount: quizViewModel.idListCount)
             quizViewModel.saveScaleListToConfigStore()
