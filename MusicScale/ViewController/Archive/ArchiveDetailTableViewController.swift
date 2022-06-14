@@ -15,9 +15,13 @@ class ArchiveDetailTableViewController: UITableViewController {
     }
     
     @IBOutlet weak var btnPlay: UIButton!
+    @IBOutlet weak var btnSelectScale: UIButton!
+    
     @IBOutlet weak var btnLike: UIButton!
     @IBOutlet weak var btnDislike: UIButton!
-    @IBOutlet weak var btnSelectScale: UIButton!
+    @IBOutlet weak var progressLikeDislike: UIProgressView!
+    @IBOutlet weak var lblDislikeStatus: UILabel!
+    @IBOutlet weak var lblLikeStatus: UILabel!
     
     @IBOutlet weak var lblAscAndDescIsSame: UILabel!
     @IBOutlet weak var segAscDesc: UISegmentedControl!
@@ -31,7 +35,6 @@ class ArchiveDetailTableViewController: UITableViewController {
     
     @IBOutlet weak var lblUploader: UILabel!
     @IBOutlet weak var lblCreatedDate: UILabel!
-    @IBOutlet weak var lblUpdatedDate: UILabel!
     @IBOutlet weak var lblViewCount: UILabel!
     @IBOutlet weak var lblDownloadCount: UILabel!
     
@@ -81,6 +84,26 @@ class ArchiveDetailTableViewController: UITableViewController {
     private let cellAliasIndexPath = IndexPath(row: 1, section: 2)
     private let cellCommentIndexPath = IndexPath(row: 0, section: 4)
     
+    private let COLOR_LIKE: UIColor = .systemGreen
+    private let COLOR_DISLIKE: UIColor = .systemPink
+    private let COLOR_NONE: UIColor = .systemGray3
+    private var currentLikeStatus: LikeStatus! {
+        didSet {
+            switch currentLikeStatus {
+            case .like:
+                btnLike.tintColor = COLOR_LIKE
+                btnDislike.tintColor = COLOR_NONE
+            case .dislike:
+                btnLike.tintColor = COLOR_NONE
+                btnDislike.tintColor = COLOR_DISLIKE
+            default:
+                btnLike.tintColor = COLOR_NONE
+                btnDislike.tintColor = COLOR_NONE
+            }
+        }
+    }
+    private var currentLikeCounts: LikeCounts?
+    
     private var selectedSomeScale: Bool = false {
         didSet {
             tableView.reloadData()
@@ -93,10 +116,19 @@ class ArchiveDetailTableViewController: UITableViewController {
     // MARK: - Lifecycle
     
     override func viewWillAppear(_ animated: Bool) {
-        
         switch mode {
         case .read:
+            getLikeStatus()
+            getLikeCounts()
+        case .create:
             break
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        switch mode {
+        case .read:
+            FirebasePostManager.shared.removeLikeCountListener()
         case .create:
             break
         }
@@ -112,6 +144,9 @@ class ArchiveDetailTableViewController: UITableViewController {
         loadWebSheetPage()
         conductor.start()
         conductor.tempo = playbackTempo
+        
+        btnLike.tintColor = .clear
+        btnDislike.tintColor = .clear
         
         // 분기
         switch mode {
@@ -253,6 +288,31 @@ class ArchiveDetailTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func btnLikeOrDislike(_ sender: UIButton) {
+        guard let postViewModel = postViewModel, let currentLikeStatus = currentLikeStatus else {
+            return
+        }
+        
+        let oldStatus = currentLikeStatus
+        
+        // var newStatus: LikeStatus = .none
+        switch sender {
+        case btnLike:
+            self.currentLikeStatus = currentLikeStatus == .like ? LikeStatus.none : .like
+        case btnDislike:
+            self.currentLikeStatus = currentLikeStatus == .dislike ? LikeStatus.none : .dislike
+        default:
+            break
+        }
+        
+        FirebasePostManager.shared.updateLike(documentID: postViewModel.documentID, status: self.currentLikeStatus) { documentID in
+            
+        } errorHandler: { err in
+            self.view.makeToast("err", position: .center)
+            self.currentLikeStatus = oldStatus
+        }
+
+    }
     
     // MARK: - prepare segue
     
@@ -326,8 +386,42 @@ class ArchiveDetailTableViewController: UITableViewController {
     }
     
     // MARK: - Custom methods
+    func getLikeStatus() {
+        guard let postViewModel = postViewModel else {
+            return
+        }
+        
+        FirebasePostManager.shared.readLike(documentID: postViewModel.documentID) { like in
+            self.currentLikeStatus = like?.status ?? LikeStatus.none
+        }
+    }
     
-    
+    func getLikeCounts() {
+        guard let postViewModel = postViewModel else {
+            return
+        }
+        
+        FirebasePostManager.shared.listenTotalLikeCount(documentID: postViewModel.documentID) { [unowned self] (likeCounts: LikeCounts, recentChanges: Like?) in
+            
+            // set labels
+            let roundedLikePercent = Int(round(likeCounts.likePercent * 100))
+            let roundedDislikePercent = Int(round(likeCounts.dislikePercent * 100))
+            lblLikeStatus.text = "\(likeCounts.likeCount) (\(roundedLikePercent)%)"
+            lblDislikeStatus.text = "\(likeCounts.dislikeCount) (\(roundedDislikePercent)%)"
+            
+            self.currentLikeCounts = likeCounts
+            
+            if likeCounts.totalCount == 0 {
+                progressLikeDislike.progressTintColor = COLOR_NONE
+                progressLikeDislike.trackTintColor = COLOR_NONE
+                progressLikeDislike.setProgress(0.5, animated: true)
+            } else {
+                progressLikeDislike.progressTintColor = COLOR_DISLIKE
+                progressLikeDislike.trackTintColor = COLOR_LIKE
+                progressLikeDislike.setProgress(Float(likeCounts.dislikePercent), animated: true)
+            }
+        }
+    }
 }
 
 // MARK: - Table View overriding

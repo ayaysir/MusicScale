@@ -2474,6 +2474,9 @@
                                                     <buttonConfiguration key="configuration" style="plain" image="hand.thumbsup.fill" catalog="system">
                                                         <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="26"/>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="btnLikeOrDislike:" destination="y31-AK-apt" eventType="touchUpInside" id="3rR-WT-Lzh"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FvQ-gR-U2e">
                                                     <rect key="frame" x="5" y="20" width="56" height="50"/>
@@ -2483,6 +2486,9 @@
                                                     <buttonConfiguration key="configuration" style="plain" image="hand.thumbsdown.fill" catalog="system">
                                                         <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="26"/>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="btnLikeOrDislike:" destination="y31-AK-apt" eventType="touchUpInside" id="EYN-Wk-yhK"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="300 (30%)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Puz-9y-jvE">
                                                     <rect key="frame" x="69" y="25" width="62" height="15"/>
@@ -2653,13 +2659,16 @@
                         <outlet property="lblAlias" destination="zec-bU-uYO" id="UCv-iW-hco"/>
                         <outlet property="lblAscAndDescIsSame" destination="vQg-fh-wuv" id="vEh-ov-ib9"/>
                         <outlet property="lblCreatedDate" destination="HZB-CL-FkU" id="BNt-kR-BNK"/>
+                        <outlet property="lblDislikeStatus" destination="Puz-9y-jvE" id="GId-gU-n0r"/>
                         <outlet property="lblDownloadCount" destination="2e2-Jl-4XF" id="zQt-Pd-6Ja"/>
                         <outlet property="lblIntNotation" destination="gtk-qQ-uWl" id="xG6-9i-97P"/>
+                        <outlet property="lblLikeStatus" destination="NwC-E5-LQt" id="7yx-SJ-Q7G"/>
                         <outlet property="lblName" destination="5VY-oI-Pis" id="Ue3-fF-Lc6"/>
                         <outlet property="lblPattern" destination="6UC-GJ-IlM" id="102-l7-xUh"/>
                         <outlet property="lblPriority" destination="4P2-9Z-3jJ" id="oAI-bA-cQc"/>
                         <outlet property="lblUploader" destination="um0-VX-CDH" id="nnC-9E-je5"/>
                         <outlet property="lblViewCount" destination="Auh-jH-BKN" id="tIm-IA-dIg"/>
+                        <outlet property="progressLikeDislike" destination="iBc-Od-pda" id="nmy-z8-baN"/>
                         <outlet property="segAscDesc" destination="Fif-uz-H7H" id="Mb2-ea-Rg4"/>
                         <outlet property="txvComment" destination="VAJ-6Y-8wA" id="WQq-pw-207"/>
                         <outlet property="webView" destination="PIa-7y-7hY" id="H7H-hc-mID"/>

@@ -51,7 +51,7 @@ class PostViewModel {
     func writeToCoreData() throws -> ScaleInfoEntity {
         let oldInfo = post.scaleInfo
         let lowestDisplayOrder = try? ScaleInfoCDService.shared.lowestDisplayOrder()
-        print(lowestDisplayOrder)
+        
         let newScaleInfo = ScaleInfo(id: UUID(),
                                      name: oldInfo.name,
                                      nameAlias: oldInfo.nameAlias,

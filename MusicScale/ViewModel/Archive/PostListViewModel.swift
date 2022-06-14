@@ -14,14 +14,21 @@ class PostListViewModel {
             self.bindHandler()
         }
     }
+    private(set) var likeInfo: [String: LikeCounts] = [:] {
+        didSet {
+            self.likeCountsBindHandler()
+        }
+    }
     
     var bindHandler: (() -> ()) = {}
+    var likeCountsBindHandler: (() -> ()) = {}
     
     let manager = FirebasePostManager.shared
 
     init() {
         FirebaseAuthManager.shared.signInAnonymously { user in
             self.listenAll()
+            self.listenLikeAll()
         }
     }
     
@@ -43,5 +50,17 @@ class PostListViewModel {
     
     func postViewModel(at index: Int) -> PostViewModel {
         return PostViewModel(post: post(at: index))
+    }
+    
+    func listenLikeAll() {
+        manager.listenLikeAll { likeInfo in
+            self.likeInfo = likeInfo
+        } errorHandler: { err in
+            print(err)
+        }
+    }
+    
+    func likeInfo(documentID: String) -> LikeCounts? {
+        return likeInfo[documentID]
     }
 }

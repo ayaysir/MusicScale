@@ -36,6 +36,8 @@
 		4455D1C1285890A500FB344E /* FirebaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C0285890A500FB344E /* FirebaseUtil.swift */; };
 		4455D1C32858957700FB344E /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C22858957700FB344E /* Date+.swift */; };
 		4455D1C52858BFB700FB344E /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C42858BFB700FB344E /* Notification.Name+.swift */; };
+		4455D1C72858CCB300FB344E /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C62858CCB300FB344E /* Like.swift */; };
+		4455D1C92858D5AD00FB344E /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C82858D5AD00FB344E /* UIView+.swift */; };
 		445FA4B7284BA06B0008D621 /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B6284BA06B0008D621 /* QuizTests.swift */; };
 		445FA4B9284BAE540008D621 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B8284BAE540008D621 /* Array+.swift */; };
 		445FA4BB284BAF3F0008D621 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */; };
@@ -171,6 +173,8 @@
 		4455D1C0285890A500FB344E /* FirebaseUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtil.swift; sourceTree = "<group>"; };
 		4455D1C22858957700FB344E /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		4455D1C42858BFB700FB344E /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
+		4455D1C62858CCB300FB344E /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
+		4455D1C82858D5AD00FB344E /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		445FA4B6284BA06B0008D621 /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		445FA4B8284BAE540008D621 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
@@ -497,6 +501,7 @@
 				44537F6D2857975C0061CADF /* UIApplication+.swift */,
 				4455D1C22858957700FB344E /* Date+.swift */,
 				4455D1C42858BFB700FB344E /* Notification.Name+.swift */,
+				4455D1C82858D5AD00FB344E /* UIView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -610,6 +615,7 @@
 			isa = PBXGroup;
 			children = (
 				44ABE1022854C1D00022B4FB /* Post.swift */,
+				4455D1C62858CCB300FB344E /* Like.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -951,6 +957,7 @@
 				4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */,
 				44FEFBF328534597000402DE /* MIDISoundGenerator.swift in Sources */,
 				445FA4C9284F53C90008D621 /* QuizCommon.swift in Sources */,
+				4455D1C72858CCB300FB344E /* Like.swift in Sources */,
 				443A0C612842864400641BC0 /* CreateScaleInfoViewModel.swift in Sources */,
 				4463FEB4282D317700E7A607 /* PianoViewModel.swift in Sources */,
 				44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */,
@@ -979,6 +986,7 @@
 				4475CB512830A6C200B9D204 /* MusicSheetHelper.swift in Sources */,
 				44537F68285623200061CADF /* SwiftSpinner.swift in Sources */,
 				44537F6A285628A90061CADF /* FirebaseAuthManager.swift in Sources */,
+				4455D1C92858D5AD00FB344E /* UIView+.swift in Sources */,
 				446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */,
 				44B4AB8428453286008C8AFD /* SortFilterConfigStore.swift in Sources */,
 				4475CB532830B52700B9D204 /* String+.swift in Sources */,

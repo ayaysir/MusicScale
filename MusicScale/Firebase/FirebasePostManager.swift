@@ -21,18 +21,26 @@ enum FirebaseManagerError: String, Error {
 class FirebasePostManager {
     
     let POSTS_DIR = "scale_posts"
+    let LIKE_DIR = "likes"
     
     static let shared = FirebasePostManager()
     
-    typealias CD_CompletionHandler = (_ documentID: String) -> ()
+    typealias CompletionHandler = (_ documentID: String) -> ()
     typealias ErrorHandler = (_ err: Error) -> ()
     typealias ReadAllCompletionHandler = (_ posts: [Post]) -> ()
     typealias ReadOneCompletionHandler = (_ post: Post) -> ()
     typealias QuerySnapshotListener = (QuerySnapshot?, Error?) -> ()
+    typealias LikeCompletionHandler = (_ like: Like?) -> ()
+    typealias LikeCountsCompletion = (_ likeCounts: LikeCounts, _ recentChanges: Like?) -> ()
+    typealias LikeAllCompletion = (_ likeInfo: [String: LikeCounts]) -> ()
     
     var db: Firestore!
     var rootCollection: CollectionReference!
     var collectionName: String!
+    
+    private var collectionListener: ListenerRegistration?
+    private var likeCountsListener: ListenerRegistration?
+    
     
     init() {
         let settings = FirestoreSettings()
@@ -64,7 +72,7 @@ class FirebasePostManager {
         }
     }
     
-    func addPost(postRequest request: Post, completionHandler: CD_CompletionHandler? = nil, errorHandler: ErrorHandler? = nil) {
+    func addPost(postRequest request: Post, completionHandler: CompletionHandler? = nil, errorHandler: ErrorHandler? = nil) {
         
         var ref: DocumentReference? = nil
         
@@ -102,7 +110,7 @@ class FirebasePostManager {
         }
     }
     
-    func updatePost(documentID: String, originalRequest request: Post, completionHandler: CD_CompletionHandler? = nil, errorHandler: ErrorHandler? = nil) {
+    func updatePost(documentID: String, originalRequest request: Post, completionHandler: CompletionHandler? = nil, errorHandler: ErrorHandler? = nil) {
         
         do {
             // createdTS에는 값이 들어있으므로 업데이트시 시간이 바뀌지 않는다.
@@ -111,7 +119,7 @@ class FirebasePostManager {
             request.serverModifiedTS = nil
             
             try rootCollection.document(documentID).setData(from: request) { err in
-                if let err = err, let errorHandler = errorHandler {
+                if let err = err {
                     self.manageError(error: err, altText: "Error updating document:", errorHandler: errorHandler)
                     return
                 }
@@ -128,7 +136,7 @@ class FirebasePostManager {
         }
     }
     
-    func deletePost(documentID: String, completionHandler: CD_CompletionHandler? = nil, errorHandler: ErrorHandler? = nil) {
+    func deletePost(documentID: String, completionHandler: CompletionHandler? = nil, errorHandler: ErrorHandler? = nil) {
         
         rootCollection.document(documentID).delete() { err in
             if let err = err {
@@ -209,7 +217,97 @@ class FirebasePostManager {
         }
     }
     
+    func updateLike(documentID: String, status: LikeStatus, completionHandler: CompletionHandler? = nil, errorHandler: ErrorHandler? = nil) {
+        guard let currentUser = currentUser else {
+            manageError(error: FirebaseManagerError.userNotExist, altText: "", errorHandler: errorHandler)
+            return
+        }
+        
+        let likesRef = rootCollection.document(documentID).collection(LIKE_DIR)
+        let like = Like(status: status, authorUID: currentUser.uid, postDocumentID: documentID)
+        do {
+            try likesRef.document(currentUser.uid).setData(from: like) { err in
+                if let err = err {
+                    self.manageError(error: err, altText: "Error from like post:", errorHandler: errorHandler)
+                    return
+                }
+                
+                if let completionHandler = completionHandler {
+                    completionHandler(documentID)
+                    return
+                }
+                
+                print(#function, "\(status) to postDocument ID: \(documentID)")
+            }
+        } catch {
+            manageError(error: error, altText: "", errorHandler: errorHandler)
+        }
+    }
     
+    func readLike(documentID: String, completionHandler: LikeCompletionHandler? = nil, errorHandler: ErrorHandler? = nil) {
+        guard let currentUser = currentUser else {
+            manageError(error: FirebaseManagerError.userNotExist, altText: "", errorHandler: errorHandler)
+            return
+        }
+        
+        let likesRef = rootCollection.document(documentID).collection(LIKE_DIR)
+        likesRef.document(currentUser.uid).getDocument { documentSnapshot, err in
+            guard let document = documentSnapshot else {
+                self.manageError(error: err, altText: "Error fetching document: \(err!)", errorHandler: errorHandler)
+                return
+            }
+            guard let like = try? document.data(as: Like.self) else {
+                print("\(documentID): Like was empty.")
+                completionHandler?(nil)
+                return
+            }
+            
+            completionHandler?(like)
+        }
+    }
     
+    func listenLikeAll(completionHandler: LikeAllCompletion? = nil, errorHandler: ErrorHandler? = nil) {
+        db.collectionGroup("likes").addSnapshotListener { querySnapshot, err in
+            guard let collection = querySnapshot else {
+                self.manageError(error: FirebaseManagerError.collectionSnapshotIsNil, altText: "QuerySnapshotListener failed:", errorHandler: errorHandler)
+                return
+            }
+            
+            let likes = collection.documents.compactMap { documentSnapshot in
+                try? documentSnapshot.data(as: Like.self)
+            }
+            
+            let collectedInfo = likes.reduce(into: [String: [Like]]()) { partialResult, like in
+                partialResult[like.postDocumentID, default: []].append(like)
+            }.reduce(into: [String: LikeCounts]()) { partialResult, element in
+                partialResult[element.key] = LikeCounts.getLikeCounts(from: element.value)
+            }
+            
+            completionHandler?(collectedInfo)
+        }
+    }
     
+    func listenTotalLikeCount(documentID: String, completionHandler: LikeCountsCompletion? = nil, errorHandler: ErrorHandler? = nil) {
+        let ref = rootCollection.document(documentID).collection("likes")
+        self.likeCountsListener = ref.addSnapshotListener { querySnapshot, err in
+            guard let collection = querySnapshot else {
+                self.manageError(error: err, altText: "Error fetching document: \(err!)", errorHandler: errorHandler)
+                return
+            }
+            
+            let likes = collection.documents.compactMap { documentSnapshot in
+                try? documentSnapshot.data(as: Like.self)
+            }
+            
+            completionHandler?(
+                LikeCounts.getLikeCounts(from: likes),
+                try? collection.documentChanges.first?.document.data(as: Like.self)
+            )
+
+        }
+    }
+    
+    func removeLikeCountListener() {
+        self.likeCountsListener?.remove()
+    }
 }

@@ -20,7 +20,6 @@ class ArchiveMainTableViewController: UITableViewController {
     /// Text shown during load the TableView
     let loadingLabel = UILabel()
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         print(Date().timeIntervalSince1970 * 1000)
@@ -36,7 +35,9 @@ class ArchiveMainTableViewController: UITableViewController {
                 self.tableView.reloadData()
                 self.hideLoadingSpinner()
             }
-            
+            viewModel.likeCountsBindHandler = {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -68,7 +69,10 @@ class ArchiveMainTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell else {
             return UITableViewCell()
         }
-        cell.configure(postViewModel: viewModel.postViewModel(at: indexPath.row))
+        
+        let postVM = viewModel.postViewModel(at: indexPath.row)
+        cell.configure(postViewModel: postVM)
+        cell.configureLikeInfo(likeCounts: viewModel.likeInfo(documentID: postVM.documentID))
 
         return cell
     }
@@ -207,6 +211,10 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var lblUploadDate: UILabel!
     @IBOutlet weak var progressLikeDislike: UIProgressView!
     
+    private let COLOR_LIKE: UIColor = .systemGreen
+    private let COLOR_DISLIKE: UIColor = .systemPink
+    private let COLOR_NONE: UIColor = .systemGray3
+    
     private(set) var postViewModel: PostViewModel!
     
     override func prepareForReuse() {
@@ -220,5 +228,18 @@ class PostCell: UITableViewCell {
         lblAliases.text = postViewModel.alias
         lblUploadDate.text = postViewModel.relativeCreatedTimeStr ?? ""
         
+    }
+    
+    func configureLikeInfo(likeCounts: LikeCounts?) {
+        
+        if likeCounts == nil || likeCounts?.totalCount == 0 {
+            progressLikeDislike.progressTintColor = COLOR_NONE
+            progressLikeDislike.trackTintColor = COLOR_NONE
+            progressLikeDislike.setProgress(0.5, animated: false)
+        } else {
+            progressLikeDislike.progressTintColor = COLOR_DISLIKE
+            progressLikeDislike.trackTintColor = COLOR_LIKE
+            progressLikeDislike.setProgress(Float(likeCounts!.dislikePercent), animated: false)
+        }
     }
 }
