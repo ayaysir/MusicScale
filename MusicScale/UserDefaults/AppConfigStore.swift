@@ -9,12 +9,32 @@ import Foundation
 
 extension String {
     static let cfgAppCustomScale = "APP_cfgAppCustomScale"
+    static let cfgAppPlaybackInstrument = "APP_cfgAppPlaybackInstrument"
+    static let cfgAppPianoInstrument = "APP_cfgAppPianoInstrument"
 }
 
 struct AppConfigStore {
     
-    static let shared = AppConfigStore()
+    static var shared = AppConfigStore()
     private let store = UserDefaults.standard
+    
+    var playbackInstrument: Int {
+        get {
+            let value = store.integer(forKey: .cfgAppPlaybackInstrument)
+            return value > 0 ? value : 5
+        } set {
+            store.set(newValue, forKey: .cfgAppPlaybackInstrument)
+        }
+    }
+    
+    var pianoInstrument: Int {
+        get {
+            let value = store.integer(forKey: .cfgAppPianoInstrument)
+            return value > 0 ? value : 5
+        } set {
+            store.set(newValue, forKey: .cfgAppPianoInstrument)
+        }
+    }
     
     var userCustomScale: [NoteStrPair] {
         get {

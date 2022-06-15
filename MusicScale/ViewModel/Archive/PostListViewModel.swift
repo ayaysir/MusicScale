@@ -104,8 +104,9 @@ class PostListViewModel {
             }
         
             if alwaysAll || searchCategory == .degrees {
-                results.append(post.scaleInfo.degreesAscending.lowercased().contains(searchText))
-                results.append(post.scaleInfo.degreesDescending.lowercased().contains(searchText))
+                let replacedSearchText = replaceAltText(searchText: searchText)
+                results.append(post.scaleInfo.degreesAscending.contains(replacedSearchText))
+                results.append(post.scaleInfo.degreesDescending.contains(replacedSearchText))
             }
         
             return results.reduce(false) { $0 || $1 }

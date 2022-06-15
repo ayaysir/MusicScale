@@ -1,0 +1,10 @@
+//
+//  MIDICommon.swift
+//  MusicScale
+//
+//  Created by yoonbumtae on 2022/06/16.
+//
+
+import Foundation
+
+let gsMuseScoreFileURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2")

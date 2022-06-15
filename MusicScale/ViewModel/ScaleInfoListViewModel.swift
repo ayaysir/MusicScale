@@ -79,8 +79,9 @@ class ScaleInfoListViewModel {
             }
             
             if alwaysAll || searchCategory == .degrees {
-                results.append(entity.degreesAscending?.lowercased().contains(searchText) ?? false)
-                results.append(entity.degreesDescending?.lowercased().contains(searchText) ?? false)
+                let replacedSearchText = replaceAltText(searchText: searchText)
+                results.append(entity.degreesAscending?.contains(replacedSearchText) ?? false)
+                results.append(entity.degreesDescending?.contains(replacedSearchText) ?? false)
             }
             
             return results.reduce(false) { $0 || $1 }

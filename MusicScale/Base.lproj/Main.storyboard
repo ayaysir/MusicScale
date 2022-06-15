@@ -118,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PJ-bV-bTO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2578.2608695652175" y="1496.6517857142856"/>
+            <point key="canvasLocation" x="2412" y="1475"/>
         </scene>
         <!--Score Web View Controller-->
         <scene sceneID="ehm-4l-VFX">
@@ -154,24 +154,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YLk-qG-rOB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2057" y="-623"/>
+            <point key="canvasLocation" x="2022" y="-817"/>
         </scene>
         <!--Piano View Controller-->
         <scene sceneID="FRv-xf-JbN">
             <objects>
                 <viewController id="koB-7m-YD5" customClass="PianoViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="feE-u1-cuc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="709"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="x31-Qa-z9y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
-                    <size key="freeformSize" width="414" height="500"/>
+                    <size key="freeformSize" width="414" height="709"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mGY-ea-mDc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2057" y="-282"/>
+            <point key="canvasLocation" x="2931.8840579710145" y="-422.20982142857139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Eel-of-dSm">
@@ -188,7 +188,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Phv-9V-2Ve" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-720" y="-595"/>
+            <point key="canvasLocation" x="-733" y="-775"/>
         </scene>
         <!--Aeolian-->
         <scene sceneID="7zN-kk-LE7">
@@ -333,7 +333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpK-P1-p9p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="863.768115942029" y="-595.3125"/>
+            <point key="canvasLocation" x="864" y="-714"/>
         </scene>
         <!--Scale Info Update Table View Controller-->
         <scene sceneID="tzh-2D-aTq">
@@ -661,7 +661,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d8k-Qv-4o6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="942.02898550724649" y="-1270.3125"/>
+            <point key="canvasLocation" x="864" y="-1438"/>
         </scene>
         <!--Scale Sub Info Table View Controller-->
         <scene sceneID="ZMl-6K-EUG">
@@ -958,34 +958,126 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ho-er-G0d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2.8985507246376816" y="-595.3125"/>
+            <point key="canvasLocation" x="-4" y="-783"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="hdc-sK-FuB">
+        <!--Settings-->
+        <scene sceneID="0ql-Tw-gIh">
             <objects>
-                <viewController id="gZd-zw-915" customClass="ViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="QoS-GS-clR">
+                <tableViewController id="OFn-xd-aK7" customClass="SettingTableViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="SQe-YQ-VEc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="voV-Ho-WWe">
-                                <rect key="frame" x="235" y="146" width="67" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                <connections>
-                                    <action selector="btnActAddDummy:" destination="gZd-zw-915" eventType="touchUpInside" id="xAP-wJ-x5c"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="iS7-hP-Fi7"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" systemItem="bookmarks" id="L68-Yx-DUR"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4n9-UJ-0NY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <sections>
+                            <tableViewSection headerTitle="MIDI Instruments" id="awR-Q4-mel">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" textLabel="Cs5-BJ-7dT" style="IBUITableViewCellStyleDefault" id="Pyh-Z9-tOp">
+                                        <rect key="frame" x="20" y="49.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pyh-Z9-tOp" id="65V-ck-Oi8">
+                                            <rect key="frame" x="0.0" y="0.0" width="313.5" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Playback Instrument" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cs5-BJ-7dT">
+                                                    <rect key="frame" x="20" y="0.0" width="285.5" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" textLabel="vYT-Mt-ljc" style="IBUITableViewCellStyleDefault" id="Gc4-89-WGy">
+                                        <rect key="frame" x="20" y="93" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gc4-89-WGy" id="f2w-WK-K8J">
+                                            <rect key="frame" x="0.0" y="0.0" width="313.5" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Keyboard Instrument" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vYT-Mt-ljc">
+                                                    <rect key="frame" x="20" y="0.0" width="285.5" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Enharmonic Notations" id="K35-uE-q4X">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" textLabel="Q7p-ED-17V" style="IBUITableViewCellStyleDefault" id="VXz-aW-47C">
+                                        <rect key="frame" x="20" y="186.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VXz-aW-47C" id="h31-gB-fA4">
+                                            <rect key="frame" x="0.0" y="0.0" width="313.5" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Enharmonic Notations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q7p-ED-17V">
+                                                    <rect key="frame" x="20" y="0.0" width="285.5" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="OFn-xd-aK7" id="RJY-dQ-LPU"/>
+                            <outlet property="delegate" destination="OFn-xd-aK7" id="eeW-Gx-Bxb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="hrA-w1-URZ"/>
+                    <connections>
+                        <segue destination="xaY-XB-Y7C" kind="show" identifier="InstrumentSegue" id="RVe-oP-Uxl"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yf6-O0-rvw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-51" y="74"/>
+            <point key="canvasLocation" x="-845" y="-35"/>
+        </scene>
+        <!--Instrument Table View Controller-->
+        <scene sceneID="RTa-aS-b59">
+            <objects>
+                <tableViewController id="xaY-XB-Y7C" customClass="InstrumentTableViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="QEl-5E-XqE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="InstrumentCell" textLabel="9Uc-Rz-vaa" style="IBUITableViewCellStyleDefault" id="y2G-sP-Zgo">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y2G-sP-Zgo" id="rBB-lQ-3rD">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Uc-Rz-vaa">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="xaY-XB-Y7C" id="DTy-b6-DIr"/>
+                            <outlet property="delegate" destination="xaY-XB-Y7C" id="uun-HP-Lm5"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="0jA-jm-zUg"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bUg-WL-Zxx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-141" y="-35"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Zxk-Uj-UeM">
@@ -1001,12 +1093,12 @@
                         <segue destination="lHx-Wr-9eP" kind="relationship" relationship="viewControllers" id="ysX-aK-E8k"/>
                         <segue destination="UMY-g3-YgY" kind="relationship" relationship="viewControllers" id="Bog-pa-04r"/>
                         <segue destination="diU-Fh-LAj" kind="relationship" relationship="viewControllers" id="k6a-xS-gJy"/>
-                        <segue destination="gZd-zw-915" kind="relationship" relationship="viewControllers" id="Gde-e0-U3r"/>
+                        <segue destination="ndr-Yr-dVx" kind="relationship" relationship="viewControllers" id="ruY-th-S97"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fLc-Y5-MUl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1371" y="74"/>
+            <point key="canvasLocation" x="-2452" y="-775"/>
         </scene>
         <!--Quiz-->
         <scene sceneID="G9M-MQ-glS">
@@ -2196,10 +2288,29 @@
             </objects>
             <point key="canvasLocation" x="-1739.1304347826087" y="1676.7857142857142"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="BUf-8V-Ufq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ndr-Yr-dVx" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="pRZ-Uz-oqf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9QW-oO-rNx">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OFn-xd-aK7" kind="relationship" relationship="rootViewController" id="WOM-2g-XHX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uc6-8T-BAn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1742.0289855072465" y="-35.491071428571423"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VsC-uc-p1n"/>
-        <segue reference="8Fa-Oz-VZU"/>
+        <segue reference="6tl-C7-X1w"/>
+        <segue reference="2J2-cR-7Di"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="delete.left" catalog="system" width="128" height="104"/>

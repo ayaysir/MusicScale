@@ -37,8 +37,9 @@ class NoteSequencerConductor: ObservableObject {
         }
         
         do {
-            if let fileURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2") {
-                try instrument.loadMelodicSoundFont(url: fileURL, preset: 67)
+            let preset = AppConfigStore.shared.playbackInstrument
+            if let fileURL = gsMuseScoreFileURL {
+                try instrument.loadMelodicSoundFont(url: fileURL, preset: preset)
             } else {
                 Log("Could not find file")
             }

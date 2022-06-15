@@ -722,10 +722,23 @@ struct MusicSheetHelper {
             let resultPrefix = prefixList[basePrefixIndex - 1]
             return NoteNumberPair(resultPrefix, resultNumber)
         case .augmented:
-            let resultPrefix = prefixList[basePrefixIndex + 1]
-            return NoteNumberPair(resultPrefix, resultNumber)
-        
+            // 2022-6-16: Index out of range 에러 발생 (Enigmatic, A#)
+            
+            if let resultPrefix = prefixList[safe: basePrefixIndex + 1] {
+                return NoteNumberPair(resultPrefix, resultNumber)
+            } else {
+                print(prefixList, basePrefixIndex + 1, resultNumber)
+                return fixTripleSharpToAltNote(basePrefixIndex: basePrefixIndex + 1, resultNumber: resultNumber)
+            }
         }
+    }
+    
+    /// (임시) augmented에서 tripleSharp(?) 가 발생하는 문제 해결
+    func fixTripleSharpToAltNote(basePrefixIndex: Int, resultNumber: Int) -> NoteNumberPair {
+        let prefixList = ["__", "_", "=", "^", "^^"]
+        // 음을 한 단계 올리고 (온음), prefix를 두 단계 내림
+        let adjustIndex = 2
+        return NoteNumberPair(prefixList[basePrefixIndex - adjustIndex], resultNumber + 1)
     }
     
     // MARK: - enharmonic mode가 standard 외인 경우

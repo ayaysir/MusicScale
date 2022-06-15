@@ -8,7 +8,7 @@
 import Foundation
 import AudioKit
 
-let gsMuseScoreFileURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2")
+// let gsMuseScoreFileURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2")
 
 class MIDISoundGenerator {
     
@@ -17,7 +17,7 @@ class MIDISoundGenerator {
     private var currentMIDINoteNumber: MIDINoteNumber!
     private var currentChannel: MIDIChannel!
     
-    init(soundbankURL: URL? = gsMuseScoreFileURL, instPreset preset: Int = 67) {
+    init(soundbankURL: URL? = gsMuseScoreFileURL, instPreset preset: Int = AppConfigStore.shared.pianoInstrument) {
         engine.output = instrument
         
         // Load EXS file (you can also load SoundFonts and WAV files too using the AppleSampler Class)

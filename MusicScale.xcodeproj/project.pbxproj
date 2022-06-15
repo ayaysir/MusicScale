@@ -38,6 +38,12 @@
 		4455D1C52858BFB700FB344E /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C42858BFB700FB344E /* Notification.Name+.swift */; };
 		4455D1C72858CCB300FB344E /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C62858CCB300FB344E /* Like.swift */; };
 		4455D1C92858D5AD00FB344E /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C82858D5AD00FB344E /* UIView+.swift */; };
+		4455D1CC285A2BD400FB344E /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1CB285A2BD300FB344E /* SettingTableViewController.swift */; };
+		4455D1CE285A2CB800FB344E /* MIDIInstrumentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1CD285A2CB800FB344E /* MIDIInstrumentList.swift */; };
+		4455D1D0285A314200FB344E /* InstrumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1CF285A314200FB344E /* InstrumentTableViewController.swift */; };
+		4455D1D2285A448200FB344E /* MIDISoundGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1D1285A448200FB344E /* MIDISoundGenerator.swift */; };
+		4455D1D4285A44BE00FB344E /* MIDICommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1D3285A44BE00FB344E /* MIDICommon.swift */; };
+		4455D1D6285A538800FB344E /* SearchDegreesReplaceAltText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1D5285A538800FB344E /* SearchDegreesReplaceAltText.swift */; };
 		445FA4B7284BA06B0008D621 /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B6284BA06B0008D621 /* QuizTests.swift */; };
 		445FA4B9284BAE540008D621 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B8284BAE540008D621 /* Array+.swift */; };
 		445FA4BB284BAF3F0008D621 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */; };
@@ -60,7 +66,6 @@
 		4463FEB1282C24CA00E7A607 /* PianoKeyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEB0282C24CA00E7A607 /* PianoKeyInfo.swift */; };
 		4463FEB4282D317700E7A607 /* PianoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEB3282D317700E7A607 /* PianoViewModel.swift */; };
 		4463FEB7282D3FCE00E7A607 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEB6282D3FCE00E7A607 /* PianoView.swift */; };
-		4463FEBA282D615400E7A607 /* MIDIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEB9282D615300E7A607 /* MIDIManager.swift */; };
 		4463FEBC282D61E700E7A607 /* GeneralUser GS MuseScore v1.442.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */; };
 		4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */; };
 		4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEC1282D66C700E7A607 /* CaseCountable.swift */; };
@@ -92,9 +97,6 @@
 		44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A28283293680067184E /* ScaleInfoViewModel.swift */; };
 		44A09A2C2832A3C90067184E /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44A09A2B2832A3C90067184E /* AudioKit */; };
 		44A09A2F2832A40A0067184E /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44A09A2E2832A40A0067184E /* SoundpipeAudioKit */; };
-		44A09A312832A6180067184E /* sawPiano1.exs in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A302832A4BB0067184E /* sawPiano1.exs */; };
-		44A09A362832AEFA0067184E /* saw220-ana1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A352832AEFA0067184E /* saw220-ana1.wav */; };
-		44A09A372832B1810067184E /* sawPiano1 복사본.exs in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A342832AEE80067184E /* sawPiano1 복사본.exs */; };
 		44A09A392832B7D20067184E /* VintageDreamsWaves-v2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */; };
 		44A09A3B283559190067184E /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A3A283559190067184E /* Sequencer.swift */; };
 		44A09A7D283808C90067184E /* ScaleInfoVCConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A7C283808C90067184E /* ScaleInfoVCConfigStore.swift */; };
@@ -114,7 +116,6 @@
 		44EE68152853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md in Resources */ = {isa = PBXBuildFile; fileRef = 44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */; };
 		44EFA4B328541F0800565F93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44EFA4B228541F0800565F93 /* GoogleService-Info.plist */; };
 		44FEFBF12850EE4B000402DE /* QuizEditKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEFBF02850EE4B000402DE /* QuizEditKeyViewModel.swift */; };
-		44FEFBF328534597000402DE /* MIDISoundGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEFBF228534597000402DE /* MIDISoundGenerator.swift */; };
 		44FEFBF52853470A000402DE /* AvailableSoundInSilentMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEFBF42853470A000402DE /* AvailableSoundInSilentMode.swift */; };
 		44FEFBF728539C83000402DE /* QuizFinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEFBF628539C83000402DE /* QuizFinishedViewController.swift */; };
 		4BE14DBCD05F5882BF98D64F /* Pods_MusicScale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214599025073672669B0DEA4 /* Pods_MusicScale.framework */; };
@@ -175,6 +176,12 @@
 		4455D1C42858BFB700FB344E /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
 		4455D1C62858CCB300FB344E /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
 		4455D1C82858D5AD00FB344E /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		4455D1CB285A2BD300FB344E /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		4455D1CD285A2CB800FB344E /* MIDIInstrumentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIInstrumentList.swift; sourceTree = "<group>"; };
+		4455D1CF285A314200FB344E /* InstrumentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentTableViewController.swift; sourceTree = "<group>"; };
+		4455D1D1285A448200FB344E /* MIDISoundGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISoundGenerator.swift; sourceTree = "<group>"; };
+		4455D1D3285A44BE00FB344E /* MIDICommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDICommon.swift; sourceTree = "<group>"; };
+		4455D1D5285A538800FB344E /* SearchDegreesReplaceAltText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDegreesReplaceAltText.swift; sourceTree = "<group>"; };
 		445FA4B6284BA06B0008D621 /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		445FA4B8284BAE540008D621 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
@@ -196,7 +203,6 @@
 		4463FEB0282C24CA00E7A607 /* PianoKeyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoKeyInfo.swift; sourceTree = "<group>"; };
 		4463FEB3282D317700E7A607 /* PianoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoViewModel.swift; sourceTree = "<group>"; };
 		4463FEB6282D3FCE00E7A607 /* PianoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
-		4463FEB9282D615300E7A607 /* MIDIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIManager.swift; sourceTree = "<group>"; };
 		4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeneralUser GS MuseScore v1.442.sf2"; sourceTree = "<group>"; };
 		4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoKeyHelper.swift; sourceTree = "<group>"; };
 		4463FEC1282D66C700E7A607 /* CaseCountable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseCountable.swift; sourceTree = "<group>"; };
@@ -230,9 +236,6 @@
 		4475CB5A283176EA00B9D204 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
 		44A09A28283293680067184E /* ScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewModel.swift; sourceTree = "<group>"; };
-		44A09A302832A4BB0067184E /* sawPiano1.exs */ = {isa = PBXFileReference; lastKnownFileType = file; path = sawPiano1.exs; sourceTree = "<group>"; };
-		44A09A342832AEE80067184E /* sawPiano1 복사본.exs */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sawPiano1 복사본.exs"; sourceTree = "<group>"; };
-		44A09A352832AEFA0067184E /* saw220-ana1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "saw220-ana1.wav"; sourceTree = "<group>"; };
 		44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
 		44A09A3A283559190067184E /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
 		44A09A7C283808C90067184E /* ScaleInfoVCConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoVCConfigStore.swift; sourceTree = "<group>"; };
@@ -252,7 +255,6 @@
 		44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Quiz_IntroVC와 InProgressVC에서 무한루프.md"; sourceTree = "<group>"; };
 		44EFA4B228541F0800565F93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		44FEFBF02850EE4B000402DE /* QuizEditKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizEditKeyViewModel.swift; sourceTree = "<group>"; };
-		44FEFBF228534597000402DE /* MIDISoundGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDISoundGenerator.swift; sourceTree = "<group>"; };
 		44FEFBF42853470A000402DE /* AvailableSoundInSilentMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableSoundInSilentMode.swift; sourceTree = "<group>"; };
 		44FEFBF628539C83000402DE /* QuizFinishedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizFinishedViewController.swift; sourceTree = "<group>"; };
 		4C9FB0A5D20EA8BA718B985F /* Pods-MusicScale.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScale.release.xcconfig"; path = "Target Support Files/Pods-MusicScale/Pods-MusicScale.release.xcconfig"; sourceTree = "<group>"; };
@@ -312,12 +314,13 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		440637F5283082A800875E77 /* SampleData */ = {
+		440637F5283082A800875E77 /* ResourceData */ = {
 			isa = PBXGroup;
 			children = (
 				440637F6283082BE00875E77 /* SampleScaleList.json */,
+				4455D1CD285A2CB800FB344E /* MIDIInstrumentList.swift */,
 			);
-			path = SampleData;
+			path = ResourceData;
 			sourceTree = "<group>";
 		};
 		440637F82830839700875E77 /* Util */ = {
@@ -373,6 +376,15 @@
 				4455D1C0285890A500FB344E /* FirebaseUtil.swift */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		4455D1CA285A2B7200FB344E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4455D1CB285A2BD300FB344E /* SettingTableViewController.swift */,
+				4455D1CF285A314200FB344E /* InstrumentTableViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		445FA4BC284BCA590008D621 /* Quiz */ = {
@@ -460,15 +472,12 @@
 		4463FEB8282D614500E7A607 /* MIDI */ = {
 			isa = PBXGroup;
 			children = (
-				4463FEB9282D615300E7A607 /* MIDIManager.swift */,
-				44A09A302832A4BB0067184E /* sawPiano1.exs */,
-				44A09A342832AEE80067184E /* sawPiano1 복사본.exs */,
-				44A09A352832AEFA0067184E /* saw220-ana1.wav */,
 				4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */,
+				4455D1D1285A448200FB344E /* MIDISoundGenerator.swift */,
 				44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */,
 				44A09A3A283559190067184E /* Sequencer.swift */,
-				44FEFBF228534597000402DE /* MIDISoundGenerator.swift */,
 				44FEFBF42853470A000402DE /* AvailableSoundInSilentMode.swift */,
+				4455D1D3285A44BE00FB344E /* MIDICommon.swift */,
 			);
 			path = MIDI;
 			sourceTree = "<group>";
@@ -481,6 +490,7 @@
 				4475CB502830A6C200B9D204 /* MusicSheetHelper.swift */,
 				44A09A7E283929FB0067184E /* EnharmonicMode.swift */,
 				446AEA2B283D3EB200C2BFCF /* WebMusicSheetHelper.swift */,
+				4455D1D5285A538800FB344E /* SearchDegreesReplaceAltText.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -535,7 +545,7 @@
 				44EE68132853A7DB00A6D810 /* Report */,
 				44A09A7B2838089D0067184E /* UserDefaults */,
 				440637F82830839700875E77 /* Util */,
-				440637F5283082A800875E77 /* SampleData */,
+				440637F5283082A800875E77 /* ResourceData */,
 				440637E9282FF6BF00875E77 /* CoreData */,
 				4463FEC0282D66BC00E7A607 /* Extension */,
 				4463FEBD282D63AC00E7A607 /* Helper */,
@@ -587,6 +597,7 @@
 		44709D8A276A3BB800BBF6C9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				4455D1CA285A2B7200FB344E /* Settings */,
 				4426A005285422DD00942655 /* Archive */,
 				445FA4CA284F542A0008D621 /* Common */,
 				441738D02848ED6200A7D692 /* Quiz */,
@@ -776,10 +787,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44A09A392832B7D20067184E /* VintageDreamsWaves-v2.sf2 in Resources */,
-				44A09A372832B1810067184E /* sawPiano1 복사본.exs in Resources */,
-				44A09A362832AEFA0067184E /* saw220-ana1.wav in Resources */,
 				44EE68152853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md in Resources */,
-				44A09A312832A6180067184E /* sawPiano1.exs in Resources */,
 				44EFA4B328541F0800565F93 /* GoogleService-Info.plist in Resources */,
 				44709D65276A335800BBF6C9 /* LaunchScreen.storyboard in Resources */,
 				440637F7283082BE00875E77 /* SampleScaleList.json in Resources */,
@@ -925,7 +933,6 @@
 				44B4AB8628453AB5008C8AFD /* SortList.swift in Sources */,
 				4455D1C32858957700FB344E /* Date+.swift in Sources */,
 				446AEA3028411ED300C2BFCF /* Toast.swift in Sources */,
-				4463FEBA282D615400E7A607 /* MIDIManager.swift in Sources */,
 				445FA4C7284E70090008D621 /* QuizInProgressViewController.swift in Sources */,
 				4463FEB7282D3FCE00E7A607 /* PianoView.swift in Sources */,
 				44172529284B8A110003CDC7 /* QuizHelper.swift in Sources */,
@@ -955,8 +962,8 @@
 				44ABE108285619F60022B4FB /* PostListViewModel.swift in Sources */,
 				44537F6C285651EA0061CADF /* StarRatingViewModel.swift in Sources */,
 				4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */,
-				44FEFBF328534597000402DE /* MIDISoundGenerator.swift in Sources */,
 				445FA4C9284F53C90008D621 /* QuizCommon.swift in Sources */,
+				4455D1D6285A538800FB344E /* SearchDegreesReplaceAltText.swift in Sources */,
 				4455D1C72858CCB300FB344E /* Like.swift in Sources */,
 				443A0C612842864400641BC0 /* CreateScaleInfoViewModel.swift in Sources */,
 				4463FEB4282D317700E7A607 /* PianoViewModel.swift in Sources */,
@@ -966,6 +973,7 @@
 				441FA163283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift in Sources */,
 				4426A00C2854400B00942655 /* ArchiveDetailTableViewController.swift in Sources */,
 				445FA4BF284BCA8B0008D621 /* LeitnerSystem.swift in Sources */,
+				4455D1D0285A314200FB344E /* InstrumentTableViewController.swift in Sources */,
 				446AEA3228413E0200C2BFCF /* Cosmos.swift in Sources */,
 				4463FEAA282BE28800E7A607 /* UIViewPreview.swift in Sources */,
 				4463FEA7282BDFF700E7A607 /* PianoViewController.swift in Sources */,
@@ -975,9 +983,12 @@
 				445FA4C5284E60D70008D621 /* FlashcardsViewController.swift in Sources */,
 				445FA4CC284F547D0008D621 /* InitViewControllerFromStoryboard.swift in Sources */,
 				445FA4B9284BAE540008D621 /* Array+.swift in Sources */,
+				4455D1D2285A448200FB344E /* MIDISoundGenerator.swift in Sources */,
 				4417252B284B8AC50003CDC7 /* QuizConfig.swift in Sources */,
 				4463FEAD282C0E6600E7A607 /* Note.swift in Sources */,
 				446AEA2E283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift in Sources */,
+				4455D1CC285A2BD400FB344E /* SettingTableViewController.swift in Sources */,
+				4455D1CE285A2CB800FB344E /* MIDIInstrumentList.swift in Sources */,
 				445FA4D0284FB58C0008D621 /* ColorfulProgressView.swift in Sources */,
 				443A0C6328428F3100641BC0 /* Between.swift in Sources */,
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,
@@ -989,6 +1000,7 @@
 				4455D1C92858D5AD00FB344E /* UIView+.swift in Sources */,
 				446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */,
 				44B4AB8428453286008C8AFD /* SortFilterConfigStore.swift in Sources */,
+				4455D1D4285A44BE00FB344E /* MIDICommon.swift in Sources */,
 				4475CB532830B52700B9D204 /* String+.swift in Sources */,
 				446AEA2C283D3EB200C2BFCF /* WebMusicSheetHelper.swift in Sources */,
 				44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */,

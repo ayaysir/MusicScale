@@ -14,7 +14,7 @@ struct QuizQuestion: Codable, CustomStringConvertible {
     }
     
     var labelTitle: String {
-        return "\(key) \(scaleInfo.name)"
+        return "\(key.textValue) \(scaleInfo.name)"
     }
     
     var scaleInfo: ScaleInfo
