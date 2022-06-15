@@ -10,19 +10,18 @@ import UIKit
 class ArchiveMainTableViewController: UITableViewController {
     
     var viewModel: PostListViewModel!
-    
-    /// View which contains the loading text and the spinner
-    let loadingView = UIView()
-    
-    /// Spinner shown during load the TableView
-    let spinner = UIActivityIndicatorView()
-    
-    /// Text shown during load the TableView
-    let loadingLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(Date().timeIntervalSince1970 * 1000)
+        searchInit()
+    }
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    var searchCategoryList: [SearchCategory] = []
+    var isFiltering: Bool {
+        let isActive = searchController.isActive
+        let isSearchBarHasText = searchController.searchBar.text?.isEmpty == false
+        return isActive && isSearchBarHasText
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,12 +30,16 @@ class ArchiveMainTableViewController: UITableViewController {
             showLoadingSpinner()
             viewModel = PostListViewModel()
             viewModel.bindHandler = {
-                print("load success", self.viewModel.posts.count)
+                print("load success", self.viewModel.filteredCount)
                 self.tableView.reloadData()
+                self.tableView.layoutIfNeeded()
                 self.hideLoadingSpinner()
             }
             viewModel.likeCountsBindHandler = {
                 self.tableView.reloadData()
+            }
+            viewModel.changeOrderHandler = {
+                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
             }
         }
     }
@@ -57,12 +60,25 @@ class ArchiveMainTableViewController: UITableViewController {
         FirebasePostManager.shared.addPost(postRequest: post, completionHandler: nil, errorHandler: nil)
     }
     
+    @IBAction func barBtnActSort(_ sender: Any) {
+        
+        let actionTitles = [
+            "Ascending by upload date \(viewModel.isDescending ? "" : "(current)")",
+            "Descending by upload date \(viewModel.isDescending ? "(current)" : "")",
+        ]
+        simpleActionSheets(self, actionTitles: actionTitles, actionStyles: nil, title: "Sort Order", message: "") { actionIndex, alertController in
+            
+            if self.viewModel.isDescending != (actionIndex == 1) {
+                self.viewModel.isDescending = actionIndex != 0
+            }
+        }
+    }
     
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.posts.count
+        return viewModel.filteredCount
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -81,42 +97,7 @@ class ArchiveMainTableViewController: UITableViewController {
         let sender = ArchiveDetailSegueSender(mode: .read, object: viewModel.postViewModel(at: indexPath.row))
         performSegue(withIdentifier: "ArchiveDetailSegue", sender: sender)
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -138,6 +119,18 @@ class ArchiveMainTableViewController: UITableViewController {
     
     // MARK: - Custom methods
     
+    func searchInit() {
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = true
+        
+        searchCategoryList = SearchCategory.allCases
+        searchController.searchBar.scopeButtonTitles = SearchCategory.allCases.map { $0.textValue }
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+        // self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     func showLoadingSpinner() {
         if let currentClassInstance = UIApplication.topViewController(), currentClassInstance == self {
             SwiftSpinner.show("Loading...")
@@ -149,59 +142,15 @@ class ArchiveMainTableViewController: UITableViewController {
             SwiftSpinner.hide()
         }
     }
-    
-    // Set the activity indicator into the main view
-    private func setLoadingScreen() {
-
-        // Sets the view which contains the loading text and the spinner
-        let width: CGFloat = 120
-        let height: CGFloat = 30
-        let x = (tableView.frame.width / 2) - (width / 2)
-        let y = (tableView.frame.height / 2) - (height / 2) - (navigationController?.navigationBar.frame.height)!
-        loadingView.frame = CGRect(x: x, y: y, width: width, height: height)
-
-        // Sets loading text
-        loadingLabel.textColor = .red
-        loadingLabel.textAlignment = .center
-        loadingLabel.text = "Loading..."
-        loadingLabel.frame = CGRect(x: 0, y: 0, width: 140, height: 30)
-
-        // Sets spinner
-        spinner.style = .medium
-        spinner.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        spinner.startAnimating()
-
-        // Adds text and spinner to the view
-        loadingView.addSubview(spinner)
-        loadingView.addSubview(loadingLabel)
-        // loadingView.backgroundColor = .black.withAlphaComponent(0.2)
-        // loadingView.layer.cornerRadius = 10
-        
-        
-        // background color
-        // let overlayView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 5000, height: 5000)))
-        // overlayView.backgroundColor = .black
-        // // overlayView.alpha = 0.4
-        
-        // navigationController?.view.addSubview(overlayView)
-        
-        tableView.addSubview(loadingView)
-    }
-
-    // Remove the activity indicator from the main view
-    private func removeLoadingScreen() {
-
-        // Hides and stops the text and the spinner
-        spinner.stopAnimating()
-        spinner.isHidden = true
-        loadingLabel.isHidden = true
-
-    }
 
 }
 
-extension ArchiveMainTableViewController {
-    
+extension ArchiveMainTableViewController: UISearchBarDelegate, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchCategory = searchCategoryList[searchController.searchBar.selectedScopeButtonIndex]
+        guard let searchText = searchController.searchBar.text else { return }
+        viewModel.filter(searchText: searchText, searchCategory: searchCategory)
+    }
 }
 
 class PostCell: UITableViewCell {

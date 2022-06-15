@@ -152,8 +152,19 @@ class SimpleScaleInfoViewModel {
         let order: DegreesOrder = isAscending ? .ascending : .descending
         let targetDegrees = targetDegrees(order: order)
         let partText = helper.degreesToAbcjsPart(degrees: targetDegrees, order: order, completeFinalNote: true, key: currentKey, octaveShift: currentOctaveShift, enharmonicMode: currentEnharmonicMode)
-        let lyricText = order == .ascending ? targetDegrees + " 🤔" : " 🤔 " + targetDegrees
+        let lyricText = order == .ascending ? targetDegrees + " 🤔" : "🤔 " + targetDegrees
         return helper.composeAbcjsText(scaleNameText: "???", tempo: currentTempo, partText: partText, lyricText: lyricText)
+    }
+    
+    func abcjsTextForArchive(order: DegreesOrder) -> String {
+        return abcjsTextForSpecial(order: order, fillText: "∙", scaleNameText: "C " + scaleInfo.name)
+    }
+    
+    private func abcjsTextForSpecial(order: DegreesOrder, fillText: String, scaleNameText: String) -> String {
+        let targetDegrees = targetDegrees(order: order)
+        let partText = helper.degreesToAbcjsPart(degrees: targetDegrees, order: order, completeFinalNote: true, key: currentKey, octaveShift: currentOctaveShift, enharmonicMode: currentEnharmonicMode)
+        let lyricText = order == .ascending ? targetDegrees + " \(fillText)" : "\(fillText) " + targetDegrees
+        return helper.composeAbcjsText(scaleNameText: scaleNameText, tempo: currentTempo, partText: partText, lyricText: lyricText)
     }
     
     var playbackSemitoneAscending: [Int]? {

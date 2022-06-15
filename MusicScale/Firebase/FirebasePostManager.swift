@@ -152,18 +152,30 @@ class FirebasePostManager {
         }
     }
     
-    func readAll(completionHandler: @escaping ReadAllCompletionHandler, errorHandler: ErrorHandler? = nil) {
-        let query: Query = rootCollection.order(by: Post.CodingKeys.serverCreatedTS.rawValue, descending: true)
-        
-        let listener = querySnapshotListener(completionHandler: completionHandler, errorHandler: errorHandler)
-        query.addSnapshotListener(listener)
+    func readAll(isDescending: Bool, completionHandler: @escaping ReadAllCompletionHandler, errorHandler: ErrorHandler? = nil) {
+        let query: Query = rootCollection.order(by: Post.CodingKeys.serverCreatedTS.rawValue, descending: isDescending)
+        listenAllUseQuery(query, completionHandler: completionHandler, errorHandler: errorHandler)
     }
     
-    func listenAll(completionHandler: @escaping ReadAllCompletionHandler, errorHandler: ErrorHandler? = nil) {
-        let query: Query = rootCollection.order(by: Post.CodingKeys.serverCreatedTS.rawValue, descending: true)
+    func listenAll(isDescending: Bool, completionHandler: @escaping ReadAllCompletionHandler, errorHandler: ErrorHandler? = nil) {
+        let query: Query = rootCollection
+            .order(by: Post.CodingKeys.serverCreatedTS.rawValue, descending: isDescending)
+            // .whereField("scale_info.name", isEqualTo: "509A87A1-7916-4EE3-B2E4-140A1DBE5B60")
         
+            // prefix only
+            // .whereField("scale_info.name", isGreaterThanOrEqualTo: "509A87A1").whereField("scale_info.name", isLessThanOrEqualTo: "509A87A1\u{F7FF}")
+            // .whereField("scale_info.name", isGreaterThanOrEqualTo: "mode").whereField("scale_info.name", isLessThanOrEqualTo: "mode\u{f8ff}")
+        
+        listenAllUseQuery(query, completionHandler: completionHandler, errorHandler: errorHandler)
+    }
+    
+    func listenAllUseQuery(_ query: Query, completionHandler: @escaping ReadAllCompletionHandler, errorHandler: ErrorHandler? = nil) {
+        if collectionListener != nil {
+            collectionListener?.remove()
+            collectionListener = nil
+        }
         let listener = querySnapshotListener(completionHandler: completionHandler, errorHandler: errorHandler)
-        query.addSnapshotListener(listener)
+        collectionListener = query.addSnapshotListener(listener)
     }
     
     private func querySnapshotListener(completionHandler: @escaping ReadAllCompletionHandler, errorHandler: ErrorHandler?) -> QuerySnapshotListener {
@@ -178,9 +190,6 @@ class FirebasePostManager {
                 try? documentSnapshot.data(as: Post.self)
             }
             
-            collection.documentChanges.forEach { change in
-                print(change.newIndex, change.oldIndex)
-            }
             completionHandler(posts)
         }
     }

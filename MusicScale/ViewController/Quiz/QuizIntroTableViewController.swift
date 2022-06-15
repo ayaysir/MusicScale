@@ -138,7 +138,7 @@ class QuizIntroTableViewController: UITableViewController {
         
         if indexPath == typeOfQuestIndexPath {
             let actionTitles = quizViewModel.typeOfQuestions.map { $0.titleValue }
-            simpleActionSheets(self, actionTitles: actionTitles, title: "Types of Questions", message: "") { [self] actionIndex in
+            simpleActionSheets(self, actionTitles: actionTitles, title: "Types of Questions", message: "") { [self] actionIndex, _ in
                 if let type = QuizType.init(rawValue: actionIndex) {
                     quizStore.typeOfQuestions = type
                     lblTypeOfQuestDetail.text = type.titleValue
@@ -148,7 +148,7 @@ class QuizIntroTableViewController: UITableViewController {
         
         if indexPath == enharmonicModeIndexPath {
             let actionTitles = EnharmonicMode.titleValues
-            simpleActionSheets(self, actionTitles: actionTitles, title: "Select Enharmonic Mode", message: "") { actionIndex in
+            simpleActionSheets(self, actionTitles: actionTitles, title: "Select Enharmonic Mode", message: "") { actionIndex, _ in
                 guard let mode = EnharmonicMode(rawValue: actionIndex) else {
                     return
                 }

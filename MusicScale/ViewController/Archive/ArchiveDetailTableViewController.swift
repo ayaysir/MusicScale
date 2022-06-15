@@ -32,6 +32,7 @@ class ArchiveDetailTableViewController: UITableViewController {
     @IBOutlet weak var lblPattern: UILabel!
     @IBOutlet weak var lblPriority: UILabel!
     @IBOutlet weak var txvComment: UITextView!
+    @IBOutlet weak var lblDegreesAscending: UILabel!
     
     @IBOutlet weak var lblUploader: UILabel!
     @IBOutlet weak var lblCreatedDate: UILabel!
@@ -203,7 +204,7 @@ class ArchiveDetailTableViewController: UITableViewController {
         }
         
         let order: DegreesOrder = sender.selectedSegmentIndex == 0 ? .ascending : .descending
-        injectAbcjsText(from: currentInfoVM.abcjsText(order: order), needReload: true)
+        injectAbcjsText(from: currentInfoVM.abcjsTextForArchive(order: order), needReload: true)
     }
     
     
@@ -341,7 +342,7 @@ class ArchiveDetailTableViewController: UITableViewController {
         lblIntNotation.text = currentInfoVM.ascendingIntegerNotation
         lblPattern.text = currentInfoVM.ascendingPattern
         lblPriority.attributedText = starRatingVM.starTextAttributedStr(fillCount: currentInfoVM.defaultPriority)
-        txvComment.text = currentInfoVM.comment
+        lblDegreesAscending.text = currentInfoVM.degreesAscending
         
         txvComment.text = currentInfoVM.comment
         txvComment.sizeToFit()
@@ -354,7 +355,7 @@ class ArchiveDetailTableViewController: UITableViewController {
         case .read:
             break
         case .create:
-            injectAbcjsText(from: currentInfoVM.abcjsText(order: currentOrder), needReload: true)
+            injectAbcjsText(from: currentInfoVM.abcjsTextForArchive(order: currentOrder), needReload: true)
         }
         
     }
@@ -403,22 +404,24 @@ class ArchiveDetailTableViewController: UITableViewController {
         
         FirebasePostManager.shared.listenTotalLikeCount(documentID: postViewModel.documentID) { [unowned self] (likeCounts: LikeCounts, recentChanges: Like?) in
             
-            // set labels
-            let roundedLikePercent = Int(round(likeCounts.likePercent * 100))
-            let roundedDislikePercent = Int(round(likeCounts.dislikePercent * 100))
-            lblLikeStatus.text = "\(likeCounts.likeCount) (\(roundedLikePercent)%)"
-            lblDislikeStatus.text = "\(likeCounts.dislikeCount) (\(roundedDislikePercent)%)"
-            
             self.currentLikeCounts = likeCounts
             
             if likeCounts.totalCount == 0 {
                 progressLikeDislike.progressTintColor = COLOR_NONE
                 progressLikeDislike.trackTintColor = COLOR_NONE
                 progressLikeDislike.setProgress(0.5, animated: true)
+                
+                lblLikeStatus.text = "0 (0%)"
+                lblDislikeStatus.text = "0 (0%)"
             } else {
                 progressLikeDislike.progressTintColor = COLOR_DISLIKE
                 progressLikeDislike.trackTintColor = COLOR_LIKE
                 progressLikeDislike.setProgress(Float(likeCounts.dislikePercent), animated: true)
+                
+                let roundedLikePercent = Int(round(likeCounts.likePercent * 100))
+                let roundedDislikePercent = Int(round(likeCounts.dislikePercent * 100))
+                lblLikeStatus.text = "\(likeCounts.likeCount) (\(roundedLikePercent)%)"
+                lblDislikeStatus.text = "\(likeCounts.dislikeCount) (\(roundedDislikePercent)%)"
             }
         }
     }
@@ -603,7 +606,7 @@ extension ArchiveDetailTableViewController: WKUIDelegate, WKNavigationDelegate, 
         
         // ===== 분기별 작업 =====
         if isMode(.read), let infoVM = currentInfoVM {
-            injectAbcjsText(from: infoVM.abcjsText(order: currentOrder), needReload: false)
+            injectAbcjsText(from: infoVM.abcjsTextForArchive(order: currentOrder), needReload: false)
         }
         
         // 자바스크립트 -> 네이티브 앱 연결

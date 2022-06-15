@@ -39,15 +39,15 @@ func simpleYesAndNo(_ controller: UIViewController, message: String, title: Stri
     controller.present(alertController, animated: true, completion: nil)
 }
 
-func simpleActionSheets(_ controller: UIViewController, actionTitles: [String], actionStyles: [UIAlertAction.Style]? = nil, title: String, message: String = "", actionCompletion: @escaping (_ actionIndex: Int) -> ()) {
+func simpleActionSheets(_ controller: UIViewController, actionTitles: [String], actionStyles: [UIAlertAction.Style]? = nil, title: String, message: String = "", actionCompletion: @escaping (_ actionIndex: Int, _ alertController: UIAlertController) -> ()){
     let alertController = UIAlertController(title: title, message: "", preferredStyle: .actionSheet)
     
     for (index, actionTitle) in actionTitles.enumerated() {
         let action = UIAlertAction(title: actionTitle, style: actionStyles?[index] ?? .default, handler: { action in
-            actionCompletion(index)
+            actionCompletion(index, alertController)
         })
         alertController.addAction(action)
     }
+    alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
     controller.present(alertController, animated: true, completion: nil)
-    
 }

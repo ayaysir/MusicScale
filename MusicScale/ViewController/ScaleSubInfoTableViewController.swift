@@ -25,6 +25,7 @@ class ScaleSubInfoTableViewController: UITableViewController {
     @IBOutlet weak var lblIntegerNotation: UILabel!
     @IBOutlet weak var txvComment: UITextView!
     @IBOutlet weak var tblCellNameAlias: UITableViewCell!
+    @IBOutlet weak var lblDegreesAsc: UILabel!
     
     weak var delegate: ScaleSubInfoTVCDelegate?
     
@@ -115,6 +116,7 @@ extension ScaleSubInfoTableViewController {
         lblNameAlias.text = scaleInfoViewModel.nameAliasFormatted
         lblPattern.text = scaleInfoViewModel.ascendingPattern
         lblIntegerNotation.text = scaleInfoViewModel.ascendingIntegerNotation
+        lblDegreesAsc.text = scaleInfoViewModel.degreesAscending
         
         let fillColor: UIColor = scaleInfoViewModel.isPriorityCustomized ? .orange : .systemGray3
         lblPriority.attributedText = starRatingVM.starTextAttributedStr(fillCount: scaleInfoViewModel.priorityForDisplayBoth, fillColor: fillColor)
