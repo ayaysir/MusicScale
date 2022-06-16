@@ -66,4 +66,31 @@ struct AppConfigStore {
         }
     }
     
+    private let availableEnharmonicList: [Int: [NoteStrPair]] = [
+        2: [
+            NoteStrPair("^", "C"),
+            NoteStrPair("_", "D"),
+        ],
+        4: [
+            NoteStrPair("^", "D"),
+            NoteStrPair("_", "E"),
+        ],
+        7: [
+            NoteStrPair("^", "F"),
+            NoteStrPair("_", "G"),
+        ],
+        9: [
+            NoteStrPair("^", "G"),
+            NoteStrPair("_", "A"),
+        ],
+        11: [
+            NoteStrPair("^", "A"),
+            NoteStrPair("_", "B"),
+        ]
+    ]
+    
+    func availableEnharmonicNotes(_ number: Int) -> [NoteStrPair]? {
+        return availableEnharmonicList[number]
+    }
+    
 }

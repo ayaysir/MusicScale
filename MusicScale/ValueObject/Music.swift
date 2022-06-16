@@ -24,6 +24,9 @@ struct Music: Codable {
         case A_sharp, B_flat
         case B
         
+        private var strComponents: [String] { self.rawValue.components(separatedBy: "_") }
+        private var tradScales: [String] { ["C", "D", "E", "F", "G", "A", "B"] }
+        
         var playableKey: PlayableKey {
             
             switch self {
@@ -83,18 +86,25 @@ struct Music: Codable {
             }
         }
         
+        var noteValue: String { strComponents[0] }
+        
+        var accidentalValue: String {
+            if self.rawValue.count == 1 {
+                return "natural"
+            }
+            
+            return strComponents[1]
+        }
+        
         var enharmonicKey: Key {
             if self.rawValue.count == 1 {
                 return self
             }
             
-            let scale7 = ["C", "D", "E", "F", "G", "A", "B"]
-            
-            let strComponents = self.rawValue.components(separatedBy: "_")
-            let accidental = strComponents[1]
-            let index = scale7.firstIndex(of: strComponents[0])! + (accidental == "sharp" ? 1 : -1)
+            let accidental = accidentalValue
+            let index = tradScales.firstIndex(of: noteValue)! + (accidental == "sharp" ? 1 : -1)
             let newAccidental = accidental == "sharp" ? "flat" : "sharp"
-            return Key(rawValue: "\(scale7[index])_\(newAccidental)")!
+            return Key(rawValue: "\(tradScales[index])_\(newAccidental)")!
         }
         
         var accidental: Music.Accidental {
@@ -105,14 +115,6 @@ struct Music: Codable {
             case "flat": return .flat
             default: return .natural
             }
-        }
-        
-        var accidentalValue: String {
-            if self.rawValue.count == 1 {
-                return "natural"
-            }
-            
-            return self.rawValue.components(separatedBy: "_")[1]
         }
         
         var intervalFromC: Interval {
@@ -159,9 +161,29 @@ struct Music: Codable {
                 return self.rawValue
             }
             
-            let strComponents = self.rawValue.components(separatedBy: "_")
-            let accidental = strComponents[1] == "sharp" ? xSharp : xFlat
-            return strComponents[0] + accidental
+            let accidental = accidentalValue == "sharp" ? xSharp : xFlat
+            return noteValue + accidental
+        }
+        
+        private var musiqwikNotePart: String {
+            let noteIndex: Int = 114 + tradScales.firstIndex(of: noteValue)!
+            return String(UnicodeScalar(noteIndex)!)
+        }
+        
+        var musiqwikValueWithNatural: String {
+            let naturalIndex: Int = 242 + tradScales.firstIndex(of: noteValue)!
+            return String(UnicodeScalar(naturalIndex)!) + musiqwikNotePart
+        }
+        
+        var musiqwikValue: String {
+            if self.rawValue.count == 1 {
+                return "=\(musiqwikNotePart)"
+            }
+            
+            let accidentalStartIndex = accidentalValue == "sharp" ? 210 : 226
+            let noteIndex = tradScales.firstIndex(of: noteValue)!
+            let accidentalPart = String(UnicodeScalar(accidentalStartIndex + noteIndex)!)
+            return accidentalPart + musiqwikNotePart
         }
         
         var textValueMixed: String {
@@ -194,8 +216,7 @@ struct Music: Codable {
                 break
             }
             
-            let strComponents = self.rawValue.components(separatedBy: "_")
-            return NoteStrPair(prefix, strComponents[0])
+            return NoteStrPair(prefix, noteValue)
         }
         
         var startNote: Note {

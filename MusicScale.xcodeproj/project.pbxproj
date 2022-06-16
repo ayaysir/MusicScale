@@ -44,6 +44,8 @@
 		4455D1D2285A448200FB344E /* MIDISoundGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1D1285A448200FB344E /* MIDISoundGenerator.swift */; };
 		4455D1D4285A44BE00FB344E /* MIDICommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1D3285A44BE00FB344E /* MIDICommon.swift */; };
 		4455D1D6285A538800FB344E /* SearchDegreesReplaceAltText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1D5285A538800FB344E /* SearchDegreesReplaceAltText.swift */; };
+		4455D1D8285B31E400FB344E /* Musiqwik-rvL8.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4455D1D7285B31E400FB344E /* Musiqwik-rvL8.ttf */; };
+		4455D1DD285B337500FB344E /* EnharmonicSelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1DC285B337500FB344E /* EnharmonicSelectTableViewController.swift */; };
 		445FA4B7284BA06B0008D621 /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B6284BA06B0008D621 /* QuizTests.swift */; };
 		445FA4B9284BAE540008D621 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B8284BAE540008D621 /* Array+.swift */; };
 		445FA4BB284BAF3F0008D621 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */; };
@@ -182,6 +184,8 @@
 		4455D1D1285A448200FB344E /* MIDISoundGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISoundGenerator.swift; sourceTree = "<group>"; };
 		4455D1D3285A44BE00FB344E /* MIDICommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDICommon.swift; sourceTree = "<group>"; };
 		4455D1D5285A538800FB344E /* SearchDegreesReplaceAltText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDegreesReplaceAltText.swift; sourceTree = "<group>"; };
+		4455D1D7285B31E400FB344E /* Musiqwik-rvL8.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Musiqwik-rvL8.ttf"; sourceTree = "<group>"; };
+		4455D1DC285B337500FB344E /* EnharmonicSelectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnharmonicSelectTableViewController.swift; sourceTree = "<group>"; };
 		445FA4B6284BA06B0008D621 /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		445FA4B8284BAE540008D621 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
@@ -317,8 +321,8 @@
 		440637F5283082A800875E77 /* ResourceData */ = {
 			isa = PBXGroup;
 			children = (
+				4455D1D7285B31E400FB344E /* Musiqwik-rvL8.ttf */,
 				440637F6283082BE00875E77 /* SampleScaleList.json */,
-				4455D1CD285A2CB800FB344E /* MIDIInstrumentList.swift */,
 			);
 			path = ResourceData;
 			sourceTree = "<group>";
@@ -383,6 +387,7 @@
 			children = (
 				4455D1CB285A2BD300FB344E /* SettingTableViewController.swift */,
 				4455D1CF285A314200FB344E /* InstrumentTableViewController.swift */,
+				4455D1DC285B337500FB344E /* EnharmonicSelectTableViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -472,6 +477,7 @@
 		4463FEB8282D614500E7A607 /* MIDI */ = {
 			isa = PBXGroup;
 			children = (
+				4455D1CD285A2CB800FB344E /* MIDIInstrumentList.swift */,
 				4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */,
 				4455D1D1285A448200FB344E /* MIDISoundGenerator.swift */,
 				44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */,
@@ -788,6 +794,7 @@
 			files = (
 				44A09A392832B7D20067184E /* VintageDreamsWaves-v2.sf2 in Resources */,
 				44EE68152853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md in Resources */,
+				4455D1D8285B31E400FB344E /* Musiqwik-rvL8.ttf in Resources */,
 				44EFA4B328541F0800565F93 /* GoogleService-Info.plist in Resources */,
 				44709D65276A335800BBF6C9 /* LaunchScreen.storyboard in Resources */,
 				440637F7283082BE00875E77 /* SampleScaleList.json in Resources */,
@@ -985,6 +992,7 @@
 				445FA4B9284BAE540008D621 /* Array+.swift in Sources */,
 				4455D1D2285A448200FB344E /* MIDISoundGenerator.swift in Sources */,
 				4417252B284B8AC50003CDC7 /* QuizConfig.swift in Sources */,
+				4455D1DD285B337500FB344E /* EnharmonicSelectTableViewController.swift in Sources */,
 				4463FEAD282C0E6600E7A607 /* Note.swift in Sources */,
 				446AEA2E283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift in Sources */,
 				4455D1CC285A2BD400FB344E /* SettingTableViewController.swift in Sources */,
