@@ -39,7 +39,8 @@ class InQuizViewController: UIViewController {
     var displayNilQuestionHandler: Handler!
     
     var webkitView: WKWebView!
-    let conductor = NoteSequencerConductor()
+    // let conductor = NoteSequencerConductor()
+    let conductor = GlobalConductor.shared
     var playTimer: Timer?
     
     required init?(coder: NSCoder) {
@@ -49,7 +50,7 @@ class InQuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        conductor.start()
+        // conductor.start()
         
         displayNextQuestionHandler = { newQuestion in
             print(newQuestion)

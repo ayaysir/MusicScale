@@ -28,6 +28,11 @@ class InstrumentTableViewController: UITableViewController {
         let indexPath = InstrumentList.indexPath(of: savedNumber)
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        GlobalConductor.shared.restart()
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

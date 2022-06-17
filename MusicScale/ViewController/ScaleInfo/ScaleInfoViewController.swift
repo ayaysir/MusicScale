@@ -47,7 +47,8 @@ class ScaleInfoViewController: UIViewController {
     let transposeDropDown = DropDown()
     let enharmonicDropDown = DropDown()
     
-    private let conductor = NoteSequencerConductor()
+    // private let conductor = NoteSequencerConductor()
+    let conductor = GlobalConductor.shared
     private var playTimer: Timer?
     
     override func viewDidLoad() {
@@ -59,7 +60,7 @@ class ScaleInfoViewController: UIViewController {
         self.title = scaleInfoViewModel.name
         btnPlayAndStop.setTitle("", for: .normal)
         
-        conductor.start()
+        // conductor.start()
         
         // style
         btnPlayAndStop.layer.cornerRadius = btnPlayAndStop.frame.width * 0.5
@@ -80,7 +81,10 @@ class ScaleInfoViewController: UIViewController {
         pianoVC?.adjustKeyPosition(key: scaleInfoViewModel.currentKey.playableKey)
         pianoVC?.octaveShift = scaleInfoViewModel.currentOctaveShift
         changeAvailableKeys()
-        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        stopSequencer()
     }
     
     // MARK: - Outlet Action

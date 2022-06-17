@@ -44,7 +44,8 @@ class ArchiveDetailTableViewController: UITableViewController {
     
     private let starRatingVM = StarRatingViewModel()
     
-    private let conductor = NoteSequencerConductor()
+    // private let conductor = NoteSequencerConductor()
+    let conductor = GlobalConductor.shared
     private var playTimer: Timer?
     private let playbackTempo: Float = 120.0
     
@@ -143,7 +144,7 @@ class ArchiveDetailTableViewController: UITableViewController {
         btnSelectScale.isHidden = isMode(.read)
         originalCommentWidth = txvComment.frame.size.width
         loadWebSheetPage()
-        conductor.start()
+        // conductor.start()
         conductor.tempo = playbackTempo
         
         btnLike.tintColor = .clear

@@ -48,7 +48,8 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
     }
     
-    let conductor = NoteSequencerConductor()
+    // let conductor = NoteSequencerConductor()
+    let conductor = GlobalConductor.shared
     private var playTimer: Timer?
     private var generator: MIDISoundGenerator!
     
@@ -56,7 +57,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     private let showBanner = true
     
     override func viewWillAppear(_ animated: Bool) {
-        try? availableSoundInSilentMode()
+        // try? availableSoundInSilentMode()
         
         // Decide instPreset
         generator = MIDISoundGenerator()

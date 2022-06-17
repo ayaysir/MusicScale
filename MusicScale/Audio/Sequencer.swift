@@ -55,6 +55,11 @@ class NoteSequencerConductor: ObservableObject {
         engine.stop()
     }
     
+    func restart() {
+        stop()
+        start()
+    }
+    
     func addScaleToSequencer(semitones: [Int], startSemitone start: Int = 60) {
         
         guard sequencer.tracks.first != nil else {

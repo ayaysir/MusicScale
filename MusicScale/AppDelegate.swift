@@ -35,6 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Firebase
         FirebaseApp.configure()
         
+        // Initialize Sound
+        GlobalConductor.shared.start()
+        try? availableSoundInSilentMode()
+        
         return true
     }
     

@@ -9,7 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let conductor = NoteSequencerConductor()
+    // let conductor = NoteSequencerConductor()
+    let conductor = GlobalConductor.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()

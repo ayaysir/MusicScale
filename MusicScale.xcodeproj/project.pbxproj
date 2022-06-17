@@ -323,6 +323,7 @@
 		440637F5283082A800875E77 /* ResourceData */ = {
 			isa = PBXGroup;
 			children = (
+				4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */,
 				4455D1D7285B31E400FB344E /* Musiqwik-rvL8.ttf */,
 				440637F6283082BE00875E77 /* SampleScaleList.json */,
 			);
@@ -392,6 +393,18 @@
 				4455D1DC285B337500FB344E /* EnharmonicSelectTableViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		4455D1E4285CB40100FB344E /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				4455D1CD285A2CB800FB344E /* MIDIInstrumentList.swift */,
+				4455D1D1285A448200FB344E /* MIDISoundGenerator.swift */,
+				44A09A3A283559190067184E /* Sequencer.swift */,
+				44FEFBF42853470A000402DE /* AvailableSoundInSilentMode.swift */,
+				4455D1D3285A44BE00FB344E /* MIDICommon.swift */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 		445FA4BC284BCA590008D621 /* Quiz */ = {
@@ -479,13 +492,7 @@
 		4463FEB8282D614500E7A607 /* MIDI */ = {
 			isa = PBXGroup;
 			children = (
-				4455D1CD285A2CB800FB344E /* MIDIInstrumentList.swift */,
-				4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */,
-				4455D1D1285A448200FB344E /* MIDISoundGenerator.swift */,
 				44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */,
-				44A09A3A283559190067184E /* Sequencer.swift */,
-				44FEFBF42853470A000402DE /* AvailableSoundInSilentMode.swift */,
-				4455D1D3285A44BE00FB344E /* MIDICommon.swift */,
 			);
 			path = MIDI;
 			sourceTree = "<group>";
@@ -550,6 +557,7 @@
 		44709D54276A334F00BBF6C9 /* MusicScale */ = {
 			isa = PBXGroup;
 			children = (
+				4455D1E4285CB40100FB344E /* Audio */,
 				4426A0082854250800942655 /* Firebase */,
 				44EE68132853A7DB00A6D810 /* Report */,
 				44A09A7B2838089D0067184E /* UserDefaults */,

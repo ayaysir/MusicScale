@@ -8,8 +8,6 @@
 import Foundation
 import AudioKit
 
-// let gsMuseScoreFileURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2")
-
 class MIDISoundGenerator {
     
     let engine = AudioEngine()
