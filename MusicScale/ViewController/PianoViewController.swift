@@ -36,8 +36,12 @@ class PianoViewController: UIViewController {
         
         if let parentContainerView = parentContainerView {
             
-            viewPiano = PianoView(frame: CGRect(origin: .zero, size: parentContainerView.frame.size))
+            var newSize = parentContainerView.frame.size
+            // newSize.height = newSize.height - parentContainerView.frame.minY
+            viewPiano = PianoView(frame: CGRect(origin: .zero, size: newSize))
+            print("#1: parentContainerView.frame.size", parentContainerView.frame, parentContainerView.bounds, viewPiano.bounds.origin, viewPiano.boxOutline)
             self.view.addSubview(viewPiano)
+            print("#1-1:", viewPiano.frame.origin)
             
             let pianoLongPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handlePianoLongPress(gesture:)))
             pianoLongPressRecognizer.minimumPressDuration = 0.0

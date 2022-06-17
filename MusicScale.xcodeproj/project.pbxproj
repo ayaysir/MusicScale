@@ -46,6 +46,7 @@
 		4455D1D6285A538800FB344E /* SearchDegreesReplaceAltText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1D5285A538800FB344E /* SearchDegreesReplaceAltText.swift */; };
 		4455D1D8285B31E400FB344E /* Musiqwik-rvL8.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4455D1D7285B31E400FB344E /* Musiqwik-rvL8.ttf */; };
 		4455D1DD285B337500FB344E /* EnharmonicSelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1DC285B337500FB344E /* EnharmonicSelectTableViewController.swift */; };
+		4455D1E3285C92FA00FB344E /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1E2285C92F900FB344E /* UIViewController.swift */; };
 		445FA4B7284BA06B0008D621 /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B6284BA06B0008D621 /* QuizTests.swift */; };
 		445FA4B9284BAE540008D621 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B8284BAE540008D621 /* Array+.swift */; };
 		445FA4BB284BAF3F0008D621 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */; };
@@ -186,6 +187,7 @@
 		4455D1D5285A538800FB344E /* SearchDegreesReplaceAltText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDegreesReplaceAltText.swift; sourceTree = "<group>"; };
 		4455D1D7285B31E400FB344E /* Musiqwik-rvL8.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Musiqwik-rvL8.ttf"; sourceTree = "<group>"; };
 		4455D1DC285B337500FB344E /* EnharmonicSelectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnharmonicSelectTableViewController.swift; sourceTree = "<group>"; };
+		4455D1E2285C92F900FB344E /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		445FA4B6284BA06B0008D621 /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		445FA4B8284BAE540008D621 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				4455D1C22858957700FB344E /* Date+.swift */,
 				4455D1C42858BFB700FB344E /* Notification.Name+.swift */,
 				4455D1C82858D5AD00FB344E /* UIView+.swift */,
+				4455D1E2285C92F900FB344E /* UIViewController.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1003,6 +1006,7 @@
 				44ABE1032854C1D00022B4FB /* Post.swift in Sources */,
 				4455D1BF2857AAD400FB344E /* PostViewModel.swift in Sources */,
 				4475CB512830A6C200B9D204 /* MusicSheetHelper.swift in Sources */,
+				4455D1E3285C92FA00FB344E /* UIViewController.swift in Sources */,
 				44537F68285623200061CADF /* SwiftSpinner.swift in Sources */,
 				44537F6A285628A90061CADF /* FirebaseAuthManager.swift in Sources */,
 				4455D1C92858D5AD00FB344E /* UIView+.swift in Sources */,

@@ -30,13 +30,11 @@ class ScaleInfoViewController: UIViewController {
     @IBOutlet weak var segDegreesOrder: UISegmentedControl!
     
     @IBOutlet weak var lblTempo: UILabel!
+    @IBOutlet weak var lblOctaveShift: UILabel!
     
-    // 나중에 UserDefaults 등으로 교체
+    @IBOutlet weak var viewPlayConfig: UIView!
+    
     var configStore = ScaleInfoVCConfigStore.shared
-    // var tempCurrentOrder: DegreesOrder = .ascending
-    // var tempCurrentTempo: Double = 120
-    // var tempCurrentEnharmonicMode: EnharmonicMode = .standard
-    
     var selectedIndexPath: IndexPath?
     weak var delegate: ScaleInfoVCDelgate?
     
@@ -59,8 +57,22 @@ class ScaleInfoViewController: UIViewController {
         initEnharmonicDropDown()
         
         self.title = scaleInfoViewModel.name
+        btnPlayAndStop.setTitle("", for: .normal)
         
         conductor.start()
+        
+        // style
+        btnPlayAndStop.layer.cornerRadius = btnPlayAndStop.frame.width * 0.5
+        btnEnharmonic.layer.cornerRadius = 5
+        btnTranspose.layer.cornerRadius = 5
+        
+        let stepperScale: CGFloat = 0.7
+        viewPlayConfig.subviews.forEach { view in
+            
+            if type(of: view) == UIStepper.self {
+                view.transform = CGAffineTransform(scaleX: stepperScale, y: stepperScale)
+            }
+        }
         
         // loadFromConfigStore()는 prepare에서 실행
         
@@ -134,6 +146,8 @@ class ScaleInfoViewController: UIViewController {
             webSheetVC?.delegate = self
         case "PianoSegue":
             pianoVC = segue.destination as? PianoViewController
+            view.layoutIfNeeded()
+            
             pianoVC?.parentContainerView = containerViewPiano
         case "UpdateScaleInfoSegue":
             print("UpdateScaleInfoSegue")
@@ -172,12 +186,7 @@ extension ScaleInfoViewController {
         let mode = configStore.enharmonicMode
         changeEnharmonicMode(mode: mode, initChange: true)
         
-        // reinjectAbcjsText()
-        
         // customEnharmonics
-        // TOOO
-        
-        // stepTranspose.maximumValue = Double(Music.Key.allCases.count - 1)
     }
     
     private func reinjectAbcjsText() {
@@ -200,6 +209,7 @@ extension ScaleInfoViewController {
     func changeOctaveShift(_ shift: Int, initChange: Bool = false) {
         scaleInfoViewModel.currentOctaveShift = shift
         stepOctaveShift.value = Double(shift)
+        lblOctaveShift.text = "\(shift)"
         
         if let pianoVC = pianoVC {
             pianoVC.octaveShift = scaleInfoViewModel.currentOctaveShift
@@ -297,7 +307,8 @@ extension ScaleInfoViewController {
         conductor.sequencer.stop()
         conductor.sequencer.rewind()
         conductor.isPlaying = false
-        btnPlayAndStop.setTitle("Play", for: .normal)
+        // btnPlayAndStop.setTitle("Play", for: .normal)
+        btnPlayAndStop.setImage(UIImage(systemName: "play.fill"), for: .normal)
         
         playTimer?.invalidate()
     }
@@ -309,7 +320,8 @@ extension ScaleInfoViewController {
         self.conductor.addScaleToSequencer(semitones: targetSemitones!)
         self.conductor.isPlaying = true
         
-        btnPlayAndStop.setTitle("Stop", for: .normal)
+        // btnPlayAndStop.setTitle("Stop", for: .normal)
+        btnPlayAndStop.setImage(UIImage(systemName: "stop.fill"), for: .normal)
         
         playTimer = Timer.scheduledTimer(timeInterval: scaleInfoViewModel.expectedPlayTime, target: self, selector: #selector(stopSequencer), userInfo: nil, repeats: false)
     }

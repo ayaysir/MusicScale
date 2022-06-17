@@ -20,7 +20,7 @@ struct PianoViewConstants {
     static let divBy: Int = 8
     
     /// 마진: top, right, bottom, left
-    static let margin: Margin = (top: 10, right: 10, bottom: 10, left: 10)
+    static let margin: Margin = (top: 0, right: 10, bottom: 0, left: 10)
     static let margins: Margins = (x: margin.left + margin.right, y: margin.top + margin.bottom)
     
     /// 박스 line의 너비
@@ -40,7 +40,6 @@ class PianoView: UIView {
     var boxOutline: CGRect!
     
     let lightYellow = CGColor(red: 255/255, green: 235/255, blue: 60/255, alpha: 1)
-    // let darkYellow = CGColor(red: 255/255, green: 200/255, blue: 50/255, alpha: 1)
     let darkYellow = CGColor(red: 195/255, green: 150/255, blue: 10/255, alpha: 1)
     let violet = CGColor(red: 233/255, green: 30/255, blue: 99/255, alpha: 1)
     let purple = CGColor(red: 150/255, green: 33/255, blue: 170/255, alpha: 1)
@@ -72,14 +71,19 @@ class PianoView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-//        print("draw start")
+       // print("draw start")
         
         guard let context = UIGraphicsGetCurrentContext() else {
             return
         }
                 
-        context.setFillColor(CGColor(gray: 1, alpha: 1))
+        // context.setFillColor(CGColor(gray: 1, alpha: 1))
+        // context.setFillColor(UIColor.red.cgColor)
+        context.setFillColor(UIColor.systemBackground.cgColor)
         context.fill(rect)
+        
+        context.setFillColor(CGColor(gray: 1, alpha: 1))
+        context.fill(boxOutline)
         
         // 위아래 라인
         context.setLineWidth(viewModel.lineWidth)
@@ -100,6 +104,7 @@ class PianoView: UIView {
             context.addLine(to: keyLine.endPos)
             context.strokePath()
         }
+        print("#2: keyLine.endPost - keyLine.startPos", viewModel.whiteKeyDrawPosList.first!.endPos,  viewModel.whiteKeyDrawPosList.first!.startPos)
         
         // 키별로 동그라미 그리기 (흰 건반 - 누르기 전)
         for info in viewModel.pianoWhiteKeys {
@@ -212,18 +217,18 @@ class PianoView: UIView {
     }
 }
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct PianoView_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let view = PianoView()
-            return view
-        }
-        .previewLayout(.sizeThatFits)
-        .padding(0)
-    }
-}
-#endif
+// #if canImport(SwiftUI) && DEBUG
+// import SwiftUI
+//
+// @available(iOS 13.0, *)
+// struct PianoView_Preview: PreviewProvider {
+//     static var previews: some View {
+//         UIViewPreview {
+//             let view = PianoView()
+//             return view
+//         }
+//         .previewLayout(.sizeThatFits)
+//         .padding(0)
+//     }
+// }
+// #endif

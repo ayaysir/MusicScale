@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 체크
         
         checkAppFirstrunOrUpdateStatus {
-            // putInitalData()
+            putInitalData()
             
             ScaleInfoVCConfigStore.shared.initalizeConfigValueOnFirstrun()
         } updated: {
