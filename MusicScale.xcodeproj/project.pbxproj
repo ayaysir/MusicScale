@@ -47,6 +47,8 @@
 		4455D1D8285B31E400FB344E /* Musiqwik-rvL8.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4455D1D7285B31E400FB344E /* Musiqwik-rvL8.ttf */; };
 		4455D1DD285B337500FB344E /* EnharmonicSelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1DC285B337500FB344E /* EnharmonicSelectTableViewController.swift */; };
 		4455D1E3285C92FA00FB344E /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1E2285C92F900FB344E /* UIViewController.swift */; };
+		4455D1E6285CDBC900FB344E /* UIBarButtonItem+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1E5285CDBC900FB344E /* UIBarButtonItem+.swift */; };
+		4455D1E9285CF19F00FB344E /* HGCircularSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 4455D1E8285CF19F00FB344E /* HGCircularSlider */; };
 		445FA4B7284BA06B0008D621 /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B6284BA06B0008D621 /* QuizTests.swift */; };
 		445FA4B9284BAE540008D621 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B8284BAE540008D621 /* Array+.swift */; };
 		445FA4BB284BAF3F0008D621 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */; };
@@ -188,6 +190,7 @@
 		4455D1D7285B31E400FB344E /* Musiqwik-rvL8.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Musiqwik-rvL8.ttf"; sourceTree = "<group>"; };
 		4455D1DC285B337500FB344E /* EnharmonicSelectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnharmonicSelectTableViewController.swift; sourceTree = "<group>"; };
 		4455D1E2285C92F900FB344E /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		4455D1E5285CDBC900FB344E /* UIBarButtonItem+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+.swift"; sourceTree = "<group>"; };
 		445FA4B6284BA06B0008D621 /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		445FA4B8284BAE540008D621 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
@@ -274,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				446100BE28451B370033BCE9 /* PanModal in Frameworks */,
+				4455D1E9285CF19F00FB344E /* HGCircularSlider in Frameworks */,
 				44A09A2C2832A3C90067184E /* AudioKit in Frameworks */,
 				4BE14DBCD05F5882BF98D64F /* Pods_MusicScale.framework in Frameworks */,
 				44A09A2F2832A40A0067184E /* SoundpipeAudioKit in Frameworks */,
@@ -528,6 +532,7 @@
 				4455D1C42858BFB700FB344E /* Notification.Name+.swift */,
 				4455D1C82858D5AD00FB344E /* UIView+.swift */,
 				4455D1E2285C92F900FB344E /* UIViewController.swift */,
+				4455D1E5285CDBC900FB344E /* UIBarButtonItem+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -706,6 +711,7 @@
 				44A09A2B2832A3C90067184E /* AudioKit */,
 				44A09A2E2832A40A0067184E /* SoundpipeAudioKit */,
 				446100BD28451B370033BCE9 /* PanModal */,
+				4455D1E8285CF19F00FB344E /* HGCircularSlider */,
 			);
 			productName = MusicScale;
 			productReference = 44709D52276A334F00BBF6C9 /* MusicScale.app */;
@@ -786,6 +792,7 @@
 				44A09A2A2832A3C90067184E /* XCRemoteSwiftPackageReference "AudioKit" */,
 				44A09A2D2832A40A0067184E /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */,
 				446100BC28451B370033BCE9 /* XCRemoteSwiftPackageReference "PanModal" */,
+				4455D1E7285CF19F00FB344E /* XCRemoteSwiftPackageReference "HGCircularSlider" */,
 			);
 			productRefGroup = 44709D53276A334F00BBF6C9 /* Products */;
 			projectDirPath = "";
@@ -944,6 +951,7 @@
 				445FA4C3284E49120008D621 /* MatchKeysViewController.swift in Sources */,
 				44537F6E2857975C0061CADF /* UIApplication+.swift in Sources */,
 				44709D60276A334F00BBF6C9 /* MusicScale.xcdatamodeld in Sources */,
+				4455D1E6285CDBC900FB344E /* UIBarButtonItem+.swift in Sources */,
 				4426A007285424B100942655 /* ArchiveMainTableViewController.swift in Sources */,
 				4475CB5B283176EA00B9D204 /* Music.swift in Sources */,
 				44FEFBF728539C83000402DE /* QuizFinishedViewController.swift in Sources */,
@@ -1410,6 +1418,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4455D1E7285CF19F00FB344E /* XCRemoteSwiftPackageReference "HGCircularSlider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/HamzaGhazouani/HGCircularSlider";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		446100BC28451B370033BCE9 /* XCRemoteSwiftPackageReference "PanModal" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/slackhq/PanModal.git";
@@ -1437,6 +1453,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4455D1E8285CF19F00FB344E /* HGCircularSlider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4455D1E7285CF19F00FB344E /* XCRemoteSwiftPackageReference "HGCircularSlider" */;
+			productName = HGCircularSlider;
+		};
 		446100BD28451B370033BCE9 /* PanModal */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 446100BC28451B370033BCE9 /* XCRemoteSwiftPackageReference "PanModal" */;

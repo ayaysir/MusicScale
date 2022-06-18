@@ -15,9 +15,12 @@ class FlashcardsViewController: InQuizViewController {
     @IBOutlet weak var progressViewInStudying: UIProgressView!
     @IBOutlet weak var progressViewDayQuestionProgress: UIProgressView!
     @IBOutlet weak var lblProgressStatus: UILabel!
+    @IBOutlet weak var btnOK: UIButton!
+    @IBOutlet weak var btnRemind: UIButton!
+    
     
     // 앞면: 문제, 뒷면: 정답
-    private var backAnswerLabel: UILabel = UILabel()
+    private var backAnswerLabel: UILabel!
     
     private var showingBack = false
     private let flipDuration = 0.5
@@ -30,19 +33,6 @@ class FlashcardsViewController: InQuizViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        btnPlay.setTitle("", for: .normal)
-        
-        let cardRect = CGRect(origin: .zero, size: cardContainerView.frame.size)
-        cardContainerView.backgroundColor = UIColor(named: "OpaqueBackgroundColor")
-        
-        webkitView = WKWebView(frame: cardRect)
-        webkitView.isUserInteractionEnabled = false
-        // frontSheetView = WKWebView(frame: cardRect)
-        // frontSheetView.isUserInteractionEnabled = false
-        
-        backAnswerLabel = UILabel(frame: cardRect)
-        backAnswerLabel.textAlignment = .center
         
         // Override displayNextQuestionHandler
         displayNextQuestionHandler = { [unowned self] newQuestion in
@@ -71,18 +61,48 @@ class FlashcardsViewController: InQuizViewController {
             injectAbcjsText(from: abcjsText, needReload: true)
             updateProgressViews(isBeforeSubmit: true)
         }
+        
+        DispatchQueue.main.async { [self] in
+            cardContainerView.layoutIfNeeded()
+            
+            btnPlay.setTitle("", for: .normal)
+            btnOK.layer.cornerRadius = btnOK.frame.size.width * 0.06
+            btnRemind.layer.cornerRadius = btnRemind.frame.size.width * 0.06
+            
+            btnRemind.titleLabel?.adjustsFontSizeToFitWidth = true
+            
+            let cardRect = CGRect(origin: .zero, size: cardContainerView.frame.size)
+            cardContainerView.backgroundColor = UIColor(named: "OpaqueBackgroundColor")
+            cardContainerView.layer.borderWidth = 1.0
+            cardContainerView.layer.borderColor = UIColor.systemGray3.cgColor
+            
+            webkitView = WKWebView(frame: cardRect)
+            webkitView.isUserInteractionEnabled = false
+            
+            backAnswerLabel = UILabel(frame: cardRect)
+            backAnswerLabel.textAlignment = .center
+            backAnswerLabel.numberOfLines = 0
+            if view.frame.width > 500 {
+                let fontSize = view.frame.width * 0.07
+                backAnswerLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .semibold)
+            } else {
+                backAnswerLabel.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
+            }
+            backAnswerLabel.adjustsFontSizeToFitWidth = true
+            backAnswerLabel.lineBreakMode = .byWordWrapping
+            
+            // card flip
+            backAnswerLabel.contentMode = .scaleAspectFill
+            webkitView.contentMode = .scaleAspectFill
+            
+            cardContainerView.addSubview(webkitView)
+            webkitView.translatesAutoresizingMaskIntoConstraints = false
+            // lblCardText.spanSuperview()
+            
+            webkitView.layer.zPosition = -10
 
-        loadFirstQuestion()
-        
-        // card flip
-        backAnswerLabel.contentMode = .scaleAspectFill
-        webkitView.contentMode = .scaleAspectFill
-        
-        cardContainerView.addSubview(webkitView)
-        webkitView.translatesAutoresizingMaskIntoConstraints = false
-        // lblCardText.spanSuperview()
-        
-        webkitView.layer.zPosition = -10
+            loadFirstQuestion()
+        }
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(flip))
         singleTap.numberOfTapsRequired = 1
@@ -96,7 +116,8 @@ class FlashcardsViewController: InQuizViewController {
         }
         
         UIView.transition(from: fromView, to: toView, duration: flipDuration, options: .transitionFlipFromRight, completion: nil)
-        toView.translatesAutoresizingMaskIntoConstraints = false
+        
+        toView.translatesAutoresizingMaskIntoConstraints = toView == backAnswerLabel
         
         // toView.spanSuperview()
         showingBack = !showingBack

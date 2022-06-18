@@ -60,13 +60,14 @@ class ArchiveMainTableViewController: UITableViewController {
         FirebasePostManager.shared.addPost(postRequest: post, completionHandler: nil, errorHandler: nil)
     }
     
-    @IBAction func barBtnActSort(_ sender: Any) {
+    @IBAction func barBtnActSort(_ sender: UIBarButtonItem) {
         
         let actionTitles = [
             "Ascending by upload date \(viewModel.isDescending ? "" : "(current)")",
             "Descending by upload date \(viewModel.isDescending ? "(current)" : "")",
         ]
-        simpleActionSheets(self, actionTitles: actionTitles, actionStyles: nil, title: "Sort Order", message: "") { actionIndex, alertController in
+        let rect = sender.frame
+        simpleActionSheets(self, actionTitles: actionTitles, actionStyles: nil, title: "Sort Order", message: "", sourceView: nil, sourceRect: rect) { actionIndex in
             
             if self.viewModel.isDescending != (actionIndex == 1) {
                 self.viewModel.isDescending = actionIndex != 0

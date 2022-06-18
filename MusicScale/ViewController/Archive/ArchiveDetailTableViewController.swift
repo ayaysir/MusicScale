@@ -23,7 +23,7 @@ class ArchiveDetailTableViewController: UITableViewController {
     @IBOutlet weak var lblDislikeStatus: UILabel!
     @IBOutlet weak var lblLikeStatus: UILabel!
     
-    @IBOutlet weak var lblAscAndDescIsSame: UILabel!
+    // @IBOutlet weak var lblAscAndDescIsSame: UILabel!
     @IBOutlet weak var segAscDesc: UISegmentedControl!
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var lblName: UILabel!
@@ -76,6 +76,7 @@ class ArchiveDetailTableViewController: UITableViewController {
         return self.mode == mode
     }
     
+    // === SECTION & INDEXPATH LIST ===
     private let SECTION_FIRST = 0
     private let SECTION_PREVIEW = 1
     private let SECTION_INFO = 2
@@ -85,6 +86,7 @@ class ArchiveDetailTableViewController: UITableViewController {
     
     private let cellAliasIndexPath = IndexPath(row: 1, section: 2)
     private let cellCommentIndexPath = IndexPath(row: 0, section: 4)
+    // ================================
     
     private let COLOR_LIKE: UIColor = .systemGreen
     private let COLOR_DISLIKE: UIColor = .systemPink
@@ -113,8 +115,6 @@ class ArchiveDetailTableViewController: UITableViewController {
         }
     }
     
-    private var originalCommentWidth: CGFloat!
-    
     // MARK: - Lifecycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -142,7 +142,6 @@ class ArchiveDetailTableViewController: UITableViewController {
         // 공통
         setButtonTitle()
         btnSelectScale.isHidden = isMode(.read)
-        originalCommentWidth = txvComment.frame.size.width
         loadWebSheetPage()
         // conductor.start()
         conductor.tempo = playbackTempo
@@ -253,10 +252,6 @@ class ArchiveDetailTableViewController: UITableViewController {
             SwiftSpinner.show("Uploading...")
             FirebasePostManager.shared.addPost(postRequest: post, completionHandler: { documentID in
                 DispatchQueue.main.async {
-            
-                    // simpleAlert(self, message: "Upload success!", title: "Success") { _ in
-                    //     self.navigationController?.popViewController(animated: true)
-                    // }
                     SwiftSpinner.show(duration: 2, title: "Upload Completed!", animated: false) {
                         self.navigationController?.popViewController(animated: true)
                     }.addTapHandler({
@@ -336,7 +331,7 @@ class ArchiveDetailTableViewController: UITableViewController {
         
         self.title = currentInfoVM.name
         
-        lblAscAndDescIsSame.text = currentInfoVM.isAscAndDescDifferent ? "Diff" : "Same"
+        // lblAscAndDescIsSame.text = currentInfoVM.isAscAndDescDifferent ? "Diff" : "Same"
         
         lblName.text = currentInfoVM.name
         lblAlias.text = currentInfoVM.nameAliasFormatted
@@ -346,8 +341,6 @@ class ArchiveDetailTableViewController: UITableViewController {
         lblDegreesAscending.text = currentInfoVM.degreesAscending
         
         txvComment.text = currentInfoVM.comment
-        txvComment.sizeToFit()
-        txvComment.frame.size.width = originalCommentWidth
         
         tableView.reloadData()
         
@@ -477,6 +470,15 @@ extension ArchiveDetailTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        // Preview Section
+        if section == SECTION_PREVIEW {
+            guard let infoVM = currentInfoVM else {
+                return ""
+            }
+            
+            return infoVM.isAscAndDescDifferent ? "Diff" : "Same"
+        }
+        
         // Create mode일 때 숨겨야 할 섹션들
         if needHideSectionsBeforeSelectScale(section) {
             return ""
@@ -513,8 +515,10 @@ extension ArchiveDetailTableViewController {
                     return 0
                 }
                 
-                return txvComment.frame.height
+                return UITableView.automaticDimension
             }
+        case IndexPath(row: 0, section: SECTION_PREVIEW):
+            return UITableView.automaticDimension
         default:
             break
         }

@@ -58,7 +58,7 @@ extension QuizFinishedViewController: UITableViewDelegate, UITableViewDataSource
 class CellWithStyleRightDetail: UITableViewCell {
     
     override func prepareForReuse() {
-        
+        super.prepareForReuse()
     }
     
     func configure(title: String, detail: String) {

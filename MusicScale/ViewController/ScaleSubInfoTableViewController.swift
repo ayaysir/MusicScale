@@ -33,12 +33,8 @@ class ScaleSubInfoTableViewController: UITableViewController {
     var priorityDropDown = DropDown()
     let starRatingVM = StarRatingViewModel()
     
-    private var originalCommentWidth: CGFloat!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        originalCommentWidth = txvComment.frame.size.width
         
         initDropDownOnPriorityLabel()
         refreshViewInfo()
@@ -64,7 +60,7 @@ class ScaleSubInfoTableViewController: UITableViewController {
                 return 0
             }
             
-            return txvComment.frame.height
+            return UITableView.automaticDimension
         default:
             break
         }
@@ -112,21 +108,23 @@ extension ScaleSubInfoTableViewController {
     }
     
     func refreshViewInfo(isUpdated: Bool = false) {
-        lblName.text = scaleInfoViewModel.name
-        lblNameAlias.text = scaleInfoViewModel.nameAliasFormatted
-        lblPattern.text = scaleInfoViewModel.ascendingPattern
-        lblIntegerNotation.text = scaleInfoViewModel.ascendingIntegerNotation
-        lblDegreesAsc.text = scaleInfoViewModel.degreesAscending
-        
-        let fillColor: UIColor = scaleInfoViewModel.isPriorityCustomized ? .orange : .systemGray3
-        lblPriority.attributedText = starRatingVM.starTextAttributedStr(fillCount: scaleInfoViewModel.priorityForDisplayBoth, fillColor: fillColor)
-        
-        txvComment.text = scaleInfoViewModel.comment
-        txvComment.sizeToFit()
-        txvComment.frame.size.width = originalCommentWidth
-        
-        if isUpdated {
-            tableView.reloadRows(at: [cellAliasIndexPath, cellCommentIndexPath], with: .none)
+        DispatchQueue.main.async { [unowned self] in
+            lblName.text = scaleInfoViewModel.name
+            lblNameAlias.text = scaleInfoViewModel.nameAliasFormatted
+            lblPattern.text = scaleInfoViewModel.ascendingPattern
+            lblIntegerNotation.text = scaleInfoViewModel.ascendingIntegerNotation
+            lblDegreesAsc.text = scaleInfoViewModel.degreesAscending
+            
+            let fillColor: UIColor = scaleInfoViewModel.isPriorityCustomized ? .orange : .systemGray3
+            lblPriority.attributedText = starRatingVM.starTextAttributedStr(fillCount: scaleInfoViewModel.priorityForDisplayBoth, fillColor: fillColor)
+            
+            txvComment.text = scaleInfoViewModel.comment
+            // txvComment.sizeToFit()
+            // txvComment.frame.size.width = originalCommentWidth
+            
+            if isUpdated {
+                tableView.reloadRows(at: [cellAliasIndexPath, cellCommentIndexPath], with: .none)
+            }
         }
     }
     

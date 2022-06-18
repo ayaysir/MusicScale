@@ -36,6 +36,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     @IBOutlet weak var lblCautionAscAndDescDiff: UILabel!
     @IBOutlet weak var cosmosDefaultPriority: CosmosView!
     @IBOutlet weak var btnPlay: UIButton!
+    @IBOutlet weak var stackViewNumButtons: UIStackView!
     
     weak var updateDelegate: ScaleInfoUpdateTVCDelegate?
     weak var createDelegate: ScaleInfoUpdateTVCDelegate?
@@ -55,6 +56,9 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     
     private let bannerAdPath = IndexPath(row: 0, section: 5)
     private let showBanner = true
+    
+    private let cellSheet = IndexPath(row: 1, section: 2)
+    private var cellSheetHeight: CGFloat?
     
     override func viewWillAppear(_ animated: Bool) {
         // try? availableSoundInSilentMode()
@@ -78,13 +82,14 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         // ===== 분기별 작업 =====
         switch mode {
         case .create:
-            
+            self.title = "Create"
             cosmosDefaultPriority.rating = 3.0
             
             degreesViewModel = ScaleDegreesUpdateViewModel()
             injectAbcjsText(from: degreesViewModel.abcjsTextOnEditDegreesAsc, needReload: false)
             
         case .update:
+            self.title = "Update"
             guard let infoViewModel = infoViewModel else {
                 return
             }
@@ -114,13 +119,14 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     
     // MARK: - Table Delegate
     
-    // override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    //     if indexPath == IndexPath(row: 0, section: 0) {
-    //         return 500
-    //     } else {
-    //         return super.tableView(tableView, heightForRowAt: indexPath)
-    //     }
-    // }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+        if indexPath == cellSheet {
+            return UITableView.automaticDimension
+        }
+    
+        return super.tableView(tableView, heightForRowAt: indexPath)
+    }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if !showBanner && section == bannerAdPath.section {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HGCircularSlider
 
 class QuizInProgressViewController: UIViewController {
     
@@ -13,6 +14,8 @@ class QuizInProgressViewController: UIViewController {
     var introVC: QuizIntroTableViewController!
     
     @IBOutlet weak var btnGiveUp: UIButton!
+    @IBOutlet weak var circularSlider: CircularSlider!
+    
     
     override func viewWillAppear(_ animated: Bool) {
         

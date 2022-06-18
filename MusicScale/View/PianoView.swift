@@ -82,8 +82,8 @@ class PianoView: UIView {
         context.setFillColor(UIColor.systemBackground.cgColor)
         context.fill(rect)
         
-        context.setFillColor(CGColor(gray: 1, alpha: 1))
-        context.fill(boxOutline)
+        context.setFillColor(CGColor(red: 245/255, green: 245/255, blue: 240/255, alpha: 1))
+        context.fill(rect)
         
         // 위아래 라인
         context.setLineWidth(viewModel.lineWidth)

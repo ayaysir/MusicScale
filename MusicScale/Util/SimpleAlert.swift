@@ -39,15 +39,20 @@ func simpleYesAndNo(_ controller: UIViewController, message: String, title: Stri
     controller.present(alertController, animated: true, completion: nil)
 }
 
-func simpleActionSheets(_ controller: UIViewController, actionTitles: [String], actionStyles: [UIAlertAction.Style]? = nil, title: String, message: String = "", actionCompletion: @escaping (_ actionIndex: Int, _ alertController: UIAlertController) -> ()){
+func simpleActionSheets(_ controller: UIViewController, actionTitles: [String], actionStyles: [UIAlertAction.Style]? = nil, title: String, message: String = "", sourceView: UIView?, sourceRect: CGRect?, actionCompletion: @escaping (_ actionIndex: Int) -> ()){
     let alertController = UIAlertController(title: title, message: "", preferredStyle: .actionSheet)
-    
+    alertController.modalPresentationStyle = .popover
     for (index, actionTitle) in actionTitles.enumerated() {
         let action = UIAlertAction(title: actionTitle, style: actionStyles?[index] ?? .default, handler: { action in
-            actionCompletion(index, alertController)
+            actionCompletion(index)
         })
         alertController.addAction(action)
     }
+    
     alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+    if let presenter = alertController.popoverPresentationController {
+        presenter.sourceView = sourceView ?? controller.view.window
+        presenter.sourceRect = sourceRect ?? CGRect(x: 0, y: 0, width: 0, height: 0)
+    }
     controller.present(alertController, animated: true, completion: nil)
 }
