@@ -104,7 +104,6 @@ class PianoView: UIView {
             context.addLine(to: keyLine.endPos)
             context.strokePath()
         }
-        print("#2: keyLine.endPost - keyLine.startPos", viewModel.whiteKeyDrawPosList.first!.endPos,  viewModel.whiteKeyDrawPosList.first!.startPos)
         
         // 키별로 동그라미 그리기 (흰 건반 - 누르기 전)
         for info in viewModel.pianoWhiteKeys {

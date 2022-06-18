@@ -81,10 +81,18 @@ class ScaleInfoViewController: UIViewController {
         pianoVC?.adjustKeyPosition(key: scaleInfoViewModel.currentKey.playableKey)
         pianoVC?.octaveShift = scaleInfoViewModel.currentOctaveShift
         changeAvailableKeys()
+        
+        hideTabBarWhenLandscape(self)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         stopSequencer()
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        hideTabBarWhenLandscape(self)
     }
     
     // MARK: - Outlet Action

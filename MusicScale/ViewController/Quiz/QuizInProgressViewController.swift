@@ -13,9 +13,9 @@ class QuizInProgressViewController: UIViewController {
     var quizViewModel: QuizViewModel!
     var introVC: QuizIntroTableViewController!
     
+    @IBOutlet weak var btnContinue: UIButton!
     @IBOutlet weak var btnGiveUp: UIButton!
     @IBOutlet weak var circularSlider: CircularSlider!
-    
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -25,6 +25,9 @@ class QuizInProgressViewController: UIViewController {
             navigationController?.setViewControllers([finishedVC], animated: false)
             return
         }
+        
+        btnContinue.layer.cornerRadius = 5
+        btnGiveUp.layer.cornerRadius = 5
     }
     
     override func viewDidLoad() {

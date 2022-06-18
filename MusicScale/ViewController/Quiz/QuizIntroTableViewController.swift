@@ -86,6 +86,11 @@ class QuizIntroTableViewController: UITableViewController {
             return
         }
         
+        guard quizStore.selectedScaleInfoId.count > 0 else {
+            simpleAlert(self, message: "You must select at least one target scale.")
+            return
+        }
+        
         quizViewModel.refreshQuestionList()
         
         let inProgressVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuizInProgressViewController") as! QuizInProgressViewController

@@ -14,7 +14,12 @@ class MatchKeysViewController: InQuizViewController {
     @IBOutlet weak var lblOrder: UILabel!
     @IBOutlet weak var lblQuizProgressInfo: UILabel!
     @IBOutlet weak var containerViewPiano: UIView!
-    @IBOutlet weak var viewWebContainer: UIView!
+    // @IBOutlet weak var viewWebContainer: UIView!
+    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var viewQuizTitles: UIView!
+    @IBOutlet weak var cnstTitlesHeight: NSLayoutConstraint!
+    @IBOutlet weak var cnstSpaceBetweenProgAndTits: NSLayoutConstraint!
+    
     @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var lblResult: UILabel!
     
@@ -28,6 +33,32 @@ class MatchKeysViewController: InQuizViewController {
     @IBOutlet weak var progressViewInStudying: UIProgressView!
     @IBOutlet weak var progressViewDayQuestionProgress: UIProgressView!
     var prevDayQuestionPercent: Float = 0.0
+    
+    private var staffWidth: Int? {
+        /*
+         landscape
+         ipad 12 : 600 (570)
+         ipad 11 : 750 (417)
+         ipad mini : 1000 (344.5)
+         ipad 9.7 : 750 (364)
+         ipad Air : 750 (406)
+         iPad 5th : 750 (397.5)
+         
+         0 ~ 228 (600 ~ 1000)
+         */
+        if isLandscape && isPad {
+            print(view.frame.size)
+            if view.frame.size.width >= 1360 && view.frame.size.height >= 1020 {
+                return 600
+            } else if view.frame.size.width <= 1140 && view.frame.size.height <= 750 {
+                return 1000
+            } else {
+                return 750
+            }
+        }
+        
+        return 460
+    }
     
     /// 지금 문제 풀이중?
     var isSolvingQuestionNow: Bool = true {
@@ -52,11 +83,12 @@ class MatchKeysViewController: InQuizViewController {
     
     var pianoVC: PianoViewController?
     
-    var currentPlayableKey: Music.PlayableKey?
-    var currentQuestion: QuizQuestion?
-    var currentEditViewModel: QuizEditKeyViewModel?
-    var currentScaleInfoVM: SimpleScaleInfoViewModel?
-    var currentPlayMode: PlayMode?
+    private var currentPlayableKey: Music.PlayableKey?
+    private var currentQuestion: QuizQuestion?
+    private var currentEditViewModel: QuizEditKeyViewModel?
+    private var currentScaleInfoVM: SimpleScaleInfoViewModel?
+    private var currentPlayMode: PlayMode?
+    private var currentDisplayAbcjsText: String?
     var questionSuccessResult: Bool? {
         didSet {
             if questionSuccessResult == nil {
@@ -78,7 +110,7 @@ class MatchKeysViewController: InQuizViewController {
     }
     
     private var firstrun: Bool = true
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,10 +119,13 @@ class MatchKeysViewController: InQuizViewController {
         // button design
         btnSubmit.layer.cornerRadius = 10
         lblResult.layer.cornerRadius = 10
+        lblResult.clipsToBounds = true
         
-        webkitView = WKWebView(frame: CGRect(origin: .zero, size: viewWebContainer.frame.size))
+        webView.layoutIfNeeded()
+        webkitView = webView
         webkitView.isUserInteractionEnabled = false
-        viewWebContainer.addSubview(webkitView)
+        
+        initButtonsAppearance()
         
         // Override displayNextQuestionHandler
         displayNextQuestionHandler = { [unowned self] newQuestion in
@@ -107,7 +142,7 @@ class MatchKeysViewController: InQuizViewController {
             
             if firstrun {
                 isSolvingQuestionNow = true
-                initWebSheetPage(initAbcjsText: currentEditViewModel!.abcjsTextOnEdit)
+                initWebSheetPage(initAbcjsText: currentEditViewModel!.abcjsTextOnEdit, staffWidth: staffWidth)
                 firstrun = false
                 updateProgressViews(isBeforeSubmit: true)
             }
@@ -117,7 +152,78 @@ class MatchKeysViewController: InQuizViewController {
         }
         
         loadFirstQuestion()
+        
+        if isPad {
+            hideTabBarWhenLandscape(self)
+        }
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        print(isLandscape)
+        if isPad {
+            hideTabBarWhenLandscape(self)
+        }
+        
+        // https://stackoverflow.com/questions/26943808/ios-how-to-run-a-function-after-device-has-rotated-swift
+        coordinator.animate(alongsideTransition: nil) { [unowned self] _ in
+            
+            containerViewPiano.layoutIfNeeded()
+            pianoVC?.parentContainerView = containerViewPiano
+            pianoVC?.setPiano()
+            
+            if let currentPlayableKey = currentPlayableKey {
+                setPianoPosition(playableKey: currentPlayableKey)
+            } else if let currentQuestion = currentQuestion {
+                setPianoPosition(playableKey: currentQuestion.key.playableKey)
+            }
+            
+            if let currentDisplayAbcjsText = currentDisplayAbcjsText {
+                injectAbcjsText(from: currentDisplayAbcjsText, needReload: true, staffWidth: staffWidth)
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if isPhone {
+            OrientationUtil.lockOrientation(.portrait)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if isPhone {
+            OrientationUtil.lockOrientation(.portrait, andRotateTo: .portrait)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        showTabBar(self)
+        OrientationUtil.lockOrientation(.all)
+    }
+    
+    // MARK: - Initial methods
+    
+    private func initButtonsAppearance() {
+        let space: CGFloat = 10
+        btnPlayOnEdit.spaceBetweenImageAndText(space: space)
+        btnPlayAnswer.spaceBetweenImageAndText(space: space)
+        btnPlayTogether.spaceBetweenImageAndText(space: space)
+        
+        // let leftMargin: CGFloat = 3
+        // 
+        // if #available(iOS 15.0, *) {
+        //     btnPlayOnEdit.configuration?.imagePadding = leftMargin
+        //     btnPlayAnswer.configuration?.imagePadding = leftMargin
+        //     btnPlayTogether.configuration?.imagePadding = leftMargin
+        //     
+        // } else {
+        //     // Fallback on earlier versions
+        //     btnPlayOnEdit.titleEdgeInsets.left = leftMargin
+        //     btnPlayAnswer.titleEdgeInsets.left = leftMargin
+        //     btnPlayTogether.titleEdgeInsets.left = leftMargin
+        // }
+    }
+    
     
     // MARK: - @IBAction
     @IBAction func barBtnActBackspaceNote(_ sender: UIBarButtonItem) {
@@ -155,7 +261,8 @@ class MatchKeysViewController: InQuizViewController {
             // 정답, 오답 비교 표시
             let order: DegreesOrder = question.isAscending ? .ascending : .descending
             let abcjsText = editVM.abcjsTextForComparison(questionSuccessResult!, originalDegrees: infoVM.targetDegrees(order: order), order: order, key: infoVM.currentKey, octaveShift: 0, enharmonicMode: quizStore.enharmonicMode)
-            injectAbcjsText(from: abcjsText, needReload: true)
+            injectAbcjsText(from: abcjsText, needReload: true, staffWidth: staffWidth)
+            currentDisplayAbcjsText = abcjsText
         } 
     }
     
@@ -175,14 +282,16 @@ class MatchKeysViewController: InQuizViewController {
     
     func refreshSheetView() {
         if let currentEditViewModel = currentEditViewModel {
-            injectAbcjsText(from: currentEditViewModel.abcjsTextOnEdit, needReload: true)
+            injectAbcjsText(from: currentEditViewModel.abcjsTextOnEdit, needReload: true, staffWidth: staffWidth)
+            currentDisplayAbcjsText = currentEditViewModel.abcjsTextOnEdit
             self.highlightLastNote()
         }
     }
     
     func displayName(question: QuizQuestion) {
-        lblKeyName.text = "\(question.key) \(question.scaleInfo.name)"
+        lblKeyName.text = "\(question.key.textValue) \(question.scaleInfo.name)"
         lblOrder.text = question.isAscending ? "Ascending" : "Descending"
+        self.title = "\(lblKeyName.text!) \(question.isAscending ? "⬆" : "⬇")"
         lblQuizProgressInfo.text = quizViewModel.quizStatus
     }
     
@@ -250,6 +359,7 @@ class MatchKeysViewController: InQuizViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "QuizPianoSegue":
+            containerViewPiano.layoutIfNeeded()
             pianoVC = segue.destination as? PianoViewController
             pianoVC?.parentContainerView = containerViewPiano
             pianoVC?.mode = .free
@@ -354,7 +464,8 @@ extension MatchKeysViewController: PianoVCDelegate {
         print(currentPlayableKey, keyInfo, intNotation)
         currentEditViewModel.addKey(intNotation: intNotation, enharmonicMode: quizStore.enharmonicMode)
         
-        injectAbcjsText(from: currentEditViewModel.abcjsTextOnEdit, needReload: true)
+        injectAbcjsText(from: currentEditViewModel.abcjsTextOnEdit, needReload: true, staffWidth: staffWidth)
+        currentDisplayAbcjsText = currentEditViewModel.abcjsTextOnEdit
         highlightLastNote()
     }
 }

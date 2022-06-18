@@ -15,6 +15,7 @@
     html, body {
       margin: 0px;
       padding: 0px;
+      /* background-color: red; */
     }
 
     .abcjs-highlight {
@@ -41,9 +42,10 @@
     const is_iOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) == null ? false : true
 
     let visualObj
-    function onRender(tune, params = {
+    function onRender(tune, width = 460, params = {
       responsive: "resize",
-      staffwidth: 460,
+      staffwidth: width,
+      paddingtop: 0,
       paddingright: 5,
       paddingleft: 5,
       add_classes: true,
@@ -215,7 +217,7 @@ w: C D E♭ F G A♭ B♭ C`
 
       const sample2 =
 `X: 1
-T:
+T: 
 V: T1 clef=treble name="Submitted"
 V: T2 clef=treble name="Correct"
 L: 1/1

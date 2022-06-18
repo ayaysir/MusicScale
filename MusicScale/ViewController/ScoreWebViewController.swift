@@ -32,7 +32,7 @@ protocol ScoreWebInjection {
      - parameter from: abcjs Text (캐릭터 충돌 문제해결된 것으로)
      - parameter needReload: 외부 컨트롤러에서 재실행을 하는거라면 **true**(기본값), 최초 실행이라면 **false**
      */
-    func injectAbcjsText(from abcjsText: String, needReload: Bool)
+    func injectAbcjsText(from abcjsText: String, needReload: Bool, staffWidth: Int?)
 }
 
 class ScoreWebViewController: UIViewController {
@@ -63,7 +63,7 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
         webView.evaluateJavaScript("stopTimer()")
     }
     
-    func injectAbcjsText(from abcjsText: String, needReload: Bool = true) {
+    func injectAbcjsText(from abcjsText: String, needReload: Bool = true, staffWidth: Int? = 460) {
         
         let abcjsTextFixed = charFixedAbcjsText(abcjsText)
 

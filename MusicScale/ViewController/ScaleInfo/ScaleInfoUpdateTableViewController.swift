@@ -423,7 +423,7 @@ extension ScaleInfoUpdateTableViewController: WKUIDelegate, WKNavigationDelegate
         webView.evaluateJavaScript("stopTimer()")
     }
     
-    func injectAbcjsText(from abcjsText: String, needReload: Bool) {
+    func injectAbcjsText(from abcjsText: String, needReload: Bool, staffWidth: Int? = 460) {
         
         let abcjsTextFixed = charFixedAbcjsText(abcjsText)
         

@@ -101,7 +101,7 @@ extension InQuizViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMess
         }
     }
     
-    func initWebSheetPage(initAbcjsText: String) {
+    func initWebSheetPage(initAbcjsText: String, staffWidth: Int? = 460) {
         
         if #available(iOS 14.0, *) {
             webkitView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
@@ -120,7 +120,7 @@ extension InQuizViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMess
         webkitView.loadFileURL(url, allowingReadAccessTo: url)
         webkitView.scrollView.isScrollEnabled = false
         
-        injectAbcjsText(from: initAbcjsText, needReload: false)
+        injectAbcjsText(from: initAbcjsText, needReload: false, staffWidth: staffWidth)
         
         // 자바스크립트 -> 네이티브 앱 연결
         // 브리지 등록
@@ -149,15 +149,15 @@ extension InQuizViewController: ScoreWebInjection {
         webkitView.evaluateJavaScript("stopTimer()")
     }
     
-    func injectAbcjsText(from abcjsText: String, needReload: Bool = true) {
+    func injectAbcjsText(from abcjsText: String, needReload: Bool = true, staffWidth: Int? = 460) {
         
         let abcjsTextFixed = charFixedAbcjsText(abcjsText)
 
         if needReload {
             stopTimer()
-            webkitView.evaluateJavaScript(generateAbcJsInjectionSource(from: abcjsTextFixed))
+            webkitView.evaluateJavaScript(generateAbcJsInjectionSource(from: abcjsTextFixed, staffWidth: staffWidth))
         } else {
-            let injectionSource = generateAbcJsInjectionSource(from: abcjsTextFixed)
+            let injectionSource = generateAbcJsInjectionSource(from: abcjsTextFixed, staffWidth: staffWidth)
             let injectionScript = WKUserScript(source: injectionSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
             webkitView.configuration.userContentController.addUserScript(injectionScript)
         }
