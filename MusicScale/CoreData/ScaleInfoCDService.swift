@@ -1,5 +1,5 @@
 //
-//  CoreDataService.swift
+//  ScaleInfoCDService.swift
 //  MusicScale
 //
 //  Created by yoonbumtae on 2022/05/14.

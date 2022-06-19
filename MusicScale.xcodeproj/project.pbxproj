@@ -11,7 +11,9 @@
 		440161C3285E348800B6D4FB /* OrientationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440161C2285E348800B6D4FB /* OrientationUtil.swift */; };
 		440161C5285E54BC00B6D4FB /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440161C4285E54BC00B6D4FB /* UIButton+.swift */; };
 		4404B045285F7CEF0072CCFD /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404B044285F7CEF0072CCFD /* PostView.swift */; };
-		440637EB282FF6D900875E77 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637EA282FF6D900875E77 /* CoreDataService.swift */; };
+		4404B047285F8A5B0072CCFD /* QuizStatsCDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404B046285F8A5B0072CCFD /* QuizStatsCDService.swift */; };
+		4404B049285FA3C70072CCFD /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404B048285FA3C70072CCFD /* StatsViewController.swift */; };
+		440637EB282FF6D900875E77 /* ScaleInfoCDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637EA282FF6D900875E77 /* ScaleInfoCDService.swift */; };
 		440637ED282FF89300875E77 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637EC282FF89300875E77 /* CoreDataTests.swift */; };
 		440637F0283003CC00875E77 /* ScaleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637EF283003CC00875E77 /* ScaleInfo.swift */; };
 		440637F2283003DE00875E77 /* ScaleInfoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637F1283003DE00875E77 /* ScaleInfoListViewModel.swift */; };
@@ -159,7 +161,9 @@
 		440161C2285E348800B6D4FB /* OrientationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationUtil.swift; sourceTree = "<group>"; };
 		440161C4285E54BC00B6D4FB /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		4404B044285F7CEF0072CCFD /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
-		440637EA282FF6D900875E77 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		4404B046285F8A5B0072CCFD /* QuizStatsCDService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStatsCDService.swift; sourceTree = "<group>"; };
+		4404B048285FA3C70072CCFD /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		440637EA282FF6D900875E77 /* ScaleInfoCDService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoCDService.swift; sourceTree = "<group>"; };
 		440637EC282FF89300875E77 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		440637EF283003CC00875E77 /* ScaleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfo.swift; sourceTree = "<group>"; };
 		440637F1283003DE00875E77 /* ScaleInfoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoListViewModel.swift; sourceTree = "<group>"; };
@@ -329,7 +333,8 @@
 		440637E9282FF6BF00875E77 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				440637EA282FF6D900875E77 /* CoreDataService.swift */,
+				440637EA282FF6D900875E77 /* ScaleInfoCDService.swift */,
+				4404B046285F8A5B0072CCFD /* QuizStatsCDService.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -367,6 +372,7 @@
 				445FA4C8284F53C90008D621 /* QuizCommon.swift */,
 				445FA4CD284F5D010008D621 /* InQuizViewController.swift */,
 				44FEFBF628539C83000402DE /* QuizFinishedViewController.swift */,
+				4404B048285FA3C70072CCFD /* StatsViewController.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -980,7 +986,7 @@
 				44172529284B8A110003CDC7 /* QuizHelper.swift in Sources */,
 				4461012F28451EE30033BCE9 /* SortViewController.swift in Sources */,
 				44A09A8128392C0B0067184E /* UserDefaults+.swift in Sources */,
-				440637EB282FF6D900875E77 /* CoreDataService.swift in Sources */,
+				440637EB282FF6D900875E77 /* ScaleInfoCDService.swift in Sources */,
 				44A09A7D283808C90067184E /* ScaleInfoVCConfigStore.swift in Sources */,
 				440161C3285E348800B6D4FB /* OrientationUtil.swift in Sources */,
 				440637F428307E0000875E77 /* ScaleListTableViewController.swift in Sources */,
@@ -1036,6 +1042,7 @@
 				4455D1CC285A2BD400FB344E /* SettingTableViewController.swift in Sources */,
 				4455D1CE285A2CB800FB344E /* MIDIInstrumentList.swift in Sources */,
 				44E0ACF1285F0BC6008BBB82 /* NSLayoutConstraint+.swift in Sources */,
+				4404B049285FA3C70072CCFD /* StatsViewController.swift in Sources */,
 				445FA4D0284FB58C0008D621 /* ColorfulProgressView.swift in Sources */,
 				443A0C6328428F3100641BC0 /* Between.swift in Sources */,
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,
@@ -1052,6 +1059,7 @@
 				4475CB532830B52700B9D204 /* String+.swift in Sources */,
 				446AEA2C283D3EB200C2BFCF /* WebMusicSheetHelper.swift in Sources */,
 				44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */,
+				4404B047285F8A5B0072CCFD /* QuizStatsCDService.swift in Sources */,
 				4455D1C52858BFB700FB344E /* Notification.Name+.swift in Sources */,
 				44B70F4228491A650068495A /* QuizViewModel.swift in Sources */,
 				4455D1C1285890A500FB344E /* FirebaseUtil.swift in Sources */,

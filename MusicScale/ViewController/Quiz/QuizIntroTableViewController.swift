@@ -39,6 +39,7 @@ class QuizIntroTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // print(try? QuizStatsCDService.shared.readEntityList())
         
         // 기존 저장 LeitnerSystem 오브젝트가 있는 경우 리다리렉트
         if quizStore.savedLeitnerSystem != nil {
@@ -116,9 +117,6 @@ class QuizIntroTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == buttonSection {
-            return 1
-        }
         
         return super.tableView(tableView, numberOfRowsInSection: section)
     }

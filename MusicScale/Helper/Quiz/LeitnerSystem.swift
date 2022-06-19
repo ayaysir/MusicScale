@@ -13,7 +13,7 @@ protocol LeitnerSystemDelegate: AnyObject {
 
 struct LeitnerItem<T: Codable>: Codable {
     var item: T
-    fileprivate var boxNumber: Int
+    fileprivate(set) var boxNumber: Int
     fileprivate var seq: Int
     fileprivate(set) var isSuccess: Bool = false
     

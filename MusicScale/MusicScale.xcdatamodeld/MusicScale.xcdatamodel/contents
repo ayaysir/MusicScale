@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="GroupEntity" representedClassName="GroupEntity" syncable="YES" codeGenerationType="class">
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="groupName" optional="YES" attributeType="String"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="themeColor" optional="YES" attributeType="String"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="QuizStatEntity" representedClassName="QuizStatEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="elapsedSeconds" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isAnsweredCorrectly" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="key" optional="YES" attributeType="String"/>
+        <attribute name="order" optional="YES" attributeType="String"/>
+        <attribute name="scaleName" optional="YES" attributeType="String"/>
+        <attribute name="solveDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="studyStatus" optional="YES" attributeType="String"/>
+        <attribute name="typeOfQuestion" optional="YES" attributeType="String"/>
     </entity>
     <entity name="ScaleInfoEntity" representedClassName="ScaleInfoEntity" syncable="YES" codeGenerationType="class">
         <attribute name="comment" optional="YES" attributeType="String"/>
@@ -24,7 +34,8 @@
         <attribute name="nameAlias" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="ScaleInfoEntity" positionX="-966.612548828125" positionY="-3950.486663818359" width="128" height="253"/>
         <element name="GroupEntity" positionX="-1176.523559570312" positionY="-3794.936401367188" width="128" height="118"/>
+        <element name="ScaleInfoEntity" positionX="-966.612548828125" positionY="-3950.486663818359" width="128" height="253"/>
+        <element name="QuizStatEntity" positionX="-1071" positionY="-3825" width="128" height="149"/>
     </elements>
 </model>

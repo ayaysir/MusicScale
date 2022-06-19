@@ -32,6 +32,7 @@ class InQuizViewController: UIViewController {
     
     let quizStore = QuizConfigStore.shared
     let playbackConfigStore = ScaleInfoVCConfigStore.shared
+    let quizStatService = QuizStatsCDService.shared
     
     var quizViewModel: QuizViewModel!
     var displayNextQuestionHandler: DisplayHandler!
@@ -42,6 +43,9 @@ class InQuizViewController: UIViewController {
     // let conductor = NoteSequencerConductor()
     let conductor = GlobalConductor.shared
     var playTimer: Timer?
+    
+    var currentQuestion: QuizQuestion?
+    var currentQuizStatEntity: QuizStatEntity?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -88,6 +92,53 @@ class InQuizViewController: UIViewController {
         }
         
         displayNextQuestionHandler(newQuestion)
+    }
+    
+    /// 통계 기록: 다음 진행 버튼을 누르는 시점에 (progressNextQuestion 직전) / isAnsweredCorrectly, elapsedSeconds, studyStatus
+    private func updateQuizStat(currentQuestion: QuizQuestion) {
+        // add stats info
+        
+        let scaleName = currentQuestion.scaleInfo.name
+        let key = currentQuestion.key.rawValue
+        let order = currentQuestion.isAscending ? "ascending" : "descending"
+        let typeOfQuestion = quizViewModel.currentType.identifier
+        let isAnsweredCorrectly = false // 알 수 없음
+        let solveDate = Date()
+        let elapsedSeconds: Int16 = 0 // 알 수 없음
+        let studyStatus = "" // 알 수 없음
+        
+        do {
+            currentQuizStatEntity = try quizStatService.createQuizStatEntity(
+                scaleName: scaleName,
+                key: key,
+                order: order,
+                typeOfQuestion: typeOfQuestion,
+                isAnsweredCorrectly: isAnsweredCorrectly,
+                solveDate: solveDate,
+                elapsedSeconds: elapsedSeconds,
+                studyStatus: studyStatus
+            )
+        } catch {
+            print(error)
+        }
+    }
+    
+    func setQuizStatFromCurrentQuestion(_ isSuccess: Bool, elapsedSeconds: Int) {
+        guard let currentQuizQuestion = currentQuestion else {
+            return
+        }
+
+        updateQuizStat(currentQuestion: currentQuizQuestion)
+        currentQuizStatEntity?.isAnsweredCorrectly = isSuccess
+        
+        currentQuizStatEntity?.elapsedSeconds = Int16(elapsedSeconds)
+        currentQuizStatEntity?.studyStatus = String(quizViewModel.leitnerSystem.getCurrentQuestionStatus()?.boxNumber ?? -99)
+        
+        do {
+            try quizStatService.saveManagedContext()
+        } catch {
+            print(error)
+        }
     }
 }
 

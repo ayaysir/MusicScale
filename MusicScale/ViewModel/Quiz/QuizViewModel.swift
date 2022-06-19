@@ -27,6 +27,15 @@ enum QuizType: Int, Codable {
             return "Guess the Name"
         }
     }
+    
+    var identifier: String {
+        switch self {
+        case .matchKeys:
+            return "matchKeys"
+        case .guessName:
+            return "guessName"
+        }
+    }
 }
 
 class QuizViewModel {
@@ -38,6 +47,9 @@ class QuizViewModel {
     private(set) var scaleIdList: Set<UUID> = []
     var idListCount: Int {
         return scaleIdList.count
+    }
+    var currentType: QuizType! {
+        store.typeOfQuestions
     }
     
     // Leitner System

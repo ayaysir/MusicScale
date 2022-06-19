@@ -18,24 +18,31 @@ class FlashcardsViewController: InQuizViewController {
     @IBOutlet weak var btnOK: UIButton!
     @IBOutlet weak var btnRemind: UIButton!
     
-    
-    // 앞면: 문제, 뒷면: 정답
+    /// 앞면: 문제, 뒷면: 정답
     private var backAnswerLabel: UILabel!
     
     private var showingBack = false
     private let flipDuration = 0.5
     private var firstrun = true
     
-    var currentQuizQuestion: QuizQuestion?
+    // var currentQuestion: QuizQuestion?
     var currentScaleInfoVM: SimpleScaleInfoViewModel?
     
     var prevDayQuestionPercent: Float = 0.0
+    
+    /// 문제 시작부터 정답까지 몇 초 걸렸는지 타이머
+    private var timer: Timer?
+    private var elapsedSeconds: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Override displayNextQuestionHandler
         displayNextQuestionHandler = { [unowned self] newQuestion in
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+                self.elapsedSeconds += 1
+            })
+            
             if showingBack {
                 flip()
             }
@@ -44,7 +51,7 @@ class FlashcardsViewController: InQuizViewController {
             let tempo = playbackConfigStore.tempo
             let scaleInfoVM = SimpleScaleInfoViewModel(scaleInfo: newQuestion.scaleInfo, currentKey: newQuestion.key, currentTempo: tempo, currentEnharmonicMode: quizStore.enharmonicMode)
             
-            currentQuizQuestion = newQuestion
+            currentQuestion = newQuestion
             currentScaleInfoVM = scaleInfoVM
             
             let abcjsText = scaleInfoVM.abcjsTextForFlashcard(isAscending: newQuestion.isAscending)
@@ -127,16 +134,28 @@ class FlashcardsViewController: InQuizViewController {
         updateProgressViews(isBeforeSubmit: false)
         progressNextQuestion(false)
         stopSequencer()
+        
+        setQuizStatFromCurrentQuestion(true, elapsedSeconds: resetTimer())
     }
     
     @IBAction func btnActSuccessQuestion(_ sender: Any) {
         updateProgressViews(isBeforeSubmit: false)
         progressNextQuestion(true)
         stopSequencer()
+        
+        setQuizStatFromCurrentQuestion(true, elapsedSeconds: resetTimer())
     }
     
     @IBAction func btnActPlay(_ sender: UIButton) {
         playOrStop()
+    }
+    
+    func resetTimer() -> Int {
+        timer?.invalidate()
+        timer = nil
+        let storedSeconds = self.elapsedSeconds
+        self.elapsedSeconds = 0
+        return storedSeconds
     }
     
     func updateProgressViews(isBeforeSubmit: Bool) {
@@ -208,7 +227,7 @@ extension FlashcardsViewController: ConductorPlay {
         stopSequencer()
         
         if let currentScaleInfoVM = currentScaleInfoVM,
-           let currentQuizQuestion = currentQuizQuestion,
+           let currentQuizQuestion = currentQuestion,
            let semitones = currentQuizQuestion.isAscending ? currentScaleInfoVM.playbackSemitoneAscending : currentScaleInfoVM.playbackSemitoneDescending
         {
             conductor.tempo = Float(currentScaleInfoVM.currentTempo)

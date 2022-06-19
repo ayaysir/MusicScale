@@ -44,7 +44,7 @@ class MatchKeysViewController: InQuizViewController {
     var pianoVC: PianoViewController?
     
     private var currentPlayableKey: Music.PlayableKey?
-    private var currentQuestion: QuizQuestion?
+    // private var currentQuestion: QuizQuestion?
     private var currentEditViewModel: QuizEditKeyViewModel?
     private var currentScaleInfoVM: SimpleScaleInfoViewModel?
     private var currentPlayMode: PlayMode?
@@ -54,6 +54,10 @@ class MatchKeysViewController: InQuizViewController {
     }
     
     private var firstrun: Bool = true
+    
+    /// 문제 시작부터 정답까지 몇 초 걸렸는지 타이머
+    private var timer: Timer?
+    private var elapsedSeconds: Int = 0
 
     // MARK: - VC Lifecycle
     
@@ -79,6 +83,10 @@ class MatchKeysViewController: InQuizViewController {
         
         // Override displayNextQuestionHandler
         displayNextQuestionHandler = { [unowned self] newQuestion in
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+                self.elapsedSeconds += 1
+            })
+            
             self.displayName(question: newQuestion)
             
             let tempo = playbackConfigStore.tempo
@@ -260,13 +268,17 @@ class MatchKeysViewController: InQuizViewController {
     }
     
     @IBAction func btnActSubmit(_ sender: Any) {
+        // Next 버튼
         if !isSolvingQuestionNow, let result = questionSuccessResult {
             questionSuccessResult = nil
             isSolvingQuestionNow = true
+            setQuizStatFromCurrentQuestion(result, elapsedSeconds: resetTimer())
             progressNextQuestion(result)
+            stopSequencer()
             return
         }
         
+        // Submit 버튼
         if let question = currentQuestion,
            let editVM = currentEditViewModel,
            let infoVM = currentScaleInfoVM {
@@ -371,6 +383,14 @@ class MatchKeysViewController: InQuizViewController {
             progressViewInStudying.progressTintColor = .realGreeen
             progressViewInStudying.trackTintColor = .systemYellow
         }
+    }
+    
+    func resetTimer() -> Int {
+        timer?.invalidate()
+        timer = nil
+        let storedSeconds = self.elapsedSeconds
+        self.elapsedSeconds = 0
+        return storedSeconds
     }
     
     // MARK: - Navigation
