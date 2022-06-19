@@ -43,6 +43,7 @@ class ArchiveDetailTableViewController: UITableViewController {
     @IBOutlet weak var barBtnDeleteOr: UIBarButtonItem!
     
     private let starRatingVM = StarRatingViewModel()
+    private let postManager = FirebasePostManager.shared
     
     // private let conductor = NoteSequencerConductor()
     let conductor = GlobalConductor.shared
@@ -130,7 +131,7 @@ class ArchiveDetailTableViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         switch mode {
         case .read:
-            FirebasePostManager.shared.removeLikeCountListener()
+            postManager.removeLikeCountListener()
         case .create:
             break
         }
@@ -156,6 +157,7 @@ class ArchiveDetailTableViewController: UITableViewController {
             setButtonTitleForReadMode()
             setMetadataLabelFromPostVM()
             setLabelsFromInfoVM()
+            getPostCounts()
         case .create:
             setButtonTitleForCreateMode()
             lblUploader.text = "Anonymous (\(FirebaseAuthManager.shared.currentUser?.uid[0..<4] ?? ""))"
@@ -234,6 +236,11 @@ class ArchiveDetailTableViewController: UITableViewController {
 
             do {
                 let newEntity = try postViewModel.writeToCoreData()
+                postManager.updatePostCount(.download, documentID: postViewModel.documentID)
+                postManager.readPostCount(.download, documentID: postViewModel.documentID) { (count: Int) in
+                    self.lblDownloadCount.text = String(count)
+                }
+                
                 simpleAlert(self, message: "Sucess Download", title: "Download") { _ in
                     NotificationCenter.default.post(name: .downloadedFromArchive, object: newEntity)
                 }
@@ -250,7 +257,7 @@ class ArchiveDetailTableViewController: UITableViewController {
             
             // setLoadingScreen()
             SwiftSpinner.show("Uploading...")
-            FirebasePostManager.shared.addPost(postRequest: post, completionHandler: { documentID in
+            postManager.addPost(postRequest: post, completionHandler: { documentID in
                 DispatchQueue.main.async {
                     SwiftSpinner.show(duration: 2, title: "Upload Completed!", animated: false) {
                         self.navigationController?.popViewController(animated: true)
@@ -274,7 +281,7 @@ class ArchiveDetailTableViewController: UITableViewController {
         }
 
         if isMode(.read) && postViewModel.authorUID == user.uid {
-            FirebasePostManager.shared.deletePost(documentID: postViewModel.documentID) { documentID in
+            postManager.deletePost(documentID: postViewModel.documentID) { documentID in
                 simpleAlert(self, message: "Success to delete.", title: "Delete") { _ in
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -302,8 +309,8 @@ class ArchiveDetailTableViewController: UITableViewController {
             break
         }
         
-        FirebasePostManager.shared.updateLike(documentID: postViewModel.documentID, status: self.currentLikeStatus) { documentID in
-            
+        postManager.updateLike(documentID: postViewModel.documentID, status: self.currentLikeStatus) { documentID in
+            // 
         } errorHandler: { err in
             self.view.makeToast("err", position: .center)
             self.currentLikeStatus = oldStatus
@@ -380,13 +387,27 @@ class ArchiveDetailTableViewController: UITableViewController {
         return refLabel.frame.height
     }
     
+    func getPostCounts() {
+        // View, Download count
+        guard let documentID = postViewModel?.documentID else {
+            return
+        }
+        postManager.updatePostCount(.view, documentID: documentID)
+        postManager.readPostCount(.view, documentID: documentID) { (count: Int) in
+            self.lblViewCount.text = "\(count)"
+        }
+        postManager.readPostCount(.download, documentID: documentID) { (count: Int) in
+            self.lblDownloadCount.text = "\(count)"
+        }
+    }
+    
     // MARK: - Custom methods
     func getLikeStatus() {
         guard let postViewModel = postViewModel else {
             return
         }
         
-        FirebasePostManager.shared.readLike(documentID: postViewModel.documentID) { like in
+        postManager.readLike(documentID: postViewModel.documentID) { like in
             self.currentLikeStatus = like?.status ?? LikeStatus.none
         }
     }
@@ -396,7 +417,7 @@ class ArchiveDetailTableViewController: UITableViewController {
             return
         }
         
-        FirebasePostManager.shared.listenTotalLikeCount(documentID: postViewModel.documentID) { [unowned self] (likeCounts: LikeCounts, recentChanges: Like?) in
+        postManager.listenTotalLikeCount(documentID: postViewModel.documentID) { [unowned self] (likeCounts: LikeCounts, recentChanges: Like?) in
             
             self.currentLikeCounts = likeCounts
             

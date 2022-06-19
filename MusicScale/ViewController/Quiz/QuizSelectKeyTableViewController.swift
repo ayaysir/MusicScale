@@ -47,7 +47,8 @@ class QuizSelectKeyTableViewController: UITableViewController {
     func toggleCheckmark(_ cell: UITableViewCell, isCheckmark: Bool) {
         // background color
         if isCheckmark {
-            cell.backgroundColor = UIColor.init(fromGooglePicker: "245, 180, 83")
+            // cell.backgroundColor = UIColor.init(fromGooglePicker: "245, 180, 83")
+            cell.backgroundColor = .systemGray5
             cell.accessoryType = .checkmark
         } else {
             cell.backgroundColor = .clear

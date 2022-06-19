@@ -22,6 +22,8 @@ class FirebasePostManager {
     
     let POSTS_DIR = "scale_posts"
     let LIKE_DIR = "likes"
+    let VIEW_DIR = "views"
+    let DOWNLOAD_DIR = "downloads"
     
     static let shared = FirebasePostManager()
     
@@ -33,6 +35,7 @@ class FirebasePostManager {
     typealias LikeCompletionHandler = (_ like: Like?) -> ()
     typealias LikeCountsCompletion = (_ likeCounts: LikeCounts, _ recentChanges: Like?) -> ()
     typealias LikeAllCompletion = (_ likeInfo: [String: LikeCounts]) -> ()
+    typealias CountCompletionHandler = (_ count: Int) -> ()
     
     var db: Firestore!
     var rootCollection: CollectionReference!
@@ -226,6 +229,8 @@ class FirebasePostManager {
         }
     }
     
+    // MARK: - Like Dislike
+    
     func updateLike(documentID: String, status: LikeStatus, completionHandler: CompletionHandler? = nil, errorHandler: ErrorHandler? = nil) {
         guard let currentUser = currentUser else {
             manageError(error: FirebaseManagerError.userNotExist, altText: "", errorHandler: errorHandler)
@@ -319,4 +324,50 @@ class FirebasePostManager {
     func removeLikeCountListener() {
         self.likeCountsListener?.remove()
     }
+    
+    // MARK: - View, Download Count
+    enum PostCount {
+        case view, download
+    }
+    
+    func updatePostCount(_ category: PostCount, documentID: String, completionHandler: CompletionHandler? = nil, errorHandler: ErrorHandler? = nil) {
+        guard let currentUser = currentUser else {
+            manageError(error: FirebaseManagerError.userNotExist, altText: "", errorHandler: errorHandler)
+            return
+        }
+        
+        let isViewCount = category == .view
+        let countsRef = rootCollection.document(documentID).collection(isViewCount ? VIEW_DIR : DOWNLOAD_DIR)
+        let postView = PostView(viewerUID: currentUser.uid, postDocumentID: documentID)
+        do {
+            try countsRef.document(currentUser.uid).setData(from: postView) { err in
+                if let err = err {
+                    self.manageError(error: err, altText: " Error from update \(category)Count post \(documentID):", errorHandler: errorHandler)
+                    return
+                }
+                
+                if let completionHandler = completionHandler {
+                    completionHandler(documentID)
+                    return
+                }
+                
+                print(#function, "\(category)Count to postDocument ID: \(documentID)")
+            }
+        } catch {
+            manageError(error: error, altText: "", errorHandler: errorHandler)
+        }
+    }
+    
+    func readPostCount(_ category: PostCount, documentID: String, completionHandler: CountCompletionHandler? = nil, errorHandler: ErrorHandler? = nil) {
+        let ref = rootCollection.document(documentID).collection(category == .view ? VIEW_DIR : DOWNLOAD_DIR)
+        ref.getDocuments { snapshot, err in
+            guard let snapshot = snapshot else {
+                self.manageError(error: err, altText: "Error fetching document: \(err!)", errorHandler: errorHandler)
+                return
+            }
+
+            completionHandler?(snapshot.count)
+        }
+    }
+    
 }

@@ -22,7 +22,7 @@
             <objects>
                 <viewController storyboardIdentifier="SortViewController" id="Ft7-Pr-gYI" customClass="SortViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="odr-qm-t26">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NSD-dd-SRc">
@@ -128,7 +128,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="414" height="896"/>
+                    <size key="freeformSize" width="414" height="400"/>
                     <connections>
                         <outlet property="segAscDesc" destination="NSD-dd-SRc" id="2X5-sS-d4M"/>
                         <outlet property="tableViewButtons" destination="Onc-KB-qsq" id="dEk-b8-mIW"/>
@@ -1209,6 +1209,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" systemColor="systemGray3Color"/>
                                         <connections>
                                             <segue destination="Qaz-AP-emY" kind="show" id="g7j-xM-Ywt"/>
                                         </connections>
@@ -1249,7 +1250,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Uc-Rz-vaa">
                                             <rect key="frame" x="20" y="0.0" width="388" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -1266,7 +1267,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bUg-WL-Zxx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-141" y="-35"/>
+            <point key="canvasLocation" x="81" y="-12"/>
         </scene>
         <!--Enharmonic Notations-->
         <scene sceneID="HfF-qb-YMi">
@@ -2351,7 +2352,7 @@
                                 </connections>
                             </button>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQD-JC-cXE" customClass="CircularSlider" customModule="HGCircularSlider">
-                                <rect key="frame" x="25.666666666666629" y="249.66666666666666" width="376.66666666666674" height="376.66666666666674"/>
+                                <rect key="frame" x="25.666666666666657" y="249.66666666666666" width="376.66666666666674" height="376.66666666666674"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="36%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kkf-tA-sZ1">
                                         <rect key="frame" x="44.666666666666657" y="117.00000000000003" width="287.33333333333337" height="142.99999999999997"/>
@@ -2635,9 +2636,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uua-OS-9LT">
-                                                    <rect key="frame" x="20" y="15" width="374" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uua-OS-9LT">
+                                                    <rect key="frame" x="20" y="15" width="374" height="30"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Select a scale..."/>
                                                     <connections>
@@ -2645,6 +2645,12 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="uua-OS-9LT" firstAttribute="leading" secondItem="vhE-Mg-4P0" secondAttribute="leading" constant="20" symbolic="YES" id="MdD-1M-hon"/>
+                                                <constraint firstAttribute="trailing" secondItem="uua-OS-9LT" secondAttribute="trailing" constant="20" symbolic="YES" id="UC7-zk-fsl"/>
+                                                <constraint firstAttribute="bottom" secondItem="uua-OS-9LT" secondAttribute="bottom" constant="15" id="fiJ-bV-mTR"/>
+                                                <constraint firstItem="uua-OS-9LT" firstAttribute="top" secondItem="vhE-Mg-4P0" secondAttribute="top" constant="15" id="rHi-CA-GJ0"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -2959,7 +2965,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="VAJ-6Y-8wA">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                                    <rect key="frame" x="10" y="0.0" width="394" height="170"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2969,8 +2975,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="VAJ-6Y-8wA" secondAttribute="bottom" id="5Su-T7-Ylb"/>
-                                                <constraint firstItem="VAJ-6Y-8wA" firstAttribute="leading" secondItem="2cS-VG-Pce" secondAttribute="leading" id="Nj4-U2-dIe"/>
-                                                <constraint firstAttribute="trailing" secondItem="VAJ-6Y-8wA" secondAttribute="trailing" id="aiI-c5-I6v"/>
+                                                <constraint firstItem="VAJ-6Y-8wA" firstAttribute="leading" secondItem="2cS-VG-Pce" secondAttribute="leading" constant="10" id="Nj4-U2-dIe"/>
+                                                <constraint firstAttribute="trailing" secondItem="VAJ-6Y-8wA" secondAttribute="trailing" constant="10" id="aiI-c5-I6v"/>
                                                 <constraint firstItem="VAJ-6Y-8wA" firstAttribute="top" secondItem="2cS-VG-Pce" secondAttribute="top" id="tO9-sN-Sos"/>
                                             </constraints>
                                         </tableViewCellContentView>

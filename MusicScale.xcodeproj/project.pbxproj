@@ -10,6 +10,7 @@
 		0E34DAC644E3F87647A9DEB4 /* Pods_MusicScaleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F34760ED95FD2F96DADCF95 /* Pods_MusicScaleTests.framework */; };
 		440161C3285E348800B6D4FB /* OrientationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440161C2285E348800B6D4FB /* OrientationUtil.swift */; };
 		440161C5285E54BC00B6D4FB /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440161C4285E54BC00B6D4FB /* UIButton+.swift */; };
+		4404B045285F7CEF0072CCFD /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404B044285F7CEF0072CCFD /* PostView.swift */; };
 		440637EB282FF6D900875E77 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637EA282FF6D900875E77 /* CoreDataService.swift */; };
 		440637ED282FF89300875E77 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637EC282FF89300875E77 /* CoreDataTests.swift */; };
 		440637F0283003CC00875E77 /* ScaleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637EF283003CC00875E77 /* ScaleInfo.swift */; };
@@ -157,6 +158,7 @@
 		31DB1CF93AE06F4045E6B9A3 /* Pods-MusicScale.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScale.debug.xcconfig"; path = "Target Support Files/Pods-MusicScale/Pods-MusicScale.debug.xcconfig"; sourceTree = "<group>"; };
 		440161C2285E348800B6D4FB /* OrientationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationUtil.swift; sourceTree = "<group>"; };
 		440161C4285E54BC00B6D4FB /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		4404B044285F7CEF0072CCFD /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		440637EA282FF6D900875E77 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		440637EC282FF89300875E77 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		440637EF283003CC00875E77 /* ScaleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfo.swift; sourceTree = "<group>"; };
@@ -661,6 +663,7 @@
 			children = (
 				44ABE1022854C1D00022B4FB /* Post.swift */,
 				4455D1C62858CCB300FB344E /* Like.swift */,
+				4404B044285F7CEF0072CCFD /* PostView.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -1002,6 +1005,7 @@
 				44ABE108285619F60022B4FB /* PostListViewModel.swift in Sources */,
 				44537F6C285651EA0061CADF /* StarRatingViewModel.swift in Sources */,
 				4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */,
+				4404B045285F7CEF0072CCFD /* PostView.swift in Sources */,
 				445FA4C9284F53C90008D621 /* QuizCommon.swift in Sources */,
 				4455D1D6285A538800FB344E /* SearchDegreesReplaceAltText.swift in Sources */,
 				4455D1C72858CCB300FB344E /* Like.swift in Sources */,
