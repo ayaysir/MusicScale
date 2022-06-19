@@ -45,6 +45,7 @@ class QuizIntroTableViewController: UITableViewController {
             let inProgressVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuizInProgressViewController") as! QuizInProgressViewController
             inProgressVC.quizViewModel = quizViewModel
             inProgressVC.introVC = self
+            navigationItem.title = ""
             navigationController?.setViewControllers([inProgressVC], animated: false)
             return
         }

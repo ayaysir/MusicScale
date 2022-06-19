@@ -101,7 +101,7 @@ extension InQuizViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMess
         }
     }
     
-    func initWebSheetPage(initAbcjsText: String, staffWidth: Int? = 460) {
+    func initWebSheetPage(initAbcjsText: String, staffWidth: Int? = DEF_STAFFWIDTH) {
         
         if #available(iOS 14.0, *) {
             webkitView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
@@ -149,7 +149,7 @@ extension InQuizViewController: ScoreWebInjection {
         webkitView.evaluateJavaScript("stopTimer()")
     }
     
-    func injectAbcjsText(from abcjsText: String, needReload: Bool = true, staffWidth: Int? = 460) {
+    func injectAbcjsText(from abcjsText: String, needReload: Bool = true, staffWidth: Int? = DEF_STAFFWIDTH) {
         
         let abcjsTextFixed = charFixedAbcjsText(abcjsText)
 

@@ -42,6 +42,7 @@ class ScoreWebViewController: UIViewController {
     weak var delegate: ScoreWebVCDelegate?
     
     var scaleInfoViewModel: ScaleInfoViewModel!
+    var staffWidth: Int? = DEF_STAFFWIDTH
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,9 +70,9 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
 
         if needReload {
             stopTimer()
-            webView.evaluateJavaScript(generateAbcJsInjectionSource(from: abcjsTextFixed))
+            webView.evaluateJavaScript(generateAbcJsInjectionSource(from: abcjsTextFixed, staffWidth: staffWidth))
         } else {
-            let injectionSource = generateAbcJsInjectionSource(from: abcjsTextFixed)
+            let injectionSource = generateAbcJsInjectionSource(from: abcjsTextFixed, staffWidth: staffWidth)
             let injectionScript = WKUserScript(source: injectionSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
             webView.configuration.userContentController.addUserScript(injectionScript)
         }
@@ -98,7 +99,7 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
         webView.scrollView.isScrollEnabled = false
         
         let abcjsText = ScaleInfoVCConfigStore.shared.degreesOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending
-        injectAbcjsText(from: abcjsText, needReload: false)
+        injectAbcjsText(from: abcjsText, needReload: false, staffWidth: staffWidth)
         
         // 자바스크립트 -> 네이티브 앱 연결
         // 브리지 등록

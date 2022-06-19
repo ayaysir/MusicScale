@@ -34,6 +34,11 @@ class ScaleInfoViewController: UIViewController {
     
     @IBOutlet weak var viewPlayConfig: UIView!
     
+    @IBOutlet weak var cnstSheetPropoHeight: NSLayoutConstraint!
+    @IBOutlet weak var cnstPianoHeight: NSLayoutConstraint!
+    private var originialCnstSheetPropoHeight: NSLayoutConstraint!
+    private var originalCnstPianoHeight: NSLayoutConstraint!
+    
     var configStore = ScaleInfoVCConfigStore.shared
     var selectedIndexPath: IndexPath?
     weak var delegate: ScaleInfoVCDelgate?
@@ -51,8 +56,21 @@ class ScaleInfoViewController: UIViewController {
     let conductor = GlobalConductor.shared
     private var playTimer: Timer?
     
+    var staffWidth: Int? {
+        if isPad && isLandscape {
+            return 700
+        }
+        
+        return DEF_STAFFWIDTH
+    }
+    
+    // MARK: - VC life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        originialCnstSheetPropoHeight = cnstSheetPropoHeight
+        originalCnstPianoHeight = cnstPianoHeight
         
         initTransposeDropDown()
         initEnharmonicDropDown()
@@ -78,21 +96,72 @@ class ScaleInfoViewController: UIViewController {
         // loadFromConfigStore()는 prepare에서 실행
         
         // 피아노 이용 가능 키 표시 - 최초 페이지 열었을 때
-        pianoVC?.adjustKeyPosition(key: scaleInfoViewModel.currentKey.playableKey)
-        pianoVC?.octaveShift = scaleInfoViewModel.currentOctaveShift
-        changeAvailableKeys()
-        
+        setAvailableKeyAndOctaveShift()
         hideTabBarWhenLandscape(self)
-        
+        updateMultiplierRefelectOrientation()
+        redrawPianoViewWhenOrientationChange()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if isPhone {
+            OrientationUtil.lockOrientation(.portrait)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if isPhone {
+            OrientationUtil.lockOrientation(.portrait, andRotateTo: .portrait)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         stopSequencer()
-        tabBarController?.tabBar.isHidden = false
+        showTabBar(self)
+        OrientationUtil.lockOrientation(.all)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         hideTabBarWhenLandscape(self)
+        updateMultiplierRefelectOrientation()
+        
+        coordinator.animate(alongsideTransition: nil) { _ in
+            self.redrawPianoViewWhenOrientationChange()
+            self.reinjectAbcjsText()
+        }
+    }
+    
+    // MARK: - Init methods
+    
+    /// 피아노 이용 가능 키 표시
+    func setAvailableKeyAndOctaveShift() {
+        pianoVC?.adjustKeyPosition(key: scaleInfoViewModel.currentKey.playableKey)
+        pianoVC?.octaveShift = scaleInfoViewModel.currentOctaveShift
+        changeAvailableKeys()
+    }
+    
+    /// 방향 전환시 피아노 뷰 다시 그리기 (coordinator.animate(alongsideTransition: nil) {...})
+    func redrawPianoViewWhenOrientationChange() {
+        self.view.layoutIfNeeded()
+        pianoVC?.parentContainerView = containerViewPiano
+        pianoVC?.setPiano()
+        setAvailableKeyAndOctaveShift()
+    }
+    
+    private func setContainersMultiplier(sheetMultipler: CGFloat, pianoMultiplier: CGFloat) {
+        cnstSheetPropoHeight = cnstSheetPropoHeight.setMultiplier(multiplier: sheetMultipler)
+        cnstPianoHeight = cnstPianoHeight.setMultiplier(multiplier: pianoMultiplier)
+        containerViewWebSheet.layoutIfNeeded()
+        containerViewPiano.layoutIfNeeded()
+    }
+    
+    private func updateMultiplierRefelectOrientation() {
+        if isLandscape {
+            // sheet: 0.22 -> 10% 증가
+            // piano: 0.235 ->
+            setContainersMultiplier(sheetMultipler: 0.32, pianoMultiplier: 0.335)
+        } else {
+            setContainersMultiplier(sheetMultipler: originialCnstSheetPropoHeight.multiplier, pianoMultiplier: originalCnstPianoHeight.multiplier)
+        }
     }
     
     // MARK: - Outlet Action
@@ -141,6 +210,20 @@ class ScaleInfoViewController: UIViewController {
         changeOctaveShift(Int(sender.value))
     }
     
+    @IBAction func btnActExpandInfo(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        
+        if sender.isSelected {
+            sender.tintColor = .systemYellow
+            // 0으로 설정시 크기 복구가 안됨
+            setContainersMultiplier(sheetMultipler: 0.0001, pianoMultiplier: 0.0001)
+        } else {
+            sender.tintColor = .systemGray3
+            updateMultiplierRefelectOrientation()
+        }
+        redrawPianoViewWhenOrientationChange()
+    }
+    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -156,6 +239,7 @@ class ScaleInfoViewController: UIViewController {
             loadFromConfigStore()
             webSheetVC?.scaleInfoViewModel = scaleInfoViewModel
             webSheetVC?.delegate = self
+            webSheetVC?.staffWidth = staffWidth
         case "PianoSegue":
             pianoVC = segue.destination as? PianoViewController
             view.layoutIfNeeded()
@@ -202,7 +286,7 @@ extension ScaleInfoViewController {
     }
     
     private func reinjectAbcjsText() {
-        webSheetVC?.injectAbcjsText(from: configStore.degreesOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending, needReload: true)
+        webSheetVC?.injectAbcjsText(from: configStore.degreesOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending, needReload: true, staffWidth: staffWidth)
         stopSequencer()
     }
     
@@ -307,7 +391,6 @@ extension ScaleInfoViewController {
     private func changeAvailableKeys() {
         // 피아노 이용 가능 키 표시
         if scaleInfoViewModel.isAscAndDescDifferent && configStore.degreesOrder == .descending {
-            print(scaleInfoViewModel.availableIntNoteArrayInDescOrder)
             pianoVC?.updateAvailableKeys(integerNotations: scaleInfoViewModel.availableIntNoteArrayInDescOrder)
         } else {
             pianoVC?.updateAvailableKeys(integerNotations: scaleInfoViewModel.ascendingIntegerNotationArray)

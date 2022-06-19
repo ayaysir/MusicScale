@@ -575,7 +575,7 @@ extension ArchiveDetailTableViewController: WKUIDelegate, WKNavigationDelegate, 
         webView.evaluateJavaScript("stopTimer()")
     }
     
-    func injectAbcjsText(from abcjsText: String, needReload: Bool, staffWidth: Int? = 460) {
+    func injectAbcjsText(from abcjsText: String, needReload: Bool, staffWidth: Int? = DEF_STAFFWIDTH) {
         
         let abcjsTextFixed = charFixedAbcjsText(abcjsText)
         

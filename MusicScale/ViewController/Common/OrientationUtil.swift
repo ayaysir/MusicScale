@@ -63,3 +63,15 @@ func showTabBar(_ viewController: UIViewController) {
     viewController.tabBarController?.tabBar.isHidden = false
 }
 
+var isIpad129: Bool {
+    // iPad Pro 5 12.9
+    let name = UIDevice().type.rawValue
+    return name.starts(with: "iPad Pro") && name.contains("12.9")
+}
+
+var isIpadMini: Bool {
+    let name = UIDevice().type.rawValue
+    return name.starts(with: "iPad Mini")
+}
+
+let DEF_STAFFWIDTH = 460

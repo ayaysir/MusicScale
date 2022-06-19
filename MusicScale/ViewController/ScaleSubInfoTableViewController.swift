@@ -94,7 +94,7 @@ extension ScaleSubInfoTableViewController {
             
             let rating = item.count
             print(item, rating)
-            self.lblPriority.attributedText = self.starRatingVM.starTextAttributedStr(fillCount: rating)
+            self.lblPriority.attributedText =  self.starRatingVM.starTextAttributedStr(fillCount: rating)
             self.scaleInfoViewModel.updateMyPriority(rating)
             
             if let delegate = self.delegate {

@@ -13,11 +13,13 @@ class QuizInProgressViewController: UIViewController {
     var quizViewModel: QuizViewModel!
     var introVC: QuizIntroTableViewController!
     
+    @IBOutlet weak var circlularSlider: CircularSlider!
     @IBOutlet weak var btnContinue: UIButton!
     @IBOutlet weak var btnGiveUp: UIButton!
-    @IBOutlet weak var circularSlider: CircularSlider!
+    @IBOutlet weak var lblPercent: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.title = ""
         
         if quizViewModel.isAllQuestionFinished {
             let finishedVC = initVCFromStoryboard(storyboardID: .QuizFinishedViewController) as! QuizFinishedViewController
@@ -26,14 +28,21 @@ class QuizInProgressViewController: UIViewController {
             return
         }
         
-        btnContinue.layer.cornerRadius = 5
-        btnGiveUp.layer.cornerRadius = 5
+        let stats = quizViewModel.leitnerSystem.progressInfo
+        let inStudyPercent: CGFloat = CGFloat(stats.learningBoxOneCount + stats.learningBoxTwoCount + stats.learningBoxThreeCount) / CGFloat(stats.originalItemListCount)
+        let finishedPercent: CGFloat = CGFloat(stats.finishedBoxCount) / CGFloat(stats.originalItemListCount)
+        let forecastPercent = inStudyPercent * 0.3 + finishedPercent * 0.7
+        
+        circlularSlider
+        circlularSlider.endPointValue = forecastPercent
+        let displayValue = Int(round(forecastPercent * 100))
+        lblPercent.text = "\(displayValue)%"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        btnContinue.layer.cornerRadius = 5
+        btnGiveUp.layer.cornerRadius = 5
     }
     
     @IBAction func btnActContinue(_ sender: Any) {
@@ -47,8 +56,6 @@ class QuizInProgressViewController: UIViewController {
             flashcardVC.quizViewModel = quizViewModel
             navigationController?.setViewControllers([self, flashcardVC], animated: true)
         }
-        
-        
     }
     
     @IBAction func btnActGiveUp(_ sender: Any) {

@@ -119,6 +119,8 @@
 		44B70F3D2848F4F40068495A /* QuizConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F3C2848F4F40068495A /* QuizConfigStore.swift */; };
 		44B70F4228491A650068495A /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F4128491A650068495A /* QuizViewModel.swift */; };
 		44B70F44284A57430068495A /* AppConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F43284A57430068495A /* AppConfigStore.swift */; };
+		44E0ACF1285F0BC6008BBB82 /* NSLayoutConstraint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E0ACF0285F0BC6008BBB82 /* NSLayoutConstraint+.swift */; };
+		44E0ACF3285F3FCD008BBB82 /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E0ACF2285F3FCC008BBB82 /* UIDevice+.swift */; };
 		44E7A07528467692005C7909 /* SearchCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E7A07428467692005C7909 /* SearchCategory.swift */; };
 		44EE68152853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md in Resources */ = {isa = PBXBuildFile; fileRef = 44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */; };
 		44EFA4B328541F0800565F93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44EFA4B228541F0800565F93 /* GoogleService-Info.plist */; };
@@ -264,6 +266,8 @@
 		44B70F3C2848F4F40068495A /* QuizConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizConfigStore.swift; sourceTree = "<group>"; };
 		44B70F4128491A650068495A /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		44B70F43284A57430068495A /* AppConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigStore.swift; sourceTree = "<group>"; };
+		44E0ACF0285F0BC6008BBB82 /* NSLayoutConstraint+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+.swift"; sourceTree = "<group>"; };
+		44E0ACF2285F3FCC008BBB82 /* UIDevice+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
 		44E7A07428467692005C7909 /* SearchCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategory.swift; sourceTree = "<group>"; };
 		44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Quiz_IntroVC와 InProgressVC에서 무한루프.md"; sourceTree = "<group>"; };
 		44EFA4B228541F0800565F93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -539,6 +543,8 @@
 				4455D1E2285C92F900FB344E /* UIViewController.swift */,
 				4455D1E5285CDBC900FB344E /* UIBarButtonItem+.swift */,
 				440161C4285E54BC00B6D4FB /* UIButton+.swift */,
+				44E0ACF0285F0BC6008BBB82 /* NSLayoutConstraint+.swift */,
+				44E0ACF2285F3FCC008BBB82 /* UIDevice+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -954,6 +960,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44B70F3D2848F4F40068495A /* QuizConfigStore.swift in Sources */,
+				44E0ACF3285F3FCD008BBB82 /* UIDevice+.swift in Sources */,
 				445FA4C3284E49120008D621 /* MatchKeysViewController.swift in Sources */,
 				44537F6E2857975C0061CADF /* UIApplication+.swift in Sources */,
 				44709D60276A334F00BBF6C9 /* MusicScale.xcdatamodeld in Sources */,
@@ -1024,6 +1031,7 @@
 				446AEA2E283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift in Sources */,
 				4455D1CC285A2BD400FB344E /* SettingTableViewController.swift in Sources */,
 				4455D1CE285A2CB800FB344E /* MIDIInstrumentList.swift in Sources */,
+				44E0ACF1285F0BC6008BBB82 /* NSLayoutConstraint+.swift in Sources */,
 				445FA4D0284FB58C0008D621 /* ColorfulProgressView.swift in Sources */,
 				443A0C6328428F3100641BC0 /* Between.swift in Sources */,
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,

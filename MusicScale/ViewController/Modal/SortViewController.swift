@@ -60,6 +60,11 @@ class SortViewController: UIViewController {
             }
         }
         
+        guard info != nil else {
+            self.dismiss(animated: true)
+            return
+        }
+        
         if segAscDesc.isEnabled {
             info.order = segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
         }

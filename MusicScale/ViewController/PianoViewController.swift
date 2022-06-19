@@ -39,6 +39,12 @@ class PianoViewController: UIViewController {
     func setPiano() {
         if let parentContainerView = parentContainerView {
             
+            if self.view.subviews.isNotEmpty {
+                self.view.subviews.forEach { subview in
+                    subview.removeFromSuperview()
+                }
+            }
+            
             let newSize = parentContainerView.frame.size
             viewPiano = PianoView(frame: CGRect(origin: .zero, size: newSize))
             self.view.addSubview(viewPiano)

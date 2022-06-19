@@ -34,51 +34,11 @@ class MatchKeysViewController: InQuizViewController {
     @IBOutlet weak var progressViewDayQuestionProgress: UIProgressView!
     var prevDayQuestionPercent: Float = 0.0
     
-    private var staffWidth: Int? {
-        /*
-         landscape
-         ipad 12 : 600 (570)
-         ipad 11 : 750 (417)
-         ipad mini : 1000 (344.5)
-         ipad 9.7 : 750 (364)
-         ipad Air : 750 (406)
-         iPad 5th : 750 (397.5)
-         
-         0 ~ 228 (600 ~ 1000)
-         */
-        if isLandscape && isPad {
-            print(view.frame.size)
-            if view.frame.size.width >= 1360 && view.frame.size.height >= 1020 {
-                return 600
-            } else if view.frame.size.width <= 1140 && view.frame.size.height <= 750 {
-                return 1000
-            } else {
-                return 750
-            }
-        }
-        
-        return 460
-    }
+    private var staffWidth: Int? { setStaffWidth() }
     
     /// 지금 문제 풀이중?
     var isSolvingQuestionNow: Bool = true {
-        didSet {
-            if isSolvingQuestionNow {
-                barBtnReset.isEnabled = true
-                barBtnBackspace.isEnabled = true
-                btnPlayAnswer.isEnabled = false
-                btnPlayTogether.isEnabled = false
-                btnSubmit.setTitle("Submit", for: .normal)
-                btnSubmit.backgroundColor = .systemOrange
-            } else {
-                barBtnReset.isEnabled = false
-                barBtnBackspace.isEnabled = false
-                btnPlayAnswer.isEnabled = true
-                btnPlayTogether.isEnabled = true
-                btnSubmit.setTitle("Next >>", for: .normal)
-                btnSubmit.backgroundColor = .systemBlue
-            }
-        }
+        didSet { didSetIsSolvingQuestionNow() }
     }
     
     var pianoVC: PianoViewController?
@@ -90,31 +50,19 @@ class MatchKeysViewController: InQuizViewController {
     private var currentPlayMode: PlayMode?
     private var currentDisplayAbcjsText: String?
     var questionSuccessResult: Bool? {
-        didSet {
-            if questionSuccessResult == nil {
-                lblResult.text = "🤔"
-                lblResult.backgroundColor = .tertiarySystemGroupedBackground
-                lblResult.textColor = nil
-            } else if let result = questionSuccessResult {
-                if result {
-                    lblResult.text = "Success"
-                    lblResult.backgroundColor = .green
-                    lblResult.textColor = nil
-                } else {
-                    lblResult.text = "Failed"
-                    lblResult.backgroundColor = .systemPink
-                    lblResult.textColor = .white
-                }
-            }
-        }
+        didSet { didSetQuestionSuccessResult() }
     }
     
     private var firstrun: Bool = true
 
+    // MARK: - VC Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // viewWebContainer.backgroundColor = UIColor(named: "OpaqueBackgroundColor")
+        DispatchQueue.main.async {
+            self.removeTitlesIfIphoneTouch()
+        }
         
         // button design
         btnSubmit.layer.cornerRadius = 10
@@ -122,6 +70,8 @@ class MatchKeysViewController: InQuizViewController {
         lblResult.clipsToBounds = true
         
         webView.layoutIfNeeded()
+        print("⛔️ MatchTheKeysVC webview frame:", webView.frame)
+        print("⛔️ MatchTheKeysVC view frame:", view.frame)
         webkitView = webView
         webkitView.isUserInteractionEnabled = false
         
@@ -158,32 +108,6 @@ class MatchKeysViewController: InQuizViewController {
         }
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        
-        print(isLandscape)
-        if isPad {
-            hideTabBarWhenLandscape(self)
-        }
-        
-        // https://stackoverflow.com/questions/26943808/ios-how-to-run-a-function-after-device-has-rotated-swift
-        coordinator.animate(alongsideTransition: nil) { [unowned self] _ in
-            
-            containerViewPiano.layoutIfNeeded()
-            pianoVC?.parentContainerView = containerViewPiano
-            pianoVC?.setPiano()
-            
-            if let currentPlayableKey = currentPlayableKey {
-                setPianoPosition(playableKey: currentPlayableKey)
-            } else if let currentQuestion = currentQuestion {
-                setPianoPosition(playableKey: currentQuestion.key.playableKey)
-            }
-            
-            if let currentDisplayAbcjsText = currentDisplayAbcjsText {
-                injectAbcjsText(from: currentDisplayAbcjsText, needReload: true, staffWidth: staffWidth)
-            }
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         if isPhone {
             OrientationUtil.lockOrientation(.portrait)
@@ -201,29 +125,124 @@ class MatchKeysViewController: InQuizViewController {
         OrientationUtil.lockOrientation(.all)
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        if isPad {
+            hideTabBarWhenLandscape(self)
+        }
+        
+        // https://stackoverflow.com/questions/26943808/ios-how-to-run-a-function-after-device-has-rotated-swift
+        coordinator.animate(alongsideTransition: nil) { _ in
+            self.redrawPianoViewWhenOrientationChange()
+        }
+    }
+    
     // MARK: - Initial methods
+    
+    /// 방향 전환시 피아노 뷰 다시 그리기 (coordinator.animate(alongsideTransition: nil) {...})
+    func redrawPianoViewWhenOrientationChange() {
+        containerViewPiano.layoutIfNeeded()
+        pianoVC?.parentContainerView = containerViewPiano
+        pianoVC?.setPiano()
+        
+        if let currentPlayableKey = currentPlayableKey {
+            setPianoPosition(playableKey: currentPlayableKey)
+        } else if let currentQuestion = currentQuestion {
+            setPianoPosition(playableKey: currentQuestion.key.playableKey)
+        }
+        
+        if let currentDisplayAbcjsText = currentDisplayAbcjsText {
+            injectAbcjsText(from: currentDisplayAbcjsText, needReload: true, staffWidth: staffWidth)
+        }
+    }
     
     private func initButtonsAppearance() {
         let space: CGFloat = 10
         btnPlayOnEdit.spaceBetweenImageAndText(space: space)
         btnPlayAnswer.spaceBetweenImageAndText(space: space)
         btnPlayTogether.spaceBetweenImageAndText(space: space)
-        
-        // let leftMargin: CGFloat = 3
-        // 
-        // if #available(iOS 15.0, *) {
-        //     btnPlayOnEdit.configuration?.imagePadding = leftMargin
-        //     btnPlayAnswer.configuration?.imagePadding = leftMargin
-        //     btnPlayTogether.configuration?.imagePadding = leftMargin
-        //     
-        // } else {
-        //     // Fallback on earlier versions
-        //     btnPlayOnEdit.titleEdgeInsets.left = leftMargin
-        //     btnPlayAnswer.titleEdgeInsets.left = leftMargin
-        //     btnPlayTogether.titleEdgeInsets.left = leftMargin
-        // }
     }
     
+    private func removeTitlesIfIphoneTouch() {
+        let isIPhoneTouch = isLandscape ? view.frame.height == 320 : view.frame.width == 320
+        if isIPhoneTouch {
+            lblResult.frame.origin = CGPoint(x: lblResult.frame.origin.x, y: 0)
+            lblKeyName.frame.size.height = 0.0
+            lblOrder.frame.size.height = 0.0
+            cnstTitlesHeight.constant = lblResult.frame.size.height
+        }
+    }
+    
+    // MARK: - computed properties or didSet
+    
+    private func isCorrectDevice(_ logicalWidth: CGFloat, _ logicalHeight: CGFloat) -> Bool {
+        let width = view.frame.size.width
+        let height = view.frame.size.height
+        return !isLandscape ? width == logicalWidth && height == logicalHeight : width == logicalHeight && height == logicalWidth
+    }
+    
+    func setStaffWidth() -> Int {
+        /*
+         landscape
+         ipad 12 : 600 (570)
+         ipad 11 : 750 (417)
+         ipad mini : 1000 (344.5)
+         ipad 9.7 : 750 (364)
+         ipad Air : 750 (406)
+         iPad 5th : 750 (397.5)
+         
+         0 ~ 228 (600 ~ 1000)
+         */
+        
+        if isLandscape && isPad {
+            // print("📱 isLandscape && isPad:", UIDevice().type.rawValue)
+            if isIpad129 {
+                return 600
+            } else if isIpadMini {
+                return 1000
+            } else {
+                return 750
+            }
+        }
+        
+        return DEF_STAFFWIDTH
+    }
+    
+    func didSetIsSolvingQuestionNow() {
+        if isSolvingQuestionNow {
+            barBtnReset.isEnabled = true
+            barBtnBackspace.isEnabled = true
+            btnPlayAnswer.isEnabled = false
+            btnPlayTogether.isEnabled = false
+            btnSubmit.setTitle("Submit", for: .normal)
+            btnSubmit.backgroundColor = .systemOrange
+        } else {
+            barBtnReset.isEnabled = false
+            barBtnBackspace.isEnabled = false
+            btnPlayAnswer.isEnabled = true
+            btnPlayTogether.isEnabled = true
+            btnSubmit.setTitle("Next >>", for: .normal)
+            btnSubmit.backgroundColor = .systemBlue
+        }
+    }
+    
+    func didSetQuestionSuccessResult() {
+        if questionSuccessResult == nil {
+            lblResult.text = "🤔"
+            lblResult.backgroundColor = .tertiarySystemGroupedBackground
+            lblResult.textColor = nil
+        } else if let result = questionSuccessResult {
+            if result {
+                lblResult.text = "Success"
+                lblResult.backgroundColor = .green
+                lblResult.textColor = nil
+            } else {
+                lblResult.text = "Failed"
+                lblResult.backgroundColor = .systemPink
+                lblResult.textColor = .white
+            }
+        }
+    }
     
     // MARK: - @IBAction
     @IBAction func barBtnActBackspaceNote(_ sender: UIBarButtonItem) {
