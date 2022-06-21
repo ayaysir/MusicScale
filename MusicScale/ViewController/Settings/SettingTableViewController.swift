@@ -9,11 +9,17 @@ import UIKit
 
 class SettingTableViewController: UITableViewController {
     
+    @IBOutlet weak var viewBannerContainer: UIView!
+    
     let playbackInstCell = IndexPath(row: 0, section: 0)
     let pianoInstCell = IndexPath(row: 1, section: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        DispatchQueue.main.async { [unowned self] in
+            setupBannerAds(self, container: viewBannerContainer)
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

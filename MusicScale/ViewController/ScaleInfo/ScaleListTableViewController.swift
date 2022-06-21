@@ -49,10 +49,6 @@ class ScaleListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scaleListViewModel.handleDataReloaded = {
-            self.tableView.reloadData()
-        }
-        
         searchInit()
         
         switch mode {
@@ -332,6 +328,16 @@ class ScaleListTableViewController: UITableViewController {
         }
         return false
     }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
+        setupBannerAds(self, container: view)
+        return view
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        50
+    }
 
     // MARK: - Navigation
     
@@ -384,6 +390,7 @@ extension ScaleListTableViewController: ScaleInfoUpdateTVCDelegate {
     
     func didFinishedCreate(_ controller: ScaleInfoUpdateTableViewController, entity: ScaleInfoEntity) {
         scaleListViewModel.addCreatedInfoToList(entity: entity)
+        tableView.reloadData()
     }
 }
 

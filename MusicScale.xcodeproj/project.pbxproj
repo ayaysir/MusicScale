@@ -62,7 +62,6 @@
 		445FA4C3284E49120008D621 /* MatchKeysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4C2284E49120008D621 /* MatchKeysViewController.swift */; };
 		445FA4C5284E60D70008D621 /* FlashcardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4C4284E60D70008D621 /* FlashcardsViewController.swift */; };
 		445FA4C7284E70090008D621 /* QuizInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4C6284E70090008D621 /* QuizInProgressViewController.swift */; };
-		445FA4C9284F53C90008D621 /* QuizCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4C8284F53C90008D621 /* QuizCommon.swift */; };
 		445FA4CC284F547D0008D621 /* InitViewControllerFromStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4CB284F547D0008D621 /* InitViewControllerFromStoryboard.swift */; };
 		445FA4CE284F5D010008D621 /* InQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4CD284F5D010008D621 /* InQuizViewController.swift */; };
 		445FA4D0284FB58C0008D621 /* ColorfulProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4CF284FB58C0008D621 /* ColorfulProgressView.swift */; };
@@ -103,6 +102,10 @@
 		4475CB572831501600B9D204 /* Sequence+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB562831501600B9D204 /* Sequence+.swift */; };
 		4475CB592831759300B9D204 /* CustomCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB582831759300B9D204 /* CustomCharacter.swift */; };
 		4475CB5B283176EA00B9D204 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB5A283176EA00B9D204 /* Music.swift */; };
+		44872B0928608CED00C20E06 /* AdsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44872B0828608CED00C20E06 /* AdsManager.swift */; };
+		44872B0C2860963C00C20E06 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 44872B0B2860963C00C20E06 /* IQKeyboardManagerSwift */; };
+		44872B0F2860AA5100C20E06 /* AdUnitID_Distributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44872B0E2860AA5100C20E06 /* AdUnitID_Distributor.swift */; };
+		44872B112860B21D00C20E06 /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44872B102860B21D00C20E06 /* NSObject+.swift */; };
 		449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF426282EC008008273CA /* ScaleInfoViewController.swift */; };
 		44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A28283293680067184E /* ScaleInfoViewModel.swift */; };
 		44A09A2C2832A3C90067184E /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44A09A2B2832A3C90067184E /* AudioKit */; };
@@ -211,7 +214,6 @@
 		445FA4C2284E49120008D621 /* MatchKeysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchKeysViewController.swift; sourceTree = "<group>"; };
 		445FA4C4284E60D70008D621 /* FlashcardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardsViewController.swift; sourceTree = "<group>"; };
 		445FA4C6284E70090008D621 /* QuizInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizInProgressViewController.swift; sourceTree = "<group>"; };
-		445FA4C8284F53C90008D621 /* QuizCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCommon.swift; sourceTree = "<group>"; };
 		445FA4CB284F547D0008D621 /* InitViewControllerFromStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitViewControllerFromStoryboard.swift; sourceTree = "<group>"; };
 		445FA4CD284F5D010008D621 /* InQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InQuizViewController.swift; sourceTree = "<group>"; };
 		445FA4CF284FB58C0008D621 /* ColorfulProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulProgressView.swift; sourceTree = "<group>"; };
@@ -255,6 +257,10 @@
 		4475CB562831501600B9D204 /* Sequence+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+.swift"; sourceTree = "<group>"; };
 		4475CB582831759300B9D204 /* CustomCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCharacter.swift; sourceTree = "<group>"; };
 		4475CB5A283176EA00B9D204 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		44872B0628607CCC00C20E06 /* MusicScale.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MusicScale.entitlements; sourceTree = "<group>"; };
+		44872B0828608CED00C20E06 /* AdsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsManager.swift; sourceTree = "<group>"; };
+		44872B0E2860AA5100C20E06 /* AdUnitID_Distributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdUnitID_Distributor.swift; sourceTree = "<group>"; };
+		44872B102860B21D00C20E06 /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
 		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
 		44A09A28283293680067184E /* ScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewModel.swift; sourceTree = "<group>"; };
 		44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
@@ -295,6 +301,7 @@
 				44A09A2C2832A3C90067184E /* AudioKit in Frameworks */,
 				4BE14DBCD05F5882BF98D64F /* Pods_MusicScale.framework in Frameworks */,
 				44A09A2F2832A40A0067184E /* SoundpipeAudioKit in Frameworks */,
+				44872B0C2860963C00C20E06 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +376,6 @@
 				445FA4C2284E49120008D621 /* MatchKeysViewController.swift */,
 				445FA4C4284E60D70008D621 /* FlashcardsViewController.swift */,
 				445FA4C6284E70090008D621 /* QuizInProgressViewController.swift */,
-				445FA4C8284F53C90008D621 /* QuizCommon.swift */,
 				445FA4CD284F5D010008D621 /* InQuizViewController.swift */,
 				44FEFBF628539C83000402DE /* QuizFinishedViewController.swift */,
 				4404B048285FA3C70072CCFD /* StatsViewController.swift */,
@@ -382,6 +388,7 @@
 			children = (
 				449AF426282EC008008273CA /* ScaleInfoViewController.swift */,
 				441FA162283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift */,
+				440637F328307E0000875E77 /* ScaleListTableViewController.swift */,
 			);
 			path = ScaleInfo;
 			sourceTree = "<group>";
@@ -553,6 +560,7 @@
 				440161C4285E54BC00B6D4FB /* UIButton+.swift */,
 				44E0ACF0285F0BC6008BBB82 /* NSLayoutConstraint+.swift */,
 				44E0ACF2285F3FCC008BBB82 /* UIDevice+.swift */,
+				44872B102860B21D00C20E06 /* NSObject+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -582,6 +590,8 @@
 		44709D54276A334F00BBF6C9 /* MusicScale */ = {
 			isa = PBXGroup;
 			children = (
+				44872B0728608CD900C20E06 /* AdMob */,
+				44872B0628607CCC00C20E06 /* MusicScale.entitlements */,
 				4455D1E4285CB40100FB344E /* Audio */,
 				4426A0082854250800942655 /* Firebase */,
 				44EE68132853A7DB00A6D810 /* Report */,
@@ -639,18 +649,34 @@
 		44709D8A276A3BB800BBF6C9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				44872B0D2860981400C20E06 /* SubContainer */,
 				4455D1CA285A2B7200FB344E /* Settings */,
 				4426A005285422DD00942655 /* Archive */,
 				445FA4CA284F542A0008D621 /* Common */,
 				441738D02848ED6200A7D692 /* Quiz */,
 				4461012D28451ECA0033BCE9 /* Modal */,
 				441FA161283BE32B0084AE58 /* ScaleInfo */,
-				44709D8B276A3BDE00BBF6C9 /* ScoreWebViewController.swift */,
-				4463FEA6282BDFF700E7A607 /* PianoViewController.swift */,
-				440637F328307E0000875E77 /* ScaleListTableViewController.swift */,
-				4475CB4E2830A0DD00B9D204 /* ScaleSubInfoTableViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		44872B0728608CD900C20E06 /* AdMob */ = {
+			isa = PBXGroup;
+			children = (
+				44872B0828608CED00C20E06 /* AdsManager.swift */,
+				44872B0E2860AA5100C20E06 /* AdUnitID_Distributor.swift */,
+			);
+			path = AdMob;
+			sourceTree = "<group>";
+		};
+		44872B0D2860981400C20E06 /* SubContainer */ = {
+			isa = PBXGroup;
+			children = (
+				44709D8B276A3BDE00BBF6C9 /* ScoreWebViewController.swift */,
+				4463FEA6282BDFF700E7A607 /* PianoViewController.swift */,
+				4475CB4E2830A0DD00B9D204 /* ScaleSubInfoTableViewController.swift */,
+			);
+			path = SubContainer;
 			sourceTree = "<group>";
 		};
 		44A09A7B2838089D0067184E /* UserDefaults */ = {
@@ -733,6 +759,7 @@
 				44A09A2E2832A40A0067184E /* SoundpipeAudioKit */,
 				446100BD28451B370033BCE9 /* PanModal */,
 				4455D1E8285CF19F00FB344E /* HGCircularSlider */,
+				44872B0B2860963C00C20E06 /* IQKeyboardManagerSwift */,
 			);
 			productName = MusicScale;
 			productReference = 44709D52276A334F00BBF6C9 /* MusicScale.app */;
@@ -814,6 +841,7 @@
 				44A09A2D2832A40A0067184E /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */,
 				446100BC28451B370033BCE9 /* XCRemoteSwiftPackageReference "PanModal" */,
 				4455D1E7285CF19F00FB344E /* XCRemoteSwiftPackageReference "HGCircularSlider" */,
+				44872B0A2860963C00C20E06 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 44709D53276A334F00BBF6C9 /* Products */;
 			projectDirPath = "";
@@ -1012,7 +1040,6 @@
 				44537F6C285651EA0061CADF /* StarRatingViewModel.swift in Sources */,
 				4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */,
 				4404B045285F7CEF0072CCFD /* PostView.swift in Sources */,
-				445FA4C9284F53C90008D621 /* QuizCommon.swift in Sources */,
 				4455D1D6285A538800FB344E /* SearchDegreesReplaceAltText.swift in Sources */,
 				4455D1C72858CCB300FB344E /* Like.swift in Sources */,
 				443A0C612842864400641BC0 /* CreateScaleInfoViewModel.swift in Sources */,
@@ -1021,6 +1048,7 @@
 				44709D8C276A3BDE00BBF6C9 /* ScoreWebViewController.swift in Sources */,
 				441738D22848ED9100A7D692 /* QuizIntroTableViewController.swift in Sources */,
 				441FA163283BE3510084AE58 /* ScaleInfoUpdateTableViewController.swift in Sources */,
+				44872B0F2860AA5100C20E06 /* AdUnitID_Distributor.swift in Sources */,
 				4426A00C2854400B00942655 /* ArchiveDetailTableViewController.swift in Sources */,
 				440161C5285E54BC00B6D4FB /* UIButton+.swift in Sources */,
 				445FA4BF284BCA8B0008D621 /* LeitnerSystem.swift in Sources */,
@@ -1053,6 +1081,7 @@
 				44537F68285623200061CADF /* SwiftSpinner.swift in Sources */,
 				44537F6A285628A90061CADF /* FirebaseAuthManager.swift in Sources */,
 				4455D1C92858D5AD00FB344E /* UIView+.swift in Sources */,
+				44872B112860B21D00C20E06 /* NSObject+.swift in Sources */,
 				446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */,
 				44B4AB8428453286008C8AFD /* SortFilterConfigStore.swift in Sources */,
 				4455D1D4285A44BE00FB344E /* MIDICommon.swift in Sources */,
@@ -1062,6 +1091,7 @@
 				4404B047285F8A5B0072CCFD /* QuizStatsCDService.swift in Sources */,
 				4455D1C52858BFB700FB344E /* Notification.Name+.swift in Sources */,
 				44B70F4228491A650068495A /* QuizViewModel.swift in Sources */,
+				44872B0928608CED00C20E06 /* AdsManager.swift in Sources */,
 				4455D1C1285890A500FB344E /* FirebaseUtil.swift in Sources */,
 				4475CB592831759300B9D204 /* CustomCharacter.swift in Sources */,
 				440637F0283003CC00875E77 /* ScaleInfo.swift in Sources */,
@@ -1250,6 +1280,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MusicScale/MusicScale.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S2SA26VAN;
@@ -1259,6 +1290,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1269,6 +1301,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicScale;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1281,6 +1314,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MusicScale/MusicScale.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S2SA26VAN;
@@ -1290,6 +1324,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1300,6 +1335,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicScale;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1464,6 +1500,14 @@
 				kind = branch;
 			};
 		};
+		44872B0A2860963C00C20E06 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		44A09A2A2832A3C90067184E /* XCRemoteSwiftPackageReference "AudioKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AudioKit/AudioKit.git";
@@ -1492,6 +1536,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 446100BC28451B370033BCE9 /* XCRemoteSwiftPackageReference "PanModal" */;
 			productName = PanModal;
+		};
+		44872B0B2860963C00C20E06 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44872B0A2860963C00C20E06 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		44A09A2B2832A3C90067184E /* AudioKit */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -42,6 +42,8 @@ class ArchiveDetailTableViewController: UITableViewController {
     @IBOutlet weak var barBtnDownloadOr: UIBarButtonItem!
     @IBOutlet weak var barBtnDeleteOr: UIBarButtonItem!
     
+    @IBOutlet weak var viewBannerContainer: UIView!
+    
     private let starRatingVM = StarRatingViewModel()
     private let postManager = FirebasePostManager.shared
     
@@ -142,13 +144,21 @@ class ArchiveDetailTableViewController: UITableViewController {
         
         // 공통
         setButtonTitle()
-        btnSelectScale.isHidden = isMode(.read)
+        
         loadWebSheetPage()
         // conductor.start()
         conductor.tempo = playbackTempo
         
         btnLike.tintColor = .clear
         btnDislike.tintColor = .clear
+        
+        // banner
+        DispatchQueue.main.async { [unowned self] in
+            btnSelectScale.isHidden = isMode(.read)
+            if isMode(.read) {
+                setupBannerAds(self, container: viewBannerContainer)
+            }
+        }
         
         // 분기
         switch mode {

@@ -13,6 +13,15 @@ class QuizFinishedViewController: UIViewController {
     
     @IBOutlet weak var btnGoHome: UIButton!
     @IBOutlet weak var tableViewStats: UITableView!
+    @IBOutlet weak var viewBannerContainer: UIView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +30,8 @@ class QuizFinishedViewController: UIViewController {
         tableViewStats.dataSource = self
         
         btnGoHome.layer.cornerRadius = 5
+        
+        setupBannerAds(self, container: viewBannerContainer)
     }
     
     @IBAction func btnActGoToTop(_ sender: Any) {
@@ -28,7 +39,7 @@ class QuizFinishedViewController: UIViewController {
         navigationController?.setViewControllers([topVC], animated: true)
         quizViewModel.removeSavedLeitnerSystem()
     }
-    
+
     
     // MARK: - Navigation
 }

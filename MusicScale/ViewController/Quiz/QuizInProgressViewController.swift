@@ -17,9 +17,11 @@ class QuizInProgressViewController: UIViewController {
     @IBOutlet weak var btnContinue: UIButton!
     @IBOutlet weak var btnGiveUp: UIButton!
     @IBOutlet weak var lblPercent: UILabel!
+    @IBOutlet weak var viewBannerContainer: UIView!
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = ""
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         if quizViewModel.isAllQuestionFinished {
             let finishedVC = initVCFromStoryboard(storyboardID: .QuizFinishedViewController) as! QuizFinishedViewController
@@ -33,16 +35,22 @@ class QuizInProgressViewController: UIViewController {
         let finishedPercent: CGFloat = CGFloat(stats.finishedBoxCount) / CGFloat(stats.originalItemListCount)
         let forecastPercent = inStudyPercent * 0.3 + finishedPercent * 0.7
         
-        circlularSlider
         circlularSlider.endPointValue = forecastPercent
         let displayValue = Int(round(forecastPercent * 100))
         lblPercent.text = "\(displayValue)%"
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         btnContinue.layer.cornerRadius = 5
         btnGiveUp.layer.cornerRadius = 5
+        
+        setupBannerAds(self, container: viewBannerContainer)
     }
     
     @IBAction func btnActContinue(_ sender: Any) {

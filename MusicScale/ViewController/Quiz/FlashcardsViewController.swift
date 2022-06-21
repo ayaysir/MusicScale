@@ -17,6 +17,7 @@ class FlashcardsViewController: InQuizViewController {
     @IBOutlet weak var lblProgressStatus: UILabel!
     @IBOutlet weak var btnOK: UIButton!
     @IBOutlet weak var btnRemind: UIButton!
+    @IBOutlet weak var viewBannerContainer: UIView!
     
     /// 앞면: 문제, 뒷면: 정답
     private var backAnswerLabel: UILabel!
@@ -37,6 +38,8 @@ class FlashcardsViewController: InQuizViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupBannerAds(self, container: viewBannerContainer)
+        
         // Override displayNextQuestionHandler
         displayNextQuestionHandler = { [unowned self] newQuestion in
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
@@ -44,7 +47,7 @@ class FlashcardsViewController: InQuizViewController {
             })
             
             if showingBack {
-                flip()
+                flip(false)
             }
             
             self.backAnswerLabel.text = newQuestion.labelTitle
@@ -111,23 +114,51 @@ class FlashcardsViewController: InQuizViewController {
             loadFirstQuestion()
         }
         
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(flip))
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(flipTrue))
         singleTap.numberOfTapsRequired = 1
         cardContainerView.addGestureRecognizer(singleTap)
     }
     
-    @objc func flip() {
+    override func viewWillAppear(_ animated: Bool) {
+        if isPhone {
+            OrientationUtil.lockOrientation(.portrait)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if isPhone {
+            OrientationUtil.lockOrientation(.portrait, andRotateTo: .portrait)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        OrientationUtil.lockOrientation(.all)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: nil) { [unowned self] coordinator in
+            view.layoutIfNeeded()
+            let cardRect = CGRect(origin: .zero, size: cardContainerView.frame.size)
+            webkitView.frame = cardRect
+        }
+    }
+    
+    func flip(_ animation: Bool = true) {
         guard let toView = showingBack ? webkitView : backAnswerLabel,
               let fromView = showingBack ? backAnswerLabel : webkitView else {
             return
         }
         
-        UIView.transition(from: fromView, to: toView, duration: flipDuration, options: .transitionFlipFromRight, completion: nil)
+        UIView.transition(from: fromView, to: toView, duration: animation ? flipDuration : 0.01, options: .transitionFlipFromRight, completion: nil)
         
         toView.translatesAutoresizingMaskIntoConstraints = toView == backAnswerLabel
         
         // toView.spanSuperview()
         showingBack = !showingBack
+    }
+    
+    @objc func flipTrue() {
+        flip(true)
     }
     
     @IBAction func btnActRemindQuestion(_ sender: Any) {

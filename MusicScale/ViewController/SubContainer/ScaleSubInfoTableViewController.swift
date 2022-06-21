@@ -15,8 +15,10 @@ protocol ScaleSubInfoTVCDelegate: AnyObject {
 class ScaleSubInfoTableViewController: UITableViewController {
     
     let MIN_CELL_SIZE: CGFloat = 30.0
-    let cellAliasIndexPath = IndexPath(row: 1, section: 0)
-    let cellCommentIndexPath = IndexPath(row: 0, section: 1)
+    
+    // == SECTION & INDEXPATH ==
+    let cellAliasIndexPath = IndexPath(row: 1, section: 1)
+    let cellCommentIndexPath = IndexPath(row: 0, section: 2)
 
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblNameAlias: UILabel!
@@ -26,6 +28,7 @@ class ScaleSubInfoTableViewController: UITableViewController {
     @IBOutlet weak var txvComment: UITextView!
     @IBOutlet weak var tblCellNameAlias: UITableViewCell!
     @IBOutlet weak var lblDegreesAsc: UILabel!
+    @IBOutlet weak var viewBannerAdsContainer: UIView!
     
     weak var delegate: ScaleSubInfoTVCDelegate?
     
@@ -38,6 +41,11 @@ class ScaleSubInfoTableViewController: UITableViewController {
         
         initDropDownOnPriorityLabel()
         refreshViewInfo()
+        
+        // 광고
+        DispatchQueue.main.async {
+            setupBannerAds(self, container: self.viewBannerAdsContainer)
+        }
     }
     
     // MARK: - Table view data source

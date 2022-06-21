@@ -9,10 +9,16 @@ import UIKit
 
 class ArchiveMainTableViewController: UITableViewController {
     
+    @IBOutlet weak var barBtnAddDummy: UIBarButtonItem!
+    
     var viewModel: PostListViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        barBtnAddDummy.title = ""
+        barBtnAddDummy.isEnabled = false
+        
         searchInit()
     }
     
@@ -97,6 +103,16 @@ class ArchiveMainTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sender = ArchiveDetailSegueSender(mode: .read, object: viewModel.postViewModel(at: indexPath.row))
         performSegue(withIdentifier: "ArchiveDetailSegue", sender: sender)
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
+        setupBannerAds(self, container: footerView)
+        return footerView
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 50
     }
     
     // MARK: - Navigation

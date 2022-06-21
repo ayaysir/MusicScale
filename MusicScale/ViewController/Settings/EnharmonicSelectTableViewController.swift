@@ -14,12 +14,17 @@ class EnharmonicSelectTableViewController: UITableViewController {
 
     @IBOutlet weak var colViewNoteList: UICollectionView!
     @IBOutlet weak var colViewAvaliableNotes: UICollectionView!
+    @IBOutlet weak var viewBannerContainer: UIView!
     
     private var tempUserCustomScale: [NoteStrPair] = []
     private var currentSelectedNumber: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        DispatchQueue.main.async { [unowned self] in
+            setupBannerAds(self, container: viewBannerContainer)
+        }
         
         colViewNoteList.delegate = self
         colViewNoteList.dataSource = self
@@ -62,6 +67,14 @@ class EnharmonicSelectTableViewController: UITableViewController {
         let prevPairHasAccidental = prevPair.prefix != ""
         let currPairHasNatural = currPair.prefix == ""
         return prevPairHasAccidental && currPairHasNatural && prevPair.noteStr == currPair.noteStr
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath == IndexPath(row: 0, section: 0) {
+            return UITableView.automaticDimension
+        }
+        
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
 }

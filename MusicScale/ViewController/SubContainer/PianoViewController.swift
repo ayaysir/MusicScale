@@ -34,6 +34,8 @@ class PianoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setPiano()
+        
+        
     }
     
     func setPiano() {
@@ -69,9 +71,9 @@ class PianoViewController: UIViewController {
     
     @objc func handlePianoLongPress(gesture: UILongPressGestureRecognizer) {
         
-        let semitoneStart = 60 + PianoKeyHelper.adjustKeySemitone(key: currentPlayableKey)
+        // let semitoneStart = 60 + PianoKeyHelper.adjustKeySemitone(key: currentPlayableKey)
         let location = gesture.location(in: gesture.view)
-        let viewModel = viewPiano.viewModel
+        // let viewModel = viewPiano.viewModel
         
         switch gesture.state {
         case .possible:
@@ -80,33 +82,38 @@ class PianoViewController: UIViewController {
         case .began:
             guard isKeyPressEnabled else { return }
             
-            if let viewModel = viewModel, let keyInfo = viewModel.getKeyInfoBy(touchLocation: location) {
-                if mode == .stricted {
-                    guard viewPiano.viewModel.availableKeyIndexes.contains(keyInfo.keyIndex) else {
-                        return
-                    }
-                }
-                
-                viewModel.currentTouchedKey = keyInfo
-                
-                // 노트 재생
-                let targetNoteNumber = semitoneStart + keyInfo.keyIndex + (octaveShift * 12)
-                generator.playSound(noteNumber: targetNoteNumber)
-                
-                // delegate 있는 경우 키 누름 정보 전송
-                if let delegate = delegate {
-                    delegate.didKeyPressed(self, keyInfo: keyInfo)
-                }
+            // if let viewModel = viewModel, let keyInfo = viewModel.getKeyInfoBy(touchLocation: location) {
+            //     if mode == .stricted {
+            //         guard viewPiano.viewModel.availableKeyIndexes.contains(keyInfo.keyIndex) else {
+            //             return
+            //         }
+            //     }
+            //
+            //     viewModel.currentTouchedKey = keyInfo
+            //
+            //     // 노트 재생
+            //     let targetNoteNumber = semitoneStart + keyInfo.keyIndex + (octaveShift * 12)
+            //     generator.playSound(noteNumber: targetNoteNumber)
+            //
+            //     // delegate 있는 경우 키 누름 정보 전송
+            //     if let delegate = delegate {
+            //         delegate.didKeyPressed(self, keyInfo: keyInfo)
+            //     }
+            // }
+            
+            if let keyInfo = viewPiano.viewModel.getKeyInfoBy(touchLocation: location) {
+                startKeyPress(keyInfo)
             }
         case .changed:
             // print(".", terminator: ":")
             break
         case .ended:
             // 노트 멈춤
-            if viewModel?.currentTouchedKey != nil {
-                viewModel?.currentTouchedKey = nil
-                generator.stopSound()
-            }
+            // if viewModel?.currentTouchedKey != nil {
+            //     viewModel?.currentTouchedKey = nil
+            //     generator.stopSound()
+            // }
+            stopKeyPress()
         case .cancelled:
             // print("cancelled")
             break
@@ -115,6 +122,36 @@ class PianoViewController: UIViewController {
             break
         @unknown default:
             print("default", terminator: ":")
+        }
+    }
+    
+    // MARK: - Start or stop key press
+    
+    func startKeyPress(_ keyInfo: PianoKeyInfo) {
+        let semitoneStart = 60 + PianoKeyHelper.adjustKeySemitone(key: currentPlayableKey)
+        
+        if mode == .stricted {
+            guard viewPiano.viewModel.availableKeyIndexes.contains(keyInfo.keyIndex) else {
+                return
+            }
+        }
+        
+        viewPiano.viewModel.currentTouchedKey = keyInfo
+        
+        // 노트 재생
+        let targetNoteNumber = semitoneStart + keyInfo.keyIndex + (octaveShift * 12)
+        generator.playSound(noteNumber: targetNoteNumber)
+        
+        // delegate 있는 경우 키 누름 정보 전송
+        if let delegate = delegate {
+            delegate.didKeyPressed(self, keyInfo: keyInfo)
+        }
+    }
+    
+    func stopKeyPress() {
+        if viewPiano.viewModel?.currentTouchedKey != nil {
+            viewPiano.viewModel?.currentTouchedKey = nil
+            generator.stopSound()
         }
     }
 }

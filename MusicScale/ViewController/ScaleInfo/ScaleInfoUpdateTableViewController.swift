@@ -37,6 +37,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     @IBOutlet weak var cosmosDefaultPriority: CosmosView!
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var stackViewNumButtons: UIStackView!
+    @IBOutlet weak var viewBannerContainer: UIView!
     
     weak var updateDelegate: ScaleInfoUpdateTVCDelegate?
     weak var createDelegate: ScaleInfoUpdateTVCDelegate?
@@ -61,9 +62,10 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     private var cellSheetHeight: CGFloat?
     
     override func viewWillAppear(_ animated: Bool) {
-        // try? availableSoundInSilentMode()
+        // IQKeyboardManager 동작
+        // https://stackoverflow.com/questions/38768966/iqkeyboardmanager-not-working-when-uitableview-embedded-in-a-container-view
+        super.viewWillAppear(animated)
         
-        // Decide instPreset
         generator = MIDISoundGenerator()
     }
     
@@ -78,6 +80,10 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         loadWebSheetPage()
         txfScaleName.addTarget(self, action: #selector(scaleNameChanged), for: .editingChanged)
         btnPlay.setTitle("", for: .normal)
+        
+        DispatchQueue.main.async { [unowned self] in
+            setupBannerAds(self, container: viewBannerContainer)
+        }
         
         // ===== 분기별 작업 =====
         switch mode {
@@ -295,24 +301,30 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     
     @IBAction func barBtnActSubmit(_ sender: UIBarButtonItem) {
         
-        // Degrees 유효성 검사
-        // ASC: 반드시 1로 시작
-        // DESC: 반드시 1로 끝남
-        
         let isDescEnabled = swtActivateDesc.isOn
         let degreeNaturalOne = "\(Music.Accidental.natural.textValue)1"
         
         // ===== 유효성 검사 =====
         //ASC: 반드시 1로 시작
         guard degreesViewModel.onEditDegreesAsc.first == "1" || degreesViewModel.onEditDegreesAsc.first == degreeNaturalOne else {
-            print("ASC: 반드시 1로 시작")
+            simpleAlert(self, message: "ASC is start with 1")
+            return
+        }
+        
+        guard degreesViewModel.onEditDegreesAsc.count >= 2 else {
+            simpleAlert(self, message: "degreesViewModel.onEditDegreesAsc.count >= 2 ")
             return
         }
         
         // DESC: 반드시 1로 끝남
         if isDescEnabled {
             guard degreesViewModel.onEditDegreesDesc.last == "1" || degreesViewModel.onEditDegreesDesc.last == degreeNaturalOne else {
-                print("DESC: 반드시 1로 끝남")
+                simpleAlert(self, message: "DESC: 반드시 1로 끝남")
+                return
+            }
+            
+            guard degreesViewModel.onEditDegreesDesc.count >= 2 else {
+                simpleAlert(self, message: "degreesViewModel.onEditDegreesDesc.count >= 2 ")
                 return
             }
         }
@@ -320,17 +332,20 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         // txfScaleName: 50자 정도 초과 못하게
         guard let scaleName = txfScaleName.text,
               scaleName.count >= 2 && scaleName.count <= 50 else {
+            simpleAlert(self, message: "title must be 2 ~ 50")
             return
         }
         
         // rating: 1 ~ 5
         let ratingInt = Int(cosmosDefaultPriority.rating)
         guard ratingInt.between(1...5) else {
+            simpleAlert(self, message: "rating must be 1 ~ 5")
             return
         }
         
-        // txfComment: 2000자 부근까지
-        guard let comment = txvComment.text, comment.count <= 2000 else {
+        // txfComment: 5000자 부근까지
+        guard let comment = txvComment.text, comment.count <= 5000 else {
+            simpleAlert(self, message: "comment must be 5000")
             return
         }
         

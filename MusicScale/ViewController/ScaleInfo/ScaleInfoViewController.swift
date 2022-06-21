@@ -64,6 +64,26 @@ class ScaleInfoViewController: UIViewController {
         return DEF_STAFFWIDTH
     }
     
+    // MARK: - Detect Hardware Keyboard Press
+    
+    func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override var keyCommands: [UIKeyCommand]? {
+        let keyValues = "zxcvbnmasdfghjkl"
+        return keyValues.map { value in
+            UIKeyCommand(input: String(value), modifierFlags: [], action: #selector(KeyPress))
+        }
+    }
+    
+    @objc func KeyPress(sender: UIKeyCommand) {
+        guard let input = sender.input else {
+            return
+        }
+        // ...
+    }
+    
     // MARK: - VC life cycle
     
     override func viewDidLoad() {

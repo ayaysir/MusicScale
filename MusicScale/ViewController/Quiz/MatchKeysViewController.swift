@@ -20,6 +20,8 @@ class MatchKeysViewController: InQuizViewController {
     @IBOutlet weak var cnstTitlesHeight: NSLayoutConstraint!
     @IBOutlet weak var cnstSpaceBetweenProgAndTits: NSLayoutConstraint!
     
+    @IBOutlet weak var viewBannerContainer: UIView!
+    
     @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var lblResult: UILabel!
     
@@ -56,13 +58,28 @@ class MatchKeysViewController: InQuizViewController {
     private var firstrun: Bool = true
     
     /// 문제 시작부터 정답까지 몇 초 걸렸는지 타이머
-    private var timer: Timer?
+    private var solvingTimer: Timer?
     private var elapsedSeconds: Int = 0
+    
+    private var keyPressTimer: Timer?
+    private var lastKeyPressedInterval: Int = 0 {
+        didSet {
+            if lastKeyPressedInterval == 6 {
+                fadeBannerOnPiano(fadeIn: true)
+                lastKeyPressedInterval = 0
+                keyPressTimer?.invalidate()
+                keyPressTimer = nil
+            }
+        }
+    }
 
     // MARK: - VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupBannerAds(self, container: viewBannerContainer)
+        viewBannerContainer.isHidden = true
         
         DispatchQueue.main.async {
             self.removeTitlesIfIphoneTouch()
@@ -83,7 +100,7 @@ class MatchKeysViewController: InQuizViewController {
         
         // Override displayNextQuestionHandler
         displayNextQuestionHandler = { [unowned self] newQuestion in
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+            solvingTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
                 self.elapsedSeconds += 1
             })
             
@@ -224,6 +241,8 @@ class MatchKeysViewController: InQuizViewController {
             btnPlayTogether.isEnabled = false
             btnSubmit.setTitle("Submit", for: .normal)
             btnSubmit.backgroundColor = .systemOrange
+            
+            viewBannerContainer.isHidden = true
         } else {
             barBtnReset.isEnabled = false
             barBtnBackspace.isEnabled = false
@@ -231,6 +250,38 @@ class MatchKeysViewController: InQuizViewController {
             btnPlayTogether.isEnabled = true
             btnSubmit.setTitle("Next >>", for: .normal)
             btnSubmit.backgroundColor = .systemBlue
+            
+            fadeBannerOnPiano(fadeIn: true)
+        }
+    }
+    
+    var isFadeAnimatingNow: Bool = false
+    func fadeBannerOnPiano(fadeIn: Bool) {
+        let duration: TimeInterval = 1.2
+            
+        DispatchQueue.main.async {
+            self.viewBannerContainer.layoutIfNeeded()
+            if fadeIn && self.viewBannerContainer.isHidden {
+                self.viewBannerContainer.alpha = 0
+                self.viewBannerContainer.isHidden = false
+                
+                UIView.animate(withDuration: duration) {
+                    self.isFadeAnimatingNow = true
+                    self.viewBannerContainer.alpha = 1
+                } completion: { _ in
+                    self.isFadeAnimatingNow = false
+                }
+            } else if !fadeIn && !self.viewBannerContainer.isHidden {
+                self.viewBannerContainer.alpha = 1
+                
+                UIView.animate(withDuration: duration) {
+                    self.isFadeAnimatingNow = true
+                    self.viewBannerContainer.alpha = 0
+                } completion: { _ in
+                    self.viewBannerContainer.isHidden = true
+                    self.isFadeAnimatingNow = false
+                }
+            }
         }
     }
     
@@ -272,7 +323,7 @@ class MatchKeysViewController: InQuizViewController {
         if !isSolvingQuestionNow, let result = questionSuccessResult {
             questionSuccessResult = nil
             isSolvingQuestionNow = true
-            setQuizStatFromCurrentQuestion(result, elapsedSeconds: resetTimer())
+            setQuizStatFromCurrentQuestion(result, elapsedSeconds: resetSolvingTimer())
             progressNextQuestion(result)
             stopSequencer()
             return
@@ -385,9 +436,9 @@ class MatchKeysViewController: InQuizViewController {
         }
     }
     
-    func resetTimer() -> Int {
-        timer?.invalidate()
-        timer = nil
+    func resetSolvingTimer() -> Int {
+        solvingTimer?.invalidate()
+        solvingTimer = nil
         let storedSeconds = self.elapsedSeconds
         self.elapsedSeconds = 0
         return storedSeconds
@@ -492,10 +543,20 @@ extension MatchKeysViewController: ConductorPlay {
 // MARK: - PianoVCDelegate
 extension MatchKeysViewController: PianoVCDelegate {
     func didKeyPressed(_ controller: PianoViewController, keyInfo: PianoKeyInfo) {
+        
         guard isSolvingQuestionNow else {
-            // print("isSolvingQuestionNow is false. Delegate processing refused.")
+            if !isFadeAnimatingNow && !viewBannerContainer.isHidden {
+                fadeBannerOnPiano(fadeIn: false)
+                keyPressTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+                    self.lastKeyPressedInterval += 1
+                    // print(self.lastKeyPressedInterval)
+                })
+            }
+            
+            lastKeyPressedInterval = 0
             return
         }
+        
         guard let currentPlayableKey = currentPlayableKey else { return }
         guard let currentEditViewModel = currentEditViewModel else { return }
         let intNotation = keyInfo.keyIndex - PianoKeyHelper.findRootKeyPosition(playableKey: currentPlayableKey)

@@ -72,4 +72,23 @@ class InstrumentTableViewController: UITableViewController {
         
         navigationController?.popViewController(animated: true)
     }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let half = tableView.numberOfSections / 2
+        if section == 0 || section == half || section == tableView.numberOfSections - 1 {
+            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
+            setupBannerAds(self, container: footerView)
+            return footerView
+        }
+        
+        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let half = tableView.numberOfSections / 2
+        if section == 0 || section == half || section == tableView.numberOfSections - 1 {
+            return 50
+        }
+        return 20
+    }
 }

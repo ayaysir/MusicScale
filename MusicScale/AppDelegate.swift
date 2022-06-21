@@ -9,6 +9,8 @@ import UIKit
 import CoreData
 import DropDown
 import FirebaseCore
+import GoogleMobileAds
+import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -32,8 +34,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // putInitalData()
         }
         
+        IQKeyboardManager.shared.enable = true
+        
         // Firebase
         FirebaseApp.configure()
+        
+        // Initialize the Google Mobile Ads SDK.
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         
         // Initialize Sound
         GlobalConductor.shared.start()
@@ -54,6 +61,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print(error)
         }
+    }
+    
+    func applicationDidFinishLaunching(_ application: UIApplication) {
+        print(#file, #function)
     }
     
     /// set orientations you want to be allowed in this property by default

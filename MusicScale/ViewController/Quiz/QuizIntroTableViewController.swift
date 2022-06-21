@@ -23,6 +23,7 @@ class QuizIntroTableViewController: UITableViewController {
     
     @IBOutlet weak var cellAscending: UITableViewCell!
     @IBOutlet weak var cellDescending: UITableViewCell!
+    @IBOutlet weak var viewBannerContainer: UIView!
     
     let ascCellIndexPath = IndexPath(row: 0, section: 3)
     let descCellIndexPath = IndexPath(row: 1, section: 3)
@@ -79,6 +80,10 @@ class QuizIntroTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        DispatchQueue.main.async { [unowned self] in
+            setupBannerAds(self, container: viewBannerContainer)
+        }
     }
     
     @IBAction func btnActStartQuiz(_ sender: UIButton) {
