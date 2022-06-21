@@ -9,7 +9,7 @@ import Foundation
 
 func adUnitIDDistributor(_ instance: NSObject) -> String {
     /*
-     
+     .
      1.
      - ScaleList TVC
      - ScaleSubInfo TVC
