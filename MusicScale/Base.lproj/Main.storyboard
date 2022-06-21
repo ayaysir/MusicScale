@@ -519,7 +519,6 @@
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="c2p-Ah-UtD">
                                                     <rect key="frame" x="8" y="0.0" width="355" height="73"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <string key="text">Ionian
 🇰🇷 아이오니안
 🇯🇵 イオニアン</string>
@@ -795,7 +794,6 @@
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter descriptions, notes, or memorization tips and more..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0C4-bg-MUT">
                                                     <rect key="frame" x="10" y="0.0" width="369" height="105"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1539,6 +1537,7 @@
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hhD-CE-d9D">
                                                     <rect key="frame" x="20" y="11" width="348" height="88"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EQm-6V-96o">
                                                         <size key="itemSize" width="91" height="86"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1755,7 +1754,7 @@
         <scene sceneID="G9M-MQ-glS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UMY-g3-YgY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Quiz" image="menucard" catalog="system" id="TGN-zv-fiG"/>
+                    <tabBarItem key="tabBarItem" title="Quiz" image="greetingcard" catalog="system" id="TGN-zv-fiG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ICE-Wn-gHF">
                         <rect key="frame" x="0.0" y="44" width="428" height="44"/>
@@ -3433,7 +3432,7 @@
         <scene sceneID="BUf-8V-Ufq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ndr-Yr-dVx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="pRZ-Uz-oqf"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gearshape" catalog="system" id="pRZ-Uz-oqf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9QW-oO-rNx">
                         <rect key="frame" x="0.0" y="44" width="428" height="44"/>
@@ -3450,18 +3449,18 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VsC-uc-p1n"/>
-        <segue reference="8Fa-Oz-VZU"/>
+        <segue reference="6tl-C7-X1w"/>
+        <segue reference="2J2-cR-7Di"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.up.and.down.square.fill" catalog="system" width="128" height="114"/>
         <image name="delete.backward" catalog="system" width="128" height="104"/>
         <image name="delete.left" catalog="system" width="128" height="104"/>
-        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="globe" catalog="system" width="128" height="121"/>
+        <image name="greetingcard" catalog="system" width="107" height="128"/>
         <image name="hand.thumbsdown.fill" catalog="system" width="128" height="121"/>
         <image name="hand.thumbsup.fill" catalog="system" width="128" height="121"/>
-        <image name="menucard" catalog="system" width="107" height="128"/>
         <image name="music.quarternote.3" catalog="system" width="128" height="103"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
         <namedColor name="TransparentFillColor">

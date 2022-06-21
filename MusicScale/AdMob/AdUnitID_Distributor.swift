@@ -9,7 +9,7 @@ import Foundation
 
 func adUnitIDDistributor(_ instance: NSObject) -> String {
     /*
-     .
+     
      1.
      - ScaleList TVC
      - ScaleSubInfo TVC
@@ -39,8 +39,7 @@ func adUnitIDDistributor(_ instance: NSObject) -> String {
         is ScaleSubInfoTableViewController,
         is ScaleInfoUpdateTableViewController:
         
-        print("group 1")
-        break
+        return "ca-app-pub-6364767349592629/8826386168"
         
     case
         is MatchKeysViewController,
@@ -49,23 +48,20 @@ func adUnitIDDistributor(_ instance: NSObject) -> String {
         is QuizFinishedViewController,
         is QuizIntroTableViewController:
         
-        print("group 2")
-        break
+        return "ca-app-pub-6364767349592629/3574059480"
         
     case
         is ArchiveMainTableViewController,
         is ArchiveDetailTableViewController:
         
-        print("group 3")
-        break
+        return "ca-app-pub-6364767349592629/2069406129"
         
     case
         is SettingTableViewController,
         is EnharmonicSelectTableViewController,
         is InstrumentTableViewController:
         
-        print("group 4")
-        break
+        return "ca-app-pub-6364767349592629/1877834439"
         
     default:
         break

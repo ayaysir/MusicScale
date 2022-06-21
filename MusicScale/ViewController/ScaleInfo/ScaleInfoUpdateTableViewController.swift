@@ -81,8 +81,8 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         txfScaleName.addTarget(self, action: #selector(scaleNameChanged), for: .editingChanged)
         btnPlay.setTitle("", for: .normal)
         
-        DispatchQueue.main.async { [unowned self] in
-            setupBannerAds(self, container: viewBannerContainer)
+        DispatchQueue.main.async {
+            setupBannerAds(self, container: self.viewBannerContainer)
         }
         
         // ===== 분기별 작업 =====

@@ -81,8 +81,8 @@ class QuizIntroTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DispatchQueue.main.async { [unowned self] in
-            setupBannerAds(self, container: viewBannerContainer)
+        DispatchQueue.main.async {
+            setupBannerAds(self, container: self.viewBannerContainer)
         }
     }
     
