@@ -226,11 +226,11 @@
             </objects>
             <point key="canvasLocation" x="1563" y="2075"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Scales-->
         <scene sceneID="Eel-of-dSm">
             <objects>
                 <navigationController id="lHx-Wr-9eP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="z1b-qk-9P4"/>
+                    <tabBarItem key="tabBarItem" title="Scales" image="music.quarternote.3" catalog="system" id="z1b-qk-9P4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ch3-4c-f4z">
                         <rect key="frame" x="0.0" y="44" width="428" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1755,7 +1755,7 @@
         <scene sceneID="G9M-MQ-glS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UMY-g3-YgY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Quiz" id="TGN-zv-fiG"/>
+                    <tabBarItem key="tabBarItem" title="Quiz" image="menucard" catalog="system" id="TGN-zv-fiG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ICE-Wn-gHF">
                         <rect key="frame" x="0.0" y="44" width="428" height="44"/>
@@ -2796,11 +2796,11 @@
             </objects>
             <point key="canvasLocation" x="1668.75" y="1240.1408450704225"/>
         </scene>
-        <!--Download-->
+        <!--Archive-->
         <scene sceneID="uU5-En-k4r">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="diU-Fh-LAj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Download" id="8GZ-bs-Pbc"/>
+                    <tabBarItem key="tabBarItem" title="Archive" image="globe" catalog="system" id="8GZ-bs-Pbc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="yfY-Jr-RB9">
                         <rect key="frame" x="0.0" y="44" width="428" height="96"/>
@@ -3429,11 +3429,11 @@
             </objects>
             <point key="canvasLocation" x="-4199" y="1056"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="BUf-8V-Ufq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ndr-Yr-dVx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="pRZ-Uz-oqf"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="pRZ-Uz-oqf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9QW-oO-rNx">
                         <rect key="frame" x="0.0" y="44" width="428" height="44"/>
@@ -3457,8 +3457,12 @@
         <image name="arrow.up.and.down.square.fill" catalog="system" width="128" height="114"/>
         <image name="delete.backward" catalog="system" width="128" height="104"/>
         <image name="delete.left" catalog="system" width="128" height="104"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="globe" catalog="system" width="128" height="121"/>
         <image name="hand.thumbsdown.fill" catalog="system" width="128" height="121"/>
         <image name="hand.thumbsup.fill" catalog="system" width="128" height="121"/>
+        <image name="menucard" catalog="system" width="107" height="128"/>
+        <image name="music.quarternote.3" catalog="system" width="128" height="103"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
         <namedColor name="TransparentFillColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="0.019999999552965164" colorSpace="custom" customColorSpace="sRGB"/>
