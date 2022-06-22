@@ -1,0 +1,572 @@
+
+/* Class = "UITextView"; text = "Enter descriptions, notes, or memorization tips and more..."; ObjectID = "0C4-bg-MUT"; */
+"0C4-bg-MUT.text" = "説明、メモ、暗記のヒントなどを入力してください...";
+
+/* Class = "UIBarButtonItem"; title = "Delete"; ObjectID = "1Cg-fN-UUk"; */
+"1Cg-fN-UUk.title" = "消去";
+
+/* Class = "UITableViewSection"; headerTitle = "Comment"; ObjectID = "1Dc-ST-gj7"; */
+"1Dc-ST-gj7.headerTitle" = "コメント";
+
+/* Class = "UIButton"; normalTitle = "3"; ObjectID = "1Na-GU-GXg"; */
+"1Na-GU-GXg.normalTitle" = "3";
+
+/* Class = "UILabel"; text = "SSSSSSSSSSSSSSSSSSSSSSSS"; ObjectID = "1PZ-a3-HzC"; */
+"1PZ-a3-HzC.text" = "SSSSSSSSSSSSSSSSSSSSSSSS";
+
+/* Class = "UILabel"; text = "12"; ObjectID = "2e2-Jl-4XF"; */
+"2e2-Jl-4XF.text" = "12";
+
+/* Class = "UITableViewSection"; headerTitle = "Scale Name"; ObjectID = "2rB-rT-RHT"; */
+"2rB-rT-RHT.headerTitle" = "スケール名";
+
+/* Class = "UINavigationItem"; title = "Dorian Scale"; ObjectID = "2yS-la-dtF"; */
+"2yS-la-dtF.title" = "Dorian Scale";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "3EG-Sz-5ce"; */
+"3EG-Sz-5ce.normalTitle" = "Button";
+
+/* Class = "UISegmentedControl"; 3Ol-cg-3AV.segmentTitles[0] = "Default"; ObjectID = "3Ol-cg-3AV"; */
+"3Ol-cg-3AV.segmentTitles[0]" = "デフォルト";
+
+/* Class = "UISegmentedControl"; 3Ol-cg-3AV.segmentTitles[1] = "♯ (Sharp)"; ObjectID = "3Ol-cg-3AV"; */
+"3Ol-cg-3AV.segmentTitles[1]" = "♯ (Sharp)";
+
+/* Class = "UISegmentedControl"; 3Ol-cg-3AV.segmentTitles[2] = "♭ (flat)"; ObjectID = "3Ol-cg-3AV"; */
+"3Ol-cg-3AV.segmentTitles[2]" = "♭ (flat)";
+
+/* Class = "UISegmentedControl"; 3Ol-cg-3AV.segmentTitles[3] = "♮ (Natural)"; ObjectID = "3Ol-cg-3AV"; */
+"3Ol-cg-3AV.segmentTitles[3]" = "♮ (Natural)";
+
+/* Class = "UILabel"; text = "Transpose in"; ObjectID = "3Ue-1x-MJm"; */
+"3Ue-1x-MJm.text" = "Transpose in";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "3ho-CT-qOa"; */
+"3ho-CT-qOa.text" = "名前";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "3jw-Nu-Jgg"; */
+"3jw-Nu-Jgg.text" = "題名";
+
+/* Class = "UILabel"; text = "SSSSSSSSSSSSSSSSSSSSSSSS"; ObjectID = "4P2-9Z-3jJ"; */
+"4P2-9Z-3jJ.text" = "SSSSSSSSSSSSSSSSSSSSSSSS";
+
+/* Class = "UITableViewSection"; headerTitle = "Infomation"; ObjectID = "4u8-fR-1bb"; */
+"4u8-fR-1bb.headerTitle" = "情報";
+
+/* Class = "UILabel"; text = "Natural minor scale"; ObjectID = "56w-vM-U3Y"; */
+"56w-vM-U3Y.text" = "Natural minor scale";
+
+/* Class = "UILabel"; text = "Alias"; ObjectID = "5IY-CJ-0CB"; */
+"5IY-CJ-0CB.text" = "エイリアス";
+
+/* Class = "UILabel"; text = "1"; ObjectID = "5Up-kL-uBY"; */
+"5Up-kL-uBY.text" = "1";
+
+/* Class = "UILabel"; text = "SSSSSSSSSSSSSSSSSSSSSSSS"; ObjectID = "5VY-oI-Pis"; */
+"5VY-oI-Pis.text" = "SSSSSSSSSSSSSSSSSSSSSSSS";
+
+/* Class = "UINavigationItem"; title = "Guess the Name"; ObjectID = "5dN-VM-Sze"; */
+"5dN-VM-Sze.title" = "名前を推測する";
+
+/* Class = "UILabel"; text = "Menu 2"; ObjectID = "68P-JU-DKp"; */
+"68P-JU-DKp.text" = "Menu 2";
+
+/* Class = "UILabel"; text = "SSSSSSSSSSSSSSSSSSSSSSSS"; ObjectID = "6UC-GJ-IlM"; */
+"6UC-GJ-IlM.text" = "SSSSSSSSSSSSSSSSSSSSSSSS";
+
+/* Class = "UIButton"; normalTitle = "Got it"; ObjectID = "6lp-M4-Be5"; */
+"6lp-M4-Be5.normalTitle" = "確認";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "6sb-up-3c6"; */
+"6sb-up-3c6.text" = "題名";
+
+/* Class = "UINavigationItem"; title = "Aeolian"; ObjectID = "7CF-gT-5wt"; */
+"7CF-gT-5wt.title" = "Aeolian";
+
+/* Class = "UITableViewSection"; headerTitle = "Select a Scale"; ObjectID = "7QV-8K-WQz"; */
+"7QV-8K-WQz.headerTitle" = "スケールを選択";
+
+/* Class = "UITableViewSection"; footerTitle = "Default Priority is the default value to set when first writing or when distributing to other users after uploading, and it is different from the \"My Priority\" you set."; ObjectID = "7g6-dn-VuA"; */
+"7g6-dn-VuA.footerTitle" = "デフォルトの優先度は、最初の書き込み時またはアップロード後に他のユーザーに配布するときに設定するデフォルト値であり、設定した「マイ優先度」とは異なります。";
+
+/* Class = "UITableViewSection"; headerTitle = "Default Priority"; ObjectID = "7g6-dn-VuA"; */
+"7g6-dn-VuA.headerTitle" = "デフォルトの優先度";
+
+/* Class = "UIButton"; normalTitle = "Together"; ObjectID = "7uE-nP-ZqC"; */
+"7uE-nP-ZqC.normalTitle" = "一緒";
+
+/* Class = "UITabBarItem"; title = "Archive"; ObjectID = "8GZ-bs-Pbc"; */
+"8GZ-bs-Pbc.title" = "資料室";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "8xD-Bq-RLM"; */
+"8xD-Bq-RLM.title" = "Item";
+
+/* Class = "UILabel"; text = "Select the scales"; ObjectID = "91a-PY-ENJ"; */
+"91a-PY-ENJ.text" = "スケールを選択します";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "972-3C-Ond"; */
+"972-3C-Ond.normalTitle" = "C";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "9Uc-Rz-vaa"; */
+"9Uc-Rz-vaa.text" = "Title";
+
+/* Class = "UILabel"; text = "SSSSSSSSSSSSSSSSSSSSSSSS"; ObjectID = "AJs-Tl-Yfh"; */
+"AJs-Tl-Yfh.text" = "SSSSSSSSSSSSSSSSSSSSSSSS";
+
+/* Class = "UILabel"; text = "Desending"; ObjectID = "AuC-nO-kXO"; */
+"AuC-nO-kXO.text" = "下行";
+
+/* Class = "UILabel"; text = "30"; ObjectID = "Auh-jH-BKN"; */
+"Auh-jH-BKN.text" = "30";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "Azm-Am-8mc"; */
+"Azm-Am-8mc.text" = "詳細";
+
+/* Class = "UIButton"; normalTitle = "Give Up"; ObjectID = "B1i-IH-uOJ"; */
+"B1i-IH-uOJ.normalTitle" = "あきらめる";
+
+/* Class = "UILabel"; text = "Ascending"; ObjectID = "BZw-Jl-49a"; */
+"BZw-Jl-49a.text" = "上行";
+
+/* Class = "UIBarButtonItem"; title = "Update"; ObjectID = "Bsq-Ow-kds"; */
+"Bsq-Ow-kds.title" = "アップデート";
+
+/* Class = "UILabel"; text = "Tempo (BPM)"; ObjectID = "CYt-Ub-afp"; */
+"CYt-Ub-afp.text" = "Tempo (BPM)";
+
+/* Class = "UILabel"; text = "Playback Instrument"; ObjectID = "Cs5-BJ-7dT"; */
+"Cs5-BJ-7dT.text" = "再生楽器";
+
+/* Class = "UILabel"; text = "Enharmonic Modes"; ObjectID = "EDC-ci-Cit"; */
+"EDC-ci-Cit.text" = "Enharmonic Modes";
+
+/* Class = "UILabel"; text = "2 weeks ago"; ObjectID = "EJR-h5-fZy"; */
+"EJR-h5-fZy.text" = "2 weeks ago";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "EXO-Zk-CHY"; */
+"EXO-Zk-CHY.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Aeolian Mode"; ObjectID = "Ems-tJ-kqY"; */
+"Ems-tJ-kqY.text" = "Aeolian Mode";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "FBw-aH-9eU"; */
+"FBw-aH-9eU.normalTitle" = "Button";
+
+/* Class = "UISegmentedControl"; Fif-uz-H7H.segmentTitles[0] = "Ascending"; ObjectID = "Fif-uz-H7H"; */
+"Fif-uz-H7H.segmentTitles[0]" = "上行";
+
+/* Class = "UISegmentedControl"; Fif-uz-H7H.segmentTitles[1] = "Descending"; ObjectID = "Fif-uz-H7H"; */
+"Fif-uz-H7H.segmentTitles[1]" = "下行";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "FvQ-gR-U2e"; */
+"FvQ-gR-U2e.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Uploader"; ObjectID = "GuV-72-VXs"; */
+"GuV-72-VXs.text" = "アップローダー";
+
+/* Class = "UILabel"; text = " enu 1"; ObjectID = "Gv8-tf-5U2"; */
+"Gv8-tf-5U2.text" = " enu 1";
+
+/* Class = "UILabel"; text = "2020-20-20 12:13:!4"; ObjectID = "HZB-CL-FkU"; */
+"HZB-CL-FkU.text" = "2020-20-20 12:13:!4";
+
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "Hfc-rb-Nkn"; */
+"Hfc-rb-Nkn.normalTitle" = "継続する";
+
+/* Class = "UILabel"; text = "SSSSSSSSSSSSSSSSSSSSSSSS"; ObjectID = "HiU-jV-BKf"; */
+"HiU-jV-BKf.text" = "SSSSSSSSSSSSSSSSSSSSSSSS";
+
+/* Class = "UINavigationItem"; title = "Scale List"; ObjectID = "HlW-aX-UHD"; */
+"HlW-aX-UHD.title" = "スケールリスト";
+
+/* Class = "UIButton"; normalTitle = "2"; ObjectID = "Hng-gy-HjZ"; */
+"Hng-gy-HjZ.normalTitle" = "2";
+
+/* Class = "UITableViewSection"; headerTitle = "Select Progress Order"; ObjectID = "ISH-DC-OyD"; */
+"ISH-DC-OyD.headerTitle" = "進行順序を選択";
+
+/* Class = "UIButton"; normalTitle = "6"; ObjectID = "Idf-yt-9uw"; */
+"Idf-yt-9uw.normalTitle" = "6";
+
+/* Class = "UILabel"; text = "Alias"; ObjectID = "JZd-si-rA9"; */
+"JZd-si-rA9.text" = "エイリアス";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "JaS-Rt-rM2"; */
+"JaS-Rt-rM2.text" = "詳細";
+
+/* Class = "UITableViewSection"; headerTitle = "Enharmonic Notations"; ObjectID = "K35-uE-q4X"; */
+"K35-uE-q4X.headerTitle" = "異名同音表記";
+
+/* Class = "UILabel"; text = "Download Count"; ObjectID = "K3E-8w-0zV"; */
+"K3E-8w-0zV.text" = "ダウンロード数";
+
+/* Class = "UITableViewSection"; headerTitle = "Information"; ObjectID = "LEs-GG-4b1"; */
+"LEs-GG-4b1.headerTitle" = "情報";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "LM6-rk-LIN"; */
+"LM6-rk-LIN.text" = "題名";
+
+/* Class = "UIButton"; normalTitle = "Sharp(#) and natural"; ObjectID = "LbI-JK-IQB"; */
+"LbI-JK-IQB.normalTitle" = "Sharp(#) and natural";
+
+/* Class = "UINavigationItem"; title = "Quiz"; ObjectID = "LcN-Cr-0iW"; */
+"LcN-Cr-0iW.title" = "クイズ";
+
+/* Class = "UINavigationItem"; title = "Select the Keys"; ObjectID = "MWS-f4-dcH"; */
+"MWS-f4-dcH.title" = "調を選択します";
+
+/* Class = "UILabel"; text = "Send Mail to Developer"; ObjectID = "MYK-91-rGs"; */
+"MYK-91-rGs.text" = "開発者にメールを送信";
+
+/* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "MZm-Pw-WoS"; */
+"MZm-Pw-WoS.title" = "リセット";
+
+/* Class = "UINavigationItem"; title = "iPad"; ObjectID = "MiK-Yj-hkz"; */
+"MiK-Yj-hkz.title" = "iPad";
+
+/* Class = "UIButton"; normalTitle = "7"; ObjectID = "NDi-z6-U9H"; */
+"NDi-z6-U9H.normalTitle" = "7";
+
+/* Class = "UILabel"; text = "Continue?"; ObjectID = "NFV-Uj-s8A"; */
+"NFV-Uj-s8A.text" = "継続する？";
+
+/* Class = "UISegmentedControl"; NSD-dd-SRc.segmentTitles[0] = "Ascending"; ObjectID = "NSD-dd-SRc"; */
+"NSD-dd-SRc.segmentTitles[0]" = "Ascending";
+
+/* Class = "UISegmentedControl"; NSD-dd-SRc.segmentTitles[1] = "Descending"; ObjectID = "NSD-dd-SRc"; */
+"NSD-dd-SRc.segmentTitles[1]" = "Descending";
+
+/* Class = "UILabel"; text = "700 (70%)"; ObjectID = "NwC-E5-LQt"; */
+"NwC-E5-LQt.text" = "700 (70%)";
+
+/* Class = "UILabel"; text = "KeyName"; ObjectID = "Okz-86-0QZ"; */
+"Okz-86-0QZ.text" = "KeyName";
+
+/* Class = "UILabel"; text = "300 (30%)"; ObjectID = "Puz-9y-jvE"; */
+"Puz-9y-jvE.text" = "300 (30%)";
+
+/* Class = "UILabel"; text = "Enharmonic Notations"; ObjectID = "Q7p-ED-17V"; */
+"Q7p-ED-17V.text" = "異名同音表記";
+
+/* Class = "UITableViewSection"; footerTitle = "Ascending and Desceding are same."; ObjectID = "QTY-w3-07b"; */
+"QTY-w3-07b.footerTitle" = "上行と下行は同じです。";
+
+/* Class = "UITableViewSection"; headerTitle = "Preview"; ObjectID = "QTY-w3-07b"; */
+"QTY-w3-07b.headerTitle" = "プレビュー";
+
+/* Class = "UIButton"; normalTitle = "5"; ObjectID = "QjB-6J-h29"; */
+"QjB-6J-h29.normalTitle" = "5";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "Qra-tq-LIM"; */
+"Qra-tq-LIM.text" = "詳細";
+
+/* Class = "UITableViewSection"; headerTitle = "Comment"; ObjectID = "RLI-3f-ygA"; */
+"RLI-3f-ygA.headerTitle" = "コメント";
+
+/* Class = "UILabel"; text = "=Òr=="; ObjectID = "Rqh-Rg-I2v"; */
+"Rqh-Rg-I2v.text" = "=Òr==";
+
+/* Class = "UITabBarController"; title = "PrimaryTabBarController"; ObjectID = "S8F-Uh-enl"; */
+"S8F-Uh-enl.title" = "PrimaryTabBarController";
+
+/* Class = "UILabel"; text = "Octave Shift"; ObjectID = "SYV-TE-ucg"; */
+"SYV-TE-ucg.text" = "Octave Shift";
+
+/* Class = "UILabel"; text = "Go to GitHub Repository"; ObjectID = "SdA-3a-3ZF"; */
+"SdA-3a-3ZF.text" = "GitHubリポジトリに移動";
+
+/* Class = "UITabBarItem"; title = "Quiz"; ObjectID = "TGN-zv-fiG"; */
+"TGN-zv-fiG.title" = "クイズ";
+
+/* Class = "UIBarButtonItem"; title = "Edit"; ObjectID = "ToQ-KK-G10"; */
+"ToQ-KK-G10.title" = "編集";
+
+/* Class = "UILabel"; text = "Pattern (Asc.)"; ObjectID = "UQ2-Bd-mzV"; */
+"UQ2-Bd-mzV.text" = "パターン (上行)";
+
+/* Class = "UIButton"; configuration.title = "Done"; ObjectID = "UWJ-SI-vOd"; */
+"UWJ-SI-vOd.configuration.title" = "完了";
+"UWJ-SI-vOd.normalTitle" = "完了";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "UWJ-SI-vOd"; */
+"UWJ-SI-vOd.normalTitle" = "Button";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "VAJ-6Y-8wA"; */
+"VAJ-6Y-8wA.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "VAm-Vf-UU4"; */
+"VAm-Vf-UU4.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "120"; ObjectID = "VRb-r7-aq6"; */
+"VRb-r7-aq6.text" = "120";
+
+/* Class = "UILabel"; text = "Ascending and Descending are different."; ObjectID = "Va8-eM-OZi"; */
+"Va8-eM-OZi.text" = "上行と下行は異なります。";
+
+/* Class = "UISegmentedControl"; Wqp-e2-Cge.segmentTitles[0] = "Ascending"; ObjectID = "Wqp-e2-Cge"; */
+"Wqp-e2-Cge.segmentTitles[0]" = "上行";
+
+/* Class = "UISegmentedControl"; Wqp-e2-Cge.segmentTitles[1] = "Descending"; ObjectID = "Wqp-e2-Cge"; */
+"Wqp-e2-Cge.segmentTitles[1]" = "下行";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "X1c-ti-nUZ"; */
+"X1c-ti-nUZ.text" = "題名";
+
+/* Class = "UITableViewSection"; headerTitle = "Available Soon"; ObjectID = "X4k-Io-zGQ"; */
+"X4k-Io-zGQ.headerTitle" = "すぐに利用可能";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "XEK-LT-H7l"; */
+"XEK-LT-H7l.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "Natural minor scale, natural minor scale"; ObjectID = "XcI-jk-JXx"; */
+"XcI-jk-JXx.text" = "Natural minor scale, natural minor scale";
+
+/* Class = "UINavigationItem"; title = "Enharmonic Notations"; ObjectID = "Yoi-Uu-7kP"; */
+"Yoi-Uu-7kP.title" = "異名同音表記";
+
+/* Class = "UISegmentedControl"; Z21-5W-1nF.segmentTitles[0] = "Ascending"; ObjectID = "Z21-5W-1nF"; */
+"Z21-5W-1nF.segmentTitles[0]" = "上行";
+
+/* Class = "UISegmentedControl"; Z21-5W-1nF.segmentTitles[1] = "Descending"; ObjectID = "Z21-5W-1nF"; */
+"Z21-5W-1nF.segmentTitles[1]" = "下行";
+
+/* Class = "UITableViewSection"; headerTitle = "Select Key"; ObjectID = "Z48-EF-LYc"; */
+"Z48-EF-LYc.headerTitle" = "調を選択";
+
+/* Class = "UITableViewSection"; headerTitle = "Available Enharmonic Notes"; ObjectID = "ZFA-Lf-9PX"; */
+"ZFA-Lf-9PX.headerTitle" = "利用可能な異名同音ノート";
+
+/* Class = "UITableViewSection"; footerTitle = "Enter an alias for the scale or a foreign language term. You can enter multiple aliases and press Enter to separate words."; ObjectID = "ZRm-N1-fYF"; */
+"ZRm-N1-fYF.footerTitle" = "スケールまたは外国語の用語のエイリアスを入力します。 複数のエイリアスを入力し、Enterキーを押して単語を区切ることができます。";
+
+/* Class = "UITableViewSection"; headerTitle = "Scale Name Aliases"; ObjectID = "ZRm-N1-fYF"; */
+"ZRm-N1-fYF.headerTitle" = "スケール名のエイリアス";
+
+/* Class = "UILabel"; text = "Integer Notation (Asc.)"; ObjectID = "Za1-p6-uF2"; */
+"Za1-p6-uF2.text" = "整数表記 (上行)";
+
+/* Class = "UINavigationItem"; title = "Flashcards Prototype"; ObjectID = "aI7-W9-8Co"; */
+"aI7-W9-8Co.title" = "Flashcards Prototype";
+
+/* Class = "UITableViewSection"; headerTitle = "MIDI Instruments"; ObjectID = "awR-Q4-mel"; */
+"awR-Q4-mel.headerTitle" = "MIDIインストゥルメント";
+
+/* Class = "UITableViewSection"; headerTitle = "Degrees"; ObjectID = "ayI-wy-sCl"; */
+"ayI-wy-sCl.headerTitle" = "音度";
+
+/* Class = "UINavigationItem"; title = "Download"; ObjectID = "bwb-44-Weh"; */
+"bwb-44-Weh.title" = "ダウンロード";
+
+/* Class = "UITextView"; text = "Ionian\n🇰🇷 아이오니안\n🇯🇵 イオニアン"; ObjectID = "c2p-Ah-UtD"; */
+"c2p-Ah-UtD.text" = "Ionian\n🇰🇷 아이오니안\n🇯🇵 イオニアン";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "ctq-px-ioi"; */
+"ctq-px-ioi.text" = "詳細";
+
+/* Class = "UIBarButtonItem"; title = "Submit"; ObjectID = "dCH-q1-Ogl"; */
+"dCH-q1-Ogl.title" = "送信";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "dHP-0v-sV6"; */
+"dHP-0v-sV6.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "dxu-jU-oSQ"; */
+"dxu-jU-oSQ.text" = "詳細";
+
+/* Class = "UILabel"; text = "Types of questions"; ObjectID = "eFq-Vb-uIu"; */
+"eFq-Vb-uIu.text" = "質問の種類";
+
+/* Class = "UILabel"; text = "Descending"; ObjectID = "eFz-N0-zYj"; */
+"eFz-N0-zYj.text" = "下行";
+
+/* Class = "UILabel"; text = "SSSSSSSSSSSSSSSSSSSSSSSS"; ObjectID = "eOc-vm-J6K"; */
+"eOc-vm-J6K.text" = "SSSSSSSSSSSSSSSSSSSSSSSS";
+
+/* Class = "UILabel"; text = "SSSSSSSSSSSSSSSSSSSSSSSS"; ObjectID = "egm-cZ-3nF"; */
+"egm-cZ-3nF.text" = "SSSSSSSSSSSSSSSSSSSSSSSS";
+
+/* Class = "UIButton"; configuration.title = "View Quiz History Log (β)"; ObjectID = "fI1-YR-FWc"; */
+"fI1-YR-FWc.configuration.title" = "クイズ履歴ログの表示（β）";
+"fI1-YR-FWc.normalTitle" = "クイズ履歴ログの表示（β）";
+
+/* Class = "UITableViewSection"; headerTitle = "Select Scales"; ObjectID = "ftc-OT-aci"; */
+"ftc-OT-aci.headerTitle" = "スケールを選択";
+
+/* Class = "UITableViewSection"; headerTitle = "Comment"; ObjectID = "gho-qR-VYd"; */
+"gho-qR-VYd.headerTitle" = "コメント";
+
+/* Class = "UILabel"; text = "SSSSSSSSSSSSSSSSSSSSSSSS"; ObjectID = "gtk-qQ-uWl"; */
+"gtk-qQ-uWl.text" = "SSSSSSSSSSSSSSSSSSSSSSSS";
+
+/* Class = "UILabel"; text = "Default Priority"; ObjectID = "h1M-Kf-l8b"; */
+"h1M-Kf-l8b.text" = "デフォルトの優先度";
+
+/* Class = "UITableViewSection"; headerTitle = "Options"; ObjectID = "heC-yQ-Os6"; */
+"heC-yQ-Os6.headerTitle" = "オプション";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "hrA-w1-URZ"; */
+"hrA-w1-URZ.title" = "設定";
+
+/* Class = "UIBarButtonItem"; title = "Upload"; ObjectID = "hyB-2I-mwu"; */
+"hyB-2I-mwu.title" = "アップロード";
+
+/* Class = "UILabel"; text = "Select the keys"; ObjectID = "ixH-BN-XK1"; */
+"ixH-BN-XK1.text" = "調を選択します";
+
+/* Class = "UILabel"; text = "=Òr=="; ObjectID = "j6p-XF-5jC"; */
+"j6p-XF-5jC.text" = "=Òr==";
+
+/* Class = "UILabel"; text = "Aeolian Mode"; ObjectID = "jbv-oV-BBv"; */
+"jbv-oV-BBv.text" = "Aeolian Mode";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "jt6-Z8-on3"; */
+"jt6-Z8-on3.text" = "Label";
+
+/* Class = "UILabel"; text = "SSSSSSSSSSSSSSSSSSSSSSSS"; ObjectID = "kWf-40-E1F"; */
+"kWf-40-E1F.text" = "SSSSSSSSSSSSSSSSSSSSSSSS";
+
+/* Class = "UILabel"; text = "36%"; ObjectID = "kkf-tA-sZ1"; */
+"kkf-tA-sZ1.text" = "36%";
+
+/* Class = "UILabel"; text = "🎉 Completed 🎉"; ObjectID = "kvI-Dv-kk6"; */
+"kvI-Dv-kk6.text" = "🎉 完了 🎉";
+
+/* Class = "UILabel"; text = "🤔"; ObjectID = "l2n-0U-f5O"; */
+"l2n-0U-f5O.text" = "🤔";
+
+/* Class = "UITextView"; text = "1. Click the note you want to change in the 'Note List', which is notated and sorted by MIDI number notation. (C4 = 0, divided in semitones)\n\n2. Select one of the available lists of Enharmonic notes."; ObjectID = "lEB-7k-dIR"; */
+"lEB-7k-dIR.text" = "1.「ノートリスト」で変更したいノートをクリックします。ノートリストはMIDI番号表記で表記およびソートされています。 （C4 = 0、半音で分割）\n\n2 .異名同音の音符の利用可能なリストの1つを選択します。";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "lHc-Ey-SPq"; */
+"lHc-Ey-SPq.normalTitle" = "送信";
+
+/* Class = "UITextField"; placeholder = "Enter the scale name. ex) Major scale"; ObjectID = "lUC-Sc-oFm"; */
+"lUC-Sc-oFm.placeholder" = "スケール名を入力します。 例）Major scale";
+
+/* Class = "UIBarButtonItem"; title = "Download"; ObjectID = "lae-Ou-byD"; */
+"lae-Ou-byD.title" = "ダウンロード";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "lfh-7v-VfA"; */
+"lfh-7v-VfA.text" = "題名";
+
+/* Class = "UILabel"; text = "Licenses"; ObjectID = "mlg-Rx-erV"; */
+"mlg-Rx-erV.text" = "ライセンス";
+
+/* Class = "UITableViewSection"; headerTitle = "Note List"; ObjectID = "nCv-Cl-OqY"; */
+"nCv-Cl-OqY.headerTitle" = "ノートリスト";
+
+/* Class = "UILabel"; text = "Pattern (Asc.)"; ObjectID = "ndq-IR-mas"; */
+"ndq-IR-mas.text" = "パターン (上行)";
+
+/* Class = "UINavigationItem"; title = "Quiz History Log (β)"; ObjectID = "ogC-iR-vp6"; */
+"ogC-iR-vp6.title" = "クイズ履歴ログ（β）";
+
+/* Class = "UIBarButtonItem"; title = "Add"; ObjectID = "p3G-1W-HEc"; */
+"p3G-1W-HEc.title" = "追加";
+
+/* Class = "UIBarButtonItem"; title = "Sort"; ObjectID = "p4m-07-TYR"; */
+"p4m-07-TYR.title" = "選別";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "pRZ-Uz-oqf"; */
+"pRZ-Uz-oqf.title" = "設定";
+
+/* Class = "UITableViewSection"; headerTitle = "How to Use"; ObjectID = "pXD-tD-ksB"; */
+"pXD-tD-ksB.headerTitle" = "使い方";
+
+/* Class = "UIButton"; normalTitle = "4"; ObjectID = "peS-et-Gc5"; */
+"peS-et-Gc5.normalTitle" = "4";
+
+/* Class = "UILabel"; text = "Degrees (Asc.)"; ObjectID = "qYR-2Q-efh"; */
+"qYR-2Q-efh.text" = "音度 (上行)";
+
+/* Class = "UIButton"; normalTitle = "Answer"; ObjectID = "qy4-OM-nif"; */
+"qy4-OM-nif.normalTitle" = "答え";
+
+/* Class = "UILabel"; text = "🙇‍♂️"; ObjectID = "r9T-fX-9kM"; */
+"r9T-fX-9kM.text" = "🙇‍♂️";
+
+/* Class = "UITableViewSection"; headerTitle = "Metadata"; ObjectID = "rAN-Wf-0d2"; */
+"rAN-Wf-0d2.headerTitle" = "メタデータ";
+
+/* Class = "UILabel"; text = "Created"; ObjectID = "sFB-7T-5QC"; */
+"sFB-7T-5QC.text" = "作成日";
+
+/* Class = "UIButton"; normalTitle = "START"; ObjectID = "sRe-le-n0S"; */
+"sRe-le-n0S.normalTitle" = "始める";
+
+/* Class = "UILabel"; text = "Help Manual"; ObjectID = "scX-nE-Bgk"; */
+"scX-nE-Bgk.text" = "ヘルプ";
+
+/* Class = "UILabel"; text = "View Count"; ObjectID = "sew-Iu-3Ch"; */
+"sew-Iu-3Ch.text" = "ビュー数";
+
+/* Class = "UIButton"; normalTitle = "Go to the Quiz Home"; ObjectID = "shl-j8-Xhh"; */
+"shl-j8-Xhh.normalTitle" = "クイズのホームに移動します";
+
+/* Class = "UIButton"; normalTitle = "Study Again"; ObjectID = "uXc-3O-iSr"; */
+"uXc-3O-iSr.normalTitle" = "もう一度勉強する";
+
+/* Class = "UILabel"; text = "This Device (or Anonymous)"; ObjectID = "um0-VX-CDH"; */
+"um0-VX-CDH.text" = "This Device (or Anonymous)";
+
+/* Class = "UIButton"; configuration.title = "Select a scale..."; ObjectID = "uua-OS-9LT"; */
+"uua-OS-9LT.configuration.title" = "スケールを選択してください...";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "uua-OS-9LT"; */
+"uua-OS-9LT.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Keyboard Instrument"; ObjectID = "vYT-Mt-ljc"; */
+"vYT-Mt-ljc.text" = "鍵盤の楽器";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "vdc-Lf-uf0"; */
+"vdc-Lf-uf0.text" = "名前";
+
+/* Class = "UITableViewSection"; headerTitle = "Infomation"; ObjectID = "vrG-5B-Pm4"; */
+"vrG-5B-Pm4.headerTitle" = "情報";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "wMN-xY-VNM"; */
+"wMN-xY-VNM.text" = "題名";
+
+/* Class = "UIBarButtonItem"; title = "Backspace"; ObjectID = "wqy-QJ-y1X"; */
+"wqy-QJ-y1X.title" = "バックスペース";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "xEu-r5-PBa"; */
+"xEu-r5-PBa.text" = "0";
+
+/* Class = "UILabel"; text = "Priority"; ObjectID = "xHD-YY-kmw"; */
+"xHD-YY-kmw.text" = "優先順位";
+
+/* Class = "UIButton"; normalTitle = "onEdit"; ObjectID = "xbS-4W-H0K"; */
+"xbS-4W-H0K.normalTitle" = "作成中";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "xdl-pC-8cd"; */
+"xdl-pC-8cd.normalTitle" = "1";
+
+/* Class = "UILabel"; text = "start: 0, box_one: 0, box_two: 0, box_three: 0, finished: 0"; ObjectID = "xjO-zv-uJW"; */
+"xjO-zv-uJW.text" = "start: 0, box_one: 0, box_two: 0, box_three: 0, finished: 0";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "xpx-c0-wDg"; */
+"xpx-c0-wDg.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "SSSSSSSSSSSSSSSSSSSSSSSS"; ObjectID = "yQE-sL-izW"; */
+"yQE-sL-izW.text" = "SSSSSSSSSSSSSSSSSSSSSSSS";
+
+/* Class = "UILabel"; text = "Integer Notation (Asc.)"; ObjectID = "ySI-Fk-w9l"; */
+"ySI-Fk-w9l.text" = "整数表記 (上行)";
+
+/* Class = "UILabel"; text = "Degrees (Asc.)"; ObjectID = "yje-XN-cRl"; */
+"yje-XN-cRl.text" = "音度 (上行)";
+
+/* Class = "UIBarButtonItem"; title = "Sort"; ObjectID = "yxr-Ap-H9v"; */
+"yxr-Ap-H9v.title" = "選別";
+
+/* Class = "UITableViewSection"; headerTitle = "Reliability"; ObjectID = "yzs-pK-L7i"; */
+"yzs-pK-L7i.headerTitle" = "信頼性";
+
+/* Class = "UITabBarItem"; title = "Scales"; ObjectID = "z1b-qk-9P4"; */
+"z1b-qk-9P4.title" = "スケール";
+
+/* Class = "UILabel"; text = "Enharmonic Mode"; ObjectID = "zcU-lM-KJV"; */
+"zcU-lM-KJV.text" = "Enharmonic Mode";
+
+/* Class = "UILabel"; text = "SSSSSSSSSSSSSSSSSSSSSSSS"; ObjectID = "zec-bU-uYO"; */
+"zec-bU-uYO.text" = "SSSSSSSSSSSSSSSSSSSSSSSS";

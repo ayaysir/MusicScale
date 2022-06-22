@@ -17,7 +17,7 @@ class StatsViewController: UIViewController {
             let result = try  QuizStatsCDService.shared.readEntityList()
             
             if result.count == 0 {
-                txvQuizLog.text = "There is no records."
+                txvQuizLog.text = "There is no records.".localized()
                 return
             }
             
@@ -25,7 +25,7 @@ class StatsViewController: UIViewController {
                 return partialResult + "\(entity)\n"
             }
         } catch {
-            txvQuizLog.text = "An error occurred while retrieving data."
+            txvQuizLog.text = "An error occurred while retrieving data.".localized()
         }
     }
     

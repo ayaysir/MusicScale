@@ -7,24 +7,30 @@
 
 import UIKit
 
+fileprivate let CAUTION = "Caution".localized()
+fileprivate let OK = "OK".localized()
+fileprivate let NO = "No".localized()
+fileprivate let YES = "Yes".localized()
+fileprivate let CANCEL = "Cancel".localized()
+
 func simpleAlert(_ controller: UIViewController, message: String) {
-    let alertController = UIAlertController(title: "Caution", message: message, preferredStyle: .alert)
-    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+    let alertController = UIAlertController(title: CAUTION, message: message, preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: OK, style: .default, handler: nil)
     alertController.addAction(alertAction)
     controller.present(alertController, animated: true, completion: nil)
 }
 
 func simpleAlert(_ controller: UIViewController, message: String, title: String, handler: ((UIAlertAction) -> Void)?) {
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    let alertAction = UIAlertAction(title: "OK", style: .default, handler: handler)
+    let alertAction = UIAlertAction(title: OK, style: .default, handler: handler)
     alertController.addAction(alertAction)
     controller.present(alertController, animated: true, completion: nil)
 }
 
 func simpleDestructiveYesAndNo(_ controller: UIViewController, message: String, title: String, yesHandler: ((UIAlertAction) -> Void)?) {
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    let alertActionNo = UIAlertAction(title: "No", style: .cancel, handler: nil)
-    let alertActionYes = UIAlertAction(title: "Yes", style: .destructive, handler: yesHandler)
+    let alertActionNo = UIAlertAction(title: NO, style: .cancel, handler: nil)
+    let alertActionYes = UIAlertAction(title: YES, style: .destructive, handler: yesHandler)
     alertController.addAction(alertActionNo)
     alertController.addAction(alertActionYes)
     controller.present(alertController, animated: true, completion: nil)
@@ -32,8 +38,8 @@ func simpleDestructiveYesAndNo(_ controller: UIViewController, message: String, 
 
 func simpleYesAndNo(_ controller: UIViewController, message: String, title: String, yesHandler: ((UIAlertAction) -> Void)?) {
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    let alertActionNo = UIAlertAction(title: "No", style: .cancel, handler: nil)
-    let alertActionYes = UIAlertAction(title: "Yes", style: .default, handler: yesHandler)
+    let alertActionNo = UIAlertAction(title: NO, style: .cancel, handler: nil)
+    let alertActionYes = UIAlertAction(title: YES, style: .default, handler: yesHandler)
     alertController.addAction(alertActionNo)
     alertController.addAction(alertActionYes)
     controller.present(alertController, animated: true, completion: nil)
@@ -49,7 +55,7 @@ func simpleActionSheets(_ controller: UIViewController, actionTitles: [String], 
         alertController.addAction(action)
     }
     
-    alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+    alertController.addAction(UIAlertAction(title: CANCEL, style: .cancel, handler: nil))
     if let presenter = alertController.popoverPresentationController {
         presenter.sourceView = sourceView ?? controller.view.window
         presenter.sourceRect = sourceRect ?? CGRect(x: 0, y: 0, width: 0, height: 0)

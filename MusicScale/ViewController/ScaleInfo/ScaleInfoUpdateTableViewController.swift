@@ -88,14 +88,16 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         // ===== 분기별 작업 =====
         switch mode {
         case .create:
-            self.title = "Create"
+            self.title = "Create".localized()
             cosmosDefaultPriority.rating = 3.0
             
             degreesViewModel = ScaleDegreesUpdateViewModel()
             injectAbcjsText(from: degreesViewModel.abcjsTextOnEditDegreesAsc, needReload: false)
             
+            txvComment.text = TextViewLocalization.CreateComment.localized()
+            
         case .update:
-            self.title = "Update"
+            self.title = "Update".localized()
             guard let infoViewModel = infoViewModel else {
                 return
             }
@@ -225,7 +227,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         // let order: DegreesOrder = segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
         
         if (order == .ascending ? degreesViewModel.onEditDegreesAsc : degreesViewModel.onEditDegreesDesc).count > 20 {
-            self.tableView.makeToast("⚠️ degreesViewModel.onEditDegreesAsc.count must be 20 or less.", position: .center)
+            self.tableView.makeToast("⚠️ You have exceeded the number of notes you can enter.".localized(), position: .center)
             return
         }
         
@@ -242,8 +244,8 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
             
             let isNoteOrderWrong = order == .ascending ? (prevInteger > currInteger) : (prevInteger < currInteger)
             let wrongNoteOrderMessage = order == .ascending
-            ? "⚠️ ASC: prevInteger must be less than currInteger."
-            : "⚠️ DESC: prevInteger must be greater than currInteger."
+            ? "⚠️ Ascending: The previous note must have a lower pitch than the current note.".localized()
+            : "⚠️ Descending: The pitch of the previous note must be higher than the current note.".localized()
             
             let pairHasTargetPrefix = order == .ascending
             ? (prevNumPair.prefix == "_" || prevNumPair.prefix == "__")
@@ -307,24 +309,24 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         // ===== 유효성 검사 =====
         //ASC: 반드시 1로 시작
         guard degreesViewModel.onEditDegreesAsc.first == "1" || degreesViewModel.onEditDegreesAsc.first == degreeNaturalOne else {
-            simpleAlert(self, message: "ASC is start with 1")
+            simpleAlert(self, message: "Degrees in ascending scale must start with 1.".localized())
             return
         }
         
         guard degreesViewModel.onEditDegreesAsc.count >= 2 else {
-            simpleAlert(self, message: "degreesViewModel.onEditDegreesAsc.count >= 2 ")
+            simpleAlert(self, message: "There must be at least one note of the scale except for the beginning and end notes.".localized())
             return
         }
         
         // DESC: 반드시 1로 끝남
         if isDescEnabled {
             guard degreesViewModel.onEditDegreesDesc.last == "1" || degreesViewModel.onEditDegreesDesc.last == degreeNaturalOne else {
-                simpleAlert(self, message: "DESC: 반드시 1로 끝남")
+                simpleAlert(self, message: "Degrees in descending scale must end with 1.".localized())
                 return
             }
             
             guard degreesViewModel.onEditDegreesDesc.count >= 2 else {
-                simpleAlert(self, message: "degreesViewModel.onEditDegreesDesc.count >= 2 ")
+                simpleAlert(self, message: "There must be at least one note of the scale except for the beginning and end notes.".localized())
                 return
             }
         }
@@ -332,20 +334,20 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         // txfScaleName: 50자 정도 초과 못하게
         guard let scaleName = txfScaleName.text,
               scaleName.count >= 2 && scaleName.count <= 50 else {
-            simpleAlert(self, message: "title must be 2 ~ 50")
+            simpleAlert(self, message: "Title must have between 2 and 50 characters.".localized())
             return
         }
         
         // rating: 1 ~ 5
         let ratingInt = Int(cosmosDefaultPriority.rating)
         guard ratingInt.between(1...5) else {
-            simpleAlert(self, message: "rating must be 1 ~ 5")
+            simpleAlert(self, message: "The star rating must be between 1 and 5.".localized())
             return
         }
         
         // txfComment: 5000자 부근까지
         guard let comment = txvComment.text, comment.count <= 5000 else {
-            simpleAlert(self, message: "comment must be 5000")
+            simpleAlert(self, message: "Comments must be no more than 5000 characters.".localized())
             return
         }
         

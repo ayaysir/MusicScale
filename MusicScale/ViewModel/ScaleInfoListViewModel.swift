@@ -37,7 +37,7 @@ class ScaleInfoListViewModel {
     private func fetchCoreData() {
         // 이 작업이 실행될떄마다 뷰도 새로고침한다.
         do {
-            let isAscending = sortStore.curentOrder == .ascending || sortStore.curentOrder == .none
+            let isAscending = sortStore.currentOrder == .ascending || sortStore.currentOrder == .none
             let key: String = {
                 switch sortStore.currentState {
                 case .none, .displayOrder:
@@ -53,7 +53,7 @@ class ScaleInfoListViewModel {
             totalEntityData = try service.readCoreData(sortDescriptors: [sort])
             
             if sortStore.currentState == .priority {
-                orderByDisplayedPriority(order: sortStore.curentOrder)
+                orderByDisplayedPriority(order: sortStore.currentOrder)
             }
             
             handleDataReloaded()
@@ -113,7 +113,7 @@ class ScaleInfoListViewModel {
             leftEntity.displayOrder < rightEntity.displayOrder
         }
         SortFilterConfigStore.shared.currentState = .displayOrder
-        SortFilterConfigStore.shared.curentOrder = .none
+        SortFilterConfigStore.shared.currentOrder = .none
         handleDataReloaded()
     }
     
@@ -122,7 +122,7 @@ class ScaleInfoListViewModel {
             compareTwo(by: order, left: leftEntity.name!, right: rightEntity.name!)
         }
         SortFilterConfigStore.shared.currentState = .name
-        SortFilterConfigStore.shared.curentOrder = order
+        SortFilterConfigStore.shared.currentOrder = order
         handleDataReloaded()
     }
     
@@ -133,7 +133,7 @@ class ScaleInfoListViewModel {
             return compareTwo(by: order, left: leftTargetPriority, right: rightTargetPriority)
         }
         SortFilterConfigStore.shared.currentState = .priority
-        SortFilterConfigStore.shared.curentOrder = order
+        SortFilterConfigStore.shared.currentOrder = order
         handleDataReloaded()
     }
     

@@ -154,6 +154,7 @@ class ArchiveDetailTableViewController: UITableViewController {
         
         // banner
         DispatchQueue.main.async { [unowned self] in
+            btnSelectScale.setTitle("Select a scale...".localized(), for: .normal)
             btnSelectScale.isHidden = isMode(.read)
             if isMode(.read) {
                 setupBannerAds(self, container: viewBannerContainer)
@@ -170,7 +171,8 @@ class ArchiveDetailTableViewController: UITableViewController {
             getPostCounts()
         case .create:
             setButtonTitleForCreateMode()
-            lblUploader.text = "Anonymous (\(FirebaseAuthManager.shared.currentUser?.uid[0..<4] ?? ""))"
+            let anonymousText = "Anonymous".localized()
+            lblUploader.text = "\(anonymousText) (\(FirebaseAuthManager.shared.currentUser?.uid[0..<4] ?? ""))"
         }
     }
     
@@ -186,20 +188,20 @@ class ArchiveDetailTableViewController: UITableViewController {
         barBtnDeleteOr.title = ""
         barBtnDeleteOr.isEnabled = false
         
-        barBtnDownloadOr.title = "Submit"
+        barBtnDownloadOr.title = "Submit".localized()
         barBtnDownloadOr.isEnabled = true
     }
     
     func setButtonTitleForReadMode() {
         if let user = FirebaseAuthManager.shared.currentUser, user.uid == postViewModel?.authorUID {
-            barBtnDeleteOr.title = "Delete"
+            barBtnDeleteOr.title = "Delete".localized()
             barBtnDeleteOr.isEnabled = true
         } else {
             barBtnDeleteOr.title = ""
             barBtnDeleteOr.isEnabled = false
         }
         
-        barBtnDownloadOr.title = "Download"
+        barBtnDownloadOr.title = "Download".localized()
         barBtnDownloadOr.isEnabled = true
     }
     
@@ -251,30 +253,32 @@ class ArchiveDetailTableViewController: UITableViewController {
                     self.lblDownloadCount.text = String(count)
                 }
                 
-                simpleAlert(self, message: "Sucess Download", title: "Download") { _ in
+                simpleAlert(self, message: "Download was successful.".localized(), title: "Download".localized()) { _ in
                     NotificationCenter.default.post(name: .downloadedFromArchive, object: newEntity)
                 }
             } catch {
-                simpleAlert(self, message: "Failed to download: \(error.localizedDescription)")
+                let localizedErrMsg = "Download failed: %@".localized()
+                // simpleAlert(self, message: "Download failed: \(error.localizedDescription)")
+                simpleAlert(self, message: localizedErrMsg)
             }
         case .create:
             // Submit
             guard let infoVM = infoViewModelForCreateMode else {
-                simpleAlert(self, message: "You have not selected any scales to upload.")
+                simpleAlert(self, message: "You have not selected any scales to upload.".localized())
                 return
             }
             let post = Post(scaleInfo: infoVM.scaleInfo)
             
             // setLoadingScreen()
-            SwiftSpinner.show("Uploading...")
+            SwiftSpinner.show("Uploading...".localized())
             postManager.addPost(postRequest: post, completionHandler: { documentID in
                 DispatchQueue.main.async {
-                    SwiftSpinner.show(duration: 2, title: "Upload Completed!", animated: false) {
+                    SwiftSpinner.show(duration: 1.5, title: "Upload Completed!".localized(), animated: false) {
                         self.navigationController?.popViewController(animated: true)
                     }.addTapHandler({
                         SwiftSpinner.hide()
                         self.navigationController?.popViewController(animated: true)
-                    }, subtitle: "Tap to dismiss")
+                    }, subtitle: "Tap to dismiss".localized())
                 }
             
             }, errorHandler: nil)
@@ -292,11 +296,13 @@ class ArchiveDetailTableViewController: UITableViewController {
 
         if isMode(.read) && postViewModel.authorUID == user.uid {
             postManager.deletePost(documentID: postViewModel.documentID) { documentID in
-                simpleAlert(self, message: "Success to delete.", title: "Delete") { _ in
+                simpleAlert(self, message: "Delete was successful.".localized(), title: "Delete".localized()) { _ in
                     self.navigationController?.popViewController(animated: true)
                 }
             } errorHandler: { err in
-                simpleAlert(self, message: "Failed to delete because an error occurred.")
+                let localizedErrMsg = "Failed to delete because an error occurred: %@".localized()
+                // simpleAlert(self, message: "Failed to delete because an error occurred: \(err.localizedDescription)")
+                simpleAlert(self, message: localizedErrMsg)
                 return
             }
         }
@@ -322,7 +328,7 @@ class ArchiveDetailTableViewController: UITableViewController {
         postManager.updateLike(documentID: postViewModel.documentID, status: self.currentLikeStatus) { documentID in
             // 
         } errorHandler: { err in
-            self.view.makeToast("err", position: .center)
+            self.view.makeToast("Error has occured:".localized() + " \(err.localizedDescription)" , position: .center)
             self.currentLikeStatus = oldStatus
         }
 
@@ -483,7 +489,7 @@ extension ArchiveDetailTableViewController {
             case .read:
                 return ""
             case .create:
-                return "Select a scale"
+                return "Select a scale".localized()
             }
         }
         
@@ -507,7 +513,7 @@ extension ArchiveDetailTableViewController {
                 return ""
             }
             
-            return infoVM.isAscAndDescDifferent ? "Diff" : "Same"
+            return infoVM.isAscAndDescDifferent ? "This scale has different ascending and descending order.".localized() : "This scale has the same ascending and descending order.".localized()
         }
         
         // Create mode일 때 숨겨야 할 섹션들

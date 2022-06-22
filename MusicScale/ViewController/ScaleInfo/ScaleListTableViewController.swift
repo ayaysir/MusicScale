@@ -81,9 +81,9 @@ class ScaleListTableViewController: UITableViewController {
         if mode == .quizSelect {
             let infoCount = scaleListViewModel.getInfoCount(isFiltering: isFiltering)
             if quizViewModel.idListCount == infoCount {
-                barBtnAdd.title = "Deselect All"
+                barBtnAdd.title = "Deselect All".localized()
             } else {
-                barBtnAdd.title = "Select All"
+                barBtnAdd.title = "Select All".localized()
             }
         }
     }
@@ -111,12 +111,12 @@ class ScaleListTableViewController: UITableViewController {
         if tableView.isEditing {
             // Edit mode off
             tableView.setEditing(false, animated: true)
-            sender.title = "Edit"
+            sender.title = "Edit".localized()
             toggleStarRatingViewForCurrentVisibleCells(isEditing: false)
         } else {
             // Edit mode on
             tableView.setEditing(true, animated: true)
-            sender.title = "Done"
+            sender.title = "Done".localized()
             toggleStarRatingViewForCurrentVisibleCells(isEditing: true)
         }
     }
@@ -253,12 +253,12 @@ class ScaleListTableViewController: UITableViewController {
         
         if tableView.isEditing {
             
-            let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
+            let delete = UIContextualAction(style: .destructive, title: "Delete".localized()) { (action, sourceView, completionHandler) in
                 
                 let cell = tableView.cellForRow(at: indexPath) as! ScaleListCell
                 let entity = cell.infoViewModel.entity
                 
-                simpleDestructiveYesAndNo(self, message: "Do you want to delete? It cannot be recovered.", title: "Delete") { action in
+                simpleDestructiveYesAndNo(self, message: "Do you want to delete? It cannot be recovered.".localized(), title: "Delete".localized()) { action in
                     self.scaleListViewModel.deleteScaleInfo(entity: entity)
                     tableView.deleteRows(at: [indexPath], with: .fade)
                     completionHandler(true)
@@ -292,7 +292,7 @@ class ScaleListTableViewController: UITableViewController {
             
             if isSelected {
                 if quizViewModel.idListCount <= 1 {
-                    simpleAlert(self, message: "At least one scale must be selected.")
+                    simpleAlert(self, message: "At least one scale must be selected.".localized())
                     return
                 }
                 

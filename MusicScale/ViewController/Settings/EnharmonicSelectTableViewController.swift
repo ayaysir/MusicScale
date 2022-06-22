@@ -15,6 +15,7 @@ class EnharmonicSelectTableViewController: UITableViewController {
     @IBOutlet weak var colViewNoteList: UICollectionView!
     @IBOutlet weak var colViewAvaliableNotes: UICollectionView!
     @IBOutlet weak var viewBannerContainer: UIView!
+    @IBOutlet weak var txvHowToUse: UITextView!
     
     private var tempUserCustomScale: [NoteStrPair] = []
     private var currentSelectedNumber: Int?
@@ -25,6 +26,8 @@ class EnharmonicSelectTableViewController: UITableViewController {
         DispatchQueue.main.async {
             setupBannerAds(self, container: self.viewBannerContainer)
         }
+        
+        txvHowToUse.text = TextViewLocalization.SettingEnharmonicHelp.localized()
         
         colViewNoteList.delegate = self
         colViewNoteList.dataSource = self

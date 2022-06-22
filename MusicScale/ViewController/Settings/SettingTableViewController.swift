@@ -11,6 +11,8 @@ class SettingTableViewController: UITableViewController {
     
     @IBOutlet weak var viewBannerContainer: UIView!
     
+    private let setEnhamonicCellIndexPath = IndexPath(row: 0, section: 1)
+    
     let playbackInstCell = IndexPath(row: 0, section: 0)
     let pianoInstCell = IndexPath(row: 1, section: 0)
     
@@ -30,6 +32,12 @@ class SettingTableViewController: UITableViewController {
             performSegue(withIdentifier: "InstrumentSegue", sender: InstrumentTableViewController.Place.piano)
         default:
             break
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        if indexPath == setEnhamonicCellIndexPath {
+            simpleAlert(self, message: "When the scale is displayed in the score, the user can select the same name. Select 'Custom' in the Enharmonic Mode.".localized(), title: "Enharmonic Notations".localized(), handler: nil)
         }
     }
     

@@ -16,18 +16,19 @@ class SortViewController: UIViewController {
 
     @IBOutlet weak var segAscDesc: UISegmentedControl!
     @IBOutlet weak var tableViewButtons: UITableView!
+    @IBOutlet weak var btnDone: UIButton!
     
     weak var delegate: SortVCDelegate?
     let sortStore = SortFilterConfigStore.shared
     
     let menus: [SortInfo] = [
-        SortInfo(title: "Custom Display Order", order: .none, state: .displayOrder),
-        SortInfo(title: "Scale Name", order: .none, state: .name),
-        SortInfo(title: "Priority", order: .none, state: .priority),
+        SortInfo(title: "Custom Display Order".localized(), order: .none, state: .displayOrder),
+        SortInfo(title: "Scale Name".localized(), order: .none, state: .name),
+        SortInfo(title: "Priority".localized(), order: .none, state: .priority),
     ]
     
     override func viewWillAppear(_ animated: Bool) {
-        switch sortStore.curentOrder {
+        switch sortStore.currentOrder {
         case .none:
             break
         case .ascending:
@@ -39,12 +40,14 @@ class SortViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        btnDone.setTitle("Done".localized(), for: .normal)
+        
         tableViewButtons.delegate = self
         tableViewButtons.dataSource = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("ShortViewController", #function)
         tableViewButtons.reloadData()
     }
     
@@ -123,7 +126,6 @@ extension SortViewController: UITableViewDelegate, UITableViewDataSource {
             break
         }
     }
-    
 }
 
 extension SortViewController: PanModalPresentable {

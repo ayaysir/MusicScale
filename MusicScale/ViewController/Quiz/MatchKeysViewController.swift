@@ -239,7 +239,7 @@ class MatchKeysViewController: InQuizViewController {
             barBtnBackspace.isEnabled = true
             btnPlayAnswer.isEnabled = false
             btnPlayTogether.isEnabled = false
-            btnSubmit.setTitle("Submit", for: .normal)
+            btnSubmit.setTitle("Submit".localized(), for: .normal)
             btnSubmit.backgroundColor = .systemOrange
             
             viewBannerContainer.isHidden = true
@@ -248,7 +248,7 @@ class MatchKeysViewController: InQuizViewController {
             barBtnBackspace.isEnabled = false
             btnPlayAnswer.isEnabled = true
             btnPlayTogether.isEnabled = true
-            btnSubmit.setTitle("Next >>", for: .normal)
+            btnSubmit.setTitle("Next >>".localized(), for: .normal)
             btnSubmit.backgroundColor = .systemBlue
             
             fadeBannerOnPiano(fadeIn: true)
@@ -292,11 +292,11 @@ class MatchKeysViewController: InQuizViewController {
             lblResult.textColor = nil
         } else if let result = questionSuccessResult {
             if result {
-                lblResult.text = "Success"
+                lblResult.text = "Success".localized()
                 lblResult.backgroundColor = .green
                 lblResult.textColor = nil
             } else {
-                lblResult.text = "Failed"
+                lblResult.text = "Failed".localized()
                 lblResult.backgroundColor = .systemPink
                 lblResult.textColor = .white
             }
@@ -372,7 +372,7 @@ class MatchKeysViewController: InQuizViewController {
     
     func displayName(question: QuizQuestion) {
         lblKeyName.text = "\(question.key.textValue) \(question.scaleInfo.name)"
-        lblOrder.text = question.isAscending ? "Ascending" : "Descending"
+        lblOrder.text = question.isAscending ? "Ascending".localized() : "Descending".localized()
         self.title = "\(lblKeyName.text!) \(question.isAscending ? "⬆" : "⬇")"
         lblQuizProgressInfo.text = quizViewModel.quizStatus
     }

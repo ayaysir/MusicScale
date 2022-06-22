@@ -14,9 +14,9 @@ class InstrumentTableViewController: UITableViewController {
         didSet {
             switch place {
             case .playback:
-                self.title = "Select a Playback Instrument"
+                self.title = "Select a Playback Instrument".localized()
             case .piano:
-                self.title = "Select a Keyboard Instrument"
+                self.title = "Select a Keyboard Instrument".localized()
             }
         }
     }

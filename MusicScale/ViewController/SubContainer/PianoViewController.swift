@@ -34,8 +34,6 @@ class PianoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setPiano()
-        
-        
     }
     
     func setPiano() {

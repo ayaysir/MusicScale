@@ -1,0 +1,84 @@
+/* 
+  Localizable.strings
+  MusicScale
+
+  Created by yoonbumtae on 2022/06/23.
+  
+*/
+
+/* Text View */
+"TextView_CreateComment" = "説明、メモ、暗記のヒントなどを入力してください... (ウェブリンク添付可能)";
+"TextView_SettingEnharmonicHelp" = "1.「ノートリスト」で変更したいノートをクリックします。ノートリストはMIDI番号表記で表記およびソートされています。 （C4 = 0、半音で分割）\n\n2 .異名同音の音符の利用可能なリストの1つを選択します。";
+
+"Caution" = "注意";
+"OK" = "確認";
+"No" = "いいえ";
+"Yes" = "はい";
+"Cancel" = "キャンセル";
+"Cycle" = "サイクル";
+"Quest of Cycle" = "問題のサイクル";
+"Not Studying Yet" = "未学習";
+"In Studying" = "学習中";
+"Finished" = "学習完了";
+"Total Questions" = "質問の総数";
+"Total Cycle" = "トータルサイクル";
+"Try Count" = "試行回数";
+"Success Count" = "成功回数";
+"Failed Count" = "失敗回数";
+"Select a Playback Instrument" = "楽譜再生楽器の選択";
+"Select a Keyboard Instrument" = "キーボード再生楽器の選択";
+"Loading data..." = "データのロード中...";
+"Select a scale..." = "スケールを選択してください...";
+"Anonymous" = "匿名";
+"Submit" = "送信";
+"Delete" = "消去";
+"Download" = "ダウンロード";
+"Download was successful." = "ダウンロードは成功しました。";
+"Download failed: %@" = "ダウンロードに失敗しました： ％@";
+"You have not selected any scales to upload." = "アップロードするスケールを選択していません。";
+"Uploading..." = "アップロード中...";
+"Upload Completed!" = "アップロードが完了しました！";
+"Tap to dismiss" = "タップして閉じる";
+"Delete was successful." = "削除に成功しました。";
+"Failed to delete because an error occurred: %@" = "エラーが発生したため、削除に失敗しました：％@";
+"Error has occured:" = "エラーが発生しました：";
+"Select a scale" = "スケールを選択してください";
+"This scale has different ascending and descending order." = "このスケールには、上行と下行が異なります。";
+"This scale has the same ascending and descending order." = "このスケールの上行と下行は同じです。";
+"You must select at least one of Ascending and Descending order." = "上行と下行の少なくとも1つを選択する必要があります。";
+"You must select at least one target scale." = "少なくとも1つのターゲットスケールを選択する必要があります。";
+"You must select at least 1 key." = "少なくとも1つの調を選択する必要があります。";
+"There is no records." = "記録はありません。";
+"An error occurred while retrieving data." = "データの取得中にエラーが発生しました。";
+"Custom Display Order" = "カスタム表示順序";
+"Scale Name" = "スケール名";
+"Priority" = "優先順位";
+"Create" = "作成";
+"⚠️ You have exceeded the number of notes you can enter." = "⚠️入力できるノートの数を超えました。";
+"⚠️ Ascending: The previous note must have a lower pitch than the current note." = "⚠️上行：前の音は現在の音よりも低いピッチである必要があります。";
+"⚠️ Descending: The pitch of the previous note must be higher than the current note." = "⚠️下行：前の音のピッチは現在の音よりも高くなければなりません。";
+"Degrees in ascending scale must start with 1." = "上行の度は1から始める必要があります。";
+"There must be at least one note of the scale except for the beginning and end notes." = "開始音と終了音を除いて、音階の音が少なくとも1つ必要です。";
+"Degrees in descending scale must end with 1." = "下行の音度は1で終わる必要があります。";
+"Title must have between 2 and 50 characters." = "タイトルは2〜50文字である必要があります。";
+"The star rating must be between 1 and 5." = "星による評価は1から5の間でなければなりません。";
+"Comments must be no more than 5000 characters." = "コメントは5000文字以内にする必要があります。";
+"Deselect All" = "すべての選択を解除";
+"Select All" = "すべて選択";
+"Edit" = "編集";
+"Done" = "完了";
+"Do you want to delete? It cannot be recovered." = "削除しますか？回復できません。";
+"At least one scale must be selected." = "少なくとも1つのスケールを選択する必要があります。";
+"Scale's default" = "基本表記";
+"When the scale is displayed in the score, the user can select the same name. Select 'Custom' in the Enharmonic Mode." = "楽譜にスケール設定音を表示するときは、異名同音を選択できます。 異名同音モードで「Custom」を選択します。";
+"Enharmonic Notations" = "異名同音表記";
+"Types of Questions" = "質問の種類";
+"Select Enharmonic Mode" = "異名同音モードを選択";
+"Match the Keys" = "構成音を合わせる";
+"Guess the Name" = "スケール名を合わせる";
+"Ascending" = "上行";
+"Descending" = "下行";
+"Success" = "成功";
+"Failed" = "失敗";
+"Submit" = "提出";
+"Next >>" = "次 >>";

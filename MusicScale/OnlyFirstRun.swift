@@ -28,3 +28,10 @@ func checkAppFirstrunOrUpdateStatus(firstrun: () -> (), updated: () -> (), nothi
     UserDefaults.standard.set(currentVersion, forKey: "VersionOfLastRun")
     UserDefaults.standard.synchronize()
 }
+
+func setConfigValueOnFirstrun() {
+    userDefaultsConfiguratorList.forEach { instance in
+        var instance = instance
+        instance.initalizeConfigValueOnFirstrun()
+    }
+}

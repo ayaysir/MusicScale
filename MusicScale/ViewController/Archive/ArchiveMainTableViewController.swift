@@ -150,7 +150,7 @@ class ArchiveMainTableViewController: UITableViewController {
     
     func showLoadingSpinner() {
         if let currentClassInstance = UIApplication.topViewController(), currentClassInstance == self {
-            SwiftSpinner.show("Loading...")
+            SwiftSpinner.show("Loading data...".localized())
         }
     }
     

@@ -17,7 +17,7 @@ extension String {
     static let kCustomEnharmonics = "ScaleInfo_CONFIG_CustomEnharmonics"
 }
 
-struct ScaleInfoVCConfigStore {
+struct ScaleInfoVCConfigStore: UserDefaultsConfigurator {
     
     static var shared = ScaleInfoVCConfigStore()
     private let store = UserDefaults.standard

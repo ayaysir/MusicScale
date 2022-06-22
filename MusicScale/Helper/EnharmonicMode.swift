@@ -13,7 +13,7 @@ enum EnharmonicMode: Int, Codable, CaseIterable {
     var titleValue: String {
         switch self {
         case .standard:
-            return "Scale's default"
+            return "Scale's default".localized()
         case .sharpAndNatural:
             return "Sharp(♯) and natural"
         case .flatAndNatural:

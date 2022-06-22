@@ -22,11 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DropDown.startListeningToKeyboard()
         
         // 체크
-        
         checkAppFirstrunOrUpdateStatus {
             putInitalData()
-            
-            ScaleInfoVCConfigStore.shared.initalizeConfigValueOnFirstrun()
+            setConfigValueOnFirstrun()
         } updated: {
             print("버전 변경시마다 실행됨")
         } nothingChanged: {

@@ -8,22 +8,22 @@
 import Foundation
 
 extension String {
-    
-    // static let kSortDisplayOrder = "SORTFILTER_SortDisplayOrder"
-    // static let kSortNameAsc = "SORTFILTER_SortNameAsc"
-    // static let kSortNameDesc = "SORTFILTER_SortNameDesc"
-    // static let kSortPriorityAsc = "SORTFILTER_SortPriorityAsc"
-    // static let kSortPriorityDesc = "SORTFILTER_SortPriorityDesc"
     static let kSortState = "SORTFILTER_SortState"
     static let kSortOrder = "SORTFILTER_SortOrder"
 }
 
 
-struct SortFilterConfigStore {
+struct SortFilterConfigStore: UserDefaultsConfigurator {
+    
+    mutating func initalizeConfigValueOnFirstrun() {
+        currentOrder = .ascending
+        currentState = .priority
+    }
+    
     static var shared = SortFilterConfigStore()
     private let store = UserDefaults.standard
     
-    var curentOrder: SortOrder {
+    var currentOrder: SortOrder {
         get {
             let storedInt = store.integer(forKey: .kSortOrder)
             return SortOrder(rawValue: storedInt) ?? .none

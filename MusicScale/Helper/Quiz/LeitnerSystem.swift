@@ -27,7 +27,20 @@ struct LeitnerProgressInfo: Codable, CustomStringConvertible {
         return "CDI:\(currentDQIndex), day:\(day), dailyQuest: \(dailyQuestionCount), start: \(startBoxCount), box_one: \(learningBoxOneCount), box_two: \(learningBoxTwoCount), box_three: \(learningBoxThreeCount), finished: \(finishedBoxCount)"
     }
     var labelText: String {
-        return "Cycle: \(day) | Quest of Cycle: \(currentDQIndex + 1) / \(dailyQuestionCount) | Not Studying Yet: \(startBoxCount) | In Studying: \(learningBoxOneCount + learningBoxTwoCount + learningBoxThreeCount) | Finished: \(finishedBoxCount)"
+        
+        let texts = [
+            ["Cycle".localized(), "\(day)"],
+            ["Quest of Cycle".localized(), "\(currentDQIndex + 1)"],
+            ["Not Studying Yet".localized(), "\(startBoxCount)"],
+            ["In Studying".localized(), "\(learningBoxOneCount)"],
+            ["Finished".localized(), "\(finishedBoxCount)"],
+        ]
+        
+        return texts.map { "\($0[0]): \($0[1])" }.joined(separator: " ┆ ")
+        
+        // "Cycle: \(day) ┆ Quest of Cycle: \(currentDQIndex + 1) / \(dailyQuestionCount) ┆ Not Studying Yet: \(startBoxCount) ┆ In Studying: \(learningBoxOneCount + learningBoxTwoCount + learningBoxThreeCount) ┆ Finished: \(finishedBoxCount)
+        // """
+        // return "Cycle: \(day) ┆ Quest of Cycle: \(currentDQIndex + 1) / \(dailyQuestionCount) ┆ Not Studying Yet: \(startBoxCount) ┆ In Studying: \(learningBoxOneCount + learningBoxTwoCount + learningBoxThreeCount) ┆ Finished: \(finishedBoxCount)"
     }
     
     let currentDQIndex, day, totalBoxCount, dailyQuestionCount, startBoxCount: Int

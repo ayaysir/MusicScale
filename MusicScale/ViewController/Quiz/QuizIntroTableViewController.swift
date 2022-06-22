@@ -89,12 +89,12 @@ class QuizIntroTableViewController: UITableViewController {
     @IBAction func btnActStartQuiz(_ sender: UIButton) {
         
         guard quizStore.ascSelected || quizStore.descSelected else {
-            simpleAlert(self, message: "You must select at least one of Ascending and Descending order.")
+            simpleAlert(self, message: "You must select at least one of Ascending and Descending order.".localized())
             return
         }
         
         guard quizStore.selectedScaleInfoId.count > 0 else {
-            simpleAlert(self, message: "You must select at least one target scale.")
+            simpleAlert(self, message: "You must select at least one target scale.".localized())
             return
         }
         
@@ -162,7 +162,7 @@ class QuizIntroTableViewController: UITableViewController {
         
         if indexPath == typeOfQuestIndexPath {
             let actionTitles = quizViewModel.typeOfQuestions.map { $0.titleValue }
-            simpleActionSheets(self, actionTitles: actionTitles, title: "Types of Questions", message: "", sourceView: tableView, sourceRect: rect) { [self] actionIndex in
+            simpleActionSheets(self, actionTitles: actionTitles, title: "Types of Questions".localized(), message: "", sourceView: tableView, sourceRect: rect) { [self] actionIndex in
                 if let type = QuizType.init(rawValue: actionIndex) {
                     quizStore.typeOfQuestions = type
                     lblTypeOfQuestDetail.text = type.titleValue
@@ -172,7 +172,7 @@ class QuizIntroTableViewController: UITableViewController {
         
         if indexPath == enharmonicModeIndexPath {
             let actionTitles = EnharmonicMode.titleValues
-            simpleActionSheets(self, actionTitles: actionTitles, title: "Select Enharmonic Mode", message: "", sourceView: tableView, sourceRect: rect) { actionIndex in
+            simpleActionSheets(self, actionTitles: actionTitles, title: "Select Enharmonic Mode".localized(), message: "", sourceView: tableView, sourceRect: rect) { actionIndex in
                 guard let mode = EnharmonicMode(rawValue: actionIndex) else {
                     return
                 }

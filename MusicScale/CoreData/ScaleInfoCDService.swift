@@ -243,5 +243,3 @@ struct ScaleInfoCDService {
         throw CDError.unknownError
     }
 }
-
-

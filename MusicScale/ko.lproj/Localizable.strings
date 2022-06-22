@@ -1,0 +1,84 @@
+/* 
+  Localizable.strings
+  MusicScale
+
+  Created by yoonbumtae on 2022/06/23.
+  
+*/
+
+/* Text View */
+"TextView_CreateComment" = "설명, 메모 또는 암기 팁 등을 입력할 수 있습니다... (웹 하이퍼링크 추가 가능)";
+"TextView_SettingEnharmonicHelp" = "1. '음표 목록'에서 변경하려는 음표를 클릭하면 MIDI 번호 표기법으로 기보 및 정렬된 음표 목록이 표시됩니다. (C4 = 0, 반음 단위)\n\n2. 사용 가능한 이명동음 음표 목록 중 하나를 선택합니다.";
+
+"Caution" = "주의";
+"OK" = "확인";
+"No" = "아니오";
+"Yes" = "네";
+"Cancel" = "취소";
+"Cycle" = "사이클";
+"Quest of Cycle" = "퀘스트 사이클";
+"Not Studying Yet" = "미학습";
+"In Studying" = "학습중";
+"Finished" = "학습완료";
+"Total Questions" = "총 질문";
+"Total Cycle" = "총 사이클";
+"Try Count" = "시도 횟수";
+"Success Count" = "성공 횟수";
+"Failed Count" = "실패 횟수";
+"Select a Playback Instrument" = "악보 재생 악기 선택";
+"Select a Keyboard Instrument" = "키보드 재생 악기 선택";
+"Loading data..." = "데이터 로딩중...";
+"Select a scale..." = "스케일을 선택하세요...";
+"Anonymous" = "익명";
+"Submit" = "제출";
+"Delete" = "삭제";
+"Download" = "다운로드";
+"Download was successful." = "다운로드가 성공했습니다.";
+"Download failed: %@" = "다운로드 실패: %@";
+"You have not selected any scales to upload." = "업로드 할 스케일을 선택하지 않았습니다.";
+"Uploading..." = "업로드 중입니다...";
+"Upload Completed!" = "업로드 완료!";
+"Tap to dismiss" = "탭해서 닫기";
+"Delete was successful." = "삭제 성공했습니다.";
+"Failed to delete because an error occurred: %@" = "오류가 발생하여 삭제하지 못했습니다 : %@";
+"Error has occured:" = "오류가 발생했습니다.";
+"Select a scale" = "스케일을 선택하세요";
+"This scale has different ascending and descending order." = "이 스케일은 오름차순과 내림차순의 구성음이 다릅니다.";
+"This scale has the same ascending and descending order." = "이 스케일은 오름차순과 내림차순의 구성음이 같습니다.";
+"You must select at least one of Ascending and Descending order." = "오름차순 및 내림차순 순서 중 하나 이상을 선택해야합니다.";
+"You must select at least one target scale." = "하나 이상의 대상 스케일을 선택해야 합니다.";
+"You must select at least 1 key." = "하나 이상의 키를 선택해야 합니다.";
+"There is no records." = "기록이 없습니다.";
+"An error occurred while retrieving data." = "데이터를 검색하는 동안 오류가 발생했습니다.";
+"Custom Display Order" = "사용자 정의 순서";
+"Scale Name" = "스케일 이름";
+"Priority" = "별점";
+"Create" = "만들기";
+"⚠️ You have exceeded the number of notes you can enter." = "⚠️ 입력할 수 있는 노트 수를 초과했습니다.";
+"⚠️ Ascending: The previous note must have a lower pitch than the current note." = "⚠️ 오름차순: 이전 노트는 현재 음표보다 피치가 낮아야 합니다.";
+"⚠️ Descending: The pitch of the previous note must be higher than the current note." = "⚠️ 내림차순: 이전 노트의 피치는 현재 노트보다 높아야 합니다.";
+"Degrees in ascending scale must start with 1." = "오름차순 스케일의 도수는 1로 시작해야 합니다.";
+"There must be at least one note of the scale except for the beginning and end notes." = "시작 및 끝 노트를 제외하고는 적어도 하나 이상의 노트가 있어야합니다.";
+"Degrees in descending scale must end with 1." = "내림차순 스케일의 도수는 1로 끝나야합니다.";
+"Title must have between 2 and 50 characters." = "제목의 문자는 2 ~ 50자 이내여야 합니다.";
+"The star rating must be between 1 and 5." = "별점은 1에서 5 사이여야 합니다.";
+"Comments must be no more than 5000 characters." = "의견은 5000 자 이내여야 합니다.";
+"Deselect All" = "전부 선택 해제";
+"Select All" = "전부 선택";
+"Edit" = "편집";
+"Done" = "완료";
+"Do you want to delete? It cannot be recovered." = "삭제하시겠습니까? 복구할 수 없습니다.";
+"At least one scale must be selected." = "적어도 하나의 스케일을 선택해야 합니다.";
+"Scale's default" = "기본 표기법";
+"When the scale is displayed in the score, the user can select the same name. Select 'Custom' in the Enharmonic Mode." = "악보에 스케일 구성음을 표시할 때 이명동음을 선택할 수 있습니다. 이명동음 모드에서 'Custom'을 선택하세요.";
+"Enharmonic Notations" = "이명동음 표기";
+"Types of Questions" = "문제 유형";
+"Select Enharmonic Mode" = "이명동음 표기법 선택";
+"Match the Keys" = "구성음 맞추기";
+"Guess the Name" = "스케일 이름 맞추기";
+"Ascending" = "오름차순";
+"Descending" = "내림차순";
+"Success" = "성공";
+"Failed" = "실패";
+"Submit" = "제출";
+"Next >>" = "다음 >>";

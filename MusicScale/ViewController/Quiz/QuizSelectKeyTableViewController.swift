@@ -89,7 +89,7 @@ class QuizSelectKeyTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
         if availableKeyList.count == 1 {
-            simpleAlert(self, message: "You must select at least 1 key.")
+            simpleAlert(self, message: "You must select at least 1 key.".localized())
             return nil
         }
         return indexPath

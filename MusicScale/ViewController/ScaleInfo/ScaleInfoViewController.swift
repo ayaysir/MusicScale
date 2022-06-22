@@ -81,6 +81,8 @@ class ScaleInfoViewController: UIViewController {
         guard let input = sender.input else {
             return
         }
+        
+        print("keyPressed:", input)
         // ...
     }
     

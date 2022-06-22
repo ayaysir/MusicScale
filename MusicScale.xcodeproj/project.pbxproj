@@ -30,7 +30,6 @@
 		4426A007285424B100942655 /* ArchiveMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426A006285424B100942655 /* ArchiveMainTableViewController.swift */; };
 		4426A00A2854251B00942655 /* FirebasePostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426A0092854251B00942655 /* FirebasePostManager.swift */; };
 		4426A00C2854400B00942655 /* ArchiveDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426A00B2854400B00942655 /* ArchiveDetailTableViewController.swift */; };
-		443A0C612842864400641BC0 /* CreateScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C602842864400641BC0 /* CreateScaleInfoViewModel.swift */; };
 		443A0C6328428F3100641BC0 /* Between.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C6228428F3100641BC0 /* Between.swift */; };
 		443A0C652843E99B00641BC0 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C642843E99B00641BC0 /* SimpleAlert.swift */; };
 		44537F68285623200061CADF /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44537F67285623200061CADF /* SwiftSpinner.swift */; };
@@ -64,7 +63,6 @@
 		445FA4C7284E70090008D621 /* QuizInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4C6284E70090008D621 /* QuizInProgressViewController.swift */; };
 		445FA4CC284F547D0008D621 /* InitViewControllerFromStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4CB284F547D0008D621 /* InitViewControllerFromStoryboard.swift */; };
 		445FA4CE284F5D010008D621 /* InQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4CD284F5D010008D621 /* InQuizViewController.swift */; };
-		445FA4D0284FB58C0008D621 /* ColorfulProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4CF284FB58C0008D621 /* ColorfulProgressView.swift */; };
 		446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446100BA284517FB0033BCE9 /* UIColor+.swift */; };
 		446100BE28451B370033BCE9 /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = 446100BD28451B370033BCE9 /* PanModal */; };
 		4461012F28451EE30033BCE9 /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4461012E28451EE30033BCE9 /* SortViewController.swift */; };
@@ -85,7 +83,6 @@
 		446AEA3228413E0200C2BFCF /* Cosmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446AEA3128413E0200C2BFCF /* Cosmos.swift */; };
 		44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D55276A334F00BBF6C9 /* AppDelegate.swift */; };
 		44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D57276A334F00BBF6C9 /* SceneDelegate.swift */; };
-		44709D5A276A334F00BBF6C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44709D59276A334F00BBF6C9 /* ViewController.swift */; };
 		44709D5D276A334F00BBF6C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44709D5B276A334F00BBF6C9 /* Main.storyboard */; };
 		44709D60276A334F00BBF6C9 /* MusicScale.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44709D5E276A334F00BBF6C9 /* MusicScale.xcdatamodeld */; };
 		44709D62276A335800BBF6C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44709D61276A335800BBF6C9 /* Assets.xcassets */; };
@@ -107,6 +104,9 @@
 		44872B0F2860AA5100C20E06 /* AdUnitID_Distributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44872B0E2860AA5100C20E06 /* AdUnitID_Distributor.swift */; };
 		44872B112860B21D00C20E06 /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44872B102860B21D00C20E06 /* NSObject+.swift */; };
 		44872B13286222C700C20E06 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 44872B12286222C700C20E06 /* .gitignore */; };
+		44872B152862328400C20E06 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44872B142862328300C20E06 /* Localization.swift */; };
+		44872B1728634C9F00C20E06 /* UserDefaultsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44872B1628634C9F00C20E06 /* UserDefaultsConfigurator.swift */; };
+		44872B1C2863673C00C20E06 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44872B1E2863673C00C20E06 /* Localizable.strings */; };
 		449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF426282EC008008273CA /* ScaleInfoViewController.swift */; };
 		44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A28283293680067184E /* ScaleInfoViewModel.swift */; };
 		44A09A2C2832A3C90067184E /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44A09A2B2832A3C90067184E /* AudioKit */; };
@@ -117,7 +117,6 @@
 		44A09A7F283929FB0067184E /* EnharmonicMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A7E283929FB0067184E /* EnharmonicMode.swift */; };
 		44A09A8128392C0B0067184E /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A8028392C0B0067184E /* UserDefaults+.swift */; };
 		44A09A832839327F0067184E /* OnlyFirstRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A822839327F0067184E /* OnlyFirstRun.swift */; };
-		44A09A8528394A200067184E /* DropDownTransposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A8428394A200067184E /* DropDownTransposeViewModel.swift */; };
 		44ABE1032854C1D00022B4FB /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ABE1022854C1D00022B4FB /* Post.swift */; };
 		44ABE108285619F60022B4FB /* PostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ABE107285619F60022B4FB /* PostListViewModel.swift */; };
 		44B4AB8428453286008C8AFD /* SortFilterConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4AB8328453285008C8AFD /* SortFilterConfigStore.swift */; };
@@ -184,7 +183,6 @@
 		4426A006285424B100942655 /* ArchiveMainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveMainTableViewController.swift; sourceTree = "<group>"; };
 		4426A0092854251B00942655 /* FirebasePostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebasePostManager.swift; sourceTree = "<group>"; };
 		4426A00B2854400B00942655 /* ArchiveDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveDetailTableViewController.swift; sourceTree = "<group>"; };
-		443A0C602842864400641BC0 /* CreateScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScaleInfoViewModel.swift; sourceTree = "<group>"; };
 		443A0C6228428F3100641BC0 /* Between.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Between.swift; sourceTree = "<group>"; };
 		443A0C642843E99B00641BC0 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
 		44537F67285623200061CADF /* SwiftSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 		445FA4C6284E70090008D621 /* QuizInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizInProgressViewController.swift; sourceTree = "<group>"; };
 		445FA4CB284F547D0008D621 /* InitViewControllerFromStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitViewControllerFromStoryboard.swift; sourceTree = "<group>"; };
 		445FA4CD284F5D010008D621 /* InQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InQuizViewController.swift; sourceTree = "<group>"; };
-		445FA4CF284FB58C0008D621 /* ColorfulProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulProgressView.swift; sourceTree = "<group>"; };
 		446100BA284517FB0033BCE9 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		4461012E28451EE30033BCE9 /* SortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
 		4463FEA6282BDFF700E7A607 /* PianoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoViewController.swift; sourceTree = "<group>"; };
@@ -238,7 +235,6 @@
 		44709D52276A334F00BBF6C9 /* MusicScale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicScale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44709D55276A334F00BBF6C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44709D57276A334F00BBF6C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		44709D59276A334F00BBF6C9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		44709D5C276A334F00BBF6C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		44709D5F276A334F00BBF6C9 /* MusicScale.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicScale.xcdatamodel; sourceTree = "<group>"; };
 		44709D61276A335800BBF6C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -263,6 +259,13 @@
 		44872B0E2860AA5100C20E06 /* AdUnitID_Distributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdUnitID_Distributor.swift; sourceTree = "<group>"; };
 		44872B102860B21D00C20E06 /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
 		44872B12286222C700C20E06 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		44872B142862328300C20E06 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		44872B1628634C9F00C20E06 /* UserDefaultsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConfigurator.swift; sourceTree = "<group>"; };
+		44872B182863514200C20E06 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		44872B192863515600C20E06 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		44872B1D2863673C00C20E06 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		44872B1F2863673F00C20E06 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		44872B202863674400C20E06 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
 		44A09A28283293680067184E /* ScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewModel.swift; sourceTree = "<group>"; };
 		44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
@@ -271,7 +274,6 @@
 		44A09A7E283929FB0067184E /* EnharmonicMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnharmonicMode.swift; sourceTree = "<group>"; };
 		44A09A8028392C0B0067184E /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		44A09A822839327F0067184E /* OnlyFirstRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyFirstRun.swift; sourceTree = "<group>"; };
-		44A09A8428394A200067184E /* DropDownTransposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTransposeViewModel.swift; sourceTree = "<group>"; };
 		44ABE1022854C1D00022B4FB /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		44ABE107285619F60022B4FB /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
 		44B4AB8328453285008C8AFD /* SortFilterConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFilterConfigStore.swift; sourceTree = "<group>"; };
@@ -502,9 +504,7 @@
 				4463FEB3282D317700E7A607 /* PianoViewModel.swift */,
 				440637F1283003DE00875E77 /* ScaleInfoListViewModel.swift */,
 				44A09A28283293680067184E /* ScaleInfoViewModel.swift */,
-				44A09A8428394A200067184E /* DropDownTransposeViewModel.swift */,
 				446AEA2D283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift */,
-				443A0C602842864400641BC0 /* CreateScaleInfoViewModel.swift */,
 				44537F6B285651EA0061CADF /* StarRatingViewModel.swift */,
 			);
 			path = ViewModel;
@@ -514,7 +514,6 @@
 			isa = PBXGroup;
 			children = (
 				4463FEB6282D3FCE00E7A607 /* PianoView.swift */,
-				445FA4CF284FB58C0008D621 /* ColorfulProgressView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -613,7 +612,6 @@
 				44709D88276A37F200BBF6C9 /* web */,
 				44709D55276A334F00BBF6C9 /* AppDelegate.swift */,
 				44709D57276A334F00BBF6C9 /* SceneDelegate.swift */,
-				44709D59276A334F00BBF6C9 /* ViewController.swift */,
 				44709D5B276A334F00BBF6C9 /* Main.storyboard */,
 				44709D61276A335800BBF6C9 /* Assets.xcassets */,
 				44709D63276A335800BBF6C9 /* LaunchScreen.storyboard */,
@@ -621,6 +619,8 @@
 				44709D66276A335800BBF6C9 /* Info.plist */,
 				44709D5E276A334F00BBF6C9 /* MusicScale.xcdatamodeld */,
 				44A09A822839327F0067184E /* OnlyFirstRun.swift */,
+				44872B142862328300C20E06 /* Localization.swift */,
+				44872B1E2863673C00C20E06 /* Localizable.strings */,
 			);
 			path = MusicScale;
 			sourceTree = "<group>";
@@ -689,6 +689,7 @@
 				44B4AB8328453285008C8AFD /* SortFilterConfigStore.swift */,
 				44B70F3C2848F4F40068495A /* QuizConfigStore.swift */,
 				44B70F43284A57430068495A /* AppConfigStore.swift */,
+				44872B1628634C9F00C20E06 /* UserDefaultsConfigurator.swift */,
 			);
 			path = UserDefaults;
 			sourceTree = "<group>";
@@ -837,6 +838,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
+				ja,
 			);
 			mainGroup = 44709D49276A334F00BBF6C9;
 			packageReferences = (
@@ -863,6 +866,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44A09A392832B7D20067184E /* VintageDreamsWaves-v2.sf2 in Resources */,
+				44872B1C2863673C00C20E06 /* Localizable.strings in Resources */,
 				44EE68152853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md in Resources */,
 				4455D1D8285B31E400FB344E /* Musiqwik-rvL8.ttf in Resources */,
 				44EFA4B328541F0800565F93 /* GoogleService-Info.plist in Resources */,
@@ -1009,7 +1013,6 @@
 				4426A007285424B100942655 /* ArchiveMainTableViewController.swift in Sources */,
 				4475CB5B283176EA00B9D204 /* Music.swift in Sources */,
 				44FEFBF728539C83000402DE /* QuizFinishedViewController.swift in Sources */,
-				44709D5A276A334F00BBF6C9 /* ViewController.swift in Sources */,
 				44B4AB8628453AB5008C8AFD /* SortList.swift in Sources */,
 				4455D1C32858957700FB344E /* Date+.swift in Sources */,
 				446AEA3028411ED300C2BFCF /* Toast.swift in Sources */,
@@ -1038,7 +1041,6 @@
 				443A0C652843E99B00641BC0 /* SimpleAlert.swift in Sources */,
 				44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */,
 				44E7A07528467692005C7909 /* SearchCategory.swift in Sources */,
-				44A09A8528394A200067184E /* DropDownTransposeViewModel.swift in Sources */,
 				44B70F3B2848F1A90068495A /* QuizSelectKeyTableViewController.swift in Sources */,
 				44ABE108285619F60022B4FB /* PostListViewModel.swift in Sources */,
 				44537F6C285651EA0061CADF /* StarRatingViewModel.swift in Sources */,
@@ -1046,7 +1048,6 @@
 				4404B045285F7CEF0072CCFD /* PostView.swift in Sources */,
 				4455D1D6285A538800FB344E /* SearchDegreesReplaceAltText.swift in Sources */,
 				4455D1C72858CCB300FB344E /* Like.swift in Sources */,
-				443A0C612842864400641BC0 /* CreateScaleInfoViewModel.swift in Sources */,
 				4463FEB4282D317700E7A607 /* PianoViewModel.swift in Sources */,
 				44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */,
 				44709D8C276A3BDE00BBF6C9 /* ScoreWebViewController.swift in Sources */,
@@ -1075,12 +1076,12 @@
 				4455D1CE285A2CB800FB344E /* MIDIInstrumentList.swift in Sources */,
 				44E0ACF1285F0BC6008BBB82 /* NSLayoutConstraint+.swift in Sources */,
 				4404B049285FA3C70072CCFD /* StatsViewController.swift in Sources */,
-				445FA4D0284FB58C0008D621 /* ColorfulProgressView.swift in Sources */,
 				443A0C6328428F3100641BC0 /* Between.swift in Sources */,
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,
 				44ABE1032854C1D00022B4FB /* Post.swift in Sources */,
 				4455D1BF2857AAD400FB344E /* PostViewModel.swift in Sources */,
 				4475CB512830A6C200B9D204 /* MusicSheetHelper.swift in Sources */,
+				44872B152862328400C20E06 /* Localization.swift in Sources */,
 				4455D1E3285C92FA00FB344E /* UIViewController.swift in Sources */,
 				44537F68285623200061CADF /* SwiftSpinner.swift in Sources */,
 				44537F6A285628A90061CADF /* FirebaseAuthManager.swift in Sources */,
@@ -1098,6 +1099,7 @@
 				44872B0928608CED00C20E06 /* AdsManager.swift in Sources */,
 				4455D1C1285890A500FB344E /* FirebaseUtil.swift in Sources */,
 				4475CB592831759300B9D204 /* CustomCharacter.swift in Sources */,
+				44872B1728634C9F00C20E06 /* UserDefaultsConfigurator.swift in Sources */,
 				440637F0283003CC00875E77 /* ScaleInfo.swift in Sources */,
 				445FA4C1284E3AD80008D621 /* Collection+.swift in Sources */,
 			);
@@ -1147,6 +1149,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				44709D5C276A334F00BBF6C9 /* Base */,
+				44872B182863514200C20E06 /* ko */,
+				44872B192863515600C20E06 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1159,6 +1163,16 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		44872B1E2863673C00C20E06 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44872B1D2863673C00C20E06 /* en */,
+				44872B1F2863673F00C20E06 /* ja */,
+				44872B202863674400C20E06 /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1166,6 +1180,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -1227,6 +1242,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

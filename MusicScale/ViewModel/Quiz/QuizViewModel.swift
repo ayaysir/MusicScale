@@ -22,9 +22,9 @@ enum QuizType: Int, Codable {
     var titleValue: String {
         switch self {
         case .matchKeys:
-            return "Match the Keys"
+            return "Match the Keys".localized()
         case .guessName:
-            return "Guess the Name"
+            return "Guess the Name".localized()
         }
     }
     
@@ -187,11 +187,11 @@ class QuizViewModel {
         var result: [(name: String, value: Int)] = []
         let statsInfo = leitnerSystem.statsInfo
         
-        result.append(("Total Questions", statsInfo.originalItemListCount))
-        result.append(("Total Cycle", statsInfo.day))
-        result.append(("Try Count", statsInfo.tryCount))
-        result.append(("Success Count", statsInfo.successCount))
-        result.append(("Failed Count", statsInfo.failedCount))
+        result.append(("Total Questions".localized(), statsInfo.originalItemListCount))
+        result.append(("Total Cycle".localized(), statsInfo.day))
+        result.append(("Try Count".localized(), statsInfo.tryCount))
+        result.append(("Success Count".localized(), statsInfo.successCount))
+        result.append(("Failed Count".localized(), statsInfo.failedCount))
         
         return result
     }

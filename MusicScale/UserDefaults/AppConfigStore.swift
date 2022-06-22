@@ -13,7 +13,27 @@ extension String {
     static let cfgAppPianoInstrument = "APP_cfgAppPianoInstrument"
 }
 
-struct AppConfigStore {
+struct AppConfigStore: UserDefaultsConfigurator {
+    
+    mutating func initalizeConfigValueOnFirstrun() {
+        playbackInstrument = 5
+        pianoInstrument = 5
+        userCustomScale = [
+            NoteStrPair("", "C"),
+            NoteStrPair("^", "C"),
+            NoteStrPair("", "D"),
+            NoteStrPair("_", "E"),
+            NoteStrPair("", "E"),
+            NoteStrPair("", "F"),
+            NoteStrPair("^", "F"),
+            NoteStrPair("", "G"),
+            NoteStrPair("^", "G"),
+            NoteStrPair("", "A"),
+            NoteStrPair("^", "A"),
+            NoteStrPair("", "B"),
+        ]
+    }
+    
     
     static var shared = AppConfigStore()
     private let store = UserDefaults.standard

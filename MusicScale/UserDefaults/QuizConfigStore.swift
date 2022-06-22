@@ -18,7 +18,15 @@ extension String {
     static var cfgQuizLeitnerSystem = "QUIZ_cfgQuizLeitnerSystem"
 }
 
-struct QuizConfigStore {
+struct QuizConfigStore: UserDefaultsConfigurator {
+    
+    mutating func initalizeConfigValueOnFirstrun() {
+        availableKeys = [.C, .D, .E]
+        ascSelected = true
+        descSelected = false
+        typeOfQuestions = .matchKeys
+    }
+    
     
     static var shared = QuizConfigStore()
     private let store = UserDefaults.standard
