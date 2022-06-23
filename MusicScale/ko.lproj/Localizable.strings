@@ -9,6 +9,7 @@
 /* Text View */
 "TextView_CreateComment" = "설명, 메모 또는 암기 팁 등을 입력할 수 있습니다... (웹 하이퍼링크 추가 가능)";
 "TextView_SettingEnharmonicHelp" = "1. '음표 목록'에서 변경하려는 음표를 클릭하면 MIDI 번호 표기법으로 기보 및 정렬된 음표 목록이 표시됩니다. (C4 = 0, 반음 단위)\n\n2. 사용 가능한 이명동음 음표 목록 중 하나를 선택합니다.";
+"MusicScale_ManualFileName" = "MusicScale - ko";
 
 "Caution" = "주의";
 "OK" = "확인";

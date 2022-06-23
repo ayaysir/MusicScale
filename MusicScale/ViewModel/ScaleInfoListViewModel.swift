@@ -65,6 +65,7 @@ class ScaleInfoListViewModel {
     // 검색
     func search(searchText: String, searchCategory: SearchCategory) {
         let searchText = searchText.lowercased()
+        // print(searchText)
         
         searchEntityData = totalEntityData.filter { entity in
             var results: [Bool] = []

@@ -11,3 +11,4 @@
 "TextView_SettingEnharmonicHelp" = "1. Click the note you want to change in the 'Note List', which is notated and sorted by MIDI number notation. (C4 = 0, divided in semitones)\n\n2. Select one of the available lists of Enharmonic notes.";
 
 "current_sort" = "current";
+"MusicScale_ManualFileName" = "MusicScale - en";

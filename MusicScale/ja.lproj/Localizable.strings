@@ -9,6 +9,7 @@
 /* Text View */
 "TextView_CreateComment" = "説明、メモ、暗記のヒントなどを入力してください... (ウェブリンク添付可能)";
 "TextView_SettingEnharmonicHelp" = "1.「ノートリスト」で変更したいノートをクリックします。ノートリストはMIDI番号表記で表記およびソートされています。 （C4 = 0、半音で分割）\n\n2 .異名同音の音符の利用可能なリストの1つを選択します。";
+"MusicScale_ManualFileName" = "MusicScale - en";
 
 "Caution" = "注意";
 "OK" = "確認";

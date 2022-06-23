@@ -91,7 +91,7 @@ class SettingTableViewController: UITableViewController {
             let place = sender as! InstrumentTableViewController.Place
             selectVC.place = place
         case "HelpSegue", "LicenseSegue":
-            let webVC = segue.destination as! WebPageViewController
+            let webVC = segue.destination as! PDFViewController
             webVC.category = segue.identifier == "HelpSegue" ? .help : .licenses
         default:
             break

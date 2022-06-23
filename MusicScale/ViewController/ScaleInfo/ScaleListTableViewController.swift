@@ -50,6 +50,9 @@ class ScaleListTableViewController: UITableViewController {
         super.viewDidLoad()
         
         searchInit()
+        scaleListViewModel.handleDataReloaded = {
+            self.tableView.reloadData()
+        }
         
         switch mode {
         case .main:

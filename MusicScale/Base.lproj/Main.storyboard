@@ -491,10 +491,10 @@
                             <tableViewSection headerTitle="Scale Name" id="2rB-rT-RHT">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Z74-96-Pfm">
-                                        <rect key="frame" x="20" y="49" width="388" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="49" width="388" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z74-96-Pfm" id="Hi4-HY-JtS">
-                                            <rect key="frame" x="0.0" y="0.0" width="388" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="388" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter the scale name. ex) Major scale" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-Sc-oFm">
@@ -511,7 +511,7 @@
                             <tableViewSection headerTitle="Scale Name Aliases" footerTitle="Enter an alias for the scale or a foreign language term. You can enter multiple aliases and press Enter to separate words." id="ZRm-N1-fYF">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="84" id="Uyn-M1-xdI">
-                                        <rect key="frame" x="20" y="149.66666793823242" width="388" height="84"/>
+                                        <rect key="frame" x="20" y="150" width="388" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uyn-M1-xdI" id="ShG-0Q-96Q">
                                             <rect key="frame" x="0.0" y="0.0" width="388" height="84"/>
@@ -535,7 +535,7 @@
                             <tableViewSection headerTitle="Degrees" id="ayI-wy-sCl">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="51" id="rv3-q4-bcM">
-                                        <rect key="frame" x="20" y="305.66666603088379" width="388" height="51"/>
+                                        <rect key="frame" x="20" y="305.99999809265137" width="388" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rv3-q4-bcM" id="SOa-Ul-amZ">
                                             <rect key="frame" x="0.0" y="0.0" width="388" height="51"/>
@@ -567,7 +567,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="210" id="WOX-f3-c4K">
-                                        <rect key="frame" x="20" y="356.66666603088379" width="388" height="210"/>
+                                        <rect key="frame" x="20" y="356.99999809265137" width="388" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WOX-f3-c4K" id="b6s-pO-lcS">
                                             <rect key="frame" x="0.0" y="0.0" width="388" height="210"/>
@@ -751,7 +751,7 @@
                                 <string key="footerTitle">Default Priority is the default value to set when first writing or when distributing to other users after uploading, and it is different from the "My Priority" you set.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="Cbr-ru-iYb">
-                                        <rect key="frame" x="20" y="623.66666603088379" width="388" height="50"/>
+                                        <rect key="frame" x="20" y="623.99999809265137" width="388" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cbr-ru-iYb" id="tzW-ph-R3m">
                                             <rect key="frame" x="0.0" y="0.0" width="388" height="50"/>
@@ -787,7 +787,7 @@
                             <tableViewSection headerTitle="Comment" id="gho-qR-VYd">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="116" id="sdu-43-ANX">
-                                        <rect key="frame" x="20" y="759.66666603088379" width="388" height="116"/>
+                                        <rect key="frame" x="20" y="759.99999809265137" width="388" height="116"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sdu-43-ANX" id="boC-d7-I1B">
                                             <rect key="frame" x="0.0" y="0.0" width="388" height="116"/>
@@ -813,7 +813,7 @@
                             <tableViewSection headerTitle="" id="e2E-Rb-NVX">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="zga-mx-9vx">
-                                        <rect key="frame" x="20" y="911" width="388" height="50"/>
+                                        <rect key="frame" x="20" y="911.33333206176758" width="388" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zga-mx-9vx" id="mme-Pq-nf9">
                                             <rect key="frame" x="0.0" y="0.0" width="388" height="50"/>
@@ -1396,35 +1396,31 @@
             </objects>
             <point key="canvasLocation" x="3177" y="-560"/>
         </scene>
-        <!--Web Page View Controller-->
+        <!--View Controller-->
         <scene sceneID="iMs-MW-gvX">
             <objects>
-                <viewController id="YUB-VH-J3c" customClass="WebPageViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YUB-VH-J3c" customClass="PDFViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mhk-yJ-CbN">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YrK-B9-f0Y">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXg-zJ-4zR" customClass="PDFView">
                                 <rect key="frame" x="0.0" y="88" width="428" height="755"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="c5g-dR-fuu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="YrK-B9-f0Y" firstAttribute="top" secondItem="c5g-dR-fuu" secondAttribute="top" id="U4P-5f-zOp"/>
-                            <constraint firstItem="c5g-dR-fuu" firstAttribute="bottom" secondItem="YrK-B9-f0Y" secondAttribute="bottom" id="Uk8-De-Kyf"/>
-                            <constraint firstItem="c5g-dR-fuu" firstAttribute="trailing" secondItem="YrK-B9-f0Y" secondAttribute="trailing" id="pfG-Th-QJp"/>
-                            <constraint firstItem="YrK-B9-f0Y" firstAttribute="leading" secondItem="c5g-dR-fuu" secondAttribute="leading" id="zv2-sk-o45"/>
+                            <constraint firstItem="iXg-zJ-4zR" firstAttribute="top" secondItem="c5g-dR-fuu" secondAttribute="top" id="1nZ-dy-4td"/>
+                            <constraint firstItem="c5g-dR-fuu" firstAttribute="trailing" secondItem="iXg-zJ-4zR" secondAttribute="trailing" id="QaY-Dd-vi0"/>
+                            <constraint firstItem="c5g-dR-fuu" firstAttribute="bottom" secondItem="iXg-zJ-4zR" secondAttribute="bottom" id="d07-UQ-ohk"/>
+                            <constraint firstItem="iXg-zJ-4zR" firstAttribute="leading" secondItem="c5g-dR-fuu" secondAttribute="leading" id="qQ1-zY-qn5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zqs-Jo-IHS"/>
                     <connections>
-                        <outlet property="webView" destination="YrK-B9-f0Y" id="WXm-Fo-Eoa"/>
+                        <outlet property="pdfView" destination="iXg-zJ-4zR" id="wqE-QX-Wck"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G8D-fd-5Fo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2961,7 +2957,7 @@
             </objects>
             <point key="canvasLocation" x="-4210" y="157"/>
         </scene>
-        <!--Dorian Scale-->
+        <!--Archive Upload-->
         <scene sceneID="eud-pq-xW3">
             <objects>
                 <tableViewController id="y31-AK-apt" customClass="ArchiveDetailTableViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
@@ -3428,7 +3424,7 @@
                             </tableViewSection>
                         </sections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Dorian Scale" largeTitleDisplayMode="always" id="2yS-la-dtF">
+                    <navigationItem key="navigationItem" title="Archive Upload" largeTitleDisplayMode="always" id="2yS-la-dtF">
                         <rightBarButtonItems>
                             <barButtonItem title="Download" id="lae-Ou-byD">
                                 <color key="tintColor" red="0.1397617307" green="0.57722751000000005" blue="0.12033876960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
