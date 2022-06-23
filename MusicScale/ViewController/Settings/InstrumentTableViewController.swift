@@ -73,9 +73,13 @@ class InstrumentTableViewController: UITableViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    private func isBannerContainerSection(_ section: Int) -> Bool {
         let half = tableView.numberOfSections / 2
-        if section == 0 || section == half || section == tableView.numberOfSections - 1 {
+        return section == 0 || section == half || section == tableView.numberOfSections - 1
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if AdsManager.SHOW_AD && isBannerContainerSection(section) {
             let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
             setupBannerAds(self, container: footerView)
             return footerView
@@ -85,10 +89,10 @@ class InstrumentTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        let half = tableView.numberOfSections / 2
-        if section == 0 || section == half || section == tableView.numberOfSections - 1 {
+        if AdsManager.SHOW_AD && isBannerContainerSection(section) {
             return 50
         }
+        
         return 20
     }
 }

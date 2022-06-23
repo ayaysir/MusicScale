@@ -12,15 +12,6 @@ class ArchiveMainTableViewController: UITableViewController {
     @IBOutlet weak var barBtnAddDummy: UIBarButtonItem!
     
     var viewModel: PostListViewModel!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        barBtnAddDummy.title = ""
-        barBtnAddDummy.isEnabled = false
-        
-        searchInit()
-    }
     
     let searchController = UISearchController(searchResultsController: nil)
     var searchCategoryList: [SearchCategory] = []
@@ -33,8 +24,13 @@ class ArchiveMainTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         if viewModel == nil {
-            showLoadingSpinner()
             viewModel = PostListViewModel()
+            
+            // check network status
+            if Reachability.isConnectedToNetwork() {
+                showLoadingSpinner()
+            }
+            
             viewModel.bindHandler = {
                 print("load success", self.viewModel.filteredCount)
                 self.tableView.reloadData()
@@ -47,6 +43,20 @@ class ArchiveMainTableViewController: UITableViewController {
             viewModel.changeOrderHandler = {
                 self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
             }
+        }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        barBtnAddDummy.title = ""
+        barBtnAddDummy.isEnabled = false
+        
+        searchInit()
+        
+        if !Reachability.isConnectedToNetwork() {
+            simpleAlert(self, message: "No internet connection.".localized())
+            SwiftSpinner.hide()
         }
     }
     
@@ -68,12 +78,18 @@ class ArchiveMainTableViewController: UITableViewController {
     
     @IBAction func barBtnActSort(_ sender: UIBarButtonItem) {
         
+        let ascText = "Ascending by upload date".localized()
+        let descText = "Descending by upload date".localized()
+        let currentText = "current_sort".localized()
+        let currentWithBracket = "(\(currentText)"
+        
         let actionTitles = [
-            "Ascending by upload date \(viewModel.isDescending ? "" : "(current)")",
-            "Descending by upload date \(viewModel.isDescending ? "(current)" : "")",
+            "\(ascText) \(viewModel.isDescending ? "" : currentWithBracket)",
+            "\(descText) \(viewModel.isDescending ? currentWithBracket : "")",
         ]
         let rect = sender.frame
-        simpleActionSheets(self, actionTitles: actionTitles, actionStyles: nil, title: "Sort Order", message: "", sourceView: nil, sourceRect: rect) { actionIndex in
+        
+        simpleActionSheets(self, actionTitles: actionTitles, actionStyles: nil, title: "Sort Order".localized(), message: "", sourceView: nil, sourceRect: rect) { actionIndex in
             
             if self.viewModel.isDescending != (actionIndex == 1) {
                 self.viewModel.isDescending = actionIndex != 0
@@ -81,7 +97,6 @@ class ArchiveMainTableViewController: UITableViewController {
         }
     }
     
-
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -106,13 +121,17 @@ class ArchiveMainTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
-        setupBannerAds(self, container: footerView)
-        return footerView
+        if AdsManager.SHOW_AD {
+            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
+            setupBannerAds(self, container: footerView)
+            return footerView
+        }
+        
+        return super.tableView(tableView, viewForFooterInSection: section)
     }
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 50
+        return AdsManager.SHOW_AD ? 50 : super.tableView(tableView, heightForFooterInSection: section)
     }
     
     // MARK: - Navigation

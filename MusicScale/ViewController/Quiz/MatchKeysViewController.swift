@@ -251,7 +251,9 @@ class MatchKeysViewController: InQuizViewController {
             btnSubmit.setTitle("Next >>".localized(), for: .normal)
             btnSubmit.backgroundColor = .systemBlue
             
-            fadeBannerOnPiano(fadeIn: true)
+            if AdsManager.SHOW_AD {
+                fadeBannerOnPiano(fadeIn: true)
+            }
         }
     }
     

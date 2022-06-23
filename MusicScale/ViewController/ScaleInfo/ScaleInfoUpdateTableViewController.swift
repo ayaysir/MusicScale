@@ -56,7 +56,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     private var generator: MIDISoundGenerator!
     
     private let bannerAdPath = IndexPath(row: 0, section: 5)
-    private let showBanner = true
+    // private let showBanner = true
     
     private let cellSheet = IndexPath(row: 1, section: 2)
     private var cellSheetHeight: CGFloat?
@@ -137,7 +137,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if !showBanner && section == bannerAdPath.section {
+        if !AdsManager.SHOW_AD && section == bannerAdPath.section {
             return 0.1
         } else {
             return super.tableView(tableView, heightForHeaderInSection: section)
@@ -145,7 +145,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if !showBanner && section == bannerAdPath.section {
+        if !AdsManager.SHOW_AD && section == bannerAdPath.section {
             return 0.1
         } else {
             return super.tableView(tableView, heightForHeaderInSection: section)
@@ -153,18 +153,10 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !showBanner && section == bannerAdPath.section {
+        if !AdsManager.SHOW_AD && section == bannerAdPath.section {
             return 0
         } else {
             return super.tableView(tableView, numberOfRowsInSection: section)
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if !showBanner && section == bannerAdPath.section {
-            return ""
-        } else {
-            return super.tableView(tableView, titleForHeaderInSection: section)
         }
     }
     

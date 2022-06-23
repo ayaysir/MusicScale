@@ -82,3 +82,14 @@
 "Failed" = "실패";
 "Submit" = "제출";
 "Next >>" = "다음 >>";
+"The mail send form cannot be opened because the mail account is not set up on the device. Send it to yoonbumtae@gmail.com and we will reply." = "메일 계정이 기기에 설정되어 있지 않아 메일 보내기 양식을 열 수 없습니다. yoonbumtae@gmail.com으로 보내주시면 답변드리겠습니다.";
+"Feedback of MusicScale App" = "MusicScale 앱의 피드백";
+"Please let us know bug reports, suggestions, and more." = "버그 보고, 제안 사항 등을 알려주세요.";
+"Ascending by upload date" = "업로드 일자 오름차순";
+"Descending by upload date" = "업로드 일자 내림차순";
+"current_sort" = "적용중";
+"Sort Order" = "정렬 순서";
+"Sharp(♯) only" = "올림표(♯)만";
+"Flat(♭) only" = "내림표(♭)만";
+"My custom" = "커스텀";
+"No internet connection." = "인터넷에 연결되어 있지 않습니다.";

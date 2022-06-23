@@ -15,11 +15,11 @@ enum EnharmonicMode: Int, Codable, CaseIterable {
         case .standard:
             return "Scale's default".localized()
         case .sharpAndNatural:
-            return "Sharp(♯) and natural"
+            return "Sharp(♯) only".localized()
         case .flatAndNatural:
-            return "Flat(♭) and natural"
+            return "Flat(♭) only".localized()
         case .userCustom:
-            return "Custom"
+            return "My Custom".localized()
         }
     }
     

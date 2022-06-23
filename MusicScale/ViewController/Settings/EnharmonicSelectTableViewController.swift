@@ -11,6 +11,8 @@ class EnharmonicSelectTableViewController: UITableViewController {
 
     private var configStore = AppConfigStore.shared
     private let tradKeys = ["C", "D", "E", "F", "G", "A", "B"]
+    
+    private let SECTION_BANNER = 3
 
     @IBOutlet weak var colViewNoteList: UICollectionView!
     @IBOutlet weak var colViewAvaliableNotes: UICollectionView!
@@ -80,6 +82,29 @@ class EnharmonicSelectTableViewController: UITableViewController {
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == SECTION_BANNER && !AdsManager.SHOW_AD {
+            return 0.1
+        }
+        
+        return super.tableView(tableView, heightForHeaderInSection: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == SECTION_BANNER && !AdsManager.SHOW_AD {
+            return 0.1
+        }
+        
+        return super.tableView(tableView, heightForFooterInSection: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == SECTION_BANNER && !AdsManager.SHOW_AD {
+            return 0
+        }
+        
+        return super.tableView(tableView, numberOfRowsInSection: section)
+    }
 }
 
 extension EnharmonicSelectTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {

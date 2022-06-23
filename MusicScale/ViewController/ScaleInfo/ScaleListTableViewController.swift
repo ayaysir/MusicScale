@@ -91,6 +91,9 @@ class ScaleListTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: .downloadedFromArchive, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(getNewEntityFromArchive(_:)), name: .downloadedFromArchive, object: nil)
+        
+        // NotificationCenter.default.removeObserver(self, name: .networkIsOffline, object: nil)
+        // NotificationCenter.default.addObserver(self, selector: #selector(a), name: .networkIsOffline, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -330,13 +333,18 @@ class ScaleListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
-        setupBannerAds(self, container: view)
-        return view
+        if AdsManager.SHOW_AD {
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
+            setupBannerAds(self, container: view)
+            return view
+        }
+        
+        return super.tableView(tableView, viewForFooterInSection: section)
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        50
+        return AdsManager.SHOW_AD ? 50 : super.tableView(tableView, heightForFooterInSection: section)
     }
 
     // MARK: - Navigation

@@ -1244,11 +1244,11 @@
                                         <rect key="frame" x="20" y="186.00000190734863" width="388" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VXz-aW-47C" id="h31-gB-fA4">
-                                            <rect key="frame" x="0.0" y="0.0" width="327.33333333333331" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="330.66666666666669" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Enharmonic Notations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q7p-ED-17V">
-                                                    <rect key="frame" x="20" y="0.0" width="299.33333333333331" height="43.666667938232422"/>
+                                                    <rect key="frame" x="20" y="0.0" width="302.66666666666669" height="43.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>
@@ -1282,6 +1282,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
+                                        <connections>
+                                            <segue destination="YUB-VH-J3c" kind="show" identifier="HelpSegue" id="O20-Z1-8J6"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="mlg-Rx-erV" style="IBUITableViewCellStyleDefault" id="PBY-18-JBu">
                                         <rect key="frame" x="20" y="323.00000381469727" width="388" height="43.666667938232422"/>
@@ -1300,6 +1303,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
+                                        <connections>
+                                            <segue destination="YUB-VH-J3c" kind="show" identifier="LicenseSegue" id="M8x-He-tZN"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="MYK-91-rGs" style="IBUITableViewCellStyleDefault" id="TQh-Bq-cgE">
                                         <rect key="frame" x="20" y="366.66667175292969" width="388" height="43.666667938232422"/>
@@ -1389,6 +1395,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yf6-O0-rvw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3177" y="-560"/>
+        </scene>
+        <!--Web Page View Controller-->
+        <scene sceneID="iMs-MW-gvX">
+            <objects>
+                <viewController id="YUB-VH-J3c" customClass="WebPageViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mhk-yJ-CbN">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YrK-B9-f0Y">
+                                <rect key="frame" x="0.0" y="88" width="428" height="755"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="c5g-dR-fuu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YrK-B9-f0Y" firstAttribute="top" secondItem="c5g-dR-fuu" secondAttribute="top" id="U4P-5f-zOp"/>
+                            <constraint firstItem="c5g-dR-fuu" firstAttribute="bottom" secondItem="YrK-B9-f0Y" secondAttribute="bottom" id="Uk8-De-Kyf"/>
+                            <constraint firstItem="c5g-dR-fuu" firstAttribute="trailing" secondItem="YrK-B9-f0Y" secondAttribute="trailing" id="pfG-Th-QJp"/>
+                            <constraint firstItem="YrK-B9-f0Y" firstAttribute="leading" secondItem="c5g-dR-fuu" secondAttribute="leading" id="zv2-sk-o45"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="zqs-Jo-IHS"/>
+                    <connections>
+                        <outlet property="webView" destination="YrK-B9-f0Y" id="WXm-Fo-Eoa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G8D-fd-5Fo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4117.2897196261683" y="-559.17926565874734"/>
         </scene>
         <!--Instrument Table View Controller-->
         <scene sceneID="RTa-aS-b59">
@@ -2140,6 +2181,7 @@
                         <outlet property="btnPlay" destination="EXO-Zk-CHY" id="3ba-TD-PBN"/>
                         <outlet property="btnRemind" destination="uXc-3O-iSr" id="2QL-VH-F9F"/>
                         <outlet property="cardContainerView" destination="i8u-Bp-kD8" id="FDn-6e-W0j"/>
+                        <outlet property="cnstBannerHeight" destination="10o-9x-Gmd" id="HmF-Sa-lzW"/>
                         <outlet property="lblProgressStatus" destination="jt6-Z8-on3" id="qE5-TR-bZz"/>
                         <outlet property="progressViewDayQuestionProgress" destination="ein-Vh-JIj" id="4vz-PS-Naw"/>
                         <outlet property="progressViewInStudying" destination="9HU-z4-5hf" id="O9E-Wg-odD"/>
@@ -3454,6 +3496,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="M8x-He-tZN"/>
         <segue reference="VsC-uc-p1n"/>
         <segue reference="8Fa-Oz-VZU"/>
     </inferredMetricsTieBreakers>

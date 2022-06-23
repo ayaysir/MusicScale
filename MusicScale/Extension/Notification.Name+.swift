@@ -9,4 +9,5 @@ import Foundation
 
 extension Notification.Name {
     static let downloadedFromArchive = Notification.Name("DownloadedFromArchive")
+    static let networkIsOffline = Notification.Name("NetworkIsOffline")
 }

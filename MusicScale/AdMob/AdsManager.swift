@@ -52,7 +52,13 @@ import GoogleMobileAds
  */
 
 @discardableResult
-func setupBannerAds( _ viewController: UIViewController, container: UIView? = nil) -> GADBannerView {
+func setupBannerAds( _ viewController: UIViewController, container: UIView? = nil) -> GADBannerView? {
+    
+    container?.backgroundColor = .clear
+    
+    guard AdsManager.SHOW_AD else {
+        return nil
+    }
 
     container?.layoutIfNeeded()
     let bannerWidth = container != nil ? container!.frame.width : viewController.view.frame.width
@@ -63,8 +69,6 @@ func setupBannerAds( _ viewController: UIViewController, container: UIView? = ni
     bannerView.translatesAutoresizingMaskIntoConstraints = false
     
     if let container = container {
-        print(viewController.className, container.frame, bannerView.frame)
-        container.backgroundColor = .clear
         container.addSubview(bannerView)
     } else {
         viewController.view.addSubview(bannerView)
@@ -74,9 +78,45 @@ func setupBannerAds( _ viewController: UIViewController, container: UIView? = ni
     // bannerView.adUnitID = adUnitID
     bannerView.adUnitID = adUnitIDDistributor(viewController)
     bannerView.rootViewController = viewController
+    bannerView.delegate = AdsManager.shared
 
     let request = GADRequest()
     bannerView.load(request)
 
     return bannerView
+}
+
+class AdsManager: NSObject, GADBannerViewDelegate {
+    
+    static var shared = AdsManager()
+    
+    static var PRODUCT_MODE: Bool = true
+    static var SHOW_AD: Bool {
+        // ... //
+        return PRODUCT_MODE && true
+    }
+    private var showAd: Bool {
+        AdsManager.SHOW_AD
+    }
+    
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        // print(#function, bannerView.rootViewController)
+    }
+    
+    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
+        
+    }
+    
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        // print(#function, error.localizedDescription)
+        
+        NotificationCenter.default.post(name: .networkIsOffline, object: nil)
+        
+        switch bannerView.rootViewController {
+        case is ScaleListTableViewController:
+            break
+        default:
+            break
+        }
+    }
 }

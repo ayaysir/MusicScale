@@ -18,6 +18,7 @@ class FlashcardsViewController: InQuizViewController {
     @IBOutlet weak var btnOK: UIButton!
     @IBOutlet weak var btnRemind: UIButton!
     @IBOutlet weak var viewBannerContainer: UIView!
+    @IBOutlet weak var cnstBannerHeight: NSLayoutConstraint!
     
     /// 앞면: 문제, 뒷면: 정답
     private var backAnswerLabel: UILabel!
@@ -73,6 +74,11 @@ class FlashcardsViewController: InQuizViewController {
         }
         
         DispatchQueue.main.async { [self] in
+            if !AdsManager.SHOW_AD {
+                cnstBannerHeight.constant = 0
+                viewBannerContainer.layoutIfNeeded()
+            }
+            
             cardContainerView.layoutIfNeeded()
             
             btnPlay.setTitle("", for: .normal)

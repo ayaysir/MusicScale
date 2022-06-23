@@ -19,6 +19,7 @@ class ScaleSubInfoTableViewController: UITableViewController {
     // == SECTION & INDEXPATH ==
     let cellAliasIndexPath = IndexPath(row: 1, section: 1)
     let cellCommentIndexPath = IndexPath(row: 0, section: 2)
+    let cellAdBannerIndexPath = IndexPath(row: 0, section: 0)
 
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblNameAlias: UILabel!
@@ -74,6 +75,45 @@ class ScaleSubInfoTableViewController: UITableViewController {
         }
         
         return originalSize
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case cellAdBannerIndexPath.section:
+            if !AdsManager.SHOW_AD {
+                return 0
+            }
+        default:
+            break
+        }
+        
+        return super.tableView(tableView, numberOfRowsInSection: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case cellAdBannerIndexPath.section:
+            if !AdsManager.SHOW_AD {
+                return 0.1
+            }
+        default:
+            break
+        }
+        
+        return super.tableView(tableView, heightForHeaderInSection: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case cellAdBannerIndexPath.section:
+            if !AdsManager.SHOW_AD {
+                return 0.1
+            }
+        default:
+            break
+        }
+        
+        return super.tableView(tableView, heightForFooterInSection: section)
     }
     
     // MARK: - Navigation

@@ -82,3 +82,14 @@
 "Failed" = "失敗";
 "Submit" = "提出";
 "Next >>" = "次 >>";
+"The mail send form cannot be opened because the mail account is not set up on the device. Send it to yoonbumtae@gmail.com and we will reply." = "メールアカウントがデバイスに設定されていないため、メール送信フォームを開くことができません。 yoonbumtae@gmail.comにお送りください。返信いたします。";
+"Feedback of MusicScale App" = "MusicScaleアプリからのフィードバック";
+"Please let us know bug reports, suggestions, and more." = "バグ報告、提案などを教えてください。";
+"Ascending by upload date" = "アップロード日の昇順";
+"Descending by upload date" = "アップロード日の降順";
+"current_sort" = "適用中";
+"Sort Order" = "ソート順序";
+"Sharp(♯) only" = "シャープ(♯)のみ";
+"Flat(♭) only" = "フラット(♭)のみ";
+"My custom" = "カスタム";
+"No internet connection." = "インターネットに接続されていません。";

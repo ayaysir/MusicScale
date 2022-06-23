@@ -31,6 +31,7 @@ class QuizIntroTableViewController: UITableViewController {
     let typeOfQuestIndexPath = IndexPath(row: 0, section: 0)
     let enharmonicModeIndexPath = IndexPath(row: 1, section: 0)
     let buttonSection: Int = 4
+    let SECTION_BANNER = 6
     
     let overlayView = UIView(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: 4000, height: 4000)))
     let overlayViewTag: Int = 85843945
@@ -122,8 +123,27 @@ class QuizIntroTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if !AdsManager.SHOW_AD && section == SECTION_BANNER {
+            return 0
+        }
         
         return super.tableView(tableView, numberOfRowsInSection: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if !AdsManager.SHOW_AD && section == SECTION_BANNER {
+            return 0.1
+        }
+        
+        return super.tableView(tableView, heightForHeaderInSection: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if !AdsManager.SHOW_AD && section == SECTION_BANNER {
+            return 0
+        }
+        
+        return super.tableView(tableView, heightForFooterInSection: section)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

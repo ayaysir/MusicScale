@@ -121,6 +121,8 @@ class ArchiveDetailTableViewController: UITableViewController {
     // MARK: - Lifecycle
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         switch mode {
         case .read:
             getLikeStatus()
@@ -131,6 +133,8 @@ class ArchiveDetailTableViewController: UITableViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         switch mode {
         case .read:
             postManager.removeLikeCountListener()
@@ -141,6 +145,12 @@ class ArchiveDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if isMode(.create) && !Reachability.isConnectedToNetwork() {
+            simpleAlert(self, message: "No internet connection.".localized(), title: "Caution".localized()) { _ in
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
         
         // 공통
         setButtonTitle()
@@ -474,6 +484,11 @@ extension ArchiveDetailTableViewController {
             return 0
         }
         
+        // 광고
+        if isMode(.read) && !AdsManager.SHOW_AD && section == SECTION_FIRST {
+            return 0
+        }
+        
         // Create mode일 때 숨겨야 할 섹션들
         if needHideSectionsBeforeSelectScale(section) {
             return 0
@@ -569,6 +584,11 @@ extension ArchiveDetailTableViewController {
             return 0.1
         }
         
+        // 광고
+        if isMode(.read) && !AdsManager.SHOW_AD && section == SECTION_FIRST {
+            return 0.1
+        }
+        
         if needHideSectionsBeforeSelectScale(section) {
             return 0.1
         }
@@ -579,6 +599,12 @@ extension ArchiveDetailTableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         // Create mode일 때 신뢰도 섹션 숨김
         if isMode(.create) && section == SECTION_RELIABILITY {
+            return 0.1
+        }
+        
+        
+        // 광고
+        if isMode(.read) && !AdsManager.SHOW_AD && section == SECTION_FIRST {
             return 0.1
         }
         
