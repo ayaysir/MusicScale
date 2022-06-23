@@ -9,7 +9,7 @@ import Foundation
 
 func getSampleScaleDataFromLocal(completion : @escaping ([ScaleInfo]) throws -> ()) {
     
-    let fileLocation = Bundle.main.url(forResource: "SampleScaleList", withExtension: "json")
+    let fileLocation = Bundle.main.url(forResource: "SampleScaleList-20220624", withExtension: "json")
     
     do {
         let data = try Data(contentsOf: fileLocation!)

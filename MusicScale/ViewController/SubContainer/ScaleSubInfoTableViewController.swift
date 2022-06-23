@@ -43,9 +43,12 @@ class ScaleSubInfoTableViewController: UITableViewController {
         initDropDownOnPriorityLabel()
         refreshViewInfo()
         
-        // 광고
         DispatchQueue.main.async {
+            // 광고
             setupBannerAds(self, container: self.viewBannerAdsContainer)
+            
+            self.txvComment.layoutIfNeeded()
+            self.tableView.reloadData()
         }
     }
     
