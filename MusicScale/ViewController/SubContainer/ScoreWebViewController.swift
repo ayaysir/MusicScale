@@ -46,10 +46,6 @@ class ScoreWebViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(#function)
-        
-        // initIgnoreSilenceMode()
         loadWebSheetPage()
     }
 }

@@ -146,6 +146,8 @@ class ArchiveDetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        TrackingTransparencyPermissionRequest()
+        
         if isMode(.create) && !Reachability.isConnectedToNetwork() {
             simpleAlert(self, message: "No internet connection.".localized(), title: "Caution".localized()) { _ in
                 self.navigationController?.popViewController(animated: true)

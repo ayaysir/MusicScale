@@ -91,6 +91,8 @@ class ScaleInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        TrackingTransparencyPermissionRequest()
+        
         originialCnstSheetPropoHeight = cnstSheetPropoHeight
         originalCnstPianoHeight = cnstPianoHeight
         

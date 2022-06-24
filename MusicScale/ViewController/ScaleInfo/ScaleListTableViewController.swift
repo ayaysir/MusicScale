@@ -49,6 +49,8 @@ class ScaleListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        TrackingTransparencyPermissionRequest()
+        
         searchInit()
         scaleListViewModel.handleDataReloaded = {
             self.tableView.reloadData()

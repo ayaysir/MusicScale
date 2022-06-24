@@ -35,11 +35,11 @@ class NoteTests: XCTestCase {
         
         // then
         // C, C#, D, D#, E, F
-        XCTAssertEqual(semitone_F, 5)
-        XCTAssertEqual(semitone_C_Sharp, 1)
-        XCTAssertEqual(semitone_B_Flat, 10)
+        XCTAssertEqual(semitone_F, 65)
+        XCTAssertEqual(semitone_C_Sharp, 61)
+        XCTAssertEqual(semitone_B_Flat, 70)
         XCTAssertEqual(semitone_G_DoubleFlat, semitone_F) // = 5?
-        XCTAssertEqual(semitone_A_DoubleSharp, 11)
+        XCTAssertEqual(semitone_A_DoubleSharp, 71)
     }
     
     func test_noteComparable() throws {

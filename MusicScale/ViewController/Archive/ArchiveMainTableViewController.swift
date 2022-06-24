@@ -49,6 +49,8 @@ class ArchiveMainTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        TrackingTransparencyPermissionRequest()
+        
         barBtnAddDummy.title = ""
         barBtnAddDummy.isEnabled = false
         

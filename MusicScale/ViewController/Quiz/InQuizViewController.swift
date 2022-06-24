@@ -54,7 +54,7 @@ class InQuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // conductor.start()
+        TrackingTransparencyPermissionRequest()
         
         displayNextQuestionHandler = { newQuestion in
             print(newQuestion)

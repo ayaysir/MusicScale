@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  MusicScale
+
+  Created by yoonbumtae on 2022/06/24.
+  
+*/
+
+NSUserTrackingUsageDescription = "권한을 허용하면 사용자 맞춤형 배너 광고가 표시됩니다. 허용하지 않더라도 배너 광고는 표시됩니다.";

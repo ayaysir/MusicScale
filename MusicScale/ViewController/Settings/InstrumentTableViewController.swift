@@ -36,6 +36,7 @@ class InstrumentTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        TrackingTransparencyPermissionRequest()
     }
 
     // MARK: - Table view data source

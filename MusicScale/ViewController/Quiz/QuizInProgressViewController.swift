@@ -47,6 +47,8 @@ class QuizInProgressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        TrackingTransparencyPermissionRequest()
+        
         btnContinue.layer.cornerRadius = 5
         btnGiveUp.layer.cornerRadius = 5
         

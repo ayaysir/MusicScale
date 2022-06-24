@@ -76,6 +76,8 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        TrackingTransparencyPermissionRequest()
+        
         // ===== 공통 작업 =====
         loadWebSheetPage()
         txfScaleName.addTarget(self, action: #selector(scaleNameChanged), for: .editingChanged)

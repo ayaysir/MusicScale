@@ -31,6 +31,8 @@ class SettingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        TrackingTransparencyPermissionRequest()
+        
         DispatchQueue.main.async {
             setupBannerAds(self, container: self.viewBannerContainer)
         }

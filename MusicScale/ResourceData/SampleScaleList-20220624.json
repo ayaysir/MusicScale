@@ -664,7 +664,7 @@
     "degrees_descending": "",
     "default_priority": 3,
     "my_priority": -1,
-    "comment": "The tritone scale, C D♭ E G♭ G(♮) B♭, is enharmonically equivalent to the Petrushka chord, it means C Major chord ( C E G(♮) ) + G♭ Major chord's 2nd inversion ( D♭ G♭ B♭ ).[13] This is the reason why it's called \"Tritone Scale\".\n\nhttps://en.wikipedia.org/wiki/Hexatonic_scale#Tritone_scale",
+    "comment": "The tritone scale, C D♭ E G♭ G(♮) B♭, is enharmonically equivalent to the Petrushka chord, it means C Major chord ( C E G(♮) ) + G♭ Major chord's 2nd inversion ( D♭ G♭ B♭ ). This is the reason why it's called \"Tritone Scale\".\n\nhttps://en.wikipedia.org/wiki/Hexatonic_scale#Tritone_scale",
     "links": "",
     "is_div_by_12tet": true,
     "group_name": "",

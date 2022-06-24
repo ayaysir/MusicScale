@@ -34,6 +34,7 @@ class QuizSelectKeyTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        TrackingTransparencyPermissionRequest()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

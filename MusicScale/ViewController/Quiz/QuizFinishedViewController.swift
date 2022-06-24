@@ -25,6 +25,8 @@ class QuizFinishedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        TrackingTransparencyPermissionRequest()
 
         tableViewStats.delegate = self
         tableViewStats.dataSource = self
