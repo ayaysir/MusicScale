@@ -25,7 +25,7 @@ class InstrumentTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         let savedNumber = place == .playback ? configStore.playbackInstrument : configStore.pianoInstrument
-        let indexPath = InstrumentList.indexPath(of: savedNumber)
+        let indexPath = InstrumentList.indexPath(of: savedNumber + 1)
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
     }
     
@@ -66,9 +66,9 @@ class InstrumentTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch place {
         case .playback:
-            configStore.playbackInstrument = InstrumentList.instrument(at: indexPath).number
+            configStore.playbackInstrument = InstrumentList.instrument(at: indexPath).number - 1
         case .piano:
-            configStore.pianoInstrument = InstrumentList.instrument(at: indexPath).number
+            configStore.pianoInstrument = InstrumentList.instrument(at: indexPath).number - 1
         }
         
         navigationController?.popViewController(animated: true)

@@ -17,7 +17,7 @@ struct SortFilterConfigStore: UserDefaultsConfigurator {
     
     mutating func initalizeConfigValueOnFirstrun() {
         currentOrder = .ascending
-        currentState = .priority
+        currentState = .displayOrder
     }
     
     static var shared = SortFilterConfigStore()
