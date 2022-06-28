@@ -51,6 +51,10 @@ var isLandscape: Bool {
         return true
     }
     
+    if UIDevice.current.orientation.isFlat {
+        return true
+    }
+    
     return false
 }
 
@@ -72,6 +76,11 @@ var isIpad129: Bool {
 var isIpadMini: Bool {
     let name = UIDevice().type.rawValue
     return name.starts(with: "iPad Mini")
+}
+
+var isIpadPro1st97: Bool {
+    let name = UIDevice().type.rawValue
+    return name.starts(with: "iPad Pro 9.7")
 }
 
 let DEF_STAFFWIDTH = 460

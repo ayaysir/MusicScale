@@ -65,7 +65,9 @@ class MatchKeysViewController: InQuizViewController {
     private var lastKeyPressedInterval: Int = 0 {
         didSet {
             if lastKeyPressedInterval == 6 {
-                fadeBannerOnPiano(fadeIn: true)
+                if !isSolvingQuestionNow && viewBannerContainer.isHidden {
+                    fadeBannerOnPiano(fadeIn: true)
+                }
                 lastKeyPressedInterval = 0
                 keyPressTimer?.invalidate()
                 keyPressTimer = nil
@@ -148,6 +150,7 @@ class MatchKeysViewController: InQuizViewController {
     override func viewWillDisappear(_ animated: Bool) {
         showTabBar(self)
         OrientationUtil.lockOrientation(.all)
+        stopSequencer()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -218,6 +221,9 @@ class MatchKeysViewController: InQuizViewController {
          
          0 ~ 228 (600 ~ 1000)
          */
+        
+        // // Orientation Test
+        // lblKeyName.text = "\(isLandscape) : \(isPad) : \(UIDevice.current.orientation == .unknown) : \(UIDevice.current.orientation.isFlat)"
         
         if isLandscape && isPad {
             // print("📱 isLandscape && isPad:", UIDevice().type.rawValue)
@@ -551,7 +557,6 @@ extension MatchKeysViewController: PianoVCDelegate {
                 fadeBannerOnPiano(fadeIn: false)
                 keyPressTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
                     self.lastKeyPressedInterval += 1
-                    // print(self.lastKeyPressedInterval)
                 })
             }
             
@@ -563,7 +568,7 @@ extension MatchKeysViewController: PianoVCDelegate {
         guard let currentEditViewModel = currentEditViewModel else { return }
         let intNotation = keyInfo.keyIndex - PianoKeyHelper.findRootKeyPosition(playableKey: currentPlayableKey)
         
-        print(currentPlayableKey, keyInfo, intNotation)
+        // print(currentPlayableKey, keyInfo, intNotation)
         currentEditViewModel.addKey(intNotation: intNotation, enharmonicMode: quizStore.enharmonicMode)
         
         injectAbcjsText(from: currentEditViewModel.abcjsTextOnEdit, needReload: true, staffWidth: staffWidth)

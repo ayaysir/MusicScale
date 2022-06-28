@@ -30,11 +30,7 @@ class NoteSequencerConductor: ObservableObject {
     }
     
     func start() {
-        do {
-            try engine.start()
-        } catch {
-            Log("AudioKit did not start! \(error)")
-        }
+        startEngineOnly()
         
         do {
             let preset = AppConfigStore.shared.playbackInstrument
@@ -49,6 +45,18 @@ class NoteSequencerConductor: ObservableObject {
         
         let _ = sequencer.newTrack()!
         let _ = sequencer.newTrack()!
+    }
+    
+    func pause() {
+        engine.pause()
+    }
+    
+    func startEngineOnly() {
+        do {
+            try engine.start()
+        } catch {
+            Log("AudioKit did not start! \(error)")
+        }
     }
     
     func stop() {

@@ -53,6 +53,7 @@
 		4426A00C2854400B00942655 /* ArchiveDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426A00B2854400B00942655 /* ArchiveDetailTableViewController.swift */; };
 		443A0C6328428F3100641BC0 /* Between.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C6228428F3100641BC0 /* Between.swift */; };
 		443A0C652843E99B00641BC0 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C642843E99B00641BC0 /* SimpleAlert.swift */; };
+		4444C47A286B661D00F5E058 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4444C479286B661D00F5E058 /* MainTabBarController.swift */; };
 		44537F68285623200061CADF /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44537F67285623200061CADF /* SwiftSpinner.swift */; };
 		44537F6A285628A90061CADF /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44537F69285628A90061CADF /* FirebaseAuthManager.swift */; };
 		44537F6C285651EA0061CADF /* StarRatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44537F6B285651EA0061CADF /* StarRatingViewModel.swift */; };
@@ -228,6 +229,7 @@
 		4426A00B2854400B00942655 /* ArchiveDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveDetailTableViewController.swift; sourceTree = "<group>"; };
 		443A0C6228428F3100641BC0 /* Between.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Between.swift; sourceTree = "<group>"; };
 		443A0C642843E99B00641BC0 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
+		4444C479286B661D00F5E058 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		44537F67285623200061CADF /* SwiftSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
 		44537F69285628A90061CADF /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		44537F6B285651EA0061CADF /* StarRatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingViewModel.swift; sourceTree = "<group>"; };
@@ -734,6 +736,7 @@
 				441738D02848ED6200A7D692 /* Quiz */,
 				4461012D28451ECA0033BCE9 /* Modal */,
 				441FA161283BE32B0084AE58 /* ScaleInfo */,
+				4444C479286B661D00F5E058 /* MainTabBarController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1103,6 +1106,7 @@
 				441E96D928638D9700261D43 /* PDFViewController.swift in Sources */,
 				44E0ACF3285F3FCD008BBB82 /* UIDevice+.swift in Sources */,
 				445FA4C3284E49120008D621 /* MatchKeysViewController.swift in Sources */,
+				4444C47A286B661D00F5E058 /* MainTabBarController.swift in Sources */,
 				44537F6E2857975C0061CADF /* UIApplication+.swift in Sources */,
 				44709D60276A334F00BBF6C9 /* MusicScale.xcdatamodeld in Sources */,
 				4455D1E6285CDBC900FB344E /* UIBarButtonItem+.swift in Sources */,

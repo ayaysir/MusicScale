@@ -65,6 +65,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(#file, #function)
     }
     
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        print(#function	)
+    }
+    
     /// set orientations you want to be allowed in this property by default
     var orientationLock = UIInterfaceOrientationMask.all
     

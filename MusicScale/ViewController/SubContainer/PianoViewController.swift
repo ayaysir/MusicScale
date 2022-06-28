@@ -61,10 +61,23 @@ class PianoViewController: UIViewController {
         
         // Decide instPreset
         generator = MIDISoundGenerator()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.didActivateNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIScene.didActivateNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIScene.willDeactivateNotification, object: nil)
         generator.stopEngine()
+    }
+    
+    @objc func didActivated() {
+        generator.startEngine()
+    }
+    
+    @objc func willResignActive() {
+        generator.pauseEngine()
     }
     
     @objc func handlePianoLongPress(gesture: UILongPressGestureRecognizer) {

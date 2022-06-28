@@ -63,14 +63,27 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         // IQKeyboardManager 동작
-        // https://stackoverflow.com/questions/38768966/iqkeyboardmanager-not-working-when-uitableview-embedded-in-a-container-view
+        // https://stackoverflow.com/questions/38768966
         super.viewWillAppear(animated)
         
         generator = MIDISoundGenerator()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.didActivateNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIScene.didActivateNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIScene.willDeactivateNotification, object: nil)
         generator.stopEngine()
+    }
+    
+    @objc func didActivated() {
+        generator.startEngine()
+    }
+    
+    @objc func willResignActive() {
+        generator.pauseEngine()
     }
     
     override func viewDidLoad() {

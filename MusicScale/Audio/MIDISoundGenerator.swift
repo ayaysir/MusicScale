@@ -15,20 +15,14 @@ class MIDISoundGenerator {
     private var currentMIDINoteNumber: MIDINoteNumber!
     private var currentChannel: MIDIChannel!
     
+    private var soundbankURL: URL?
+    private var preset: Int?
+    
     init(soundbankURL: URL? = gsMuseScoreFileURL, instPreset preset: Int = AppConfigStore.shared.pianoInstrument) {
         engine.output = instrument
         
-        // Load EXS file (you can also load SoundFonts and WAV files too using the AppleSampler Class)
-        do {
-            if let fileURL = soundbankURL {
-                try instrument.loadMelodicSoundFont(url: fileURL, preset: preset)
-            } else {
-                Log("MIDISoundGenerator: Could not find soundbank file.")
-            }
-        } catch {
-            Log("MIDISoundGenerator: Could not load instrument.")
-        }
-        
+       
+        initSoundbank(soundbankURL: soundbankURL, instPreset: preset)
         startEngine()
     }
     
@@ -59,12 +53,29 @@ class MIDISoundGenerator {
         }
     }
     
+    func initSoundbank(soundbankURL: URL?, instPreset preset: Int) {
+        // Load EXS file (you can also load SoundFonts and WAV files too using the AppleSampler Class)
+        do {
+            if let fileURL = soundbankURL {
+                try instrument.loadMelodicSoundFont(url: fileURL, preset: preset)
+            } else {
+                Log("MIDISoundGenerator: Could not find soundbank file.")
+            }
+        } catch {
+            Log("MIDISoundGenerator: Could not load instrument.")
+        }
+    }
+    
     func startEngine() {
         do {
             try engine.start()
         } catch {
             Log("MIDISoundGenerator: AudioKit did not start!")
         }
+    }
+    
+    func pauseEngine() {
+        engine.pause()
     }
     
     func stopEngine() {
