@@ -146,6 +146,7 @@ class FlashcardsViewController: InQuizViewController {
             view.layoutIfNeeded()
             let cardRect = CGRect(origin: .zero, size: cardContainerView.frame.size)
             webkitView.frame = cardRect
+            backAnswerLabel.frame = cardRect
         }
     }
     

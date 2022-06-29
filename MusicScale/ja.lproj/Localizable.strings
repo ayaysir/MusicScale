@@ -11,6 +11,14 @@
 "TextView_SettingEnharmonicHelp" = "1.「ノートリスト」で変更したいノートをクリックします。ノートリストはMIDI番号表記で表記およびソートされています。 （C4 = 0、半音で分割）\n\n2 .異名同音の音符の利用可能なリストの1つを選択します。";
 "MusicScale_ManualFileName" = "MusicScale - en";
 
+/* introduce other apps */
+
+"Other apps made by BGSMM" = "BGSMMが作った他のアプリのリスト";
+
+"description_MakeMyMusicBox" = "iPhone / iPadでミュージックボックスが生まれ変わりました。 独自のオルゴールと楽譜を作成してください。";
+"description_TunerXR" = "Tuner XR(Tuner with eXtRa features)はボーカル、楽器などを演奏する音楽家のためのチューナーアプリです。";
+"description_DiffuserStick" = "DiffuserStickアプリはディフューザースティック交換サイクル管理ヘルパーアプリで、ディフューザーの写真とともにディフューザースティックを差し込んだ日を記録し、交換期間になるとプッシュアラームを介して通知します。";
+
 "Caution" = "注意";
 "OK" = "確認";
 "No" = "いいえ";

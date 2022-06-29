@@ -11,6 +11,16 @@
 "TextView_SettingEnharmonicHelp" = "1. '음표 목록'에서 변경하려는 음표를 클릭하면 MIDI 번호 표기법으로 기보 및 정렬된 음표 목록이 표시됩니다. (C4 = 0, 반음 단위)\n\n2. 사용 가능한 이명동음 음표 목록 중 하나를 선택합니다.";
 "MusicScale_ManualFileName" = "MusicScale - ko";
 
+/* introduce other apps */
+
+"Other apps made by BGSMM" = "BGSMM이 만든 다른 앱 보기";
+"Make My MusicBox" = "나만의 오르골 만들기";
+
+"description_MakeMyMusicBox" = "iPhone/iPad에서 뮤직박스가 다시 태어났습니다. 나만의 오르골과 악보를 만들어보세요.";
+"description_TunerXR" = "Tuner XR(Tuner with eXtRa features)은 보컬, 악기 등을 연주하는 음악가들을 위한 튜너 앱입니다.";
+"description_DiffuserStick" = "디퓨저 스틱(막대기) 교체 주기 관리 도우미 앱으로, 디퓨저의 사진과 함께 디퓨저 스틱을 꽂은 날을 기록하고, 교체 기간이 되면 푸시 알람을 통해 알려줍니다.";
+
+
 "Caution" = "주의";
 "OK" = "확인";
 "No" = "아니오";
