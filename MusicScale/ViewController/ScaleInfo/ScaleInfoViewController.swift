@@ -462,13 +462,15 @@ extension ScaleInfoViewController: ScoreWebVCDelegate {
 extension ScaleInfoViewController: ScaleInfoUpdateTVCDelegate {
     
     func didFinishedUpdate(_ controller: ScaleInfoUpdateTableViewController, viewModel: ScaleInfoViewModel) {
-        
         self.scaleInfoViewModel = viewModel
+        self.title = viewModel.name
         infoVC?.refreshViewInfo(isUpdated: true)
         delegate?.didInfoUpdated(self, indexPath: selectedIndexPath)
         changeAvailableKeys()
         reinjectAbcjsText()
         
+        // tempo bug fix
+        conductor.tempo = Float(configStore.tempo)
     }
 }
 

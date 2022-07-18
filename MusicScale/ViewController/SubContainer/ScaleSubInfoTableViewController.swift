@@ -160,6 +160,7 @@ extension ScaleSubInfoTableViewController {
     
     func refreshViewInfo(isUpdated: Bool = false) {
         DispatchQueue.main.async { [unowned self] in
+            
             lblName.text = scaleInfoViewModel.name
             lblNameAlias.text = scaleInfoViewModel.nameAliasFormatted
             lblPattern.text = scaleInfoViewModel.ascendingPattern
