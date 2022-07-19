@@ -88,7 +88,6 @@
         // This is called when the timer starts so we know the svg has been drawn by now.
         // Create the cursor and add it to the sheet music's svg.
         const svg = document.querySelector(self.rootSelector + " svg");
-        console.log("rootSelector:", rootSelector)
         self.cursor = document.createElementNS("http://www.w3.org/2000/svg", "line");
         self.cursor.setAttribute("class", "abcjs-cursor");
         self.cursor.setAttributeNS(null, 'x1', 0);

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFAudio
 
 class MainTabBarController: UITabBarController {
 
@@ -14,6 +15,8 @@ class MainTabBarController: UITabBarController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.didActivateNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didInterrupted), name: AVAudioSession.interruptionNotification, object: AVAudioSession.sharedInstance())
+        
     }
     
     @objc func didActivated() {
@@ -22,5 +25,18 @@ class MainTabBarController: UITabBarController {
     
     @objc func willResignActive() {
         GlobalConductor.shared.pause()
+    }
+    
+    @objc func didInterrupted(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let typeKeyRaw = userInfo[AVAudioSessionInterruptionTypeKey],
+              let typeKey = AVAudioSession.InterruptionType(rawValue: typeKeyRaw as! UInt) else {
+            simpleAlert(self, message: "typeKey is nil")
+            return
+        }
+        
+        if typeKey == .ended {
+            GlobalConductor.shared.startEngineOnly()
+        }
     }
 }
