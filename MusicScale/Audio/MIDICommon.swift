@@ -12,3 +12,7 @@ let gsMuseScoreFileURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore 
 struct GlobalConductor {
     static let shared = NoteSequencerConductor()
 }
+
+struct GlobalGenerator {
+    static let shared = MIDISoundGenerator()
+}

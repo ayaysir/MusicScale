@@ -57,8 +57,6 @@ class PianoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // try? availableSoundInSilentMode()
-        
         // Decide instPreset
         generator = MIDISoundGenerator()
         
