@@ -20,11 +20,14 @@ class MainTabBarController: UITabBarController {
     }
     
     @objc func didActivated() {
+        
         GlobalConductor.shared.startEngineOnly()
+        GlobalGenerator.shared.startEngine()
     }
     
     @objc func willResignActive() {
         GlobalConductor.shared.pause()
+        GlobalGenerator.shared.pauseEngine()
     }
     
     @objc func didInterrupted(notification: Notification) {
@@ -36,7 +39,8 @@ class MainTabBarController: UITabBarController {
         }
         
         if typeKey == .ended {
-            GlobalConductor.shared.startEngineOnly()
+            // GlobalConductor.shared.startEngineOnly()
+            didActivated()
         }
     }
 }

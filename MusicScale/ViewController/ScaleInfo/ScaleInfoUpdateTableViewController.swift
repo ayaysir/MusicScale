@@ -53,7 +53,8 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     // let conductor = NoteSequencerConductor()
     let conductor = GlobalConductor.shared
     private var playTimer: Timer?
-    private var generator: MIDISoundGenerator!
+    // private var generator: MIDISoundGenerator!
+    private var generator: MIDISoundGenerator = GlobalGenerator.shared
     
     private let bannerAdPath = IndexPath(row: 0, section: 5)
     // private let showBanner = true
@@ -65,26 +66,28 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         // IQKeyboardManager 동작
         // https://stackoverflow.com/questions/38768966
         super.viewWillAppear(animated)
+        generator.startEngine()
         
-        generator = MIDISoundGenerator()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.didActivateNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
+        // generator = MIDISoundGenerator()
+        //
+        // NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.didActivateNotification, object: nil)
+        // NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: UIScene.didActivateNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIScene.willDeactivateNotification, object: nil)
-        generator.stopEngine()
-    }
-    
-    @objc func didActivated() {
-        generator.startEngine()
-    }
-    
-    @objc func willResignActive() {
+        // NotificationCenter.default.removeObserver(self, name: UIScene.didActivateNotification, object: nil)
+        // NotificationCenter.default.removeObserver(self, name: UIScene.willDeactivateNotification, object: nil)
+        // generator.stopEngine()
         generator.pauseEngine()
     }
+    
+    // @objc func didActivated() {
+    //     generator.startEngine()
+    // }
+    //
+    // @objc func willResignActive() {
+    //     generator.pauseEngine()
+    // }
     
     override func viewDidLoad() {
         super.viewDidLoad()

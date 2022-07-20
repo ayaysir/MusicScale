@@ -69,6 +69,10 @@ class InstrumentTableViewController: UITableViewController {
             configStore.playbackInstrument = InstrumentList.instrument(at: indexPath).number - 1
         case .piano:
             configStore.pianoInstrument = InstrumentList.instrument(at: indexPath).number - 1
+            
+            // stop and reset sound generator engine
+            GlobalGenerator.shared.stopEngine()
+            GlobalGenerator.shared.initEngine()
         }
         
         navigationController?.popViewController(animated: true)

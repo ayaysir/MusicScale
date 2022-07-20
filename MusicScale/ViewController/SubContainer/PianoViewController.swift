@@ -23,7 +23,8 @@ class PianoViewController: UIViewController {
     var mode: Mode = .stricted
     var isKeyPressEnabled: Bool = true
     
-    private var generator: MIDISoundGenerator!
+    // private var generator: MIDISoundGenerator!
+    private var generator: MIDISoundGenerator = GlobalGenerator.shared
     
     var currentPlayableKey: Music.PlayableKey = .C
     var octaveShift: Int = 0
@@ -58,25 +59,27 @@ class PianoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         // Decide instPreset
-        generator = MIDISoundGenerator()
+        // generator = MIDISoundGenerator()
+        generator.startEngine()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.didActivateNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
+        // NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.didActivateNotification, object: nil)
+        // NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: UIScene.didActivateNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIScene.willDeactivateNotification, object: nil)
-        generator.stopEngine()
-    }
-    
-    @objc func didActivated() {
-        generator.startEngine()
-    }
-    
-    @objc func willResignActive() {
+        // NotificationCenter.default.removeObserver(self, name: UIScene.didActivateNotification, object: nil)
+        // NotificationCenter.default.removeObserver(self, name: UIScene.willDeactivateNotification, object: nil)
+        // generator.stopEngine()
         generator.pauseEngine()
     }
+    
+    // @objc func didActivated() {
+    //     generator.startEngine()
+    // }
+    //
+    // @objc func willResignActive() {
+    //     generator.pauseEngine()
+    // }
     
     @objc func handlePianoLongPress(gesture: UILongPressGestureRecognizer) {
         
@@ -91,25 +94,6 @@ class PianoViewController: UIViewController {
         case .began:
             guard isKeyPressEnabled else { return }
             
-            // if let viewModel = viewModel, let keyInfo = viewModel.getKeyInfoBy(touchLocation: location) {
-            //     if mode == .stricted {
-            //         guard viewPiano.viewModel.availableKeyIndexes.contains(keyInfo.keyIndex) else {
-            //             return
-            //         }
-            //     }
-            //
-            //     viewModel.currentTouchedKey = keyInfo
-            //
-            //     // 노트 재생
-            //     let targetNoteNumber = semitoneStart + keyInfo.keyIndex + (octaveShift * 12)
-            //     generator.playSound(noteNumber: targetNoteNumber)
-            //
-            //     // delegate 있는 경우 키 누름 정보 전송
-            //     if let delegate = delegate {
-            //         delegate.didKeyPressed(self, keyInfo: keyInfo)
-            //     }
-            // }
-            
             if let keyInfo = viewPiano.viewModel.getKeyInfoBy(touchLocation: location) {
                 startKeyPress(keyInfo)
             }
@@ -118,10 +102,6 @@ class PianoViewController: UIViewController {
             break
         case .ended:
             // 노트 멈춤
-            // if viewModel?.currentTouchedKey != nil {
-            //     viewModel?.currentTouchedKey = nil
-            //     generator.stopSound()
-            // }
             stopKeyPress()
         case .cancelled:
             // print("cancelled")
