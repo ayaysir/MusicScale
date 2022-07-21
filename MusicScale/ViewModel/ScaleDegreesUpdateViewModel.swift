@@ -58,6 +58,7 @@ class ScaleDegreesUpdateViewModel {
     }
     
     var playbackSemitonesOnEditDesc: [Int] {
+        // print(#function, "UpdateDescendingPlaybackIssues:", degreesDesc, helper.getSemitoneToPlaybackNotes(degrees: degreesDesc, order: .descending, key: .C))
         return helper.getSemitoneToPlaybackNotes(degrees: degreesDesc, order: .descending, key: .C)
     }
     

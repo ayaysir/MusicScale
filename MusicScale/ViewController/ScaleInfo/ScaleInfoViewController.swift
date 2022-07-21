@@ -130,6 +130,8 @@ class ScaleInfoViewController: UIViewController {
         if isPhone {
             OrientationUtil.lockOrientation(.portrait)
         }
+        
+        conductor.tempo = Float(configStore.tempo)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -439,10 +441,8 @@ extension ScaleInfoViewController {
         self.conductor.addScaleToSequencer(semitones: targetSemitones!)
         self.conductor.isPlaying = true
         
-        // btnPlayAndStop.setTitle("Stop", for: .normal)
         btnPlayAndStop.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-        
-        playTimer = Timer.scheduledTimer(timeInterval: scaleInfoViewModel.expectedPlayTime, target: self, selector: #selector(stopSequencer), userInfo: nil, repeats: false)
+        playTimer = Timer.scheduledTimer(timeInterval: self.conductor.sequencer.length.seconds, target: self, selector: #selector(stopSequencer), userInfo: nil, repeats: false)
     }
 }
 

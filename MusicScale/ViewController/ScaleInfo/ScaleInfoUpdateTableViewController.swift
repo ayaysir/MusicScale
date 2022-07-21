@@ -135,8 +135,6 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
                 swtActivateDesc.isOn = true
                 segAscDesc.isEnabled = true
             }
-            
-            print(degreesViewModel.onEditDegreesDesc)
         }
         
         conductor.tempo = Float(degreesViewModel.tempo)
@@ -573,7 +571,13 @@ extension ScaleInfoUpdateTableViewController: ConductorPlay {
         stopSequencer()
         startTimer()
         var targetSemitones = degreesViewModel.playbackSemitonesOnEdit(order: order)
-        targetSemitones.removeLast()
+        
+        if order == .ascending {
+            targetSemitones.removeLast()
+        } else {
+            targetSemitones.removeFirst()
+        }
+        
         self.conductor.addScaleToSequencer(semitones: targetSemitones)
         self.conductor.isPlaying = true
         

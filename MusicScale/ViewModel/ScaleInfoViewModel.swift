@@ -109,7 +109,8 @@ class SimpleScaleInfoViewModel {
     
     var availableIntNoteArrayInDescOrder: [Int] {
         if isAscAndDescDifferent {
-            return helper.getIntegerNotation(degrees: scaleInfo.degreesDescending, order: .descending, completeFinalNote: true).map { abs($0) }
+            // return helper.getIntegerNotation(degrees: scaleInfo.degreesDescending, order: .descending, completeFinalNote: true).map { abs($0) }
+            return helper.getIntegerNotation(degrees: scaleInfo.degreesDescending, order: .descending, completeFinalNote: true).map { 12 + $0 }
         } else {
             return ascendingIntegerNotationArray
         }

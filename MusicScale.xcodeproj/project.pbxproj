@@ -100,6 +100,7 @@
 		4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */; };
 		4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEC1282D66C700E7A607 /* CaseCountable.swift */; };
 		4463FEC4282EB2AE00E7A607 /* PianoKeyHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEC3282EB2AE00E7A607 /* PianoKeyHelperTests.swift */; };
+		446776382889361400F1C4B6 /* ToRemoveComment.md in Resources */ = {isa = PBXBuildFile; fileRef = 446776372889361400F1C4B6 /* ToRemoveComment.md */; };
 		446AEA2C283D3EB200C2BFCF /* WebMusicSheetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446AEA2B283D3EB200C2BFCF /* WebMusicSheetHelper.swift */; };
 		446AEA2E283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446AEA2D283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift */; };
 		446AEA3028411ED300C2BFCF /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446AEA2F28411ED300C2BFCF /* Toast.swift */; };
@@ -275,6 +276,7 @@
 		4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoKeyHelper.swift; sourceTree = "<group>"; };
 		4463FEC1282D66C700E7A607 /* CaseCountable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseCountable.swift; sourceTree = "<group>"; };
 		4463FEC3282EB2AE00E7A607 /* PianoKeyHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoKeyHelperTests.swift; sourceTree = "<group>"; };
+		446776372889361400F1C4B6 /* ToRemoveComment.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ToRemoveComment.md; sourceTree = "<group>"; };
 		446AEA2B283D3EB200C2BFCF /* WebMusicSheetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMusicSheetHelper.swift; sourceTree = "<group>"; };
 		446AEA2D283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleDegreesUpdateViewModel.swift; sourceTree = "<group>"; };
 		446AEA2F28411ED300C2BFCF /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
@@ -807,6 +809,7 @@
 			isa = PBXGroup;
 			children = (
 				44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */,
+				446776372889361400F1C4B6 /* ToRemoveComment.md */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -961,6 +964,7 @@
 				441E96ED286590C600261D43 /* InfoPlist.strings in Resources */,
 				441E96FF2865974900261D43 /* MusicScale - English.012.jpeg in Resources */,
 				441E97062865974900261D43 /* MusicScale - English.003.jpeg in Resources */,
+				446776382889361400F1C4B6 /* ToRemoveComment.md in Resources */,
 				440637F7283082BE00875E77 /* SampleScaleList.json in Resources */,
 				44709D89276A37F200BBF6C9 /* web in Resources */,
 				441E97082865974900261D43 /* MusicScale - English.010.jpeg in Resources */,

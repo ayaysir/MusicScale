@@ -169,10 +169,16 @@ struct MusicSheetHelper {
             let finalNotePair = NoteNumberPair(result[0].prefix, result[0].number + 7)
             result += [finalNotePair]
         } else if completeFinalNote && order == .descending {
-            if let lastNotePair = result.last {
-                let toFirstNotePair = NoteNumberPair(lastNotePair.prefix, lastNotePair.number + 7)
-                result.insert(toFirstNotePair, at: 0)
-            }
+            
+            let toFirstNotePair = NoteNumberPair("", 8)
+            result.insert(toFirstNotePair, at: 0)
+            
+            // if let lastNotePair = result.last {
+            //     // UpdateDescendingPlaybackIssues:
+            //     print("toFirstNotePiar: UpdateDescendingPlaybackIssues:", lastNotePair)
+            //     let toFirstNotePair = NoteNumberPair(lastNotePair.prefix, lastNotePair.number + 7)
+            //     result.insert(toFirstNotePair, at: 0)
+            // }
         }
         
         if key == .C && octaveShift == 0 {
@@ -475,7 +481,7 @@ struct MusicSheetHelper {
         
         let leftInteger = numPairToInteger(leftPair)
         let rightInteger = numPairToInteger(rightPair)
-        
+        // print(#function, "UpdateDescendingPlaybackIssues:", leftPair, leftInteger, rightPair, rightInteger)
         if leftInteger <= rightInteger {
             return rightInteger - leftInteger
         } else {
@@ -503,7 +509,7 @@ struct MusicSheetHelper {
          */
         
         let noteNumPairs = degreesToNoteNumberPairs(degrees: degrees, order: order, completeFinalNote: completeFinalNote)
-
+        // print("UpdateDescendingPlaybackIssues: noteNumbPiars:", noteNumPairs, completeFinalNote)
         return noteNumPairs.enumerated().withPreviousAndNext.reduce(into: [Int]()) { partialResult, values in
             let (prev, curr, _) = values
             
@@ -515,7 +521,7 @@ struct MusicSheetHelper {
                 let interval = order == .ascending ?
                 getIntervalOfTwoNumPair(leftPair: prevPair, rightPair: curr.element) :
                 getIntervalOfTwoNumPair(leftPair: curr.element, rightPair: prevPair)
-                
+                // print(#line, "UpdateDescendingPlaybackIssues:", order, getIntervalOfTwoNumPair(leftPair: prevPair, rightPair: curr.element),  getIntervalOfTwoNumPair(leftPair: curr.element, rightPair: prevPair))
                 let lastInteger = partialResult.last!
                 let adjustInterval = order == .ascending ? interval : -interval
                 partialResult.append(lastInteger + adjustInterval)
@@ -546,9 +552,10 @@ struct MusicSheetHelper {
     func getSemitoneToPlaybackNotes(degrees: String, order: DegreesOrder, key: Music.Key, octaveShift: Int = 0) -> [Int] {
         
         let integerNotation = getIntegerNotation(degrees: degrees, order: order, completeFinalNote: true)
-        let startSemitone = order.signum == 1 ? key.playableKey.rawValue : key.playableKey.rawValue + 12
+        // print("UpdateDescendingPlaybackIssues:", degrees, integerNotation)
+        let startSemitone = order == .ascending ? key.playableKey.rawValue : key.playableKey.rawValue + 12
         
-        return integerNotation.map { ($0 + startSemitone) + (octaveShift * 12) }
+        return integerNotation.map { (startSemitone + $0) + (octaveShift * 12) }
     }
     
     /// 미디 재생을 위한 MidiNumber 정보 반환 (by Notes)
