@@ -104,3 +104,7 @@
 "Flat(♭) only" = "내림표(♭)만";
 "My custom" = "커스텀";
 "No internet connection." = "인터넷에 연결되어 있지 않습니다.";
+
+/* 2022-07-22 */
+"There is a possibility of sound delay or silence when setting this patch number due to an error in the soundfont file. Please use a different instrument patch number." = "이 패치 넘버는 사운드폰트 파일의 오류로 인해 설정시 소리의 딜레이 또는 무음의 가능성이 있습니다. 다른 악기 패치 넘버를 이용해 주세요.";
+"Soundfont Error" = "사운드폰트 오류";

@@ -102,3 +102,7 @@
 "Flat(♭) only" = "フラット(♭)のみ";
 "My custom" = "カスタム";
 "No internet connection." = "インターネットに接続されていません。";
+
+/* 2022-07-22 */
+"There is a possibility of sound delay or silence when setting this patch number due to an error in the soundfont file. Please use a different instrument patch number." = "このパッチ番号は、サウンドフォントのエラーのため、セットアップ中に音の遅延や無音の可能性があります。 他の楽器パッチ番号をご利用ください。";
+"Soundfont Error" = "サウンドフォントのエラ";

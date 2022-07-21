@@ -8,7 +8,9 @@
 import Foundation
 
 struct InstrumentInfo: Codable, Hashable {
+    /// one-base
     let number: Int
+    
     let name: String
     let group: String
     

@@ -21,6 +21,9 @@ class InstrumentTableViewController: UITableViewController {
         }
     }
     
+    // 문제있는 악기 번호 목록 (one-base)
+    private let brokenInstNumber = [1, 2, 4, 37, 38, 39]
+    
     var configStore = AppConfigStore.shared
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,11 +59,30 @@ class InstrumentTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InstrumentCell", for: indexPath)
         
+        let instInfo = InstrumentList.instrument(at: indexPath)
         if let label = cell.contentView.subviews[safe: 0] as? UILabel {
-            label.text = InstrumentList.instrument(at: indexPath).tableRowTitle
+            
+            // warn broken instrument
+            if brokenInstNumber.contains(instInfo.number) {
+                cell.accessoryType = .detailButton
+                cell.tintColor = .lightGray
+                
+                label.textColor = .lightGray
+                label.text = instInfo.tableRowTitle + " ⚠️"
+            } else {
+                cell.accessoryType = .none
+                cell.tintColor = nil
+                
+                label.textColor = nil
+                label.text = instInfo.tableRowTitle
+            }
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        simpleAlert(self, message: "There is a possibility of sound delay or silence when setting this patch number due to an error in the soundfont file. Please use a different instrument patch number.".localized(), title: "Soundfont Error".localized(), handler: nil)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -75,7 +97,7 @@ class InstrumentTableViewController: UITableViewController {
             GlobalGenerator.shared.initEngine()
         }
         
-        navigationController?.popViewController(animated: true)
+        // navigationController?.popViewController(animated: true)
     }
     
     private func isBannerContainerSection(_ section: Int) -> Bool {
