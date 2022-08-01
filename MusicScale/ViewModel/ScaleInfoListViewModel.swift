@@ -73,6 +73,7 @@ class ScaleInfoListViewModel {
             
             if alwaysAll || searchCategory == .name {
                 results.append(entity.name?.lowercased().contains(searchText) ?? false)
+                results.append(entity.nameAlias?.lowercased().contains(searchText) ?? false)
             }
             
             if alwaysAll || searchCategory == .comment {
