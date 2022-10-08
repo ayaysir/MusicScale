@@ -185,6 +185,10 @@ class ScaleListTableViewController: UITableViewController {
     // MARK: - Custome Methods
     func searchInit() {
         self.navigationItem.searchController = searchController
+        
+        // iOS 14 이하 버전에서 검색 시 배경 흐려지는거 방지
+        searchController.obscuresBackgroundDuringPresentation = false
+        
         searchController.searchBar.scopeButtonTitles = SearchCategory.allCases.map { $0.textValue }
         searchCategoryList = SearchCategory.allCases
         searchController.searchBar.delegate = self

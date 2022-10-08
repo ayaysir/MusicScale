@@ -1438,7 +1438,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.02.1;
+				MARKETING_VERSION = 1.03.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicScale;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -1474,7 +1474,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.02.1;
+				MARKETING_VERSION = 1.03.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicScale;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

@@ -14,12 +14,15 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.didActivateNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didInterrupted), name: AVAudioSession.interruptionNotification, object: AVAudioSession.sharedInstance())
         
     }
     
-    @objc func didActivated() {
+    @objc func didActivated(_ notification: Notification? = nil) {
+        // AwakeFromBackground: 테스트 완료되면 주석처리
+        simpleAlert(self, message: "didActivated: \(String(describing: notification?.name))")
         
         GlobalConductor.shared.startEngineOnly()
         GlobalGenerator.shared.startEngine()
