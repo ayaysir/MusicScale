@@ -69,7 +69,6 @@ class NoteSequencerConductor: ObservableObject {
     }
     
     func addScaleToSequencer(semitones: [Int], startSemitone start: Int = 60) {
-        
         guard sequencer.tracks.first != nil else {
             print("NoteSequencerConductor: Tracks are not initialized. Place the conductor.start() in the appropriate place.")
             return
@@ -104,6 +103,27 @@ class NoteSequencerConductor: ObservableObject {
         for (index, semitone) in semitones2.enumerated() {
             sequencer.tracks[1].add(noteNumber: MIDINoteNumber(startFrom_2 + semitone), velocity: 90,
                       position: Duration(beats: Double(index)), duration: Duration(beats: 1), channel: MIDIChannel(1))
+        }
+        
+        sequencer.debug()
+        sequencer.setGlobalMIDIOutput(instrument.midiIn)
+        sequencer.setTempo(Double(tempo))
+    }
+    
+    /// 모든 노트 음을 x 초간 연주
+    func addSacleToSequencerForPlayAllNoteOnce(semitones: [Int], startSemitone start: Int = 60) {
+        guard sequencer.tracks.first != nil else {
+            print("NoteSequencerConductor: Tracks are not initialized. Place the conductor.start() in the appropriate place.")
+            return
+        }
+        
+        sequencer.tracks[0].clear()
+        sequencer.tracks[1].clear()
+        
+        for (index, semitone) in semitones.enumerated() {
+            let startPos = 0.15 * Double(index)
+            sequencer.tracks[0].add(noteNumber: MIDINoteNumber(start + semitone), velocity: 90,
+                                    position: Duration(beats: startPos), duration: Duration(beats: 8.0 - startPos), channel: MIDIChannel(1))
         }
         
         sequencer.debug()

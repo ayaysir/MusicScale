@@ -124,6 +124,14 @@ class ScaleInfoViewController: UIViewController {
         hideTabBarWhenLandscape(self)
         updateMultiplierRefelectOrientation()
         redrawPianoViewWhenOrientationChange()
+        
+        // Play Button long press
+        
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(btnPlayLongPressed))
+        // longPressRecognizer.minimumPressDuration = 0.5
+        longPressRecognizer.delaysTouchesBegan = true
+        btnPlayAndStop.addGestureRecognizer(longPressRecognizer)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -219,12 +227,23 @@ class ScaleInfoViewController: UIViewController {
         }
     }
     
-    @IBAction func btnActPlayAndStop(_ sender: UIButton) {
+    @IBAction func btnActPlayAndStop(_ sender: UITapGestureRecognizer) {
         if conductor.sequencer.isPlaying {
             stopSequencer()
             return
         }
         startSequencer()
+    }
+    
+    @objc func btnPlayLongPressed(_ gesture: UILongPressGestureRecognizer) {
+        if conductor.sequencer.isPlaying {
+            return
+        }
+        
+        if gesture.state == .began {
+            Vibration.warning.vibrate()
+            startAllNotesAtSameTime()
+        }
     }
     
     @IBAction func stepActChangeTempo(_ sender: UIStepper) {
@@ -430,6 +449,7 @@ extension ScaleInfoViewController {
         conductor.isPlaying = false
         // btnPlayAndStop.setTitle("Play", for: .normal)
         btnPlayAndStop.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        btnPlayAndStop.backgroundColor = .systemPink
         
         playTimer?.invalidate()
     }
@@ -442,6 +462,19 @@ extension ScaleInfoViewController {
         self.conductor.isPlaying = true
         
         btnPlayAndStop.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+        btnPlayAndStop.backgroundColor = .systemPink
+        playTimer = Timer.scheduledTimer(timeInterval: self.conductor.sequencer.length.seconds, target: self, selector: #selector(stopSequencer), userInfo: nil, repeats: false)
+    }
+    
+    /// 길게 누르면 모든 음을 동시에 재생
+    func startAllNotesAtSameTime() {
+        stopSequencer()
+        let targetSemitones = configStore.degreesOrder == .ascending ? scaleInfoViewModel.playbackSemitoneAscending : scaleInfoViewModel.playbackSemitoneDescending
+        conductor.addSacleToSequencerForPlayAllNoteOnce(semitones: targetSemitones!)
+        self.conductor.isPlaying = true
+        
+        btnPlayAndStop.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+        btnPlayAndStop.backgroundColor = .blue
         playTimer = Timer.scheduledTimer(timeInterval: self.conductor.sequencer.length.seconds, target: self, selector: #selector(stopSequencer), userInfo: nil, repeats: false)
     }
 }

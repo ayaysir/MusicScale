@@ -1254,11 +1254,11 @@
                                         <rect key="frame" x="20" y="186.00000190734863" width="388" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VXz-aW-47C" id="h31-gB-fA4">
-                                            <rect key="frame" x="0.0" y="0.0" width="327.33333333333331" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="330.66666666666669" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Enharmonic Notations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q7p-ED-17V">
-                                                    <rect key="frame" x="20" y="0.0" width="299.33333333333331" height="43.666667938232422"/>
+                                                    <rect key="frame" x="20" y="0.0" width="302.66666666666669" height="43.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>
@@ -3594,8 +3594,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="M8x-He-tZN"/>
-        <segue reference="VsC-uc-p1n"/>
-        <segue reference="8Fa-Oz-VZU"/>
+        <segue reference="6tl-C7-X1w"/>
+        <segue reference="2J2-cR-7Di"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Wake" width="40" height="40"/>
