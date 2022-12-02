@@ -108,3 +108,7 @@
 /* 2022-07-22 */
 "There is a possibility of sound delay or silence when setting this patch number due to an error in the soundfont file. Please use a different instrument patch number." = "이 패치 넘버는 사운드폰트 파일의 오류로 인해 설정시 소리의 딜레이 또는 무음의 가능성이 있습니다. 다른 악기 패치 넘버를 이용해 주세요.";
 "Soundfont Error" = "사운드폰트 오류";
+
+/* 2022-12-03 */
+"Export the currently saved scale informations to a CSV file. CSV files can be opened with spreadsheet apps such as Microsoft Excel, Google Spreadsheet or Apple Numbers." = "현재 저장된 스케일 정보 목록을 CSV 파일로 내보냅니다. CSV 파일은 Microsoft Excel, Google Spreadsheet 또는 Apple Numbers와 같은 스프레드시트 앱에서 열 수 있습니다.";
+"Export to CSV file" = "CSV 파일로 내보내기";

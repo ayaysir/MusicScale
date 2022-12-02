@@ -22,7 +22,7 @@ class MainTabBarController: UITabBarController {
     
     @objc func didActivated(_ notification: Notification? = nil) {
         // AwakeFromBackground: 테스트 완료되면 주석처리
-        simpleAlert(self, message: "didActivated: \(String(describing: notification?.name))")
+        // simpleAlert(self, message: "didActivated: \(String(describing: notification?.name))")
         
         GlobalConductor.shared.startEngineOnly()
         GlobalGenerator.shared.startEngine()

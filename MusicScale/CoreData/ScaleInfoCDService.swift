@@ -55,6 +55,9 @@ struct ScaleInfoCDService {
         entityObject.myPriority = Int16(info.myPriority)
         entityObject.displayOrder = Int16(info.displayOrder)
         
+        entityObject.createdDate = info.createdDate
+        entityObject.modifiedDate = info.modifiedDate
+        
         do {
             // managedContext 내부의 변경사항 저장
             try managedContext.save()
@@ -173,6 +176,11 @@ struct ScaleInfoCDService {
         }
     }
     
+    /// 목록을 ScaleInfo 구조체로 내보내기
+    func getScaleInfoStructs() throws -> [ScaleInfo] {
+        return try readCoreData().compactMap { toScaleInfoStruct(from: $0) }
+    }
+    
     func toScaleInfoStruct(from entity: ScaleInfoEntity) -> ScaleInfo? {
         
         let defaultPriority = Int(entity.defaultPriority)
@@ -203,8 +211,8 @@ struct ScaleInfoCDService {
             isDivBy12Tet: isDivBy12Tet,
             displayOrder: displayOrder,
             myPriority: myPriority,
-            createdDate: Date(),
-            modifiedDate: Date(),
+            createdDate: entity.createdDate ?? Date(),
+            modifiedDate: entity.modifiedDate ?? Date(),
             groupName: ""
         )
     }

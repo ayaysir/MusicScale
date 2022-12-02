@@ -195,7 +195,7 @@
 "JaS-Rt-rM2.text" = "자세히";
 
 /* Class = "UITableViewSection"; headerTitle = "Enharmonic Notations"; ObjectID = "K35-uE-q4X"; */
-"K35-uE-q4X.headerTitle" = "이명동음 표기";
+"K35-uE-q4X.headerTitle" = "앱 설정";
 
 /* Class = "UILabel"; text = "Download Count"; ObjectID = "K3E-8w-0zV"; */
 "K3E-8w-0zV.text" = "다운로드수";
@@ -349,7 +349,7 @@
 "aI7-W9-8Co.title" = "Flashcards Prototype";
 
 /* Class = "UITableViewSection"; headerTitle = "MIDI Instruments"; ObjectID = "awR-Q4-mel"; */
-"awR-Q4-mel.headerTitle" = "MIDI 악기";
+"awR-Q4-mel.headerTitle" = "MIDI 설정";
 
 /* Class = "UITableViewSection"; headerTitle = "Degrees"; ObjectID = "ayI-wy-sCl"; */
 "ayI-wy-sCl.headerTitle" = "도수";

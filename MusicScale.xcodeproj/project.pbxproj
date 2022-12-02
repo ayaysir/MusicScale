@@ -133,6 +133,10 @@
 		44872B1C2863673C00C20E06 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44872B1E2863673C00C20E06 /* Localizable.strings */; };
 		44872B2228638C4000C20E06 /* Scale transpose example.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 44872B2128638C3F00C20E06 /* Scale transpose example.pdf */; };
 		4494B4622938DCB90009548C /* Vibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B4612938DCB90009548C /* Vibration.swift */; };
+		4494B465293A45440009548C /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 4494B464293A45440009548C /* CodableCSV */; };
+		4494B467293A4ADE0009548C /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B466293A4ADE0009548C /* FileUtil.swift */; };
+		4494B469293A4D850009548C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B468293A4D850009548C /* DateUtil.swift */; };
+		4494B46B293A512D0009548C /* PopActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46A293A512D0009548C /* PopActivityView.swift */; };
 		449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF426282EC008008273CA /* ScaleInfoViewController.swift */; };
 		44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A28283293680067184E /* ScaleInfoViewModel.swift */; };
 		44A09A2C2832A3C90067184E /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44A09A2B2832A3C90067184E /* AudioKit */; };
@@ -319,6 +323,9 @@
 		44872B2128638C3F00C20E06 /* Scale transpose example.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Scale transpose example.pdf"; sourceTree = "<group>"; };
 		44872B2328638C6E00C20E06 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		4494B4612938DCB90009548C /* Vibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibration.swift; sourceTree = "<group>"; };
+		4494B466293A4ADE0009548C /* FileUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
+		4494B468293A4D850009548C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
+		4494B46A293A512D0009548C /* PopActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopActivityView.swift; sourceTree = "<group>"; };
 		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
 		44A09A28283293680067184E /* ScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewModel.swift; sourceTree = "<group>"; };
 		44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
@@ -355,6 +362,7 @@
 			files = (
 				446100BE28451B370033BCE9 /* PanModal in Frameworks */,
 				4455D1E9285CF19F00FB344E /* HGCircularSlider in Frameworks */,
+				4494B465293A45440009548C /* CodableCSV in Frameworks */,
 				44A09A2C2832A3C90067184E /* AudioKit in Frameworks */,
 				4BE14DBCD05F5882BF98D64F /* Pods_MusicScale.framework in Frameworks */,
 				44A09A2F2832A40A0067184E /* SoundpipeAudioKit in Frameworks */,
@@ -429,6 +437,8 @@
 				44537F67285623200061CADF /* SwiftSpinner.swift */,
 				441E96DF286480AD00261D43 /* Reachability.swift */,
 				4494B4612938DCB90009548C /* Vibration.swift */,
+				4494B466293A4ADE0009548C /* FileUtil.swift */,
+				4494B468293A4D850009548C /* DateUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -545,6 +555,7 @@
 			children = (
 				445FA4CB284F547D0008D621 /* InitViewControllerFromStoryboard.swift */,
 				440161C2285E348800B6D4FB /* OrientationUtil.swift */,
+				4494B46A293A512D0009548C /* PopActivityView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -851,6 +862,7 @@
 				446100BD28451B370033BCE9 /* PanModal */,
 				4455D1E8285CF19F00FB344E /* HGCircularSlider */,
 				44872B0B2860963C00C20E06 /* IQKeyboardManagerSwift */,
+				4494B464293A45440009548C /* CodableCSV */,
 			);
 			productName = MusicScale;
 			productReference = 44709D52276A334F00BBF6C9 /* MusicScale.app */;
@@ -935,6 +947,7 @@
 				446100BC28451B370033BCE9 /* XCRemoteSwiftPackageReference "PanModal" */,
 				4455D1E7285CF19F00FB344E /* XCRemoteSwiftPackageReference "HGCircularSlider" */,
 				44872B0A2860963C00C20E06 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				4494B463293A45440009548C /* XCRemoteSwiftPackageReference "CodableCSV" */,
 			);
 			productRefGroup = 44709D53276A334F00BBF6C9 /* Products */;
 			projectDirPath = "";
@@ -1118,6 +1131,7 @@
 				445FA4C3284E49120008D621 /* MatchKeysViewController.swift in Sources */,
 				4444C47A286B661D00F5E058 /* MainTabBarController.swift in Sources */,
 				44537F6E2857975C0061CADF /* UIApplication+.swift in Sources */,
+				4494B469293A4D850009548C /* DateUtil.swift in Sources */,
 				44709D60276A334F00BBF6C9 /* MusicScale.xcdatamodeld in Sources */,
 				4494B4622938DCB90009548C /* Vibration.swift in Sources */,
 				4455D1E6285CDBC900FB344E /* UIBarButtonItem+.swift in Sources */,
@@ -1135,6 +1149,7 @@
 				440637EB282FF6D900875E77 /* ScaleInfoCDService.swift in Sources */,
 				44A09A7D283808C90067184E /* ScaleInfoVCConfigStore.swift in Sources */,
 				440161C3285E348800B6D4FB /* OrientationUtil.swift in Sources */,
+				4494B467293A4ADE0009548C /* FileUtil.swift in Sources */,
 				440637F428307E0000875E77 /* ScaleListTableViewController.swift in Sources */,
 				4475CB572831501600B9D204 /* Sequence+.swift in Sources */,
 				440637F2283003DE00875E77 /* ScaleInfoListViewModel.swift in Sources */,
@@ -1187,6 +1202,7 @@
 				4455D1CC285A2BD400FB344E /* SettingTableViewController.swift in Sources */,
 				4455D1CE285A2CB800FB344E /* MIDIInstrumentList.swift in Sources */,
 				44E0ACF1285F0BC6008BBB82 /* NSLayoutConstraint+.swift in Sources */,
+				4494B46B293A512D0009548C /* PopActivityView.swift in Sources */,
 				4404B049285FA3C70072CCFD /* StatsViewController.swift in Sources */,
 				443A0C6328428F3100641BC0 /* Between.swift in Sources */,
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,
@@ -1654,6 +1670,14 @@
 				kind = branch;
 			};
 		};
+		4494B463293A45440009548C /* XCRemoteSwiftPackageReference "CodableCSV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dehesa/CodableCSV";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.7;
+			};
+		};
 		44A09A2A2832A3C90067184E /* XCRemoteSwiftPackageReference "AudioKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AudioKit/AudioKit.git";
@@ -1687,6 +1711,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 44872B0A2860963C00C20E06 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		4494B464293A45440009548C /* CodableCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4494B463293A45440009548C /* XCRemoteSwiftPackageReference "CodableCSV" */;
+			productName = CodableCSV;
 		};
 		44A09A2B2832A3C90067184E /* AudioKit */ = {
 			isa = XCSwiftPackageProductDependency;

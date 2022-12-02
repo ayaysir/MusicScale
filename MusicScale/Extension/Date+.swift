@@ -47,4 +47,23 @@ extension Date {
             : "\(secondsFromNow) second" + (secondsFromNow > 1 ? "s" : "") + " ago" }
         return ""
     }
+    
+    // https://stackoverflow.com/questions/53356392/how-to-get-day-and-month-from-date-type-swift-4
+    
+    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
+        return calendar.dateComponents(Set(components), from: self)
+    }
+    
+    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
+        return calendar.component(component, from: self)
+    }
+    
+    /// 연월일만 뽑기 - 예) 20201203
+    var ymdText: String {
+        let year = get(.year)
+        let month = get(.month) <= 9 ? "0\(get(.month))" : "\(get(.month))"
+        let day = get(.day) <= 9 ? "0\(get(.day))" : "\(get(.day))"
+        
+        return "\(year)\(month)\(day)"
+    }
 }

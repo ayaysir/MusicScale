@@ -25,19 +25,22 @@ struct ScaleInfo: Codable {
     var createdDate, modifiedDate: Date
     var groupName: String
 
-    enum CodingKeys: String, CodingKey {
-        case id, name
+    enum CodingKeys: String, CodingKey, CaseIterable {
+        // CSV 출력될 순서대로 재정렬
+        case id
+        case displayOrder = "display_order"
+        case name
         case nameAlias = "name_alias"
         case degreesAscending = "degrees_ascending"
         case degreesDescending = "degrees_descending"
         case defaultPriority = "default_priority"
-        case comment, links
-        case isDivBy12Tet = "is_div_by_12tet"
-        case displayOrder = "display_order"
         case myPriority = "my_priority"
+        case comment
+        case links
+        case isDivBy12Tet = "is_div_by_12tet"
+        case groupName = "group_name"
         case createdDate = "created_date"
         case modifiedDate = "modified_date"
-        case groupName = "group_name"
     }
     
     

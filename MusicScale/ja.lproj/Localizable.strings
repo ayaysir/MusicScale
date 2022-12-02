@@ -106,3 +106,7 @@
 /* 2022-07-22 */
 "There is a possibility of sound delay or silence when setting this patch number due to an error in the soundfont file. Please use a different instrument patch number." = "このパッチ番号は、サウンドフォントのエラーのため、セットアップ中に音の遅延や無音の可能性があります。 他の楽器パッチ番号をご利用ください。";
 "Soundfont Error" = "サウンドフォントのエラ";
+
+/* 2022-12-03 */
+"Export the currently saved scale informations to a CSV file. CSV files can be opened with spreadsheet apps such as Microsoft Excel, Google Spreadsheet or Apple Numbers." = "現在保存されているスケール情報のリストをCSVファイルにエクスポートします。 CSVファイルは、Microsoft Excel、Google Spreadsheet、Apple Numbersなどのスプレッドシートアプリを開くことができます。";
+"Export to CSV file" = "CSVファイルにエクスポート";
