@@ -137,6 +137,7 @@
 		4494B467293A4ADE0009548C /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B466293A4ADE0009548C /* FileUtil.swift */; };
 		4494B469293A4D850009548C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B468293A4D850009548C /* DateUtil.swift */; };
 		4494B46B293A512D0009548C /* PopActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46A293A512D0009548C /* PopActivityView.swift */; };
+		4494B46D293A596E0009548C /* QuizStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46C293A596E0009548C /* QuizStat.swift */; };
 		449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF426282EC008008273CA /* ScaleInfoViewController.swift */; };
 		44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A28283293680067184E /* ScaleInfoViewModel.swift */; };
 		44A09A2C2832A3C90067184E /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44A09A2B2832A3C90067184E /* AudioKit */; };
@@ -326,6 +327,7 @@
 		4494B466293A4ADE0009548C /* FileUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
 		4494B468293A4D850009548C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		4494B46A293A512D0009548C /* PopActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopActivityView.swift; sourceTree = "<group>"; };
+		4494B46C293A596E0009548C /* QuizStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStat.swift; sourceTree = "<group>"; };
 		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
 		44A09A28283293680067184E /* ScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewModel.swift; sourceTree = "<group>"; };
 		44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 			children = (
 				4417252A284B8AC50003CDC7 /* QuizConfig.swift */,
 				4417252C284B8FC60003CDC7 /* QuizQuestion.swift */,
+				4494B46C293A596E0009548C /* QuizStat.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -1199,6 +1202,7 @@
 				4455D1DD285B337500FB344E /* EnharmonicSelectTableViewController.swift in Sources */,
 				4463FEAD282C0E6600E7A607 /* Note.swift in Sources */,
 				446AEA2E283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift in Sources */,
+				4494B46D293A596E0009548C /* QuizStat.swift in Sources */,
 				4455D1CC285A2BD400FB344E /* SettingTableViewController.swift in Sources */,
 				4455D1CE285A2CB800FB344E /* MIDIInstrumentList.swift in Sources */,
 				44E0ACF1285F0BC6008BBB82 /* NSLayoutConstraint+.swift in Sources */,

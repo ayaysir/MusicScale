@@ -218,7 +218,13 @@
                             <constraint firstItem="dHP-0v-sV6" firstAttribute="leading" secondItem="9Sv-lR-dZQ" secondAttribute="leading" constant="20" id="dTF-At-8RL"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Quiz History Log (β)" id="ogC-iR-vp6"/>
+                    <navigationItem key="navigationItem" title="Quiz History Log (β)" id="ogC-iR-vp6">
+                        <barButtonItem key="rightBarButtonItem" title="Export to CSV" id="HQn-hZ-vQ1">
+                            <connections>
+                                <action selector="barBtnActExportToCSV:" destination="myW-XE-4tv" id="zkI-HY-kRH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="txvQuizLog" destination="dHP-0v-sV6" id="lSj-Aj-rWZ"/>
                     </connections>

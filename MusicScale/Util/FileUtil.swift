@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CodableCSV
 
 struct FileUtil {
     
@@ -32,5 +33,21 @@ struct FileUtil {
             print("\(error)")
             return nil
         }
+    }
+    
+    static func createTempCSVFile<T: Codable>(fileName: String, codableList list: [T], headers: [String]) throws -> URL {
+        
+        let fm = FileManager.default
+        let cacheURL = fm.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("\(fileName).csv")
+        
+        let encoder = CSVEncoder() {
+            $0.headers = headers
+            $0.dateStrategy = .iso8601
+        }
+        
+        let data = try encoder.encode(list, into: Data.self)
+        try data.write(to: cacheURL)
+        
+        return cacheURL
     }
 }

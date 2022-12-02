@@ -96,6 +96,30 @@ struct QuizStatsCDService {
         
         try managedContext.save()
     }
+    
+    func toQuizStat(from entity: QuizStatEntity) -> QuizStat? {
+        guard let scaleName = entity.scaleName,
+              let key = entity.key,
+              let order = entity.order,
+              let typeOfQuestion = entity.typeOfQuestion,
+              let solveDate = entity.solveDate,
+              let studyStatus = entity.studyStatus else {
+            return nil
+        }
+        
+        return QuizStat(scaleName: scaleName,
+                        key: key,
+                        order: order,
+                        typeOfQuestion: typeOfQuestion,
+                        isAnsweredCorrectly: entity.isAnsweredCorrectly,
+                        solveDate: solveDate,
+                        elapsedSeconds: entity.elapsedSeconds,
+                        studyStatus: studyStatus)
+    }
+    
+    func getQuizStats() throws -> [QuizStat] {
+        return try readEntityList().compactMap { toQuizStat(from: $0) }
+    }
 }
 
 extension QuizStatEntity {

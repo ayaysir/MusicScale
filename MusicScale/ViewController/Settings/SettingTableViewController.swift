@@ -122,20 +122,15 @@ extension SettingTableViewController {
     func exportToCSV() {
         do {
             let list = try ScaleInfoCDService.shared.getScaleInfoStructs()
+            let fileName = "UltimateScale - \(Date().ymdText) - ScaleInfo"
+            let headers = ScaleInfo.CodingKeys.allCases.map { $0.rawValue }
             
-            let fm = FileManager.default
-            let cacheURL = fm.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("UltimateScale - \(Date().ymdText) Exported.csv")
+            let cacheURL = try FileUtil.createTempCSVFile(fileName: fileName, codableList: list, headers: headers)
             
-            let encoder = CSVEncoder() {
-                $0.headers = ScaleInfo.CodingKeys.allCases.map { $0.rawValue }
-                $0.dateStrategy = .iso8601
-            }
-            let data = try encoder.encode(list, into: Data.self)
-            try data.write(to: cacheURL)
-
             popActivityView(self, shareList: [cacheURL as NSURL])
         } catch {
-            print(#function, "error:", error)
+            simpleAlert(self, message: "CSV Export: Error occurred: \(error.localizedDescription)")
+            print("CSV Export: Error occurred:", error)
         }
     }
 }
