@@ -29,14 +29,15 @@ class StatsViewController: UIViewController {
         }
     }
     
-    @IBAction func barBtnActExportToCSV(_ sender: Any) {
+    @IBAction func barBtnActExportToCSV(_ sender: UIBarButtonItem) {
         do {
             let list = try QuizStatsCDService.shared.getQuizStats()
             let fileName = "UltimateScale - \(Date().ymdText) - QuizStats"
             let headers = QuizStat.CodingKeys.allCases.map { $0.rawValue }
             
             let url = try FileUtil.createTempCSVFile(fileName: fileName, codableList: list, headers: headers)
-            popActivityView(self, shareList: [url as NSURL])
+            
+            showActivityVC(self, activityItems: [url], sourceRect: CGRect(x: view.frame.width * 0.8, y: 0, width: view.frame.width * 0.2, height: self.topBarHeight))
         } catch {
             simpleAlert(self, message: "CSV Export: Error occurred: \(error.localizedDescription)")
             print("CSV Export: Error occurred:", error)

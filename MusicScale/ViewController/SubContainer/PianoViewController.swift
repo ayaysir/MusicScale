@@ -35,6 +35,7 @@ class PianoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setPiano()
+        view.backgroundColor = .systemBackground
     }
     
     func setPiano() {

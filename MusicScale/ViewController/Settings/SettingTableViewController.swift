@@ -125,9 +125,9 @@ extension SettingTableViewController {
             let fileName = "UltimateScale - \(Date().ymdText) - ScaleInfo"
             let headers = ScaleInfo.CodingKeys.allCases.map { $0.rawValue }
             
-            let cacheURL = try FileUtil.createTempCSVFile(fileName: fileName, codableList: list, headers: headers)
-            
-            popActivityView(self, shareList: [cacheURL as NSURL])
+            let url = try FileUtil.createTempCSVFile(fileName: fileName, codableList: list, headers: headers)
+            let cell = tableView.cellForRow(at: exportToCsvCell)
+            showActivityVC(self, activityItems: [url], sourceRect: cell!.frame)
         } catch {
             simpleAlert(self, message: "CSV Export: Error occurred: \(error.localizedDescription)")
             print("CSV Export: Error occurred:", error)

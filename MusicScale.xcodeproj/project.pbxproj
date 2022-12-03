@@ -136,7 +136,7 @@
 		4494B465293A45440009548C /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 4494B464293A45440009548C /* CodableCSV */; };
 		4494B467293A4ADE0009548C /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B466293A4ADE0009548C /* FileUtil.swift */; };
 		4494B469293A4D850009548C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B468293A4D850009548C /* DateUtil.swift */; };
-		4494B46B293A512D0009548C /* PopActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46A293A512D0009548C /* PopActivityView.swift */; };
+		4494B46B293A512D0009548C /* ShowActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46A293A512D0009548C /* ShowActivityView.swift */; };
 		4494B46D293A596E0009548C /* QuizStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46C293A596E0009548C /* QuizStat.swift */; };
 		449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF426282EC008008273CA /* ScaleInfoViewController.swift */; };
 		44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A28283293680067184E /* ScaleInfoViewModel.swift */; };
@@ -326,7 +326,7 @@
 		4494B4612938DCB90009548C /* Vibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibration.swift; sourceTree = "<group>"; };
 		4494B466293A4ADE0009548C /* FileUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
 		4494B468293A4D850009548C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
-		4494B46A293A512D0009548C /* PopActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopActivityView.swift; sourceTree = "<group>"; };
+		4494B46A293A512D0009548C /* ShowActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowActivityView.swift; sourceTree = "<group>"; };
 		4494B46C293A596E0009548C /* QuizStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStat.swift; sourceTree = "<group>"; };
 		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
 		44A09A28283293680067184E /* ScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewModel.swift; sourceTree = "<group>"; };
@@ -558,7 +558,7 @@
 			children = (
 				445FA4CB284F547D0008D621 /* InitViewControllerFromStoryboard.swift */,
 				440161C2285E348800B6D4FB /* OrientationUtil.swift */,
-				4494B46A293A512D0009548C /* PopActivityView.swift */,
+				4494B46A293A512D0009548C /* ShowActivityView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1206,7 +1206,7 @@
 				4455D1CC285A2BD400FB344E /* SettingTableViewController.swift in Sources */,
 				4455D1CE285A2CB800FB344E /* MIDIInstrumentList.swift in Sources */,
 				44E0ACF1285F0BC6008BBB82 /* NSLayoutConstraint+.swift in Sources */,
-				4494B46B293A512D0009548C /* PopActivityView.swift in Sources */,
+				4494B46B293A512D0009548C /* ShowActivityView.swift in Sources */,
 				4404B049285FA3C70072CCFD /* StatsViewController.swift in Sources */,
 				443A0C6328428F3100641BC0 /* Between.swift in Sources */,
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,
