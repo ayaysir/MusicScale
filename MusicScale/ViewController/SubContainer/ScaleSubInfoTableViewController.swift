@@ -16,10 +16,13 @@ class ScaleSubInfoTableViewController: UITableViewController {
     
     let MIN_CELL_SIZE: CGFloat = 30.0
     
-    // == SECTION & INDEXPATH ==
-    let cellAliasIndexPath = IndexPath(row: 1, section: 1)
-    let cellCommentIndexPath = IndexPath(row: 0, section: 2)
-    let cellAdBannerIndexPath = IndexPath(row: 0, section: 0)
+    // ======== SECTION & INDEXPATH ========
+    private let cellAliasIndexPath = IndexPath(row: 1, section: 1)
+    private let cellCommentIndexPath = IndexPath(row: 0, section: 2)
+    
+    private let cellAdBannerIndexPath = IndexPath(row: 1, section: 0)
+    private let cellComparisonIndexPath = IndexPath(row: 0, section: 0)
+    // ======================================
 
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblNameAlias: UILabel!
@@ -37,6 +40,9 @@ class ScaleSubInfoTableViewController: UITableViewController {
     var priorityDropDown = DropDown()
     let starRatingVM = StarRatingViewModel()
     
+    // 한 개만 보여주는 모드인지, 여러 개 보여주는 모드인지?
+    var isMultipleInfoMode = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +52,9 @@ class ScaleSubInfoTableViewController: UITableViewController {
         DispatchQueue.main.async {
             // 광고
             setupBannerAds(self, container: self.viewBannerAdsContainer)
+            
+            // init isMultipleMode
+            
             
             self.txvComment.layoutIfNeeded()
             self.tableView.reloadData()
@@ -73,6 +82,10 @@ class ScaleSubInfoTableViewController: UITableViewController {
             }
             
             return UITableView.automaticDimension
+        case cellComparisonIndexPath:
+            if !isMultipleInfoMode {
+                return 0
+            }
         default:
             break
         }
@@ -81,10 +94,13 @@ class ScaleSubInfoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         switch section {
         case cellAdBannerIndexPath.section:
-            if !AdsManager.SHOW_AD {
+            if !AdsManager.SHOW_AD && !isMultipleInfoMode {
                 return 0
+            } else if !AdsManager.SHOW_AD && isMultipleInfoMode {
+                return 1
             }
         default:
             break
@@ -96,7 +112,7 @@ class ScaleSubInfoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case cellAdBannerIndexPath.section:
-            if !AdsManager.SHOW_AD {
+            if !AdsManager.SHOW_AD && !isMultipleInfoMode {
                 return 0.1
             }
         default:
@@ -109,7 +125,7 @@ class ScaleSubInfoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         case cellAdBannerIndexPath.section:
-            if !AdsManager.SHOW_AD {
+            if !AdsManager.SHOW_AD && !isMultipleInfoMode {
                 return 0.1
             }
         default:

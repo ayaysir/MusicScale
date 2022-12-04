@@ -46,7 +46,14 @@ class ScaleInfoViewController: UIViewController {
     var infoVC: ScaleSubInfoTableViewController?
     var webSheetVC: ScoreWebViewController?
     var pianoVC: PianoViewController?
+    var updateVC: ScaleInfoUpdateTableViewController?
     
+    /*
+     비교 모드(Comparison Mode)
+     1. 비교모드가 아닌 경우 빈 배열, 한 개의 ScaleInfoVM
+     2. 비교모드인 경우 배열에 여러 개의 ScaleInfoVM 넣어놓고
+        segmentControl 바뀔 때마다 scaleInfoVM 변수 교체 -> re-render entire VC
+     */
     var scaleInfoViewModel: ScaleInfoViewModel!
     
     let transposeDropDown = DropDown()
@@ -91,47 +98,34 @@ class ScaleInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 최초 실행 후 한 번만 하면 되는 작업들
+        
         TrackingTransparencyPermissionRequest()
         
-        originialCnstSheetPropoHeight = cnstSheetPropoHeight
-        originalCnstPianoHeight = cnstPianoHeight
+        backupConstraintsConstant()
         
         initTransposeDropDown()
         initEnharmonicDropDown()
         
+        addCornerRadiusToButtons()
+        scaleUpAllSteppers()
+        
+        hideTabBarWhenLandscape(self)
+        
+        updateMultiplierRefelectOrientation()
+        redrawPianoViewWhenOrientationChange()
+        
+        addLongpressGestureForPlaySameTime()
+        
+        // 뷰모델 변경되면 다시 해야되는 작업들
+        
+        // VC 타이틀 변경
         self.title = scaleInfoViewModel.name
-        btnPlayAndStop.setTitle("", for: .normal)
-        
-        // conductor.start()
-        
-        // style
-        btnPlayAndStop.layer.cornerRadius = btnPlayAndStop.frame.width * 0.5
-        btnEnharmonic.layer.cornerRadius = 5
-        btnTranspose.layer.cornerRadius = 5
-        
-        let stepperScale: CGFloat = 0.7
-        viewPlayConfig.subviews.forEach { view in
-            
-            if type(of: view) == UIStepper.self {
-                view.transform = CGAffineTransform(scaleX: stepperScale, y: stepperScale)
-            }
-        }
         
         // loadFromConfigStore()는 prepare에서 실행
         
         // 피아노 이용 가능 키 표시 - 최초 페이지 열었을 때
         setAvailableKeyAndOctaveShift()
-        hideTabBarWhenLandscape(self)
-        updateMultiplierRefelectOrientation()
-        redrawPianoViewWhenOrientationChange()
-        
-        // Play Button long press
-        
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(btnPlayLongPressed))
-        // longPressRecognizer.minimumPressDuration = 0.5
-        longPressRecognizer.delaysTouchesBegan = true
-        btnPlayAndStop.addGestureRecognizer(longPressRecognizer)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -196,6 +190,33 @@ class ScaleInfoViewController: UIViewController {
         } else {
             setContainersMultiplier(sheetMultipler: originialCnstSheetPropoHeight.multiplier, pianoMultiplier: originalCnstPianoHeight.multiplier)
         }
+    }
+    
+    private func scaleUpAllSteppers() {
+        let stepperScale: CGFloat = 0.7
+        viewPlayConfig.subviews.forEach { view in
+            if type(of: view) == UIStepper.self {
+                view.transform = CGAffineTransform(scaleX: stepperScale, y: stepperScale)
+            }
+        }
+    }
+    
+    private func addCornerRadiusToButtons() {
+        btnPlayAndStop.layer.cornerRadius = btnPlayAndStop.frame.width * 0.5
+        btnEnharmonic.layer.cornerRadius = 5
+        btnTranspose.layer.cornerRadius = 5
+    }
+    
+    private func backupConstraintsConstant() {
+        originialCnstSheetPropoHeight = cnstSheetPropoHeight
+        originalCnstPianoHeight = cnstPianoHeight
+    }
+    
+    private func addLongpressGestureForPlaySameTime() {
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(btnPlayLongPressed))
+        // longPressRecognizer.minimumPressDuration = 0.5
+        longPressRecognizer.delaysTouchesBegan = true
+        btnPlayAndStop.addGestureRecognizer(longPressRecognizer)
     }
     
     // MARK: - Outlet Action
@@ -276,37 +297,77 @@ class ScaleInfoViewController: UIViewController {
         switch segue.identifier {
         case "InfoSegue":
             infoVC = segue.destination as? ScaleSubInfoTableViewController
-            infoVC?.scaleInfoViewModel = scaleInfoViewModel
-            infoVC?.delegate = self
+            renderInfoSegue()
         case "WebSheetSegue":
             webSheetVC = segue.destination as? ScoreWebViewController
-            // 최초 정보 로딩
-            loadFromConfigStore()
-            webSheetVC?.scaleInfoViewModel = scaleInfoViewModel
-            webSheetVC?.delegate = self
-            webSheetVC?.staffWidth = staffWidth
+            renderWebSheetSegue()
         case "PianoSegue":
             pianoVC = segue.destination as? PianoViewController
-            view.layoutIfNeeded()
-            
-            pianoVC?.parentContainerView = containerViewPiano
+            renderPianoSegue()
         case "UpdateScaleInfoSegue":
-            print("UpdateScaleInfoSegue")
-            let updateVC = segue.destination as! ScaleInfoUpdateTableViewController
-            updateVC.infoViewModel = scaleInfoViewModel
-            updateVC.mode = .update
-            updateVC.updateDelegate = self
+            updateVC = segue.destination as? ScaleInfoUpdateTableViewController
+            renderUpdateSegue()
         default:
             break
         }
     }
+    
+    // MARK: - render each subVCs
+    
+    private func renderInfoSegue() {
+        guard let infoVC = infoVC else {
+            return
+        }
+
+        infoVC.scaleInfoViewModel = scaleInfoViewModel
+        infoVC.delegate = self
+    }
+    
+    private func renderWebSheetSegue() {
+        guard let webSheetVC = webSheetVC else {
+            return
+        }
+        
+        loadFromConfigStore()   // 최초 정보 로딩
+        webSheetVC.scaleInfoViewModel = scaleInfoViewModel
+        webSheetVC.delegate = self
+        webSheetVC.staffWidth = staffWidth
+    }
+    
+    private func renderPianoSegue() {
+        guard let pianoVC = pianoVC else {
+            return
+        }
+
+        view.layoutIfNeeded()
+        pianoVC.parentContainerView = containerViewPiano
+    }
+    
+    private func renderUpdateSegue() {
+        guard let updateVC = updateVC else {
+            return
+        }
+
+        updateVC.infoViewModel = scaleInfoViewModel
+        updateVC.mode = .update
+        updateVC.updateDelegate = self
+    }
+    
+    // MARK: - refresh VC for Multiple Comparison mode
+    
+    func reloadInfoViews() {
+        renderInfoSegue()
+        renderWebSheetSegue()
+        renderPianoSegue()
+        renderUpdateSegue()
+    }
 }
 
-// MARK: - Custom methods
 extension ScaleInfoViewController {
     
+    // MARK: - Custom methods
+    
     private func loadFromConfigStore() {
-        
         // tempo
         let tempo = configStore.tempo
         changeTempo(tempo: tempo, initChange: true)
@@ -409,7 +470,6 @@ extension ScaleInfoViewController {
             reinjectAbcjsText()
             configStore.enharmonicMode = mode
         }
-
     }
     
     func transpose(noteStr: String, initChange: Bool = false) {
