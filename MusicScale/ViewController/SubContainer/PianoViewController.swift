@@ -23,7 +23,6 @@ class PianoViewController: UIViewController {
     var mode: Mode = .stricted
     var isKeyPressEnabled: Bool = true
     
-    // private var generator: MIDISoundGenerator!
     private var generator: MIDISoundGenerator = GlobalGenerator.shared
     
     var currentPlayableKey: Music.PlayableKey = .C
@@ -55,38 +54,29 @@ class PianoViewController: UIViewController {
             pianoLongPressRecognizer.minimumPressDuration = 0.0
             viewPiano.addGestureRecognizer(pianoLongPressRecognizer)
             
+            // let pianoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handlePianoTap))
+            // viewPiano.addGestureRecognizer(pianoTapRecognizer)
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // Decide instPreset
-        // generator = MIDISoundGenerator()
         generator.startEngine()
-        
-        // NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.didActivateNotification, object: nil)
-        // NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        // NotificationCenter.default.removeObserver(self, name: UIScene.didActivateNotification, object: nil)
-        // NotificationCenter.default.removeObserver(self, name: UIScene.willDeactivateNotification, object: nil)
-        // generator.stopEngine()
         generator.pauseEngine()
     }
     
-    // @objc func didActivated() {
-    //     generator.startEngine()
-    // }
-    //
-    // @objc func willResignActive() {
-    //     generator.pauseEngine()
+    // @objc func handlePianoTap(gesture: UITapGestureRecognizer) {
+    //     guard isKeyPressEnabled else { return }
+    //     let location = gesture.location(in: gesture.view)
+    //     if let keyInfo = viewPiano.viewModel.getKeyInfoBy(touchLocation: location) {
+    //         startKeyPress(keyInfo, isLongPress: false)
+    //     }
     // }
     
     @objc func handlePianoLongPress(gesture: UILongPressGestureRecognizer) {
-        
-        // let semitoneStart = 60 + PianoKeyHelper.adjustKeySemitone(key: currentPlayableKey)
         let location = gesture.location(in: gesture.view)
-        // let viewModel = viewPiano.viewModel
         
         switch gesture.state {
         case .possible:
@@ -94,7 +84,6 @@ class PianoViewController: UIViewController {
             break
         case .began:
             guard isKeyPressEnabled else { return }
-            
             if let keyInfo = viewPiano.viewModel.getKeyInfoBy(touchLocation: location) {
                 startKeyPress(keyInfo)
             }
@@ -117,7 +106,7 @@ class PianoViewController: UIViewController {
     
     // MARK: - Start or stop key press
     
-    func startKeyPress(_ keyInfo: PianoKeyInfo) {
+    func startKeyPress(_ keyInfo: PianoKeyInfo, isLongPress: Bool = true) {
         let semitoneStart = 60 + PianoKeyHelper.adjustKeySemitone(key: currentPlayableKey)
         
         if mode == .stricted {
@@ -158,4 +147,3 @@ extension PianoViewController {
         viewPiano.setNeedsDisplay()
     }
 }
-

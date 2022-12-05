@@ -27,7 +27,6 @@
 		441738D22848ED9100A7D692 /* QuizIntroTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441738D12848ED9100A7D692 /* QuizIntroTableViewController.swift */; };
 		441E96D928638D9700261D43 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44872B2328638C6E00C20E06 /* PDFViewController.swift */; };
 		441E96E0286480AD00261D43 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E96DF286480AD00261D43 /* Reachability.swift */; };
-		441E96E22864A76E00261D43 /* MusicScale - ko.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 441E96E12864A76E00261D43 /* MusicScale - ko.pdf */; };
 		441E96E62864AD5600261D43 /* MusicScale - en.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 441E96E52864AD5600261D43 /* MusicScale - en.pdf */; };
 		441E96E82864B17800261D43 /* MusicScale Licenses.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 441E96E72864B17800261D43 /* MusicScale Licenses.pdf */; };
 		441E96EA2864F1CF00261D43 /* SampleScaleList-20220624.json in Resources */ = {isa = PBXBuildFile; fileRef = 441E96E92864F1CF00261D43 /* SampleScaleList-20220624.json */; };
@@ -141,6 +140,7 @@
 		4494B46F293CF85A0009548C /* ScaleComparisonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46E293CF85A0009548C /* ScaleComparisonViewModel.swift */; };
 		4494B471293D075E0009548C /* UISegmentControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B470293D075E0009548C /* UISegmentControl+.swift */; };
 		4494B473293E18B80009548C /* UIUserInterfaceStyle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B472293E18B80009548C /* UIUserInterfaceStyle+.swift */; };
+		4494B477293E41440009548C /* MusicScale - ko.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4494B475293E41430009548C /* MusicScale - ko.pdf */; };
 		449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF426282EC008008273CA /* ScaleInfoViewController.swift */; };
 		44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A28283293680067184E /* ScaleInfoViewModel.swift */; };
 		44A09A2C2832A3C90067184E /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44A09A2B2832A3C90067184E /* AudioKit */; };
@@ -213,7 +213,6 @@
 		4417252C284B8FC60003CDC7 /* QuizQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestion.swift; sourceTree = "<group>"; };
 		441738D12848ED9100A7D692 /* QuizIntroTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizIntroTableViewController.swift; sourceTree = "<group>"; };
 		441E96DF286480AD00261D43 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		441E96E12864A76E00261D43 /* MusicScale - ko.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "MusicScale - ko.pdf"; sourceTree = "<group>"; };
 		441E96E52864AD5600261D43 /* MusicScale - en.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "MusicScale - en.pdf"; sourceTree = "<group>"; };
 		441E96E72864B17800261D43 /* MusicScale Licenses.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "MusicScale Licenses.pdf"; sourceTree = "<group>"; };
 		441E96E92864F1CF00261D43 /* SampleScaleList-20220624.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "SampleScaleList-20220624.json"; sourceTree = "<group>"; };
@@ -334,6 +333,7 @@
 		4494B46E293CF85A0009548C /* ScaleComparisonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleComparisonViewModel.swift; sourceTree = "<group>"; };
 		4494B470293D075E0009548C /* UISegmentControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentControl+.swift"; sourceTree = "<group>"; };
 		4494B472293E18B80009548C /* UIUserInterfaceStyle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIUserInterfaceStyle+.swift"; sourceTree = "<group>"; };
+		4494B475293E41430009548C /* MusicScale - ko.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "MusicScale - ko.pdf"; sourceTree = "<group>"; };
 		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
 		44A09A28283293680067184E /* ScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewModel.swift; sourceTree = "<group>"; };
 		44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
@@ -424,7 +424,7 @@
 			children = (
 				441E96F1286596F300261D43 /* Manual JPEG */,
 				4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */,
-				441E96E12864A76E00261D43 /* MusicScale - ko.pdf */,
+				4494B475293E41430009548C /* MusicScale - ko.pdf */,
 				441E96E72864B17800261D43 /* MusicScale Licenses.pdf */,
 				441E96E52864AD5600261D43 /* MusicScale - en.pdf */,
 				4455D1D7285B31E400FB344E /* Musiqwik-rvL8.ttf */,
@@ -996,7 +996,6 @@
 				440637F7283082BE00875E77 /* SampleScaleList.json in Resources */,
 				44709D89276A37F200BBF6C9 /* web in Resources */,
 				441E97082865974900261D43 /* MusicScale - English.010.jpeg in Resources */,
-				441E96E22864A76E00261D43 /* MusicScale - ko.pdf in Resources */,
 				441E97042865974900261D43 /* MusicScale - English.008.jpeg in Resources */,
 				441E96EA2864F1CF00261D43 /* SampleScaleList-20220624.json in Resources */,
 				44872B2228638C4000C20E06 /* Scale transpose example.pdf in Resources */,
@@ -1008,6 +1007,7 @@
 				441E96E82864B17800261D43 /* MusicScale Licenses.pdf in Resources */,
 				441E97092865974900261D43 /* MusicScale - English.005.jpeg in Resources */,
 				441E970A2865974900261D43 /* MusicScale - English.002.jpeg in Resources */,
+				4494B477293E41440009548C /* MusicScale - ko.pdf in Resources */,
 				441E96E62864AD5600261D43 /* MusicScale - en.pdf in Resources */,
 				441E97032865974900261D43 /* MusicScale - English.001.jpeg in Resources */,
 			);
@@ -1474,7 +1474,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.03.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicScale;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -1510,7 +1510,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.03.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicScale;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
