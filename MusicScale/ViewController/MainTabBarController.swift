@@ -9,9 +9,13 @@ import UIKit
 import AVFAudio
 
 class MainTabBarController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Appearance
+        let currentTheme = UIUserInterfaceStyle(rawValue: AppConfigStore.shared.appAppearance) ?? .unspecified
+        currentTheme.overrideAllWindow()
 
         NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.didActivateNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.willEnterForegroundNotification, object: nil)

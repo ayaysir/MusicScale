@@ -28,6 +28,19 @@
     g.abcjs-tempo {
       display: none;
     } 
+
+    @media (prefers-color-scheme: dark) {
+      * {
+        color-scheme: light dark;
+        filter: invert(0%);
+        -webkit-filter: invert(0%)
+      }
+
+      .abcjs-highlight {
+        fill: orange;
+      }
+    }
+
   </style>
 </head>
 

@@ -111,3 +111,10 @@
 "Export the currently saved scale informations to a CSV file. CSV files can be opened with spreadsheet apps such as Microsoft Excel, Google Spreadsheet or Apple Numbers." = "現在保存されているスケール情報のリストをCSVファイルにエクスポートします。 CSVファイルは、Microsoft Excel、Google Spreadsheet、Apple Numbersなどのスプレッドシートアプリを開くことができます。";
 "Export to CSV file" = "CSVファイルにエクスポート";
 "The number of comparison scales cannot exceed 8." = "比較スケールの数は8個を超えることはできません。";
+
+"Appearance" = "モード";
+"Select Appearance Theme" = "アプリのカラーモードを選択してください。";
+"Use device theme" = "デバイスのモードを使用する";
+"Light theme" = "ライトモード";
+"Dark theme" = "ダークモード";
+

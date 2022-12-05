@@ -140,6 +140,7 @@
 		4494B46D293A596E0009548C /* QuizStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46C293A596E0009548C /* QuizStat.swift */; };
 		4494B46F293CF85A0009548C /* ScaleComparisonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46E293CF85A0009548C /* ScaleComparisonViewModel.swift */; };
 		4494B471293D075E0009548C /* UISegmentControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B470293D075E0009548C /* UISegmentControl+.swift */; };
+		4494B473293E18B80009548C /* UIUserInterfaceStyle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B472293E18B80009548C /* UIUserInterfaceStyle+.swift */; };
 		449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF426282EC008008273CA /* ScaleInfoViewController.swift */; };
 		44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A28283293680067184E /* ScaleInfoViewModel.swift */; };
 		44A09A2C2832A3C90067184E /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44A09A2B2832A3C90067184E /* AudioKit */; };
@@ -332,6 +333,7 @@
 		4494B46C293A596E0009548C /* QuizStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStat.swift; sourceTree = "<group>"; };
 		4494B46E293CF85A0009548C /* ScaleComparisonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleComparisonViewModel.swift; sourceTree = "<group>"; };
 		4494B470293D075E0009548C /* UISegmentControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentControl+.swift"; sourceTree = "<group>"; };
+		4494B472293E18B80009548C /* UIUserInterfaceStyle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIUserInterfaceStyle+.swift"; sourceTree = "<group>"; };
 		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
 		44A09A28283293680067184E /* ScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewModel.swift; sourceTree = "<group>"; };
 		44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
@@ -665,6 +667,7 @@
 				44E0ACF0285F0BC6008BBB82 /* NSLayoutConstraint+.swift */,
 				44E0ACF2285F3FCC008BBB82 /* UIDevice+.swift */,
 				44872B102860B21D00C20E06 /* NSObject+.swift */,
+				4494B472293E18B80009548C /* UIUserInterfaceStyle+.swift */,
 				4494B470293D075E0009548C /* UISegmentControl+.swift */,
 			);
 			path = Extension;
@@ -1229,6 +1232,7 @@
 				44872B112860B21D00C20E06 /* NSObject+.swift in Sources */,
 				446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */,
 				44B4AB8428453286008C8AFD /* SortFilterConfigStore.swift in Sources */,
+				4494B473293E18B80009548C /* UIUserInterfaceStyle+.swift in Sources */,
 				4455D1D4285A44BE00FB344E /* MIDICommon.swift in Sources */,
 				4475CB532830B52700B9D204 /* String+.swift in Sources */,
 				446AEA2C283D3EB200C2BFCF /* WebMusicSheetHelper.swift in Sources */,

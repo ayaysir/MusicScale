@@ -11,6 +11,7 @@ extension String {
     static let cfgAppCustomScale = "APP_cfgAppCustomScale"
     static let cfgAppPlaybackInstrument = "APP_cfgAppPlaybackInstrument"
     static let cfgAppPianoInstrument = "APP_cfgAppPianoInstrument"
+    static let cfgAppAppearance = "APP_cfgAppAppearance"
 }
 
 struct AppConfigStore: UserDefaultsConfigurator {
@@ -32,6 +33,8 @@ struct AppConfigStore: UserDefaultsConfigurator {
             NoteStrPair("^", "A"),
             NoteStrPair("", "B"),
         ]
+        
+        appAppearance = 0
     }
     
     
@@ -113,4 +116,8 @@ struct AppConfigStore: UserDefaultsConfigurator {
         return availableEnharmonicList[number]
     }
     
+    var appAppearance: Int {
+        get { return store.integer(forKey: .cfgAppAppearance) }
+        set { store.set(newValue, forKey: .cfgAppAppearance) }
+    }
 }

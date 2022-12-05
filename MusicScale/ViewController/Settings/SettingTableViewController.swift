@@ -12,13 +12,15 @@ import CodableCSV
 class SettingTableViewController: UITableViewController {
     
     @IBOutlet weak var viewBannerContainer: UIView!
+    @IBOutlet weak var lblCurrentAppearance: UILabel!
     
     // ========== 구조 변경할 경우 반드시 업데이트 ==========
     private let playbackInstCell = IndexPath(row: 0, section: 0)
     private let pianoInstCell = IndexPath(row: 1, section: 0)
     
-    private let setEnhamonicCell = IndexPath(row: 0, section: 1)
-    private let exportToCsvCell = IndexPath(row: 1, section: 1)
+    private let setAppearanceCellIndexPath = IndexPath(row: 0, section: 1)
+    private let setEnhamonicCell = IndexPath(row: 1, section: 1)
+    private let exportToCsvCell = IndexPath(row: 2, section: 1)
     
     private let githubLinkCell = IndexPath(row: 3, section: 2)
     private let sendMailCell = IndexPath(row: 2, section: 2)
@@ -26,10 +28,13 @@ class SettingTableViewController: UITableViewController {
     private let SECTION_BANNER = 4
     // ==============================================
     
+    private let config = UserDefaults.standard
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // NotificationCenter.default.removeObserver(self, name: .networkIsOffline, object: nil)
-        // NotificationCenter.default.addObserver(self, selector: #selector(a), name: .networkIsOffline, object: nil)
+        
+        let currentAppearance = UIUserInterfaceStyle(rawValue: AppConfigStore.shared.appAppearance) ?? .unspecified
+        changeAppearanceText(currentAppearance)
     }
     
     override func viewDidLoad() {
@@ -55,12 +60,13 @@ class SettingTableViewController: UITableViewController {
         case sendMailCell:
             launchEmail()
         case exportToCsvCell:
-            
             self.exportToCSV()
             // simpleYesAndNo(self,
             //                message: "If you click 'Yes', the Export to CSV file window will appear.".localized(),
             //                title: "Export to CSV file".localized()) { _ in
             // }
+        case setAppearanceCellIndexPath:
+            showAppearanceActionSheet()
         default:
             break
         }
@@ -118,6 +124,33 @@ class SettingTableViewController: UITableViewController {
 }
 
 extension SettingTableViewController {
+    
+    func changeAppearanceText(_ appearance: UIUserInterfaceStyle) {
+        lblCurrentAppearance.text = appearance.menuText
+    }
+    
+    func showAppearanceActionSheet() {
+        let alert = UIAlertController(title: "Select Appearance Theme".localized(), message: nil, preferredStyle: .actionSheet)
+        let themes: [UIUserInterfaceStyle] = [.unspecified, .light, .dark]
+        
+        themes.forEach { theme in
+            let action = UIAlertAction(title: theme.menuText, style: .default) { _ in
+                theme.overrideAllWindow()
+                AppConfigStore.shared.appAppearance = theme.rawValue
+                self.changeAppearanceText(theme)
+            }
+            
+            alert.addAction(action)
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel)
+        alert.addAction(cancel)
+        
+        alert.popoverPresentationController?.sourceView = self.view
+        alert.popoverPresentationController?.sourceRect = tableView.cellForRow(at: setAppearanceCellIndexPath)!.frame
+        
+        self.present(alert, animated: true)
+    }
     
     func exportToCSV() {
         do {
