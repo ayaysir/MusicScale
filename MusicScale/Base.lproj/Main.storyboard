@@ -464,10 +464,15 @@
                                     <segue destination="dom-77-63F" kind="show" identifier="UpdateScaleInfoSegue" id="6tl-C7-X1w"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Compare" id="vbb-eD-Be3"/>
+                            <barButtonItem title="Compare" id="vbb-eD-Be3">
+                                <connections>
+                                    <action selector="btnActCompare:" destination="LFu-VY-SiC" id="wGg-pg-cVW"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="barBtnUpdate" destination="Bsq-Ow-kds" id="Zs1-YZ-VRO"/>
                         <outlet property="btnEnharmonic" destination="LbI-JK-IQB" id="XiJ-lg-p8J"/>
                         <outlet property="btnPlayAndStop" destination="VAm-Vf-UU4" id="22H-E3-zGC"/>
                         <outlet property="btnTranspose" destination="972-3C-Ond" id="1Lg-0B-uKU"/>
@@ -888,6 +893,9 @@
                                                         <segment title="First"/>
                                                         <segment title="Second"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="segActChangeScale:" destination="moQ-G5-aJS" eventType="valueChanged" id="cmC-8K-YpE"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -1115,6 +1123,7 @@
                         <outlet property="lblNameAlias" destination="kWf-40-E1F" id="cVe-4m-MXF"/>
                         <outlet property="lblPattern" destination="AJs-Tl-Yfh" id="jF6-BW-Qqm"/>
                         <outlet property="lblPriority" destination="yQE-sL-izW" id="7Wm-Ht-zbe"/>
+                        <outlet property="segCompareList" destination="qrh-jg-Dvk" id="7Dk-Ew-LWq"/>
                         <outlet property="tblCellNameAlias" destination="ah7-ho-JhU" id="qYA-f9-i8j"/>
                         <outlet property="txvComment" destination="XEK-LT-H7l" id="UK8-z5-hGv"/>
                         <outlet property="viewBannerAdsContainer" destination="P2g-fz-Xih" id="Fsa-5h-dFl"/>
@@ -1286,11 +1295,11 @@
                                         <rect key="frame" x="20" y="186.00000190734863" width="388" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VXz-aW-47C" id="h31-gB-fA4">
-                                            <rect key="frame" x="0.0" y="0.0" width="327.33333333333331" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="330.66666666666669" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Enharmonic Notations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q7p-ED-17V">
-                                                    <rect key="frame" x="20" y="0.0" width="299.33333333333331" height="43.666667938232422"/>
+                                                    <rect key="frame" x="20" y="0.0" width="302.66666666666669" height="43.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>
@@ -1307,11 +1316,11 @@
                                         <rect key="frame" x="20" y="229.66666984558105" width="388" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hEH-4f-6TQ" id="sfT-Ou-I4L">
-                                            <rect key="frame" x="0.0" y="0.0" width="327.33333333333331" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="330.66666666666669" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Export to CSV file" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="162-0R-Fjx">
-                                                    <rect key="frame" x="20" y="0.0" width="299.33333333333331" height="43.666667938232422"/>
+                                                    <rect key="frame" x="20" y="0.0" width="302.66666666666669" height="43.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>

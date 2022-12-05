@@ -67,27 +67,11 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
         // https://stackoverflow.com/questions/38768966
         super.viewWillAppear(animated)
         generator.startEngine()
-        
-        // generator = MIDISoundGenerator()
-        //
-        // NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.didActivateNotification, object: nil)
-        // NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        // NotificationCenter.default.removeObserver(self, name: UIScene.didActivateNotification, object: nil)
-        // NotificationCenter.default.removeObserver(self, name: UIScene.willDeactivateNotification, object: nil)
-        // generator.stopEngine()
         generator.pauseEngine()
     }
-    
-    // @objc func didActivated() {
-    //     generator.startEngine()
-    // }
-    //
-    // @objc func willResignActive() {
-    //     generator.pauseEngine()
-    // }
     
     override func viewDidLoad() {
         super.viewDidLoad()

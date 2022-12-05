@@ -16,6 +16,10 @@ protocol ScaleListUploadDelegate: AnyObject {
     func didUploadScaleSelected(_ controller: ScaleListTableViewController, infoViewModel: ScaleInfoViewModel)
 }
 
+protocol ScaleListCompareDelegate: AnyObject {
+    func didCompareListSubmitted(_ controller: ScaleListTableViewController, updatedVM: ScaleComparisonViewModel)
+}
+
 class ScaleListTableViewController: UITableViewController {
     
     @IBOutlet weak var barBtnEdit: UIBarButtonItem!
@@ -24,11 +28,15 @@ class ScaleListTableViewController: UITableViewController {
     let scaleListViewModel = ScaleInfoListViewModel()
     var quizViewModel: QuizViewModel!
     
+    // 비교 모드에서 배열 목록
+    var comparisonViewModel: ScaleComparisonViewModel!
+    
     weak var quizDelegate: ScaleListQuizDelegate?
     weak var uploadDelegate: ScaleListUploadDelegate?
+    weak var compareDelegate: ScaleListCompareDelegate?
     
     enum ListMode {
-        case main, quizSelect, uploadSelect
+        case main, quizSelect, uploadSelect, compareSelect
     }
     var mode: ListMode = .main
     
@@ -60,19 +68,27 @@ class ScaleListTableViewController: UITableViewController {
         case .main:
             break
         case .quizSelect:
-            barBtnEdit.isEnabled = false
-            barBtnEdit.title = ""
-            navigationItem.leftItemsSupplementBackButton = true
-            
+            hideBarBtnEdit()
             changeSelectAllButtonTitle()
         case .uploadSelect:
-            barBtnEdit.isEnabled = false
-            barBtnEdit.title = ""
-            navigationItem.leftItemsSupplementBackButton = true
-            barBtnAdd.isEnabled = false
-            barBtnAdd.title = ""
-            navigationItem.largeTitleDisplayMode = .never
+            hideBarBtnEdit()
+            hideBarBtnAdd()
+        case .compareSelect:
+            hideBarBtnEdit()
+            hideBarBtnAdd()
         }
+    }
+    
+    private func hideBarBtnEdit() {
+        barBtnEdit.isEnabled = false
+        barBtnEdit.title = ""
+        navigationItem.leftItemsSupplementBackButton = true
+    }
+    
+    private func hideBarBtnAdd() {
+        barBtnAdd.isEnabled = false
+        barBtnAdd.title = ""
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     @objc func getNewEntityFromArchive(_ notification: Notification) {
@@ -102,11 +118,12 @@ class ScaleListTableViewController: UITableViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         if let quizDelegate = quizDelegate {
             quizDelegate.didQuizListSubmitted(self, newCount: quizViewModel.idListCount)
             quizViewModel.saveScaleListToConfigStore()
             navigationController?.popViewController(animated: true)
+        } else if let compareDelegate = compareDelegate {
+            compareDelegate.didCompareListSubmitted(self, updatedVM: comparisonViewModel)
         }
     }
     
@@ -129,6 +146,7 @@ class ScaleListTableViewController: UITableViewController {
         }
     }
     
+    // QuizSelect 모드에서는 이름이 Select(Deselect) All 로 바뀜
     @IBAction func barBtnActAdd(_ sender: UIBarButtonItem) {
         switch mode {
         case .main:
@@ -142,6 +160,8 @@ class ScaleListTableViewController: UITableViewController {
                 selectAllCell()
             }
         case .uploadSelect:
+            break
+        case .compareSelect:
             break
         }
     }
@@ -212,7 +232,8 @@ class ScaleListTableViewController: UITableViewController {
     }
     
     func toggleCheckmark(of cell: ScaleListCell, isCheckmark: Bool) {
-        let backgroundColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 0.2)
+        // let backgroundColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 0.2)
+        let backgroundColor: UIColor = .systemGray5
         
         cell.accessoryType = isCheckmark ? .checkmark : .none
         cell.cosmosViewMyPriority.isHidden = isCheckmark
@@ -237,7 +258,6 @@ class ScaleListTableViewController: UITableViewController {
             } else {
                 return  scaleListViewModel.getScaleInfoViewModelOf(index: indexPath.row)
             }
-            
         }()
         
         guard let infoViewModel = infoViewModel else {
@@ -247,10 +267,18 @@ class ScaleListTableViewController: UITableViewController {
         cell.configure(infoViewModel: infoViewModel)
         cell.cosmosViewMyPriority.isHidden = tableView.isEditing ? true : false
         
+        // 특정 모드에서 여러 개 선택하고 체크마크 표시
         if mode == .quizSelect {
             cell.selectionStyle = .none
             let containsId = quizViewModel.containsId(infoViewModel.id)
             toggleCheckmark(of: cell, isCheckmark: containsId)
+        } else if mode == .compareSelect {
+            cell.selectionStyle = .none
+            let isFirstVM = comparisonViewModel.isFirstVM(viewModel: infoViewModel)
+            let isChecked = isFirstVM || comparisonViewModel.contain(viewModel: infoViewModel)
+            toggleCheckmark(of: cell, isCheckmark: isChecked)
+            
+            cell.backgroundColor = isFirstVM ? .systemOrange : cell.backgroundColor
         }
         
         return cell
@@ -321,6 +349,30 @@ class ScaleListTableViewController: UITableViewController {
                 uploadDelegate.didUploadScaleSelected(self, infoViewModel: currentViewModel)
             }
             navigationController?.popViewController(animated: true)
+        case .compareSelect:
+            let cell = tableView.cellForRow(at: indexPath) as! ScaleListCell
+            let isSelected = cell.accessoryType == .checkmark
+            
+            if comparisonViewModel.isFirstVM(viewModel: currentViewModel) {
+                print("first VM: \(currentViewModel.name)")
+                return
+            }
+            
+            if isSelected {
+                comparisonViewModel.remove(viewModel: currentViewModel)
+                toggleCheckmark(of: cell, isCheckmark: false)
+            } else {
+                // print(comparisonViewModel.totalSegmentVMs.count)
+                guard comparisonViewModel.totalSegmentVMs.count <= 7 else {
+                    simpleAlert(self, message: "The number of comparison scales cannot exceed 8.".localized())
+                    return
+                }
+                
+                comparisonViewModel.append(viewModel: currentViewModel)
+                toggleCheckmark(of: cell, isCheckmark: true)
+            }
+            // print(comparisonViewModel.totalSegmentVMs.count)
+            // comparisonViewModel.totalSegmentVMs.forEach { print($0.name) }
         }
     }
     

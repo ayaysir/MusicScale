@@ -90,7 +90,7 @@ class AdsManager: NSObject, GADBannerViewDelegate {
     
     static var shared = AdsManager()
     
-    static var PRODUCT_MODE: Bool = true
+    static var PRODUCT_MODE: Bool = false
     static var SHOW_AD: Bool {
         // ... //
         return PRODUCT_MODE && true

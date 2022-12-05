@@ -34,6 +34,8 @@ class ScaleInfoViewController: UIViewController {
     
     @IBOutlet weak var viewPlayConfig: UIView!
     
+    @IBOutlet weak var barBtnUpdate: UIBarButtonItem!
+    
     @IBOutlet weak var cnstSheetPropoHeight: NSLayoutConstraint!
     @IBOutlet weak var cnstPianoHeight: NSLayoutConstraint!
     private var originialCnstSheetPropoHeight: NSLayoutConstraint!
@@ -46,7 +48,6 @@ class ScaleInfoViewController: UIViewController {
     var infoVC: ScaleSubInfoTableViewController?
     var webSheetVC: ScoreWebViewController?
     var pianoVC: PianoViewController?
-    var updateVC: ScaleInfoUpdateTableViewController?
     
     /*
      비교 모드(Comparison Mode)
@@ -55,6 +56,7 @@ class ScaleInfoViewController: UIViewController {
         segmentControl 바뀔 때마다 scaleInfoVM 변수 교체 -> re-render entire VC
      */
     var scaleInfoViewModel: ScaleInfoViewModel!
+    var comparisonViewModel: ScaleComparisonViewModel?
     
     let transposeDropDown = DropDown()
     let enharmonicDropDown = DropDown()
@@ -290,6 +292,23 @@ class ScaleInfoViewController: UIViewController {
         redrawPianoViewWhenOrientationChange()
     }
     
+    @IBAction func btnActCompare(_ sender: Any) {
+        let scaleListVC = initVCFromStoryboard(storyboardID: .ScaleListTableViewController) as! ScaleListTableViewController
+        
+        scaleListVC.mode = .compareSelect
+        if comparisonViewModel == nil {
+            comparisonViewModel = ScaleComparisonViewModel(firstScaleInfoVM: scaleInfoViewModel)
+            barBtnUpdate.isEnabled = false
+            barBtnUpdate.title = nil
+        }
+        
+        scaleListVC.comparisonViewModel = comparisonViewModel
+        scaleListVC.compareDelegate = self
+        
+
+        navigationController?.pushViewController(scaleListVC, animated: true)
+    }
+    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -305,8 +324,10 @@ class ScaleInfoViewController: UIViewController {
             pianoVC = segue.destination as? PianoViewController
             renderPianoSegue()
         case "UpdateScaleInfoSegue":
-            updateVC = segue.destination as? ScaleInfoUpdateTableViewController
-            renderUpdateSegue()
+            let updateVC = segue.destination as! ScaleInfoUpdateTableViewController
+            updateVC.infoViewModel = scaleInfoViewModel
+            updateVC.mode = .update
+            updateVC.updateDelegate = self
         default:
             break
         }
@@ -342,24 +363,23 @@ class ScaleInfoViewController: UIViewController {
         view.layoutIfNeeded()
         pianoVC.parentContainerView = containerViewPiano
     }
-    
-    private func renderUpdateSegue() {
-        guard let updateVC = updateVC else {
-            return
-        }
-
-        updateVC.infoViewModel = scaleInfoViewModel
-        updateVC.mode = .update
-        updateVC.updateDelegate = self
-    }
-    
     // MARK: - refresh VC for Multiple Comparison mode
     
     func reloadInfoViews() {
+        // VC 타이틀 변경
+        self.title = scaleInfoViewModel.name
+        
+        // 피아노 이용 가능 키 표시 - 최초 페이지 열었을 때
+        setAvailableKeyAndOctaveShift()
+        
         renderInfoSegue()
+        // isUpdate: 별명 필드와 코멘트 필드의 셀 높이를 변경하는 역할
+        infoVC?.refreshViewInfo(isUpdated: true)
+        
         renderWebSheetSegue()
+        webSheetVC?.renderAbjcsText(needReload: true)
+        
         renderPianoSegue()
-        renderUpdateSegue()
     }
 }
 
@@ -570,10 +590,36 @@ extension ScaleInfoViewController: ScaleInfoUpdateTVCDelegate {
 // MARK: - ScaleSubInfoTVCDelegate
 extension ScaleInfoViewController: ScaleSubInfoTVCDelegate {
     
+    func didCompareScaleChange(_ controller: ScaleSubInfoTableViewController, index: Int) {
+        guard let comparisonViewModel = comparisonViewModel else { return }
+        scaleInfoViewModel = comparisonViewModel.totalSegmentVMs[index]
+        reloadInfoViews()
+        stopSequencer()
+    }
+    
     func didMyPriorityUpdated(_ controller: ScaleSubInfoTableViewController, viewModel: ScaleInfoViewModel) {
         self.scaleInfoViewModel = viewModel
         // List TableView에 변경사항 반영
         delegate?.didInfoUpdated(self, indexPath: selectedIndexPath)
+    }
+}
+
+// MARK: - ScaleListCompareDelegate
+extension ScaleInfoViewController: ScaleListCompareDelegate {
+    
+    func didCompareListSubmitted(_ controller: ScaleListTableViewController, updatedVM: ScaleComparisonViewModel) {
+        // print(#function)
+        // updatedVM.printTotalSegmentVmsName()
+        comparisonViewModel = updatedVM
+        infoVC?.comparisonViewModel = comparisonViewModel
+        
+        if !updatedVM.isComparisonAllowed && barBtnUpdate.title == nil {
+            barBtnUpdate.title = "Update".localized()
+            barBtnUpdate.isEnabled = true
+        }
+        
+        scaleInfoViewModel = updatedVM.firstScaleInfoVM
+        reloadInfoViews()
     }
 }
 

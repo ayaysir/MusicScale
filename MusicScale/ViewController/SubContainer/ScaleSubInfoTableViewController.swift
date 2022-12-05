@@ -10,6 +10,7 @@ import DropDown
 
 protocol ScaleSubInfoTVCDelegate: AnyObject {
     func didMyPriorityUpdated(_ controller: ScaleSubInfoTableViewController, viewModel: ScaleInfoViewModel)
+    func didCompareScaleChange(_ controller: ScaleSubInfoTableViewController, index: Int)
 }
 
 class ScaleSubInfoTableViewController: UITableViewController {
@@ -33,15 +34,21 @@ class ScaleSubInfoTableViewController: UITableViewController {
     @IBOutlet weak var tblCellNameAlias: UITableViewCell!
     @IBOutlet weak var lblDegreesAsc: UILabel!
     @IBOutlet weak var viewBannerAdsContainer: UIView!
+    @IBOutlet weak var segCompareList: UISegmentedControl!
     
     weak var delegate: ScaleSubInfoTVCDelegate?
     
     var scaleInfoViewModel: ScaleInfoViewModel!
+    
     var priorityDropDown = DropDown()
     let starRatingVM = StarRatingViewModel()
     
     // 한 개만 보여주는 모드인지, 여러 개 보여주는 모드인지?
-    var isMultipleInfoMode = false
+    var comparisonViewModel: ScaleComparisonViewModel? {
+        didSet {
+            changeSegmentListForComparison()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,13 +60,17 @@ class ScaleSubInfoTableViewController: UITableViewController {
             // 광고
             setupBannerAds(self, container: self.viewBannerAdsContainer)
             
-            // init isMultipleMode
-            
-            
             self.txvComment.layoutIfNeeded()
             self.tableView.reloadData()
         }
     }
+    
+    // MARK: - @IBActions
+    
+    @IBAction func segActChangeScale(_ sender: UISegmentedControl) {
+        delegate?.didCompareScaleChange(self, index: sender.selectedSegmentIndex)
+    }
+    
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -83,7 +94,7 @@ class ScaleSubInfoTableViewController: UITableViewController {
             
             return UITableView.automaticDimension
         case cellComparisonIndexPath:
-            if !isMultipleInfoMode {
+            if !isMultipleInfoMode() {
                 return 0
             }
         default:
@@ -97,9 +108,9 @@ class ScaleSubInfoTableViewController: UITableViewController {
         
         switch section {
         case cellAdBannerIndexPath.section:
-            if !AdsManager.SHOW_AD && !isMultipleInfoMode {
+            if !AdsManager.SHOW_AD && !isMultipleInfoMode() {
                 return 0
-            } else if !AdsManager.SHOW_AD && isMultipleInfoMode {
+            } else if !AdsManager.SHOW_AD && isMultipleInfoMode() {
                 return 1
             }
         default:
@@ -112,7 +123,7 @@ class ScaleSubInfoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case cellAdBannerIndexPath.section:
-            if !AdsManager.SHOW_AD && !isMultipleInfoMode {
+            if !AdsManager.SHOW_AD && !isMultipleInfoMode() {
                 return 0.1
             }
         default:
@@ -125,7 +136,7 @@ class ScaleSubInfoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         case cellAdBannerIndexPath.section:
-            if !AdsManager.SHOW_AD && !isMultipleInfoMode {
+            if !AdsManager.SHOW_AD && !isMultipleInfoMode() {
                 return 0.1
             }
         default:
@@ -146,6 +157,25 @@ class ScaleSubInfoTableViewController: UITableViewController {
 
 // MARK: - Custom Methods
 extension ScaleSubInfoTableViewController {
+    
+    func isMultipleInfoMode() -> Bool {
+        guard let comparisonViewModel = comparisonViewModel else {
+            return false
+        }
+        
+        return comparisonViewModel.isComparisonAllowed
+    }
+    
+    func changeSegmentListForComparison() {
+        guard let comparisonViewModel = comparisonViewModel else {
+            return
+        }
+        
+        segCompareList.replaceSegments(segments: comparisonViewModel.totalSegmentVMsName)
+        segCompareList.selectedSegmentIndex = 0
+        
+        tableView.reloadData()
+    }
     
     func initDropDownOnPriorityLabel() {
         

@@ -48,6 +48,11 @@ class ScoreWebViewController: UIViewController {
         super.viewDidLoad()
         loadWebSheetPage()
     }
+    
+    func renderAbjcsText(needReload: Bool = false) {
+        let abcjsText = ScaleInfoVCConfigStore.shared.degreesOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending
+        injectAbcjsText(from: abcjsText, needReload: needReload, staffWidth: staffWidth)
+    }
 }
 
 extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, ScoreWebInjection {
@@ -94,8 +99,9 @@ extension ScoreWebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMe
         webView.loadFileURL(url, allowingReadAccessTo: url)
         webView.scrollView.isScrollEnabled = false
         
-        let abcjsText = ScaleInfoVCConfigStore.shared.degreesOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending
-        injectAbcjsText(from: abcjsText, needReload: false, staffWidth: staffWidth)
+        // let abcjsText = ScaleInfoVCConfigStore.shared.degreesOrder == .ascending ? scaleInfoViewModel.abcjsTextAscending : scaleInfoViewModel.abcjsTextDescending
+        // injectAbcjsText(from: abcjsText, needReload: false, staffWidth: staffWidth)
+        renderAbjcsText()
         
         // 자바스크립트 -> 네이티브 앱 연결
         // 브리지 등록

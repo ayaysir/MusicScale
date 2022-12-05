@@ -138,6 +138,8 @@
 		4494B469293A4D850009548C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B468293A4D850009548C /* DateUtil.swift */; };
 		4494B46B293A512D0009548C /* ShowActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46A293A512D0009548C /* ShowActivityView.swift */; };
 		4494B46D293A596E0009548C /* QuizStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46C293A596E0009548C /* QuizStat.swift */; };
+		4494B46F293CF85A0009548C /* ScaleComparisonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46E293CF85A0009548C /* ScaleComparisonViewModel.swift */; };
+		4494B471293D075E0009548C /* UISegmentControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B470293D075E0009548C /* UISegmentControl+.swift */; };
 		449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF426282EC008008273CA /* ScaleInfoViewController.swift */; };
 		44A09A29283293680067184E /* ScaleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A28283293680067184E /* ScaleInfoViewModel.swift */; };
 		44A09A2C2832A3C90067184E /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44A09A2B2832A3C90067184E /* AudioKit */; };
@@ -328,6 +330,8 @@
 		4494B468293A4D850009548C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		4494B46A293A512D0009548C /* ShowActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowActivityView.swift; sourceTree = "<group>"; };
 		4494B46C293A596E0009548C /* QuizStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStat.swift; sourceTree = "<group>"; };
+		4494B46E293CF85A0009548C /* ScaleComparisonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleComparisonViewModel.swift; sourceTree = "<group>"; };
+		4494B470293D075E0009548C /* UISegmentControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentControl+.swift"; sourceTree = "<group>"; };
 		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
 		44A09A28283293680067184E /* ScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewModel.swift; sourceTree = "<group>"; };
 		44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
@@ -604,6 +608,7 @@
 				44A09A28283293680067184E /* ScaleInfoViewModel.swift */,
 				446AEA2D283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift */,
 				44537F6B285651EA0061CADF /* StarRatingViewModel.swift */,
+				4494B46E293CF85A0009548C /* ScaleComparisonViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -660,6 +665,7 @@
 				44E0ACF0285F0BC6008BBB82 /* NSLayoutConstraint+.swift */,
 				44E0ACF2285F3FCC008BBB82 /* UIDevice+.swift */,
 				44872B102860B21D00C20E06 /* NSObject+.swift */,
+				4494B470293D075E0009548C /* UISegmentControl+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1169,6 +1175,7 @@
 				4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */,
 				443A0C652843E99B00641BC0 /* SimpleAlert.swift in Sources */,
 				44709D56276A334F00BBF6C9 /* AppDelegate.swift in Sources */,
+				4494B471293D075E0009548C /* UISegmentControl+.swift in Sources */,
 				44E7A07528467692005C7909 /* SearchCategory.swift in Sources */,
 				44B70F3B2848F1A90068495A /* QuizSelectKeyTableViewController.swift in Sources */,
 				44ABE108285619F60022B4FB /* PostListViewModel.swift in Sources */,
@@ -1216,6 +1223,7 @@
 				44872B152862328400C20E06 /* Localization.swift in Sources */,
 				4455D1E3285C92FA00FB344E /* UIViewController.swift in Sources */,
 				44537F68285623200061CADF /* SwiftSpinner.swift in Sources */,
+				4494B46F293CF85A0009548C /* ScaleComparisonViewModel.swift in Sources */,
 				44537F6A285628A90061CADF /* FirebaseAuthManager.swift in Sources */,
 				4455D1C92858D5AD00FB344E /* UIView+.swift in Sources */,
 				44872B112860B21D00C20E06 /* NSObject+.swift in Sources */,
