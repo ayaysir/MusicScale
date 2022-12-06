@@ -576,7 +576,7 @@
 
 /* 2022-12-05 비교, CSV 내보내기 로컬라이징 */
 "vbb-eD-Be3.title" = "比較";
-"HQn-hZ-vQ1.title" = "CSVファイルにエクスポート";
-"162-0R-Fjx.text" = "CSVファイルにエクスポート";
+"HQn-hZ-vQ1.title" = "CSVにエクスポート";
+"162-0R-Fjx.text" = "CSV形式にエクスポート";
 
 "Kp3-E2-WVV" = "アプリのカラーモード";

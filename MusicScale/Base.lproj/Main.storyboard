@@ -2412,7 +2412,7 @@
                                         <rect key="frame" x="0.0" y="62" width="374" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -3683,7 +3683,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="M8x-He-tZN"/>
         <segue reference="6tl-C7-X1w"/>
-        <segue reference="2J2-cR-7Di"/>
+        <segue reference="8Fa-Oz-VZU"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Wake" width="40" height="40"/>

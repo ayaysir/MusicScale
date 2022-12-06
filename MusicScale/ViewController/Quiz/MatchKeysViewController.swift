@@ -301,8 +301,8 @@ class MatchKeysViewController: InQuizViewController {
         } else if let result = questionSuccessResult {
             if result {
                 lblResult.text = "Success".localized()
-                lblResult.backgroundColor = .green
-                lblResult.textColor = nil
+                lblResult.backgroundColor = UIColor(named: "Color_QuizSuccess")
+                lblResult.textColor = .white
             } else {
                 lblResult.text = "Failed".localized()
                 lblResult.backgroundColor = .systemPink
