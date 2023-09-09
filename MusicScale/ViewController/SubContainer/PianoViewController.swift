@@ -14,7 +14,6 @@ protocol PianoVCDelegate: AnyObject {
 }
 
 class PianoViewController: UIViewController {
-    
     enum Mode {
         case stricted, free
     }
@@ -24,6 +23,7 @@ class PianoViewController: UIViewController {
     var isKeyPressEnabled: Bool = true
     
     private var generator: MIDISoundGenerator = GlobalGenerator.shared
+    private var midiListener = MIDIListener()
     
     var currentPlayableKey: Music.PlayableKey = .C
     var octaveShift: Int = 0

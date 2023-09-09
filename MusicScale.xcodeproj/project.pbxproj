@@ -159,6 +159,7 @@
 		44B70F3D2848F4F40068495A /* QuizConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F3C2848F4F40068495A /* QuizConfigStore.swift */; };
 		44B70F4228491A650068495A /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F4128491A650068495A /* QuizViewModel.swift */; };
 		44B70F44284A57430068495A /* AppConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B70F43284A57430068495A /* AppConfigStore.swift */; };
+		44DE2C3E2AACBE9F000464E9 /* MIDIListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DE2C3D2AACBE9F000464E9 /* MIDIListener.swift */; };
 		44E0ACF1285F0BC6008BBB82 /* NSLayoutConstraint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E0ACF0285F0BC6008BBB82 /* NSLayoutConstraint+.swift */; };
 		44E0ACF3285F3FCD008BBB82 /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E0ACF2285F3FCC008BBB82 /* UIDevice+.swift */; };
 		44E7A07528467692005C7909 /* SearchCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E7A07428467692005C7909 /* SearchCategory.swift */; };
@@ -350,6 +351,7 @@
 		44B70F3C2848F4F40068495A /* QuizConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizConfigStore.swift; sourceTree = "<group>"; };
 		44B70F4128491A650068495A /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		44B70F43284A57430068495A /* AppConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigStore.swift; sourceTree = "<group>"; };
+		44DE2C3D2AACBE9F000464E9 /* MIDIListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIListener.swift; sourceTree = "<group>"; };
 		44E0ACF0285F0BC6008BBB82 /* NSLayoutConstraint+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+.swift"; sourceTree = "<group>"; };
 		44E0ACF2285F3FCC008BBB82 /* UIDevice+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
 		44E7A07428467692005C7909 /* SearchCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategory.swift; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 				44A09A3A283559190067184E /* Sequencer.swift */,
 				44FEFBF42853470A000402DE /* AvailableSoundInSilentMode.swift */,
 				4455D1D3285A44BE00FB344E /* MIDICommon.swift */,
+				44DE2C3D2AACBE9F000464E9 /* MIDIListener.swift */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -1218,6 +1221,7 @@
 				44E0ACF1285F0BC6008BBB82 /* NSLayoutConstraint+.swift in Sources */,
 				4494B46B293A512D0009548C /* ShowActivityView.swift in Sources */,
 				4404B049285FA3C70072CCFD /* StatsViewController.swift in Sources */,
+				44DE2C3E2AACBE9F000464E9 /* MIDIListener.swift in Sources */,
 				443A0C6328428F3100641BC0 /* Between.swift in Sources */,
 				440637FA283083AE00875E77 /* JSONCoder.swift in Sources */,
 				44ABE1032854C1D00022B4FB /* Post.swift in Sources */,
@@ -1474,7 +1478,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicScale;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -1510,7 +1514,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicScale;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

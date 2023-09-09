@@ -25,6 +25,7 @@ class MIDISoundGenerator {
     }
     
     func initEngine(soundbankURL: URL? = gsMuseScoreFileURL, instPreset preset: Int = AppConfigStore.shared.pianoInstrument) {
+        var preset = preset < 0 ? 5 : preset
         initSoundbank(soundbankURL: soundbankURL, instPreset: preset)
         startEngine()
     }
@@ -37,6 +38,22 @@ class MIDISoundGenerator {
     
     func playSound(noteNumber: Int, velocity: MIDIVelocity = 90, channel: MIDIChannel = 1) {
         playSound(noteNumber: MIDINoteNumber(noteNumber), velocity: velocity, channel: channel)
+    }
+    
+    func playSimply(noteNumber: MIDINoteNumber, velocity: MIDIVelocity = 90, channel: MIDIChannel = 1) {
+        instrument.play(noteNumber: noteNumber, velocity: velocity, channel: channel)
+    }
+    
+    func playSimply(noteNumber: Int, velocity: MIDIVelocity = 90, channel: MIDIChannel = 1) {
+        playSimply(noteNumber: MIDINoteNumber(noteNumber), velocity: velocity, channel: channel)
+    }
+    
+    func stopSimply(noteNumber: MIDINoteNumber, channel: MIDIChannel = 1) {
+        instrument.stop(noteNumber: noteNumber, channel: channel)
+    }
+    
+    func stopSimply(noteNumber: Int, channel: MIDIChannel = 1) {
+        stopSimply(noteNumber: MIDINoteNumber(noteNumber), channel: channel)
     }
     
     func playSoundWithDuration(noteNumber: Int, millisecond: Int, velocity: MIDIVelocity = 90, channel: MIDIChannel = 1) {
