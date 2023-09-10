@@ -11,11 +11,12 @@ import AVFoundation
 
 protocol PianoVCDelegate: AnyObject {
     func didKeyPressed(_ controller: PianoViewController, keyInfo: PianoKeyInfo)
+    func didMIDIReceived(_ controller: PianoViewController, noteNumber: Int)
 }
 
 class PianoViewController: UIViewController {
     enum Mode {
-        case stricted, free
+        case stricted, quiz
     }
     
     var viewPiano: PianoView!
@@ -35,6 +36,12 @@ class PianoViewController: UIViewController {
         super.viewDidLoad()
         setPiano()
         view.backgroundColor = .systemBackground
+        
+        if mode == .quiz {
+            midiListener.noteOnHandler = { noteNumber in
+                self.delegate?.didMIDIReceived(self, noteNumber: noteNumber)
+            }
+        }
     }
     
     func setPiano() {

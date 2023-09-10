@@ -460,7 +460,7 @@ class MatchKeysViewController: InQuizViewController {
             containerViewPiano.layoutIfNeeded()
             pianoVC = segue.destination as? PianoViewController
             pianoVC?.parentContainerView = containerViewPiano
-            pianoVC?.mode = .free
+            pianoVC?.mode = .quiz
             pianoVC?.delegate = self
         default:
             break
@@ -550,8 +550,17 @@ extension MatchKeysViewController: ConductorPlay {
 
 // MARK: - PianoVCDelegate
 extension MatchKeysViewController: PianoVCDelegate {
-    func didKeyPressed(_ controller: PianoViewController, keyInfo: PianoKeyInfo) {
+    func didMIDIReceived(_ controller: PianoViewController, noteNumber: Int) {
+        guard let currentPlayableKey else {
+            return
+        }
         
+        // 현재 키가 C#이면 C#(Db)4가 0, C#(Db)5가 12가 나와야 함
+        let intNotationRelative = noteNumber - 60 - currentPlayableKey.rawValue
+        addNoteToSheet(intNotation: intNotationRelative)
+    }
+    
+    func didKeyPressed(_ controller: PianoViewController, keyInfo: PianoKeyInfo) {
         guard isSolvingQuestionNow else {
             if !isFadeAnimatingNow && !viewBannerContainer.isHidden {
                 fadeBannerOnPiano(fadeIn: false)
@@ -565,14 +574,27 @@ extension MatchKeysViewController: PianoVCDelegate {
         }
         
         guard let currentPlayableKey = currentPlayableKey else { return }
-        guard let currentEditViewModel = currentEditViewModel else { return }
+        
         let intNotation = keyInfo.keyIndex - PianoKeyHelper.findRootKeyPosition(playableKey: currentPlayableKey)
         
-        // print(currentPlayableKey, keyInfo, intNotation)
-        currentEditViewModel.addKey(intNotation: intNotation, enharmonicMode: quizStore.enharmonicMode)
+        print(currentPlayableKey, keyInfo, intNotation)
+        addNoteToSheet(intNotation: intNotation)
+    }
+    
+    func addNoteToSheet(intNotation: Int) {
+        guard let currentEditViewModel = currentEditViewModel else { return }
         
-        injectAbcjsText(from: currentEditViewModel.abcjsTextOnEdit, needReload: true, staffWidth: staffWidth)
-        currentDisplayAbcjsText = currentEditViewModel.abcjsTextOnEdit
-        highlightLastNote()
+        DispatchQueue.main.async { [weak self] in
+            guard let self else {
+                return
+            }
+            
+            currentEditViewModel.addKey(intNotation: intNotation, enharmonicMode: quizStore.enharmonicMode)
+            
+            injectAbcjsText(from: currentEditViewModel.abcjsTextOnEdit, needReload: true, staffWidth: staffWidth)
+            currentDisplayAbcjsText = currentEditViewModel.abcjsTextOnEdit
+            highlightLastNote()
+        }
+        
     }
 }
