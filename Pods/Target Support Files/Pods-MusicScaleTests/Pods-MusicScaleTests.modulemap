@@ -1,6 +1,0 @@
-framework module Pods_MusicScaleTests {
-  umbrella header "Pods-MusicScaleTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
