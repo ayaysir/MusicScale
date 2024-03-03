@@ -8,12 +8,14 @@
 import UIKit
 import DropDown
 import AudioToolbox
+import GoogleMobileAds
 
 protocol ScaleInfoVCDelgate: AnyObject {
     func didInfoUpdated(_ controller: ScaleInfoViewController, indexPath: IndexPath?)
 }
 
 class ScaleInfoViewController: UIViewController {
+    private var interstitial: GADInterstitialAd?
     
     @IBOutlet weak var containerViewInfo: UIView!
     @IBOutlet weak var containerViewWebSheet: UIView!
@@ -128,6 +130,9 @@ class ScaleInfoViewController: UIViewController {
         
         // 피아노 이용 가능 키 표시 - 최초 페이지 열었을 때
         setAvailableKeyAndOctaveShift()
+        
+        // 전면 광고 준비
+        prepareFullScreenAd()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,6 +153,11 @@ class ScaleInfoViewController: UIViewController {
         stopSequencer()
         showTabBar(self)
         OrientationUtil.lockOrientation(.all)
+    }
+    
+    override func willMove(toParent parent: UIViewController?) {
+        // 뒤로 가기 사이에 전면 광고를 표시하려면 willMove에 추가
+        interstitial?.present(fromRootViewController: self)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -219,6 +229,13 @@ class ScaleInfoViewController: UIViewController {
         // longPressRecognizer.minimumPressDuration = 0.5
         longPressRecognizer.delaysTouchesBegan = true
         btnPlayAndStop.addGestureRecognizer(longPressRecognizer)
+    }
+    
+    private func prepareFullScreenAd() {
+        Task {
+            interstitial = try await setupFullAds(self)
+            interstitial?.fullScreenContentDelegate = self
+        }
     }
     
     // MARK: - Outlet Action
@@ -669,5 +686,15 @@ extension ScaleInfoViewController {
             changeEnharmonicMode(mode: .init(rawValue: index)!)
           }
         _ = dropDownCommon(dropDown: targetDropDown, dataSource: dataSource, selectionAction: selectionAction)
+    }
+}
+
+extension ScaleInfoViewController: GADFullScreenContentDelegate {
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        view.isUserInteractionEnabled = true
+    }
+    
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        view.isUserInteractionEnabled = true
     }
 }

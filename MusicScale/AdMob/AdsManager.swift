@@ -52,7 +52,7 @@ import GoogleMobileAds
  */
 
 @discardableResult
-func setupBannerAds( _ viewController: UIViewController, container: UIView? = nil) -> GADBannerView? {
+func setupBannerAds(_ viewController: UIViewController, container: UIView? = nil) -> GADBannerView? {
     
     container?.backgroundColor = .clear
     
@@ -84,6 +84,25 @@ func setupBannerAds( _ viewController: UIViewController, container: UIView? = ni
     bannerView.load(request)
 
     return bannerView
+}
+
+enum AdsError: Error {
+    case showAdNotAllowed
+}
+
+/**
+ 전체 화면 광고: 사용 방법
+ 1. 사용할 뷰컨트롤러의 멤버 변수로 `private var interstitial: GADInterstitialAd?` 추가
+ 2. `interstitial`을 `setupFullAds`로 불러오고, `fullScreenContentDelegate`로 `self` 추가
+ 3. `ad(...didFailToPresentFullScreenContentWithError...)`, `adDidDismissFullScreenContent` 메서드 구현
+ */
+func setupFullAds(_ viewController: UIViewController) async throws -> GADInterstitialAd? {
+    guard AdsManager.SHOW_AD else {
+        throw AdsError.showAdNotAllowed
+    }
+    
+    let request = GADRequest()
+    return try await GADInterstitialAd.load(withAdUnitID: "ca-app-pub-6364767349592629/6979389977", request: request)
 }
 
 class AdsManager: NSObject, GADBannerViewDelegate {

@@ -88,6 +88,7 @@ extension MIDIListener: AudioKit.MIDIListener {
         midi.closeAllInputs()
         if !midi.inputInfos.isEmpty {
             midi.openInput()
+            midi.openInput(name: "Bluetooth")
         }
     }
     
