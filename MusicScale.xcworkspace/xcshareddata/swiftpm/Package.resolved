@@ -1,0 +1,77 @@
+{
+  "pins" : [
+    {
+      "identity" : "audiokit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AudioKit/AudioKit.git",
+      "state" : {
+        "revision" : "c30a151fea40696ad0a45c60c2bba29112bb4279",
+        "version" : "5.6.1"
+      }
+    },
+    {
+      "identity" : "audiokitex",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AudioKit/AudioKitEX",
+      "state" : {
+        "revision" : "58fa4a002028a2addf96466dd5ad68182e7d387e",
+        "version" : "5.6.0"
+      }
+    },
+    {
+      "identity" : "codablecsv",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dehesa/CodableCSV",
+      "state" : {
+        "revision" : "99ace2cfdfbc19108b529c021005fb57a460e715",
+        "version" : "0.6.7"
+      }
+    },
+    {
+      "identity" : "hgcircularslider",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/HamzaGhazouani/HGCircularSlider",
+      "state" : {
+        "revision" : "2b98462d32bf7211851aa73537dbaba5dd80229e",
+        "version" : "2.2.1"
+      }
+    },
+    {
+      "identity" : "iqkeyboardmanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hackiftekhar/IQKeyboardManager.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "f0fad1d51f9710cbd0ac6d49121d8b7fddd5c7f6"
+      }
+    },
+    {
+      "identity" : "kissfft",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AudioKit/KissFFT",
+      "state" : {
+        "revision" : "dd0636e151724b8ba2e0908eba4d99a6ff24d00c",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "panmodal",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/slackhq/PanModal.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "b2f5bd7d169cba564d5c5b7203864f79be3fe826"
+      }
+    },
+    {
+      "identity" : "soundpipeaudiokit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AudioKit/SoundpipeAudioKit.git",
+      "state" : {
+        "revision" : "ee7d9542078ae48b24744a67c0350a12f9de354b",
+        "version" : "5.6.1"
+      }
+    }
+  ],
+  "version" : 2
+}

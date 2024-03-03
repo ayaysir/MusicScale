@@ -16,3 +16,7 @@ struct GlobalConductor {
 struct GlobalGenerator {
     static let shared = MIDISoundGenerator()
 }
+
+struct GlobalMIDIListener {
+    static let shared = MIDIListener()
+}

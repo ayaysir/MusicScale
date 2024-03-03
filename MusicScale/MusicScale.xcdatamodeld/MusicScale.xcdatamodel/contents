@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G91" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="GroupEntity" representedClassName="GroupEntity" syncable="YES" codeGenerationType="class">
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="groupName" optional="YES" attributeType="String"/>
@@ -33,9 +33,4 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="nameAlias" optional="YES" attributeType="String"/>
     </entity>
-    <elements>
-        <element name="GroupEntity" positionX="-1176.523559570312" positionY="-3794.936401367188" width="128" height="118"/>
-        <element name="ScaleInfoEntity" positionX="-966.612548828125" positionY="-3950.486663818359" width="128" height="253"/>
-        <element name="QuizStatEntity" positionX="-1071" positionY="-3825" width="128" height="149"/>
-    </elements>
 </model>

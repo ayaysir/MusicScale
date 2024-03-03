@@ -25,7 +25,7 @@ class MIDISoundGenerator {
     }
     
     func initEngine(soundbankURL: URL? = gsMuseScoreFileURL, instPreset preset: Int = AppConfigStore.shared.pianoInstrument) {
-        var preset = preset < 0 ? 5 : preset
+        let preset = preset < 0 ? 5 : preset
         initSoundbank(soundbankURL: soundbankURL, instPreset: preset)
         startEngine()
     }

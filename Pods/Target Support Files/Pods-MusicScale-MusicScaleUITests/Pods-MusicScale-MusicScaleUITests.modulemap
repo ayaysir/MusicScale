@@ -1,0 +1,6 @@
+framework module Pods_MusicScale_MusicScaleUITests {
+  umbrella header "Pods-MusicScale-MusicScaleUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

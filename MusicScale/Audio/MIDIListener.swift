@@ -8,10 +8,8 @@
 import AudioKit
 import CoreMIDI
 
-class MIDIListener {
+class MIDIListener: ObservableObject {
     private let midi = MIDI.sharedInstance
-    private let engine = AudioEngine()
-    private let instrument = MIDISampler()
     private let generator = MIDISoundGenerator()
     
     private let isUseGenerator: Bool
@@ -21,14 +19,19 @@ class MIDIListener {
     var noteOnHandler: NoteHandler?
     var noteOffHandler: NoteHandler?
     
+    @Published var isDeviceConnected = false
+    
     init(useGenerator: Bool = true) {
         self.isUseGenerator = useGenerator
-        
+        openMIDI()
+    }
+    
+    func openMIDI() {
         midi.openInput(name: "Bluetooth")
         midi.openInput()
         midi.addListener(self)
         
-        if useGenerator {
+        if self.isUseGenerator {
             generator.initEngine()
         }
     }
@@ -56,7 +59,7 @@ extension MIDIListener: AudioKit.MIDIListener {
     }
     
     func receivedMIDIController(_ controller: AudioKit.MIDIByte, value: AudioKit.MIDIByte, channel: AudioKit.MIDIChannel, portID: MIDIUniqueID?, timeStamp: MIDITimeStamp?) {
-        //
+        print(#function)
     }
     
     func receivedMIDIAftertouch(noteNumber: AudioKit.MIDINoteNumber, pressure: AudioKit.MIDIByte, channel: AudioKit.MIDIChannel, portID: MIDIUniqueID?, timeStamp: MIDITimeStamp?) {
@@ -80,7 +83,12 @@ extension MIDIListener: AudioKit.MIDIListener {
     }
     
     func receivedMIDISetupChange() {
-        //
+        // 연결된 미디 장치가 한 개 이상 있을 때, openInput하면 중간에 꽂아도 연주됨
+        // 중복 인풋을 방지하기 위해 먼저 closeAllInputs부터
+        midi.closeAllInputs()
+        if !midi.inputInfos.isEmpty {
+            midi.openInput()
+        }
     }
     
     func receivedMIDIPropertyChange(propertyChangeInfo: MIDIObjectPropertyChangeNotification) {

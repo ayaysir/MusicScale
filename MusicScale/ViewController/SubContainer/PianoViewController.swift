@@ -24,7 +24,7 @@ class PianoViewController: UIViewController {
     var isKeyPressEnabled: Bool = true
     
     private var generator: MIDISoundGenerator = GlobalGenerator.shared
-    private var midiListener = MIDIListener()
+    // private var midiListener = MIDIListener()
     
     var currentPlayableKey: Music.PlayableKey = .C
     var octaveShift: Int = 0
@@ -38,10 +38,13 @@ class PianoViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         if mode == .quiz {
-            midiListener.noteOnHandler = { noteNumber in
+            GlobalMIDIListener.shared.noteOnHandler = { noteNumber in
                 self.delegate?.didMIDIReceived(self, noteNumber: noteNumber)
             }
+        } else {
+            GlobalMIDIListener.shared.noteOnHandler = nil
         }
+        
     }
     
     func setPiano() {
