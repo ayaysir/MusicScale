@@ -28,7 +28,7 @@ import GoogleMobileAds
  
  ====================
  
- 광고 목록
+ 배너 광고 목록
 
  TableView (static)
  - Setting TVC
@@ -48,6 +48,15 @@ import GoogleMobileAds
  - Flashcards VC
  - QuizInProgress VC
  - QuizFinished VC
+ 
+ 전면 광고 목록
+ - ScaleInfoVC (뒤로가기)
+ - QuizInProgressViewController (시작)
+ - QuizFinishedViewController (시작)
+ - ArchiveDetailTableViewController (뒤로가기)
+ ==== 안해도됨 QuizInProgressViewController에서 이미 동작 ====
+ - FlashcardsViewController (뒤로가기)
+ - MatchKeysViewController (뒤로가기)
  
  */
 

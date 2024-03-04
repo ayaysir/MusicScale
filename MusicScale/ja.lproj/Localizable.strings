@@ -118,3 +118,5 @@
 "Light theme" = "ライトモード";
 "Dark theme" = "ダークモード";
 
+/* Interstitial ad (2024-03-04) */
+"Content is loading. please wait for a moment..." = "コンテンツを読み込んでいます。 しばらくお待ちください。";

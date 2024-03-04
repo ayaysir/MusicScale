@@ -7,8 +7,10 @@
 
 import UIKit
 import WebKit
+import GoogleMobileAds
 
 class ArchiveDetailTableViewController: UITableViewController {
+    private var interstitial: GADInterstitialAd?
     
     enum CRUDMode {
         case read, create
@@ -186,6 +188,14 @@ class ArchiveDetailTableViewController: UITableViewController {
             let anonymousText = "Anonymous".localized()
             lblUploader.text = "\(anonymousText) (\(FirebaseAuthManager.shared.currentUser?.uid[0..<4] ?? ""))"
         }
+        
+        // 전면 광고 준비
+        prepareFullScreenAd()
+    }
+    
+    override func willMove(toParent parent: UIViewController?) {
+        // 뒤로 가기 사이에 전면 광고를 표시하려면 willMove에 추가
+        interstitial?.present(fromRootViewController: self)
     }
     
     // MARK: - set initial design
@@ -215,6 +225,13 @@ class ArchiveDetailTableViewController: UITableViewController {
         
         barBtnDownloadOr.title = "Download".localized()
         barBtnDownloadOr.isEnabled = true
+    }
+    
+    private func prepareFullScreenAd() {
+        Task {
+            interstitial = try await setupFullAds(self)
+            interstitial?.fullScreenContentDelegate = self
+        }
     }
     
     // MARK: - @IBAction
@@ -752,5 +769,15 @@ extension ArchiveDetailTableViewController: ConductorPlay {
             
             playTimer?.invalidate()
         }
+    }
+}
+
+extension ArchiveDetailTableViewController: GADFullScreenContentDelegate {
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        view.isUserInteractionEnabled = true
+    }
+    
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        view.isUserInteractionEnabled = true
     }
 }

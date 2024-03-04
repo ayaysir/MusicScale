@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class QuizFinishedViewController: UIViewController {
+    private var interstitial: GADInterstitialAd?
     
     var quizViewModel: QuizViewModel!
     
@@ -34,6 +36,8 @@ class QuizFinishedViewController: UIViewController {
         btnGoHome.layer.cornerRadius = 5
         
         setupBannerAds(self, container: viewBannerContainer)
+        
+        prepareAndShowFullScreenAd()
     }
     
     @IBAction func btnActGoToTop(_ sender: Any) {
@@ -64,6 +68,37 @@ extension QuizFinishedViewController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
 }
+
+extension QuizFinishedViewController: GADFullScreenContentDelegate {
+    private func prepareAndShowFullScreenAd() {
+        Task {
+            SwiftSpinner.show("Content is loading. please wait for a moment...".localized())
+            interstitial = try await setupFullAds(self)
+            
+            if let interstitial {
+                interstitial.fullScreenContentDelegate = self
+                view.isUserInteractionEnabled = false
+                interstitial.present(fromRootViewController: self)
+            }
+        }
+    }
+    
+    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        view.isUserInteractionEnabled = true
+        SwiftSpinner.hide()
+    }
+    
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        view.isUserInteractionEnabled = true
+        SwiftSpinner.hide()
+    }
+    
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        view.isUserInteractionEnabled = true
+        SwiftSpinner.hide()
+    }
+}
+
 
 class CellWithStyleRightDetail: UITableViewCell {
     

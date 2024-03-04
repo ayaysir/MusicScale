@@ -119,3 +119,6 @@
 "Use device theme" = "기기 테마 사용";
 "Light theme" = "밝은 테마";
 "Dark theme" = "어두운 테마";
+
+/* Interstitial ad (2024-03-04) */
+"Content is loading. please wait for a moment..." = "컨텐츠를 로딩중입니다. 잠시만 기다려 주세요.";

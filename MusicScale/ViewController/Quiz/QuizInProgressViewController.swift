@@ -7,8 +7,10 @@
 
 import UIKit
 import HGCircularSlider
+import GoogleMobileAds
 
 class QuizInProgressViewController: UIViewController {
+    private var interstitial: GADInterstitialAd?
     
     var quizViewModel: QuizViewModel!
     var introVC: QuizIntroTableViewController!
@@ -53,6 +55,8 @@ class QuizInProgressViewController: UIViewController {
         btnGiveUp.layer.cornerRadius = 5
         
         setupBannerAds(self, container: viewBannerContainer)
+        
+        prepareAndShowFullScreenAd()
     }
     
     @IBAction func btnActContinue(_ sender: Any) {
@@ -73,16 +77,34 @@ class QuizInProgressViewController: UIViewController {
         
         navigationController?.setViewControllers([introVC], animated: true)
     }
-    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension QuizInProgressViewController: GADFullScreenContentDelegate {
+    private func prepareAndShowFullScreenAd() {
+        Task {
+            SwiftSpinner.show("Content is loading. please wait for a moment...")
+            interstitial = try await setupFullAds(self)
+            
+            if let interstitial {
+                interstitial.fullScreenContentDelegate = self
+                view.isUserInteractionEnabled = false
+                interstitial.present(fromRootViewController: self)
+            }
+        }
     }
-    */
-
+    
+    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        view.isUserInteractionEnabled = true
+        SwiftSpinner.hide()
+    }
+    
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        view.isUserInteractionEnabled = true
+        SwiftSpinner.hide()
+    }
+    
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        view.isUserInteractionEnabled = true
+        SwiftSpinner.hide()
+    }
 }
