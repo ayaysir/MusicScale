@@ -40,6 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize the Google Mobile Ads SDK.
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         
+        // 광고 최대 연령 조정
+        GADMobileAds.sharedInstance().requestConfiguration.maxAdContentRating = .teen
+        
         // Initialize Sound
         GlobalConductor.shared.start()
         try? availableSoundInSilentMode()

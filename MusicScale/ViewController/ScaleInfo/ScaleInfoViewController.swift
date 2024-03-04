@@ -75,28 +75,6 @@ class ScaleInfoViewController: UIViewController {
         return DEF_STAFFWIDTH
     }
     
-    // MARK: - Detect Hardware Keyboard Press
-    
-    func canBecomeFirstResponder() -> Bool {
-        return true
-    }
-    
-    override var keyCommands: [UIKeyCommand]? {
-        let keyValues = "zxcvbnmasdfghjkl"
-        return keyValues.map { value in
-            UIKeyCommand(input: String(value), modifierFlags: [], action: #selector(KeyPress))
-        }
-    }
-    
-    @objc func KeyPress(sender: UIKeyCommand) {
-        guard let input = sender.input else {
-            return
-        }
-        
-        print("keyPressed:", input)
-        // ...
-    }
-    
     // MARK: - VC life cycle
     
     override func viewDidLoad() {
@@ -133,6 +111,9 @@ class ScaleInfoViewController: UIViewController {
         
         // 전면 광고 준비
         prepareFullScreenAd()
+        
+        // 스와이프로 뒤로가기 비활성화
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {

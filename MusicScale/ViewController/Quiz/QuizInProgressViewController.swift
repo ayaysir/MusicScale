@@ -82,7 +82,7 @@ class QuizInProgressViewController: UIViewController {
 extension QuizInProgressViewController: GADFullScreenContentDelegate {
     private func prepareAndShowFullScreenAd() {
         Task {
-            SwiftSpinner.show("Content is loading. please wait for a moment...")
+            SwiftSpinner.show("Content is loading. please wait for a moment...".localized())
             interstitial = try await setupFullAds(self)
             
             if let interstitial {

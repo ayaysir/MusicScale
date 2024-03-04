@@ -32,6 +32,8 @@ class PianoViewController: UIViewController {
     var parentContainerView: UIView?
     weak var delegate: PianoVCDelegate?
     
+    private var prevTouchedKey: PianoKeyInfo?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setPiano()
@@ -44,12 +46,10 @@ class PianoViewController: UIViewController {
         } else {
             GlobalMIDIListener.shared.noteOnHandler = nil
         }
-        
     }
     
     func setPiano() {
         if let parentContainerView = parentContainerView {
-            
             if self.view.subviews.isNotEmpty {
                 self.view.subviews.forEach { subview in
                     subview.removeFromSuperview()
@@ -62,6 +62,7 @@ class PianoViewController: UIViewController {
             
             let pianoLongPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handlePianoLongPress(gesture:)))
             pianoLongPressRecognizer.minimumPressDuration = 0.0
+            
             viewPiano.addGestureRecognizer(pianoLongPressRecognizer)
             
             // let pianoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handlePianoTap))
@@ -98,11 +99,17 @@ class PianoViewController: UIViewController {
                 startKeyPress(keyInfo)
             }
         case .changed:
-            // print(".", terminator: ":")
-            break
+            if let keyInfo = viewPiano.viewModel.getKeyInfoBy(touchLocation: location) {
+                changeKeyPress(keyInfo)
+            }
         case .ended:
             // 노트 멈춤
-            stopKeyPress()
+            guard isKeyPressEnabled else { return }
+            if let keyInfo = viewPiano.viewModel.getKeyInfoBy(touchLocation: location) {
+                stopKeyPress(keyInfo)
+            } else if let prevTouchedKey {
+                stopKeyPress(prevTouchedKey)
+            }
         case .cancelled:
             // print("cancelled")
             break
@@ -125,7 +132,8 @@ class PianoViewController: UIViewController {
             }
         }
         
-        viewPiano.viewModel.currentTouchedKey = keyInfo
+        // viewPiano.viewModel.currentTouchedKey = keyInfo
+        viewPiano.viewModel.insertCurrentTouchedKeysWithRefreshView(keyInfo)
         
         // 노트 재생
         let targetNoteNumber = semitoneStart + keyInfo.keyIndex + (octaveShift * 12)
@@ -137,11 +145,33 @@ class PianoViewController: UIViewController {
         }
     }
     
-    func stopKeyPress() {
-        if viewPiano.viewModel?.currentTouchedKey != nil {
-            viewPiano.viewModel?.currentTouchedKey = nil
-            generator.stopSound()
+    func changeKeyPress(_ keyInfo: PianoKeyInfo) {
+        guard !viewPiano.viewModel.currentTouchedKeys.contains(keyInfo) else {
+            prevTouchedKey = keyInfo
+            return
         }
+        
+        if let prevTouchedKey {
+            stopKeyPress(prevTouchedKey)
+        }
+    }
+    
+    // func stopKeyPress() {
+    //     if viewPiano.viewModel?.currentTouchedKey != nil {
+    //         viewPiano.viewModel?.currentTouchedKey = nil
+    //         generator.stopSound()
+    //     }
+    // }
+    
+    func stopKeyPress(_ keyInfo: PianoKeyInfo) {
+        if viewPiano.viewModel.currentTouchedKeys.contains(keyInfo) {
+            viewPiano.viewModel.removeCurrentTouchedKeysWithRefreshView(keyInfo)
+            let semitoneStart = 60 + PianoKeyHelper.adjustKeySemitone(key: currentPlayableKey)
+            let targetNoteNumber = semitoneStart + keyInfo.keyIndex + (octaveShift * 12)
+            generator.stopSimply(noteNumber: targetNoteNumber)
+        }
+        
+        prevTouchedKey = nil
     }
 }
 
@@ -155,5 +185,54 @@ extension PianoViewController {
     func updateAvailableKeys(integerNotations: [Int]) {
         viewPiano.viewModel.availableKeyIndexes = integerNotations.map { $0 + PianoKeyHelper.findRootKeyPosition(playableKey: currentPlayableKey) }
         viewPiano.setNeedsDisplay()
+    }
+}
+
+extension PianoViewController {
+    // MARK: - Detect Hardware Keyboard Press
+    
+    func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        var didHandleEvent = false
+        
+        for press in presses {
+            // Get the pressed key.
+            guard let key = press.key else { continue }
+            if "zxcvbnm,".contains(key.charactersIgnoringModifiers),
+               let firstIndex = "zxcvbnm,".map(String.init).firstIndex(of: key.charactersIgnoringModifiers) {
+                startKeyPress(viewPiano.viewModel.pianoWhiteKeys[firstIndex + 1])
+                
+                didHandleEvent = true
+            }
+        }
+        
+        if !didHandleEvent {
+            super.pressesBegan(presses, with: event)
+        }
+    }
+    
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        var didHandleEvent = false
+        
+        for press in presses {
+            // Get the released key.
+            guard let key = press.key else { continue }
+            
+            if "zxcvbnm,".contains(key.charactersIgnoringModifiers),
+               let firstIndex = "zxcvbnm,".map(String.init).firstIndex(of: key.charactersIgnoringModifiers) {
+                stopKeyPress(viewPiano.viewModel.pianoWhiteKeys[firstIndex + 1])
+                
+                print(#function, key)
+                didHandleEvent = true
+            }
+            
+        }
+        
+        if !didHandleEvent {
+            super.pressesEnded(presses, with: event)
+        }
     }
 }

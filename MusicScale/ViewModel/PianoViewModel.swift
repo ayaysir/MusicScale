@@ -66,18 +66,19 @@ class PianoViewModel {
         return CGRect(x: margin.left, y: margin.top, width: frame.width - (margin.left + margin.right), height: frame.height - (margin.top + margin.bottom))
     }
     
-    var currentTouchedKey: PianoKeyInfo? {
-        didSet {
-            if let currentTouchedKey = currentTouchedKey {
-                handlerForRefreshPartialView(currentTouchedKey.touchArea)
-            } else {
-                handlerForRefreshEntireView()
-            }
-        }
-    }
+    // var currentTouchedKey: PianoKeyInfo? {
+    //     didSet {
+    //         if let currentTouchedKey = currentTouchedKey {
+    //             handlerForRefreshPartialView(currentTouchedKey.touchArea)
+    //         } else {
+    //             handlerForRefreshEntireView()
+    //         }
+    //     }
+    // }
+    
+    private(set) var currentTouchedKeys: Set<PianoKeyInfo> = []
     
     init(frame: CGRect, divBy: Int, margin: Margin, lineWidth: CGFloat, blackKeyRatio: CGSize) {
-        
         self.divBy = divBy
         self.margin = margin
         self.lineWidth = lineWidth
@@ -200,5 +201,13 @@ class PianoViewModel {
         }
     }
     
+    func insertCurrentTouchedKeysWithRefreshView(_ keyInfo: PianoKeyInfo) {
+        currentTouchedKeys.insert(keyInfo)
+        handlerForRefreshPartialView(keyInfo.touchArea)
+    }
     
+    func removeCurrentTouchedKeysWithRefreshView(_ keyInfo: PianoKeyInfo) {
+        currentTouchedKeys.remove(keyInfo)
+        handlerForRefreshPartialView(keyInfo.touchArea)
+    }
 }
