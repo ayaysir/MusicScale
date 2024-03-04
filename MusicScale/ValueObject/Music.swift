@@ -428,6 +428,25 @@ struct Music: Codable {
             }
         }
         
+        var keyInputToBlackKeyMapper: String {
+            switch self {
+            case .C, .C_sharp:
+                "sdghjl"
+            case .D, .D_sharp:
+                "asfghkl"
+            case .E:
+                "adfgjk"
+            case .F, .F_sharp:
+                "sdfhjl"
+            case .G, .G_sharp:
+                "asdghkl"
+            case .A, .A_sharp:
+                "asfgjkl"
+            case .B:
+                "adfhjk"
+            }
+        }
+        
         static func getPlaybleKey(index: Int) -> PlayableKey {
             return self.allCases[index]
         }

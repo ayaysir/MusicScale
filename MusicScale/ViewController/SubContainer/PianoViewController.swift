@@ -24,7 +24,6 @@ class PianoViewController: UIViewController {
     var isKeyPressEnabled: Bool = true
     
     private var generator: MIDISoundGenerator = GlobalGenerator.shared
-    // private var midiListener = MIDIListener()
     
     var currentPlayableKey: Music.PlayableKey = .C
     var octaveShift: Int = 0
@@ -195,16 +194,34 @@ extension PianoViewController {
         return true
     }
     
+    var characterSet: CharacterSet {
+        var characterSet = CharacterSet(charactersIn: "./;'")
+        characterSet.formUnion(.alphanumerics)
+        return characterSet
+    }
+    
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         var didHandleEvent = false
         
         for press in presses {
             // Get the pressed key.
             guard let key = press.key else { continue }
-            if "zxcvbnm,".contains(key.charactersIgnoringModifiers),
-               let firstIndex = "zxcvbnm,".map(String.init).firstIndex(of: key.charactersIgnoringModifiers) {
+            
+            let keyValue = key.charactersIgnoringModifiers
+            
+            // 흰색 피아노 키: "zcvbnm,"으로 고정됨
+            if "zxcvbnm,".contains(keyValue),
+               let firstIndex = "zxcvbnm,".map(String.init).firstIndex(of: keyValue) {
                 startKeyPress(viewPiano.viewModel.pianoWhiteKeys[firstIndex + 1])
-                
+                didHandleEvent = true
+            }
+            // 검은색 피아노 키:
+            else if currentPlayableKey.keyInputToBlackKeyMapper.contains(keyValue),
+               let firstIndex = currentPlayableKey.keyInputToBlackKeyMapper.map(String.init).firstIndex(of: keyValue) {
+                startKeyPress(viewPiano.viewModel.pianoBlackKeys[firstIndex])
+                didHandleEvent = true
+            }
+            else if let scalar = keyValue.unicodeScalars.first, characterSet.contains(scalar) {
                 didHandleEvent = true
             }
         }
@@ -221,14 +238,21 @@ extension PianoViewController {
             // Get the released key.
             guard let key = press.key else { continue }
             
+            let keyValue = key.charactersIgnoringModifiers
+            
             if "zxcvbnm,".contains(key.charactersIgnoringModifiers),
                let firstIndex = "zxcvbnm,".map(String.init).firstIndex(of: key.charactersIgnoringModifiers) {
                 stopKeyPress(viewPiano.viewModel.pianoWhiteKeys[firstIndex + 1])
-                
-                print(#function, key)
                 didHandleEvent = true
             }
-            
+            else if currentPlayableKey.keyInputToBlackKeyMapper.contains(keyValue),
+               let firstIndex = currentPlayableKey.keyInputToBlackKeyMapper.map(String.init).firstIndex(of: keyValue) {
+                stopKeyPress(viewPiano.viewModel.pianoBlackKeys[firstIndex])
+                didHandleEvent = true
+            }
+            else if let scalar = keyValue.unicodeScalars.first, characterSet.contains(scalar) {
+                didHandleEvent = true
+            }
         }
         
         if !didHandleEvent {
