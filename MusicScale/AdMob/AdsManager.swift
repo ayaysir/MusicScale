@@ -118,11 +118,13 @@ class AdsManager: NSObject, GADBannerViewDelegate {
     
     static var shared = AdsManager()
     
-    static var PRODUCT_MODE: Bool = true
+    /// 배포 시 반드시 true로
+    static var PRODUCT_MODE: Bool = false
     static var SHOW_AD: Bool {
         // ... //
         return PRODUCT_MODE && true
     }
+    
     private var showAd: Bool {
         AdsManager.SHOW_AD
     }

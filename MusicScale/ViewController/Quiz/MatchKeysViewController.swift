@@ -14,7 +14,7 @@ class MatchKeysViewController: InQuizViewController {
     @IBOutlet weak var lblOrder: UILabel!
     @IBOutlet weak var lblQuizProgressInfo: UILabel!
     @IBOutlet weak var containerViewPiano: UIView!
-    // @IBOutlet weak var viewWebContainer: UIView!
+    
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var viewQuizTitles: UIView!
     @IBOutlet weak var cnstTitlesHeight: NSLayoutConstraint!
@@ -46,7 +46,7 @@ class MatchKeysViewController: InQuizViewController {
     var pianoVC: PianoViewController?
     
     private var currentPlayableKey: Music.PlayableKey?
-    // private var currentQuestion: QuizQuestion?
+    
     private var currentEditViewModel: QuizEditKeyViewModel?
     private var currentScaleInfoVM: SimpleScaleInfoViewModel?
     private var currentPlayMode: PlayMode?
@@ -312,11 +312,9 @@ class MatchKeysViewController: InQuizViewController {
     }
     
     // MARK: - @IBAction
+    
     @IBAction func barBtnActBackspaceNote(_ sender: UIBarButtonItem) {
-        if let currentEditViewModel = currentEditViewModel {
-            currentEditViewModel.removeLastKey()
-            refreshSheetView()
-        }
+        backspaceNote()
     }
     
     @IBAction func barBtnActResetNotes(_ sender: UIBarButtonItem) {
@@ -327,33 +325,7 @@ class MatchKeysViewController: InQuizViewController {
     }
     
     @IBAction func btnActSubmit(_ sender: Any) {
-        // Next 버튼
-        if !isSolvingQuestionNow, let result = questionSuccessResult {
-            questionSuccessResult = nil
-            isSolvingQuestionNow = true
-            setQuizStatFromCurrentQuestion(result, elapsedSeconds: resetSolvingTimer())
-            progressNextQuestion(result)
-            stopSequencer()
-            return
-        }
-        
-        // Submit 버튼
-        if let question = currentQuestion,
-           let editVM = currentEditViewModel,
-           let infoVM = currentScaleInfoVM {
-            
-            questionSuccessResult = editVM.checkAnswer(originalAnswer: question.isAscending ? infoVM.ascendingIntegerNotationArray : infoVM.descendingIntegerNotationArray)
-            
-            // editMode
-            isSolvingQuestionNow = false
-            updateProgressViews(isBeforeSubmit: false)
-            
-            // 정답, 오답 비교 표시
-            let order: DegreesOrder = question.isAscending ? .ascending : .descending
-            let abcjsText = editVM.abcjsTextForComparison(questionSuccessResult!, originalDegrees: infoVM.targetDegrees(order: order), order: order, key: infoVM.currentKey, octaveShift: 0, enharmonicMode: quizStore.enharmonicMode)
-            injectAbcjsText(from: abcjsText, needReload: true, staffWidth: staffWidth)
-            currentDisplayAbcjsText = abcjsText
-        } 
+        submit()
     }
     
     @IBAction func btnActPlayOnEdit(_ sender: UIButton) {
@@ -450,6 +422,45 @@ class MatchKeysViewController: InQuizViewController {
         let storedSeconds = self.elapsedSeconds
         self.elapsedSeconds = 0
         return storedSeconds
+    }
+    
+    func backspaceNote() {
+        guard let currentEditViewModel else {
+            return
+        }
+        
+        currentEditViewModel.removeLastKey()
+        refreshSheetView()
+    }
+    
+    func submit() {
+        // Next 버튼
+        if !isSolvingQuestionNow, let result = questionSuccessResult {
+            questionSuccessResult = nil
+            isSolvingQuestionNow = true
+            setQuizStatFromCurrentQuestion(result, elapsedSeconds: resetSolvingTimer())
+            progressNextQuestion(result)
+            stopSequencer()
+            return
+        }
+        
+        // Submit 버튼
+        if let question = currentQuestion,
+           let editVM = currentEditViewModel,
+           let infoVM = currentScaleInfoVM {
+            
+            questionSuccessResult = editVM.checkAnswer(originalAnswer: question.isAscending ? infoVM.ascendingIntegerNotationArray : infoVM.descendingIntegerNotationArray)
+            
+            // editMode
+            isSolvingQuestionNow = false
+            updateProgressViews(isBeforeSubmit: false)
+            
+            // 정답, 오답 비교 표시
+            let order: DegreesOrder = question.isAscending ? .ascending : .descending
+            let abcjsText = editVM.abcjsTextForComparison(questionSuccessResult!, originalDegrees: infoVM.targetDegrees(order: order), order: order, key: infoVM.currentKey, octaveShift: 0, enharmonicMode: quizStore.enharmonicMode)
+            injectAbcjsText(from: abcjsText, needReload: true, staffWidth: staffWidth)
+            currentDisplayAbcjsText = abcjsText
+        }
     }
     
     // MARK: - Navigation
@@ -596,5 +607,53 @@ extension MatchKeysViewController: PianoVCDelegate {
             highlightLastNote()
         }
         
+    }
+}
+
+extension MatchKeysViewController {
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let key = presses.first?.key else { return }
+        
+        if isSolvingQuestionNow {
+            /*
+             퀴즈 푸는중
+             - backspace: 한 개 지우기
+             - enter: 제출
+             - space: 작성중 노트 재생
+             */
+            switch key.keyCode {
+            case .keyboardSpacebar:
+                playOrStop(playMode: .onEdit)
+            case .keyboardDeleteOrBackspace:
+                backspaceNote()
+            case .keyboardReturnOrEnter:
+                submit()
+            default:
+                break
+            }
+        } else {
+            /*
+             퀴즈 풀고 난 후
+             - backspace: 아무것도 안함
+             - enter: 다음
+             - space: 정답 노트 재생
+             - option + space: 두개 동시 재생
+             - option + shift + space: 작성중 노트 재생
+             */
+            switch key.keyCode {
+            case .keyboardSpacebar:
+                if key.modifierFlags == .alternate {
+                    playOrStop(playMode: .together)
+                } else if key.modifierFlags.contains(.alternate) && key.modifierFlags.contains(.shift) {
+                    playOrStop(playMode: .onEdit)
+                } else {
+                    playOrStop(playMode: .answer)
+                }
+            case .keyboardReturnOrEnter:
+                submit()
+            default:
+                break
+            }
+        }
     }
 }

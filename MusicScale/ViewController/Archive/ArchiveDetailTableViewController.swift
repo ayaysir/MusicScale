@@ -194,6 +194,10 @@ class ArchiveDetailTableViewController: UITableViewController {
     }
     
     override func willMove(toParent parent: UIViewController?) {
+        guard AdsManager.SHOW_AD else {
+            return
+        }
+        
         // 뒤로 가기 사이에 전면 광고를 표시하려면 willMove에 추가
         interstitial?.present(fromRootViewController: self)
     }
@@ -228,6 +232,10 @@ class ArchiveDetailTableViewController: UITableViewController {
     }
     
     private func prepareFullScreenAd() {
+        guard AdsManager.SHOW_AD else {
+            return
+        }
+        
         Task {
             interstitial = try await setupFullAds(self)
             interstitial?.fullScreenContentDelegate = self

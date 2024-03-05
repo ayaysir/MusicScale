@@ -168,20 +168,12 @@ class FlashcardsViewController: InQuizViewController {
         flip(true)
     }
     
-    @IBAction func btnActRemindQuestion(_ sender: Any) {
-        updateProgressViews(isBeforeSubmit: false)
-        progressNextQuestion(false)
-        stopSequencer()
-        
-        setQuizStatFromCurrentQuestion(true, elapsedSeconds: resetTimer())
+    @IBAction func btnActRemindQuestion(_ sender: UIButton) {
+        sendToRemind()
     }
     
-    @IBAction func btnActSuccessQuestion(_ sender: Any) {
-        updateProgressViews(isBeforeSubmit: false)
-        progressNextQuestion(true)
-        stopSequencer()
-        
-        setQuizStatFromCurrentQuestion(true, elapsedSeconds: resetTimer())
+    @IBAction func btnActSuccessQuestion(_ sender: UIButton) {
+        sendToSuccess()
     }
     
     @IBAction func btnActPlay(_ sender: UIButton) {
@@ -229,16 +221,25 @@ class FlashcardsViewController: InQuizViewController {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func sendToSuccess() {
+        updateProgressViews(isBeforeSubmit: false)
+        progressNextQuestion(true)
+        stopSequencer()
+        
+        setQuizStatFromCurrentQuestion(true, elapsedSeconds: resetTimer())
+        
+        view.makeToast("[확인] 성공했습니다! 이 기세를 이어갑시다!", duration: 2, position: .top)
     }
-    */
-
+    
+    private func sendToRemind() {
+        updateProgressViews(isBeforeSubmit: false)
+        progressNextQuestion(false)
+        stopSequencer()
+        
+        setQuizStatFromCurrentQuestion(true, elapsedSeconds: resetTimer())
+        
+        view.makeToast("[다시 학습하기] 알겠습니다! 조금 더 분발합시다!", duration: 2, position: .top)
+    }
 }
 
 extension FlashcardsViewController: ConductorPlay {
@@ -274,6 +275,27 @@ extension FlashcardsViewController: ConductorPlay {
             self.conductor.isPlaying = true
             btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
             playTimer = Timer.scheduledTimer(timeInterval: currentScaleInfoVM.expectedPlayTime, target: self, selector: #selector(stopSequencer), userInfo: nil, repeats: false)
+        }
+    }
+}
+
+extension FlashcardsViewController {
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let key = presses.first?.key else {
+            return
+        }
+        
+        switch key.keyCode {
+        case .keyboardSpacebar:
+            playOrStop()
+        case .keyboardReturnOrEnter:
+            sendToSuccess()
+        case .keyboardDeleteOrBackspace:
+            sendToRemind()
+        case .keyboardUpArrow, .keyboardDownArrow, .keyboardLeftArrow, .keyboardRightArrow:
+            flipTrue()
+        default:
+            break
         }
     }
 }
