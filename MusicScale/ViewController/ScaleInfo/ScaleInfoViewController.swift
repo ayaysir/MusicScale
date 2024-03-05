@@ -331,6 +331,7 @@ class ScaleInfoViewController: UIViewController {
             stopSequencer()
             return
         }
+        
         startSequencer()
     }
     
@@ -360,6 +361,16 @@ class ScaleInfoViewController: UIViewController {
         let index = Int(value)
         let noteStr = transposeDropDown.dataSource[index]
         transpose(noteStr: noteStr)
+    }
+    
+    private func toggleOrder() {
+        if segDegreesOrder.selectedSegmentIndex == 0 {
+            changeOrder(.descending)
+            segDegreesOrder.selectedSegmentIndex = 1
+        } else {
+            changeOrder(.ascending)
+            segDegreesOrder.selectedSegmentIndex = 0
+        }
     }
     
     // MARK: - render each subVCs
@@ -618,9 +629,9 @@ extension ScaleInfoViewController: ScaleInfoUpdateTVCDelegate {
 
 // MARK: - ScaleSubInfoTVCDelegate
 extension ScaleInfoViewController: ScaleSubInfoTVCDelegate {
-    
+    /// 비교군에서 스케일을 변경합니다.
     func didCompareScaleChange(_ controller: ScaleSubInfoTableViewController, index: Int) {
-        guard let comparisonViewModel = comparisonViewModel else { return }
+        guard let comparisonViewModel else { return }
         scaleInfoViewModel = comparisonViewModel.totalSegmentVMs[index]
         reloadInfoViews()
         stopSequencer()
@@ -727,6 +738,34 @@ extension ScaleInfoViewController {
         case .keyboardDownArrow:
             stepOctaveShift.value -= 1
             changeOctaveShift(Int(stepOctaveShift.value))
+        case .keyboardTab:
+            guard let infoVC else {
+                super.pressesBegan(presses, with: event)
+                return
+            }
+            
+            if key.modifierFlags == .alternate {
+                toggleOrder()
+                return
+            }
+            
+            let totalCount = infoVC.segCompareList.numberOfSegments
+            let currentIndex = infoVC.segCompareList.selectedSegmentIndex
+            let afterIndex: Int = {
+                let changed = currentIndex + (key.modifierFlags == .shift ? -1 : 1)
+                
+                if changed < 0 {
+                    return totalCount - 1
+                } else if changed >= totalCount {
+                    return 0
+                } else {
+                    return changed
+                }
+            }()
+            
+            infoVC.segCompareList.selectedSegmentIndex = afterIndex
+            didCompareScaleChange(infoVC, index: infoVC.segCompareList.selectedSegmentIndex)
+            break
         default:
             super.pressesBegan(presses, with: event)
         }
