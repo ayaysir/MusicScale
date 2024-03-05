@@ -46,6 +46,8 @@ class PianoView: UIView {
     
     let orange = CGColor(red: 250/255, green: 177/255, blue: 88/255, alpha: 1)
     
+    let whiteKeyStrings = " zxcvbnm,    ".map(String.init)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         print("PianoView is initialized from \(#function)")
@@ -105,10 +107,11 @@ class PianoView: UIView {
             context.strokePath()
         }
         
-        // 키별로 동그라미 그리기 (흰 건반 - 누르기 전)
-        for info in viewModel.pianoWhiteKeys {
+        for (index, info) in viewModel.pianoWhiteKeys.enumerated() {
+            let touchArea = info.touchArea
+            
+            // 키별로 동그라미 그리기 (흰 건반 - 누르기 전)
             if viewModel.availableKeyIndexes.contains(info.keyIndex) {
-                let touchArea = info.touchArea
                 let startY = touchArea.minY + touchArea.height * (1 - PianoViewConstants.blackKeyRatio.height)
                 let keyRect = CGRect(x: touchArea.minX, y: startY, width: touchArea.width, height: touchArea.height)
                 
@@ -127,6 +130,29 @@ class PianoView: UIView {
                 context.drawRadialGradient(gradient!, startCenter: midPoint, startRadius: 0, endCenter: midPoint, endRadius: arcRadius, options: [])
             }
             
+            // 2024-03-05: 단축키 그리기 (설정에서 관련 부분 추가하고 if문으로 감싸기)
+            if AppConfigStore.shared.isShowHWKeyboardMapping {
+                let font = UIFont.systemFont(ofSize: 16)
+                let string = NSAttributedString(
+                    string: whiteKeyStrings[index],
+                    attributes: [.font: font, .foregroundColor: UIColor.darkGray])
+                string.draw(at: .init(x: touchArea.minX + 10, y: touchArea.maxY - 25))
+            }
+            
+            // TODO: - 시작음 문자 표시
+            // if index == 1 {
+            //     switch viewModel.currentPlayableKey {
+            //     case .C, .D, .E, .F, .G, .A, .B:
+            //         let fontSize = boxOutline.width * 0.2
+            //         let font = UIFont.systemFont(ofSize: 50, weight: .bold)
+            //         let string = NSAttributedString(
+            //             string: viewModel.currentPlayableKey.textValueMixed,
+            //             attributes: [.font: font, .foregroundColor: UIColor.black])
+            //         string.draw(at: .init(x: touchArea.midX - 20, y: touchArea.maxY - 80))
+            //     default:
+            //         break
+            //     }
+            // }
         }
         
         // 현재 누르고 있는 건반 하이라이트(흰색)
@@ -157,34 +183,6 @@ class PianoView: UIView {
             }
         }
         
-        // 현재 누르고 있는 건반 하이라이트(흰색)
-        // 흰 건반인 경우 검은 건반 그리기 전에 하이라이트 해야 안겹침
-        // if let currentTouchedKey = viewModel.currentTouchedKey, currentTouchedKey.keyColor == .white {
-        //     context.addRect(currentTouchedKey.touchArea)
-        //     context.setFillColor(orange)
-        //     context.fillPath()
-        //     
-        //     // 키별로 동그라미 그리기 (흰색 건반 - 누른 후)
-        //     if viewModel.availableKeyIndexes.contains(currentTouchedKey.keyIndex) {
-        //         let touchArea = currentTouchedKey.touchArea
-        //         let startY = touchArea.minY + touchArea.height * (1 - PianoViewConstants.blackKeyRatio.height)
-        //         let keyRect = CGRect(x: touchArea.minX, y: startY, width: touchArea.width, height: touchArea.height)
-        //         let midPoint = CGPoint(x: keyRect.midX, y: keyRect.midY)
-        //         let arcRadius = keyRect.width / 2 / 1.5
-        //         
-        //         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        //         let gradientColors = [
-        //             lightYellow,
-        //             violet,
-        //         ] as CFArray
-        //         
-        //         let colorLocations: [CGFloat] = [0.5, 0.95]
-        //         let gradient = CGGradient(colorsSpace: colorSpace, colors: gradientColors, locations: colorLocations)
-        //         
-        //         context.drawRadialGradient(gradient!, startCenter: midPoint, startRadius: 0, endCenter: midPoint, endRadius: arcRadius, options: [])
-        //     }
-        // }
-        
         // 검은 건반 그리기:
         for keyRect in viewModel.blackKeyDrawPosList {
             context.setFillColor(CGColor(gray: 0.1, alpha: 1))
@@ -192,8 +190,10 @@ class PianoView: UIView {
             context.fillPath()
         }
         
-        // 키별로 동그라미 그리기 (검은 건반 - 누르기 전)
-        for info in viewModel.pianoBlackKeys {
+        for (index, info) in viewModel.pianoBlackKeys.enumerated() {
+            let touchArea = info.touchArea
+            
+            // 키별로 동그라미 그리기 (검은 건반 - 누르기 전)
             if viewModel.availableKeyIndexes.contains(info.keyIndex) {
                 let keyRect = info.touchArea
                 let midPoint = CGPoint(x: keyRect.midX, y: keyRect.midY)
@@ -209,6 +209,15 @@ class PianoView: UIView {
                 let gradient = CGGradient(colorsSpace: colorSpace, colors: gradientColors, locations: colorLocations)
                 
                 context.drawRadialGradient(gradient!, startCenter: midPoint, startRadius: 0, endCenter: midPoint, endRadius: arcRadius, options: [])
+            }
+            
+            // 2024-03-05: 단축키 그리기 (설정에서 관련 부분 추가하고 if문으로 감싸기)
+            if AppConfigStore.shared.isShowHWKeyboardMapping {
+                let font = UIFont.systemFont(ofSize: 16)
+                let string = NSAttributedString(
+                    string: viewModel.currentPlayableKey.keyInputToBlackKeyMapper[index],
+                    attributes: [.font: font, .foregroundColor: UIColor.lightGray])
+                string.draw(at: .init(x: touchArea.minX + 10, y: touchArea.maxY - 25))
             }
         }
         
@@ -238,33 +247,6 @@ class PianoView: UIView {
                 context.drawRadialGradient(gradient!, startCenter: midPoint, startRadius: 0, endCenter: midPoint, endRadius: arcRadius, options: [])
             }
         }
-        
-        // // 현재 누르고 있는 건반 하이라이트(검은색)
-        // // 검은색 건반인 경우 검은 건반 그린 이후에 하이라이트 해야 안묻힘
-        // if let currentTouchedKey = viewModel.currentTouchedKey, currentTouchedKey.keyColor == .black {
-        //     context.addRect(currentTouchedKey.touchArea)
-        //     context.setFillColor(orange)
-        //     context.fillPath()
-        //     
-        //     // 키별로 동그라미 그리기 (검은 건반 - 누른 후)
-        //     if viewModel.availableKeyIndexes.contains(currentTouchedKey.keyIndex) {
-        //         
-        //         let keyRect = currentTouchedKey.touchArea
-        //         let midPoint = CGPoint(x: keyRect.midX, y: keyRect.midY)
-        //         let arcRadius = keyRect.width / 2 / 1.5
-        //         
-        //         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        //         let gradientColors = [
-        //             lightYellow,
-        //             violet,
-        //         ] as CFArray
-        //         
-        //         let colorLocations: [CGFloat] = [0.5, 0.95]
-        //         let gradient = CGGradient(colorsSpace: colorSpace, colors: gradientColors, locations: colorLocations)
-        //         
-        //         context.drawRadialGradient(gradient!, startCenter: midPoint, startRadius: 0, endCenter: midPoint, endRadius: arcRadius, options: [])
-        //     }
-        // }
     }
 }
 

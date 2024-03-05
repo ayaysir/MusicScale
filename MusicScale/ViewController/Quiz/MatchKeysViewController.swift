@@ -611,6 +611,29 @@ extension MatchKeysViewController: PianoVCDelegate {
 }
 
 extension MatchKeysViewController {
+    var characterSet: CharacterSet {
+        var characterSet = CharacterSet(charactersIn: ",./;'")
+        characterSet.formUnion(.alphanumerics)
+        return characterSet
+    }
+    
+    func startHWKeyPress(key: UIKey) {
+        if let pianoVC,
+           let firstScalar = key.charactersIgnoringModifiers.unicodeScalars.first,
+           characterSet.contains(firstScalar) {
+            pianoVC.startKeyPressByHWKeyboard(keyValueIgnoringModifiers: key.charactersIgnoringModifiers)
+        }
+    }
+    
+    func endHWKeyPress(key: UIKey) {
+        if let pianoVC,
+           let firstScalar = key.charactersIgnoringModifiers.unicodeScalars.first,
+           characterSet.contains(firstScalar) {
+            pianoVC.endKeyPressByHWKeyboard(keyValueIgnoringModifiers: key.charactersIgnoringModifiers)
+            return
+        }
+    }
+    
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         guard let key = presses.first?.key else { return }
         
@@ -629,7 +652,12 @@ extension MatchKeysViewController {
             case .keyboardReturnOrEnter:
                 submit()
             default:
-                break
+                if (4...56) ~= key.keyCode.rawValue {
+                    startHWKeyPress(key: key)
+                    return
+                }
+                
+                super.pressesBegan(presses, with: event)
             }
         } else {
             /*
@@ -652,8 +680,23 @@ extension MatchKeysViewController {
             case .keyboardReturnOrEnter:
                 submit()
             default:
-                break
+                if (4...56) ~= key.keyCode.rawValue {
+                    startHWKeyPress(key: key)
+                    return
+                }
+                
+                super.pressesBegan(presses, with: event)
             }
         }
+    }
+    
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let key = presses.first?.key else { return }
+        
+        if (4...56) ~= key.keyCode.rawValue {
+            endHWKeyPress(key: key)
+        }
+        
+        super.pressesEnded(presses, with: event)
     }
 }

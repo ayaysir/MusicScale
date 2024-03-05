@@ -39,8 +39,8 @@ func setConfigValueOnFirstrun() {
 
 func TrackingTransparencyPermissionRequest() {
     if #available(iOS 14, *) {
-        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+        ATTrackingManager.requestTrackingAuthorization { status in
             print("requestTrackingAuthorization status:", status)
-        })
+        }
     }
 }

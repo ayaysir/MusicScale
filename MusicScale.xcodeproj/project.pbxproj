@@ -703,7 +703,6 @@
 			isa = PBXGroup;
 			children = (
 				44872B0728608CD900C20E06 /* AdMob */,
-				44872B0628607CCC00C20E06 /* MusicScale.entitlements */,
 				4455D1E4285CB40100FB344E /* Audio */,
 				4426A0082854250800942655 /* Firebase */,
 				44EE68132853A7DB00A6D810 /* Report */,
@@ -720,16 +719,12 @@
 				4463FEAB282C0E5600E7A607 /* ValueObject */,
 				44709D8A276A3BB800BBF6C9 /* ViewController */,
 				44709D88276A37F200BBF6C9 /* web */,
-				44709D55276A334F00BBF6C9 /* AppDelegate.swift */,
-				44709D57276A334F00BBF6C9 /* SceneDelegate.swift */,
-				44709D5B276A334F00BBF6C9 /* Main.storyboard */,
+				44E6FDB32B9784F900FF6972 /* Main */,
 				44709D61276A335800BBF6C9 /* Assets.xcassets */,
-				44709D63276A335800BBF6C9 /* LaunchScreen.storyboard */,
 				44EFA4B228541F0800565F93 /* GoogleService-Info.plist */,
 				44709D66276A335800BBF6C9 /* Info.plist */,
+				44872B0628607CCC00C20E06 /* MusicScale.entitlements */,
 				44709D5E276A334F00BBF6C9 /* MusicScale.xcdatamodeld */,
-				44A09A822839327F0067184E /* OnlyFirstRun.swift */,
-				44872B142862328300C20E06 /* Localization.swift */,
 				44872B1E2863673C00C20E06 /* Localizable.strings */,
 				441E96EF286590C600261D43 /* InfoPlist.strings */,
 			);
@@ -832,6 +827,19 @@
 				44FEFBF02850EE4B000402DE /* QuizEditKeyViewModel.swift */,
 			);
 			path = Quiz;
+			sourceTree = "<group>";
+		};
+		44E6FDB32B9784F900FF6972 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				44709D55276A334F00BBF6C9 /* AppDelegate.swift */,
+				44709D57276A334F00BBF6C9 /* SceneDelegate.swift */,
+				44709D5B276A334F00BBF6C9 /* Main.storyboard */,
+				44709D63276A335800BBF6C9 /* LaunchScreen.storyboard */,
+				44A09A822839327F0067184E /* OnlyFirstRun.swift */,
+				44872B142862328300C20E06 /* Localization.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		44EE68132853A7DB00A6D810 /* Report */ = {

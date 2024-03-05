@@ -12,6 +12,7 @@ extension String {
     static let cfgAppPlaybackInstrument = "APP_cfgAppPlaybackInstrument"
     static let cfgAppPianoInstrument = "APP_cfgAppPianoInstrument"
     static let cfgAppAppearance = "APP_cfgAppAppearance"
+    static let cfgAppIsShowHWKeyboardMapping = "APP_cfgAppIsShowHWKeyboardMapping"
 }
 
 struct AppConfigStore: UserDefaultsConfigurator {
@@ -35,6 +36,7 @@ struct AppConfigStore: UserDefaultsConfigurator {
         ]
         
         appAppearance = 0
+        isShowHWKeyboardMapping = false
     }
     
     
@@ -119,5 +121,10 @@ struct AppConfigStore: UserDefaultsConfigurator {
     var appAppearance: Int {
         get { return store.integer(forKey: .cfgAppAppearance) }
         set { store.set(newValue, forKey: .cfgAppAppearance) }
+    }
+    
+    var isShowHWKeyboardMapping: Bool {
+        get { store.bool(forKey: .cfgAppIsShowHWKeyboardMapping) }
+        set { store.set(newValue, forKey: .cfgAppIsShowHWKeyboardMapping) }
     }
 }

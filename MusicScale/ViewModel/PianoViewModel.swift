@@ -32,6 +32,8 @@ class PianoViewModel {
     var handlerForRefreshEntireView: (() -> ()) = {}
     var handlerForRefreshPartialView: ((CGRect) -> ()) = { _ in }
     
+    var currentPlayableKey: Music.PlayableKey = .C
+    
     var adjustKeyPosition: Int = 0 {
         didSet {
             arrangeKeys()
@@ -66,16 +68,6 @@ class PianoViewModel {
         return CGRect(x: margin.left, y: margin.top, width: frame.width - (margin.left + margin.right), height: frame.height - (margin.top + margin.bottom))
     }
     
-    // var currentTouchedKey: PianoKeyInfo? {
-    //     didSet {
-    //         if let currentTouchedKey = currentTouchedKey {
-    //             handlerForRefreshPartialView(currentTouchedKey.touchArea)
-    //         } else {
-    //             handlerForRefreshEntireView()
-    //         }
-    //     }
-    // }
-    
     private(set) var currentTouchedKeys: Set<PianoKeyInfo> = []
     
     init(frame: CGRect, divBy: Int, margin: Margin, lineWidth: CGFloat, blackKeyRatio: CGSize) {
@@ -91,7 +83,6 @@ class PianoViewModel {
     }
     
     convenience init(frame: CGRect) {
-        
         let divBy: Int = PianoViewConstants.divBy
         let margin: Margin = PianoViewConstants.margin
         let lineWidth = PianoViewConstants.lineWidth
@@ -101,7 +92,6 @@ class PianoViewModel {
     }
     
     private func arrangeKeys() {
-        
         passIndexAdjusted = PianoViewModel.passIndexInC.map { $0 + (adjustKeyPosition) }
         pianoKeys = []
         whiteKeyDrawPosList = []
@@ -112,10 +102,10 @@ class PianoViewModel {
     
     func changeKey(key: Music.PlayableKey) {
         self.adjustKeyPosition = PianoKeyHelper.adjustKeyPosition(key: key)
+        currentPlayableKey = key
     }
     
     func getKeyInfoBy(touchLocation location: CGPoint) -> PianoKeyInfo? {
-        
         // print(pianoBlackKeys)
         if let targetBlackKey = pianoBlackKeys.first(where: { $0.touchArea.contains(location) }) {
             return targetBlackKey
@@ -131,7 +121,6 @@ class PianoViewModel {
     
     // 상하 라인 정보 제공
     private func createTopBottomLine() {
-        
         let topBottomPosY = [margin.top, frame.height - margin.bottom]
         
         // 위아래 라인
@@ -144,7 +133,6 @@ class PianoViewModel {
     
     // 흰 건반 영역 추가
     private func createWhiteKeys() {
-        
         let margins: Margins = (x: margin.left + margin.right, y: margin.top + margin.bottom)
 
         let whiteKeyWidth = (frame.width - margins.x) / CGFloat(divBy)
@@ -175,7 +163,6 @@ class PianoViewModel {
     
     // 검은 건반 영역 추가
     private func createBlackKeys() {
-        
         let margins: Margins = (x: margin.left + margin.right, y: margin.top + margin.bottom)
         
         var blackKeyIndex = -2

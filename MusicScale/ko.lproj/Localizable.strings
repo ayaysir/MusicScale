@@ -122,3 +122,11 @@
 
 /* Interstitial ad (2024-03-04) */
 "Content is loading. please wait for a moment..." = "컨텐츠를 로딩중입니다. 잠시만 기다려 주세요.";
+
+/* 2024-03-06 */
+"When you connect an USB/Bluetooth keyboard to an iOS/iPadOS device, or run the app through an Apple Silicon series Mac, you can play the piano keys using the hardware keyboard. In this case, you can decide whether or not to display the corresponding hardware keys above the piano keys displayed in the app." = "iOS/iPadOS의 디바이스에 유선 키보드 또는 블루투스 키보드를 연결했을 때, 또는 Apple Silicon 시리즈의 mac을 통해 앱을 실행하는 경우, 하드웨어 키보드로 피아노 건반을 연주할 수 있습니다. 이 경우 앱에서 표시되는 피아노 건반 위에 해당하는 하드웨어 키 매핑의 표시 여부를 결정할 수 있습니다.";
+
+"Display Hardware Key on Piano" = "피아노 건반 위에 하드웨어 키보드 매핑 표시";
+"On" = "켜기";
+"Off" = "끄기";
+"Select whether hardware keyboard mappings are displayed or not on the piano" = "하드웨어 키보드 매핑을 피아노 건반 위에 표시할지 여부를 선택하세요.";

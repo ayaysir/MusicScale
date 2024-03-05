@@ -120,3 +120,11 @@
 
 /* Interstitial ad (2024-03-04) */
 "Content is loading. please wait for a moment..." = "コンテンツを読み込んでいます。 しばらくお待ちください。";
+
+/* 2024-03-06 */
+"When you connect an USB/Bluetooth keyboard to an iOS/iPadOS device, or run the app through an Apple Silicon series Mac, you can play the piano keys using the hardware keyboard. In this case, you can decide whether or not to display the corresponding hardware keys above the piano keys displayed in the app." = "iOS / iPadOSのデバイスに有線キーボードまたはBluetoothキーボードを接続したとき、またはApple Siliconシリーズのmacを介してアプリを実行している場合は、ハードウェアキーボードでピアノの鍵盤を弾くことができます。 この場合、アプリで表示されるピアノ鍵盤の上に対応するハードウェアキーマッピングを表示するかどうかを選択できます。";
+
+"Display Hardware Key on Piano" = "ピアノ鍵盤の上にハードウェアキーボードマッピングを表示";
+"On" = "オン";
+"Off" = "オフ";
+"Select whether hardware keyboard mappings are displayed or not on the piano" = "ハードウェアのキーボードマッピングをピアノの鍵盤の上に表示するかどうかを選択します。";
