@@ -474,6 +474,7 @@
                     <connections>
                         <outlet property="barBtnUpdate" destination="Bsq-Ow-kds" id="Zs1-YZ-VRO"/>
                         <outlet property="btnEnharmonic" destination="LbI-JK-IQB" id="XiJ-lg-p8J"/>
+                        <outlet property="btnExpandInfo" destination="K7l-hN-Euj" id="ay7-WS-XTn"/>
                         <outlet property="btnPlayAndStop" destination="VAm-Vf-UU4" id="22H-E3-zGC"/>
                         <outlet property="btnTranspose" destination="972-3C-Ond" id="1Lg-0B-uKU"/>
                         <outlet property="cnstPianoHeight" destination="dfP-2f-Psz" id="GFP-wG-Ltd"/>
@@ -3690,7 +3691,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="M8x-He-tZN"/>
-        <segue reference="VsC-uc-p1n"/>
+        <segue reference="6tl-C7-X1w"/>
         <segue reference="2J2-cR-7Di"/>
     </inferredMetricsTieBreakers>
     <resources>

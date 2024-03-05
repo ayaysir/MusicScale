@@ -200,6 +200,13 @@ extension PianoViewController {
         return characterSet
     }
     
+    func isArrowKey(_ key: UIKey) -> Bool {
+        switch key.keyCode {
+        case .keyboardUpArrow, .keyboardDownArrow, .keyboardLeftArrow, .keyboardRightArrow: true
+        default: false
+        }
+    }
+    
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         var didHandleEvent = false
         
@@ -221,7 +228,9 @@ extension PianoViewController {
                 startKeyPress(viewPiano.viewModel.pianoBlackKeys[firstIndex])
                 didHandleEvent = true
             }
-            else if let scalar = keyValue.unicodeScalars.first, characterSet.contains(scalar) {
+            else if !isArrowKey(key),
+                    let scalar = keyValue.unicodeScalars.first,
+                    characterSet.contains(scalar) {
                 didHandleEvent = true
             }
         }
@@ -250,7 +259,9 @@ extension PianoViewController {
                 stopKeyPress(viewPiano.viewModel.pianoBlackKeys[firstIndex])
                 didHandleEvent = true
             }
-            else if let scalar = keyValue.unicodeScalars.first, characterSet.contains(scalar) {
+            else if !isArrowKey(key),
+                    let scalar = keyValue.unicodeScalars.first,
+                    characterSet.contains(scalar) {
                 didHandleEvent = true
             }
         }

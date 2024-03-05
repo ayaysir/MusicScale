@@ -24,6 +24,7 @@ class ScaleInfoViewController: UIViewController {
     @IBOutlet weak var btnTranspose: UIButton!
     @IBOutlet weak var btnEnharmonic: UIButton!
     @IBOutlet weak var btnPlayAndStop: UIButton!
+    @IBOutlet weak var btnExpandInfo: UIButton!
     
     @IBOutlet weak var stepTranspose: UIStepper!
     @IBOutlet weak var stepTempo: UIStepper!
@@ -231,10 +232,7 @@ class ScaleInfoViewController: UIViewController {
     }
     
     @IBAction func stepActTranspose(_ sender: UIStepper) {
-        let index = Int(sender.value)
-        // print(#function, index, sender.maximumValue)
-        let noteStr = transposeDropDown.dataSource[index]
-        transpose(noteStr: noteStr)
+        changeTranspose(stepperValue: sender.value)
     }
     
     @IBAction func segActChangeOrder(_ sender: UISegmentedControl) {
@@ -249,11 +247,7 @@ class ScaleInfoViewController: UIViewController {
     }
     
     @IBAction func btnActPlayAndStop(_ sender: UITapGestureRecognizer) {
-        if conductor.sequencer.isPlaying {
-            stopSequencer()
-            return
-        }
-        startSequencer()
+        playAndStop()
     }
     
     @objc func btnPlayLongPressed(_ gesture: UILongPressGestureRecognizer) {
@@ -278,16 +272,7 @@ class ScaleInfoViewController: UIViewController {
     
     @IBAction func btnActExpandInfo(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        
-        if sender.isSelected {
-            sender.tintColor = .systemYellow
-            // 0으로 설정시 크기 복구가 안됨
-            setContainersMultiplier(sheetMultipler: 0.0001, pianoMultiplier: 0.0001)
-        } else {
-            sender.tintColor = .systemGray3
-            updateMultiplierRefelectOrientation()
-        }
-        redrawPianoViewWhenOrientationChange()
+        expandInfo(isSelected: sender.isSelected)
     }
     
     @IBAction func btnActCompare(_ sender: Any) {
@@ -329,6 +314,44 @@ class ScaleInfoViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    // MARK: - hardware keyboard command
+    
+    private func playAndStop() {
+        if conductor.sequencer.isPlaying {
+            stopSequencer()
+            return
+        }
+        startSequencer()
+    }
+    
+    private func playLongPress() {
+        if conductor.sequencer.isPlaying {
+            return
+        }
+        
+        Vibration.warning.vibrate()
+        startAllNotesAtSameTime()
+    }
+    
+    private func expandInfo(isSelected: Bool) {
+        if isSelected {
+            btnExpandInfo.tintColor = .systemYellow
+            // 0으로 설정시 크기 복구가 안됨
+            setContainersMultiplier(sheetMultipler: 0.0001, pianoMultiplier: 0.0001)
+        } else {
+            btnExpandInfo.tintColor = .systemGray3
+            updateMultiplierRefelectOrientation()
+        }
+        
+        redrawPianoViewWhenOrientationChange()
+    }
+    
+    private func changeTranspose(stepperValue value: Double) {
+        let index = Int(value)
+        let noteStr = transposeDropDown.dataSource[index]
+        transpose(noteStr: noteStr)
     }
     
     // MARK: - render each subVCs
@@ -667,6 +690,38 @@ extension ScaleInfoViewController {
             changeEnharmonicMode(mode: .init(rawValue: index)!)
           }
         _ = dropDownCommon(dropDown: targetDropDown, dataSource: dataSource, selectionAction: selectionAction)
+    }
+}
+
+extension ScaleInfoViewController {
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let key = presses.first?.key else { return }
+        
+        switch key.keyCode {
+        case .keyboardSpacebar:
+            if key.modifierFlags == .alternate {
+                playLongPress()
+            } else {
+                playAndStop()
+            }
+        case .keyboardReturnOrEnter:
+            btnExpandInfo.isSelected = !btnExpandInfo.isSelected
+            expandInfo(isSelected: btnExpandInfo.isSelected)
+        case .keyboardLeftArrow:
+            stepTranspose.value -= 1
+            changeTranspose(stepperValue: stepTranspose.value)
+        case .keyboardRightArrow:
+            stepTranspose.value += 1
+            changeTranspose(stepperValue: stepTranspose.value)
+        case .keyboardUpArrow:
+            stepOctaveShift.value += 1
+            changeOctaveShift(Int(stepOctaveShift.value))
+        case .keyboardDownArrow:
+            stepOctaveShift.value -= 1
+            changeOctaveShift(Int(stepOctaveShift.value))
+        default:
+            super.pressesBegan(presses, with: event)
+        }
     }
 }
 
