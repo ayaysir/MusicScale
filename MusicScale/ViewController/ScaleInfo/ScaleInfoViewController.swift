@@ -713,6 +713,12 @@ extension ScaleInfoViewController {
 }
 
 extension ScaleInfoViewController {
+    var characterSet: CharacterSet {
+        var characterSet = CharacterSet(charactersIn: ",./;'")
+        characterSet.formUnion(.alphanumerics)
+        return characterSet
+    }
+    
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         guard let key = presses.first?.key else { return }
         
@@ -765,10 +771,33 @@ extension ScaleInfoViewController {
             
             infoVC.segCompareList.selectedSegmentIndex = afterIndex
             didCompareScaleChange(infoVC, index: infoVC.segCompareList.selectedSegmentIndex)
-            break
+        
+            
         default:
+            if (4...56) ~= key.keyCode.rawValue,
+               let pianoVC,
+               let firstScalar = key.charactersIgnoringModifiers.unicodeScalars.first,
+               characterSet.contains(firstScalar) {
+                pianoVC.startKeyPressByHWKeyboard(keyValueIgnoringModifiers: key.charactersIgnoringModifiers)
+                return
+            }
+            
             super.pressesBegan(presses, with: event)
         }
+    }
+    
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let key = presses.first?.key else { return }
+        
+        if (4...56) ~= key.keyCode.rawValue,
+           let pianoVC,
+           let firstScalar = key.charactersIgnoringModifiers.unicodeScalars.first,
+           characterSet.contains(firstScalar) {
+            pianoVC.endKeyPressByHWKeyboard(keyValueIgnoringModifiers: key.charactersIgnoringModifiers)
+            return
+        }
+        
+        super.pressesEnded(presses, with: event)
     }
 }
 
