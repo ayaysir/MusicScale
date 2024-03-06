@@ -130,3 +130,19 @@
 "On" = "켜기";
 "Off" = "끄기";
 "Select whether hardware keyboard mappings are displayed or not on the piano" = "하드웨어 키보드 매핑을 피아노 건반 위에 표시할지 여부를 선택하세요.";
+
+"If you have already purchased a product but the product is not applied due to reinstallation of the app, you can use Restore Purchase History. This only works if you have previously purchased the item." = "이미 상품을 구매하였으나 앱의 재설치 등으로 인해 제품이 적용되지 않은 경우, 구입 목록 복원을 이용할 수 있습니다. 이전에 상품을 구매한 경우에만 작동합니다.";
+"Restore Purchase History" = "구입 목록 복원";
+"Purchasing this product will permanently remove all banner and full screen ads from the app. Use the app comfortably without ads!" = "이 상품을 구입하면 앱에서 표시되는 모든 배너 광고 및 전체 화면 광고를 영구적으로 제거할 수 있습니다. 광고 없이 쾌적하게 앱을 이용하세요!";
+"In-app product I. Introduction" = "앱 내 상품 I. 소개";
+
+"Processing in-app purchase operation.\nPlease wait..." = "결제 작업을 처리중입니다.\n잠시만 기다려 주세요...";
+"Your purchase has been completed. You will no longer see ads in the app. If ads are not removed from some screens, force quit the app and relaunch it." = "구매 완료되었습니다. 이제 앱에서 광고가 표시되지 않습니다. 일부 화면에서 광고가 제거되지 않은 경우 앱을 강제 종료 후 다시 실행해주세요.";
+"Purchase completed" = "구매 완료";
+"Purchase failed: Please try again." = "구매 실패: 다시 시도해주세요.";
+
+"Purchased" = "구입 완료";
+"Not Purchased" = "미구입";
+
+"Success! Let’s keep this momentum going!" = "[확인] 성공했습니다! 이 기세를 이어갑시다!";
+"Again! Let's try harder!" = "[다시 학습하기] 알겠습니다! 조금 더 분발합시다!";

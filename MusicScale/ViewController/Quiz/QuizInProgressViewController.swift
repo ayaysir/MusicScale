@@ -40,6 +40,14 @@ class QuizInProgressViewController: UIViewController {
         circlularSlider.endPointValue = forecastPercent
         let displayValue = Int(round(forecastPercent * 100))
         lblPercent.text = "\(displayValue)%"
+        
+        NotificationCenter.default.removeObserver(self, name: .IAPHelperPurchaseNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleIAPPurchase(_:)), name: .IAPHelperPurchaseNotification, object: nil)
+    }
+    
+    @objc func handleIAPPurchase(_ notification: Notification) {
+        viewBannerContainer.removeFromSuperview()
+        interstitial = nil
     }
     
     override func viewWillDisappear(_ animated: Bool) {

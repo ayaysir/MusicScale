@@ -313,7 +313,7 @@
 "X1c-ti-nUZ.text" = "제목";
 
 /* Class = "UITableViewSection"; headerTitle = "Available Soon"; ObjectID = "X4k-Io-zGQ"; */
-"X4k-Io-zGQ.headerTitle" = "곧 이용할 수 있습니다";
+"X4k-Io-zGQ.headerTitle" = "앱 내 결제";
 
 /* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "XEK-LT-H7l"; */
 "XEK-LT-H7l.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
@@ -482,7 +482,7 @@
 "qy4-OM-nif.normalTitle" = "정답";
 
 /* Class = "UILabel"; text = "🙇‍♂️"; ObjectID = "r9T-fX-9kM"; */
-"r9T-fX-9kM.text" = "🙇‍♂️";
+"r9T-fX-9kM.text" = "구입 목록 복원";
 
 /* Class = "UITableViewSection"; headerTitle = "Metadata"; ObjectID = "rAN-Wf-0d2"; */
 "rAN-Wf-0d2.headerTitle" = "메타데이터";

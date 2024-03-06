@@ -8,6 +8,55 @@
 import Foundation
 import GoogleMobileAds
 
+enum AdsError: Error {
+    case showAdNotAllowed
+}
+
+class AdsManager: NSObject {
+    private override init() {}
+    static var shared = AdsManager()
+    
+    /// 배포 시 반드시 true로
+    static var PRODUCT_MODE: Bool = true
+    
+    /// 광고 제거 구입했나요?
+    static var isPurchasedRemoveAd: Bool {
+        UserDefaults.standard.bool(forKey: InAppProducts.productIDs.first!)
+    }
+    
+    /// 최종 광고 표시 여부
+    static var SHOW_AD: Bool {
+        return PRODUCT_MODE && !isPurchasedRemoveAd
+    }
+}
+
+extension AdsManager: GADBannerViewDelegate {
+    private var showAd: Bool {
+        AdsManager.SHOW_AD
+    }
+    
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        // print(#function, bannerView.rootViewController)
+    }
+    
+    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
+        
+    }
+    
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        // print(#function, error.localizedDescription)
+        
+        NotificationCenter.default.post(name: .networkIsOffline, object: nil)
+        
+        switch bannerView.rootViewController {
+        case is ScaleListTableViewController:
+            break
+        default:
+            break
+        }
+    }
+}
+
 /*
  하단 광고 넣는 방법
  == Delegate 사용하지 않는 경우 ==
@@ -59,7 +108,6 @@ import GoogleMobileAds
  - MatchKeysViewController (뒤로가기)
  
  */
-
 @discardableResult
 func setupBannerAds(_ viewController: UIViewController, container: UIView? = nil) -> GADBannerView? {
     
@@ -95,10 +143,6 @@ func setupBannerAds(_ viewController: UIViewController, container: UIView? = nil
     return bannerView
 }
 
-enum AdsError: Error {
-    case showAdNotAllowed
-}
-
 /**
  전체 화면 광고: 사용 방법
  1. 사용할 뷰컨트롤러의 멤버 변수로 `private var interstitial: GADInterstitialAd?` 추가
@@ -112,41 +156,4 @@ func setupFullAds(_ viewController: UIViewController) async throws -> GADInterst
     
     let request = GADRequest()
     return try await GADInterstitialAd.load(withAdUnitID: "ca-app-pub-6364767349592629/6979389977", request: request)
-}
-
-class AdsManager: NSObject, GADBannerViewDelegate {
-    
-    static var shared = AdsManager()
-    
-    /// 배포 시 반드시 true로
-    static var PRODUCT_MODE: Bool = false
-    static var SHOW_AD: Bool {
-        // ... //
-        return PRODUCT_MODE && true
-    }
-    
-    private var showAd: Bool {
-        AdsManager.SHOW_AD
-    }
-    
-    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        // print(#function, bannerView.rootViewController)
-    }
-    
-    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
-        
-    }
-    
-    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
-        // print(#function, error.localizedDescription)
-        
-        NotificationCenter.default.post(name: .networkIsOffline, object: nil)
-        
-        switch bannerView.rootViewController {
-        case is ScaleListTableViewController:
-            break
-        default:
-            break
-        }
-    }
 }

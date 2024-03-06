@@ -162,6 +162,7 @@
 		44DE2C3E2AACBE9F000464E9 /* MIDIListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DE2C3D2AACBE9F000464E9 /* MIDIListener.swift */; };
 		44E0ACF1285F0BC6008BBB82 /* NSLayoutConstraint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E0ACF0285F0BC6008BBB82 /* NSLayoutConstraint+.swift */; };
 		44E0ACF3285F3FCD008BBB82 /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E0ACF2285F3FCC008BBB82 /* UIDevice+.swift */; };
+		44E6FDB62B9817F300FF6972 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E6FDB52B9817F300FF6972 /* IAPHelper.swift */; };
 		44E7A07528467692005C7909 /* SearchCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E7A07428467692005C7909 /* SearchCategory.swift */; };
 		44EE68152853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md in Resources */ = {isa = PBXBuildFile; fileRef = 44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */; };
 		44EFA4B328541F0800565F93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44EFA4B228541F0800565F93 /* GoogleService-Info.plist */; };
@@ -354,6 +355,7 @@
 		44DE2C3D2AACBE9F000464E9 /* MIDIListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIListener.swift; sourceTree = "<group>"; };
 		44E0ACF0285F0BC6008BBB82 /* NSLayoutConstraint+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+.swift"; sourceTree = "<group>"; };
 		44E0ACF2285F3FCC008BBB82 /* UIDevice+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
+		44E6FDB52B9817F300FF6972 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		44E7A07428467692005C7909 /* SearchCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategory.swift; sourceTree = "<group>"; };
 		44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Quiz_IntroVC와 InProgressVC에서 무한루프.md"; sourceTree = "<group>"; };
 		44EFA4B228541F0800565F93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -702,6 +704,7 @@
 		44709D54276A334F00BBF6C9 /* MusicScale */ = {
 			isa = PBXGroup;
 			children = (
+				44E6FDB42B9817E700FF6972 /* IAP */,
 				44872B0728608CD900C20E06 /* AdMob */,
 				4455D1E4285CB40100FB344E /* Audio */,
 				4426A0082854250800942655 /* Firebase */,
@@ -840,6 +843,14 @@
 				44872B142862328300C20E06 /* Localization.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		44E6FDB42B9817E700FF6972 /* IAP */ = {
+			isa = PBXGroup;
+			children = (
+				44E6FDB52B9817F300FF6972 /* IAPHelper.swift */,
+			);
+			path = IAP;
 			sourceTree = "<group>";
 		};
 		44EE68132853A7DB00A6D810 /* Report */ = {
@@ -1216,6 +1227,7 @@
 				4417252D284B8FC60003CDC7 /* QuizQuestion.swift in Sources */,
 				449AF427282EC008008273CA /* ScaleInfoViewController.swift in Sources */,
 				445FA4C5284E60D70008D621 /* FlashcardsViewController.swift in Sources */,
+				44E6FDB62B9817F300FF6972 /* IAPHelper.swift in Sources */,
 				445FA4CC284F547D0008D621 /* InitViewControllerFromStoryboard.swift in Sources */,
 				445FA4B9284BAE540008D621 /* Array+.swift in Sources */,
 				4455D1D2285A448200FB344E /* MIDISoundGenerator.swift in Sources */,

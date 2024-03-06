@@ -41,7 +41,7 @@ class QuizIntroTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // print(try? QuizStatsCDService.shared.readEntityList())
+        super.viewWillAppear(animated)
         
         // 기존 저장 LeitnerSystem 오브젝트가 있는 경우 리다리렉트
         if quizStore.savedLeitnerSystem != nil {
@@ -77,6 +77,13 @@ class QuizIntroTableViewController: UITableViewController {
         
         // enharmonic Mode
         lblEnharmonicModeDetail.text = quizStore.enharmonicMode.titleValue
+        
+        NotificationCenter.default.removeObserver(self, name: .IAPHelperPurchaseNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleIAPPurchase(_:)), name: .IAPHelperPurchaseNotification, object: nil)
+    }
+    
+    @objc func handleIAPPurchase(_ notification: Notification) {
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {

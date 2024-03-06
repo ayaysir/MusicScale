@@ -228,7 +228,7 @@ class FlashcardsViewController: InQuizViewController {
         
         setQuizStatFromCurrentQuestion(true, elapsedSeconds: resetTimer())
         
-        view.makeToast("[확인] 성공했습니다! 이 기세를 이어갑시다!", duration: 2, position: .top)
+        view.makeToast("Success! Let’s keep this momentum going!".localized(), duration: 1.6, position: .top)
     }
     
     private func sendToRemind() {
@@ -238,7 +238,7 @@ class FlashcardsViewController: InQuizViewController {
         
         setQuizStatFromCurrentQuestion(true, elapsedSeconds: resetTimer())
         
-        view.makeToast("[다시 학습하기] 알겠습니다! 조금 더 분발합시다!", duration: 2, position: .top)
+        view.makeToast("Again! Let's try harder!".localized(), duration: 1.6, position: .top)
     }
 }
 

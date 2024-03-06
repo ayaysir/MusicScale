@@ -22,6 +22,7 @@ class ArchiveMainTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         if viewModel == nil {
             viewModel = PostListViewModel()
@@ -44,8 +45,15 @@ class ArchiveMainTableViewController: UITableViewController {
                 self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
             }
         }
+        
+        NotificationCenter.default.removeObserver(self, name: .IAPHelperPurchaseNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleIAPPurchase(_:)), name: .IAPHelperPurchaseNotification, object: nil)
     }
 
+    @objc func handleIAPPurchase(_ notification: Notification) {
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

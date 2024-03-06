@@ -115,6 +115,17 @@ class ScaleListTableViewController: UITableViewController {
         
         // NotificationCenter.default.removeObserver(self, name: .networkIsOffline, object: nil)
         // NotificationCenter.default.addObserver(self, selector: #selector(a), name: .networkIsOffline, object: nil)
+        
+        NotificationCenter.default.removeObserver(self, name: .IAPHelperPurchaseNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleIAPPurchase(_:)), name: .IAPHelperPurchaseNotification, object: nil)
+        
+        // @objc func handleIAPPurchase(_ notification: Notification) {
+        //     tableView.reloadData()
+        // }
+    }
+    
+    @objc func handleIAPPurchase(_ notification: Notification) {
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

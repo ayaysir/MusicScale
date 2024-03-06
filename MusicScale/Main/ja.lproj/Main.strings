@@ -313,7 +313,7 @@
 "X1c-ti-nUZ.text" = "題名";
 
 /* Class = "UITableViewSection"; headerTitle = "Available Soon"; ObjectID = "X4k-Io-zGQ"; */
-"X4k-Io-zGQ.headerTitle" = "すぐに利用可能";
+"X4k-Io-zGQ.headerTitle" = "アプリ内商品の購入";
 
 /* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "XEK-LT-H7l"; */
 "XEK-LT-H7l.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
@@ -482,7 +482,7 @@
 "qy4-OM-nif.normalTitle" = "答え";
 
 /* Class = "UILabel"; text = "🙇‍♂️"; ObjectID = "r9T-fX-9kM"; */
-"r9T-fX-9kM.text" = "🙇‍♂️";
+"r9T-fX-9kM.text" = "購入リストの復元";
 
 /* Class = "UITableViewSection"; headerTitle = "Metadata"; ObjectID = "rAN-Wf-0d2"; */
 "rAN-Wf-0d2.headerTitle" = "メタデータ";
