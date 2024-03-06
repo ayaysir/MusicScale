@@ -449,7 +449,7 @@
 "lfh-7v-VfA.text" = "題名";
 
 /* Class = "UILabel"; text = "Licenses"; ObjectID = "mlg-Rx-erV"; */
-"mlg-Rx-erV.text" = "ライセンス";
+"mlg-Rx-erV.text" = "新機能とショートカットテーブル";
 
 /* Class = "UITableViewSection"; headerTitle = "Note List"; ObjectID = "nCv-Cl-OqY"; */
 "nCv-Cl-OqY.headerTitle" = "ノートリスト";
@@ -583,3 +583,5 @@
 
 /* 2024-03-06 */
 "Uf2-uc-MQh.text" = "ピアノの上にHWキーを表示";
+
+"Jym-0J-hpL.text" = "ライセンス";

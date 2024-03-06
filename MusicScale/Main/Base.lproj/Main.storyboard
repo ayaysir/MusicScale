@@ -1460,7 +1460,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="316.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Licenses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mlg-Rx-erV">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="New Features &amp; Shortcuts Table" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mlg-Rx-erV">
                                                     <rect key="frame" x="16" y="0.0" width="292.5" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
@@ -1471,11 +1471,32 @@
                                         </tableViewCellContentView>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
                                         <connections>
-                                            <segue destination="YUB-VH-J3c" kind="show" identifier="LicenseSegue" id="M8x-He-tZN"/>
+                                            <segue destination="YUB-VH-J3c" kind="show" identifier="NewFeatureSegue" id="ejH-Eh-ga8"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Jym-0J-hpL" style="IBUITableViewCellStyleDefault" id="Xl4-fs-Jwe">
+                                        <rect key="frame" x="16" y="658.5" width="343" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xl4-fs-Jwe" id="0al-P0-j8l">
+                                            <rect key="frame" x="0.0" y="0.0" width="316.5" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Licenses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jym-0J-hpL">
+                                                    <rect key="frame" x="16" y="0.0" width="292.5" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="tintColor" systemColor="systemGray3Color"/>
+                                        <connections>
+                                            <segue destination="YUB-VH-J3c" kind="show" identifier="LicenseSegue" id="vqg-rm-2GU"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="MYK-91-rGs" style="IBUITableViewCellStyleDefault" id="TQh-Bq-cgE">
-                                        <rect key="frame" x="16" y="658.5" width="343" height="43.5"/>
+                                        <rect key="frame" x="16" y="702" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TQh-Bq-cgE" id="dQA-bt-Eu2">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
@@ -1493,7 +1514,7 @@
                                         <color key="tintColor" systemColor="systemGray3Color"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="SdA-3a-3ZF" style="IBUITableViewCellStyleDefault" id="nmX-lt-PIO">
-                                        <rect key="frame" x="16" y="702" width="343" height="43.5"/>
+                                        <rect key="frame" x="16" y="745.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nmX-lt-PIO" id="lvZ-OH-nq2">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
@@ -1511,7 +1532,7 @@
                                         <color key="tintColor" systemColor="systemGray3Color"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ilC-iq-SWi" style="IBUITableViewCellStyleDefault" id="n5b-Oc-FP3">
-                                        <rect key="frame" x="16" y="745.5" width="343" height="43.5"/>
+                                        <rect key="frame" x="16" y="789" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n5b-Oc-FP3" id="ehU-ha-MpD">
                                             <rect key="frame" x="0.0" y="0.0" width="316.5" height="43.5"/>
@@ -1536,7 +1557,7 @@
                             <tableViewSection headerTitle="" id="V8T-jG-Tfa">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="9oY-9A-mky">
-                                        <rect key="frame" x="16" y="829" width="343" height="50"/>
+                                        <rect key="frame" x="16" y="872.5" width="343" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9oY-9A-mky" id="NgE-h3-jfm">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
@@ -3741,7 +3762,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="M8x-He-tZN"/>
+        <segue reference="ejH-Eh-ga8"/>
         <segue reference="6tl-C7-X1w"/>
         <segue reference="2J2-cR-7Di"/>
     </inferredMetricsTieBreakers>

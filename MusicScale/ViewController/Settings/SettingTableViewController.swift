@@ -31,8 +31,8 @@ class SettingTableViewController: UITableViewController {
     private let restorePurchasesCellIndexPath = IndexPath(row: 0, section: 2)
     private let firstIAPProductCellIndexPath = IndexPath(row: 1, section: 2)
     
-    private let githubLinkCell = IndexPath(row: 3, section: 3)
-    private let sendMailCell = IndexPath(row: 2, section: 3)
+    private let sendMailCell = IndexPath(row: 3, section: 3)
+    private let githubLinkCell = IndexPath(row: 4, section: 3)
     
     private let SECTION_BANNER = 4
     // ==============================================
@@ -66,9 +66,9 @@ class SettingTableViewController: UITableViewController {
             let selectVC = segue.destination as! InstrumentTableViewController
             let place = sender as! InstrumentTableViewController.Place
             selectVC.place = place
-        case "HelpSegue", "LicenseSegue":
+        case "HelpSegue", "LicenseSegue", "NewFeatureSegue":
             let webVC = segue.destination as! PDFViewController
-            webVC.category = segue.identifier == "HelpSegue" ? .help : .licenses
+            webVC.category = segue.identifier == "HelpSegue" ? .help : segue.identifier == "LicenseSegue" ? .licenses : .newFeatureAndShortcuts
         default:
             break
         }

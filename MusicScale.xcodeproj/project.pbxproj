@@ -163,6 +163,8 @@
 		44E0ACF1285F0BC6008BBB82 /* NSLayoutConstraint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E0ACF0285F0BC6008BBB82 /* NSLayoutConstraint+.swift */; };
 		44E0ACF3285F3FCD008BBB82 /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E0ACF2285F3FCC008BBB82 /* UIDevice+.swift */; };
 		44E6FDB62B9817F300FF6972 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E6FDB52B9817F300FF6972 /* IAPHelper.swift */; };
+		44E6FDB92B985BA600FF6972 /* MusicScale - ShortcutTable - en.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 44E6FDB72B985BA600FF6972 /* MusicScale - ShortcutTable - en.pdf */; };
+		44E6FDBA2B985BA600FF6972 /* MusicScale - ShortcutTable - ko.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 44E6FDB82B985BA600FF6972 /* MusicScale - ShortcutTable - ko.pdf */; };
 		44E7A07528467692005C7909 /* SearchCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E7A07428467692005C7909 /* SearchCategory.swift */; };
 		44EE68152853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md in Resources */ = {isa = PBXBuildFile; fileRef = 44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */; };
 		44EFA4B328541F0800565F93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44EFA4B228541F0800565F93 /* GoogleService-Info.plist */; };
@@ -356,6 +358,8 @@
 		44E0ACF0285F0BC6008BBB82 /* NSLayoutConstraint+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+.swift"; sourceTree = "<group>"; };
 		44E0ACF2285F3FCC008BBB82 /* UIDevice+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
 		44E6FDB52B9817F300FF6972 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
+		44E6FDB72B985BA600FF6972 /* MusicScale - ShortcutTable - en.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "MusicScale - ShortcutTable - en.pdf"; sourceTree = "<group>"; };
+		44E6FDB82B985BA600FF6972 /* MusicScale - ShortcutTable - ko.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "MusicScale - ShortcutTable - ko.pdf"; sourceTree = "<group>"; };
 		44E7A07428467692005C7909 /* SearchCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategory.swift; sourceTree = "<group>"; };
 		44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Quiz_IntroVC와 InProgressVC에서 무한루프.md"; sourceTree = "<group>"; };
 		44EFA4B228541F0800565F93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -426,6 +430,7 @@
 		440637F5283082A800875E77 /* ResourceData */ = {
 			isa = PBXGroup;
 			children = (
+				44E6FDBB2B985BB000FF6972 /* ShortcutTable */,
 				441E96F1286596F300261D43 /* Manual JPEG */,
 				4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */,
 				4494B475293E41430009548C /* MusicScale - ko.pdf */,
@@ -853,6 +858,15 @@
 			path = IAP;
 			sourceTree = "<group>";
 		};
+		44E6FDBB2B985BB000FF6972 /* ShortcutTable */ = {
+			isa = PBXGroup;
+			children = (
+				44E6FDB72B985BA600FF6972 /* MusicScale - ShortcutTable - en.pdf */,
+				44E6FDB82B985BA600FF6972 /* MusicScale - ShortcutTable - ko.pdf */,
+			);
+			path = ShortcutTable;
+			sourceTree = "<group>";
+		};
 		44EE68132853A7DB00A6D810 /* Report */ = {
 			isa = PBXGroup;
 			children = (
@@ -1030,6 +1044,8 @@
 				441E97092865974900261D43 /* MusicScale - English.005.jpeg in Resources */,
 				441E970A2865974900261D43 /* MusicScale - English.002.jpeg in Resources */,
 				4494B477293E41440009548C /* MusicScale - ko.pdf in Resources */,
+				44E6FDB92B985BA600FF6972 /* MusicScale - ShortcutTable - en.pdf in Resources */,
+				44E6FDBA2B985BA600FF6972 /* MusicScale - ShortcutTable - ko.pdf in Resources */,
 				441E96E62864AD5600261D43 /* MusicScale - en.pdf in Resources */,
 				441E97032865974900261D43 /* MusicScale - English.001.jpeg in Resources */,
 			);

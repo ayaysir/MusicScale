@@ -449,7 +449,7 @@
 "lfh-7v-VfA.text" = "제목";
 
 /* Class = "UILabel"; text = "Licenses"; ObjectID = "mlg-Rx-erV"; */
-"mlg-Rx-erV.text" = "라이센스";
+"mlg-Rx-erV.text" = "새로운 기능 & 단축키 표";
 
 /* Class = "UITableViewSection"; headerTitle = "Note List"; ObjectID = "nCv-Cl-OqY"; */
 "nCv-Cl-OqY.headerTitle" = "음표 목록";
@@ -584,3 +584,5 @@
 
 /* 2024-03-06 */
 "Uf2-uc-MQh.text" = "피아노에 하드웨어 키 표시";
+
+"Jym-0J-hpL.text" = "라이선스";
