@@ -146,7 +146,7 @@
 		44A09A2C2832A3C90067184E /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44A09A2B2832A3C90067184E /* AudioKit */; };
 		44A09A2F2832A40A0067184E /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44A09A2E2832A40A0067184E /* SoundpipeAudioKit */; };
 		44A09A392832B7D20067184E /* VintageDreamsWaves-v2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */; };
-		44A09A3B283559190067184E /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A3A283559190067184E /* Sequencer.swift */; };
+		44A09A3B283559190067184E /* NoteSequencerConductor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A3A283559190067184E /* NoteSequencerConductor.swift */; };
 		44A09A7D283808C90067184E /* ScaleInfoVCConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A7C283808C90067184E /* ScaleInfoVCConfigStore.swift */; };
 		44A09A7F283929FB0067184E /* EnharmonicMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A7E283929FB0067184E /* EnharmonicMode.swift */; };
 		44A09A8128392C0B0067184E /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A09A8028392C0B0067184E /* UserDefaults+.swift */; };
@@ -341,7 +341,7 @@
 		449AF426282EC008008273CA /* ScaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewController.swift; sourceTree = "<group>"; };
 		44A09A28283293680067184E /* ScaleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoViewModel.swift; sourceTree = "<group>"; };
 		44A09A382832B7850067184E /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
-		44A09A3A283559190067184E /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
+		44A09A3A283559190067184E /* NoteSequencerConductor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSequencerConductor.swift; sourceTree = "<group>"; };
 		44A09A7C283808C90067184E /* ScaleInfoVCConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoVCConfigStore.swift; sourceTree = "<group>"; };
 		44A09A7E283929FB0067184E /* EnharmonicMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnharmonicMode.swift; sourceTree = "<group>"; };
 		44A09A8028392C0B0067184E /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
@@ -542,7 +542,7 @@
 			children = (
 				4455D1CD285A2CB800FB344E /* MIDIInstrumentList.swift */,
 				4455D1D1285A448200FB344E /* MIDISoundGenerator.swift */,
-				44A09A3A283559190067184E /* Sequencer.swift */,
+				44A09A3A283559190067184E /* NoteSequencerConductor.swift */,
 				44FEFBF42853470A000402DE /* AvailableSoundInSilentMode.swift */,
 				4455D1D3285A44BE00FB344E /* MIDICommon.swift */,
 				44DE2C3D2AACBE9F000464E9 /* MIDIListener.swift */,
@@ -1204,7 +1204,7 @@
 				4475CB572831501600B9D204 /* Sequence+.swift in Sources */,
 				440637F2283003DE00875E77 /* ScaleInfoListViewModel.swift in Sources */,
 				4426A00A2854251B00942655 /* FirebasePostManager.swift in Sources */,
-				44A09A3B283559190067184E /* Sequencer.swift in Sources */,
+				44A09A3B283559190067184E /* NoteSequencerConductor.swift in Sources */,
 				44A09A832839327F0067184E /* OnlyFirstRun.swift in Sources */,
 				445FA4CE284F5D010008D621 /* InQuizViewController.swift in Sources */,
 				4463FEB1282C24CA00E7A607 /* PianoKeyInfo.swift in Sources */,

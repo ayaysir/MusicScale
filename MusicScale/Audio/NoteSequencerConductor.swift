@@ -1,5 +1,5 @@
 //
-//  Sequencer.swift
+//  NoteSequencerConductor.swift
 //  MusicScale
 //
 //  Created by yoonbumtae on 2022/05/19.
@@ -30,7 +30,7 @@ class NoteSequencerConductor: ObservableObject {
     }
     
     func start() {
-        startEngineOnly()
+        startEngine()
         
         do {
             let preset = AppConfigStore.shared.playbackInstrument
@@ -47,11 +47,11 @@ class NoteSequencerConductor: ObservableObject {
         let _ = sequencer.newTrack()!
     }
     
-    func pause() {
+    func pauseEngine() {
         engine.pause()
     }
     
-    func startEngineOnly() {
+    func startEngine() {
         do {
             try engine.start()
         } catch {

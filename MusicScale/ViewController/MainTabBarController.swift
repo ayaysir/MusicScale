@@ -25,15 +25,17 @@ class MainTabBarController: UITabBarController {
     }
     
     @objc func didActivated(_ notification: Notification? = nil) {
+        // print(#function)
         // AwakeFromBackground: 테스트 완료되면 주석처리
         // simpleAlert(self, message: "didActivated: \(String(describing: notification?.name))")
         
-        GlobalConductor.shared.startEngineOnly()
+        GlobalConductor.shared.startEngine()
         GlobalGenerator.shared.startEngine()
     }
     
     @objc func willResignActive() {
-        GlobalConductor.shared.pause()
+        // print(#function)
+        GlobalConductor.shared.pauseEngine()
         GlobalGenerator.shared.pauseEngine()
     }
     
@@ -46,7 +48,6 @@ class MainTabBarController: UITabBarController {
         }
         
         if typeKey == .ended {
-            // GlobalConductor.shared.startEngineOnly()
             didActivated()
         }
     }
