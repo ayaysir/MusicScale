@@ -79,6 +79,8 @@ class SettingTableViewController: UITableViewController {
   }
 }
 
+// MARK: - TableView delegates
+
 extension SettingTableViewController {
   override func tableView(
     _ tableView: UITableView,
@@ -165,19 +167,24 @@ extension SettingTableViewController {
     
     if let iapProducts,
        indexPath.section == SECTION_IAP,
-       indexPath.row != 0,
-       cell.contentView.subviews.count >= 2,
-       let firstLabel = cell.contentView.subviews.first as? UILabel,
-       let secondLabel = cell.contentView.subviews[safe: 1] as? UILabel {
-      
-      let product = iapProducts[indexPath.row - 1]
-      firstLabel.text = product.localizedTitle + " (\(product.localizedPrice ?? ""))"
+       indexPath.row != restorePurchasesCellIndexPath.row,
+       let product = iapProducts[safe: indexPath.row] {
       
       let isPurchased = InAppProducts.helper.isProductPurchased(product.productIdentifier)
-      secondLabel.text = isPurchased ? "Purchased".localized() : "Not Purchased".localized()
-      secondLabel.textColor = isPurchased ? .systemGreen : nil
       
-      return cell
+      // 89 / 171 / 225
+      cell.tintColor = isPurchased ? .highlightAccessoryTint : nil
+      
+      if let lblIapProductName = cell.contentView.subviews.first as? UILabel {
+        lblIapProductName.text = product.localizedTitle + " (\(product.localizedPrice ?? ""))"
+        lblIapProductName.textColor = isPurchased ? .lightGray : nil
+      }
+      
+      if let lblPurchaseStatus = cell.contentView.subviews[safe: 1] as? UILabel {
+        
+        lblPurchaseStatus.text = isPurchased ? "Purchased".localized() : "Not Purchased".localized()
+        lblPurchaseStatus.textColor = isPurchased ? .systemGreen : .darkGray
+      }
     }
     
     return cell
