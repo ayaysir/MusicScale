@@ -21,3 +21,34 @@
 "description_MakeMyMusicBox" = "Music Box is reborn on iPhone/iPad. Create your own music box and sheet music.";
 "description_TunerXR" = "Tuner XR (Tuner with eXtRa features) is an musical tuning app for musicians who play vocals, instruments, and more.";
 "description_DiffuserStick" = "The DiffuserStick app is a diffuser stick replacement cycle management assistant app, which records the date the diffuser stick was inserted along with a picture of the diffuser, and notifies you through a push alarm when the replacement period is due.";
+
+/* SettingVC */
+"loc.discount_percent" = "%d%% off!";
+
+"loc.enharmonic_mode_custom_info" = "When the scale is displayed in the score, the user can select the same name. Select 'Custom' in the Enharmonic Mode.";
+"loc.enharmonic_notations" = "Enharmonic Notations";
+"loc.export_csv_info" = "Export the currently saved scale informations to a CSV file. CSV files can be opened with spreadsheet apps such as Microsoft Excel, Google Spreadsheet or Apple Numbers.";
+"loc.export_csv_title" = "Export to CSV file";
+"loc.hwkey_mapping_info" = "When you connect an USB/Bluetooth keyboard to an iOS/iPadOS device, or run the app through an Apple Silicon series Mac, you can play the piano keys using the hardware keyboard. In this case, you can decide whether or not to display the corresponding hardware keys above the piano keys displayed in the app.";
+"loc.hwkey_mapping_title" = "Display Hardware Key on Piano";
+"loc.restore_purchase_info" = "If you have already purchased a product but the product is not applied due to reinstallation of the app, you can use Restore Purchase History. This only works if you have previously purchased the item.";
+"loc.restore_purchase_title" = "Restore Purchase History";
+"loc.iap_intro_info" = "Purchasing this product will permanently remove all banner and full screen ads from the app. Use the app comfortably without ads!";
+"loc.iap_intro_title" = "In-app Product Information";
+"loc.select_appearance" = "Select Appearance Theme";
+"loc.cancel" = "Cancel";
+"loc.on" = "On";
+"loc.off" = "Off";
+"loc.select_hwkey_mapping_display" = "Select whether hardware keyboard mappings are displayed or not on the piano";
+"loc.mail_not_configured" = "The mail send form cannot be opened because the mail account is not set up on the device. Send it to yoonbumtae@gmail.com and we will reply.";
+"loc.feedback_email_title" = "Feedback of MusicScale App";
+"loc.feedback_email_body" = "Please let us know bug reports, suggestions, and more.";
+"loc.processing_iap" = "Processing in-app purchase operation.\nPlease wait...";
+"loc.purchase_completed_info" = "Your purchase has been completed. You will no longer see ads in the app. If ads are not removed from some screens, force quit the app and relaunch it.";
+"loc.purchase_completed_title" = "Purchase completed";
+"loc.purchase_failed" = "Purchase failed: Please try again.";
+
+"loc.purchased" = "Purchased";
+"loc.not_purchased" = "Not Purchased";
+"loc.creating_csv" = "Generating CSV file...";
+

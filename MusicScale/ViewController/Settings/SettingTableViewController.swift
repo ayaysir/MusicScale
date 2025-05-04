@@ -122,15 +122,15 @@ extension SettingTableViewController {
   override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
     switch indexPath {
     case setEnhamonicCell:
-      simpleAlert(self, message: "When the scale is displayed in the score, the user can select the same name. Select 'Custom' in the Enharmonic Mode.".localized(), title: "Enharmonic Notations".localized(), handler: nil)
+      simpleAlert(self, message: "loc.enharmonic_mode_custom_info".localized(), title: "loc.enharmonic_notations".localized(), handler: nil)
     case exportToCsvCell:
-      simpleAlert(self, message: "Export the currently saved scale informations to a CSV file. CSV files can be opened with spreadsheet apps such as Microsoft Excel, Google Spreadsheet or Apple Numbers.".localized(), title: "Export to CSV file".localized(), handler: nil)
+      simpleAlert(self, message: "loc.export_csv_info".localized(), title: "loc.export_csv_title".localized(), handler: nil)
     case setHWKeyMappingCellIndexPath:
-      simpleAlert(self, message: "When you connect an USB/Bluetooth keyboard to an iOS/iPadOS device, or run the app through an Apple Silicon series Mac, you can play the piano keys using the hardware keyboard. In this case, you can decide whether or not to display the corresponding hardware keys above the piano keys displayed in the app.".localized(), title: "Display Hardware Key on Piano".localized(), handler: nil)
+      simpleAlert(self, message: "loc.hwkey_mapping_info".localized(), title: "loc.hwkey_mapping_title".localized(), handler: nil)
     case restorePurchasesCellIndexPath:
-      simpleAlert(self, message: "If you have already purchased a product but the product is not applied due to reinstallation of the app, you can use Restore Purchase History. This only works if you have previously purchased the item.".localized(), title: "Restore Purchase History".localized(), handler: nil)
+      simpleAlert(self, message: "loc.restore_purchase_info".localized(), title: "loc.restore_purchase_title".localized(), handler: nil)
     case firstIAPProductCellIndexPath:
-      simpleAlert(self, message: "Purchasing this product will permanently remove all banner and full screen ads from the app. Use the app comfortably without ads!".localized(), title: "In-app product I. Introduction".localized(), handler: nil)
+      simpleAlert(self, message: "loc.iap_intro_info".localized(), title: "loc.iap_intro_title".localized(), handler: nil)
     default:
       break
     }
@@ -213,7 +213,7 @@ extension SettingTableViewController {
   
   /// 테마 변경 액션 시트를 표시
   func showAppearanceActionSheet() {
-    let alert = UIAlertController(title: "Select Appearance Theme".localized(), message: nil, preferredStyle: .actionSheet)
+    let alert = UIAlertController(title: "loc.select_appearance".localized(), message: nil, preferredStyle: .actionSheet)
     let themes: [UIUserInterfaceStyle] = [.unspecified, .light, .dark]
     
     themes.forEach { theme in
@@ -226,7 +226,7 @@ extension SettingTableViewController {
       alert.addAction(action)
     }
     
-    let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel)
+    let cancel = UIAlertAction(title: "loc.cancel".localized(), style: .cancel)
     alert.addAction(cancel)
     
     alert.popoverPresentationController?.sourceView = self.view
@@ -237,13 +237,13 @@ extension SettingTableViewController {
   
   /// 하드웨어 키보드 매핑 on/off 여부 표시
   private func changeShowHWKeyMappingText(isOn: Bool) {
-    lblIsShowHWKeyMapping.text = isOn ? "On".localized() : "Off".localized()
+    lblIsShowHWKeyMapping.text = (isOn ? "loc.on" : "loc.off").localized()
   }
   
   /// 하드웨어 키보드 매핑 표시 설정 액션 시트 표시
   func showHWKeyMappingActionSheet() {
     let alert = UIAlertController(
-      title: "Select whether hardware keyboard mappings are displayed or not on the piano".localized(),
+      title: "loc.select_hwkey_mapping_display".localized(),
       message: nil,
       preferredStyle: .actionSheet)
     let selectors: [Bool] = [true, false]
@@ -269,7 +269,7 @@ extension SettingTableViewController {
   /// CSV 출력 메뉴
   func exportToCSV() {
     do {
-      SwiftSpinner.show("CSV 파일을 생성중입니다.")
+      SwiftSpinner.show("loc.creating_csv")
       let list = try ScaleInfoCDService.shared.getScaleInfoStructs()
       let fileName = "UltimateScale - \(Date().ymdText) - ScaleInfo"
       let headers = ScaleInfo.CodingKeys.allCases.map { $0.rawValue }
@@ -290,11 +290,11 @@ extension SettingTableViewController: MFMailComposeViewControllerDelegate {
   
   func launchEmail() {
     guard MFMailComposeViewController.canSendMail() else {
-      simpleAlert(self, message: "The mail send form cannot be opened because the mail account is not set up on the device. Send it to yoonbumtae@gmail.com and we will reply.".localized())
+      simpleAlert(self, message: "loc.mail_not_configured".localized())
       return
     }
     
-    let emailTitle = "Feedback of MusicScale App".localized() // 메일 제목
+    let emailTitle = "loc.feedback_email_title".localized() // 메일 제목
     let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     
     let messageBody =
@@ -303,7 +303,7 @@ extension SettingTableViewController: MFMailComposeViewControllerDelegate {
         OS Version: \(UIDevice.current.systemVersion)
         Device: \(UIDevice().type.rawValue)
         
-        \("Please let us know bug reports, suggestions, and more.".localized())
+        \("loc.feedback_email_body".localized())
         """
     
     let toRecipents = ["yoonbumtae@gmail.com"]
@@ -364,9 +364,9 @@ extension SettingTableViewController {
     if let product = iapProducts?.first(where: {productID == $0.productIdentifier}),
        !InAppProducts.helper.isProductPurchased(productID) {
       InAppProducts.helper.buyProduct(product)
-      SwiftSpinner.show("Processing in-app purchase operation.\nPlease wait...".localized())
+      SwiftSpinner.show("loc.processing_iap".localized())
     } else {
-      simpleAlert(self, message: "Your purchase has been completed. You will no longer see ads in the app. If ads are not removed from some screens, force quit the app and relaunch it.".localized(), title: "Purchase completed".localized(), handler: nil)
+      simpleAlert(self, message: "loc.purchase_completed_info".localized(), title: "loc.purchase_completed_title".localized(), handler: nil)
     }
   }
   
@@ -378,13 +378,13 @@ extension SettingTableViewController {
   /// 결제 후 Notification을 받아 처리
   @objc func handleIAPPurchase(_ notification: Notification) {
     guard notification.object is String else {
-      simpleAlert(self, message: "Purchase failed: Please try again.".localized())
+      simpleAlert(self, message: "loc.purchase_failed".localized())
       return
     }
     
     DispatchQueue.main.async { [weak self] in
       guard let self else { return }
-      simpleAlert(self, message: "Your purchase has been completed. You will no longer see ads in the app. If ads are not removed from some screens, force quit the app and relaunch it.".localized(), title: "Purchase completed".localized()) { [weak self] action in
+      simpleAlert(self, message: "loc.purchase_completed_info".localized(), title: "loc.purchase_completed_title".localized()) { [weak self] action in
         guard let self else { return }
         // 결제 성공하면 해야할 작업...
         // 1. 로딩 인디케이터 숨기기
@@ -401,7 +401,12 @@ extension SettingTableViewController {
   
   // 에러 발생시(결제 취소 포함) 작업
   @objc func hadnleIAPError(_ notification: Notification) {
-    print(#function)
     SwiftSpinner.hide()
+    simpleAlert(
+      self,
+      message: "\(notification.object as? String ?? "")".localized(),
+      title: "loc.purchase_failed".localized(),
+      handler: nil
+    )
   }
 }

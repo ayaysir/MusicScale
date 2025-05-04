@@ -19,9 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     
     // IAP Test only - Must be removed when distributing
-    // if let firstProduct = InAppProducts.productIDs.first {
-    //     UserDefaults.standard.set(false, forKey: firstProduct)
-    // }
+#if DEBUG
+      // if let firstProduct = InAppProducts.productIDs.first { UserDefaults.standard.set(false, forKey: firstProduct) }
+#endif
     
     // in your AppDelegate's didFinishLaunching method so that the drop down will handle its display with the keyboard displayed even the first time a drop down is showed.
     DropDown.startListeningToKeyboard()

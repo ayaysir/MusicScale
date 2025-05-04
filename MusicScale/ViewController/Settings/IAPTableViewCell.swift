@@ -19,12 +19,12 @@ class IAPTableViewCell: UITableViewCell {
     toggleTimer?.invalidate()
 
     if isPurchased {
-      lblPurchaseStatus.text = "Purchased".localized()
+      lblPurchaseStatus.text = "loc.purchased".localized()
       lblPurchaseStatus.textColor = .systemGreen
     } else if let discountRate, discountRate > 0 {
       startDiscountAnimation(rate: discountRate)
     } else {
-      lblPurchaseStatus.text = "Not Purchased".localized()
+      lblPurchaseStatus.text = "loc.not_purchased".localized()
       lblPurchaseStatus.textColor = .darkGray
     }
   }
@@ -44,10 +44,10 @@ class IAPTableViewCell: UITableViewCell {
 
     if showingDiscount {
       let percent = Int(rate * 100)
-      text = "\(percent)% 할인중!"
+      text = "loc.discount_percent".localized(with: percent)
       color = .systemPink
     } else {
-      text = "Not Purchased".localized()
+      text = "loc.not_purchased".localized()
       color = .darkGray
     }
 

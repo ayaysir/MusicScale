@@ -23,7 +23,6 @@
 "OK" = "確認";
 "No" = "いいえ";
 "Yes" = "はい";
-"Cancel" = "キャンセル";
 "Cycle" = "サイクル";
 "Quest of Cycle" = "問題のサイクル";
 "Not Studying Yet" = "未学習";
@@ -79,8 +78,6 @@
 "Do you want to delete? It cannot be recovered." = "削除しますか？回復できません。";
 "At least one scale must be selected." = "少なくとも1つのスケールを選択する必要があります。";
 "Scale's default" = "基本表記";
-"When the scale is displayed in the score, the user can select the same name. Select 'Custom' in the Enharmonic Mode." = "楽譜にスケール設定音を表示するときは、異名同音を選択できます。 異名同音モードで「Custom」を選択します。";
-"Enharmonic Notations" = "異名同音表記";
 "Types of Questions" = "質問の種類";
 "Select Enharmonic Mode" = "異名同音モードを選択";
 "Match the Keys" = "構成音を合わせる";
@@ -91,9 +88,6 @@
 "Failed" = "失敗";
 "Submit" = "提出";
 "Next >>" = "次 >>";
-"The mail send form cannot be opened because the mail account is not set up on the device. Send it to yoonbumtae@gmail.com and we will reply." = "メールアカウントがデバイスに設定されていないため、メール送信フォームを開くことができません。 yoonbumtae@gmail.comにお送りください。返信いたします。";
-"Feedback of MusicScale App" = "MusicScaleアプリからのフィードバック";
-"Please let us know bug reports, suggestions, and more." = "バグ報告、提案などを教えてください。";
 "Ascending by upload date" = "アップロード日の昇順";
 "Descending by upload date" = "アップロード日の降順";
 "current_sort" = "適用中";
@@ -109,11 +103,9 @@
 
 /* 2022-12-03 */
 "Export the currently saved scale informations to a CSV file. CSV files can be opened with spreadsheet apps such as Microsoft Excel, Google Spreadsheet or Apple Numbers." = "現在保存されているスケール情報のリストをCSVファイルにエクスポートします。 CSVファイルは、Microsoft Excel、Google Spreadsheet、Apple Numbersなどのスプレッドシートアプリを開くことができます。";
-"Export to CSV file" = "CSV形式にエクスポート";
 "The number of comparison scales cannot exceed 8." = "比較スケールの数は8個を超えることはできません。";
 
 "Appearance" = "モード";
-"Select Appearance Theme" = "アプリのカラーモードを選択してください。";
 "Use device theme" = "デバイスのモードを使用する";
 "Light theme" = "ライトモード";
 "Dark theme" = "ダークモード";
@@ -122,25 +114,38 @@
 "Content is loading. please wait for a moment..." = "コンテンツを読み込んでいます。 しばらくお待ちください。";
 
 /* 2024-03-06 */
-"When you connect an USB/Bluetooth keyboard to an iOS/iPadOS device, or run the app through an Apple Silicon series Mac, you can play the piano keys using the hardware keyboard. In this case, you can decide whether or not to display the corresponding hardware keys above the piano keys displayed in the app." = "iOS / iPadOSのデバイスに有線キーボードまたはBluetoothキーボードを接続したとき、またはApple Siliconシリーズのmacを介してアプリを実行している場合は、ハードウェアキーボードでピアノの鍵盤を弾くことができます。 この場合、アプリで表示されるピアノ鍵盤の上に対応するハードウェアキーマッピングを表示するかどうかを選択できます。";
-
-"Display Hardware Key on Piano" = "ピアノ鍵盤の上にハードウェアキーボードマッピングを表示";
-"On" = "オン";
-"Off" = "オフ";
-"Select whether hardware keyboard mappings are displayed or not on the piano" = "ハードウェアのキーボードマッピングをピアノの鍵盤の上に表示するかどうかを選択します。";
-
-"If you have already purchased a product but the product is not applied due to reinstallation of the app, you can use Restore Purchase History. This only works if you have previously purchased the item." = "すでに商品を購入しているがアプリの再インストールなどにより製品が適用されていない場合は、購入リストの復元を利用できます。 以前に商品を購入した場合にのみ機能します。";
-"Restore Purchase History" = "購入リストの復元";
-"Purchasing this product will permanently remove all banner and full screen ads from the app. Use the app comfortably without ads!" = "この商品を購入すると、アプリに表示されるすべてのバナー広告と全画面広告を完全に削除できます。 広告なしで快適にアプリを使用してください！";
-"In-app product I. Introduction" = "アプリ内商品 I. について";
-
-"Processing in-app purchase operation.\nPlease wait..." = "お支払い作業を処理中です。\nしばらくお待ちください...";
-"Your purchase has been completed. You will no longer see ads in the app. If ads are not removed from some screens, force quit the app and relaunch it." = "購入完了です。 これでアプリに広告が表示されなくなります。一部の画面で広告が削除されていない場合は、アプリを強制終了してからもう一度実行してください。";
-"Purchase completed" = "購入完了";
-"Purchase failed: Please try again." = "購入に失敗しました：もう一度お試しください。";
-
-"Purchased" = "購入";
-"Not Purchased" = "未購入";
-
 "Success! Let’s keep this momentum going!" = "【確認】 成功しました！この勢いを続けていきましょう！";
 "Again! Let's try harder!" = "【もう一度】 わかりました！もう少し気をつけましょう！";
+
+/* SettingVC */
+"loc.discount_percent" = "%d%% 割引中！";
+
+"loc.enharmonic_mode_custom_info" = "楽譜にスケール設定音を表示するときは、異名同音を選択できます。 異名同音モードで「Custom」を選択します。";
+"loc.enharmonic_notations" = "異名同音表記";
+"loc.export_csv_info" = "現在保存されているスケール情報のリストをCSVファイルにエクスポートします。 CSVファイルは、Microsoft Excel、Google Spreadsheet、Apple Numbersなどのスプレッドシートアプリを開くことができます。";
+"loc.export_csv_title" = "CSV形式にエクスポート";
+"loc.hwkey_mapping_info" = "iOS / iPadOSのデバイスに有線キーボードまたはBluetoothキーボードを接続したとき、またはApple Siliconシリーズのmacを介してアプリを実行している場合は、ハードウェアキーボードでピアノの鍵盤を弾くことができます。 この場合、アプリで表示されるピアノ鍵盤の上に対応するハードウェアキーマッピングを表示するかどうかを選択できます。";
+"loc.hwkey_mapping_title" = "ピアノ鍵盤の上にハードウェアキーボードマッピングを表示";
+"loc.restore_purchase_info" = "すでに商品を購入しているがアプリの再インストールなどにより製品が適用されていない場合は、購入リストの復元を利用できます。 以前に商品を購入した場合にのみ機能します。";
+"loc.restore_purchase_title" = "購入リストの復元";
+"loc.iap_intro_info" = "この商品を購入すると、アプリに表示されるすべてのバナー広告と全画面広告を完全に削除できます。 広告なしで快適にアプリを使用してください！";
+"loc.iap_intro_title" = "アプリ内商品について";
+"loc.select_appearance_theme" = "アプリのカラーモードを選択してください。";
+"loc.cancel" = "キャンセル";
+"loc.on" = "オン";
+"loc.off" = "オフ";
+"loc.select_hwkey_mapping_display" = "ハードウェアのキーボードマッピングをピアノの鍵盤の上に表示するかどうかを選択します。";
+"loc.mail_not_configured" = "メールアカウントがデバイスに設定されていないため、メール送信フォームを開くことができません。 yoonbumtae@gmail.comにお送りください。返信いたします。";
+
+"loc.feedback_email_title" = "MusicScaleアプリからのフィードバック";
+"loc.feedback_email_body" = "バグ報告、提案などを教えてください。";
+
+"loc.processing_iap"  = "お支払い作業を処理中です。\nしばらくお待ちください...";
+"loc.purchase_completed_info" = "購入完了です。 これでアプリに広告が表示されなくなります。一部の画面で広告が削除されていない場合は、アプリを強制終了してからもう一度実行してください。";
+"loc.purchase_completed_title" = "購入完了";
+"loc.purchase_failed" = "購入に失敗しました：もう一度お試しください。";
+
+"loc.purchased" = "購入";
+"loc.not_purchased" = "未購入";
+"loc.creating_csv" = "Generating CSV file...";
+"loc.select_appearance" = "アプリのカラーモードを選択してください。";
