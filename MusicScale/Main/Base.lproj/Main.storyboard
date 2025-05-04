@@ -1254,7 +1254,7 @@
                         <sections>
                             <tableViewSection headerTitle="In-app Purchases" id="X4k-Io-zGQ">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" textLabel="z2m-zy-zda" detailTextLabel="I5q-Dp-gIb" style="IBUITableViewCellStyleValue1" id="rqX-WL-m5p">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" textLabel="z2m-zy-zda" detailTextLabel="I5q-Dp-gIb" style="IBUITableViewCellStyleValue1" id="rqX-WL-m5p" customClass="IAPTableViewCell" customModule="MusicScale" customModuleProvider="target">
                                         <rect key="frame" x="16" y="55.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rqX-WL-m5p" id="8hH-FE-BUc">
@@ -1278,6 +1278,10 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="tintColor" systemColor="systemCyanColor"/>
+                                        <connections>
+                                            <outlet property="lblIapProductName" destination="z2m-zy-zda" id="4ln-lX-Erw"/>
+                                            <outlet property="lblPurchaseStatus" destination="I5q-Dp-gIb" id="inU-Yu-dOH"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" textLabel="r9T-fX-9kM" style="IBUITableViewCellStyleDefault" id="MrF-W5-hjL">
                                         <rect key="frame" x="16" y="99" width="343" height="43.5"/>

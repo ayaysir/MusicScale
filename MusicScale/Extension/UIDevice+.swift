@@ -37,6 +37,7 @@ public enum Model : String {
          iPad7              = "iPad 7", //iPad 2019
          iPad8              = "iPad 8", //iPad 2020
          iPad9              = "iPad 9", //iPad 2021
+         iPad10             = "iPad 10", //iPad 2022
          
          //iPad Mini
          iPadMini           = "iPad Mini",
@@ -90,6 +91,19 @@ public enum Model : String {
          iPhone13Pro        = "iPhone 13 Pro",
          iPhone13ProMax     = "iPhone 13 Pro Max",
          iPhoneSE3          = "iPhone SE 3nd gen",
+         iPhone14           = "iPhone 14",
+         iPhone14Plus       = "iPhone 14 Plus",
+         iPhone14Pro        = "iPhone 14 Pro",
+         iPhone14ProMax     = "iPhone 14 Pro Max",
+         iPhone15           = "iPhone 15",
+         iPhone15Plus       = "iPhone 15 Plus",
+         iPhone15Pro        = "iPhone 15 Pro",
+         iPhone15ProMax     = "iPhone 15 Pro Max",
+         iPhone16           = "iPhone 16" ,
+         iPhone16Plus       = "iPhone 16 Plus",
+         iPhone16Pro        = "iPhone 16 Pro",
+         iPhone16ProMax     = "iPhone 16 Pro Max",
+         iPhone16e          = "iPhone 16e",
          
          // Apple Watch
          AppleWatch1         = "Apple Watch 1gen",
@@ -109,6 +123,7 @@ public enum Model : String {
          AppleTV4           = "Apple TV 4gen",
          AppleTV_4K         = "Apple TV 4K",
          AppleTV2_4K        = "Apple TV 4K 2gen",
+         AppleTV3_4K        = "Apple TV 4K 3gen",
          
          unrecognized       = "?unrecognized?"
 }
@@ -117,7 +132,7 @@ public enum Model : String {
 // MARK: UIDevice extensions
 // #-#-#-#-#-#-#-#-#-#-#-#-#
 
-public extension UIDevice {
+    public extension UIDevice {
     
     var type: Model {
         var systemInfo = utsname()
@@ -127,13 +142,13 @@ public extension UIDevice {
                 ptr in String.init(validatingUTF8: ptr)
             }
         }
-        
+    
         let modelMap : [String: Model] = [
-            
+    
             //Simulator
             "i386"      : .simulator,
             "x86_64"    : .simulator,
-            
+    
             //iPod
             "iPod1,1"   : .iPod1,
             "iPod2,1"   : .iPod2,
@@ -142,7 +157,7 @@ public extension UIDevice {
             "iPod5,1"   : .iPod5,
             "iPod7,1"   : .iPod6,
             "iPod9,1"   : .iPod7,
-            
+    
             //iPad
             "iPad2,1"   : .iPad2,
             "iPad2,2"   : .iPad2,
@@ -164,7 +179,9 @@ public extension UIDevice {
             "iPad11,7"  : .iPad8,
             "iPad12,1"  : .iPad9, //iPad 2021
             "iPad12,2"  : .iPad9,
-            
+            "iPad13,18" : .iPad10,
+            "iPad13,19" : .iPad10,
+    
             //iPad Mini
             "iPad2,5"   : .iPadMini,
             "iPad2,6"   : .iPadMini,
@@ -181,7 +198,7 @@ public extension UIDevice {
             "iPad11,2"  : .iPadMini5,
             "iPad14,1"  : .iPadMini6,
             "iPad14,2"  : .iPadMini6,
-            
+    
             //iPad Pro
             "iPad6,3"   : .iPadPro9_7,
             "iPad6,4"   : .iPadPro9_7,
@@ -211,7 +228,7 @@ public extension UIDevice {
             "iPad13,9"  : .iPadPro5_12_9,
             "iPad13,10" : .iPadPro5_12_9,
             "iPad13,11" : .iPadPro5_12_9,
-            
+    
             //iPad Air
             "iPad4,1"   : .iPadAir,
             "iPad4,2"   : .iPadAir,
@@ -224,7 +241,7 @@ public extension UIDevice {
             "iPad13,2"  : .iPadAir4,
             "iPad13,16" : .iPadAir5,
             "iPad13,17" : .iPadAir5,
-            
+    
             //iPhone
             "iPhone3,1" : .iPhone4,
             "iPhone3,2" : .iPhone4,
@@ -268,6 +285,19 @@ public extension UIDevice {
             "iPhone14,2" : .iPhone13Pro,
             "iPhone14,3" : .iPhone13ProMax,
             "iPhone14,6" : .iPhoneSE3,
+            "iPhone14,7" : .iPhone14,
+            "iPhone14,8" : .iPhone14Plus,
+            "iPhone15,2" : .iPhone14Pro,
+            "iPhone15,3" : .iPhone14ProMax,
+            "iPhone15,4" : .iPhone15,
+            "iPhone15,5" : .iPhone15Plus,
+            "iPhone16,1" : .iPhone15Pro,
+            "iPhone16,2" : .iPhone15ProMax,
+            "iPhone17,3" : .iPhone16,
+            "iPhone17,4" : .iPhone16Plus,
+            "iPhone17,1" : .iPhone16Pro,
+            "iPhone17,2" : .iPhone16ProMax,
+            "iPhone17,5" : .iPhone16e,
             
             // Apple Watch
             "Watch1,1" : .AppleWatch1,
@@ -300,7 +330,7 @@ public extension UIDevice {
             "Watch6,7" : .AppleWatchS7,
             "Watch6,8" : .AppleWatchS7,
             "Watch6,9" : .AppleWatchS7,
-            
+    
             //Apple TV
             "AppleTV1,1" : .AppleTV1,
             "AppleTV2,1" : .AppleTV2,
@@ -308,16 +338,17 @@ public extension UIDevice {
             "AppleTV3,2" : .AppleTV3,
             "AppleTV5,3" : .AppleTV4,
             "AppleTV6,2" : .AppleTV_4K,
-            "AppleTV11,1" : .AppleTV2_4K
+            "AppleTV11,1" : .AppleTV2_4K,
+            "AppleTV14,1" : .AppleTV3_4K
         ]
-        
-        guard let mcode = modelCode, let map = String(validatingUTF8: mcode), let model = modelMap[map] else { return Model.unrecognized }
+    
+        guard let mcode = modelCode, let model = modelMap[mcode] else { return Model.unrecognized }
         if model == .simulator {
-            if let simModelCode = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
-                if let simMap = String(validatingUTF8: simModelCode), let simModel = modelMap[simMap] {
-                    return simModel
-                }
-            }
+           if let simModelCode = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
+              if let simModel = modelMap[simModelCode] {
+                return simModel
+              }
+           }
         }
         return model
     }

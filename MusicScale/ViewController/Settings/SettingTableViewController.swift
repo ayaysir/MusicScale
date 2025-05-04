@@ -163,30 +163,44 @@ extension SettingTableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = super.tableView(tableView, cellForRowAt: indexPath)
-    
+    guard let cell = super.tableView(tableView, cellForRowAt: indexPath) as? IAPTableViewCell else {
+      return super.tableView(tableView, cellForRowAt: indexPath)
+    }
+
     if let iapProducts,
        indexPath.section == SECTION_IAP,
        indexPath.row != restorePurchasesCellIndexPath.row,
        let product = iapProducts[safe: indexPath.row] {
-      
+
       let isPurchased = InAppProducts.helper.isProductPurchased(product.productIdentifier)
+
+      cell.tintColor = isPurchased ? .systemGray3 : .highlightAccessoryTint
+      cell.lblIapProductName.text = product.localizedTitle + " (\(product.localizedPrice ?? ""))"
+      cell.lblIapProductName.textColor = isPurchased ? .lightGray : nil
       
-      // 89 / 171 / 225
-      cell.tintColor = isPurchased ? .highlightAccessoryTint : nil
+      cell.configure(isPurchased: isPurchased, discountRate: nil)
       
-      if let lblIapProductName = cell.contentView.subviews.first as? UILabel {
-        lblIapProductName.text = product.localizedTitle + " (\(product.localizedPrice ?? ""))"
-        lblIapProductName.textColor = isPurchased ? .lightGray : nil
+      if isPurchased {
+        return cell
       }
       
-      if let lblPurchaseStatus = cell.contentView.subviews[safe: 1] as? UILabel {
-        
-        lblPurchaseStatus.text = isPurchased ? "Purchased".localized() : "Not Purchased".localized()
-        lblPurchaseStatus.textColor = isPurchased ? .systemGreen : .darkGray
+      Task {
+        do {
+          let isDiscountNow = try await DiscountManager.shared.isDiscountNow()
+          guard isDiscountNow else {
+            return
+          }
+          
+          let rate = try await DiscountManager.shared.globalDiscountRate()
+          await MainActor.run {
+            cell.configure(isPurchased: false, discountRate: rate)
+          }
+        } catch {
+          print("할인 정보 로딩 실패: \(error.localizedDescription)")
+        }
       }
     }
-    
+
     return cell
   }
 }
