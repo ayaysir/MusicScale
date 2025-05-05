@@ -89,9 +89,16 @@ extension SettingTableViewController {
     // IAP Section
     if let iapProducts,
        indexPath.section == SECTION_IAP,
-       indexPath.row != restorePurchasesCellIndexPath.row {
-      let product = iapProducts[indexPath.row]
+       indexPath.row != restorePurchasesCellIndexPath.row,
+       let product = iapProducts[safe: indexPath.row] {
       purchaseIAP(productID: product.productIdentifier)
+    } else {
+      simpleAlert(
+        self,
+        message: "loc.iap_not_ready".localized(),
+        title: "loc.iap_not_ready_title".localized(),
+        handler: nil
+      )
     }
     
     // Links or segues
@@ -162,7 +169,10 @@ extension SettingTableViewController {
     return super.tableView(tableView, numberOfRowsInSection: section)
   }
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  override func tableView(
+    _ tableView: UITableView,
+    cellForRowAt indexPath: IndexPath
+  ) -> UITableViewCell {
     guard let cell = super.tableView(tableView, cellForRowAt: indexPath) as? IAPTableViewCell else {
       return super.tableView(tableView, cellForRowAt: indexPath)
     }
@@ -171,9 +181,9 @@ extension SettingTableViewController {
        indexPath.section == SECTION_IAP,
        indexPath.row != restorePurchasesCellIndexPath.row,
        let product = iapProducts[safe: indexPath.row] {
-
+      
       let isPurchased = InAppProducts.helper.isProductPurchased(product.productIdentifier)
-
+      
       cell.tintColor = isPurchased ? .systemGray3 : .highlightAccessoryTint
       cell.lblIapProductName.text = product.localizedTitle + " (\(product.localizedPrice ?? ""))"
       cell.lblIapProductName.textColor = isPurchased ? .lightGray : nil
@@ -334,7 +344,10 @@ extension SettingTableViewController {
     
     // IAP 불러오기
     InAppProducts.helper.inquireProductsRequest { [weak self] (success, products) in
-      guard let self, success else { return }
+      guard let self, success else {
+        print(#function, "IAP products inquiry failed")
+        return
+      }
       self.iapProducts = products
       
       DispatchQueue.main.async { [weak self] in

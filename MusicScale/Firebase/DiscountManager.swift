@@ -127,7 +127,7 @@ extension DiscountManager {
     
     return try await withCheckedThrowingContinuation { continuation in
       fetchGlobalDiscountRate { result in
-        if let result = result {
+        if let result {
           self.globalDiscountRateCache = (result, Date())
           continuation.resume(returning: result)
         } else {

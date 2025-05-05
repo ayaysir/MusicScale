@@ -63,9 +63,6 @@ class PianoViewController: UIViewController {
       pianoLongPressRecognizer.minimumPressDuration = 0.0
       
       viewPiano.addGestureRecognizer(pianoLongPressRecognizer)
-      
-      // let pianoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handlePianoTap))
-      // viewPiano.addGestureRecognizer(pianoTapRecognizer)
     }
   }
   
@@ -76,14 +73,6 @@ class PianoViewController: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     generator.pauseEngine()
   }
-  
-  // @objc func handlePianoTap(gesture: UITapGestureRecognizer) {
-  //     guard isKeyPressEnabled else { return }
-  //     let location = gesture.location(in: gesture.view)
-  //     if let keyInfo = viewPiano.viewModel.getKeyInfoBy(touchLocation: location) {
-  //         startKeyPress(keyInfo, isLongPress: false)
-  //     }
-  // }
   
   @objc func handlePianoLongPress(gesture: UILongPressGestureRecognizer) {
     let location = gesture.location(in: gesture.view)
@@ -104,10 +93,14 @@ class PianoViewController: UIViewController {
     case .ended:
       // 노트 멈춤
       guard isKeyPressEnabled else { return }
-      if let keyInfo = viewPiano.viewModel.getKeyInfoBy(touchLocation: location) {
-        stopKeyPress(keyInfo)
-      } else if let prevTouchedKey {
+      
+      // 20250506: 순서 바꿈 (.ended 처리부에 keyInfo가 nil이 아닐 경우에도 prevTouchedKey를 우선적으로 활용하지 않음:)
+      if let prevTouchedKey {
+        print("Gesture: .ended using prevTouchedKey")
         stopKeyPress(prevTouchedKey)
+      } else if let keyInfo = viewPiano.viewModel.getKeyInfoBy(touchLocation: location) {
+        print("Gesture: .ended fallback keyInfo")
+        stopKeyPress(keyInfo)
       }
     case .cancelled:
       // print("cancelled")
@@ -124,6 +117,10 @@ class PianoViewController: UIViewController {
   
   func startKeyPress(_ keyInfo: PianoKeyInfo, isLongPress: Bool = true) {
     let semitoneStart = 60 + PianoKeyHelper.adjustKeySemitone(key: currentPlayableKey)
+    
+    // 20250506 추가: keyInfo를 미리 prevTouchedKey에 배정하고
+    // .stricted 모드에서 터치 슬라이드를 할 때 끊기는 것 방지
+    prevTouchedKey = keyInfo
     
     if mode == .stricted {
       guard viewPiano.viewModel.availableKeyIndexes.contains(keyInfo.keyIndex) else {
@@ -145,22 +142,18 @@ class PianoViewController: UIViewController {
   }
   
   func changeKeyPress(_ keyInfo: PianoKeyInfo) {
+    // keyInfo가 현재 누른 키 목록에 있는지 검사
+    // 없으면 prevTouchKey에 keyInfo 할당 후 리턴, 있다면 다음 단계
     guard !viewPiano.viewModel.currentTouchedKeys.contains(keyInfo) else {
-      prevTouchedKey = keyInfo
       return
     }
     
     if let prevTouchedKey {
       stopKeyPress(prevTouchedKey)
+      // 20250505 추가: 움직이면 prevKey를 멈추고 끝내는게 아닌 움직인 위치에 있는 키 연주
+      startKeyPress(keyInfo)
     }
   }
-  
-  // func stopKeyPress() {
-  //     if viewPiano.viewModel?.currentTouchedKey != nil {
-  //         viewPiano.viewModel?.currentTouchedKey = nil
-  //         generator.stopSound()
-  //     }
-  // }
   
   func stopKeyPress(_ keyInfo: PianoKeyInfo) {
     if viewPiano.viewModel.currentTouchedKeys.contains(keyInfo) {
@@ -168,9 +161,9 @@ class PianoViewController: UIViewController {
       let semitoneStart = 60 + PianoKeyHelper.adjustKeySemitone(key: currentPlayableKey)
       let targetNoteNumber = semitoneStart + keyInfo.keyIndex + (octaveShift * 12)
       generator.stopSimply(noteNumber: targetNoteNumber)
+      
+      prevTouchedKey = nil
     }
-    
-    prevTouchedKey = nil
   }
 }
 

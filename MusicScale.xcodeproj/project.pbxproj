@@ -75,6 +75,7 @@
 		4455D1E3285C92FA00FB344E /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1E2285C92F900FB344E /* UIViewController.swift */; };
 		4455D1E6285CDBC900FB344E /* UIBarButtonItem+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1E5285CDBC900FB344E /* UIBarButtonItem+.swift */; };
 		4455D1E9285CF19F00FB344E /* HGCircularSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 4455D1E8285CF19F00FB344E /* HGCircularSlider */; };
+		445DACAD2DC919DF0092686B /* 20250506-피아노_눌림_에러.md in Resources */ = {isa = PBXBuildFile; fileRef = 445DACAC2DC919C30092686B /* 20250506-피아노_눌림_에러.md */; };
 		445FA4B7284BA06B0008D621 /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B6284BA06B0008D621 /* QuizTests.swift */; };
 		445FA4B9284BAE540008D621 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4B8284BAE540008D621 /* Array+.swift */; };
 		445FA4BB284BAF3F0008D621 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */; };
@@ -266,6 +267,7 @@
 		4455D1DC285B337500FB344E /* EnharmonicSelectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnharmonicSelectTableViewController.swift; sourceTree = "<group>"; };
 		4455D1E2285C92F900FB344E /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		4455D1E5285CDBC900FB344E /* UIBarButtonItem+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+.swift"; sourceTree = "<group>"; };
+		445DACAC2DC919C30092686B /* 20250506-피아노_눌림_에러.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "20250506-피아노_눌림_에러.md"; sourceTree = "<group>"; };
 		445FA4B6284BA06B0008D621 /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		445FA4B8284BAE540008D621 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		445FA4BA284BAF3F0008D621 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
@@ -873,6 +875,7 @@
 		44EE68132853A7DB00A6D810 /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				445DACAC2DC919C30092686B /* 20250506-피아노_눌림_에러.md */,
 				44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */,
 				446776372889361400F1C4B6 /* ToRemoveComment.md */,
 			);
@@ -1028,6 +1031,7 @@
 				44EFA4B328541F0800565F93 /* GoogleService-Info.plist in Resources */,
 				441E97072865974900261D43 /* MusicScale - English.004.jpeg in Resources */,
 				44872B13286222C700C20E06 /* .gitignore in Resources */,
+				445DACAD2DC919DF0092686B /* 20250506-피아노_눌림_에러.md in Resources */,
 				441E970B2865974900261D43 /* MusicScale - English.011.jpeg in Resources */,
 				44709D65276A335800BBF6C9 /* LaunchScreen.storyboard in Resources */,
 				441E96ED286590C600261D43 /* InfoPlist.strings in Resources */,

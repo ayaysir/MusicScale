@@ -149,3 +149,6 @@
 "loc.not_purchased" = "未購入";
 "loc.creating_csv" = "Generating CSV file...";
 "loc.select_appearance" = "アプリのカラーモードを選択してください。";
+
+"loc.iap_not_ready_title" = "アプリ内課金を利用できません";
+"loc.iap_not_ready" = "アプリ内課金を現在利用できません。設定を確認するか、後でもう一度お試しください。";

@@ -147,3 +147,5 @@
 "loc.cancel" = "취소";
 "loc.creating_csv" = "CSV 파일을 생성중입니다...";
 
+"loc.iap_not_ready_title" = "인앱결제를 사용할 수 없음";
+"loc.iap_not_ready" = "인앱결제를 사용할 수 없는 상태입니다. 설정을 확인하거나 나중에 다시 시도해 주세요.";

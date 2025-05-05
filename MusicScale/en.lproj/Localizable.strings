@@ -52,3 +52,5 @@
 "loc.not_purchased" = "Not Purchased";
 "loc.creating_csv" = "Generating CSV file...";
 
+"loc.iap_not_ready_title" = "In-App Purchase Unavailable";
+"loc.iap_not_ready" = "In-App Purchases are currently unavailable. Please check your settings or try again later.";

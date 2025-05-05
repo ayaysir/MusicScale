@@ -92,8 +92,12 @@ extension IAPHelper: SKProductsRequestDelegate {
   /*
    SKProductsRequestDelegate에서 구현을 요구하는 메서드로 IAP 제품 리스트 목록을 성공적으로 받아왔을 때 실행됩니다.
    */
-  public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-    print("IAP: Loaded list of products...")
+  public func productsRequest(
+    _ request: SKProductsRequest,
+    didReceive response: SKProductsResponse
+  ) {
+    print("IAP: (productsRequest didReceive) start to load list of products...")
+    print("IAP: (invalidIdentifiers) \(response.invalidProductIdentifiers)")
     let products = response.products
     productsRequestCompletionHandler?(true, products)
     clearRequestAndHandler()
@@ -101,6 +105,8 @@ extension IAPHelper: SKProductsRequestDelegate {
     for p in products {
       print("IAP - Found product: \(p.productIdentifier) \(p.localizedTitle) \(p.price.floatValue)")
     }
+    
+    print("IAP: Products count: \(products.count)")
   }
   
   /*
