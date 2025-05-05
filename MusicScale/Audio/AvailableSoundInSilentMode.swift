@@ -8,6 +8,6 @@
 import AVFoundation
 
 func availableSoundInSilentMode(_ isOn: Bool = true) throws {
-    try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-    try AVAudioSession.sharedInstance().setActive(isOn)
+  try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+  try AVAudioSession.sharedInstance().setActive(isOn)
 }

@@ -8,11 +8,11 @@
 import Foundation
 
 struct QuizConfig: Codable {
-    
-    var availableKeys: Set<Music.Key>
-    var ascSelected, descSelected: Bool
-    var selectedScaleInfoId: Set<UUID>
-    var numberOfQuestions: Int
-    var typeOfQuestions: QuizType
-    var enharmonicMode: EnharmonicMode
+  
+  var availableKeys: Set<Music.Key>
+  var ascSelected, descSelected: Bool
+  var selectedScaleInfoId: Set<UUID>
+  var numberOfQuestions: Int
+  var typeOfQuestions: QuizType
+  var enharmonicMode: EnharmonicMode
 }

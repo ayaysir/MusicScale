@@ -8,8 +8,8 @@
 import Firebase
 
 struct FirebaseUtil {
-    
-    static func timestampToDate(_ timestamp: Timestamp) -> Date {
-        return Date(timeIntervalSince1970: TimeInterval(timestamp.seconds))
-    }
+  
+  static func timestampToDate(_ timestamp: Timestamp) -> Date {
+    return Date(timeIntervalSince1970: TimeInterval(timestamp.seconds))
+  }
 }

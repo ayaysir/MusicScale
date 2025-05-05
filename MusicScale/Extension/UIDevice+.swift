@@ -132,7 +132,7 @@ public enum Model : String {
 // MARK: UIDevice extensions
 // #-#-#-#-#-#-#-#-#-#-#-#-#
 
-    public extension UIDevice {
+public extension UIDevice {
     
     var type: Model {
         var systemInfo = utsname()
@@ -142,13 +142,13 @@ public enum Model : String {
                 ptr in String.init(validatingUTF8: ptr)
             }
         }
-    
+        
         let modelMap : [String: Model] = [
-    
+            
             //Simulator
             "i386"      : .simulator,
             "x86_64"    : .simulator,
-    
+            
             //iPod
             "iPod1,1"   : .iPod1,
             "iPod2,1"   : .iPod2,
@@ -157,7 +157,7 @@ public enum Model : String {
             "iPod5,1"   : .iPod5,
             "iPod7,1"   : .iPod6,
             "iPod9,1"   : .iPod7,
-    
+            
             //iPad
             "iPad2,1"   : .iPad2,
             "iPad2,2"   : .iPad2,
@@ -181,7 +181,7 @@ public enum Model : String {
             "iPad12,2"  : .iPad9,
             "iPad13,18" : .iPad10,
             "iPad13,19" : .iPad10,
-    
+            
             //iPad Mini
             "iPad2,5"   : .iPadMini,
             "iPad2,6"   : .iPadMini,
@@ -198,7 +198,7 @@ public enum Model : String {
             "iPad11,2"  : .iPadMini5,
             "iPad14,1"  : .iPadMini6,
             "iPad14,2"  : .iPadMini6,
-    
+            
             //iPad Pro
             "iPad6,3"   : .iPadPro9_7,
             "iPad6,4"   : .iPadPro9_7,
@@ -228,7 +228,7 @@ public enum Model : String {
             "iPad13,9"  : .iPadPro5_12_9,
             "iPad13,10" : .iPadPro5_12_9,
             "iPad13,11" : .iPadPro5_12_9,
-    
+            
             //iPad Air
             "iPad4,1"   : .iPadAir,
             "iPad4,2"   : .iPadAir,
@@ -241,7 +241,7 @@ public enum Model : String {
             "iPad13,2"  : .iPadAir4,
             "iPad13,16" : .iPadAir5,
             "iPad13,17" : .iPadAir5,
-    
+            
             //iPhone
             "iPhone3,1" : .iPhone4,
             "iPhone3,2" : .iPhone4,
@@ -330,7 +330,7 @@ public enum Model : String {
             "Watch6,7" : .AppleWatchS7,
             "Watch6,8" : .AppleWatchS7,
             "Watch6,9" : .AppleWatchS7,
-    
+            
             //Apple TV
             "AppleTV1,1" : .AppleTV1,
             "AppleTV2,1" : .AppleTV2,
@@ -341,14 +341,14 @@ public enum Model : String {
             "AppleTV11,1" : .AppleTV2_4K,
             "AppleTV14,1" : .AppleTV3_4K
         ]
-    
+        
         guard let mcode = modelCode, let model = modelMap[mcode] else { return Model.unrecognized }
         if model == .simulator {
-           if let simModelCode = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
-              if let simModel = modelMap[simModelCode] {
-                return simModel
-              }
-           }
+            if let simModelCode = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
+                if let simModel = modelMap[simModelCode] {
+                    return simModel
+                }
+            }
         }
         return model
     }

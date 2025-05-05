@@ -21,6 +21,7 @@
 		440637F7283082BE00875E77 /* SampleScaleList.json in Resources */ = {isa = PBXBuildFile; fileRef = 440637F6283082BE00875E77 /* SampleScaleList.json */; };
 		440637FA283083AE00875E77 /* JSONCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637F9283083AE00875E77 /* JSONCoder.swift */; };
 		440637FC283084DE00875E77 /* CoreDataWithSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440637FB283084DE00875E77 /* CoreDataWithSampleTests.swift */; };
+		440D32332DC8EFEB00929967 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440D32322DC8EFE700929967 /* GlobalVariables.swift */; };
 		44172529284B8A110003CDC7 /* QuizHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44172528284B8A110003CDC7 /* QuizHelper.swift */; };
 		4417252B284B8AC50003CDC7 /* QuizConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4417252A284B8AC50003CDC7 /* QuizConfig.swift */; };
 		4417252D284B8FC60003CDC7 /* QuizQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4417252C284B8FC60003CDC7 /* QuizQuestion.swift */; };
@@ -61,7 +62,6 @@
 		4455D1BF2857AAD400FB344E /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1BE2857AAD400FB344E /* PostViewModel.swift */; };
 		4455D1C1285890A500FB344E /* FirebaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C0285890A500FB344E /* FirebaseUtil.swift */; };
 		4455D1C32858957700FB344E /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C22858957700FB344E /* Date+.swift */; };
-		4455D1C52858BFB700FB344E /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C42858BFB700FB344E /* Notification.Name+.swift */; };
 		4455D1C72858CCB300FB344E /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C62858CCB300FB344E /* Like.swift */; };
 		4455D1C92858D5AD00FB344E /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1C82858D5AD00FB344E /* UIView+.swift */; };
 		4455D1CC285A2BD400FB344E /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455D1CB285A2BD300FB344E /* SettingTableViewController.swift */; };
@@ -134,7 +134,6 @@
 		4494B4622938DCB90009548C /* Vibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B4612938DCB90009548C /* Vibration.swift */; };
 		4494B465293A45440009548C /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 4494B464293A45440009548C /* CodableCSV */; };
 		4494B467293A4ADE0009548C /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B466293A4ADE0009548C /* FileUtil.swift */; };
-		4494B469293A4D850009548C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B468293A4D850009548C /* DateUtil.swift */; };
 		4494B46B293A512D0009548C /* ShowActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46A293A512D0009548C /* ShowActivityView.swift */; };
 		4494B46D293A596E0009548C /* QuizStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46C293A596E0009548C /* QuizStat.swift */; };
 		4494B46F293CF85A0009548C /* ScaleComparisonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494B46E293CF85A0009548C /* ScaleComparisonViewModel.swift */; };
@@ -214,6 +213,7 @@
 		440637F6283082BE00875E77 /* SampleScaleList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleScaleList.json; sourceTree = "<group>"; };
 		440637F9283083AE00875E77 /* JSONCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoder.swift; sourceTree = "<group>"; };
 		440637FB283084DE00875E77 /* CoreDataWithSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWithSampleTests.swift; sourceTree = "<group>"; };
+		440D32322DC8EFE700929967 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		44172528284B8A110003CDC7 /* QuizHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizHelper.swift; sourceTree = "<group>"; };
 		4417252A284B8AC50003CDC7 /* QuizConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizConfig.swift; sourceTree = "<group>"; };
 		4417252C284B8FC60003CDC7 /* QuizQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestion.swift; sourceTree = "<group>"; };
@@ -254,7 +254,6 @@
 		4455D1BE2857AAD400FB344E /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		4455D1C0285890A500FB344E /* FirebaseUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtil.swift; sourceTree = "<group>"; };
 		4455D1C22858957700FB344E /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
-		4455D1C42858BFB700FB344E /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
 		4455D1C62858CCB300FB344E /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
 		4455D1C82858D5AD00FB344E /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		4455D1CB285A2BD300FB344E /* SettingTableViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -296,7 +295,7 @@
 		446AEA2F28411ED300C2BFCF /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		446AEA3128413E0200C2BFCF /* Cosmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cosmos.swift; sourceTree = "<group>"; };
 		44709D52276A334F00BBF6C9 /* MusicScale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicScale.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		44709D55276A334F00BBF6C9 /* AppDelegate.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; tabWidth = 4; };
+		44709D55276A334F00BBF6C9 /* AppDelegate.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; tabWidth = 2; };
 		44709D57276A334F00BBF6C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		44709D5C276A334F00BBF6C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		44709D5F276A334F00BBF6C9 /* MusicScale.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicScale.xcdatamodel; sourceTree = "<group>"; };
@@ -333,7 +332,6 @@
 		44872B2328638C6E00C20E06 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		4494B4612938DCB90009548C /* Vibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibration.swift; sourceTree = "<group>"; };
 		4494B466293A4ADE0009548C /* FileUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
-		4494B468293A4D850009548C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		4494B46A293A512D0009548C /* ShowActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowActivityView.swift; sourceTree = "<group>"; };
 		4494B46C293A596E0009548C /* QuizStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStat.swift; sourceTree = "<group>"; };
 		4494B46E293CF85A0009548C /* ScaleComparisonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleComparisonViewModel.swift; sourceTree = "<group>"; };
@@ -448,7 +446,7 @@
 			path = ResourceData;
 			sourceTree = "<group>";
 		};
-		440637F82830839700875E77 /* Util */ = {
+		440637F82830839700875E77 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
 				440637F9283083AE00875E77 /* JSONCoder.swift */,
@@ -459,9 +457,8 @@
 				441E96DF286480AD00261D43 /* Reachability.swift */,
 				4494B4612938DCB90009548C /* Vibration.swift */,
 				4494B466293A4ADE0009548C /* FileUtil.swift */,
-				4494B468293A4D850009548C /* DateUtil.swift */,
 			);
-			path = Util;
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		441738D02848ED6200A7D692 /* Quiz */ = {
@@ -675,7 +672,6 @@
 				445FA4C0284E3AD80008D621 /* Collection+.swift */,
 				44537F6D2857975C0061CADF /* UIApplication+.swift */,
 				4455D1C22858957700FB344E /* Date+.swift */,
-				4455D1C42858BFB700FB344E /* Notification.Name+.swift */,
 				4455D1C82858D5AD00FB344E /* UIView+.swift */,
 				4455D1E2285C92F900FB344E /* UIViewController.swift */,
 				4455D1E5285CDBC900FB344E /* UIBarButtonItem+.swift */,
@@ -721,7 +717,7 @@
 				4426A0082854250800942655 /* Firebase */,
 				44EE68132853A7DB00A6D810 /* Report */,
 				44A09A7B2838089D0067184E /* UserDefaults */,
-				440637F82830839700875E77 /* Util */,
+				440637F82830839700875E77 /* Utility */,
 				440637F5283082A800875E77 /* ResourceData */,
 				440637E9282FF6BF00875E77 /* CoreData */,
 				4463FEC0282D66BC00E7A607 /* Extension */,
@@ -846,6 +842,7 @@
 		44E6FDB32B9784F900FF6972 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				440D32322DC8EFE700929967 /* GlobalVariables.swift */,
 				44709D55276A334F00BBF6C9 /* AppDelegate.swift */,
 				44709D57276A334F00BBF6C9 /* SceneDelegate.swift */,
 				44709D5B276A334F00BBF6C9 /* Main.storyboard */,
@@ -971,7 +968,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1620;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					44709D51276A334F00BBF6C9 = {
 						CreatedOnToolsVersion = 13.0;
@@ -1106,9 +1103,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MusicScale/Pods-MusicScale-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MusicScale/Pods-MusicScale-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1167,9 +1168,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MusicScale/Pods-MusicScale-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MusicScale/Pods-MusicScale-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1184,9 +1189,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MusicScale-MusicScaleUITests/Pods-MusicScale-MusicScaleUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MusicScale-MusicScaleUITests/Pods-MusicScale-MusicScaleUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1201,9 +1210,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MusicScale-MusicScaleUITests/Pods-MusicScale-MusicScaleUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MusicScale-MusicScaleUITests/Pods-MusicScale-MusicScaleUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1223,7 +1236,6 @@
 				445FA4C3284E49120008D621 /* MatchKeysViewController.swift in Sources */,
 				4444C47A286B661D00F5E058 /* MainTabBarController.swift in Sources */,
 				44537F6E2857975C0061CADF /* UIApplication+.swift in Sources */,
-				4494B469293A4D850009548C /* DateUtil.swift in Sources */,
 				44709D60276A334F00BBF6C9 /* MusicScale.xcdatamodeld in Sources */,
 				4494B4622938DCB90009548C /* Vibration.swift in Sources */,
 				4455D1E6285CDBC900FB344E /* UIBarButtonItem+.swift in Sources */,
@@ -1266,6 +1278,7 @@
 				4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */,
 				4404B045285F7CEF0072CCFD /* PostView.swift in Sources */,
 				4455D1D6285A538800FB344E /* SearchDegreesReplaceAltText.swift in Sources */,
+				440D32332DC8EFEB00929967 /* GlobalVariables.swift in Sources */,
 				4455D1C72858CCB300FB344E /* Like.swift in Sources */,
 				44CA60FD2DC7B043005A0C7A /* IAPTableViewCell.swift in Sources */,
 				4463FEB4282D317700E7A607 /* PianoViewModel.swift in Sources */,
@@ -1322,7 +1335,6 @@
 				446AEA2C283D3EB200C2BFCF /* WebMusicSheetHelper.swift in Sources */,
 				44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */,
 				4404B047285F8A5B0072CCFD /* QuizStatsCDService.swift in Sources */,
-				4455D1C52858BFB700FB344E /* Notification.Name+.swift in Sources */,
 				44B70F4228491A650068495A /* QuizViewModel.swift in Sources */,
 				44872B0928608CED00C20E06 /* AdsManager.swift in Sources */,
 				4455D1C1285890A500FB344E /* FirebaseUtil.swift in Sources */,
@@ -1451,6 +1463,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -1515,6 +1528,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -1546,7 +1560,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusicScale/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = UltimateScale;
@@ -1584,7 +1597,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusicScale/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = UltimateScale;
@@ -1619,7 +1631,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1644,7 +1655,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1668,7 +1678,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1691,7 +1700,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

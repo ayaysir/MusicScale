@@ -8,12 +8,12 @@
 import Foundation
 
 protocol UserDefaultsConfigurator {
-    mutating func initalizeConfigValueOnFirstrun()
+  mutating func initalizeConfigValueOnFirstrun()
 }
 
 var userDefaultsConfiguratorList: [UserDefaultsConfigurator] = [
-    ScaleInfoVCConfigStore.shared,
-    SortFilterConfigStore.shared,
-    QuizConfigStore.shared,
-    AppConfigStore.shared,
+  ScaleInfoVCConfigStore.shared,
+  SortFilterConfigStore.shared,
+  QuizConfigStore.shared,
+  AppConfigStore.shared,
 ]

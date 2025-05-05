@@ -8,12 +8,12 @@
 import Foundation
 
 protocol BetweenNumbers {
-    associatedtype N: Comparable
-    func between(_ range: ClosedRange<N>) -> Bool
+  associatedtype N: Comparable
+  func between(_ range: ClosedRange<N>) -> Bool
 }
 
 extension Int: BetweenNumbers {
-    func between(_ range: ClosedRange<Int>) -> Bool {
-        return range.contains(self)
-    }
+  func between(_ range: ClosedRange<Int>) -> Bool {
+    return range.contains(self)
+  }
 }

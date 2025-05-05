@@ -8,15 +8,15 @@
 import Foundation
 
 enum SortState: Int, Codable {
-    case none, displayOrder, name, priority
+  case none, displayOrder, name, priority
 }
 
 enum SortOrder: Int {
-    case none, ascending, descending
+  case none, ascending, descending
 }
 
 struct SortInfo {
-    var title: String
-    var order: SortOrder
-    var state: SortState
+  var title: String
+  var order: SortOrder
+  var state: SortState
 }
