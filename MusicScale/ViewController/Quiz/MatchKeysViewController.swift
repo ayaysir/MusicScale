@@ -471,7 +471,7 @@ class MatchKeysViewController: InQuizViewController {
       containerViewPiano.layoutIfNeeded()
       pianoVC = segue.destination as? PianoViewController
       pianoVC?.parentContainerView = containerViewPiano
-      pianoVC?.mode = .quiz
+      pianoVC?.contentMode = .quiz
       pianoVC?.delegate = self
     default:
       break

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="S8F-Uh-enl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="S8F-Uh-enl">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -137,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PJ-bV-bTO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1550" y="-2927"/>
+            <point key="canvasLocation" x="1699" y="-2932"/>
         </scene>
         <!--Score Web View Controller-->
         <scene sceneID="ehm-4l-VFX">
@@ -173,13 +173,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YLk-qG-rOB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="798" y="-2071"/>
+            <point key="canvasLocation" x="784" y="-1992"/>
         </scene>
         <!--Piano View Controller-->
         <scene sceneID="FRv-xf-JbN">
             <objects>
                 <viewController id="koB-7m-YD5" customClass="PianoViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="feE-u1-cuc">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="feE-u1-cuc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="709"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="x31-Qa-z9y"/>
@@ -254,7 +254,7 @@
         <scene sceneID="7zN-kk-LE7">
             <objects>
                 <viewController id="LFu-VY-SiC" customClass="ScaleInfoViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Acd-Ez-ug2">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Acd-Ez-ug2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -270,7 +270,7 @@
                                     <segue destination="DAe-qX-YdK" kind="embed" identifier="WebSheetSegue" id="gzf-qz-h50"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YQ5-tU-dgi">
+                            <containerView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YQ5-tU-dgi">
                                 <rect key="frame" x="0.0" y="461.5" width="375" height="156.5"/>
                                 <connections>
                                     <segue destination="koB-7m-YD5" kind="embed" identifier="PianoSegue" id="2J2-cR-7Di"/>
@@ -431,6 +431,29 @@
                                     <action selector="btnActExpandInfo:" destination="LFu-VY-SiC" eventType="touchUpInside" id="PUu-DG-Fij"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HHN-va-34L">
+                                <rect key="frame" x="279" y="369.5" width="96" height="32"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VA3-Rk-LKd">
+                                        <rect key="frame" x="61" y="6" width="27" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                        <color key="tintColor" name="OpaqueBackgroundColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="hand.point.up" catalog="system" symbolScale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnActPianoKeyPressMode:" destination="LFu-VY-SiC" eventType="touchUpInside" id="bmY-Wx-0Vw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="WgA-g6-R5g"/>
+                                    <constraint firstAttribute="width" constant="96" id="yBN-Fg-JJf"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mSi-5z-bZl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -448,9 +471,11 @@
                             <constraint firstItem="4FH-iG-OmR" firstAttribute="top" secondItem="78q-Qb-nNd" secondAttribute="bottom" id="KEC-ZG-ngO"/>
                             <constraint firstItem="YQ5-tU-dgi" firstAttribute="top" secondItem="4FH-iG-OmR" secondAttribute="bottom" id="MMu-YL-pXo"/>
                             <constraint firstItem="mSi-5z-bZl" firstAttribute="trailing" secondItem="CGd-VL-s4b" secondAttribute="trailing" id="OEB-Ih-5k2"/>
+                            <constraint firstItem="HHN-va-34L" firstAttribute="bottom" secondItem="78q-Qb-nNd" secondAttribute="bottom" id="Sjx-85-Sa7"/>
                             <constraint firstItem="78q-Qb-nNd" firstAttribute="height" secondItem="Acd-Ez-ug2" secondAttribute="height" multiplier="0.22" id="Tr7-FF-zjE"/>
                             <constraint firstItem="Z21-5W-1nF" firstAttribute="leading" secondItem="mSi-5z-bZl" secondAttribute="leading" id="UVA-0u-uIc"/>
                             <constraint firstItem="mSi-5z-bZl" firstAttribute="trailing" secondItem="78q-Qb-nNd" secondAttribute="trailing" id="YHC-sx-6An"/>
+                            <constraint firstItem="HHN-va-34L" firstAttribute="trailing" secondItem="78q-Qb-nNd" secondAttribute="trailing" id="YX6-0B-1ux"/>
                             <constraint firstItem="CGd-VL-s4b" firstAttribute="top" secondItem="mSi-5z-bZl" secondAttribute="top" id="ZZW-E2-kAJ"/>
                             <constraint firstItem="YQ5-tU-dgi" firstAttribute="height" secondItem="Acd-Ez-ug2" secondAttribute="height" multiplier="0.235" id="dfP-2f-Psz"/>
                             <constraint firstItem="CGd-VL-s4b" firstAttribute="leading" secondItem="mSi-5z-bZl" secondAttribute="leading" id="huj-c3-x8E"/>
@@ -476,6 +501,7 @@
                         <outlet property="btnEnharmonic" destination="LbI-JK-IQB" id="XiJ-lg-p8J"/>
                         <outlet property="btnExpandInfo" destination="K7l-hN-Euj" id="ay7-WS-XTn"/>
                         <outlet property="btnPlayAndStop" destination="VAm-Vf-UU4" id="22H-E3-zGC"/>
+                        <outlet property="btnTogglePianoKeyPressMode" destination="VA3-Rk-LKd" id="jpn-bM-UAx"/>
                         <outlet property="btnTranspose" destination="972-3C-Ond" id="1Lg-0B-uKU"/>
                         <outlet property="cnstPianoHeight" destination="dfP-2f-Psz" id="GFP-wG-Ltd"/>
                         <outlet property="cnstSheetPropoHeight" destination="Tr7-FF-zjE" id="LHd-Uq-uJg"/>
@@ -488,12 +514,13 @@
                         <outlet property="stepOctaveShift" destination="1CM-SR-6Eq" id="uo4-4j-WaU"/>
                         <outlet property="stepTempo" destination="wsc-rc-FyV" id="gGp-wM-QRf"/>
                         <outlet property="stepTranspose" destination="e5b-Uf-Ipu" id="46m-dF-RDy"/>
+                        <outlet property="viewAdditionalToolbar" destination="HHN-va-34L" id="Uhr-2v-5hJ"/>
                         <outlet property="viewPlayConfig" destination="DWe-nX-Vix" id="8T9-im-3PK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpK-P1-p9p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-126" y="-2197"/>
+            <point key="canvasLocation" x="-127.2" y="-2197.1514242878561"/>
         </scene>
         <!--Scale Info Update Table View Controller-->
         <scene sceneID="tzh-2D-aTq">
@@ -868,7 +895,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d8k-Qv-4o6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1562" y="-3495"/>
+            <point key="canvasLocation" x="1698" y="-3587"/>
         </scene>
         <!--Scale Sub Info Table View Controller-->
         <scene sceneID="ZMl-6K-EUG">
@@ -1132,7 +1159,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fD4-BH-Wd3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="797.66355140186909" y="-2466.0907127429809"/>
+            <point key="canvasLocation" x="944" y="-2547"/>
         </scene>
         <!--Scale List-->
         <scene sceneID="fXn-we-lmp">
@@ -1242,7 +1269,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ho-er-G0d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="786" y="-3098"/>
+            <point key="canvasLocation" x="785" y="-3255"/>
         </scene>
         <!--Settings-->
         <scene sceneID="0ql-Tw-gIh">
@@ -3771,10 +3798,14 @@
         <image name="gearshape" catalog="system" width="128" height="123"/>
         <image name="globe" catalog="system" width="128" height="123"/>
         <image name="greetingcard" catalog="system" width="108" height="128"/>
+        <image name="hand.point.up" catalog="system" width="106" height="128"/>
         <image name="hand.thumbsdown.fill" catalog="system" width="128" height="121"/>
         <image name="hand.thumbsup.fill" catalog="system" width="128" height="121"/>
         <image name="music.quarternote.3" catalog="system" width="128" height="102"/>
         <image name="play.fill" catalog="system" width="120" height="128"/>
+        <namedColor name="OpaqueBackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="TransparentFillColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="0.019999999552965164" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -3782,55 +3813,55 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemCyanColor">
-            <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.1960784314" green="0.67843137249999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

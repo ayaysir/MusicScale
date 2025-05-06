@@ -39,6 +39,9 @@ class ScaleInfoViewController: UIViewController {
   
   @IBOutlet weak var barBtnUpdate: UIBarButtonItem!
   
+  @IBOutlet weak var btnTogglePianoKeyPressMode: UIButton!
+  @IBOutlet weak var viewAdditionalToolbar: UIView!
+  
   @IBOutlet weak var cnstSheetPropoHeight: NSLayoutConstraint!
   @IBOutlet weak var cnstPianoHeight: NSLayoutConstraint!
   private var originialCnstSheetPropoHeight: NSLayoutConstraint!
@@ -99,6 +102,9 @@ class ScaleInfoViewController: UIViewController {
     redrawPianoViewWhenOrientationChange()
     
     addLongpressGestureForPlaySameTime()
+    
+    viewAdditionalToolbar.backgroundColor = .clear
+    btnTogglePianoKeyPressMode.layer.cornerRadius = 5
     
     // 뷰모델 변경되면 다시 해야되는 작업들
     
@@ -298,6 +304,18 @@ class ScaleInfoViewController: UIViewController {
     
     
     navigationController?.pushViewController(scaleListVC, animated: true)
+  }
+  
+  @IBAction func btnActPianoKeyPressMode(_ sender: UIButton) {
+    guard let currentMode = pianoVC?.keyPressMode else {
+      return
+    }
+    
+    pianoVC?.keyPressMode = currentMode.next
+    sender.setImage(
+      .init(systemName: currentMode.next.systemImageString),
+      for: .normal
+    )
   }
   
   
