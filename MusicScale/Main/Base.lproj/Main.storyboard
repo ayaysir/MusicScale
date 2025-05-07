@@ -190,7 +190,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mGY-ea-mDc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="797" y="-1492"/>
+            <point key="canvasLocation" x="784" y="-1432"/>
         </scene>
         <!--Quiz History Log (β)-->
         <scene sceneID="94i-UF-9rC">
@@ -1270,6 +1270,7 @@
                         <outlet property="barBtnEdit" destination="ToQ-KK-G10" id="qYH-Nu-hyf"/>
                         <segue destination="LFu-VY-SiC" kind="show" identifier="DetailViewSegue" id="FWp-pe-ob4"/>
                         <segue destination="dom-77-63F" kind="show" identifier="CreateScaleInfoSegue" id="VsC-uc-p1n"/>
+                        <segue destination="cRa-Pf-kBo" kind="show" identifier="AdvSearch" id="LHM-6c-xMW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ho-er-G0d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3816,11 +3817,114 @@
             </objects>
             <point key="canvasLocation" x="2340" y="-560"/>
         </scene>
+        <!--Scale Info Advance Search View Controller-->
+        <scene sceneID="yiz-dP-OP6">
+            <objects>
+                <viewController id="cRa-Pf-kBo" customClass="ScaleInfoAdvanceSearchViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ASq-ht-pEs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yv-ig-jL3">
+                                <rect key="frame" x="157" y="402" width="61" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="On Edit" image="play.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="btnActPlay:" destination="cRa-Pf-kBo" eventType="touchUpInside" id="UQB-XY-eNj"/>
+                                    <action selector="btnActPlayOnEdit:" destination="JGG-Hn-FWp" eventType="touchUpInside" id="gOx-qp-3gl"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a2D-RW-5OI">
+                                <rect key="frame" x="1" y="114" width="374" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="KeyName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vA-zB-RKf">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b6P-Lk-3gO">
+                                <rect key="frame" x="0.0" y="444" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" id="SMp-kk-YI4">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="kTH-lr-PgK">
+                                            <rect key="frame" x="16" y="4.5" width="162" height="35"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="Submit">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="btnActSubmit:" destination="JGG-Hn-FWp" eventType="touchUpInside" id="d9d-aD-41i"/>
+                                            </connections>
+                                        </button>
+                                        <connections>
+                                            <action selector="btnActSubmit:" destination="cRa-Pf-kBo" id="XaP-d6-9bA"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="hHg-Yw-fo1"/>
+                                    <barButtonItem title="Reset" id="JT7-gH-eJv">
+                                        <connections>
+                                            <action selector="btnActReset:" destination="cRa-Pf-kBo" id="NFx-ok-4hK"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Backspace" image="delete.left" catalog="system" width="53.5" id="GrS-3Q-64E">
+                                        <connections>
+                                            <action selector="btnActBackspace:" destination="cRa-Pf-kBo" id="aeP-91-BmE"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o2t-wB-SrY">
+                                <rect key="frame" x="20" y="224" width="335" height="169.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WIa-RH-V2S">
+                                <rect key="frame" x="1" y="496" width="375" height="129.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <segue destination="koB-7m-YD5" kind="embed" identifier="SearchPianoSegue" id="1nC-TC-1p7"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tP0-do-Pmo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KC4-H6-9if"/>
+                    <connections>
+                        <outlet property="barBtnBackspace" destination="GrS-3Q-64E" id="LJU-nW-gxK"/>
+                        <outlet property="barBtnReset" destination="JT7-gH-eJv" id="hRe-iG-VmU"/>
+                        <outlet property="btnPlayOnEdit" destination="9yv-ig-jL3" id="dXg-H7-Vnp"/>
+                        <outlet property="btnSubmit" destination="SMp-kk-YI4" id="a3S-qi-vY2"/>
+                        <outlet property="containerViewPiano" destination="WIa-RH-V2S" id="gtZ-Ez-pKI"/>
+                        <outlet property="webView" destination="o2t-wB-SrY" id="4tq-Yq-jvP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="maY-3I-mwr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="752.79999999999995" y="-4050.2248875562223"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ejH-Eh-ga8"/>
-        <segue reference="6tl-C7-X1w"/>
-        <segue reference="2J2-cR-7Di"/>
+        <segue reference="VsC-uc-p1n"/>
+        <segue reference="1nC-TC-1p7"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Wake" width="40" height="40"/>

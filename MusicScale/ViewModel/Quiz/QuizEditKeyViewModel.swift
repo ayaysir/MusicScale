@@ -15,15 +15,19 @@ class QuizEditKeyViewModel {
   private var order: DegreesOrder!
   private var tempo: Double
   var onEditNotes: [Note] = []
-  var scaleInfo: ScaleInfo!
   
   private let helper = MusicSheetHelper()
   
-  init(scaleInfo info: ScaleInfo, key: Music.Key, order: DegreesOrder, tempo: Double) {
-    scaleInfo = info
+  init(
+    scaleInfo info: ScaleInfo?,
+    key: Music.Key,
+    order: DegreesOrder,
+    tempo: Double
+  ) {
+    // scaleInfo = info
     self.key = key
     
-    scaleName = "\(key.textValue) \(info.name)"
+    scaleName = "\(key.textValue) \(info?.name ?? "Scale")"
     self.order = order
     self.tempo = tempo
     

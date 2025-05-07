@@ -53,6 +53,7 @@ class ScaleListTableViewController: UITableViewController {
     let isSearchBarHasText = searchController.searchBar.text?.isEmpty == false
     return isActive && isSearchBarHasText
   }
+  let btnAdvSearch = UIButton(type: .system)
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -225,6 +226,28 @@ class ScaleListTableViewController: UITableViewController {
     searchController.searchBar.delegate = self
     searchController.searchResultsUpdater = self
     // self.navigationController?.navigationBar.prefersLargeTitles = true
+    
+    // 20250507: 커스텀 버튼 추가
+    let BTN_WIDTH: CGFloat = 50
+    let BTN_HEIGHT: CGFloat = 30
+    
+    btnAdvSearch.setImage(UIImage(systemName: "mail.and.text.magnifyingglass"), for: .normal)
+    btnAdvSearch.setTitle("Advance", for: .normal)
+    btnAdvSearch.frame = CGRect(x: 0, y: 0, width: BTN_WIDTH, height: BTN_HEIGHT)
+    btnAdvSearch.backgroundColor = .systemGray3
+    btnAdvSearch.layer.cornerRadius = 5
+    btnAdvSearch.translatesAutoresizingMaskIntoConstraints = false
+    searchController.searchBar.addSubview(btnAdvSearch)
+    
+    btnAdvSearch.addTarget(self, action: #selector(btnActAdvSearch), for: .touchUpInside)
+    
+    // 우측 정렬 + 중앙 정렬
+    NSLayoutConstraint.activate([
+      btnAdvSearch.trailingAnchor.constraint(equalTo: searchController.searchBar.trailingAnchor, constant: -30),
+      btnAdvSearch.centerYAnchor.constraint(equalTo: searchController.searchBar.centerYAnchor, constant: -6.3),
+      btnAdvSearch.widthAnchor.constraint(equalToConstant: BTN_WIDTH),
+      btnAdvSearch.heightAnchor.constraint(equalToConstant: BTN_HEIGHT)
+    ])
   }
   
   func toggleStarRatingViewForCurrentVisibleCells(isEditing: Bool) {
@@ -449,6 +472,19 @@ extension ScaleListTableViewController: UISearchBarDelegate, UISearchResultsUpda
     let searchCategory = searchCategoryList[searchController.searchBar.selectedScopeButtonIndex]
     guard let searchText = searchController.searchBar.text else { return }
     scaleListViewModel.search(searchText: searchText, searchCategory: searchCategory)
+  }
+  
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    btnAdvSearch.isHidden = true
+  }
+  
+  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    btnAdvSearch.isHidden = false
+  }
+  
+  @objc func btnActAdvSearch() {
+    print(#function)
+    performSegue(withIdentifier: "AdvSearch", sender: nil)
   }
 }
 

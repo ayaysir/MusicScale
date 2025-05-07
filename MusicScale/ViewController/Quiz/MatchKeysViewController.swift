@@ -606,7 +606,6 @@ extension MatchKeysViewController: PianoVCDelegate {
       currentDisplayAbcjsText = currentEditViewModel.abcjsTextOnEdit
       highlightLastNote()
     }
-    
   }
 }
 
