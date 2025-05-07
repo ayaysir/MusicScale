@@ -38,10 +38,16 @@ class PianoViewController: UIViewController {
   
   /// 이전 터치 키 - single touch slide 모드에서 필요
   private var prevTouchedKey: PianoKeyInfo?
-  /// 터치 시작지점 모음 - multi touch 모드에서 필요
-  private var touchStartLocations: [UITouch: CGPoint] = [:]
+  
+  /// 터치 시작지점 모음 - single touch only/multi touch 모드에서 필요
+  private var touchStartInfos: [UITouch : TouchInfo] = [:]
+  
   /// 롱프레스 제스처 전역변수 - 제스처 등록/삭제에 필요
   private var pianoLongPressGesture: UILongPressGestureRecognizer?
+  
+  /// single touch only/multi touch에서 최소 지속시간
+  /// - 너무 짧게 누르면 소리가 나오기도 전에 stopSound()가 실행됨
+  private let MIN_HOLD_TIME = 0.1
   
   private let GESTURE_DEBUG = false
   
@@ -167,7 +173,7 @@ class PianoViewController: UIViewController {
     }
     
     prevTouchedKey = nil
-    touchStartLocations = [:]
+    touchStartInfos = [:]
   }
   
   
@@ -180,18 +186,18 @@ class PianoViewController: UIViewController {
     // .stricted 모드에서 터치 슬라이드를 할 때 끊기는 것 방지
     prevTouchedKey = keyInfo
     
-    if contentMode == .stricted {
-      guard viewPiano.viewModel.availableKeyIndexes.contains(keyInfo.keyIndex) else {
-        return
-      }
+    // 스트릭트 모드일 경우에만 유효한 키인지 검사
+    // contentMode != .stricted → 스트릭트 모드가 아닌 경우는 무조건 통과
+    // 이하 → 스트릭트 모드인 경우에는 해당 인덱스가 있는지 확인
+    guard contentMode != .stricted || viewPiano.viewModel.availableKeyIndexes.contains(keyInfo.keyIndex) else {
+      return
     }
-    
-    // viewPiano.viewModel.currentTouchedKey = keyInfo
-    viewPiano.viewModel.insertCurrentTouchedKeysWithRefreshView(keyInfo)
     
     // 노트 재생
     let targetNoteNumber = semitoneStart + keyInfo.keyIndex + (octaveShift * 12)
     generator.playSound(noteNumber: targetNoteNumber)
+    
+    viewPiano.viewModel.insertCurrentTouchedKeysWithRefreshView(keyInfo)
     
     // delegate 있는 경우 키 누름 정보 전송
     if let delegate = delegate {
@@ -217,10 +223,11 @@ class PianoViewController: UIViewController {
     if viewPiano.viewModel.currentTouchedKeys.contains(keyInfo) {
       viewPiano.viewModel.removeCurrentTouchedKeysWithRefreshView(keyInfo)
       let semitoneStart = 60 + PianoKeyHelper.adjustKeySemitone(key: currentPlayableKey)
-      let targetNoteNumber = semitoneStart + keyInfo.keyIndex + (octaveShift * 12)
-      generator.stopSimply(noteNumber: targetNoteNumber)
       
       prevTouchedKey = nil
+      
+      let targetNoteNumber = semitoneStart + keyInfo.keyIndex + (octaveShift * 12)
+      generator.stopSimply(noteNumber: targetNoteNumber)
     }
   }
 }
@@ -234,11 +241,14 @@ extension PianoViewController {
     guard keyPressMode != .singleTouchWithSlide else { return }
     guard isKeyPressEnabled else { return }
     
+    GESTURE_DEBUG ? print("GESTURE: \(#function)") : nil
+    
     for touch in touches {
       let location = touch.location(in: viewPiano)
       GESTURE_DEBUG ? print("touches: start", location) : nil
 
-      touchStartLocations[touch] = location // 시작 위치 저장
+      // 시작 위치, 타임스탬프 저장
+      touchStartInfos[touch] = .init(location: location, touchTimestamp: touch.timestamp)
       
       if let keyInfo = viewPiano.viewModel.getKeyInfoBy(touchLocation: location) {
         startKeyPress(keyInfo)
@@ -254,14 +264,24 @@ extension PianoViewController {
     guard keyPressMode != .singleTouchWithSlide else { return }
     guard isKeyPressEnabled else { return }
     
+    GESTURE_DEBUG ? print("GESTURE: \(#function)") : nil
+    
     for touch in touches {
-      if let startLocation = touchStartLocations[touch] {
+      if let startInfo = touchStartInfos[touch],
+         let keyInfo = viewPiano.viewModel.getKeyInfoBy(touchLocation: startInfo.location) {
+        let endTime = touch.timestamp
+        let heldTime = endTime - startInfo.touchTimestamp
+        let remainingTime = MIN_HOLD_TIME - heldTime
         
-        if let keyInfo = viewPiano.viewModel.getKeyInfoBy(touchLocation: startLocation) {
+        if remainingTime > 0 {
+          DispatchQueue.main.asyncAfter(deadline: .now() + remainingTime) {
+            self.stopKeyPress(keyInfo)
+          }
+        } else {
           stopKeyPress(keyInfo)
         }
         
-        touchStartLocations.removeValue(forKey: touch)
+        touchStartInfos.removeValue(forKey: touch)
       }
     }
   }
@@ -326,7 +346,12 @@ extension PianoViewController {
 }
 
 extension PianoViewController {
-  // MARK: - Enums
+  // MARK: - Inner enums & structs
+  
+  struct TouchInfo {
+    var location: CGPoint
+    var touchTimestamp: TimeInterval
+  }
   
   enum ContentMode {
     case stricted, quiz
