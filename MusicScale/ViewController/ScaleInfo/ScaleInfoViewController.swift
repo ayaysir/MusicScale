@@ -113,6 +113,10 @@ class ScaleInfoViewController: UIViewController {
     
     // loadFromConfigStore()는 prepare에서 실행
     
+    // KeyPressMode
+    let keyPressMode = configStore.keyPressModeOnStrictMode
+    toggleKeyPressMode(to: keyPressMode)
+    
     // 피아노 이용 가능 키 표시 - 최초 페이지 열었을 때
     setAvailableKeyAndOctaveShift()
     
@@ -302,7 +306,6 @@ class ScaleInfoViewController: UIViewController {
     scaleListVC.comparisonViewModel = comparisonViewModel
     scaleListVC.compareDelegate = self
     
-    
     navigationController?.pushViewController(scaleListVC, animated: true)
   }
   
@@ -311,13 +314,8 @@ class ScaleInfoViewController: UIViewController {
       return
     }
     
-    pianoVC?.keyPressMode = currentMode.next
-    sender.setImage(
-      .init(systemName: currentMode.next.systemImageString),
-      for: .normal
-    )
+    toggleKeyPressMode(to: currentMode.next)
   }
-  
   
   // MARK: - Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -463,8 +461,8 @@ extension ScaleInfoViewController {
     transpose(noteStr: transposeStr ?? "C", initChange: true)
     
     // EnharmonicMode
-    let mode = configStore.enharmonicMode
-    changeEnharmonicMode(mode: mode, initChange: true)
+    let enharmonicMode = configStore.enharmonicMode
+    changeEnharmonicMode(mode: enharmonicMode, initChange: true)
     
     // customEnharmonics
   }
@@ -515,7 +513,6 @@ extension ScaleInfoViewController {
   }
   
   func changeEnharmonicMode(mode: EnharmonicMode, initChange: Bool = false) {
-    
     let currentKeyAccidentalValue = scaleInfoViewModel.currentKey.accidentalValue
     
     switch mode {
@@ -551,7 +548,6 @@ extension ScaleInfoViewController {
   }
   
   func transpose(noteStr: String, initChange: Bool = false) {
-    
     self.btnTranspose.setTitle(noteStr, for: .normal)
     
     if let targetKey = Music.Key.getKeyFromNoteStr(noteStr) {
@@ -578,6 +574,15 @@ extension ScaleInfoViewController {
     } else {
       pianoVC?.updateAvailableKeys(integerNotations: scaleInfoViewModel.ascendingIntegerNotationArray)
     }
+  }
+  
+  private func toggleKeyPressMode(to mode: PianoViewController.KeyPressMode) {
+    pianoVC?.keyPressMode = mode
+    btnTogglePianoKeyPressMode.setImage(
+      .init(systemName: mode.systemImageString),
+      for: .normal
+    )
+    configStore.keyPressModeOnStrictMode = mode
   }
   
   @objc func stopSequencer() {

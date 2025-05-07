@@ -19,37 +19,6 @@ protocol PianoVCDelegate: AnyObject {
 // MARK: - VC Main
 
 class PianoViewController: UIViewController {
-  enum ContentMode {
-    case stricted, quiz
-  }
-  
-  enum KeyPressMode {
-    case singleTouchOnly, singleTouchWithSlide, multiTouchOnly
-    
-    var next: Self {
-      // 순서: 싱글 터치 -> 슬라이드 -> 멀티
-      switch self {
-      case .singleTouchOnly:
-          .singleTouchWithSlide
-      case .singleTouchWithSlide:
-          .multiTouchOnly
-      case .multiTouchOnly:
-          .singleTouchOnly
-      }
-    }
-    
-    var systemImageString: String {
-      switch self {
-      case .singleTouchOnly:
-        "hand.point.up"
-      case .singleTouchWithSlide:
-        "hand.draw"
-      case .multiTouchOnly:
-        "hand.raised"
-      }
-    }
-  }
-  
   var viewPiano: PianoView!
   var contentMode: ContentMode = .stricted
   var keyPressMode: KeyPressMode = .singleTouchOnly {
@@ -353,5 +322,42 @@ extension PianoViewController {
     }
     
     return false
+  }
+}
+
+extension PianoViewController {
+  // MARK: - Enums
+  
+  enum ContentMode {
+    case stricted, quiz
+  }
+  
+  enum KeyPressMode: Int {
+    case singleTouchOnly = 0
+    case singleTouchWithSlide
+    case multiTouchOnly
+    
+    var next: Self {
+      // 순서: 싱글 터치 -> 슬라이드 -> 멀티
+      switch self {
+      case .singleTouchOnly:
+          .singleTouchWithSlide
+      case .singleTouchWithSlide:
+          .multiTouchOnly
+      case .multiTouchOnly:
+          .singleTouchOnly
+      }
+    }
+    
+    var systemImageString: String {
+      switch self {
+      case .singleTouchOnly:
+        "hand.point.up"
+      case .singleTouchWithSlide:
+        "hand.draw"
+      case .multiTouchOnly:
+        "hand.raised"
+      }
+    }
   }
 }

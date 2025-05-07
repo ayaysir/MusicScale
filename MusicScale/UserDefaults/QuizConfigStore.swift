@@ -7,17 +7,6 @@
 
 import Foundation
 
-extension String {
-  static var cfgQuizKeyList = "QUIZ_cfgQuizKeyList"
-  static var cfgQuizAscSelected = "QUIZ_cfgQuizAscSelected"
-  static var cfgQuizDescSelected = "QUIZ_cfgQuizDescSelected"
-  static var cfgQuizScaleIdList = "QUIZ_cfgQuizScaleIdList"
-  static var cfgQuizNumOfQuest = "QUIZ_cfgQuizNumOfQuest"
-  static var cfgQuizTypeOfQuest = "QUIZ_cfgQuizTypeOfQuest"
-  static var cfgQuizEnharmonicMode = "QUIZ_cfgQuizEnharmonicMode"
-  static var cfgQuizLeitnerSystem = "QUIZ_cfgQuizLeitnerSystem"
-}
-
 struct QuizConfigStore: UserDefaultsConfigurator {
   
   mutating func initalizeConfigValueOnFirstrun() {

@@ -7,14 +7,6 @@
 
 import Foundation
 
-extension String {
-  static let cfgAppCustomScale = "APP_cfgAppCustomScale"
-  static let cfgAppPlaybackInstrument = "APP_cfgAppPlaybackInstrument"
-  static let cfgAppPianoInstrument = "APP_cfgAppPianoInstrument"
-  static let cfgAppAppearance = "APP_cfgAppAppearance"
-  static let cfgAppIsShowHWKeyboardMapping = "APP_cfgAppIsShowHWKeyboardMapping"
-}
-
 struct AppConfigStore: UserDefaultsConfigurator {
   
   mutating func initalizeConfigValueOnFirstrun() {

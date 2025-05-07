@@ -434,10 +434,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HHN-va-34L">
                                 <rect key="frame" x="279" y="369.5" width="96" height="32"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VA3-Rk-LKd">
-                                        <rect key="frame" x="64" y="3" width="27" height="26"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VA3-Rk-LKd">
+                                        <rect key="frame" x="58" y="2" width="28" height="28"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="28" id="3Z9-K3-u5V"/>
+                                            <constraint firstAttribute="height" constant="28" id="UGt-H3-EVq"/>
+                                        </constraints>
                                         <color key="tintColor" name="OpaqueBackgroundColor"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal">
@@ -450,7 +453,9 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
+                                    <constraint firstItem="VA3-Rk-LKd" firstAttribute="centerY" secondItem="HHN-va-34L" secondAttribute="centerY" id="2uI-dw-Lgk"/>
                                     <constraint firstAttribute="height" constant="32" id="WgA-g6-R5g"/>
+                                    <constraint firstAttribute="trailing" secondItem="VA3-Rk-LKd" secondAttribute="trailing" constant="10" id="xiS-Jb-cD2"/>
                                     <constraint firstAttribute="width" constant="96" id="yBN-Fg-JJf"/>
                                 </constraints>
                             </view>

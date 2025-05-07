@@ -19,6 +19,7 @@ struct ScaleInfoVCConfigStore: UserDefaultsConfigurator {
     transpose = "C"
     enharmonicMode = .standard
     customEnharmonics = EnharmonicMode.userCustom.noteStrOfFirstOctave!
+    keyPressModeOnStrictMode = .singleTouchOnly
   }
   
   var degreesOrder: DegreesOrder {
@@ -76,6 +77,16 @@ struct ScaleInfoVCConfigStore: UserDefaultsConfigurator {
       } catch {
         print(error)
       }
+    }
+  }
+  
+  var keyPressModeOnStrictMode: PianoViewController.KeyPressMode {
+    get {
+      let storedValue = store.integer(forKey: .kKeyPressMode)
+      return PianoViewController.KeyPressMode(rawValue: storedValue) ?? .singleTouchOnly
+    }
+    set {
+      store.set(newValue.rawValue, forKey: .kKeyPressMode)
     }
   }
   
