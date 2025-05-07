@@ -10,6 +10,7 @@
 		0E34DAC644E3F87647A9DEB4 /* Pods_MusicScaleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F34760ED95FD2F96DADCF95 /* Pods_MusicScaleTests.framework */; };
 		440161C3285E348800B6D4FB /* OrientationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440161C2285E348800B6D4FB /* OrientationUtil.swift */; };
 		440161C5285E54BC00B6D4FB /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440161C4285E54BC00B6D4FB /* UIButton+.swift */; };
+		440380112DCA87B300EBB6A3 /* CT8MGM.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 440380102DCA87B300EBB6A3 /* CT8MGM.sf2 */; };
 		4404B045285F7CEF0072CCFD /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404B044285F7CEF0072CCFD /* PostView.swift */; };
 		4404B047285F8A5B0072CCFD /* QuizStatsCDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404B046285F8A5B0072CCFD /* QuizStatsCDService.swift */; };
 		4404B049285FA3C70072CCFD /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404B048285FA3C70072CCFD /* StatsViewController.swift */; };
@@ -96,7 +97,6 @@
 		4463FEB1282C24CA00E7A607 /* PianoKeyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEB0282C24CA00E7A607 /* PianoKeyInfo.swift */; };
 		4463FEB4282D317700E7A607 /* PianoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEB3282D317700E7A607 /* PianoViewModel.swift */; };
 		4463FEB7282D3FCE00E7A607 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEB6282D3FCE00E7A607 /* PianoView.swift */; };
-		4463FEBC282D61E700E7A607 /* GeneralUser GS MuseScore v1.442.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */; };
 		4463FEBF282D63B900E7A607 /* PianoKeyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEBE282D63B900E7A607 /* PianoKeyHelper.swift */; };
 		4463FEC2282D66C700E7A607 /* CaseCountable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEC1282D66C700E7A607 /* CaseCountable.swift */; };
 		4463FEC4282EB2AE00E7A607 /* PianoKeyHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463FEC3282EB2AE00E7A607 /* PianoKeyHelperTests.swift */; };
@@ -203,6 +203,7 @@
 		31DB1CF93AE06F4045E6B9A3 /* Pods-MusicScale.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicScale.debug.xcconfig"; path = "Target Support Files/Pods-MusicScale/Pods-MusicScale.debug.xcconfig"; sourceTree = "<group>"; };
 		440161C2285E348800B6D4FB /* OrientationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationUtil.swift; sourceTree = "<group>"; };
 		440161C4285E54BC00B6D4FB /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		440380102DCA87B300EBB6A3 /* CT8MGM.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = CT8MGM.sf2; sourceTree = "<group>"; };
 		4404B044285F7CEF0072CCFD /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		4404B046285F8A5B0072CCFD /* QuizStatsCDService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStatsCDService.swift; sourceTree = "<group>"; };
 		4404B048285FA3C70072CCFD /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
@@ -437,6 +438,7 @@
 				44E6FDBB2B985BB000FF6972 /* ShortcutTable */,
 				441E96F1286596F300261D43 /* Manual JPEG */,
 				4463FEBB282D61DC00E7A607 /* GeneralUser GS MuseScore v1.442.sf2 */,
+				440380102DCA87B300EBB6A3 /* CT8MGM.sf2 */,
 				4494B475293E41430009548C /* MusicScale - ko.pdf */,
 				441E96E72864B17800261D43 /* MusicScale Licenses.pdf */,
 				441E96E52864AD5600261D43 /* MusicScale - en.pdf */,
@@ -1027,6 +1029,7 @@
 				441E97022865974900261D43 /* MusicScale - English.006.jpeg in Resources */,
 				44EE68152853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md in Resources */,
 				4455D1D8285B31E400FB344E /* Musiqwik-rvL8.ttf in Resources */,
+				440380112DCA87B300EBB6A3 /* CT8MGM.sf2 in Resources */,
 				441E97002865974900261D43 /* MusicScale - English.009.jpeg in Resources */,
 				44EFA4B328541F0800565F93 /* GoogleService-Info.plist in Resources */,
 				441E97072865974900261D43 /* MusicScale - English.004.jpeg in Resources */,
@@ -1045,7 +1048,6 @@
 				441E96EA2864F1CF00261D43 /* SampleScaleList-20220624.json in Resources */,
 				44872B2228638C4000C20E06 /* Scale transpose example.pdf in Resources */,
 				44709D62276A335800BBF6C9 /* Assets.xcassets in Resources */,
-				4463FEBC282D61E700E7A607 /* GeneralUser GS MuseScore v1.442.sf2 in Resources */,
 				441E97052865974900261D43 /* MusicScale - English.007.jpeg in Resources */,
 				441E970D2865977900261D43 /* README-EN.md in Resources */,
 				44709D5D276A334F00BBF6C9 /* Main.storyboard in Resources */,

@@ -135,7 +135,7 @@
 "CYt-Ub-afp.text" = "Tempo (BPM)";
 
 /* Class = "UILabel"; text = "Playback Instrument"; ObjectID = "Cs5-BJ-7dT"; */
-"Cs5-BJ-7dT.text" = "再生楽器";
+"Cs5-BJ-7dT.text" = "再生/鍵盤楽器設定";
 
 /* Class = "UILabel"; text = "Enharmonic Modes"; ObjectID = "EDC-ci-Cit"; */
 "EDC-ci-Cit.text" = "Enharmonic Modes";

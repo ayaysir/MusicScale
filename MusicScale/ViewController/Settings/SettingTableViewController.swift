@@ -24,21 +24,18 @@ class SettingTableViewController: UITableViewController {
   private let restorePurchasesCellIndexPath = IndexPath(row: 1, section: 0)
   private let firstIAPProductCellIndexPath = IndexPath(row: 0, section: 0)
   
-  // MIDI Setting: Section 1
+  // App Setting: Section 1
   private let playbackInstCell = IndexPath(row: 0, section: 1)
-  private let pianoInstCell = IndexPath(row: 1, section: 1)
+  private let setAppearanceCellIndexPath = IndexPath(row: 1, section: 1)
+  private let setHWKeyMappingCellIndexPath = IndexPath(row: 2, section: 1)
+  private let setEnhamonicCell = IndexPath(row: 3, section: 1)
+  private let exportToCsvCell = IndexPath(row: 4, section: 1)
   
-  // App Setting: Section 2
-  private let setAppearanceCellIndexPath = IndexPath(row: 0, section: 2)
-  private let setHWKeyMappingCellIndexPath = IndexPath(row: 1, section: 2)
-  private let setEnhamonicCell = IndexPath(row: 2, section: 2)
-  private let exportToCsvCell = IndexPath(row: 3, section: 2)
+  // Info: Section 2
+  private let sendMailCell = IndexPath(row: 3, section: 2)
+  private let githubLinkCell = IndexPath(row: 4, section: 2)
   
-  // Info: Section 3
-  private let sendMailCell = IndexPath(row: 3, section: 3)
-  private let githubLinkCell = IndexPath(row: 4, section: 3)
-  
-  private let SECTION_BANNER = 4
+  private let SECTION_BANNER = 3
   // ==============================================
   
   private let config = UserDefaults.standard
@@ -66,10 +63,6 @@ class SettingTableViewController: UITableViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
-    case "InstrumentSegue":
-      let selectVC = segue.destination as! InstrumentTableViewController
-      let place = sender as! InstrumentTableViewController.Place
-      selectVC.place = place
     case "HelpSegue", "LicenseSegue", "NewFeatureSegue":
       let webVC = segue.destination as! PDFViewController
       webVC.category = segue.identifier == "HelpSegue" ? .help : segue.identifier == "LicenseSegue" ? .licenses : .newFeatureAndShortcuts
@@ -92,7 +85,8 @@ extension SettingTableViewController {
        indexPath.row != restorePurchasesCellIndexPath.row,
        let product = iapProducts[safe: indexPath.row] {
       purchaseIAP(productID: product.productIdentifier)
-    } else {
+    } else if indexPath.section == SECTION_IAP,
+              indexPath.row != restorePurchasesCellIndexPath.row {
       simpleAlert(
         self,
         message: "loc.iap_not_ready".localized(),
@@ -104,9 +98,7 @@ extension SettingTableViewController {
     // Links or segues
     switch indexPath {
     case playbackInstCell:
-      performSegue(withIdentifier: "InstrumentSegue", sender: InstrumentTableViewController.Place.playback)
-    case pianoInstCell:
-      performSegue(withIdentifier: "InstrumentSegue", sender: InstrumentTableViewController.Place.piano)
+      performSegue(withIdentifier: "InstrumentSegue", sender: nil)
     case githubLinkCell:
       if let url = URL(string: "https://github.com/ayaysir/MusicScale") {
         UIApplication.shared.open(url)

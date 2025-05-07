@@ -152,3 +152,8 @@
 
 "loc.iap_not_ready_title" = "アプリ内課金を利用できません";
 "loc.iap_not_ready" = "アプリ内課金を現在利用できません。設定を確認するか、後でもう一度お試しください。";
+
+/* InstrumentVC */
+"loc.instrument_title" = "再生／キーボード楽器設定";
+"loc.soundfont_warning" = "このパッチ番号を設定すると、サウンドフォントファイルのエラーにより遅延や無音が発生する可能性があります。別のパッチ番号を使用してください。";
+"loc.soundfont_error_title" = "サウンドフォントエラー";

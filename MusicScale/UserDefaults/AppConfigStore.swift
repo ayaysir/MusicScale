@@ -55,7 +55,7 @@ struct AppConfigStore: UserDefaultsConfigurator {
   var pianoInstrument: Int {
     get {
       let value = store.integer(forKey: .cfgAppPianoInstrument)
-      return value >= 0 ? value : 5
+      return 0...127 ~= value ? value : 5
     } set {
       store.set(newValue, forKey: .cfgAppPianoInstrument)
     }

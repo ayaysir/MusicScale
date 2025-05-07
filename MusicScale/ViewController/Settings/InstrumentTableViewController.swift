@@ -8,38 +8,23 @@
 import UIKit
 
 class InstrumentTableViewController: UITableViewController {
+  private var configStore = AppConfigStore.shared
   
-  enum Place { case playback, piano }
-  var place: Place = .playback {
-    didSet {
-      switch place {
-      case .playback:
-        self.title = "Select a Playback Instrument".localized()
-      case .piano:
-        self.title = "Select a Keyboard Instrument".localized()
-      }
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.title = "loc.instrument_title".localized()
+    TrackingTransparencyPermissionRequest()
   }
   
-  // 문제있는 악기 번호 목록 (one-base)
-  private let brokenInstNumber = [1, 2, 4, 37, 38, 39]
-  
-  var configStore = AppConfigStore.shared
-  
   override func viewWillAppear(_ animated: Bool) {
-    let savedNumber = place == .playback ? configStore.playbackInstrument : configStore.pianoInstrument
-    let indexPath = InstrumentList.indexPath(of: savedNumber + 1)
+    let savedNumber =  configStore.playbackInstrument
+    let indexPath = InstrumentList.indexPath(of: savedNumber)
     tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     GlobalConductor.shared.restart()
     
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    TrackingTransparencyPermissionRequest()
   }
   
   // MARK: - Table view data source
@@ -57,48 +42,49 @@ class InstrumentTableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "InstrumentCell", for: indexPath)
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: "InstrumentCell", for: indexPath) as? InstrumentCell else {
+      return UITableViewCell()
+    }
     
     let instInfo = InstrumentList.instrument(at: indexPath)
-    if let label = cell.contentView.subviews[safe: 0] as? UILabel {
-      
-      // warn broken instrument
-      if brokenInstNumber.contains(instInfo.number) {
-        cell.accessoryType = .detailButton
-        cell.tintColor = .lightGray
-        
-        label.textColor = .lightGray
-        label.text = instInfo.tableRowTitle + " ⚠️"
-      } else {
-        cell.accessoryType = .none
-        cell.tintColor = nil
-        
-        label.textColor = nil
-        label.text = instInfo.tableRowTitle
+    // let isBroken = brokenInstNumber.contains(instInfo.number)
+    let isSelectedForPlayback = instInfo.number == configStore.playbackInstrument
+    let isSelectedForPiano = instInfo.number == configStore.pianoInstrument
+    
+    cell.configure(
+      info: instInfo,
+      isBroken: false,
+      isSelectedForPlayback: isSelectedForPlayback,
+      isSelectedForPiano: isSelectedForPiano,
+      onPlaybackSelect: {
+        self.configStore.playbackInstrument = instInfo.number
+        tableView.reloadData()
+        self.restartEngine()
+      },
+      onPianoSelect: {
+        self.configStore.pianoInstrument = instInfo.number
+        tableView.reloadData()
+        self.restartEngine()
       }
-    }
+    )
     
     return cell
   }
   
   override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-    simpleAlert(self, message: "There is a possibility of sound delay or silence when setting this patch number due to an error in the soundfont file. Please use a different instrument patch number.".localized(), title: "Soundfont Error".localized(), handler: nil)
+    simpleAlert(self, message: "loc.soundfont_warning".localized(), title: "loc.soundfont_error_title".localized(), handler: nil)
   }
   
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    switch place {
-    case .playback:
-      configStore.playbackInstrument = InstrumentList.instrument(at: indexPath).number - 1
-    case .piano:
-      configStore.pianoInstrument = InstrumentList.instrument(at: indexPath).number - 1
-      
-      // stop and reset sound generator engine
-      GlobalGenerator.shared.stopEngine()
-      GlobalGenerator.shared.initEngine()
-    }
-    
-    // navigationController?.popViewController(animated: true)
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
+  
+  // MARK: - Utilities
+  func restartEngine() {
+    // stop and reset sound generator engine
+    GlobalGenerator.shared.stopEngine()
+    GlobalGenerator.shared.initEngine()
   }
+  
+  // MARK: - Ad area
   
   private func isBannerContainerSection(_ section: Int) -> Bool {
     let half = tableView.numberOfSections / 2
@@ -121,5 +107,70 @@ class InstrumentTableViewController: UITableViewController {
     }
     
     return 20
+  }
+}
+
+class InstrumentCell: UITableViewCell {
+  @IBOutlet weak var lblTitle: UILabel!
+  @IBOutlet weak var btnPlaybackSelect: UIButton!
+  @IBOutlet weak var btnPianoSelect: UIButton!
+  
+  var onPlaybackSelect: (() -> Void)?
+  var onPianoSelect: (() -> Void)?
+  
+  @IBAction func didTapPlaybackSelect(_ sender: UIButton) {
+    onPlaybackSelect?()
+  }
+
+  @IBAction func didTapPianoSelect(_ sender: UIButton) {
+    onPianoSelect?()
+  }
+  
+  func configure(
+    info: InstrumentInfo,
+    isBroken: Bool = false,
+    isSelectedForPlayback: Bool = false,
+    isSelectedForPiano: Bool = false,
+    onPlaybackSelect: @escaping () -> Void,
+    onPianoSelect: @escaping () -> Void
+  ) {
+    // warn broken instrument
+    if isBroken {
+      accessoryType = .detailButton
+      tintColor = .lightGray
+      
+      lblTitle.textColor = .lightGray
+      lblTitle.text = info.tableRowTitle + " ⚠️"
+    } else {
+      accessoryType = .none
+      tintColor = nil
+      
+      lblTitle.textColor = nil
+      lblTitle.text = info.tableRowTitle
+    }
+    
+    let selectedColor = UIColor.systemTeal.withAlphaComponent(0.3)
+    
+    if isSelectedForPlayback {
+      btnPlaybackSelect.backgroundColor = selectedColor
+      btnPlaybackSelect.tintColor = .label
+    } else {
+      btnPlaybackSelect.backgroundColor = UIColor.clear
+      btnPlaybackSelect.tintColor = .lightGray
+    }
+    
+    if isSelectedForPiano {
+      btnPianoSelect.backgroundColor = selectedColor
+      btnPianoSelect.tintColor = .label
+    } else {
+      btnPianoSelect.backgroundColor = UIColor.clear
+      btnPianoSelect.tintColor = .lightGray
+    }
+    
+    btnPlaybackSelect.layer.cornerRadius = 5
+    btnPianoSelect.layer.cornerRadius = 5
+    
+    self.onPlaybackSelect = onPlaybackSelect
+    self.onPianoSelect = onPianoSelect
   }
 }
