@@ -7,16 +7,19 @@
 
 import UIKit
 import WebKit
+import DropDown
 
 // TODO: - ⚠️⚠️ 키보드 공통부분, 악보 표시 공통부분 모듈화 ⚠️⚠️
 
 class ScaleInfoAdvanceSearchViewController: UIViewController {
   @IBOutlet weak var webView: WKWebView!
-  @IBOutlet weak var btnSubmit: UIBarButtonItem!
+  @IBOutlet weak var btnSubmit: UIButton!
   @IBOutlet weak var barBtnReset: UIBarButtonItem!
   @IBOutlet weak var barBtnBackspace: UIBarButtonItem!
   @IBOutlet weak var btnPlayOnEdit: UIButton!
   @IBOutlet weak var containerViewPiano: UIView!
+  @IBOutlet weak var stepperTranspose: UIStepper!
+  @IBOutlet weak var btnTranspose: UIButton!
   
   private var pianoVC: PianoViewController?
   private var currentPlayableKey: Music.PlayableKey = .C
@@ -25,14 +28,13 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
   private var currentDisplayAbcjsText: String?
   var playTimer: Timer?
   
-  private var editViewModel = QuizEditKeyViewModel(
-    scaleInfo: nil,
+  private var editViewModel = AdvSearchEditKeyViewModel(
     key: .C,
-    order: .ascending,
     tempo: ScaleInfoVCConfigStore.shared.tempo
   )
   
   private let conductor = GlobalConductor.shared
+  private let transposeDropDown = DropDown()
   
   // MARK: - View Lifecycles
   
@@ -45,6 +47,8 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
     webView.isUserInteractionEnabled = false
     
     initWebSheetPage(initAbcjsText: editViewModel.abcjsTextOnEdit, staffWidth: staffWidth)
+    
+    initTransposeDropDown()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -83,8 +87,15 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
     playOrStop()
   }
   
-  @IBAction func btnActSubmit(_ sender: UIBarButtonItem) {
-    // submit()
+  @IBAction func btnActSubmit(_ sender: UIButton) {
+    // TODO: - editViewModel.integerNotationsOnEdit를 이용
+    // Scale 정보 중 도수표기(degree?)와 대조
+    print(
+      #function,
+      editViewModel.key ?? .C,
+      editViewModel.integerNotationsOnEdit,
+      Set(editViewModel.integerNotationsOnEdit).sorted(by: <)
+    )
   }
   
   @IBAction func btnActReset(_ sender: UIBarButtonItem) {
@@ -96,7 +107,52 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
     backspaceNote()
   }
   
+  @IBAction func btnActTranspose(_ sender: UIButton) {
+    transposeDropDown.anchorView = sender
+    transposeDropDown.show()
+  }
+  
+  @IBAction func stepperActTranspose(_ sender: UIStepper) {
+    let index = Int(sender.value)
+    let noteStr = transposeDropDown.dataSource[index]
+    transpose(noteStr: noteStr)
+  }
+  
   // MARK: - Set/Init methods
+  
+  func initTransposeDropDown() {
+    var dataSource: [String] {
+      Music.Key.allCases.map { $0.textValue }
+    }
+    
+    let selectionAction = { [unowned self] (index: Int, item: String) in
+      transpose(noteStr: item)
+      stepperTranspose.value = Double(index)
+    }
+    
+    transposeDropDown.cornerRadius = 10
+    transposeDropDown.cellHeight = 30
+    
+    transposeDropDown.dataSource = dataSource
+    transposeDropDown.selectionAction = selectionAction
+    
+    stepperTranspose.maximumValue = Double(transposeDropDown.dataSource.count) - 1
+    stepperTranspose.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+  }
+  
+  func transpose(noteStr: String, initChange: Bool = false) {
+    self.btnTranspose.setTitle(noteStr, for: .normal)
+    
+    if let targetKey = Music.Key.getKeyFromNoteStr(noteStr) {
+      editViewModel.key = targetKey
+      
+      // change keyboard start position
+      setPianoPosition(playableKey: targetKey.playableKey)
+      editViewModel.setScaleName(key: targetKey)
+      injectAbcjsText(from: editViewModel.abcjsTextOnEdit, needReload: true, staffWidth: staffWidth)
+    }
+  }
+  
   
   func setStaffWidth() -> Int {
     /*
@@ -299,10 +355,7 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
 
 extension ScaleInfoAdvanceSearchViewController: PianoVCDelegate {
   func didKeyPressed(_ controller: PianoViewController, keyInfo: PianoKeyInfo) {
-    
     let intNotation = keyInfo.keyIndex - PianoKeyHelper.findRootKeyPosition(playableKey: currentPlayableKey)
-    
-    print(currentPlayableKey, keyInfo, intNotation)
     addNoteToSheet(intNotation: intNotation)
   }
   

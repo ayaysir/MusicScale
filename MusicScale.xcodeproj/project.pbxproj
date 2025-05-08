@@ -12,6 +12,7 @@
 		440161C5285E54BC00B6D4FB /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440161C4285E54BC00B6D4FB /* UIButton+.swift */; };
 		440380112DCA87B300EBB6A3 /* CT8MGM.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 440380102DCA87B300EBB6A3 /* CT8MGM.sf2 */; };
 		440380172DCBB01F00EBB6A3 /* ScaleInfoAdvanceSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440380162DCBB01F00EBB6A3 /* ScaleInfoAdvanceSearchViewController.swift */; };
+		440380772DCCF7A200EBB6A3 /* AdvSearchEditKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440380762DCCF7A200EBB6A3 /* AdvSearchEditKeyViewModel.swift */; };
 		4404B045285F7CEF0072CCFD /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404B044285F7CEF0072CCFD /* PostView.swift */; };
 		4404B047285F8A5B0072CCFD /* QuizStatsCDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404B046285F8A5B0072CCFD /* QuizStatsCDService.swift */; };
 		4404B049285FA3C70072CCFD /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404B048285FA3C70072CCFD /* StatsViewController.swift */; };
@@ -206,6 +207,7 @@
 		440161C4285E54BC00B6D4FB /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		440380102DCA87B300EBB6A3 /* CT8MGM.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = CT8MGM.sf2; sourceTree = "<group>"; };
 		440380162DCBB01F00EBB6A3 /* ScaleInfoAdvanceSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoAdvanceSearchViewController.swift; sourceTree = "<group>"; };
+		440380762DCCF7A200EBB6A3 /* AdvSearchEditKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvSearchEditKeyViewModel.swift; sourceTree = "<group>"; };
 		4404B044285F7CEF0072CCFD /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		4404B046285F8A5B0072CCFD /* QuizStatsCDService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStatsCDService.swift; sourceTree = "<group>"; };
 		4404B048285FA3C70072CCFD /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 				44ABE106285619E60022B4FB /* Archive */,
 				44B70F4028491A560068495A /* Quiz */,
 				4463FEB3282D317700E7A607 /* PianoViewModel.swift */,
+				440380762DCCF7A200EBB6A3 /* AdvSearchEditKeyViewModel.swift */,
 				440637F1283003DE00875E77 /* ScaleInfoListViewModel.swift */,
 				44A09A28283293680067184E /* ScaleInfoViewModel.swift */,
 				446AEA2D283E900A00C2BFCF /* ScaleDegreesUpdateViewModel.swift */,
@@ -1353,6 +1356,7 @@
 				440637F0283003CC00875E77 /* ScaleInfo.swift in Sources */,
 				441E96E0286480AD00261D43 /* Reachability.swift in Sources */,
 				445FA4C1284E3AD80008D621 /* Collection+.swift in Sources */,
+				440380772DCCF7A200EBB6A3 /* AdvSearchEditKeyViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

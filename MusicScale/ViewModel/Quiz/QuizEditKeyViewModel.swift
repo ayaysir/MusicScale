@@ -46,7 +46,6 @@ class QuizEditKeyViewModel {
   }
   
   func addKey(intNotation: Int, enharmonicMode: EnharmonicMode, strPairs: [NoteStrPair]? = nil) {
-    
     let note: Note = {
       if let strPairs = enharmonicMode.noteStrOfFirstOctave {
         return Note(intNotation: intNotation, key: key, startOctave: 4, strPairs: strPairs)
@@ -60,6 +59,7 @@ class QuizEditKeyViewModel {
     if onEditNotes.isEmpty && note.midiNoteNumber == startNote.midiNoteNumber {
       return
     }
+    
     onEditNotes.append(note)
   }
   
