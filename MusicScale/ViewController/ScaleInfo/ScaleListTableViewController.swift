@@ -297,7 +297,7 @@ class ScaleListTableViewController: UITableViewController {
     guard let infoViewModel = infoViewModel else {
       return UITableViewCell()
     }
-    
+    print("integerNotation:", infoViewModel.ascendingIntegerNotationArray)
     cell.configure(infoViewModel: infoViewModel)
     cell.cosmosViewMyPriority.isHidden = tableView.isEditing ? true : false
     

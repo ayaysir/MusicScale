@@ -32,6 +32,7 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
     key: .C,
     tempo: ScaleInfoVCConfigStore.shared.tempo
   )
+  private var scaleListViewModel = ScaleInfoListViewModel()
   
   private let conductor = GlobalConductor.shared
   private let transposeDropDown = DropDown()
@@ -90,12 +91,11 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
   @IBAction func btnActSubmit(_ sender: UIButton) {
     // TODO: - editViewModel.integerNotationsOnEdit를 이용
     // Scale 정보 중 도수표기(degree?)와 대조
-    print(
-      #function,
-      editViewModel.key ?? .C,
-      editViewModel.integerNotationsOnEdit,
-      Set(editViewModel.integerNotationsOnEdit).sorted(by: <)
-    )
+    let combinedList = scaleListViewModel.similarityData(onEditNotes: editViewModel.integerNotationsOnEdit)
+    
+    combinedList.forEach {
+      print($0.infoVM.name, $0.similarity)
+    }
   }
   
   @IBAction func btnActReset(_ sender: UIBarButtonItem) {

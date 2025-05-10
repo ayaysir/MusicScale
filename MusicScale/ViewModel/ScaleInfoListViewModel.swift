@@ -182,6 +182,11 @@ class ScaleInfoListViewModel {
     return searchedInfoViewModel[index]
   }
   
+  /// UUID로 뷰모델 반환
+  func scaleInfoViewModel(of id: UUID) -> ScaleInfoViewModel? {
+    infoViewModels.compactMap { $0 }.first { $0.id == id }
+  }
+  
   func getScaleInfoVM(isFiltering: Bool, index: Int) -> ScaleInfoViewModel? {
     return isFiltering ? getSearchedInfoViewModelOf(index: index) : getScaleInfoViewModelOf(index: index)
   }
@@ -272,7 +277,20 @@ class ScaleInfoListViewModel {
     
     print("=========================")
     print(totalEntityData!.map({ "\($0.displayOrder):\($0.name!)" }))
-    
   }
   
+  /// 두 정수 노트 목록 간 유사도 측정 후 (infoVM, %) 형태로 반환
+  func similarityData(onEditNotes: [Int]) -> [(infoVM: ScaleInfoViewModel, similarity: Double)] {
+    let setNotes = Set(onEditNotes.map {
+      (($0 % 12) + 12) % 12 // modulo 연산
+      }
+    ).sorted(by: <)
+    
+    return infoViewModels.compactMap { $0 }.map {
+      let similarity = similarityLCS(setNotes, $0.ascendingIntNotationsNoFinalNote)
+      return (infoVM: $0, similarity: similarity)
+    }.sorted {
+      $0.similarity > $1.similarity
+    }
+  }
 }

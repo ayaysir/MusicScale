@@ -87,6 +87,11 @@ class SimpleScaleInfoViewModel {
     return helper.getIntegerNotation(degrees: scaleInfo.degreesAscending, order: .ascending, completeFinalNote: true)
   }
   
+  /// 마지막 노트(12)가 없는 정수 표기 목록
+  var ascendingIntNotationsNoFinalNote: [Int] {
+    helper.getIntegerNotation(degrees: scaleInfo.degreesAscending, order: .ascending)
+  }
+  
   var descendingIntegerNotation: String? {
     let targetDegrees = helper.getTargetDegrees(scaleInfo: scaleInfo, order: .descending)
     let notation = helper.getIntegerNotation(degrees: targetDegrees, order: .descending)

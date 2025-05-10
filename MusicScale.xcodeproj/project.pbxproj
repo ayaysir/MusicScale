@@ -13,6 +13,7 @@
 		440380112DCA87B300EBB6A3 /* CT8MGM.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 440380102DCA87B300EBB6A3 /* CT8MGM.sf2 */; };
 		440380172DCBB01F00EBB6A3 /* ScaleInfoAdvanceSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440380162DCBB01F00EBB6A3 /* ScaleInfoAdvanceSearchViewController.swift */; };
 		440380772DCCF7A200EBB6A3 /* AdvSearchEditKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440380762DCCF7A200EBB6A3 /* AdvSearchEditKeyViewModel.swift */; };
+		440380842DCF935A00EBB6A3 /* LongestCommonSubsequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440380832DCF934600EBB6A3 /* LongestCommonSubsequence.swift */; };
 		4404B045285F7CEF0072CCFD /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404B044285F7CEF0072CCFD /* PostView.swift */; };
 		4404B047285F8A5B0072CCFD /* QuizStatsCDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404B046285F8A5B0072CCFD /* QuizStatsCDService.swift */; };
 		4404B049285FA3C70072CCFD /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404B048285FA3C70072CCFD /* StatsViewController.swift */; };
@@ -208,6 +209,7 @@
 		440380102DCA87B300EBB6A3 /* CT8MGM.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = CT8MGM.sf2; sourceTree = "<group>"; };
 		440380162DCBB01F00EBB6A3 /* ScaleInfoAdvanceSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInfoAdvanceSearchViewController.swift; sourceTree = "<group>"; };
 		440380762DCCF7A200EBB6A3 /* AdvSearchEditKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvSearchEditKeyViewModel.swift; sourceTree = "<group>"; };
+		440380832DCF934600EBB6A3 /* LongestCommonSubsequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongestCommonSubsequence.swift; sourceTree = "<group>"; };
 		4404B044285F7CEF0072CCFD /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		4404B046285F8A5B0072CCFD /* QuizStatsCDService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStatsCDService.swift; sourceTree = "<group>"; };
 		4404B048285FA3C70072CCFD /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 		440637F82830839700875E77 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				440380832DCF934600EBB6A3 /* LongestCommonSubsequence.swift */,
 				440637F9283083AE00875E77 /* JSONCoder.swift */,
 				446AEA2F28411ED300C2BFCF /* Toast.swift */,
 				446AEA3128413E0200C2BFCF /* Cosmos.swift */,
@@ -1323,6 +1326,7 @@
 				4494B46D293A596E0009548C /* QuizStat.swift in Sources */,
 				4455D1CC285A2BD400FB344E /* SettingTableViewController.swift in Sources */,
 				4455D1CE285A2CB800FB344E /* MIDIInstrumentList.swift in Sources */,
+				440380842DCF935A00EBB6A3 /* LongestCommonSubsequence.swift in Sources */,
 				44E0ACF1285F0BC6008BBB82 /* NSLayoutConstraint+.swift in Sources */,
 				4494B46B293A512D0009548C /* ShowActivityView.swift in Sources */,
 				4404B049285FA3C70072CCFD /* StatsViewController.swift in Sources */,
