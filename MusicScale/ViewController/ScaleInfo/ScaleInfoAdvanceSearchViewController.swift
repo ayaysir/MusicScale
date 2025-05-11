@@ -17,6 +17,7 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
   @IBOutlet weak var barBtnReset: UIBarButtonItem!
   @IBOutlet weak var barBtnBackspace: UIBarButtonItem!
   @IBOutlet weak var btnPlayOnEdit: UIButton!
+  @IBOutlet weak var lblTransposeIn: UILabel!
   @IBOutlet weak var containerViewPiano: UIView!
   @IBOutlet weak var stepperTranspose: UIStepper!
   @IBOutlet weak var btnTranspose: UIButton!
@@ -61,7 +62,12 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
     tblViewScaleList.delegate = self
     updateTableBackgroundView()
     
-    title = "Scale Search"
+    // Component Text & Localization
+    title = "loc.adv_search_title".localized()
+    btnPlayOnEdit.setTitle("loc.play".localized(), for: .normal)
+    lblTransposeIn.text = "loc.transpose_in".localized()
+    btnSubmit.setTitle("loc.submit".localized(), for: .normal)
+    barBtnReset.title = "loc.reset".localized()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -406,7 +412,7 @@ extension ScaleInfoAdvanceSearchViewController: UITableViewDataSource, UITableVi
   func updateTableBackgroundView() {
     if resultScaleList.isEmpty {
       let messageLabel = UILabel()
-      messageLabel.text = "건반을 이용한 고급 검색 기능\n\n1. 조성을 설정하세요.\n\n2. 건반, 키보드, 미디 장치 등을 통해 찾고자 하는 스케일을 해당 조성에 맞게 입력하세요.\n순서에 상관없이 자유롭게 입력할 수 있습니다.\n\n3. [제출] 버튼을 눌러 결과 목록을 확인하세요.\n퍼센트 단위로 유사도와 스케일 목록이 표시됩니다."
+      messageLabel.text = "loc.adv_search_empty_result".localized()
       messageLabel.textAlignment = .center
       messageLabel.textColor = .gray
       messageLabel.font = UIFont.systemFont(ofSize: 16)

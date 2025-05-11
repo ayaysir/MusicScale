@@ -59,3 +59,12 @@
 "loc.instrument_title" = "Playback/Keyboard Instrument";
 "loc.soundfont_warning" = "There is a possibility of sound delay or silence when setting this patch number due to an error in the soundfont file. Please use a different instrument patch number.";
 "loc.soundfont_error_title" = "Soundfont Error";
+
+/* Adv Search */
+"loc.adv_search_title" = "Advanced Scale Search";
+"loc.play" = "Play";
+"loc.transpose_in" = "Transpose in";
+"loc.submit" = "Submit";
+"loc.reset" = "Reset";
+"loc.adv_search_empty_result" = "Advanced scale search using keyboard input\n\n1. Tap the [Transpose in] to set the key signature.\n\n2. Enter the scale notes using a piano keyboard, computer keyboard, or MIDI device, matching the selected key.\nYou can enter notes in any order.\n\n3. Tap the [Submit] button to view results.\nMatching scales and similarity percentages will be displayed.";
+"loc.adv_search_button" = "Advanced";

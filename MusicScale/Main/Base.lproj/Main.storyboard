@@ -1713,14 +1713,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="InstrumentCell" id="y2G-sP-Zgo" customClass="InstrumentCell" customModule="MusicScale" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="414" height="45"/>
+                                <rect key="frame" x="0.0" y="50" width="414" height="44.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y2G-sP-Zgo" id="rBB-lQ-3rD">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAc-Ma-h0T">
-                                            <rect key="frame" x="20" y="12" width="291" height="21.5"/>
+                                            <rect key="frame" x="20" y="12" width="291" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -3919,6 +3919,7 @@
                         <outlet property="btnSubmit" destination="kTH-lr-PgK" id="imu-hn-2Pe"/>
                         <outlet property="btnTranspose" destination="XWW-cg-vNy" id="vqY-YA-MyQ"/>
                         <outlet property="containerViewPiano" destination="WIa-RH-V2S" id="gtZ-Ez-pKI"/>
+                        <outlet property="lblTransposeIn" destination="5t2-N6-EbK" id="jsQ-KH-qnb"/>
                         <outlet property="stepperTranspose" destination="hgR-BP-wns" id="RZU-6s-GoR"/>
                         <outlet property="tblViewScaleList" destination="vsS-K2-VPl" id="Zr5-wM-Yay"/>
                         <outlet property="webView" destination="o2t-wB-SrY" id="4tq-Yq-jvP"/>
@@ -3934,7 +3935,7 @@
         <segue reference="ejH-Eh-ga8"/>
         <segue reference="6tl-C7-X1w"/>
         <segue reference="5bU-7K-U4j"/>
-        <segue reference="2J2-cR-7Di"/>
+        <segue reference="1nC-TC-1p7"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Wake" width="40" height="40"/>

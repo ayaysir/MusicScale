@@ -237,7 +237,7 @@ class ScaleListTableViewController: UITableViewController {
     btnAdvSearch.setImage(UIImage.pianoSearch3, for: .normal)
     btnAdvSearch.imageView?.contentMode = .scaleAspectFit
     btnAdvSearch.imageEdgeInsets = .init(top: 2, left: -5, bottom: 2, right: 0)
-    btnAdvSearch.setTitle("Advance", for: .normal)
+    btnAdvSearch.setTitle("loc.adv_search_button".localized(), for: .normal)
     btnAdvSearch.titleEdgeInsets = .init(top: 0, left: -10, bottom: 0, right: 0)
 
     btnAdvSearch.backgroundColor = .systemPink

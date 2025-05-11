@@ -39,7 +39,7 @@
 "3Ol-cg-3AV.segmentTitles[3]" = "♮ (Natural)";
 
 /* Class = "UILabel"; text = "Transpose in"; ObjectID = "3Ue-1x-MJm"; */
-"3Ue-1x-MJm.text" = "Transpose in";
+"3Ue-1x-MJm.text" = "移調";
 
 /* Class = "UILabel"; text = "Name"; ObjectID = "3ho-CT-qOa"; */
 "3ho-CT-qOa.text" = "名前";
@@ -132,7 +132,7 @@
 "Bsq-Ow-kds.title" = "アップデート";
 
 /* Class = "UILabel"; text = "Tempo (BPM)"; ObjectID = "CYt-Ub-afp"; */
-"CYt-Ub-afp.text" = "Tempo (BPM)";
+"CYt-Ub-afp.text" = "テンポ(BPM)";
 
 /* Class = "UILabel"; text = "Playback Instrument"; ObjectID = "Cs5-BJ-7dT"; */
 "Cs5-BJ-7dT.text" = "再生/鍵盤楽器設定";
@@ -270,7 +270,7 @@
 "S8F-Uh-enl.title" = "PrimaryTabBarController";
 
 /* Class = "UILabel"; text = "Octave Shift"; ObjectID = "SYV-TE-ucg"; */
-"SYV-TE-ucg.text" = "Octave Shift";
+"SYV-TE-ucg.text" = "オクターブ";
 
 /* Class = "UILabel"; text = "Go to GitHub Repository"; ObjectID = "SdA-3a-3ZF"; */
 "SdA-3a-3ZF.text" = "GitHubリポジトリに移動";
@@ -566,7 +566,7 @@
 "z1b-qk-9P4.title" = "スケール";
 
 /* Class = "UILabel"; text = "Enharmonic Mode"; ObjectID = "zcU-lM-KJV"; */
-"zcU-lM-KJV.text" = "Enharmonic Mode";
+"zcU-lM-KJV.text" = "異名同音モード";
 
 /* Class = "UILabel"; text = "SSSSSSSSSSSSSSSSSSSSSSSS"; ObjectID = "zec-bU-uYO"; */
 "zec-bU-uYO.text" = "SSSSSSSSSSSSSSSSSSSSSSSS";

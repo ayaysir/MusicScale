@@ -157,3 +157,12 @@
 "loc.instrument_title" = "再生／キーボード楽器設定";
 "loc.soundfont_warning" = "このパッチ番号を設定すると、サウンドフォントファイルのエラーにより遅延や無音が発生する可能性があります。別のパッチ番号を使用してください。";
 "loc.soundfont_error_title" = "サウンドフォントエラー";
+
+/* Adv Search */
+"loc.adv_search_title" = "詳細なスケール検索";
+"loc.play" = "再生";
+"loc.transpose_in" = "移調";
+"loc.submit" = "送信";
+"loc.reset" = "リセット";
+"loc.adv_search_empty_result" = "鍵盤を使った高度なスケール検索\n\n1. ［移調］ボタンを押して調性（キー）を設定してください。\n\n2. ピアノ鍵盤、キーボード、MIDIデバイスなどを使って、調性に合ったスケール音を入力してください。\n順不同で自由に入力できます。\n\n3. [送信] ボタンを押すと、結果一覧が表示されます。\nスケールの類似度（％）と一致するスケールが表示されます。";
+"loc.adv_search_button" = "詳細検索";

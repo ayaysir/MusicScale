@@ -154,3 +154,12 @@
 "loc.instrument_title" = "재생/건반 악기 설정";
 "loc.soundfont_warning" = "사운드폰트 파일 오류로 인해 이 패치 번호 설정 시 소리 지연 또는 무음이 발생할 수 있습니다. 다른 패치 번호를 사용해 주세요.";
 "loc.soundfont_error_title" = "사운드폰트 오류";
+
+/* Adv Search */
+"loc.adv_search_title" = "고급 스케일 검색";
+"loc.play" = "재생";
+"loc.transpose_in" = "조바꿈";
+"loc.submit" = "제출";
+"loc.reset" = "재설정";
+"loc.adv_search_empty_result" = "건반을 이용한 고급 검색 기능\n\n1. [조바꿈] 버튼을 눌러 조성을 설정하세요.\n\n2. 건반, 키보드, 미디 장치 등을 통해 찾고자 하는 스케일을 해당 조성에 맞게 입력하세요.\n순서에 상관없이 자유롭게 입력할 수 있습니다.\n\n3. [제출] 버튼을 눌러 결과 목록을 확인하세요.\n퍼센트 단위로 유사도와 스케일 목록이 표시됩니다.";
+"loc.adv_search_button" = "고급 검색";
