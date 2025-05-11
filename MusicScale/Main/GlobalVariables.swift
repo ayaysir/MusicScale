@@ -7,7 +7,13 @@
 
 import Foundation
 
+// MARK: - Typealiases
+
+typealias InfoWithSimilarity = (infoVM: ScaleInfoViewModel, similarity: Double)
+
 extension Notification.Name {
+  // MARK: - Notification Names
+  
   static let downloadedFromArchive = Notification.Name("DownloadedFromArchive")
   static let networkIsOffline = Notification.Name("NetworkIsOffline")
   static let awakeFromBackground = Notification.Name("AwakeFromBackground")

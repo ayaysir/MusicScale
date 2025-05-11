@@ -20,6 +20,7 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
   @IBOutlet weak var containerViewPiano: UIView!
   @IBOutlet weak var stepperTranspose: UIStepper!
   @IBOutlet weak var btnTranspose: UIButton!
+  @IBOutlet weak var tblViewScaleList: UITableView!
   
   private var pianoVC: PianoViewController?
   private var currentPlayableKey: Music.PlayableKey = .C
@@ -33,6 +34,11 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
     tempo: ScaleInfoVCConfigStore.shared.tempo
   )
   private var scaleListViewModel = ScaleInfoListViewModel()
+  private var resultScaleList: [InfoWithSimilarity] = [] {
+    didSet {
+      updateTableBackgroundView()
+    }
+  }
   
   private let conductor = GlobalConductor.shared
   private let transposeDropDown = DropDown()
@@ -50,6 +56,12 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
     initWebSheetPage(initAbcjsText: editViewModel.abcjsTextOnEdit, staffWidth: staffWidth)
     
     initTransposeDropDown()
+    
+    tblViewScaleList.dataSource = self
+    tblViewScaleList.delegate = self
+    updateTableBackgroundView()
+    
+    title = "Scale Search"
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -89,13 +101,7 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
   }
   
   @IBAction func btnActSubmit(_ sender: UIButton) {
-    // TODO: - editViewModel.integerNotationsOnEdit를 이용
-    // Scale 정보 중 도수표기(degree?)와 대조
-    let combinedList = scaleListViewModel.similarityData(onEditNotes: editViewModel.integerNotationsOnEdit)
-    
-    combinedList.forEach {
-      print($0.infoVM.name, $0.similarity)
-    }
+    submit()
   }
   
   @IBAction func btnActReset(_ sender: UIBarButtonItem) {
@@ -337,6 +343,12 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
     webView.evaluateJavaScript("stopTimer()")
   }
   
+  func submit() {
+    resultScaleList = scaleListViewModel.similarityData(onEditNotes: editViewModel.integerNotationsOnEdit)
+    tblViewScaleList.reloadData()
+    tblViewScaleList.scrollToRow(at: .init(row: 0, section: 0), at: .top, animated: true)
+  }
+  
   // MARK: - Navigation
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -347,8 +359,62 @@ class ScaleInfoAdvanceSearchViewController: UIViewController {
       pianoVC?.parentContainerView = containerViewPiano
       pianoVC?.contentMode = .quiz
       pianoVC?.delegate = self
+    case "DetailViewSegue":
+      guard let scaleInfoVC = segue.destination as? ScaleInfoViewController,
+            let receivedInfoViewModel = sender as? ScaleInfoViewModel else {
+        return
+      }
+      
+      scaleInfoVC.scaleInfoViewModel = receivedInfoViewModel
+      scaleInfoVC.delegate = self
     default:
       break
+    }
+  }
+}
+
+extension ScaleInfoAdvanceSearchViewController: UITableViewDataSource, UITableViewDelegate {
+  // MARK: Table View Delegate
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    resultScaleList.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: "ScaleListCell", for: indexPath) as? ScaleListCell else {
+      return UITableViewCell()
+    }
+    
+    let infoTuple = resultScaleList[indexPath.row]
+    
+    cell.configure(infoViewModel: infoTuple.infoVM)
+    // percent label: 스토리보드 레이블 목록 위치 항상 첫번째로
+    if let lblPercent = cell.contentView.subviews.first as? UILabel {
+      lblPercent.text = String(format: "%.0f%%", infoTuple.similarity)
+    }
+    
+    return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    performSegue(
+      withIdentifier: "DetailViewSegue",
+      sender: resultScaleList[safe: indexPath.row]?.infoVM
+    )
+  }
+  
+  func updateTableBackgroundView() {
+    if resultScaleList.isEmpty {
+      let messageLabel = UILabel()
+      messageLabel.text = "건반을 이용한 고급 검색 기능\n\n1. 조성을 설정하세요.\n\n2. 건반, 키보드, 미디 장치 등을 통해 찾고자 하는 스케일을 해당 조성에 맞게 입력하세요.\n순서에 상관없이 자유롭게 입력할 수 있습니다.\n\n3. [제출] 버튼을 눌러 결과 목록을 확인하세요.\n퍼센트 단위로 유사도와 스케일 목록이 표시됩니다."
+      messageLabel.textAlignment = .center
+      messageLabel.textColor = .gray
+      messageLabel.font = UIFont.systemFont(ofSize: 16)
+      messageLabel.numberOfLines = 0
+
+      tblViewScaleList.backgroundView = messageLabel
+    } else {
+      tblViewScaleList.backgroundView = nil
     }
   }
 }
@@ -363,6 +429,74 @@ extension ScaleInfoAdvanceSearchViewController: PianoVCDelegate {
     // 현재 키가 C#이면 C#(Db)4가 0, C#(Db)5가 12가 나와야 함
     let intNotationRelative = noteNumber - 60 - currentPlayableKey.rawValue
     addNoteToSheet(intNotation: intNotationRelative)
+  }
+}
+
+extension ScaleInfoAdvanceSearchViewController: ScaleInfoVCDelgate {
+  func didInfoUpdated(_ controller: ScaleInfoViewController, indexPath: IndexPath?) {
+    guard let indexPath else {
+      tblViewScaleList.reloadData()
+      return
+    }
+    
+    tblViewScaleList.reloadRows(at: [indexPath], with: .none)
+  }
+}
+
+extension ScaleInfoAdvanceSearchViewController {
+  // MARK: - KeyPress
+  
+  var characterSet: CharacterSet {
+    var characterSet = CharacterSet(charactersIn: ",./;'")
+    characterSet.formUnion(.alphanumerics)
+    return characterSet
+  }
+  
+  func startHWKeyPress(key: UIKey) {
+    if let pianoVC,
+       let firstScalar = key.charactersIgnoringModifiers.unicodeScalars.first,
+       characterSet.contains(firstScalar) {
+      pianoVC.startKeyPressByHWKeyboard(keyValueIgnoringModifiers: key.charactersIgnoringModifiers)
+    }
+  }
+  
+  func endHWKeyPress(key: UIKey) {
+    if let pianoVC,
+       let firstScalar = key.charactersIgnoringModifiers.unicodeScalars.first,
+       characterSet.contains(firstScalar) {
+      pianoVC.endKeyPressByHWKeyboard(keyValueIgnoringModifiers: key.charactersIgnoringModifiers)
+      return
+    }
+  }
+  
+  override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+    guard let key = presses.first?.key else { return }
+    
+    switch key.keyCode {
+    case .keyboardSpacebar:
+      playOrStop()
+    case .keyboardDeleteOrBackspace:
+      backspaceNote()
+    case .keyboardReturnOrEnter:
+      submit()
+    default:
+      if (4...56) ~= key.keyCode.rawValue {
+        startHWKeyPress(key: key)
+        return
+      }
+      
+      super.pressesBegan(presses, with: event)
+    }
+  }
+  
+  override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+    guard let key = presses.first?.key else { return }
+    
+    if (4...56) ~= key.keyCode.rawValue {
+      endHWKeyPress(key: key)
+    }
+    
+    super.pressesEnded(presses, with: event)
   }
 }
 

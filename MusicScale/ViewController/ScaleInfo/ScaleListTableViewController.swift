@@ -228,14 +228,22 @@ class ScaleListTableViewController: UITableViewController {
     // self.navigationController?.navigationBar.prefersLargeTitles = true
     
     // 20250507: 커스텀 버튼 추가
-    let BTN_WIDTH: CGFloat = 50
-    let BTN_HEIGHT: CGFloat = 30
+    let BTN_WIDTH: CGFloat = 100
+    let BTN_HEIGHT: CGFloat = 26
     
-    btnAdvSearch.setImage(UIImage(systemName: "mail.and.text.magnifyingglass"), for: .normal)
-    btnAdvSearch.setTitle("Advance", for: .normal)
+    // btnAdvSearch.setImage(UIImage(systemName: "mail.and.text.magnifyingglass"), for: .normal)
+
     btnAdvSearch.frame = CGRect(x: 0, y: 0, width: BTN_WIDTH, height: BTN_HEIGHT)
-    btnAdvSearch.backgroundColor = .systemGray3
-    btnAdvSearch.layer.cornerRadius = 5
+    btnAdvSearch.setImage(UIImage.pianoSearch3, for: .normal)
+    btnAdvSearch.imageView?.contentMode = .scaleAspectFit
+    btnAdvSearch.imageEdgeInsets = .init(top: 2, left: -5, bottom: 2, right: 0)
+    btnAdvSearch.setTitle("Advance", for: .normal)
+    btnAdvSearch.titleEdgeInsets = .init(top: 0, left: -10, bottom: 0, right: 0)
+
+    btnAdvSearch.backgroundColor = .systemPink
+    btnAdvSearch.alpha = 0.8
+    btnAdvSearch.tintColor = .systemGray6
+    btnAdvSearch.layer.cornerRadius = 7
     btnAdvSearch.translatesAutoresizingMaskIntoConstraints = false
     searchController.searchBar.addSubview(btnAdvSearch)
     
@@ -243,8 +251,8 @@ class ScaleListTableViewController: UITableViewController {
     
     // 우측 정렬 + 중앙 정렬
     NSLayoutConstraint.activate([
-      btnAdvSearch.trailingAnchor.constraint(equalTo: searchController.searchBar.trailingAnchor, constant: -30),
-      btnAdvSearch.centerYAnchor.constraint(equalTo: searchController.searchBar.centerYAnchor, constant: -6.3),
+      btnAdvSearch.trailingAnchor.constraint(equalTo: searchController.searchBar.trailingAnchor, constant: -20),
+      btnAdvSearch.centerYAnchor.constraint(equalTo: searchController.searchBar.centerYAnchor, constant: -6.6),
       btnAdvSearch.widthAnchor.constraint(equalToConstant: BTN_WIDTH),
       btnAdvSearch.heightAnchor.constraint(equalToConstant: BTN_HEIGHT)
     ])
@@ -297,7 +305,7 @@ class ScaleListTableViewController: UITableViewController {
     guard let infoViewModel = infoViewModel else {
       return UITableViewCell()
     }
-    print("integerNotation:", infoViewModel.ascendingIntegerNotationArray)
+
     cell.configure(infoViewModel: infoViewModel)
     cell.cosmosViewMyPriority.isHidden = tableView.isEditing ? true : false
     
