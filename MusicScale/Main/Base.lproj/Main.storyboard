@@ -425,6 +425,12 @@
                                     <action selector="btnActExpandInfo:" destination="LFu-VY-SiC" eventType="touchUpInside" id="PUu-DG-Fij"/>
                                 </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="78q-Qb-nNd">
+                                <rect key="frame" x="0.0" y="311.5" width="414" height="197"/>
+                                <connections>
+                                    <segue destination="DAe-qX-YdK" kind="embed" identifier="WebSheetSegue" id="gzf-qz-h50"/>
+                                </connections>
+                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HHN-va-34L">
                                 <rect key="frame" x="318" y="476.5" width="96" height="32"/>
                                 <subviews>
@@ -453,12 +459,6 @@
                                     <constraint firstAttribute="width" constant="96" id="yBN-Fg-JJf"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="78q-Qb-nNd">
-                                <rect key="frame" x="0.0" y="311.5" width="414" height="197"/>
-                                <connections>
-                                    <segue destination="DAe-qX-YdK" kind="embed" identifier="WebSheetSegue" id="gzf-qz-h50"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mSi-5z-bZl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -505,8 +505,8 @@
                         <outlet property="barBtnUpdate" destination="Bsq-Ow-kds" id="Zs1-YZ-VRO"/>
                         <outlet property="btnEnharmonic" destination="LbI-JK-IQB" id="XiJ-lg-p8J"/>
                         <outlet property="btnExpandInfo" destination="K7l-hN-Euj" id="ay7-WS-XTn"/>
+                        <outlet property="btnPianoKeyPressMode" destination="VA3-Rk-LKd" id="jpn-bM-UAx"/>
                         <outlet property="btnPlayAndStop" destination="VAm-Vf-UU4" id="22H-E3-zGC"/>
-                        <outlet property="btnTogglePianoKeyPressMode" destination="VA3-Rk-LKd" id="jpn-bM-UAx"/>
                         <outlet property="btnTranspose" destination="972-3C-Ond" id="1Lg-0B-uKU"/>
                         <outlet property="cnstPianoHeight" destination="dfP-2f-Psz" id="GFP-wG-Ltd"/>
                         <outlet property="cnstSheetPropoHeight" destination="Tr7-FF-zjE" id="LHd-Uq-uJg"/>
@@ -1713,14 +1713,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="InstrumentCell" id="y2G-sP-Zgo" customClass="InstrumentCell" customModule="MusicScale" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="414" height="44.5"/>
+                                <rect key="frame" x="0.0" y="50" width="414" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y2G-sP-Zgo" id="rBB-lQ-3rD">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAc-Ma-h0T">
-                                            <rect key="frame" x="20" y="12" width="291" height="21"/>
+                                            <rect key="frame" x="20" y="12" width="291" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -3932,9 +3932,9 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ejH-Eh-ga8"/>
-        <segue reference="VsC-uc-p1n"/>
+        <segue reference="6tl-C7-X1w"/>
         <segue reference="5bU-7K-U4j"/>
-        <segue reference="1nC-TC-1p7"/>
+        <segue reference="2J2-cR-7Di"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Wake" width="40" height="40"/>
