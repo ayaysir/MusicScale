@@ -50,17 +50,15 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     segAscDesc.selectedSegmentIndex == 0 ? .ascending : .descending
   }
   
-  // let conductor = NoteSequencerConductor()
   let conductor = GlobalConductor.shared
   private var playTimer: Timer?
-  // private var generator: MIDISoundGenerator!
   private var generator: MIDISoundGenerator = GlobalGenerator.shared
   
   private let bannerAdPath = IndexPath(row: 0, section: 5)
-  // private let showBanner = true
   
   private let cellSheet = IndexPath(row: 1, section: 2)
   private var cellSheetHeight: CGFloat?
+  private let cellTxvComment = IndexPath(row: 0, section: 4)
   
   override func viewWillAppear(_ animated: Bool) {
     // IQKeyboardManager 동작
@@ -70,6 +68,7 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
   }
   
   override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
     generator.pauseEngine()
   }
   
@@ -86,6 +85,8 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
     DispatchQueue.main.async {
       setupBannerAds(self, container: self.viewBannerContainer)
     }
+    
+    txvComment.delegate = self
     
     // ===== 분기별 작업 =====
     switch mode {
@@ -130,6 +131,10 @@ class ScaleInfoUpdateTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
     if indexPath == cellSheet {
+      return UITableView.automaticDimension
+    }
+    
+    if indexPath == cellTxvComment {
       return UITableView.automaticDimension
     }
     
@@ -579,5 +584,20 @@ extension ScaleInfoUpdateTableViewController: ConductorPlay {
     btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
     
     playTimer?.invalidate()
+  }
+}
+
+extension ScaleInfoUpdateTableViewController: UITextViewDelegate {
+  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    if text == "\n" {
+      tableView.scrollToRow(at: cellTxvComment, at: .bottom, animated: false)
+    }
+    
+    return true
+  }
+  
+  func textViewDidChange(_ textView: UITextView) {
+    tableView.beginUpdates()
+    tableView.endUpdates()
   }
 }

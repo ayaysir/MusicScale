@@ -11,6 +11,7 @@ import DropDown
 import FirebaseCore
 import GoogleMobileAds
 import IQKeyboardManagerSwift
+import IQKeyboardToolbarManager
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -39,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // IQKeyboardManager.shared.enable = true
     IQKeyboardManager.shared.isEnabled = true
+    IQKeyboardToolbarManager.shared.isEnabled = true
     
     // Firebase
     FirebaseApp.configure()

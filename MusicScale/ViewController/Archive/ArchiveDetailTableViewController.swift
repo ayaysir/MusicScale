@@ -40,6 +40,7 @@ class ArchiveDetailTableViewController: UITableViewController {
   @IBOutlet weak var lblCreatedDate: UILabel!
   @IBOutlet weak var lblViewCount: UILabel!
   @IBOutlet weak var lblDownloadCount: UILabel!
+  @IBOutlet weak var txvAdditionalComment: UITextView!
   
   @IBOutlet weak var barBtnDownloadOr: UIBarButtonItem!
   @IBOutlet weak var barBtnDeleteOr: UIBarButtonItem!
@@ -82,15 +83,18 @@ class ArchiveDetailTableViewController: UITableViewController {
   }
   
   // === SECTION & INDEXPATH LIST ===
-  private let SECTION_FIRST = 0
+  // 스토리보드 바꿀때마다 반드시 업데이트
+  private let SECTION_SELECT_SCALE = 0
   private let SECTION_PREVIEW = 1
   private let SECTION_INFO = 2
   private let SECTION_RELIABILITY = 3
   private let SECTION_COMMENT = 4
-  private let SECTION_METADATA = 5
+  private let SECTION_ADDI_COMMENT = 5
+  private let SECTION_METADATA = 6
   
   private let cellAliasIndexPath = IndexPath(row: 1, section: 2)
   private let cellCommentIndexPath = IndexPath(row: 0, section: 4)
+  private let cellAdditionalCommentIndexPath = IndexPath(row: 0, section: 5)
   // ================================
   
   private let COLOR_LIKE: UIColor = .systemGreen
@@ -183,10 +187,16 @@ class ArchiveDetailTableViewController: UITableViewController {
       setMetadataLabelFromPostVM()
       setLabelsFromInfoVM()
       getPostCounts()
+      txvComment.superview?.backgroundColor = nil
+      txvAdditionalComment.isEditable = false
     case .create:
       setButtonTitleForCreateMode()
       let anonymousText = "Anonymous".localized()
       lblUploader.text = "\(anonymousText) (\(FirebaseAuthManager.shared.currentUser?.uid[0..<4] ?? ""))"
+      txvComment.superview?.backgroundColor = .systemGray5
+      txvAdditionalComment.isEditable = true
+      txvAdditionalComment.delegate = self
+      txvAdditionalComment.text = ""
     }
     
     // 전면 광고 준비
@@ -304,7 +314,10 @@ class ArchiveDetailTableViewController: UITableViewController {
         simpleAlert(self, message: "You have not selected any scales to upload.".localized())
         return
       }
-      let post = Post(scaleInfo: infoVM.scaleInfo)
+      let post = Post(
+        scaleInfo: infoVM.scaleInfo,
+        additionalComment: txvAdditionalComment.text
+      )
       
       // setLoadingScreen()
       SwiftSpinner.show("Uploading...".localized())
@@ -411,11 +424,10 @@ class ArchiveDetailTableViewController: UITableViewController {
     case .create:
       injectAbcjsText(from: currentInfoVM.abcjsTextForArchive(order: currentOrder), needReload: true)
     }
-    
   }
   
   private func setMetadataLabelFromPostVM() {
-    guard let postViewModel = postViewModel else {
+    guard let postViewModel else {
       return
     }
     
@@ -423,10 +435,21 @@ class ArchiveDetailTableViewController: UITableViewController {
     lblCreatedDate.text = postViewModel.createdDateStr
     lblViewCount.text = "30"
     lblDownloadCount.text = "10"
+    if let additionalComment = postViewModel.additionalComment {
+      txvAdditionalComment.text = additionalComment
+    }
   }
   
   private func needHideSectionsBeforeSelectScale(_ section: Int) -> Bool {
-    return !selectedSomeScale && isMode(.create) && section != SECTION_FIRST && section != SECTION_METADATA
+    !selectedSomeScale
+      && isMode(.create)
+      && section != SECTION_SELECT_SCALE
+      && section != SECTION_METADATA
+      && section != SECTION_ADDI_COMMENT
+  }
+  
+  private func isNilOrEmpty(_ text: String?) -> Bool {
+    text?.isEmpty ?? true
   }
   
   func getLabelHeight(text: String, font: UIFont = UIFont.systemFont(ofSize: 15), width: CGFloat = 1000) -> CGFloat {
@@ -512,7 +535,7 @@ extension ArchiveDetailTableViewController {
     }
     
     // 광고
-    if isMode(.read) && !AdsManager.SHOW_AD && section == SECTION_FIRST {
+    if isMode(.read) && !AdsManager.SHOW_AD && section == SECTION_SELECT_SCALE {
       return 0
     }
     
@@ -526,7 +549,7 @@ extension ArchiveDetailTableViewController {
   
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     // 모드에 따라 스케일 선택 또는 배너 광고
-    if section == SECTION_FIRST {
+    if section == SECTION_SELECT_SCALE {
       switch mode {
       case .read:
         return ""
@@ -542,6 +565,13 @@ extension ArchiveDetailTableViewController {
     
     // Create mode일 때 숨겨야 할 섹션들
     if needHideSectionsBeforeSelectScale(section) {
+      return ""
+    }
+    
+    // read일 때 additionalComment가 isNilOrEmpty인 경우
+    if isMode(.read)
+        && section == SECTION_ADDI_COMMENT
+        && isNilOrEmpty(postViewModel?.additionalComment) {
       return ""
     }
     
@@ -565,6 +595,10 @@ extension ArchiveDetailTableViewController {
     
     // Create mode일 때 신뢰도 섹션 숨김
     if isMode(.create) && section == SECTION_RELIABILITY {
+      return ""
+    }
+    
+    if isMode(.read) {
       return ""
     }
     
@@ -596,6 +630,13 @@ extension ArchiveDetailTableViewController {
         
         return UITableView.automaticDimension
       }
+    case cellAdditionalCommentIndexPath:
+      if isMode(.read)
+          && isNilOrEmpty(postViewModel?.additionalComment) {
+        return 0
+      }
+      
+      return UITableView.automaticDimension
     case IndexPath(row: 0, section: SECTION_PREVIEW):
       return UITableView.automaticDimension
     default:
@@ -612,11 +653,17 @@ extension ArchiveDetailTableViewController {
     }
     
     // 광고
-    if isMode(.read) && !AdsManager.SHOW_AD && section == SECTION_FIRST {
+    if isMode(.read) && !AdsManager.SHOW_AD && section == SECTION_SELECT_SCALE {
       return 0.1
     }
     
     if needHideSectionsBeforeSelectScale(section) {
+      return 0.1
+    }
+    
+    if isMode(.read)
+        && section == SECTION_ADDI_COMMENT
+        && isNilOrEmpty(postViewModel?.additionalComment) {
       return 0.1
     }
     
@@ -631,13 +678,18 @@ extension ArchiveDetailTableViewController {
     
     
     // 광고
-    if isMode(.read) && !AdsManager.SHOW_AD && section == SECTION_FIRST {
+    if isMode(.read) && !AdsManager.SHOW_AD && section == SECTION_SELECT_SCALE {
       return 0.1
     }
     
     if needHideSectionsBeforeSelectScale(section) {
       return 0.1
     }
+    
+    // if isMode(.read)
+    //     && section == SECTION_ADDI_COMMENT {
+    //   return 0.1
+    // }
     
     return super.tableView(tableView, heightForFooterInSection: section)
   }
@@ -787,5 +839,23 @@ extension ArchiveDetailTableViewController: FullScreenContentDelegate {
   
   func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
     view.isUserInteractionEnabled = true
+  }
+}
+
+extension ArchiveDetailTableViewController: UITextViewDelegate {
+  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    if text == "\n" {
+      tableView.scrollToRow(at: cellAdditionalCommentIndexPath, at: .bottom, animated: false)
+    }
+    
+    return true
+  }
+  
+  func textViewDidChange(_ textView: UITextView) {
+    // txvAdditionalComment.sizeThatFits(txvAdditionalComment.frame.size)
+    // reloadRows(at:)는 셀 전체를 재생성하기 때문에 키보드를 내리게 됩니다.
+    // 대신, 레이아웃만 다시 계산하는 아래 방식으로 바꾸면 키보드는 유지되고 셀 높이만 업데이트됩니다:
+    tableView.beginUpdates()
+    tableView.endUpdates()
   }
 }

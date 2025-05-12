@@ -21,7 +21,7 @@
 "2rB-rT-RHT.headerTitle" = "스케일 이름";
 
 /* Class = "UINavigationItem"; title = "Dorian Scale"; ObjectID = "2yS-la-dtF"; */
-"2yS-la-dtF.title" = "Dorian Scale";
+"2yS-la-dtF.title" = "자료실 업로드";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "3EG-Sz-5ce"; */
 "3EG-Sz-5ce.normalTitle" = "버튼";
@@ -586,3 +586,7 @@
 "Uf2-uc-MQh.text" = "피아노에 하드웨어 키 표시";
 
 "Jym-0J-hpL.text" = "라이선스";
+
+// additional comment header & footer
+"iKR-cc-BNj.headerTitle" = "추가 작성 코멘트";
+"iKR-cc-BNj.footerTitle" = "이 게시물에 관해 추가적으로 언급하고 싶은 사항이 있으면 언제든지 포함해 주시기 바랍니다.";

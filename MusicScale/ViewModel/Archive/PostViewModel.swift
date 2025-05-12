@@ -47,6 +47,7 @@ class PostViewModel {
     
     return nil
   }
+  var additionalComment: String? { post.additionalComment }
   
   func writeToCoreData() throws -> ScaleInfoEntity {
     let oldInfo = post.scaleInfo

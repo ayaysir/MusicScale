@@ -227,6 +227,10 @@ class ScaleListTableViewController: UITableViewController {
     searchController.searchResultsUpdater = self
     // self.navigationController?.navigationBar.prefersLargeTitles = true
     
+    guard mode == .main else {
+      return
+    }
+    
     // 20250507: 커스텀 버튼 추가
     let BTN_WIDTH: CGFloat = 100
     let BTN_HEIGHT: CGFloat = 26

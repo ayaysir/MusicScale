@@ -14,14 +14,18 @@ import FirebaseFirestoreSwift
  */
 struct Post: Codable {
   
-  internal init(scaleInfo: ScaleInfo) {
+  internal init(scaleInfo: ScaleInfo, additionalComment: String? = nil) {
     self.scaleInfo = scaleInfo
     self.authorUID = ""
+    self.additionalComment = additionalComment
   }
   
   var scaleInfo: ScaleInfo
   var authorUID: String
   @DocumentID var documentID: String?
+  
+  // 20250512: 추가 코멘트
+  var additionalComment: String?
   
   // If a Codable object being written contains a nil for an @ServerTimestamp-annotated field, it will be replaced with FieldValue.serverTimestamp() as it is sent.
   // https://firebase.google.com/docs/reference/swift/firebasefirestoreswift/api/reference/Structs/ServerTimestamp
@@ -34,5 +38,6 @@ struct Post: Codable {
     case documentID = "document_id"
     case serverCreatedTS = "server_created_ts"
     case serverModifiedTS = "server_modified_ts"
+    case additionalComment = "additional_comment"
   }
 }

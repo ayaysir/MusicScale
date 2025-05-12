@@ -75,8 +75,11 @@ class FirebasePostManager {
     }
   }
   
-  func addPost(postRequest request: Post, completionHandler: CompletionHandler? = nil, errorHandler: ErrorHandler? = nil) {
-    
+  func addPost(
+    postRequest request: Post,
+    completionHandler: CompletionHandler? = nil,
+    errorHandler: ErrorHandler? = nil
+  ) {
     var ref: DocumentReference? = nil
     
     do {

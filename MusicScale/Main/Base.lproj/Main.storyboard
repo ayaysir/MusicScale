@@ -840,7 +840,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="116"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter descriptions, notes, or memorization tips and more..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0C4-bg-MUT">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Enter descriptions, notes, or memorization tips and more..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0C4-bg-MUT">
                                                     <rect key="frame" x="10" y="0.0" width="354" height="116"/>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -3519,6 +3519,7 @@
                                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                 </textView>
                                             </subviews>
+                                            <color key="backgroundColor" systemColor="systemGray5Color"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="VAJ-6Y-8wA" secondAttribute="bottom" id="5Su-T7-Ylb"/>
                                                 <constraint firstItem="VAJ-6Y-8wA" firstAttribute="leading" secondItem="2cS-VG-Pce" secondAttribute="leading" constant="10" id="Nj4-U2-dIe"/>
@@ -3529,10 +3530,38 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Additional Comment for Online" footerTitle="If you have any additional comment you’d like to mention regarding this post, please feel free to include them." id="iKR-cc-BNj">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="170" id="t2q-MM-8In">
+                                        <rect key="frame" x="0.0" y="1014.5" width="414" height="170"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t2q-MM-8In" id="rhb-Ju-jap">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="t7I-6L-Gd7">
+                                                    <rect key="frame" x="10" y="0.0" width="394" height="170"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="t7I-6L-Gd7" secondAttribute="bottom" id="9Zj-yQ-xbE"/>
+                                                <constraint firstAttribute="trailing" secondItem="t7I-6L-Gd7" secondAttribute="trailing" constant="10" id="Ds5-za-nvm"/>
+                                                <constraint firstItem="t7I-6L-Gd7" firstAttribute="leading" secondItem="rhb-Ju-jap" secondAttribute="leading" constant="10" id="Hqy-Wq-NgS"/>
+                                                <constraint firstItem="t7I-6L-Gd7" firstAttribute="top" secondItem="rhb-Ju-jap" secondAttribute="top" id="c8G-LO-7LW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Metadata" id="rAN-Wf-0d2">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="GuV-72-VXs" detailTextLabel="um0-VX-CDH" rowHeight="30" style="IBUITableViewCellStyleValue1" id="0AU-wL-VEL">
-                                        <rect key="frame" x="0.0" y="1007" width="414" height="30"/>
+                                        <rect key="frame" x="0.0" y="1269" width="414" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0AU-wL-VEL" id="XYA-M0-YXZ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
@@ -3556,7 +3585,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="sFB-7T-5QC" detailTextLabel="HZB-CL-FkU" rowHeight="30" style="IBUITableViewCellStyleValue1" id="8sj-kv-8at">
-                                        <rect key="frame" x="0.0" y="1037" width="414" height="30"/>
+                                        <rect key="frame" x="0.0" y="1299" width="414" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8sj-kv-8at" id="Iwc-FX-bVk">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
@@ -3580,7 +3609,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="sew-Iu-3Ch" detailTextLabel="Auh-jH-BKN" rowHeight="30" style="IBUITableViewCellStyleValue1" id="Rhp-AK-Gt5">
-                                        <rect key="frame" x="0.0" y="1067" width="414" height="30"/>
+                                        <rect key="frame" x="0.0" y="1329" width="414" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rhp-AK-Gt5" id="PL6-u3-JaA">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
@@ -3604,7 +3633,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="K3E-8w-0zV" detailTextLabel="2e2-Jl-4XF" rowHeight="30" style="IBUITableViewCellStyleValue1" id="WDL-i2-1pb">
-                                        <rect key="frame" x="0.0" y="1097" width="414" height="30"/>
+                                        <rect key="frame" x="0.0" y="1359" width="414" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WDL-i2-1pb" id="VDT-hd-W61">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
@@ -3669,6 +3698,7 @@
                         <outlet property="lblViewCount" destination="Auh-jH-BKN" id="tIm-IA-dIg"/>
                         <outlet property="progressLikeDislike" destination="iBc-Od-pda" id="nmy-z8-baN"/>
                         <outlet property="segAscDesc" destination="Fif-uz-H7H" id="Mb2-ea-Rg4"/>
+                        <outlet property="txvAdditionalComment" destination="t7I-6L-Gd7" id="9Hy-n6-fKJ"/>
                         <outlet property="txvComment" destination="VAJ-6Y-8wA" id="WQq-pw-207"/>
                         <outlet property="viewBannerContainer" destination="vhE-Mg-4P0" id="EFL-vu-TrI"/>
                         <outlet property="webView" destination="PIa-7y-7hY" id="H7H-hc-mID"/>

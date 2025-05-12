@@ -21,7 +21,7 @@
 "2rB-rT-RHT.headerTitle" = "スケール名";
 
 /* Class = "UINavigationItem"; title = "Dorian Scale"; ObjectID = "2yS-la-dtF"; */
-"2yS-la-dtF.title" = "Dorian Scale";
+"2yS-la-dtF.title" = "資料室にアップロード";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "3EG-Sz-5ce"; */
 "3EG-Sz-5ce.normalTitle" = "Button";
@@ -585,3 +585,7 @@
 "Uf2-uc-MQh.text" = "ピアノの上にHWキーを表示";
 
 "Jym-0J-hpL.text" = "ライセンス";
+
+// additional comment header & footer
+"iKR-cc-BNj.headerTitle" = "追加コメント";
+"iKR-cc-BNj.footerTitle" = "この投稿に関して他にご意見がありましたら、お気軽にご記入ください。";
