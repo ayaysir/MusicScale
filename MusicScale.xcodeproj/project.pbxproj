@@ -171,8 +171,10 @@
 		44E6FDB92B985BA600FF6972 /* MusicScale - ShortcutTable - en.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 44E6FDB72B985BA600FF6972 /* MusicScale - ShortcutTable - en.pdf */; };
 		44E6FDBA2B985BA600FF6972 /* MusicScale - ShortcutTable - ko.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 44E6FDB82B985BA600FF6972 /* MusicScale - ShortcutTable - ko.pdf */; };
 		44E7A07528467692005C7909 /* SearchCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E7A07428467692005C7909 /* SearchCategory.swift */; };
+		44E7FEA42DD354BE00B0B598 /* ArchiveReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E7FEA22DD3514300B0B598 /* ArchiveReplyViewController.swift */; };
 		44EE68152853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md in Resources */ = {isa = PBXBuildFile; fileRef = 44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */; };
 		44EFA4B328541F0800565F93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44EFA4B228541F0800565F93 /* GoogleService-Info.plist */; };
+		44EFB5F62DD262C100CE90A2 /* Reply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EFB5F52DD262BE00CE90A2 /* Reply.swift */; };
 		44FEFBF12850EE4B000402DE /* QuizEditKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEFBF02850EE4B000402DE /* QuizEditKeyViewModel.swift */; };
 		44FEFBF52853470A000402DE /* AvailableSoundInSilentMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEFBF42853470A000402DE /* AvailableSoundInSilentMode.swift */; };
 		44FEFBF728539C83000402DE /* QuizFinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEFBF628539C83000402DE /* QuizFinishedViewController.swift */; };
@@ -372,8 +374,10 @@
 		44E6FDB72B985BA600FF6972 /* MusicScale - ShortcutTable - en.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "MusicScale - ShortcutTable - en.pdf"; sourceTree = "<group>"; };
 		44E6FDB82B985BA600FF6972 /* MusicScale - ShortcutTable - ko.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "MusicScale - ShortcutTable - ko.pdf"; sourceTree = "<group>"; };
 		44E7A07428467692005C7909 /* SearchCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategory.swift; sourceTree = "<group>"; };
+		44E7FEA22DD3514300B0B598 /* ArchiveReplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveReplyViewController.swift; sourceTree = "<group>"; };
 		44EE68142853A80B00A6D810 /* Quiz_IntroVC와 InProgressVC에서 무한루프.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Quiz_IntroVC와 InProgressVC에서 무한루프.md"; sourceTree = "<group>"; };
 		44EFA4B228541F0800565F93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		44EFB5F52DD262BE00CE90A2 /* Reply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reply.swift; sourceTree = "<group>"; };
 		44FEFBF02850EE4B000402DE /* QuizEditKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizEditKeyViewModel.swift; sourceTree = "<group>"; };
 		44FEFBF42853470A000402DE /* AvailableSoundInSilentMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableSoundInSilentMode.swift; sourceTree = "<group>"; };
 		44FEFBF628539C83000402DE /* QuizFinishedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizFinishedViewController.swift; sourceTree = "<group>"; };
@@ -522,6 +526,7 @@
 		4426A005285422DD00942655 /* Archive */ = {
 			isa = PBXGroup;
 			children = (
+				44E7FEA22DD3514300B0B598 /* ArchiveReplyViewController.swift */,
 				4426A006285424B100942655 /* ArchiveMainTableViewController.swift */,
 				4426A00B2854400B00942655 /* ArchiveDetailTableViewController.swift */,
 			);
@@ -829,6 +834,7 @@
 			children = (
 				44ABE1022854C1D00022B4FB /* Post.swift */,
 				4455D1C62858CCB300FB344E /* Like.swift */,
+				44EFB5F52DD262BE00CE90A2 /* Reply.swift */,
 				4404B044285F7CEF0072CCFD /* PostView.swift */,
 			);
 			path = Archive;
@@ -1263,6 +1269,7 @@
 				445FA4C7284E70090008D621 /* QuizInProgressViewController.swift in Sources */,
 				4463FEB7282D3FCE00E7A607 /* PianoView.swift in Sources */,
 				44172529284B8A110003CDC7 /* QuizHelper.swift in Sources */,
+				44EFB5F62DD262C100CE90A2 /* Reply.swift in Sources */,
 				4461012F28451EE30033BCE9 /* SortViewController.swift in Sources */,
 				44A09A8128392C0B0067184E /* UserDefaults+.swift in Sources */,
 				440637EB282FF6D900875E77 /* ScaleInfoCDService.swift in Sources */,
@@ -1346,6 +1353,7 @@
 				446100BB284517FB0033BCE9 /* UIColor+.swift in Sources */,
 				44B4AB8428453286008C8AFD /* SortFilterConfigStore.swift in Sources */,
 				4494B473293E18B80009548C /* UIUserInterfaceStyle+.swift in Sources */,
+				44E7FEA42DD354BE00B0B598 /* ArchiveReplyViewController.swift in Sources */,
 				44CA60FB2DC7AB4E005A0C7A /* DiscountManager.swift in Sources */,
 				4455D1D4285A44BE00FB344E /* MIDICommon.swift in Sources */,
 				4475CB532830B52700B9D204 /* String+.swift in Sources */,

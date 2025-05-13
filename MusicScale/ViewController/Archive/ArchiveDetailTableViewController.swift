@@ -41,6 +41,7 @@ class ArchiveDetailTableViewController: UITableViewController {
   @IBOutlet weak var lblViewCount: UILabel!
   @IBOutlet weak var lblDownloadCount: UILabel!
   @IBOutlet weak var txvAdditionalComment: UITextView!
+  @IBOutlet weak var btnGoDiscussion: UIButton!
   
   @IBOutlet weak var barBtnDownloadOr: UIBarButtonItem!
   @IBOutlet weak var barBtnDeleteOr: UIBarButtonItem!
@@ -90,7 +91,8 @@ class ArchiveDetailTableViewController: UITableViewController {
   private let SECTION_RELIABILITY = 3
   private let SECTION_COMMENT = 4
   private let SECTION_ADDI_COMMENT = 5
-  private let SECTION_METADATA = 6
+  private let SECTION_DISCUSSION = 6
+  private let SECTION_METADATA = 7
   
   private let cellAliasIndexPath = IndexPath(row: 1, section: 2)
   private let cellCommentIndexPath = IndexPath(row: 0, section: 4)
@@ -189,6 +191,17 @@ class ArchiveDetailTableViewController: UITableViewController {
       getPostCounts()
       txvComment.superview?.backgroundColor = nil
       txvAdditionalComment.isEditable = false
+      
+      if let documentID = postViewModel?.documentID {
+        FirebasePostManager.shared.readRepliesCount(documentID: documentID) { [unowned self] count in
+          if count > 0 {
+            btnGoDiscussion.setTitle("loc.discussion_view_replies".localized(with: count), for: .normal)
+          } else {
+            btnGoDiscussion.setTitle("loc.discussion_no_replies".localized(), for: .normal)
+          }
+        }
+      }
+      
     case .create:
       setButtonTitleForCreateMode()
       let anonymousText = "Anonymous".localized()
@@ -197,6 +210,10 @@ class ArchiveDetailTableViewController: UITableViewController {
       txvAdditionalComment.isEditable = true
       txvAdditionalComment.delegate = self
       txvAdditionalComment.text = ""
+      txvAdditionalComment.layer.borderColor = UIColor.lightGray.cgColor
+      txvAdditionalComment.layer.borderWidth = 1.0
+      txvAdditionalComment.layer.cornerRadius = 8.0
+      txvAdditionalComment.clipsToBounds = true
     }
     
     // 전면 광고 준비
@@ -224,13 +241,13 @@ class ArchiveDetailTableViewController: UITableViewController {
     barBtnDeleteOr.title = ""
     barBtnDeleteOr.isEnabled = false
     
-    barBtnDownloadOr.title = "Submit".localized()
+    barBtnDownloadOr.title = "loc.submit".localized()
     barBtnDownloadOr.isEnabled = true
   }
   
   func setButtonTitleForReadMode() {
     if let user = FirebaseAuthManager.shared.currentUser, user.uid == postViewModel?.authorUID {
-      barBtnDeleteOr.title = "Delete".localized()
+      barBtnDeleteOr.title = "loc.delete".localized()
       barBtnDeleteOr.isEnabled = true
     } else {
       barBtnDeleteOr.title = ""
@@ -346,7 +363,11 @@ class ArchiveDetailTableViewController: UITableViewController {
     
     if isMode(.read) && postViewModel.authorUID == user.uid {
       postManager.deletePost(documentID: postViewModel.documentID) { documentID in
-        simpleAlert(self, message: "Delete was successful.".localized(), title: "Delete".localized()) { _ in
+        simpleAlert(
+          self,
+          message: "Delete was successful.".localized(),
+          title: "loc.delete".localized()
+        ) { _ in
           self.navigationController?.popViewController(animated: true)
         }
       } errorHandler: { err in
@@ -388,8 +409,13 @@ class ArchiveDetailTableViewController: UITableViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
-    case "":
-      break
+    case "Segue_Discussion":
+      guard let vc = segue.destination as? ArchiveReplyViewController else {
+        return
+      }
+
+      vc.documentID = postViewModel?.documentID
+      vc.postTitle = postViewModel?.name
     default:
       break
     }
@@ -544,7 +570,16 @@ extension ArchiveDetailTableViewController {
       return 0
     }
     
+    // create 모드일때 항상 숨기기
+    if isMode(.create) && section == SECTION_DISCUSSION {
+      return 0
+    }
+    
     return super.tableView(tableView, numberOfRowsInSection: section)
+  }
+  
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    return super.tableView(tableView, cellForRowAt: indexPath)
   }
   
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -565,6 +600,11 @@ extension ArchiveDetailTableViewController {
     
     // Create mode일 때 숨겨야 할 섹션들
     if needHideSectionsBeforeSelectScale(section) {
+      return ""
+    }
+    
+    // create 모드일때 항상 숨기기
+    if isMode(.create) && section == SECTION_DISCUSSION {
       return ""
     }
     
@@ -590,6 +630,11 @@ extension ArchiveDetailTableViewController {
     
     // Create mode일 때 숨겨야 할 섹션들
     if needHideSectionsBeforeSelectScale(section) {
+      return ""
+    }
+    
+    // create 모드일때 항상 숨기기
+    if isMode(.create) && section == SECTION_DISCUSSION {
       return ""
     }
     
@@ -639,6 +684,8 @@ extension ArchiveDetailTableViewController {
       return UITableView.automaticDimension
     case IndexPath(row: 0, section: SECTION_PREVIEW):
       return UITableView.automaticDimension
+    case IndexPath(row: 0, section: SECTION_DISCUSSION):
+      return isMode(.create) ? 0 : originalSize
     default:
       break
     }
@@ -667,6 +714,11 @@ extension ArchiveDetailTableViewController {
       return 0.1
     }
     
+    // create 모드일때 항상 숨기기
+    if isMode(.create) && section == SECTION_DISCUSSION {
+      return 0.1
+    }
+    
     return super.tableView(tableView, heightForHeaderInSection: section)
   }
   
@@ -686,10 +738,10 @@ extension ArchiveDetailTableViewController {
       return 0.1
     }
     
-    // if isMode(.read)
-    //     && section == SECTION_ADDI_COMMENT {
-    //   return 0.1
-    // }
+    // create 모드일때 항상 숨기기
+    if isMode(.create) && section == SECTION_DISCUSSION {
+      return 0.1
+    }
     
     return super.tableView(tableView, heightForFooterInSection: section)
   }
@@ -859,3 +911,4 @@ extension ArchiveDetailTableViewController: UITextViewDelegate {
     tableView.endUpdates()
   }
 }
+

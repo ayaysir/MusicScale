@@ -19,11 +19,11 @@ enum FirebaseManagerError: String, Error {
 }
 
 class FirebasePostManager {
-  
   let POSTS_DIR = "scale_posts"
   let LIKE_DIR = "likes"
   let VIEW_DIR = "views"
   let DOWNLOAD_DIR = "downloads"
+  let REPLY_DIR = "replies"
   
   static let shared = FirebasePostManager()
   
@@ -44,8 +44,7 @@ class FirebasePostManager {
   private var collectionListener: ListenerRegistration?
   private var likeCountsListener: ListenerRegistration?
   
-  
-  init() {
+  private init() {
     let settings = FirestoreSettings()
     
     Firestore.firestore().settings = settings
@@ -373,4 +372,151 @@ class FirebasePostManager {
     }
   }
   
+  // MARK: - Discussion Reply
+  
+  func addReply(
+    documentID: String,
+    reply: Reply,
+    completionHandler: CompletionHandler? = nil,
+    errorHandler: ErrorHandler? = nil
+  ) {
+    guard let currentUser else {
+      manageError(
+        error: FirebaseManagerError.userNotExist,
+        altText: "No user",
+        errorHandler: errorHandler
+      )
+      return
+    }
+
+    let replyRef = rootCollection.document(documentID).collection(REPLY_DIR).document()
+    var reply = reply
+    reply.authorUID = currentUser.uid
+    reply.postDocumentID = documentID
+
+    do {
+      try replyRef.setData(from: reply) { err in
+        if let err {
+          self.manageError(error: err, altText: "Error adding reply:", errorHandler: errorHandler)
+          return
+        }
+        completionHandler?(replyRef.documentID)
+      }
+    } catch {
+      manageError(error: FirebaseManagerError.codingFailed, altText: "Error encoding reply", errorHandler: errorHandler)
+    }
+  }
+
+  func readReplies(
+    documentID: String,
+    completionHandler: @escaping (_ replies: [Reply]) -> (),
+    errorHandler: ErrorHandler? = nil
+  ) {
+    let replyRef = rootCollection.document(documentID).collection(REPLY_DIR)
+      .order(by: Reply.CodingKeys.createdAt.rawValue, descending: false)
+
+    replyRef.getDocuments { snapshot, err in
+      guard let snapshot else {
+        self.manageError(
+          error: err,
+          altText: "Error reading replies",
+          errorHandler: errorHandler
+        )
+        return
+      }
+      
+      // for doc in snapshot.documents {
+      //   print("docID:", doc.documentID) // 이게 실제 id
+      //   if let reply = try? doc.data(as: Reply.self) {
+      //     print("reply.id:", reply.id ?? "nil")
+      //   }
+      // }
+
+      let replies = snapshot.documents.compactMap {
+        do {
+          var reply = try $0.data(as: Reply.self)
+          reply.id = $0.documentID
+          return reply
+        } catch {
+          print("❌ decoding error:", error)
+          return nil
+        }
+      }
+
+      completionHandler(replies)
+    }
+  }
+  
+  func readRepliesCount(
+    documentID: String,
+    completionHandler: @escaping (_ count: Int) -> Void,
+    errorHandler: ErrorHandler? = nil
+  ) {
+    let ref = rootCollection.document(documentID).collection(REPLY_DIR)
+    ref.count.getAggregation(source: .server) { snapshot, error in
+      if let error {
+        self.manageError(error: error, altText: "Error reading reply count", errorHandler: errorHandler)
+        return
+      }
+
+      if let count = snapshot?.count {
+        completionHandler(Int(truncating: count))
+      } else {
+        completionHandler(0)
+      }
+    }
+  }
+
+  func updateReply(
+    documentID: String,
+    replyID: String,
+    updatedReply: Reply,
+    completionHandler: CompletionHandler? = nil,
+    errorHandler: ErrorHandler? = nil
+  ) {
+    let replyRef = rootCollection.document(documentID).collection(REPLY_DIR).document(replyID)
+    var reply = updatedReply
+    reply.modifiedAt = nil // Firestore will set server timestamp
+
+    do {
+      try replyRef.setData(from: reply) { err in
+        if let err {
+          self.manageError(
+            error: err,
+            altText: "Error updating reply",
+            errorHandler: errorHandler
+          )
+          return
+        }
+        completionHandler?(replyID)
+      }
+    } catch {
+      manageError(
+        error: FirebaseManagerError.codingFailed,
+        altText: "Error encoding updated reply",
+        errorHandler: errorHandler
+      )
+    }
+  }
+
+  func deleteReply(
+    documentID: String,
+    replyID: String,
+    completionHandler: CompletionHandler? = nil,
+    errorHandler: ErrorHandler? = nil
+  ) {
+    let replyRef = rootCollection.document(documentID).collection(REPLY_DIR).document(replyID)
+
+    replyRef.delete { err in
+      if let err {
+        self.manageError(
+          error: err,
+          altText: "Error deleting reply",
+          errorHandler: errorHandler
+        )
+        return
+      }
+      completionHandler?(replyID)
+    }
+  }
 }

@@ -68,3 +68,15 @@
 "loc.reset" = "Reset";
 "loc.adv_search_empty_result" = "Advanced scale search using keyboard input\n\n1. Tap the [Transpose in] to set the key signature.\n\n2. Enter the scale notes using a piano keyboard, computer keyboard, or MIDI device, matching the selected key.\nYou can enter notes in any order.\n\n3. Tap the [Submit] button to view results.\nMatching scales and similarity percentages will be displayed.";
 "loc.adv_search_button" = "Advanced";
+
+/* Discussion */
+"loc.anon" = "Anon";
+"loc.discussion" = "Discussion";
+"loc.reply_submit_title" = "Reply Submitted";
+"loc.reply_submit_message" = "Your reply has been submitted.";
+"loc.delete" = "Delete";
+"loc.warn_delete_message" = "Are you sure you want to delete this? This action cannot be undone.";
+"loc.unknown" = "Unknown";
+"loc.loading_discussion_replies" = "Loading replies...";
+"loc.discussion_view_replies" = "View and write replies [%d]";
+"loc.discussion_no_replies" = "Be the first to write a discussion topic!";

@@ -42,9 +42,9 @@ extension Date {
     if daysFromNow > 0 { return "\(daysFromNow) day" + (daysFromNow > 1 ? "s" : "") + " ago" }
     if hoursFromNow > 0 { return "\(hoursFromNow) hour" + (hoursFromNow > 1 ? "s" : "") + " ago" }
     if minutesFromNow > 0 { return "\(minutesFromNow) minute" + (minutesFromNow > 1 ? "s" : "") + " ago" }
-    if secondsFromNow > 0 { return secondsFromNow < 15 ? "Just now"
+    if secondsFromNow >= 0 { return secondsFromNow < 15 ? "Just now"
       : "\(secondsFromNow) second" + (secondsFromNow > 1 ? "s" : "") + " ago" }
-    return ""
+    return "Checking..."
   }
   
   // https://stackoverflow.com/questions/53356392/how-to-get-day-and-month-from-date-type-swift-4

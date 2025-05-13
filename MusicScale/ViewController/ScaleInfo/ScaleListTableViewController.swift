@@ -339,12 +339,16 @@ class ScaleListTableViewController: UITableViewController {
     
     if tableView.isEditing {
       
-      let delete = UIContextualAction(style: .destructive, title: "Delete".localized()) { (action, sourceView, completionHandler) in
+      let delete = UIContextualAction(style: .destructive, title: "loc.delete".localized()) { (action, sourceView, completionHandler) in
         
         let cell = tableView.cellForRow(at: indexPath) as! ScaleListCell
         let entity = cell.infoViewModel.entity
         
-        simpleDestructiveYesAndNo(self, message: "Do you want to delete? It cannot be recovered.".localized(), title: "Delete".localized()) { action in
+        simpleDestructiveYesAndNo(
+          self,
+          message: "loc.warn_delete_message".localized(),
+          title: "loc.delete".localized()
+        ) { action in
           self.scaleListViewModel.deleteScaleInfo(entity: entity)
           tableView.deleteRows(at: [indexPath], with: .fade)
           completionHandler(true)

@@ -39,7 +39,7 @@
 "Select a scale..." = "スケールを選択してください...";
 "Anonymous" = "匿名";
 "Submit" = "送信";
-"Delete" = "消去";
+// "Delete" = "消去";
 "Download" = "ダウンロード";
 "Download was successful." = "ダウンロードは成功しました。";
 "Download failed: %@" = "ダウンロードに失敗しました： ％@";
@@ -75,7 +75,7 @@
 "Select All" = "すべて選択";
 "Edit" = "編集";
 "Done" = "完了";
-"Do you want to delete? It cannot be recovered." = "削除しますか？回復できません。";
+// "Do you want to delete? It cannot be recovered." = "削除しますか？回復できません。";
 "At least one scale must be selected." = "少なくとも1つのスケールを選択する必要があります。";
 "Scale's default" = "基本表記";
 "Types of Questions" = "質問の種類";
@@ -166,3 +166,15 @@
 "loc.reset" = "リセット";
 "loc.adv_search_empty_result" = "鍵盤を使った高度なスケール検索\n\n1. ［移調］ボタンを押して調性（キー）を設定してください。\n\n2. ピアノ鍵盤、キーボード、MIDIデバイスなどを使って、調性に合ったスケール音を入力してください。\n順不同で自由に入力できます。\n\n3. [送信] ボタンを押すと、結果一覧が表示されます。\nスケールの類似度（％）と一致するスケールが表示されます。";
 "loc.adv_search_button" = "詳細検索";
+
+/* Discussion */
+"loc.anon" = "匿名";
+"loc.discussion" = "ディスカッション";
+"loc.reply_submit_title" = "コメントを投稿しました";
+"loc.reply_submit_message" = "コメントの投稿が完了しました。";
+"loc.delete" = "削除";
+"loc.warn_delete_message" = "削除してもよろしいですか？この操作は元に戻せません。";
+"loc.unknown" = "不明";
+"loc.loading_discussion_replies" = "コメントを読み込み中...";
+"loc.discussion_view_replies" = "コメントを書く・見る [%d]";
+"loc.discussion_no_replies" = "最初のディスカッションを投稿してみましょう！";
