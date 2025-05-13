@@ -8,14 +8,17 @@
 import Foundation
 
 extension String {
-  
   func localized(comment: String = "") -> String {
-    return NSLocalizedString(self, comment: comment)
+    NSLocalizedString(self, comment: comment)
   }
   
   /// myLabel.text = "My Age %d".localized(with: 26, comment: "age")
-  func localized(with argument: CVarArg, comment: String = "") -> String {
-    return String(format: self.localized(comment: comment), argument)
+  func localized(with arguments: CVarArg..., comment: String = "") -> String {
+    String(format: self.localized(comment: comment), arguments)
+  }
+  
+  func localizedFormat(_ arguments: CVarArg..., comment: String = "") -> String {
+    .localizedStringWithFormat(self, arguments)
   }
 }
 

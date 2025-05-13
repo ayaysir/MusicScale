@@ -142,7 +142,7 @@ class ReplyCell: UITableViewCell {
     txvComment.text = reply.content
     
     lblUploadDate.text = if let timestamp = reply.createdAt {
-      FirebaseUtil.timestampToDate(timestamp).relativeTime
+      FirebaseUtil.timestampToDate(timestamp).localizedRelativeTime
     } else {
       "loc.unknown".localized()
     }

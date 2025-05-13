@@ -80,3 +80,8 @@
 "loc.loading_discussion_replies" = "Loading replies...";
 "loc.discussion_view_replies" = "View and write replies [%d]";
 "loc.discussion_no_replies" = "Be the first to write a discussion topic!";
+
+/* relative time (한국어, 일본어는 strings에 작성하고 영어는 stringsdict에 작성 */
+"loc.relative_just_now" = "Just now";
+"loc.relative_yesterday" = "Yesterday";
+"loc.relative_checking" = "Checking...";

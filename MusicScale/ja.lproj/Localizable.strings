@@ -178,3 +178,16 @@
 "loc.loading_discussion_replies" = "コメントを読み込み中...";
 "loc.discussion_view_replies" = "コメントを書く・見る [%d]";
 "loc.discussion_no_replies" = "最初のディスカッションを投稿してみましょう！";
+
+/* relative time (한국어, 일본어는 strings에 작성하고 영어는 stringsdict에 작성 */
+"loc.relative_just_now" = "たった今";
+"loc.relative_yesterday" = "昨日";
+"loc.relative_checking" = "確認中…";
+
+"loc.relative_years_ago" = "%d年前";
+"loc.relative_months_ago" = "%dか月前";
+"loc.relative_weeks_ago" = "%d週間前";
+"loc.relative_days_ago" = "%d日前";
+"loc.relative_hours_ago" = "%d時間前";
+"loc.relative_minutes_ago" = "%d分前";
+"loc.relative_seconds_ago" = "%d秒前";

@@ -47,6 +47,44 @@ extension Date {
     return "Checking..."
   }
   
+  var localizedRelativeTime: String {
+    if yearsFromNow > 0 {
+      return "loc.relative_years_ago".localized(with: yearsFromNow)
+    }
+    
+    if monthsFromNow > 0 {
+      return "loc.relative_months_ago".localized(with: monthsFromNow)
+    }
+    
+    if weeksFromNow > 0 {
+      return "loc.relative_weeks_ago".localized(with: weeksFromNow)
+    }
+    
+    if isInYesterday {
+      return "loc.relative_yesterday".localized()
+    }
+    
+    if daysFromNow > 0 {
+      return "loc.relative_days_ago".localized(with: daysFromNow)
+    }
+    
+    if hoursFromNow > 0 {
+      return "loc.relative_hours_ago".localized(with: hoursFromNow)
+    }
+    
+    if minutesFromNow > 0 {
+      return "loc.relative_minutes_ago".localized(with: minutesFromNow)
+    }
+    
+    if secondsFromNow >= 0 {
+      return secondsFromNow < 15
+      ? "loc.relative_just_now".localized()
+      : "loc.relative_seconds_ago".localized(with: secondsFromNow)
+    }
+    
+    return "loc.relative_checking".localized()
+  }
+  
   // https://stackoverflow.com/questions/53356392/how-to-get-day-and-month-from-date-type-swift-4
   
   func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {

@@ -25,7 +25,7 @@ class PostViewModel {
   var relativeCreatedTimeStr: String? {
     if let timestamp = post.serverCreatedTS {
       let date = FirebaseUtil.timestampToDate(timestamp)
-      return date.relativeTime
+      return date.localizedRelativeTime
     }
     
     return nil

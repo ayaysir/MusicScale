@@ -55,6 +55,7 @@
 		4426A007285424B100942655 /* ArchiveMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426A006285424B100942655 /* ArchiveMainTableViewController.swift */; };
 		4426A00A2854251B00942655 /* FirebasePostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426A0092854251B00942655 /* FirebasePostManager.swift */; };
 		4426A00C2854400B00942655 /* ArchiveDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426A00B2854400B00942655 /* ArchiveDetailTableViewController.swift */; };
+		442C94D82DD39EAD00AFF1ED /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 442C94D62DD39EAD00AFF1ED /* Localizable.stringsdict */; };
 		443A0C6328428F3100641BC0 /* Between.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C6228428F3100641BC0 /* Between.swift */; };
 		443A0C652843E99B00641BC0 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C642843E99B00641BC0 /* SimpleAlert.swift */; };
 		4444C47A286B661D00F5E058 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4444C479286B661D00F5E058 /* MainTabBarController.swift */; };
@@ -253,6 +254,9 @@
 		4426A006285424B100942655 /* ArchiveMainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveMainTableViewController.swift; sourceTree = "<group>"; };
 		4426A0092854251B00942655 /* FirebasePostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebasePostManager.swift; sourceTree = "<group>"; };
 		4426A00B2854400B00942655 /* ArchiveDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveDetailTableViewController.swift; sourceTree = "<group>"; };
+		442C94D72DD39EAD00AFF1ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		442C94D92DD39F6500AFF1ED /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		442C94DA2DD39F6600AFF1ED /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ko; path = ko.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		443A0C6228428F3100641BC0 /* Between.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Between.swift; sourceTree = "<group>"; };
 		443A0C642843E99B00641BC0 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
 		4444C479286B661D00F5E058 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -753,6 +757,7 @@
 				44709D66276A335800BBF6C9 /* Info.plist */,
 				44872B0628607CCC00C20E06 /* MusicScale.entitlements */,
 				44709D5E276A334F00BBF6C9 /* MusicScale.xcdatamodeld */,
+				442C94D62DD39EAD00AFF1ED /* Localizable.stringsdict */,
 				44872B1E2863673C00C20E06 /* Localizable.strings */,
 				441E96EF286590C600261D43 /* InfoPlist.strings */,
 			);
@@ -1072,6 +1077,7 @@
 				4494B477293E41440009548C /* MusicScale - ko.pdf in Resources */,
 				44E6FDB92B985BA600FF6972 /* MusicScale - ShortcutTable - en.pdf in Resources */,
 				44E6FDBA2B985BA600FF6972 /* MusicScale - ShortcutTable - ko.pdf in Resources */,
+				442C94D82DD39EAD00AFF1ED /* Localizable.stringsdict in Resources */,
 				441E96E62864AD5600261D43 /* MusicScale - en.pdf in Resources */,
 				441E97032865974900261D43 /* MusicScale - English.001.jpeg in Resources */,
 			);
@@ -1419,6 +1425,16 @@
 				441E96F0286590C900261D43 /* ko */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		442C94D62DD39EAD00AFF1ED /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				442C94D72DD39EAD00AFF1ED /* en */,
+				442C94D92DD39F6500AFF1ED /* ja */,
+				442C94DA2DD39F6600AFF1ED /* ko */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 		44709D5B276A334F00BBF6C9 /* Main.storyboard */ = {

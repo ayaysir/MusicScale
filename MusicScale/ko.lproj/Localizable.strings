@@ -175,3 +175,16 @@
 "loc.loading_discussion_replies" = "댓글 불러오는 중...";
 "loc.discussion_view_replies" = "댓글 작성 및 조회 [%d]";
 "loc.discussion_no_replies" = "첫 번째 토론 주제를 작성해 보세요!";
+
+/* relative time (한국어, 일본어는 strings에 작성하고 영어는 stringsdict에 작성 */
+"loc.relative_just_now" = "방금 전";
+"loc.relative_yesterday" = "어제";
+"loc.relative_checking" = "확인 중...";
+
+"loc.relative_years_ago" = "%d년 전";
+"loc.relative_months_ago" = "%d개월 전";
+"loc.relative_weeks_ago" = "%d주 전";
+"loc.relative_days_ago" = "%d일 전";
+"loc.relative_hours_ago" = "%d시간 전";
+"loc.relative_minutes_ago" = "%d분 전";
+"loc.relative_seconds_ago" = "%d초 전";

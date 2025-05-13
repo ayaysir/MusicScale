@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+<dict>
+  <key>loc.relative_years_ago</key>
+  <dict>
+    <key>NSStringLocalizedFormatKey</key>
+    <string>%#@years@ ago</string>
+    <key>years</key>
+    <dict>
+      <key>NSStringFormatSpecTypeKey</key>
+      <string>NSStringPluralRuleType</string>
+      <key>NSStringFormatValueTypeKey</key>
+      <string>d</string>
+      <key>one</key>
+      <string>%d year</string>
+      <key>other</key>
+      <string>%d years</string>
+    </dict>
+  </dict>
+  
+  <key>loc.relative_months_ago</key>
+  <dict>
+    <key>NSStringLocalizedFormatKey</key>
+    <string>%#@months@ ago</string>
+    <key>months</key>
+    <dict>
+      <key>NSStringFormatSpecTypeKey</key>
+      <string>NSStringPluralRuleType</string>
+      <key>NSStringFormatValueTypeKey</key>
+      <string>d</string>
+      <key>one</key>
+      <string>%d month</string>
+      <key>other</key>
+      <string>%d months</string>
+    </dict>
+  </dict>
+
+  <key>loc.relative_weeks_ago</key>
+  <dict>
+    <key>NSStringLocalizedFormatKey</key>
+    <string>%#@weeks@ ago</string>
+    <key>weeks</key>
+    <dict>
+      <key>NSStringFormatSpecTypeKey</key>
+      <string>NSStringPluralRuleType</string>
+      <key>NSStringFormatValueTypeKey</key>
+      <string>d</string>
+      <key>one</key>
+      <string>%d week</string>
+      <key>other</key>
+      <string>%d weeks</string>
+    </dict>
+  </dict>
+
+  <key>loc.relative_days_ago</key>
+  <dict>
+    <key>NSStringLocalizedFormatKey</key>
+    <string>%#@days@ ago</string>
+    <key>days</key>
+    <dict>
+      <key>NSStringFormatSpecTypeKey</key>
+      <string>NSStringPluralRuleType</string>
+      <key>NSStringFormatValueTypeKey</key>
+      <string>d</string>
+      <key>one</key>
+      <string>%d day</string>
+      <key>other</key>
+      <string>%d days</string>
+    </dict>
+  </dict>
+
+  <key>loc.relative_hours_ago</key>
+  <dict>
+    <key>NSStringLocalizedFormatKey</key>
+    <string>%#@hours@ ago</string>
+    <key>hours</key>
+    <dict>
+      <key>NSStringFormatSpecTypeKey</key>
+      <string>NSStringPluralRuleType</string>
+      <key>NSStringFormatValueTypeKey</key>
+      <string>d</string>
+      <key>one</key>
+      <string>%d hour</string>
+      <key>other</key>
+      <string>%d hours</string>
+    </dict>
+  </dict>
+
+  <key>loc.relative_minutes_ago</key>
+  <dict>
+    <key>NSStringLocalizedFormatKey</key>
+    <string>%#@minutes@ ago</string>
+    <key>minutes</key>
+    <dict>
+      <key>NSStringFormatSpecTypeKey</key>
+      <string>NSStringPluralRuleType</string>
+      <key>NSStringFormatValueTypeKey</key>
+      <string>d</string>
+      <key>one</key>
+      <string>%d minute</string>
+      <key>other</key>
+      <string>%d minutes</string>
+    </dict>
+  </dict>
+
+  <key>loc.relative_seconds_ago</key>
+  <dict>
+    <key>NSStringLocalizedFormatKey</key>
+    <string>%#@seconds@ ago</string>
+    <key>seconds</key>
+    <dict>
+      <key>NSStringFormatSpecTypeKey</key>
+      <string>NSStringPluralRuleType</string>
+      <key>NSStringFormatValueTypeKey</key>
+      <string>d</string>
+      <key>one</key>
+      <string>%d second</string>
+      <key>other</key>
+      <string>%d seconds</string>
+    </dict>
+  </dict>
+</dict>
+</plist>
