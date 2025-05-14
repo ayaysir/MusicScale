@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFAudio
+import SwiftUI
 
 class MainTabBarController: UITabBarController {
   
@@ -21,7 +22,22 @@ class MainTabBarController: UITabBarController {
     NotificationCenter.default.addObserver(self, selector: #selector(didActivated), name: UIScene.willEnterForegroundNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(didInterrupted), name: AVAudioSession.interruptionNotification, object: AVAudioSession.sharedInstance())
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     
+    if !UserDefaults.standard.bool(forKey: .kIsWhatsNew160Appeared) {
+      UserDefaults.standard.set(true, forKey: .kIsWhatsNew160Appeared)
+      
+      showIAPWhatsNewPage(self, primaryAction: {
+        self.tabBarController?.selectedIndex = 3
+      })
+    } else if Double.random(in: 0...1) <= 0.2 && AdsManager.SHOW_AD {
+      showIAPPromtionPage(self) {
+        self.tabBarController?.selectedIndex = 3
+      }
+    }
   }
   
   @objc func didActivated(_ notification: Notification? = nil) {

@@ -114,7 +114,7 @@ class ScaleInfoViewController: UIViewController {
     // loadFromConfigStore()는 prepare에서 실행
     
     // KeyPressMode
-    let keyPressMode = configStore.keyPressModeOnStrictMode
+    let keyPressMode = AdsManager.SHOW_AD ? .singleTouchOnly : configStore.keyPressModeOnStrictMode
     toggleKeyPressMode(to: keyPressMode)
     
     // 피아노 이용 가능 키 표시 - 최초 페이지 열었을 때
@@ -311,6 +311,13 @@ class ScaleInfoViewController: UIViewController {
   
   @IBAction func btnActPianoKeyPressMode(_ sender: UIButton) {
     guard let currentMode = pianoVC?.keyPressMode else {
+      return
+    }
+    
+    guard !AdsManager.SHOW_AD else {
+      showIAPPromtionPage(self) {
+        self.tabBarController?.selectedIndex = 3
+      }
       return
     }
     
@@ -576,6 +583,7 @@ extension ScaleInfoViewController {
     }
   }
   
+  /// 피아노의 키 프레스 모드를 토글
   private func toggleKeyPressMode(to mode: PianoViewController.KeyPressMode) {
     pianoVC?.keyPressMode = mode
     btnPianoKeyPressMode.setImage(

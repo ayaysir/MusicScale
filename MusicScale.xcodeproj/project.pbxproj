@@ -56,6 +56,7 @@
 		4426A00A2854251B00942655 /* FirebasePostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426A0092854251B00942655 /* FirebasePostManager.swift */; };
 		4426A00C2854400B00942655 /* ArchiveDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426A00B2854400B00942655 /* ArchiveDetailTableViewController.swift */; };
 		442C94D82DD39EAD00AFF1ED /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 442C94D62DD39EAD00AFF1ED /* Localizable.stringsdict */; };
+		442C94E22DD3B00F00AFF1ED /* PRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442C94E12DD3B00800AFF1ED /* PRView.swift */; };
 		443A0C6328428F3100641BC0 /* Between.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C6228428F3100641BC0 /* Between.swift */; };
 		443A0C652843E99B00641BC0 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A0C642843E99B00641BC0 /* SimpleAlert.swift */; };
 		4444C47A286B661D00F5E058 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4444C479286B661D00F5E058 /* MainTabBarController.swift */; };
@@ -127,6 +128,7 @@
 		4475CB572831501600B9D204 /* Sequence+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB562831501600B9D204 /* Sequence+.swift */; };
 		4475CB592831759300B9D204 /* CustomCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB582831759300B9D204 /* CustomCharacter.swift */; };
 		4475CB5B283176EA00B9D204 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB5A283176EA00B9D204 /* Music.swift */; };
+		4479AC872DD454FD005D5693 /* PromotionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479AC862DD454F9005D5693 /* PromotionHelper.swift */; };
 		44872B0928608CED00C20E06 /* AdsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44872B0828608CED00C20E06 /* AdsManager.swift */; };
 		44872B0C2860963C00C20E06 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 44872B0B2860963C00C20E06 /* IQKeyboardManagerSwift */; };
 		44872B0F2860AA5100C20E06 /* AdUnitID_Distributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44872B0E2860AA5100C20E06 /* AdUnitID_Distributor.swift */; };
@@ -257,6 +259,7 @@
 		442C94D72DD39EAD00AFF1ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		442C94D92DD39F6500AFF1ED /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		442C94DA2DD39F6600AFF1ED /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ko; path = ko.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		442C94E12DD3B00800AFF1ED /* PRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRView.swift; sourceTree = "<group>"; };
 		443A0C6228428F3100641BC0 /* Between.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Between.swift; sourceTree = "<group>"; };
 		443A0C642843E99B00641BC0 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
 		4444C479286B661D00F5E058 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -331,6 +334,7 @@
 		4475CB562831501600B9D204 /* Sequence+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+.swift"; sourceTree = "<group>"; };
 		4475CB582831759300B9D204 /* CustomCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCharacter.swift; sourceTree = "<group>"; };
 		4475CB5A283176EA00B9D204 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		4479AC862DD454F9005D5693 /* PromotionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionHelper.swift; sourceTree = "<group>"; };
 		44872B0628607CCC00C20E06 /* MusicScale.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MusicScale.entitlements; sourceTree = "<group>"; };
 		44872B0828608CED00C20E06 /* AdsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsManager.swift; sourceTree = "<group>"; };
 		44872B0E2860AA5100C20E06 /* AdUnitID_Distributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdUnitID_Distributor.swift; sourceTree = "<group>"; };
@@ -614,6 +618,7 @@
 		4463FEA8282BE27600E7A607 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				442C94E12DD3B00800AFF1ED /* PRView.swift */,
 				4463FEA9282BE28800E7A607 /* UIViewPreview.swift */,
 			);
 			path = SwiftUI;
@@ -866,6 +871,7 @@
 		44E6FDB32B9784F900FF6972 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				4479AC862DD454F9005D5693 /* PromotionHelper.swift */,
 				440D32322DC8EFE700929967 /* GlobalVariables.swift */,
 				44709D55276A334F00BBF6C9 /* AppDelegate.swift */,
 				44709D57276A334F00BBF6C9 /* SceneDelegate.swift */,
@@ -1283,6 +1289,7 @@
 				440380172DCBB01F00EBB6A3 /* ScaleInfoAdvanceSearchViewController.swift in Sources */,
 				440161C3285E348800B6D4FB /* OrientationUtil.swift in Sources */,
 				4494B467293A4ADE0009548C /* FileUtil.swift in Sources */,
+				442C94E22DD3B00F00AFF1ED /* PRView.swift in Sources */,
 				440637F428307E0000875E77 /* ScaleListTableViewController.swift in Sources */,
 				4475CB572831501600B9D204 /* Sequence+.swift in Sources */,
 				440637F2283003DE00875E77 /* ScaleInfoListViewModel.swift in Sources */,
@@ -1367,6 +1374,7 @@
 				44709D58276A334F00BBF6C9 /* SceneDelegate.swift in Sources */,
 				4404B047285F8A5B0072CCFD /* QuizStatsCDService.swift in Sources */,
 				44B70F4228491A650068495A /* QuizViewModel.swift in Sources */,
+				4479AC872DD454FD005D5693 /* PromotionHelper.swift in Sources */,
 				44872B0928608CED00C20E06 /* AdsManager.swift in Sources */,
 				4455D1C1285890A500FB344E /* FirebaseUtil.swift in Sources */,
 				4475CB592831759300B9D204 /* CustomCharacter.swift in Sources */,

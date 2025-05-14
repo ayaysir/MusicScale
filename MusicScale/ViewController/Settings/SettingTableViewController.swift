@@ -9,6 +9,7 @@ import UIKit
 import MessageUI
 import StoreKit
 import CodableCSV
+import SwiftUI
 
 class SettingTableViewController: UITableViewController {
   
@@ -129,7 +130,8 @@ extension SettingTableViewController {
     case restorePurchasesCellIndexPath:
       simpleAlert(self, message: "loc.restore_purchase_info".localized(), title: "loc.restore_purchase_title".localized(), handler: nil)
     case firstIAPProductCellIndexPath:
-      simpleAlert(self, message: "loc.iap_intro_info".localized(), title: "loc.iap_intro_title".localized(), handler: nil)
+      // simpleAlert(self, message: "loc.iap_intro_info".localized(), title: "loc.iap_intro_title".localized(), handler: nil)
+    showIAPPromtionPage(self)
     default:
       break
     }

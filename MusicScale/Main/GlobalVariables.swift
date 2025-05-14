@@ -58,3 +58,7 @@ extension String {
   static let kKeyPressMode = "Keyboard_CONFIG_KeyPressMode"
 }
 
+extension String {
+  // MARK: - Whats New
+  static var kIsWhatsNew160Appeared = "WN_1.6.0"
+}

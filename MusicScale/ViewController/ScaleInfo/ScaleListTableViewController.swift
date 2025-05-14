@@ -231,35 +231,7 @@ class ScaleListTableViewController: UITableViewController {
       return
     }
     
-    // 20250507: 커스텀 버튼 추가
-    let BTN_WIDTH: CGFloat = 100
-    let BTN_HEIGHT: CGFloat = 26
-    
-    // btnAdvSearch.setImage(UIImage(systemName: "mail.and.text.magnifyingglass"), for: .normal)
-
-    btnAdvSearch.frame = CGRect(x: 0, y: 0, width: BTN_WIDTH, height: BTN_HEIGHT)
-    btnAdvSearch.setImage(UIImage.pianoSearch3, for: .normal)
-    btnAdvSearch.imageView?.contentMode = .scaleAspectFit
-    btnAdvSearch.imageEdgeInsets = .init(top: 2, left: -5, bottom: 2, right: 0)
-    btnAdvSearch.setTitle("loc.adv_search_button".localized(), for: .normal)
-    btnAdvSearch.titleEdgeInsets = .init(top: 0, left: -10, bottom: 0, right: 0)
-
-    btnAdvSearch.backgroundColor = .systemPink
-    btnAdvSearch.alpha = 0.8
-    btnAdvSearch.tintColor = .systemGray6
-    btnAdvSearch.layer.cornerRadius = 7
-    btnAdvSearch.translatesAutoresizingMaskIntoConstraints = false
-    searchController.searchBar.addSubview(btnAdvSearch)
-    
-    btnAdvSearch.addTarget(self, action: #selector(btnActAdvSearch), for: .touchUpInside)
-    
-    // 우측 정렬 + 중앙 정렬
-    NSLayoutConstraint.activate([
-      btnAdvSearch.trailingAnchor.constraint(equalTo: searchController.searchBar.trailingAnchor, constant: -20),
-      btnAdvSearch.centerYAnchor.constraint(equalTo: searchController.searchBar.centerYAnchor, constant: -6.6),
-      btnAdvSearch.widthAnchor.constraint(equalToConstant: BTN_WIDTH),
-      btnAdvSearch.heightAnchor.constraint(equalToConstant: BTN_HEIGHT)
-    ])
+    showAdvSearchButton()
   }
   
   func toggleStarRatingViewForCurrentVisibleCells(isEditing: Bool) {
@@ -284,6 +256,36 @@ class ScaleListTableViewController: UITableViewController {
     cell.accessoryType = isCheckmark ? .checkmark : .none
     cell.cosmosViewMyPriority.isHidden = isCheckmark
     cell.backgroundColor = isCheckmark ? backgroundColor : .clear
+  }
+  
+  private func showAdvSearchButton() {
+    // 20250507: 커스텀 버튼 추가
+    let BTN_WIDTH: CGFloat = 100
+    let BTN_HEIGHT: CGFloat = 26
+
+    btnAdvSearch.frame = CGRect(x: 0, y: 0, width: BTN_WIDTH, height: BTN_HEIGHT)
+    btnAdvSearch.setImage(UIImage.pianoSearch3, for: .normal)
+    btnAdvSearch.imageView?.contentMode = .scaleAspectFit
+    btnAdvSearch.imageEdgeInsets = .init(top: 2, left: -5, bottom: 2, right: 0)
+    btnAdvSearch.setTitle("loc.adv_search_button".localized(), for: .normal)
+    btnAdvSearch.titleEdgeInsets = .init(top: 0, left: -10, bottom: 0, right: 0)
+
+    btnAdvSearch.backgroundColor = .systemPink
+    btnAdvSearch.alpha = 0.8
+    btnAdvSearch.tintColor = .systemGray6
+    btnAdvSearch.layer.cornerRadius = 7
+    btnAdvSearch.translatesAutoresizingMaskIntoConstraints = false
+    searchController.searchBar.addSubview(btnAdvSearch)
+    
+    btnAdvSearch.addTarget(self, action: #selector(btnActAdvSearch), for: .touchUpInside)
+    
+    // 우측 정렬 + 중앙 정렬
+    NSLayoutConstraint.activate([
+      btnAdvSearch.trailingAnchor.constraint(equalTo: searchController.searchBar.trailingAnchor, constant: -20),
+      btnAdvSearch.centerYAnchor.constraint(equalTo: searchController.searchBar.centerYAnchor, constant: -6.6),
+      btnAdvSearch.widthAnchor.constraint(equalToConstant: BTN_WIDTH),
+      btnAdvSearch.heightAnchor.constraint(equalToConstant: BTN_HEIGHT)
+    ])
   }
   
   
@@ -498,8 +500,14 @@ extension ScaleListTableViewController: UISearchBarDelegate, UISearchResultsUpda
     btnAdvSearch.isHidden = false
   }
   
-  @objc func btnActAdvSearch() {
-    print(#function)
+  @objc private func btnActAdvSearch() {
+    guard !AdsManager.SHOW_AD else {
+      showIAPPromtionPage(self) {
+        self.tabBarController?.selectedIndex = 3
+      }
+      return
+    }
+    
     performSegue(withIdentifier: "AdvSearch", sender: nil)
   }
 }

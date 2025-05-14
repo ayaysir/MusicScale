@@ -19,7 +19,7 @@ class AdsManager: NSObject {
   /// 배포 시 반드시 true로
   static var PRODUCT_MODE: Bool {
 #if DEBUG
-    false
+    true
 #else
     true
 #endif
