@@ -9,35 +9,35 @@ import SwiftUI
 
 // MARK: - WhatsNew, PR Data
 
-let IAP_PromotionTitle = "Pro용 인앱 결제 구입"
-let IAP_ForWhatsNewTitle = "인앱 결제의 혜택이 새로워졌습니다."
+let IAP_PromotionTitle = "loc.promo_title".localized()
+let IAP_ForWhatsNewTitle = "loc.promo_whatsnew_title".localized()
 
-let IAP_PromotionSubtitle = "Pro용 인앱을 구입하시면 모든 광고 영구 제거, 고급 피아노 키보드 이용, 건반을 이용한 고급 스케일 검색 등을 할 수 있습니다."
+let IAP_PromotionSubtitle = "loc.promo_subtitle".localized()
 
-let IAP_PromotionPrimaryButtonTitle = "구입하기"
-let IAP_ForWhatsPrimaryButtonNewTitle = "상품 살펴보기"
+let IAP_PromotionPrimaryButtonTitle = "loc.promo_primary_button".localized()
+let IAP_ForWhatsPrimaryButtonNewTitle = "loc.promo_primary_button_whatsnew".localized()
 
-let IAP_PromotionSecondaryButtonTitle = "나중에 다시 알아볼게요"
+let IAP_PromotionSecondaryButtonTitle = "loc.promo_secondary_button".localized()
 
 let IAP_PromotionFeatures: [PRFeature] = [
   .init(
-    title: "모든 광고 영구 제거",
-    subtitle: "배너 광고, 전체 화면 광고를 모두 영구 제거하여 쾌적한 앱 사용이 가능합니다.",
+    title: "loc.promo_feature_ad_title".localized(),
+    subtitle: "loc.promo_feature_ad_subtitle".localized(),
     imageSystemName: "pip.remove"
   ),
   .init(
-    title: "건반을 이용한 고급 스케일 검색",
-    subtitle: "피아노 건반으로 아무 스케일을 입력하면 자동으로 일치하거나 유사한 스케일을 찾아줍니다.",
+    title: "loc.promo_feature_keyboardsearch_title".localized(),
+    subtitle: "loc.promo_feature_keyboardsearch_subtitle".localized(),
     imageSystemName: "pianokeys"
   ),
   .init(
-    title: "슬라이드로 연주하기",
-    subtitle: "피아노 키보드를 슬라이드해서 연주할 수 있습니다. 멜로디의 흐름을 파악하고자 할 때 유용합니다.",
+    title: "loc.promo_feature_slide_title".localized(),
+    subtitle: "loc.promo_feature_slide_subtitle".localized(),
     imageSystemName: "hand.draw"
   ),
   .init(
-    title: "멀티터치로 연주하기",
-    subtitle: "멀티터치로 해당 스케일에서 조합할 수 있는 화음을 연주할 수 있습니다.",
+    title: "loc.promo_feature_multitouch_title".localized(),
+    subtitle: "loc.promo_feature_multitouch_subtitle".localized(),
     imageSystemName: "hand.raised"
   ),
 ]

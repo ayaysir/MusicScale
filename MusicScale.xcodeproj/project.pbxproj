@@ -129,6 +129,7 @@
 		4475CB592831759300B9D204 /* CustomCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB582831759300B9D204 /* CustomCharacter.swift */; };
 		4475CB5B283176EA00B9D204 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CB5A283176EA00B9D204 /* Music.swift */; };
 		4479AC872DD454FD005D5693 /* PromotionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479AC862DD454F9005D5693 /* PromotionHelper.swift */; };
+		4479AC8B2DD4682B005D5693 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4479AC8A2DD4682B005D5693 /* PrivacyInfo.xcprivacy */; };
 		44872B0928608CED00C20E06 /* AdsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44872B0828608CED00C20E06 /* AdsManager.swift */; };
 		44872B0C2860963C00C20E06 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 44872B0B2860963C00C20E06 /* IQKeyboardManagerSwift */; };
 		44872B0F2860AA5100C20E06 /* AdUnitID_Distributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44872B0E2860AA5100C20E06 /* AdUnitID_Distributor.swift */; };
@@ -335,6 +336,7 @@
 		4475CB582831759300B9D204 /* CustomCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCharacter.swift; sourceTree = "<group>"; };
 		4475CB5A283176EA00B9D204 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		4479AC862DD454F9005D5693 /* PromotionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionHelper.swift; sourceTree = "<group>"; };
+		4479AC8A2DD4682B005D5693 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		44872B0628607CCC00C20E06 /* MusicScale.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MusicScale.entitlements; sourceTree = "<group>"; };
 		44872B0828608CED00C20E06 /* AdsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsManager.swift; sourceTree = "<group>"; };
 		44872B0E2860AA5100C20E06 /* AdUnitID_Distributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdUnitID_Distributor.swift; sourceTree = "<group>"; };
@@ -760,6 +762,7 @@
 				44709D61276A335800BBF6C9 /* Assets.xcassets */,
 				44EFA4B228541F0800565F93 /* GoogleService-Info.plist */,
 				44709D66276A335800BBF6C9 /* Info.plist */,
+				4479AC8A2DD4682B005D5693 /* PrivacyInfo.xcprivacy */,
 				44872B0628607CCC00C20E06 /* MusicScale.entitlements */,
 				44709D5E276A334F00BBF6C9 /* MusicScale.xcdatamodeld */,
 				442C94D62DD39EAD00AFF1ED /* Localizable.stringsdict */,
@@ -1067,6 +1070,7 @@
 				441E96FF2865974900261D43 /* MusicScale - English.012.jpeg in Resources */,
 				441E97062865974900261D43 /* MusicScale - English.003.jpeg in Resources */,
 				446776382889361400F1C4B6 /* ToRemoveComment.md in Resources */,
+				4479AC8B2DD4682B005D5693 /* PrivacyInfo.xcprivacy in Resources */,
 				440637F7283082BE00875E77 /* SampleScaleList.json in Resources */,
 				44709D89276A37F200BBF6C9 /* web in Resources */,
 				441E97082865974900261D43 /* MusicScale - English.010.jpeg in Resources */,

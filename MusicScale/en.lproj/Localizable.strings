@@ -85,3 +85,25 @@
 "loc.relative_just_now" = "Just now";
 "loc.relative_yesterday" = "Yesterday";
 "loc.relative_checking" = "Checking...";
+
+/* IAP Promo */
+"loc.promo_title" = "Purchase Pro In-App";
+"loc.promo_whatsnew_title" = "New Pro In-App Purchase!";
+
+"loc.promo_subtitle" = "By purchasing Pro, you can permanently remove all ads, use the advanced piano keyboard, and search for scales using the keyboard.";
+
+"loc.promo_primary_button" = "Purchase";
+"loc.promo_primary_button_whatsnew" = "View Product";
+"loc.promo_secondary_button" = "Remind me later";
+
+"loc.promo_feature_ad_title" = "Permanently remove all ads";
+"loc.promo_feature_ad_subtitle" = "All banner and full-screen ads are removed for a smoother experience.";
+
+"loc.promo_feature_keyboardsearch_title" = "Advanced Scale Search by Keyboard";
+"loc.promo_feature_keyboardsearch_subtitle" = "Enter any scale using piano keys, and it will find exact or similar matches automatically.";
+
+"loc.promo_feature_slide_title" = "Play by Sliding";
+"loc.promo_feature_slide_subtitle" = "Slide across the keyboard to play melodies smoothly and understand their flow.";
+
+"loc.promo_feature_multitouch_title" = "Play with Multi-touch";
+"loc.promo_feature_multitouch_subtitle" = "Use multi-touch to play harmonies based on the scale you selected.";

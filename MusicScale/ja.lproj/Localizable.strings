@@ -191,3 +191,25 @@
 "loc.relative_hours_ago" = "%d時間前";
 "loc.relative_minutes_ago" = "%d分前";
 "loc.relative_seconds_ago" = "%d秒前";
+
+/* IAP Promo */
+"loc.promo_title" = "Pro版アプリ内購入";
+"loc.promo_whatsnew_title" = "アプリ内購入の特典が更新されました！";
+
+"loc.promo_subtitle" = "Pro版を購入すると、すべての広告が永久に削除され、高度なピアノキーボードやキーボードによるスケール検索機能が利用できます。";
+
+"loc.promo_primary_button" = "購入する";
+"loc.promo_primary_button_whatsnew" = "製品を見る";
+"loc.promo_secondary_button" = "後で確認する";
+
+"loc.promo_feature_ad_title" = "すべての広告を永久に削除";
+"loc.promo_feature_ad_subtitle" = "バナー広告と全画面広告がすべて削除され、快適にアプリをご利用いただけます。";
+
+"loc.promo_feature_keyboardsearch_title" = "ピアノによる高度なスケール検索";
+"loc.promo_feature_keyboardsearch_subtitle" = "ピアノの鍵盤で任意のスケールを入力すると、一致または類似するスケールを自動的に探します。";
+
+"loc.promo_feature_slide_title" = "スライドで演奏";
+"loc.promo_feature_slide_subtitle" = "キーボードをスライドして演奏できます。メロディの流れを把握したいときに便利です。";
+
+"loc.promo_feature_multitouch_title" = "マルチタッチで演奏";
+"loc.promo_feature_multitouch_subtitle" = "マルチタッチでスケールに基づいた和音を演奏できます。";
